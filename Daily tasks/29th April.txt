@@ -1,0 +1,6 @@
+29th April
+
+create required tables,
+create insert values in the table,
+test required queries,
+List down the required APIs for the project.
