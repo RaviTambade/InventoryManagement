@@ -1,14 +1,17 @@
 -- Database Creation
 create database inventorymanagement;
 use inventorymanagement;
-
 -- Table Creation
 CREATE TABLE roles(role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, role varchar(50));
-create table employees(employee_id INT NOT NULL auto_increment primary KEY,empfirst_name VARCHAR(100),emplast_name VARCHAR(50),birth_date DATETIME,hire_date DATETIME,contact_number VARCHAR(20),email VARCHAR(50),password VARCHAR(15) NOT NULL,photo varchar (50),gender VARCHAR(50),role_id int not null,constraint fk_role foreign key(role_id) references roles(role_id) on update cascade on delete cascade);
+create table departments(department_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, department varchar(50));
+create table employees(employee_id INT NOT NULL auto_increment primary KEY,empfirst_name VARCHAR(100),emplast_name VARCHAR(50),birth_date DATETIME,hire_date DATETIME,contact_number VARCHAR(20),email VARCHAR(50),password VARCHAR(15) NOT NULL,photo varchar (50),gender VARCHAR(50),department_id  int not null,constraint fk_department_id foreign key(department_id) references departments(department_id) on update cascade on delete cascade,role_id int not null,constraint fk_role foreign key(role_id) references roles(role_id) on update cascade on delete cascade);
 CREATE TABLE materials(material_id INT NOT NULL AUTO_INCREMENT primary KEY, material_name VARCHAR(100),material_type VARCHAR(100),quantity INT NOT NULL,unit_price INT NOT NULL, photo varchar (50));
 create table floors(floor_id INT NOT NULL AUTO_INCREMENT primary KEY, floor_number varchar(20), mid int not null,constraint fk_mid foreign key(mid) references materials(material_id) on update cascade on delete cascade);
 create table sections(section_id INT NOT NULL AUTO_INCREMENT primary KEY,section_name VARCHAR(20), floors_id int not null,constraint fk_floors foreign key(floors_id) references floors(floor_id) on update cascade on delete cascade);
 CREATE TABLE warehouses(warehouse_id INT NOT NULL AUTO_INCREMENT primary KEY,warehouse_name VARCHAR(20),sections_id int not null,constraint fk_sections foreign key(sections_id) references sections(section_id) on update cascade on delete cascade);
+CREATE TABLE orders(order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,order_date DATETIME DEFAULT CURRENT_TIMESTAMP,employee_id INT NOT NULL,CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON UPDATE CASCADE ON DELETE CASCADE ,status ENUM('delivered','initiated','inprogress','cancelled','approved') NOT NULL);
+CREATE TABLE orderdetails(orderdetails_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,order_id INT NOT NULL,CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES orders(order_id) ON UPDATE CASCADE ON DELETE CASCADE,material_id INT NOT NULL,CONSTRAINT fk_material_id FOREIGN KEY (material_id) REFERENCES materials(material_id) ON UPDATE CASCADE ON DELETE CASCADE,quantity INT NOT NULL);  
+
 
 -- Insertion for material
 insert into materials(material_name, material_type, quantity, unit_price, photo) values ('Needle Bearing','Bearing',784,20, './images/SM.jpg');
@@ -123,12 +126,27 @@ INSERT INTO roles(role) VALUES("Store Manager");
 INSERT INTO roles(role) VALUES("Supervisor");
 INSERT INTO roles(role) VALUES("Store Worker");
 
+-- Insertion for departments
+insert INTO departments(department) VALUES("HR");
+INSERT INTO departments(department) VALUES("Store");
+INSERT INTO departments(department) VALUES("GB500 Line");
+INSERT INTO departments(department) VALUES("GB400 Line");
+INSERT INTO departments(department) VALUES("GB540 Line");
+INSERT INTO departments(department) VALUES("worker");
+
 -- Insertion for Employees
-INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number, role_id,email,password,photo,gender)VALUES('Sahil','Mankar','1997-05-19','2021-07-07','8756789158', 2 ,'Sahil22@gmail.com','SM569654' ,'./images/SM.jpg', 'Male');
-INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number, role_id,email,password,photo,gender)VALUES('Rahul','Desai','1995-08-11','2021-08-04','9856789157', 2 ,'RD@gmail.com','RD854466' ,'./images/SM.jpg', 'Male');
-INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number, role_id,email,password,photo,gender)VALUES('Siddhesh','Pandit','1996-01-02','2021-09-12','7845967845', 3 ,'SP@gmail.com','SP789956' ,'./images/SM.jpg', 'Male');
-INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number, role_id,email,password,photo,gender)VALUES('Tejaswini','Salvi','1992-11-19','2020-09-01','9888754415', 3 ,'TS22@gmail.com','TS337845' ,'./images/SM.jpg', 'Female');
-INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number, role_id,email,password,photo,gender)VALUES('Vedant','Yadav','1987-01-07','2009-03-11','99887564123', 1 ,'VY@gmail.com','VY788814' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('Sahil','Mankar','1997-05-19','2021-07-07','8756789158',2, 2 ,'Sahil22@gmail.com','SM569654' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('Rahul','Desai','1995-08-11','2021-08-04','9856789157',2, 2 ,'RD@gmail.com','RD854466' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('Siddhesh','Pandit','1996-01-02','2021-09-12','7845967845',3, 3 ,'SP@gmail.com','SP789956' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('Tejaswini','Salvi','1992-11-19','2020-09-01','9888754415',4, 3 ,'TS22@gmail.com','TS337845' ,'./images/SM.jpg', 'Female');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('samiksha','raut','1992-11-19','2020-09-01','7844726596',5, 3 ,'TS22@gmail.com','TS337845' ,'./images/SM.jpg', 'Female');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('Vedant','Yadav','1987-01-07','2009-03-11','99887564123',1, 1 ,'VY@gmail.com','VY788814' ,'./images/SM.jpg', 'Male');
+
+-- insertion of orders
+INSERT INTO orders(order_date, employee_id,status)VALUES ('2023-06-04  08:35:25', 4,"delivered");
+INSERT INTO orders(order_date, employee_id,status)VALUES ('2023-01-16  09:35:25',3,'inprogress');
+INSERT INTO orders(order_date, employee_id,status)VALUES ('2023-04-12  12:35:25', 3,'cancelled');
+INSERT INTO orders(order_date, employee_id,status)VALUES ('2023-08-25  06:35:25',4, 'initiated');
 
 -- employees and their role
 select employees.empfirst_name, employees.emplast_name, roles.role
@@ -140,6 +158,10 @@ SELECT warehouses.warehouse_name, sections.section_name
 FROM warehouses
 INNER JOIN sections ON  warehouses.sections_id=  sections.section_id;
 
+-- sections in departments
+select employees.empfirst_name, employees.emplast_name, departments.department
+from employees
+Inner join departments on employees.department_id= departments.department_id;  
 -- floors in section
 SELECT sections.section_name, floors.floor_number
 FROM sections
