@@ -106,7 +106,34 @@ public class WarehouseRepository : IWarehouseRepository
     }
     public bool Insert(Material material)
     {
-        bool status = false;
+         bool status = false;
+        MySqlConnection connection = new MySqlConnection();
+        connection.ConnectionString = _conString;
+        try
+        {
+            string query = "INSERT INTO Materials(material_name,material_type,quantity,unit_price,photo)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
+            Console.WriteLine(query);
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@materialName", material.MaterialName);
+            command.Parameters.AddWithValue("@materialType", material.MaterialType);
+            command.Parameters.AddWithValue("@quantity", material.MaterialQuantity);
+            command.Parameters.AddWithValue("@unitPrice", material.MaterialUnitPrice);
+            command.Parameters.AddWithValue("@imgurl", material.MaterialImgUrl);
+            connection.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
         return status;
     }
     public bool Update(Material material)

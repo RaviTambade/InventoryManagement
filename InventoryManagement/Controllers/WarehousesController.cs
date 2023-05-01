@@ -43,7 +43,8 @@ namespace InventoryManagement.Controllers
         [Route("addmaterial")]
         public bool Insert([FromBody] Material material)
         {
-            bool status = false;
+            Console.WriteLine(material.MaterialName, material.MaterialType, material.MaterialImgUrl,material.MaterialQuantity,material.MaterialUnitPrice);
+            bool status= _warehousesrv.Insert(material);
             return status;
         }
 
