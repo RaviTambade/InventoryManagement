@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Threading.Tasks;
 using InventoryManagement.Models;
-using WarehouseService.Repositories.Interfaces;
-using WarehouseService.Services.Interfaces;
-namespace CatalogService.Services;
+using InventoryManagement.Repositories.Interfaces;
+using InventoryManagement.Services.Interfaces;
+namespace InventoryManagement.Services;
 public class WarehouseService : IWarehouseService
 {
     private readonly IWarehouseRepository _repo;

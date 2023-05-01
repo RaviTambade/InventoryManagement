@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Net.Http.Headers;
 using InventoryManagement.Models;
-namespace WarehouseService.Repositories.Interfaces;
+namespace InventoryManagement.Repositories.Interfaces;
 public interface IWarehouseRepository
 {
     IEnumerable<Material> GetAll();

@@ -1,5 +1,5 @@
-using WarehouseService.Repositories.Interfaces;
-namespace WarehouseService.Services.Interfaces;
+using InventoryManagement.Repositories.Interfaces;
+namespace InventoryManagement.Services.Interfaces;
 public interface IWarehouseService : IWarehouseRepository
 {
 }

@@ -1,8 +1,17 @@
+using InventoryManagement.Repositories.Interfaces;
+using InventoryManagement.Repositories;
+using InventoryManagement.Services.Interfaces;
+using InventoryManagement.Services;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IWarehouseRepository,WarehouseRepository>();
+builder.Services.AddScoped<IWarehouseService, WarehouseService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

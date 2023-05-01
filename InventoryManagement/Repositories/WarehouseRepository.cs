@@ -1,25 +1,107 @@
+using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using System.Collections;
 using System.Data;
 using InventoryManagement.Models;
-using WarehouseService.Repositories.Interfaces;
+using InventoryManagement.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-namespace WarehouseService.Repositories;
+namespace InventoryManagement.Repositories;
 public class WarehouseRepository : IWarehouseRepository
 {
-    
-    public WarehouseRepository()
+    private IConfiguration _configuration;
+    private string _conString;
+    public WarehouseRepository(IConfiguration configuration)
     {
-
+        _configuration = configuration;
+        _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
     public  IEnumerable<Material> GetAll()
     {
        List<Material> materials = new List<Material>();
+       MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT * FROM materials";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            connection.Open();
+            MySqlDataReader reader =command.ExecuteReader();
+            while (reader.Read())
+            {
+                
+                int id = Int32.Parse(reader["material_id"].ToString());
+                string? materialname = reader["material_name"].ToString();
+                string? materialtype = reader["material_type"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                int price = int.Parse(reader["unit_price"].ToString());
+                string? imgUrl = reader["photo"].ToString();
+     
+                Material material = new Material
+                {
+                    MaterialId = id,
+                    MaterialName = materialname,
+                    MaterialType = materialtype,
+                    MaterialQuantity = quantity,
+                    MaterialUnitPrice = price,
+                    MaterialImgUrl = imgUrl,
+
+                };
+
+                materials.Add(material);
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
+        
        return materials;
     }
     public Material GetById(int materialId)
     {
-       Material material = new Material();
+        Material material = new Material();
+        MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT * FROM materials where material_id=@materialId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@materialId", materialId);
+            connection.Open();
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["material_id"].ToString());
+                string? materialname = reader["material_name"].ToString();
+                string? materialtype = reader["material_type"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                int price = int.Parse(reader["unit_price"].ToString());
+                string? imgUrl = reader["photo"].ToString();
+                
+                 material = new Material()
+                {
+                    MaterialId = id,
+                    MaterialName = materialname,
+                    MaterialType = materialtype,
+                    MaterialQuantity = quantity,
+                    MaterialUnitPrice = price,
+                    MaterialImgUrl = imgUrl,
+                };
+
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
        return material;
     }
     public bool Insert(Material material)

@@ -1,8 +1,8 @@
 using InventoryManagement.Models;
-using WarehouseService.Services.Interfaces;
+using InventoryManagement.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CatalogService.Controllers
+namespace InventoryManagement.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
@@ -18,6 +18,7 @@ namespace CatalogService.Controllers
         [Route("getallmaterials")]
         public  IEnumerable<Material> GetAllMaterials()
         {
+            Console.WriteLine("getall");
             IEnumerable<Material> allMaterials= _warehousesrv.GetAll();
             return allMaterials;
         }
