@@ -7,6 +7,6 @@ public interface IWarehouseRepository
     IEnumerable<Material> GetAll();
     Material GetById(int materialId);
     bool Insert(Material material);
-    bool Update(Material material);
+    bool Update(int materialId,Material material);
     bool Delete(int materialId);
 }

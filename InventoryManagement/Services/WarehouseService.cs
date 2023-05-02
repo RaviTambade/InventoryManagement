@@ -14,7 +14,7 @@ public class WarehouseService : IWarehouseService
     public IEnumerable<Material> GetAll() =>_repo.GetAll();
     public Material GetById(int materialId) => _repo.GetById(materialId);
     public bool Insert(Material material) => _repo.Insert(material);
-    public bool Update(Material material) => _repo.Update(material);
+    public bool Update(int materialId,Material material) => _repo.Update(materialId,material);
     public bool Delete(int materialId) => _repo.Delete(materialId);
 
 }

@@ -15,26 +15,26 @@ public class WarehouseRepository : IWarehouseRepository
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
-    public  IEnumerable<Material> GetAll()
+    public IEnumerable<Material> GetAll()
     {
-       List<Material> materials = new List<Material>();
-       MySqlConnection connection = new MySqlConnection(_conString);
+        List<Material> materials = new List<Material>();
+        MySqlConnection connection = new MySqlConnection(_conString);
         try
         {
             string query = "SELECT * FROM materials";
             MySqlCommand command = new MySqlCommand(query, connection);
             connection.Open();
-            MySqlDataReader reader =command.ExecuteReader();
+            MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                
+
                 int id = Int32.Parse(reader["material_id"].ToString());
                 string? materialname = reader["material_name"].ToString();
                 string? materialtype = reader["material_type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unit_price"].ToString());
                 string? imgUrl = reader["photo"].ToString();
-     
+
                 Material material = new Material
                 {
                     MaterialId = id,
@@ -58,8 +58,8 @@ public class WarehouseRepository : IWarehouseRepository
         {
             connection.Close();
         }
-        
-       return materials;
+
+        return materials;
     }
     public Material GetById(int materialId)
     {
@@ -80,8 +80,8 @@ public class WarehouseRepository : IWarehouseRepository
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unit_price"].ToString());
                 string? imgUrl = reader["photo"].ToString();
-                
-                 material = new Material()
+
+                material = new Material()
                 {
                     MaterialId = id,
                     MaterialName = materialname,
@@ -102,11 +102,11 @@ public class WarehouseRepository : IWarehouseRepository
         {
             connection.Close();
         }
-       return material;
+        return material;
     }
     public bool Insert(Material material)
     {
-         bool status = false;
+        bool status = false;
         MySqlConnection connection = new MySqlConnection();
         connection.ConnectionString = _conString;
         try
@@ -136,11 +136,40 @@ public class WarehouseRepository : IWarehouseRepository
         }
         return status;
     }
-    public bool Update(Material material)
+    public bool Update(int materialId, Material material)
     {
         bool status = false;
+        MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "UPDATE materials SET material_name=@materialName , material_type=@materialType , quantity=@quantity , unit_price=@unitPrice , photo=@imgurl  WHERE material_id=@materialId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@materialId", materialId);
+            command.Parameters.AddWithValue("@materialName", material.MaterialName);
+            command.Parameters.AddWithValue("@materialType", material.MaterialType);
+            command.Parameters.AddWithValue("@quantity", material.MaterialQuantity);
+            command.Parameters.AddWithValue("@unitPrice", material.MaterialUnitPrice);
+            command.Parameters.AddWithValue("@imgurl", material.MaterialImgUrl);
+            connection.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+
+        }
+        finally
+        {
+            connection.Close();
+        }
         return status;
     }
+
+
     public bool Delete(int materialId)
     {
         bool status = false;

@@ -35,7 +35,7 @@ namespace InventoryManagement.Controllers
         [Route("update/{id}")]
         public bool Update(int id, [FromBody] Material material)
         {
-            bool status = false;
+            bool status =_warehousesrv.Update(id, material);
             return status;
         }
 
