@@ -35,7 +35,7 @@ namespace InventoryManagement.Controllers
         [Route("updateEmployee/{id}")]
         public bool UpdateEmployee(int id, [FromBody] Employee employee)
         {
-            bool status = false;
+            bool status = _empsrv.Update(id, employee);
             return status;
         }
 
@@ -51,7 +51,7 @@ namespace InventoryManagement.Controllers
         [Route("deleteEmployee/{id}")]
         public bool DeleteEmployee(int id)
         {
-            bool status = false;
+            bool status = _empsrv.Delete(id);
             return status;
         }
 

@@ -159,7 +159,6 @@ public class WarehouseRepository : IWarehouseRepository
         catch (Exception e)
         {
             throw e;
-
         }
         finally
         {

@@ -169,6 +169,38 @@ public class EmployeeRepository : IEmployeeRepository
     public bool Update(int employeeId, Employee employee)
     {
         bool status = false;
+        MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "UPDATE employees SET empfirst_name=@empfirstname, emplast_name=@emplastname, birth_date=@birthdate, hire_date=@hiredate, contact_number=@contactno, department_id=@departmentid, role_id=@roleid, email=@email, password=@password, photo=@imgurl, gender=@gender WHERE employee_id=@empid";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@empid", employeeId);
+            command.Parameters.AddWithValue("@empfirstname", employee.EmployeeFirstName);
+            command.Parameters.AddWithValue("@emplastname", employee.EmployeeLastName);
+            command.Parameters.AddWithValue("@birthdate", employee.BirthDate);
+            command.Parameters.AddWithValue("@hiredate", employee.HireDate);
+            command.Parameters.AddWithValue("@contactno", employee.ContactNumber);
+            command.Parameters.AddWithValue("@departmentid", employee.DepartmentId);
+            command.Parameters.AddWithValue("@roleid", employee.RoleId);
+            command.Parameters.AddWithValue("@email", employee.email);
+            command.Parameters.AddWithValue("@password", employee.password);
+            command.Parameters.AddWithValue("@imgurl", employee.ImgUrl);
+            command.Parameters.AddWithValue("@gender", employee.Gender);
+            connection.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
         return status;
     }
 
