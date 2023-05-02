@@ -37,8 +37,8 @@ public class EmployeeRepository : IEmployeeRepository
                 string? password = reader["password"].ToString();
                 string? imgurl = reader["photo"].ToString();
                 string? gender = reader["gender"].ToString();
-                string? departmentid = reader["department_id"].ToString();
-                string? roleid = reader["role_id"].ToString();
+                int departmentid = Int32.Parse(reader["department_id"].ToString());
+                int roleid = Int32.Parse(reader["role_id"].ToString());
 
                 Employee employee = new Employee
                 {
@@ -96,8 +96,8 @@ public class EmployeeRepository : IEmployeeRepository
                 string? password = reader["password"].ToString();
                 string? imgurl = reader["photo"].ToString();
                 string? gender = reader["gender"].ToString();
-                string? departmentid = reader["department_id"].ToString();
-                string? roleid = reader["role_id"].ToString();
+                int departmentid = Int32.Parse(reader["department_id"].ToString());
+                int roleid = Int32.Parse(reader["role_id"].ToString());
 
                 employee = new Employee
                 {
@@ -130,8 +130,41 @@ public class EmployeeRepository : IEmployeeRepository
     }
     public bool Insert(Employee employee)
     {
-        bool status = false;
+         bool status = false;
+        MySqlConnection connection = new MySqlConnection();
+        connection.ConnectionString = _conString;
+        try
+        {
+            string query = "INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES(@empfirstname,@emplastname,@birthdate,@hiredate,@contactno,@departmentid,@roleid,@email,@password,@imgurl,@gender)";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@empfirstname", employee.EmployeeFirstName);
+            command.Parameters.AddWithValue("@emplastname", employee.EmployeeLastName);
+            command.Parameters.AddWithValue("@birthdate", employee.BirthDate);
+            command.Parameters.AddWithValue("@hiredate", employee.HireDate);
+            command.Parameters.AddWithValue("@contactno", employee.ContactNumber);
+            command.Parameters.AddWithValue("@departmentid", employee.DepartmentId);
+            command.Parameters.AddWithValue("@roleid", employee.RoleId);
+            command.Parameters.AddWithValue("@email", employee.email);
+            command.Parameters.AddWithValue("@password", employee.password);
+            command.Parameters.AddWithValue("@imgurl", employee.ImgUrl);
+            command.Parameters.AddWithValue("@gender", employee.Gender);
+            connection.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
         return status;
+    
     }
     public bool Update(int employeeId, Employee employee)
     {

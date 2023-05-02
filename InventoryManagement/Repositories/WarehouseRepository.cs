@@ -112,7 +112,6 @@ public class WarehouseRepository : IWarehouseRepository
         try
         {
             string query = "INSERT INTO Materials(material_name,material_type,quantity,unit_price,photo)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
-            Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@materialName", material.MaterialName);
             command.Parameters.AddWithValue("@materialType", material.MaterialType);

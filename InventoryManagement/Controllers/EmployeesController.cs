@@ -43,7 +43,7 @@ namespace InventoryManagement.Controllers
         [Route("Insertemployee")]
         public bool InsertEmployee([FromBody] Employee employee)
         {
-            bool status = false;
+            bool status = _empsrv.Insert(employee);
             return status;
         }
 

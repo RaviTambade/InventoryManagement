@@ -10,7 +10,7 @@ public class Employee{
     public string password{get;set;}
     public string ImgUrl{get;set;}
     public string Gender{get;set;}
-    public string DepartmentId{get;set;}
-    public string RoleId{get;set;}
+    public int DepartmentId{get;set;}
+    public int RoleId{get;set;}
     
 }
