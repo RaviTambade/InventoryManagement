@@ -207,6 +207,27 @@ public class EmployeeRepository : IEmployeeRepository
     public bool Delete(int employeeId)
     {
         bool status = false;
+         MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "DELETE FROM employees WHERE employee_id=@empid";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@empid", employeeId);
+            connection.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
         return status;
     }
 
