@@ -9,4 +9,5 @@ public interface IWarehouseRepository
     bool Insert(Material material);
     bool Update(int materialId,Material material);
     bool Delete(int materialId);
+    Location GetLocation(int mid);
 }

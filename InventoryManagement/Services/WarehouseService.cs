@@ -16,5 +16,6 @@ public class WarehouseService : IWarehouseService
     public bool Insert(Material material) => _repo.Insert(material);
     public bool Update(int materialId,Material material) => _repo.Update(materialId,material);
     public bool Delete(int materialId) => _repo.Delete(materialId);
+    public Location GetLocation(int mid)=> _repo.GetLocation(mid);
 
 }

@@ -54,6 +54,10 @@ namespace InventoryManagement.Controllers
             return status;
         }
 
+        public Location getLocation(int mid)
+        {
+            Location location =_warehousesrv.GetLocation(mid);
+        }
 
     }
-}
+} 

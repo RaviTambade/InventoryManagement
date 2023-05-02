@@ -194,4 +194,10 @@ public class WarehouseRepository : IWarehouseRepository
         return status;
     }
 
+    public Location GetLocation(int id)
+    {
+        Location location = new Location();
+        return location;
+    }
+
 }
