@@ -18,7 +18,6 @@ namespace InventoryManagement.Controllers
         [Route("getallmaterials")]
         public  IEnumerable<Material> GetAllMaterials()
         {
-            Console.WriteLine("getall");
             IEnumerable<Material> allMaterials= _warehousesrv.GetAll();
             return allMaterials;
         }
@@ -43,7 +42,6 @@ namespace InventoryManagement.Controllers
         [Route("addmaterial")]
         public bool Insert([FromBody] Material material)
         {
-            Console.WriteLine(material.MaterialName, material.MaterialType, material.MaterialImgUrl,material.MaterialQuantity,material.MaterialUnitPrice);
             bool status= _warehousesrv.Insert(material);
             return status;
         }
@@ -52,7 +50,7 @@ namespace InventoryManagement.Controllers
         [Route("delete/{id}")]
         public bool Delete(int id)
         {
-            bool status = false;
+            bool status = _warehousesrv.Delete(id);
             return status;
         }
 

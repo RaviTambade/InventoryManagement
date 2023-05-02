@@ -173,6 +173,27 @@ public class WarehouseRepository : IWarehouseRepository
     public bool Delete(int materialId)
     {
         bool status = false;
+        MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "DELETE FROM materials WHERE material_id=@materialId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@materialId", materialId);
+            connection.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
         return status;
     }
 
