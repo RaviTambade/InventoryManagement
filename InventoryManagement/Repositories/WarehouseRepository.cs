@@ -169,7 +169,6 @@ public class WarehouseRepository : IWarehouseRepository
         return status;
     }
 
-
     public bool Delete(int materialId)
     {
         bool status = false;
