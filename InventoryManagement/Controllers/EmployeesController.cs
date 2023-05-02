@@ -8,17 +8,18 @@ namespace InventoryManagement.Controllers
     [Route("/api/[controller]")]
     public class EmployeesController : ControllerBase
     {
+        private readonly IEmployeeService _empsrv;
         
-        public EmployeesController()
+        public EmployeesController(IEmployeeService empsvr)
         {
-            
+            _empsrv = empsvr;
         }
 
         [HttpGet]
         [Route("getallemployees")]
         public IEnumerable<Employee> GetAllEmployees()
         {
-          List<Employee> employees = new List<Employee>();
+          IEnumerable<Employee> employees= _empsrv.GetAll();
           return employees;
         }
 
@@ -26,8 +27,8 @@ namespace InventoryManagement.Controllers
         [Route("getemployee/{id}")]
         public Employee GetEmployee(int id)
         {
-           Employee employee= new Employee();
-           return employee;
+            Employee employee = _empsrv.GetById(id);
+            return employee;
         }
 
         [HttpPut]
