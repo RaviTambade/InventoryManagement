@@ -171,3 +171,11 @@ INNER JOIN floors ON  sections.floors_id=  floors.floor_id;
 SELECT floors.floor_number, materials.material_name, materials.material_type
 FROM floors
 INNER JOIN materials ON  floors.mid=  materials.material_id;
+
+
+-- query to find material location in the warehouse by material id
+select  warehouses.warehouse_name, sections.section_name,floors.floor_number, materials.material_name, materials.material_type 
+FROM warehouses 
+INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
+INNER JOIN floors ON  sections.floors_id=  floors.floor_id
+INNER JOIN materials ON  floors.mid=  materials.material_id where  materials.material_id=1
