@@ -55,7 +55,7 @@ namespace InventoryManagement.Controllers
             return status;
         }
 
-         [HttpGet]
+        [HttpGet]
         [Route("ordershistory/{id}")]
         public IEnumerable<Order> OrdersHistory(int id)
         {
@@ -63,5 +63,12 @@ namespace InventoryManagement.Controllers
             return orders;
         }
 
+        [HttpGet]
+        [Route("ordershistory/{id}")]
+        public IEnumerable<Order> OrdersHistory(int id)
+        {
+            IEnumerable<Order> orders = _empsrv.OrderHistory(id);
+            return orders;
+        }
     }
 }
