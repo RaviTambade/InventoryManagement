@@ -201,3 +201,10 @@ INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
 INNER JOIN floors ON  sections.floors_id=  floors.floor_id
 INNER JOIN materials ON  floors.mid=  materials.material_id where  materials.material_id=3
 
+-- query for orders history
+select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity
+from orders
+inner join materials on orders.orderdetails_id = materials.material_id
+inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id
+inner join employees on employees.employee_id = orders.employee_id  where employees.employee_id=3;
+
