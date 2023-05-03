@@ -9,9 +9,8 @@ CREATE TABLE materials(material_id INT NOT NULL AUTO_INCREMENT primary KEY, mate
 create table floors(floor_id INT NOT NULL AUTO_INCREMENT primary KEY, floor_number varchar(20), mid int not null,constraint fk_mid foreign key(mid) references materials(material_id) on update cascade on delete cascade);
 create table sections(section_id INT NOT NULL AUTO_INCREMENT primary KEY,section_name VARCHAR(20), floors_id int not null,constraint fk_floors foreign key(floors_id) references floors(floor_id) on update cascade on delete cascade);
 CREATE TABLE warehouses(warehouse_id INT NOT NULL AUTO_INCREMENT primary KEY,warehouse_name VARCHAR(20),sections_id int not null,constraint fk_sections foreign key(sections_id) references sections(section_id) on update cascade on delete cascade);
-CREATE TABLE orders(order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,order_date DATETIME DEFAULT CURRENT_TIMESTAMP,employee_id INT NOT NULL,CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON UPDATE CASCADE ON DELETE CASCADE ,status ENUM('delivered','initiated','inprogress','cancelled','approved') NOT NULL);
-CREATE TABLE orderdetails(orderdetails_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,order_id INT NOT NULL,CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES orders(order_id) ON UPDATE CASCADE ON DELETE CASCADE,material_id INT NOT NULL,CONSTRAINT fk_material_id FOREIGN KEY (material_id) REFERENCES materials(material_id) ON UPDATE CASCADE ON DELETE CASCADE,quantity INT NOT NULL);  
-
+CREATE TABLE orderdetails(orderdetails_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,assigned_worker_id INT NOT NULL,CONSTRAINT fk_workers_id FOREIGN KEY (assigned_worker_id) REFERENCES employees(employee_id) ON UPDATE CASCADE ON DELETE CASCADE,material_id INT NOT NULL,CONSTRAINT fk_material_id FOREIGN KEY (material_id) REFERENCES materials(material_id) ON UPDATE CASCADE ON DELETE CASCADE,quantity INT NOT NULL);  
+CREATE TABLE orders(order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,order_date DATETIME DEFAULT CURRENT_TIMESTAMP,orderdetails_id INT NOT NULL,CONSTRAINT fk_orderdetails_id FOREIGN KEY (orderdetails_id) REFERENCES orderdetails(orderdetails_id) ON UPDATE CASCADE ON DELETE CASCADE ,employee_id INT NOT NULL,CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON UPDATE CASCADE ON DELETE CASCADE ,status ENUM('delivered','cancelled') NOT NULL);
 
 -- Insertion for material
 insert into materials(material_name, material_type, quantity, unit_price, photo) values ('Needle Bearing','Bearing',784,20, './images/SM.jpg');
@@ -141,15 +140,37 @@ INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_nu
 INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('Tejaswini','Salvi','1992-11-19','2020-09-01','9888754415',4, 3 ,'TS22@gmail.com','TS337845' ,'./images/SM.jpg', 'Female');
 INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('samiksha','raut','1992-11-19','2020-09-01','7844726596',5, 3 ,'TS22@gmail.com','TS337845' ,'./images/SM.jpg', 'Female');
 INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('Vedant','Yadav','1987-01-07','2009-03-11','99887564123',1, 1 ,'VY@gmail.com','VY788814' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('sameer','jadhav','1999-05-12','2018-03-11','8455786547',6,4,'SM@gmail.com','VY788815' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('kalpesh','joshi','1998-01-14','2018-03-11','9987458745',6, 4 ,'KJgmail.com','KG788816' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('suraj','Yadav','1998-02-07','2018-03-11','8755469321',6 , 4,'SY@gmail.com','SY88817' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('manoj','sharma','1998-04-20','2018-03-11','9766132597',6, 4,'MS@gmail.com','MS788818' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('sahil','dhumak','1998-08-14','2018-03-11','9877452163',6, 4,'SDgmail.com','SD788819' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('siddhesh','pandit','1998-11-22','2018-03-11','9987554412',6, 4 ,'VSPgmail.com','VSP788810' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('shankar','kambale','1998-10-26','2018-03-11','7877455512',6, 4 ,'SK@gmail.com','SK788811' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('sumit','malap','1998-01-02','2018-03-11','9989745624',6, 4,'SM@gmail.com','SM788812' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('shubham','ghanekar','1998-03-22','2018-03-11','8955746251',6, 4,'SGgmail.com','SG788813' ,'./images/SM.jpg', 'Male');
+INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('vinaya','satpute','1998-01-06','2018-03-11','9587994765',6, 4 ,'VS@gmail.com','VS7888122' ,'./images/SM.jpg', 'Female');
 
--- insertion of orders
-INSERT INTO orders(order_date, employee_id,status)VALUES ('2023-06-04  08:35:25', 4,"delivered");
-INSERT INTO orders(order_date, employee_id,status)VALUES ('2023-01-16  09:35:25',3,'inprogress');
-INSERT INTO orders(order_date, employee_id,status)VALUES ('2023-04-12  12:35:25', 3,'cancelled');
-INSERT INTO orders(order_date, employee_id,status)VALUES ('2023-08-25  06:35:25',4, 'initiated');
+-- insertion for orderdetails
+insert into orderdetails(assigned_worker_id, material_id, quantity)values(10,3,100);
+insert into orderdetails(assigned_worker_id, material_id, quantity)values(11,4,50);
+insert into orderdetails(assigned_worker_id, material_id, quantity)values(12,5,30);
+insert into orderdetails(assigned_worker_id, material_id, quantity)values(13,4,74);
+insert into orderdetails(assigned_worker_id, material_id, quantity)values(14,7,40);
+insert into orderdetails(assigned_worker_id, material_id, quantity)values(15,8,78);
+insert into orderdetails(assigned_worker_id, material_id, quantity)values(16,9,89);
+
+-- insertion for orders
+INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-06-04  08:35:25',1 , 4,'delivered');
+INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-01-16  09:35:25',2 ,3,'delivered');
+INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-04-12  12:35:25',3 , 3,'cancelled');
+INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-08-25  06:35:25',4,4, 'delivered');
+INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-06-04  08:35:25',5 , 4,'delivered');
+INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-01-16  09:35:25',6,3,'delivered');
+INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-04-12  12:35:25',7, 3,'cancelled');
 
 -- employees and their role
-select employees.empfirst_name, employees.emplast_name, roles.role
+select employees.employee_id, employees.empfirst_name, employees.emplast_name, roles.role
 from employees
 Inner join roles on employees.role_id= roles.role_id;  
 
@@ -159,7 +180,7 @@ FROM warehouses
 INNER JOIN sections ON  warehouses.sections_id=  sections.section_id;
 
 -- sections in departments
-select employees.empfirst_name, employees.emplast_name, departments.department
+select  employees.employee_id, employees.empfirst_name, employees.emplast_name, departments.department
 from employees
 Inner join departments on employees.department_id= departments.department_id;  
 -- floors in section
@@ -178,4 +199,5 @@ select  warehouses.warehouse_name, sections.section_name,floors.floor_number, ma
 FROM warehouses 
 INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
 INNER JOIN floors ON  sections.floors_id=  floors.floor_id
-INNER JOIN materials ON  floors.mid=  materials.material_id where  materials.material_id=1
+INNER JOIN materials ON  floors.mid=  materials.material_id where  materials.material_id=3
+
