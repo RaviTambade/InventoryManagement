@@ -54,7 +54,14 @@ namespace InventoryManagement.Controllers
             bool status = _empsrv.Delete(id);
             return status;
         }
-        
+
+         [HttpGet]
+        [Route("ordershistory/{id}")]
+        public IEnumerable<Order> OrdersHistory(int id)
+        {
+            IEnumerable<Order> orders = _empsrv.OrderHistory(id);
+            return orders;
+        }
 
     }
 }

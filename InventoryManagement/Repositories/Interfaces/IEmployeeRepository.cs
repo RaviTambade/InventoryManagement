@@ -9,4 +9,5 @@ public interface IEmployeeRepository
     bool Insert(Employee employee);
     bool Update(int employeeId,Employee employee);
     bool Delete(int employeeId);
+    IEnumerable<Order> OrderHistory(int empid);
 }
