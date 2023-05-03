@@ -54,9 +54,12 @@ namespace InventoryManagement.Controllers
             return status;
         }
 
-        public Location getLocation(int mid)
+        [HttpGet]
+        [Route("getlocation/{id}")]
+        public Location GetLocation(int id)
         {
-            Location location =_warehousesrv.GetLocation(mid);
+            Location location =_warehousesrv.GetLocation(id);
+            return location;
         }
 
     }

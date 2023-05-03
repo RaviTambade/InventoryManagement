@@ -197,6 +197,45 @@ public class WarehouseRepository : IWarehouseRepository
     public Location GetLocation(int id)
     {
         Location location = new Location();
+        MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select  warehouses.warehouse_name, sections.section_name,floors.floor_number, materials.material_name, materials.material_type FROM warehouses INNER JOIN sections ON  warehouses.sections_id=sections.section_id INNER JOIN floors ON  sections.floors_id= floors.floor_id INNER JOIN materials ON  floors.mid=materials.material_id where  materials.material_id=@materialid";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            Console.WriteLine("q"+query);
+            Console.WriteLine("id"+id);
+            command.Parameters.AddWithValue("@materialid", id);
+            connection.Open();
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string? warehouse = reader["warehouse_name"].ToString();
+                string? sectionname = reader["section_name"].ToString();
+                string? floor = reader["floor_number"].ToString();
+                string? materialname = reader["material_name"].ToString();
+                string? materialtype = reader["material_type"].ToString();
+
+                Console.WriteLine(warehouse,sectionname,floor,materialname,materialtype);
+                location = new Location()
+                {
+                    WarehouseName = warehouse,
+                    SectionName = sectionname,
+                    Floor = floor,
+                    MaterialName = materialname,
+                    MaterialType = materialtype
+                };
+            }
+
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
         return location;
     }
 

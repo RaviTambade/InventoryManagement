@@ -54,6 +54,7 @@ namespace InventoryManagement.Controllers
             bool status = _empsrv.Delete(id);
             return status;
         }
+        
 
     }
 }
