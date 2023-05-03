@@ -151,19 +151,20 @@ INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_nu
 INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('shubham','ghanekar','1998-03-22','2018-03-11','8955746251',6, 4,'SGgmail.com','SG788813' ,'./images/SM.jpg', 'Male');
 INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES('vinaya','satpute','1998-01-06','2018-03-11','9587994765',6, 4 ,'VS@gmail.com','VS7888122' ,'./images/SM.jpg', 'Female');
 
+
 -- insertion for orderdetails
 insert into orderdetails(assigned_worker_id, material_id, quantity, location_id)values(10,3,100,1);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(11,4,50,1);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(12,5,30,1);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(13,4,74,1);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(14,7,40,1);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(15,8,7,1);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(16,9,89,1);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(12,14,30,2);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(13,15,74,2);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(14,16,40,2);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(15,17,78,2);
-insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(16,18,89,2);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(11,4,50,2);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(12,5,30,3);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(13,4,74,4);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(14,7,40,5);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(15,8,7,6);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(16,9,89,7);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(12,14,30,13);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(13,15,74,14);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(14,16,40,15);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(15,17,78,16);
+insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(16,18,89,17);
 
 -- insertion for orders
 INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-06-04  08:35:25',1 , 4,'delivered');
@@ -185,30 +186,28 @@ from employees
 Inner join roles on employees.role_id= roles.role_id;  
 
 
--- query for orderdetails
--- employees.empfirst_name, employees.emplast_name, materials.material_name, materials.material_type 
-
+-- query for orders history
 select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity
 from orders
 inner join materials on orders.orderdetails_id = materials.material_id
 inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id
 inner join employees on employees.employee_id = orders.employee_id  where employees.employee_id=3;
 
-
-select  warehouses.warehouse_name, sections.section_name,floors.floor_number,materials.material_id, materials.material_name, materials.material_type 
+-- query for materials location
+select warehouses.warehouse_id, warehouses.warehouse_name, sections.section_name,floors.floor_number,materials.material_id, materials.material_name, materials.material_type 
 FROM warehouses 
 INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
 INNER JOIN floors ON  sections.floors_id=  floors.floor_id
-INNER JOIN materials ON  floors.mid=  materials.material_id 
+INNER JOIN materials ON  floors.mid=  materials.material_id ;
 
-
-select  employees.empfirst_name,employees.emplast_name, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity, warehouses.warehouse_name, section_name,floor_number
+-- order details and location in warehouse
+Select  employees.empfirst_name,employees.emplast_name, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity, warehouses.warehouse_name ,section_name,floor_number
 from orderdetails  
 inner join employees on orderdetails.assigned_worker_id = employees.employee_id
-inner join materials on orderdetails.material_id = materials.material_id
 inner join warehouses on orderdetails.location_id= warehouses.warehouse_id
  INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
  INNER JOIN floors ON  sections.floors_id=  floors.floor_id
+ inner join materials on orderdetails.material_id = materials.material_id 
 
 
 
