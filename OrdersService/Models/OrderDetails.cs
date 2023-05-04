@@ -9,5 +9,4 @@ public class OrderDetails{
     public string MaterialName{get;set;}
     public string MaterialType{get;set;}
     public int Quantity{get;set;}
-
 }

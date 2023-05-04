@@ -27,5 +27,21 @@ public class OrdersController : ControllerBase
             IEnumerable<Order> orders = _ordsvs.AllOrdersHistory();
             return orders;
         }
+
+        //   [HttpGet]
+        // [Route("Task")]
+        // public IEnumerable<OrderDetails> Task()
+        // {
+        //     IEnumerable<OrderDetails> task = _ordsvs.AllOrdersHistory();
+        //     return task;
+        // }
+
+        //   [HttpGet]
+        // [Route("Taskshistory/{id}")]
+        // public IEnumerable<OrderDetails> TasksHistory(int id)
+        // {
+        //     IEnumerable<OrderDetails> tasks = _ordsvs.AllOrdersHistory(id);
+        //     return tasks;
+        // }
 }
 
