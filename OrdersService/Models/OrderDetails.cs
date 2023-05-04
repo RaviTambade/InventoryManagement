@@ -1,4 +1,4 @@
-namespace Order.Models;
+namespace OrdersService.Models;
 public class OrderDetails{
     public int OrderId{get;set;}
     public string EmployeeFirstName{get;set;}
