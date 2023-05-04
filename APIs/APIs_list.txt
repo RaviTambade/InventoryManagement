@@ -1,20 +1,4 @@
 
-
-Orders-
-       1. api/Orders/ordershistory/{id} -retrieve data of all orders ordered by employee(ORDERS HISTORY OF SUPERVISOR)
-           -authorization  Incharge, Supervisors, Store managers
-
-       2. api/Orders/allordershistory - retrieve data of all orders ordered by all employees(HISTORY OF ORDERS OF ALL SUPERVISORS )
-          -authorization  Incharge, Store managers
-
-        1. api/Orders/Task -retrieve data of order-details ordered by employee and location of material in warehouse(NEW TASK FOR STORE WORKER)
-           -authorization   store worker
-
-       2. api/Orders/Tasks/{id} -retrieve data of all order-details delivered by worker.(ALL TASKS DONE BY STORE WORKER)
-          -authorization  Incharge, Store managers, Store worker
-
-
-
 warehouse
 
       1. api/warehouse/warehouses - retrieve data of all warehouses
@@ -65,18 +49,8 @@ Orders API :-
   Method : POST
   Return : True or False
   Body : {
-        "employeeId": ,
-        "employeeFirstName": "",
-        "employeeLastName": "",
-        "birthDate": "",
-        "hireDate": "",
-        "contactNumber": "",
-        "email": "",
-        "password": "",
-        "imgUrl": "",
-        "gender": "",
-        "departmentId": ,
-        "roleId": 
+        "material_id": ,
+        "quantity": "" 
          }
   Header : Add new order
   Authentication : Supervisor only.
