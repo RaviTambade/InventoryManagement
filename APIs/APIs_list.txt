@@ -1,62 +1,4 @@
 
-warehouse
-
-      1. api/warehouse/warehouses - retrieve data of all warehouses
-          -authorization  Incharge, Store managers
-
-      2. api/warehouse/sections -retrieve data of all sections in warehouse
-           -authorization  Incharge, Store managers
-
-      3. api/warehouse/Floors -retrieve data of all floors avialable in section
-           -authorization  Incharge, Store managers
-
-      4. api/warehouse/materialsAvailableOnFloor -retrieve data of all materials avialable on floor
-           -authorization  Incharge, Store managers
-
-
-Orders API :-
-1)URL : http:localhost:portnumber/api/Orders/ordershistory/{id}
-  Method : employee id
-  Return : Json object of all orders ordered by Supervisor
-  Body : Null 
-  Header : orders details ordered by employee
-  Authentication : Employee, store managers
-   
-2)URL = http:localhost:portnumber/api/Orders/allordershistory
-  id : employee Id
-  Method : GET
-  Return : Json object of all orders
-  Body : Null 
-  Header : all orders details
-  Authentication : Incharge only
- 
-3)URL = http:localhost:portnumber/api/Orders/Task
-  Method : GET
-  Return : Json object of new task
-  Body : Null 
-  Header :  Task details
-  Authentication : store workers
-
-3)URL = http:localhost:portnumber/api/Orders/Taskshstory/{id} 
-  id : employee Id
-  Method : GET
-  Return : Json object of Tasks 
-  Body : Null 
-  Header :  list of Tasks
-  Authentication : store workers, store managers
-
-3)URL = http:localhost:portnumber/api/orders/order 
-  Method : POST
-  Return : True or False
-  Body : {
-        "material_id": ,
-        "quantity": "" 
-         }
-  Header : Add new order
-  Authentication : Supervisor only.
-
-
-
 Employee API :-
 1)URL : http:localhost:portnumber/api/employees/getallemployees
   Method : GET
@@ -124,7 +66,9 @@ Employee API :-
   Authentication : Incharge  Only.
 
 
-   
+
+
+
 Material API :-
 1)URL : http:localhost:portnumber/api/Materials/getallmaterials
   Method : GET
@@ -179,6 +123,81 @@ Material API :-
   Body : Null
   Authentication : store managers Only.
  
+
+
+warehouse API :-
+1)URL : http:localhost:portnumber/api/warehouse/warehouses/
+  Method : GET
+  Return : Json object of all warehouses in database
+  Body : Null 
+  Header : all warehouses
+  Authentication : Incharge, store managers
+   
+2)URL = http:localhost:portnumber/api/warehouse/section
+  Method : GET
+  Return : Json object of all sections in database
+  Body : Null 
+  Header : all sections
+  Authentication : Incharge, store managers
+ 
+3)URL = http:localhost:portnumber/api/warehouse/floors
+  Method : GET
+  Return : Json object of all floors in database
+  Body : Null 
+  Header : all floors
+  Authentication : Incharge, store managers
+
+3)URL = http:localhost:portnumber/api/Orders/materialsAvailableOnFloor
+  Method : GET
+  Return : Json object of materials avialable in floor 
+  Body : Null 
+  Header :  list of materials
+  Authentication : store workers, store managers
+
+
+
+
+Orders API :-
+1)URL : http:localhost:portnumber/api/Orders/ordershistory/{id}
+  id : employee Id
+  Method : GET
+  Return : Json object of all orders ordered by Supervisor
+  Body : Null 
+  Header : orders details ordered by employee
+  Authentication : Employee, store managers
+   
+2)URL = http:localhost:portnumber/api/Orders/allordershistory
+  id : employee Id
+  Method : GET
+  Return : Json object of all orders
+  Body : Null 
+  Header : all orders details
+  Authentication : Incharge only
+ 
+3)URL = http:localhost:portnumber/api/Orders/Task
+  Method : GET
+  Return : Json object of new task
+  Body : Null 
+  Header :  Task details
+  Authentication : store workers
+
+3)URL = http:localhost:portnumber/api/Orders/Taskshstory/{id} 
+  id : employee Id
+  Method : GET
+  Return : Json object of Tasks 
+  Body : Null 
+  Header :  list of Tasks
+  Authentication : store workers, store managers
+
+3)URL = http:localhost:portnumber/api/orders/order 
+  Method : POST
+  Return : True or False
+  Body : {
+        "material_id": ,
+        "quantity": "" 
+         }
+  Header : Add new order
+  Authentication : Supervisor only.
 
 
 
