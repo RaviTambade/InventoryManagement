@@ -22,7 +22,7 @@ public class OrdersController : ControllerBase
 
         [HttpGet]
         [Route("allordershistory")]
-        public IEnumerable<Order> AllOrdersHistory()
+        public IEnumerable<Order> AllOrdersHistoryOfEmployees()
         {
             IEnumerable<Order> orders = _ordsvs.AllOrdersHistory();
             return orders;

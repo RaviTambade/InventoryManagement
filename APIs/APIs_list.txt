@@ -1,0 +1,75 @@
+employees-
+       1. api/employees/getallemployees -retrieve data of all employees  
+           -authorization Incharge only
+
+       2. api/employees/GetEmployee/{id} - retrieve data of employee by their id
+          -authorization Incharge, Store managers, Supervisors, store worker 
+
+        3.api/employees/UpdateEmployee/{id} - Update data of employee by their id -fromBody Employee's data
+         -authorization Incharge only
+
+        4.api/employees/Insertemployee -  Insert data of employee  -fromBody Employee's data 
+        -authorization Incharge only
+
+        5.api/employees/deleteEmployee/{id} -  delete data of employee by their id 
+          -authorization Incharge only
+
+Materials-
+       1. api/Materials/getallmaterials -retrieve data of all materials  
+           -authorization Store managers, Incharge, Supervisors
+
+       2. api/materials/getmaterial/{id} - retrieve data of material by their id
+          -authorization Store managers, Incharge, Supervisors
+
+        3.api/materials/updateMaterial/{id} - Update data of material by their id -fromBody material's data 
+        -authorization Store managers only
+
+        4.api/materials/addmaterial -  Insert data of Material  -fromBody material's data 
+        -authorization Store managers only
+
+        5.api/materials/deletematerial/{id} -  delete data of material by their id 
+          -authorization Store managers only
+
+
+Orders-
+       1. api/Orders/ordershistory/{id} -retrieve data of all orders ordered by employee(ORDERS HISTORY OF SUPERVISOR)
+           -authorization  Incharge, Supervisors, Store managers
+
+       2. api/Orders/allordershistory - retrieve data of all orders ordered by all employees(HISTORY OF ORDERS OF ALL SUPERVISORS )
+          -authorization  Incharge, Store managers
+
+        1. api/Orders/orderdetails -retrieve data of order-details ordered by employee and location of material in warehouse(NEW TASK FOR STORE WORKER)
+           -authorization   store worker
+
+       2. api/Orders/orderdetailsHistory/{id} -retrieve data of all order-details delivered by worker.(ALL TASKS DONE BY STORE WORKER)
+          -authorization  Incharge, Store managers, Store worker
+
+
+Orders-
+       1. api/Orders/ordershistory/{id} -retrieve data of all orders ordered by employee(ORDERS HISTORY OF SUPERVISOR)
+           -authorization  Incharge, Supervisors, Store managers
+
+       2. api/Orders/allordershistory - retrieve data of all orders ordered by all employees(HISTORY OF ORDERS OF ALL SUPERVISORS )
+          -authorization  Incharge, Store managers
+
+        1. api/Orders/orderdetails -retrieve data of order-details ordered by employee and location of material in warehouse(NEW TASK FOR STORE WORKER)
+           -authorization   store worker
+
+       2. api/Orders/orderdetailsHistory/{id} -retrieve data of all order-details delivered by worker.(ALL TASKS DONE BY STORE WORKER)
+          -authorization  Incharge, Store managers, Store worker
+
+warehouse
+
+      1. api/warehouse/warehouses - retrieve data of all warehouses
+          -authorization  Incharge, Store managers
+
+      2. api/warehouse/sections -retrieve data of all sections in warehouse
+           -authorization  Incharge, Store managers
+
+      3. api/warehouse/Floors -retrieve data of all floors avialable in section
+           -authorization  Incharge, Store managers
+
+      4. api/warehouse/materialsAvailableOnFloor -retrieve data of all materials avialable on floor
+           -authorization  Incharge, Store managers
+
+ 
