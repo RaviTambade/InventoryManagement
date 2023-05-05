@@ -36,12 +36,12 @@ public class OrdersController : ControllerBase
         //     return task;
         // }
 
-        //   [HttpGet]
-        // [Route("Taskshistory/{id}")]
-        // public IEnumerable<OrderDetails> TasksHistory(int id)
-        // {
-        //     IEnumerable<OrderDetails> tasks = _ordsvs.AllOrdersHistory(id);
-        //     return tasks;
-        // }
+          [HttpGet]
+        [Route("Taskshistory/{id}")]
+        public IEnumerable<OrderDetails> TasksHistory(int id)
+        {
+            IEnumerable<OrderDetails> tasks = _ordsvs.AllOrdersHistory(id);
+            return tasks;
+        }
 }
 
