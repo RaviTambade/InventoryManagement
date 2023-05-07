@@ -12,7 +12,7 @@ public class OrdersController : ControllerBase
     {
         _ordsvs = ordsvs;
     }
-    [HttpGet]
+        [HttpGet]
         [Route("ordershistory/{id}")]
         public IEnumerable<Order> OrdersHistoryOfEmployee(int id)
         {
