@@ -1,9 +1,8 @@
 namespace OrdersService.Models;
-public class OrderDetails{
+public class Task{
     public int OrderId{get;set;}
     public string EmployeeFirstName{get;set;}
     public string EmployeeLastName{get;set;}
-    public DateTime OrderDate{get;set;}
     public string status{get;set;}
     public int MaterialId{get;set;}
     public string MaterialName{get;set;}

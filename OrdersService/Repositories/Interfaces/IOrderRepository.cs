@@ -6,4 +6,5 @@ public interface IOrderRepository
 {
     IEnumerable<Order> OrdersHistory(int empid);
     IEnumerable<Order> AllOrdersHistory();
+    IEnumerable<Task> TaskDetails();
 }
