@@ -30,17 +30,17 @@ public class OrdersController : ControllerBase
 
           [HttpGet]
         [Route("Task")]
-        public IEnumerable<Task> Task()
+        public TheTask Task()
         {
-            IEnumerable<OrderDetails> task = _ordsvs.Task();
+            TheTask task = _ordsvs.TaskDetails();
             return task;
         }
 
           [HttpGet]
         [Route("Taskshistory/{id}")]
-        public IEnumerable<Task> TasksHistory(int id)
+        public IEnumerable<TheTask> TasksHistory(int id)
         {
-            IEnumerable<OrderDetails> tasks = _ordsvs.AllOrdersHistory(id);
+            IEnumerable<TheTask> tasks = _ordsvs.AllTasks(id);
             return tasks;
         }
 }

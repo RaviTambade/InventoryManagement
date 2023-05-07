@@ -1,6 +1,5 @@
 namespace OrdersService.Models;
-public class Task{
-    public int OrderId{get;set;}
+public class TheTask{
     public string EmployeeFirstName{get;set;}
     public string EmployeeLastName{get;set;}
     public string status{get;set;}
