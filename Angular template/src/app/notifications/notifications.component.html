@@ -7,12 +7,12 @@
                         <h4 class="card-title">Login Form</h4>
                     </div>
                     <div class="card-body">
-                        <form>
+                      <form #loginForm="ngForm" (ngSubmit)="Login (loginForm.value)">
                             
                             <div class="row">
                                 <div class="col-md-8">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email" type="text">
+                                    <input matInput placeholder="Email" type="text"  [(ngModel)]="login.email">
                                   </mat-form-field>
                                 </div>
 
@@ -20,7 +20,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Password" type="text">
+                                    <input matInput placeholder="Password" type="text"  [(ngModel)]="login.password">
                                   </mat-form-field>
                                 </div>
                             </div>
@@ -36,3 +36,9 @@
     </div>
   </div>
   
+  <div *ngIf="status">
+    <p>record inserted sucessfully</p>
+  </div>
+  
+  <div *ngIf="status == false">
+    <p>Error While inserting</p>
