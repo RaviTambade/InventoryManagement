@@ -3,7 +3,6 @@ export class Employee{
         public employeeId:number,
         public employeeFirstName:string,
         public employeeLastName:string,
-        public empLastName:string,
         public birthdate:Date,
         public hiredate:Date,
         public contactNumber:string,

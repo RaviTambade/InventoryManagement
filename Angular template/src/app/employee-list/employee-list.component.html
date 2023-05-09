@@ -31,7 +31,7 @@
                                 </thead>
                                 <tbody *ngFor="let employee of employees">
                                     <tr>
-                                        <td >
+                                        <td (click)="onSelectEmployee(employee)" >
                                             {{employee.employeeId}}
                                         </td>
                                         <td>

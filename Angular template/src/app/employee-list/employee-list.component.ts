@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Employee } from 'app/Employee';
 import { EmployeeServiceService } from 'app/employee-service.service';
 
@@ -10,7 +11,7 @@ import { EmployeeServiceService } from 'app/employee-service.service';
 export class EmployeeListComponent implements OnInit  {
 
   employees:Employee[] |undefined;
-  constructor(private svc:EmployeeServiceService){}
+  constructor(private svc:EmployeeServiceService, private router:Router){}
   
   ngOnInit(): void {
     this.svc.getAll().subscribe((response)=>
@@ -20,4 +21,10 @@ export class EmployeeListComponent implements OnInit  {
     })
   }
 
+  onSelectEmployee(employee:any){
+    if(employee!=undefined)
+    this.router.navigate(['Employee/employee',employee.employeeId]);
+    console.log(employee);
+  }
+  
 }

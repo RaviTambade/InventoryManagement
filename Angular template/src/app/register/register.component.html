@@ -1,0 +1,99 @@
+<div class="main-content">
+    <div class="container-fluid ">
+          <div class="row">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Register Form</h4>
+                    </div>
+                    <div class="card-body">
+                      <form #RegisterForm="ngForm" (ngSubmit)="Register (RegisterForm.value)">
+                        <div class="row">
+                            <div class="col-md-8">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="first Name" type="text"  [(ngModel)]="employee.employeeFirstName">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="last Name" type="text"  [(ngModel)]="employee.employeeLastName">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="BirthDate" type="date"  [(ngModel)]="employee.birthdate">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="HireDate" type="date"  [(ngModel)]="employee.hiredate">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Contact Number" type="text"  [(ngModel)]="employee.contactNumber">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Email" type="text"  [(ngModel)]="employee.email">
+                                  </mat-form-field>
+                                </div>
+  
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Password" type="password"  [(ngModel)]="employee.password">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="gender" type="text"  [(ngModel)]="employee.gender">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="department" type="text"  [(ngModel)]="employee.department">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Role" type="text"  [(ngModel)]="employee.role">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                        
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Register</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+  
+        </div>
+    </div>
+  </div>
+  
+  <div *ngIf="status">
+    <p>record inserted sucessfully</p>
+  </div>
+  
+  <div *ngIf="status == false">
+    <p>Error While inserting</p>
