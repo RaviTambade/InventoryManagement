@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'app/Employee';
+import { EmployeeServiceService } from 'app/employee-service.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -8,21 +9,15 @@ import { Employee } from 'app/Employee';
 })
 export class EmployeeListComponent implements OnInit  {
 
-  employee:Employee[] |undefined;
-  constructor(private svc:CustomerService, private router:Router){}
+  employees:Employee[] |undefined;
+  constructor(private svc:EmployeeServiceService){}
   
   ngOnInit(): void {
     this.svc.getAll().subscribe((response)=>
     {
-        this.customers=response;
+        this.employees=response;
         console.log(response);
     })
-  }
-
-  onSelectCustomer(customer:any){
-    if(customer!=undefined)
-    this.router.navigate(['Customer/customer',customer.customerId]);
-    console.log(customer);
   }
 
 }

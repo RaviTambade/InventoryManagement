@@ -28,20 +28,20 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            1
+                                        <td >
+                                            {{employees.ID}}
                                         </td>
                                         <td>
-                                            Vedant Yadav
+                                            {{employees.firstName}}
                                         </td>
                                         <td>
-                                            7666447241
+                                            {{employees.contactNumber}}
                                         </td>
                                         <td>
-                                            Vedant@gmail.com
+                                            {{employees.email}}
                                         </td>
                                         <td>
-                                          Incharge
+                                          {{employees.department}}
                                       </td>
                                        
                                     </tr>
@@ -57,9 +57,3 @@
     </div>
   </div>
   
-  
-<div *ngFor="let customer of customers">
-    <h4 class="text-uppercase" (click)="onSelectCustomer(customer)">
-        <b>{{ customer.firstName }}</b>
-      </h4>
- </div> 
