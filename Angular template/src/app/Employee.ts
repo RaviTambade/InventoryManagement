@@ -2,6 +2,7 @@ export class Employee{
     constructor(
         public employeeId:number,
         public employeeFirstName:string,
+        public employeeLastName:string,
         public empLastName:string,
         public birthdate:Date,
         public hiredate:Date,
