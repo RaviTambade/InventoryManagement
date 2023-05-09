@@ -4,4 +4,5 @@ using AuthService.Models;
 namespace AuthService.Repositories.Interfaces;
 public interface ILoginRepository
 {
+    public bool Login(Credential credential);
 }

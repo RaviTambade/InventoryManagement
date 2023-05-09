@@ -20,7 +20,7 @@ namespace AuthService.Controllers
         [Route("Login")]
         public bool Login([FromBody] Credential credential)
         {
-            bool status =  false;
+            bool status = _lgsvr.Login(credential);
             return status;
         }
 
