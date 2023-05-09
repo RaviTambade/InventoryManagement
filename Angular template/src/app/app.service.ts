@@ -13,7 +13,7 @@ export class AppService {
   Login(login:Login):Observable<any>
   {
     console.log(login);
-    let url ="http://localhost:5223/auth/Login";
+    let url ="http://localhost:5145/api/login/login";
     return this.http.post<Login>(url, login);
   }
 }
