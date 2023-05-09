@@ -21,8 +21,7 @@ import { LoginComponent } from './login/login.component';
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
-
+    AdminLayoutComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

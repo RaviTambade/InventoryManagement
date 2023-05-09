@@ -1,0 +1,65 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Orders History</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table" *ngFor="let employee of employees">
+                                <thead class=" text-primary">
+                                    <th>
+                                        Employee ID
+                                    </th>
+                                    <th>
+                                        Employee Name
+                                    </th>
+                                    <th>
+                                        Contact Number
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Department
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            Vedant Yadav
+                                        </td>
+                                        <td>
+                                            7666447241
+                                        </td>
+                                        <td>
+                                            Vedant@gmail.com
+                                        </td>
+                                        <td>
+                                          Incharge
+                                      </td>
+                                       
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+        </div>
+    </div>
+  </div>
+  
+  
+<div *ngFor="let customer of customers">
+    <h4 class="text-uppercase" (click)="onSelectCustomer(customer)">
+        <b>{{ customer.firstName }}</b>
+      </h4>
+ </div> 

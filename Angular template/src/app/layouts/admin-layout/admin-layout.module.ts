@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { LoginComponent } from 'app/login/login.component';
+import { EmployeeListComponent } from 'app/employee-list/employee-list.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { LoginComponent } from 'app/login/login.component';
     DashboardComponent,
     UserProfileComponent,
     LoginComponent,
+    EmployeeListComponent,
     TableListComponent,
     TypographyComponent,
     IconsComponent,
