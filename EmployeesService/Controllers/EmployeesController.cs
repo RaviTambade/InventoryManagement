@@ -31,29 +31,29 @@ namespace EmployeesService.Controllers
             return employee;
         }
 
-        [HttpPut]
-        [Route("updateEmployee/{id}")]
-        public bool UpdateEmployee(int id, [FromBody] Employee employee)
-        {
-            bool status = _empsrv.Update(id, employee);
-            return status;
-        }
+        // [HttpPut]
+        // [Route("updateEmployee/{id}")]
+        // public bool UpdateEmployee(int id, [FromBody] Employee employee)
+        // {
+        //     bool status = _empsrv.Update(id, employee);
+        //     return status;
+        // }
 
-        [HttpPost]
-        [Route("Insertemployee")]
-        public bool InsertEmployee([FromBody] Employee employee)
-        {
-            bool status = _empsrv.Insert(employee);
-            return status;
-        }
+        // [HttpPost]
+        // [Route("Insertemployee")]
+        // public bool InsertEmployee([FromBody] Employee employee)
+        // {
+        //     bool status = _empsrv.Insert(employee);
+        //     return status;
+        // }
 
-        [HttpDelete]
-        [Route("deleteEmployee/{id}")]
-        public bool DeleteEmployee(int id)
-        {
-            bool status = _empsrv.Delete(id);
-            return status;
-        }
+        // [HttpDelete]
+        // [Route("deleteEmployee/{id}")]
+        // public bool DeleteEmployee(int id)
+        // {
+        //     bool status = _empsrv.Delete(id);
+        //     return status;
+        // }
 
     }
 }
