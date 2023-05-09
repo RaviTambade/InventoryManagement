@@ -1,7 +1,7 @@
 export class Employee{
     constructor(
         public employeeId:number,
-        public empFirstName:string,
+        public employeeFirstName:string,
         public empLastName:string,
         public birthdate:Date,
         public hiredate:Date,

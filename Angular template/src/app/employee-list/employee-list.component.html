@@ -8,7 +8,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table" *ngFor="let employee of employees">
+                            <table class="table" >
                                 <thead class=" text-primary">
                                     <th>
                                         Employee ID
@@ -26,22 +26,22 @@
                                         Department
                                     </th>
                                 </thead>
-                                <tbody>
+                                <tbody *ngFor="let employee of employees">
                                     <tr>
                                         <td >
-                                            {{employees.ID}}
+                                            {{employee.employeeId}}
                                         </td>
                                         <td>
-                                            {{employees.firstName}}
+                                            {{employee.employeeFirstName}}
                                         </td>
                                         <td>
-                                            {{employees.contactNumber}}
+                                            {{employee.contactNumber}}
                                         </td>
                                         <td>
-                                            {{employees.email}}
+                                            {{employee.email}}
                                         </td>
                                         <td>
-                                          {{employees.department}}
+                                          {{employee.department}}
                                       </td>
                                        
                                     </tr>
