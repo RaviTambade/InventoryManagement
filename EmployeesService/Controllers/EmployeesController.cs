@@ -27,7 +27,6 @@ namespace EmployeesService.Controllers
         [Route("getemployee/{id}")]
         public Employee GetEmployee(int id)
         {
-            Console.WriteLine("get emp" + id);
             Employee employee = _empsrv.GetById(id);
             return employee;
         }
