@@ -29,6 +29,7 @@ export class RegisterComponent  {
  
 
   Register(_RegisterForm:any){
+    console.log("emp" + this.employee);
     this.svc.insertEmployee(this.employee).subscribe((Response)=>{
       this.status=Response;
       console.log(Response);

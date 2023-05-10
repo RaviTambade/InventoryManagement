@@ -60,11 +60,15 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="gender" type="text"  [(ngModel)]="employee.gender">
-                                  </mat-form-field>
+                                    <h6><span class="tim-note"></span>Gender</h6>
+                                  <input type="radio" id="Male" name="gender" value="1"  [(ngModel)]="employee.gender">
+                                    <label for="Male">Male</label><br>
+                                    <input type="radio" id="Female" name="gender" value="2"  [(ngModel)]="employee.gender">
+                                    <label for="Female">Female</label><br>
+                                    <input type="radio" id="Others" name="gender" value="3"  [(ngModel)]="employee.gender">
+                                    <label for="Others">Others</label>
                                 </div>
-                            </div>
+                            </div>     
                             <div class="row">
                                 <div class="col-md-8">
                                   <mat-form-field class="example-full-width">

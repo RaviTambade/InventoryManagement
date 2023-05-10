@@ -39,13 +39,7 @@ namespace EmployeesService.Controllers
         //     return status;
         // }
 
-        // [HttpPost]
-        // [Route("Insertemployee")]
-        // public bool InsertEmployee([FromBody] Employee employee)
-        // {
-        //     bool status = _empsrv.Insert(employee);
-        //     return status;
-        // }
+
 
         // [HttpDelete]
         // [Route("deleteEmployee/{id}")]
