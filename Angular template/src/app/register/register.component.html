@@ -71,16 +71,32 @@
                             </div>     
                             <div class="row">
                                 <div class="col-md-8">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="department" type="text"  [(ngModel)]="employee.department">
-                                  </mat-form-field>
+                                  <h6><span class="tim-note"></span>Department</h6>
+                                  <input type="radio" id="hr" name="department" value="1"  [(ngModel)]="employee.department">
+                                    <label for="hr">HR</label><br>
+                                    <input type="radio" id="store" name="department" value="2"  [(ngModel)]="employee.department">
+                                    <label for="store">Store</label><br>
+                                    <input type="radio" id="gb550" name="department" value="3"  [(ngModel)]="employee.department">
+                                    <label for="gb550">GB550 Line</label><br>
+                                    <input type="radio" id="gb400" name="department" value="4"  [(ngModel)]="employee.department">
+                                    <label for="gb400">GB400 Line</label><br>
+                                    <input type="radio" id="gb540" name="department" value="5"  [(ngModel)]="employee.department">
+                                    <label for="gb540">GB540 Line</label><br>
+                                    <input type="radio" id="worker" name="department" value="6"  [(ngModel)]="employee.department">
+                                    <label for="worker">Store worker</label>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row"> 
                                 <div class="col-md-8">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Role" type="text"  [(ngModel)]="employee.role">
-                                  </mat-form-field>
+                                  <h6><span class="tim-note"></span>Role</h6>
+                                  <input type="radio" id="incharge" name="role" value="1"  [(ngModel)]="employee.role">
+                                    <label for="incharge">Incharge</label><br>
+                                    <input type="radio" id="storeManager" name="role" value="2"  [(ngModel)]="employee.role">
+                                    <label for="storeManager">Store Manager</label><br>
+                                    <input type="radio" id="supervisor" name="role" value="3"  [(ngModel)]="employee.role">
+                                    <label for="supervisor">Supervisor</label><br>
+                                    <input type="radio" id="storeworker" name="role" value="4"  [(ngModel)]="employee.role">
+                                    <label for="storeworker">Supervisor</label>
                                 </div>
                             </div>
                         
