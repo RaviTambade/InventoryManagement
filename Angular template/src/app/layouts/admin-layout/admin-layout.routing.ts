@@ -13,6 +13,7 @@ import { EmployeeListComponent } from 'app/employee-list/employee-list.component
 import { EmployeeDetailsComponent } from 'app/employee-details/employee-details.component';
 import { RegisterComponent } from 'app/register/register.component';
 import { MaterialListComponent } from 'app/material-list/material-list.component';
+import { MaterialUpdateFormComponent } from 'app/material-update-form/material-update-form.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -62,6 +63,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'login',        component: LoginComponent },
     { path: 'register',        component: RegisterComponent },
     { path: 'material-list',        component: MaterialListComponent },
+    { path: 'material-update-form',        component: MaterialUpdateFormComponent },
     { path: 'employee-list',   component: EmployeeListComponent },
     { path: 'employee-details',   component: EmployeeDetailsComponent },
     { path: 'table-list',     component: TableListComponent },

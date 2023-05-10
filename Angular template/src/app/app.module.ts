@@ -12,6 +12,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { RegisterComponent } from './register/register.component';
 import { MaterialListComponent } from './material-list/material-list.component';
 import { MaterialUpdateFormComponent } from './material-update-form/material-update-form.component';
+import { SearchMaterialComponent } from './search-material/search-material.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { MaterialUpdateFormComponent } from './material-update-form/material-upd
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    MaterialUpdateFormComponent,
+    SearchMaterialComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

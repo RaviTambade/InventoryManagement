@@ -22,6 +22,7 @@ import { EmployeeListComponent } from 'app/employee-list/employee-list.component
 import { EmployeeDetailsComponent } from 'app/employee-details/employee-details.component';
 import { RegisterComponent } from 'app/register/register.component';
 import { MaterialListComponent } from 'app/material-list/material-list.component';
+import { MaterialUpdateFormComponent } from 'app/material-update-form/material-update-form.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { MaterialListComponent } from 'app/material-list/material-list.component
     UpgradeComponent,
     EmployeeDetailsComponent,
     RegisterComponent,
-    MaterialListComponent
+    MaterialListComponent,
+    MaterialUpdateFormComponent
   ]
 })
 
