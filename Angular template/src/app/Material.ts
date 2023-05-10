@@ -1,6 +1,6 @@
 export class Material{
     constructor(
-        public id:number,
+        public materialId:number,
         public materialName:string,
         public materialType:string,
         public materialQuantity:number,

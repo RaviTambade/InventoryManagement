@@ -23,6 +23,8 @@ import { EmployeeDetailsComponent } from 'app/employee-details/employee-details.
 import { RegisterComponent } from 'app/register/register.component';
 import { MaterialListComponent } from 'app/material-list/material-list.component';
 import { MaterialUpdateFormComponent } from 'app/material-update-form/material-update-form.component';
+import { searchconsole } from 'googleapis/build/src/apis/searchconsole';
+import { SearchMaterialComponent } from 'app/search-material/search-material.component';
 
 @NgModule({
   imports: [
@@ -51,7 +53,8 @@ import { MaterialUpdateFormComponent } from 'app/material-update-form/material-u
     EmployeeDetailsComponent,
     RegisterComponent,
     MaterialListComponent,
-    MaterialUpdateFormComponent
+    MaterialUpdateFormComponent,
+    SearchMaterialComponent
   ]
 })
 

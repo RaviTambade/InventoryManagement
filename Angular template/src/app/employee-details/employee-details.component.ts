@@ -24,7 +24,7 @@ export class EmployeeDetailsComponent  {
 }
 }
 
-  getCustomerById(id: any) {
+  getEmployeeById(id: any) {
     this.svc.getById(id).subscribe((response) => {
       this.employee = response;
       console.log(this.employee);

@@ -27,7 +27,6 @@ import { SearchMaterialComponent } from './search-material/search-material.compo
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    SearchMaterialComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
