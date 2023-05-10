@@ -2,21 +2,27 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-profile">
+                <input type="number" [(ngModel)]="employeeId">
+                <button (click)="getCustomerById(employeeId)" class="btn btn-success">Search</button>
+                          
+                <div class="card card-profile" *ngIf="employee && employee.employeeId !=0">
                     <div class="card-avatar">
                         <a href="javascript:void(0)">
                             <img class="img" src="./assets/img/faces/marc.jpg" />
                         </a>
                     </div>
-                    <div class="card-body">
-                        <h6 class="card-category text-gray">SUPERVISOR</h6>
-                        <h4 class="card-title">Vedant Yadav</h4>
+                    <div class="card-body" >
+                        <h6 class="card-category text-gray">{{employee.role}}</h6>
+                        <h4 class="card-title">{{employee.employeeFirstName}} {{ employee.employeeLastName}}</h4>
                         <p class="card-description">   </p>
-                        <h5><span class="tim-note"></span>Email: vedant@gmail.com </h5>
-                        <h5><span class="tim-note"></span>Contact NO: 988874654 </h5>
-                        <h5><span class="tim-note"></span>Department: G550 Line </h5>
-                        <h5><span class="tim-note"></span>BirthDate:07-01-2001</h5>
-
+                        <h5><span class="tim-note"></span>Employee Id:{{ employee.employeeId}}</h5>
+                        <h5><span class="tim-note"></span>Email:{{ employee.email}}</h5>
+                        <h5><span class="tim-note"></span>Contact NO: {{ employee.contactNumber }} </h5>
+                        <h5><span class="tim-note"></span>Department: {{ employee.department }} </h5>
+                        <h5><span class="tim-note"></span>BirthDate: {{ employee.birthdate}}</h5>
+                        <h5><span class="tim-note"></span>Hire Date: {{ employee.hiredate}}</h5>
+                        <h5><span class="tim-note"></span>BirthDate: {{ employee.birthdate}}</h5>
+                        <h5><span class="tim-note"></span>gender: {{ employee.gender}}</h5>
                     </div>
                 </div>
             </div>
@@ -25,3 +31,18 @@
   </div> 
   
 
+  <!-- <div *ngIf="employee && employee.employeeId !=0">
+    <li class="list-group-item list-group-item-dark"alig="center">
+<p><label ><b>cCustomerId :</b></label>{{ customer.customerId }}</p>
+<p><label ><b>First Name :</b></label>{{customer.firstName}}
+<p><label ><b>Last Name :</b></label>{{ customer.lastName }}</p>
+<p><label ><b>Email :</b></label>{{ customer.email }}</p>
+<p><label ><b>Password :</b></label>{{ customer.password}}</p>
+<p><label ><b>Contact Number :</b></label>{{ customer.contactNumber}}</p>
+<p><label ><b>Account Number :</b></label>{{ customer.accountNumber}}</p>
+
+ <button class="btn btn-primary fw-danger" type="submit" (click)="deleteAccount(customer.customerId)">Delete</button>
+<button class="btn " style="background-color: #55c2da;" (click)="onSelectUpdateCustomer(customer.customerId)">Update </button>             
+
+</li>
+</div> -->

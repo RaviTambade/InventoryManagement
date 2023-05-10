@@ -21,4 +21,10 @@ export class EmployeeServiceService {
     let url ="http://localhost:5224/api/employees/getallemployees";
     return this.http.post<Employee>(url, employee);
   }
+  getById(employeeId:number):Observable<Employee>
+  {
+    let url ="http://localhost:5224/api/employees/getemployee/"+ employeeId;
+    return this.http.get<Employee>(url);
+  }
+ 
 }
