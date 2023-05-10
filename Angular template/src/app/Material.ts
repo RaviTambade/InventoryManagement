@@ -1,4 +1,4 @@
-export class Login{
+export class Material{
     constructor(
         public id:number,
         public materialName:string,

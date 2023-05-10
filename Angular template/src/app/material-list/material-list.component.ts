@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Material } from 'app/Material';
+import { MaterialService } from 'app/material.service';
 
 @Component({
   selector: 'app-material-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaterialListComponent implements OnInit {
 
-  constructor() { }
+  materials:Material [] |undefined
+  constructor(private svc:MaterialService) { }
 
   ngOnInit(): void {
+    this.svc.getAllMaterials().subscribe((response)=>{
+      this.materials =response;
+      console.log(response);
+      console.log(this.materials);
+    })
   }
 
 }
