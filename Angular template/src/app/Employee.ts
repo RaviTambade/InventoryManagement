@@ -3,8 +3,8 @@ export class Employee{
         public employeeId:number,
         public employeeFirstName:string,
         public employeeLastName:string,
-        public birthdate:Date,
-        public hiredate:Date,
+        public birthdate:string,
+        public hiredate:string,
         public contactNumber:string,
         public email:string,
         public password:string,
@@ -12,7 +12,6 @@ export class Employee{
         public gender:string,
         public department:string,
         public role:string,
-
     ){}
 }
 

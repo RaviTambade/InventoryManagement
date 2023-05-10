@@ -67,7 +67,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection connection = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.employee_id, employees.birth_date, employees.hire_date, employees.empfirst_name,employees.email,employees.contact_number, employees.photo, employees.gender, departments.department, roles.role from employees  inner join departments on employees.department_id=departments.department_id   inner join roles on employees.role_id=roles.role_id where employee_id=@employeeId";
+            string query ="select  employees.employee_id, employees.birth_date, employees.hire_date, employees.empfirst_name, employees.emplast_name, employees.email,employees.contact_number, employees.photo, employees.gender, departments.department, roles.role from employees  inner join departments on employees.department_id=departments.department_id   inner join roles on employees.role_id=roles.role_id where employee_id=@employeeId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@employeeId", employeeId);
             connection.Open();
@@ -83,8 +83,8 @@ public class EmployeeRepository : IEmployeeRepository
                 string? email = reader["email"].ToString();
                 string? imgurl = reader["photo"].ToString();
                 string? gender = reader["gender"].ToString();
-                string? department = reader["department_id"].ToString();
-                string? role = reader["role_id"].ToString();
+                string? department = reader["department"].ToString();
+                string? role = reader["role"].ToString();
 
                 employee = new Employee
                 {
