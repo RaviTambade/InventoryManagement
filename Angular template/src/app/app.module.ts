@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { RegisterComponent } from './register/register.component';
 import { MaterialListComponent } from './material-list/material-list.component';
+import { MaterialUpdateFormComponent } from './material-update-form/material-update-form.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { MaterialListComponent } from './material-list/material-list.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    MaterialUpdateFormComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
