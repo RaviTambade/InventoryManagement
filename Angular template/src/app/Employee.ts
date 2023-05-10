@@ -4,7 +4,7 @@ export class Employee{
         public employeeFirstName:string,
         public employeeLastName:string,
         public birthdate:string,
-        public hiredate:string,
+        public hiredate:Date,
         public contactNumber:string,
         public email:string,
         public password:string,

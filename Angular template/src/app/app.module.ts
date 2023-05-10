@@ -10,6 +10,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './login/login.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { RegisterComponent } from './register/register.component';
+import { MaterialListComponent } from './material-list/material-list.component';
 
 @NgModule({
   imports: [

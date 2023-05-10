@@ -13,7 +13,7 @@ export class RegisterComponent  {
      "employeeFirstName":'',
      "employeeLastName":'',
      "birthdate": '',
-     "hiredate":'',
+     "hiredate":new Date(),
      "contactNumber":'',
      "email":'',
      "password":'',

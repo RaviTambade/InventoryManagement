@@ -21,6 +21,7 @@ import { LoginComponent } from 'app/login/login.component';
 import { EmployeeListComponent } from 'app/employee-list/employee-list.component';
 import { EmployeeDetailsComponent } from 'app/employee-details/employee-details.component';
 import { RegisterComponent } from 'app/register/register.component';
+import { MaterialListComponent } from 'app/material-list/material-list.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { RegisterComponent } from 'app/register/register.component';
     NotificationsComponent,
     UpgradeComponent,
     EmployeeDetailsComponent,
-    RegisterComponent
+    RegisterComponent,
+    MaterialListComponent
   ]
 })
 
