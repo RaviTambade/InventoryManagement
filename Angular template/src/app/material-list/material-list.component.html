@@ -5,14 +5,14 @@
                 <div class="card card-chart" *ngFor="let material of materials">
                     <div class="card-header card-header-success">
                         <!-- <div class="ct-chart" id="dailySalesChart"></div> -->
-                        <img  src="/assets/img/ballBearing.jpeg" alt="" >
+                        <img  src="{{material.materialImgUrl}}" alt="" >
                     </div>
                     <div class="card-body">
                         <h4 class="card-title">Material Id:{{material.materialId}}</h4>
                         <h4 class="card-title">Material Type:{{material.materialType}}</h4>
                         <h4 class="card-title">Material Name: {{material.materialName}}</h4>
                         <p class="card-category">
-                            <span class="text-success"> </span> Qunatity:{{material.quantity}}</p>
+                            <span class="text-success"> </span> Qunatity:{{material.materialQuantity}}</p>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-left">Order</button> <button mat-raised-button type="submit" class="btn btn-danger pull-left">Delete</button>
                     </div>
                 </div>

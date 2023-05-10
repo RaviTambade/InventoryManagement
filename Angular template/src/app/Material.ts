@@ -3,9 +3,9 @@ export class Material{
         public id:number,
         public materialName:string,
         public materialType:string,
-        public quantity:number,
+        public materialQuantity:number,
         public unitprice:number,
-        public imgurl:string,
+        public materialImgUrl:string,
 
     ){}
 }
