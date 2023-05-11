@@ -17,9 +17,9 @@
                         <h4 class="card-title">Material Id: {{material.materialId}}</h4>
                         <h4 class="card-title">Current Quantity: {{material.materialQuantity}}</h4>
                         <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Qunatity" type="number"  [(ngModel)]="material.materialQuantity" >
+                            <input matInput placeholder="Qunatity" type="number" #quantity >
                           </mat-form-field>
-                            <button class="btn btn-danger pull-left" type="button">Update</button>
+                            <button class="btn btn-danger pull-left"  (click)="getValue(quantity.value)" type="button">Update</button>
                     </div>
                     </form>
                 </div>
