@@ -1,0 +1,31 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="number" [(ngModel)]="materialId">
+                <button (click)="getMaterialById(materialId)" class="btn btn-success">Search</button>
+
+                <div class="card card-chart" *ngIf="material && material.materialId !=0">
+                    <div class="card-header card-header-success">
+                        <!-- <div class="ct-chart" id="dailySalesChart"></div> -->
+                        <img src="{{material.materialImgUrl}}" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Material Id:{{material.materialId}}</h4>
+                        <h4 class="card-title">Material Type:{{material.materialType}}</h4>
+                        <h4 class="card-title">Material Name: {{material.materialName}}</h4>
+                        <p class="card-category">
+                            <input type="number"  [(ngModel)]="material.materialQuantity">
+                        </p>
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-left">Order</button> <button
+                            mat-raised-button type="submit" class="btn btn-danger pull-left">Delete</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

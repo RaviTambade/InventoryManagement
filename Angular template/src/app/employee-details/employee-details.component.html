@@ -1,20 +1,21 @@
 <div class="main-content">
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-md-12">
                 <input type="number" [(ngModel)]="employeeId">
                 <button (click)="getEmployeeById(employeeId)" class="btn btn-success">Search</button>
-                          
+
                 <div class="card card-profile" *ngIf="employee && employee.employeeId !=0">
                     <div class="card-avatar">
                         <a href="javascript:void(0)">
                             <img class="img" src="{{ employee.imgUrl }}" />
                         </a>
                     </div>
-                    <div class="card-body" >
+                    <div class="card-body">
                         <h6 class="card-category text-gray">{{employee.role}}</h6>
-                        <h4 class="card-title"> {{employee.employeeFirstName}}  {{ employee.employeeLastName}}</h4>
-                        <p class="card-description">   </p>
+                        <h4 class="card-title"> {{employee.employeeFirstName}} {{ employee.employeeLastName}}</h4>
+                        <p class="card-description"> </p>
                         <h5><span class="tim-note"></span>Employee Id: {{ employee.employeeId}}</h5>
                         <h5><span class="tim-note"></span>Email: {{ employee.email}}</h5>
                         <h5><span class="tim-note"></span>Contact NO: {{ employee.contactNumber }} </h5>
@@ -24,8 +25,73 @@
                         <h5><span class="tim-note"></span>gender: {{ employee.gender}}</h5>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
-  </div> 
-  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="col-md-12">
+                <div class="places-buttons">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto text-center">
+                            <h4 class="card-title">
+                                Notifications Places
+                                <p class="category">Click to view notifications</p>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','left')">Top Left</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','center')">Top Center</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','right')">Top Right</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','left')">Bottom Left</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','center')">Bottom Center</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','right')">Bottom Right</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
