@@ -11,7 +11,7 @@ export class MaterialUpdateFormComponent implements OnInit {
 
   @Input() materialId: number | undefined;
   material: Material | undefined;
-
+  status: boolean | undefined;
   constructor(private svc: MaterialService ) { }
   
   ngOnInit(): void {
@@ -21,7 +21,9 @@ export class MaterialUpdateFormComponent implements OnInit {
       })
     }
   }
+  Update(_UpdateForm:any){
 
+    }
   getMaterialById(id: any) {
     this.svc.getById(id).subscribe((response) => {
       this.material = response;
