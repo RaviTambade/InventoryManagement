@@ -11,14 +11,14 @@
                         <img src="{{material.materialImgUrl}}" alt="">
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title">Material Id:{{material.materialId}}</h4>
-                        <h4 class="card-title">Material Type:{{material.materialType}}</h4>
+                        <h4 class="card-title">Material Type: {{material.materialType}}</h4>
                         <h4 class="card-title">Material Name: {{material.materialName}}</h4>
-                        <p class="card-category">
-                            <input type="number"  [(ngModel)]="material.materialQuantity">
-                        </p>
-                        <button mat-raised-button type="submit" class="btn btn-danger pull-left">Order</button> <button
-                            mat-raised-button type="submit" class="btn btn-danger pull-left">Delete</button>
+                        <h4 class="card-title">Material Id: {{material.materialId}}</h4>
+                        <h4 class="card-title">Current Quantity: {{material.materialQuantity}}</h4>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Qunatity" type="number"  >
+                          </mat-form-field>
+                            <button class="btn btn-danger pull-left" type="button">Update</button>
                     </div>
                 </div>
 
@@ -26,6 +26,3 @@
         </div>
     </div>
 </div>
-
-
-
