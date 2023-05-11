@@ -67,7 +67,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection connection = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.employee_id, employees.birth_date, employees.hire_date, employees.empfirst_name, employees.emplast_name, employees.email,employees.contact_number, employees.photo, departments.department, roles.role , genders.gender  from employees  inner join departments on employees.department_id=departments.department_id  inner join genders on employees.gender_id=genders.gender_id inner join roles on employees.role_id=roles.role_id  where  employee_id=@employeeId";
+            string query ="select  employees.employee_id, DATE(employees.birth_date), DATE(employees.hire_date), employees.empfirst_name, employees.emplast_name, employees.email,employees.contact_number, employees.photo, departments.department, roles.role , genders.gender  from employees  inner join departments on employees.department_id=departments.department_id  inner join genders on employees.gender_id=genders.gender_id inner join roles on employees.role_id=roles.role_id  where   employee_id=@employeeId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@employeeId", employeeId);
             connection.Open();
@@ -77,22 +77,21 @@ public class EmployeeRepository : IEmployeeRepository
                 int id = Int32.Parse(reader["employee_id"].ToString());
                 string? empfirstname = reader["empfirst_name"].ToString();
                 string? emplastname = reader["emplast_name"].ToString();
-                DateTime birthdate = DateTime.Parse(reader["birth_date"].ToString());
-                DateTime hiredate = DateTime.Parse(reader["hire_date"].ToString());
+                string? birthdate = reader["DATE(employees.birth_date)"].ToString();
+                string? hiredate = reader["DATE(employees.hire_date)"].ToString();
                 string? contactno = reader["contact_number"].ToString();
                 string? email = reader["email"].ToString();
                 string? imgurl = reader["photo"].ToString();
                 string? gender = reader["gender"].ToString();
                 string? department = reader["department"].ToString();
                 string? role = reader["role"].ToString();
-
                 employee = new Employee
                 {
                     EmployeeId = id,
                     EmployeeFirstName = empfirstname,
                     EmployeeLastName = emplastname,
-                    BirthDate = birthdate,
-                    HireDate = hiredate,
+                    BirthDate = birthdate.Remove(10,9),
+                    HireDate = hiredate.Remove(10,9),
                     ContactNumber = contactno,
                     email = email,
                     ImgUrl = imgurl,
