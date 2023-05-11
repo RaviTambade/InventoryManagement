@@ -6,15 +6,15 @@
                 <button (click)="getMaterialById(materialId)" class="btn btn-success">Search</button>
 
                 <div class="card card-chart" *ngIf="material && material.materialId !=0">
-                    <form #UpdateForm="ngForm" (ngSubmit)="Update (UpdateForm.value)">
+                    <form>
                     <div class="card-header card-header-success">
                         <!-- <div class="ct-chart" id="dailySalesChart"></div> -->
                         <img src="{{material.materialImgUrl}}" alt="">
                     </div>
                     <div class="card-body">
+                        <h4 class="card-title">Material Id: {{material.materialId}}</h4>
                         <h4 class="card-title">Material Type: {{material.materialType}}</h4>
                         <h4 class="card-title">Material Name: {{material.materialName}}</h4>
-                        <h4 class="card-title">Material Id: {{material.materialId}}</h4>
                         <h4 class="card-title">Current Quantity: {{material.materialQuantity}}</h4>
                         <mat-form-field class="example-full-width">
                             <input matInput placeholder="Qunatity" type="number" #quantity >
