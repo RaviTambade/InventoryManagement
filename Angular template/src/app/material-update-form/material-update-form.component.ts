@@ -14,7 +14,14 @@ export class MaterialUpdateFormComponent implements OnInit {
   @Input() materialId: number | undefined;
   material: Material | undefined;
   status: boolean | undefined;
-
+  Material={
+    "materialId":1,
+    "materialName":'',
+    "materialType":'',
+    "materialQuantity":0,
+    "unitprice":0,
+    "materialImgUrl":'',
+ };
   constructor(private svc: MaterialService ) { }
   
   ngOnInit(): void {
@@ -31,12 +38,29 @@ export class MaterialUpdateFormComponent implements OnInit {
     })
   }
 
-  updateMaterial(id:number, quantity:number){
-    this.svc.updateQuantity(id,quantity).subscribe((response)=>{
-      this.status= response;
-      console.log(response);
-    })
-  }
+  // onUpdte(materialId:number, quantity:any){
+  //   console.log(materialId);
+  //   console.log(quantity)
+  //   this.svc.updateQuantity(materialId,quantity).subscribe((response)=>{
+  //     this.status= response;
+  //     console.log(response);
+  //   })
+  // }
 
+  // Update(_UpdateForm:any){
+  //   this.svc.update(this.Material).subscribe((Response)=>{
+  //     this.status=Response;
+  //     console.log(Response);
+  //   })
+
+    Register(_RegisterForm:any){
+
+      this.svc.update(this.material).subscribe((Response)=>{
+        this.status=Response;
+        console.log(Response);
+      })
+    }
+  
 
 }
+

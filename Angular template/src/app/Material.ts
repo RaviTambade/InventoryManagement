@@ -6,5 +6,6 @@ export class Material{
         public materialQuantity:number,
         public unitprice:number,
         public materialImgUrl :string,
+        
     ){}
 }

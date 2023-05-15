@@ -135,7 +135,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
-    public bool Update(int materialId, int quantity)
+    public bool Update(Material material)
     {
         bool status = false;
         MySqlConnection connection = new MySqlConnection(_conString);
@@ -143,9 +143,8 @@ public class MaterialRepository : IMaterialRepository
         {
             string query = "UPDATE materials SET  quantity=@quantity  WHERE material_id=@materialId";
             MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@materialId", materialId);
-            command.Parameters.AddWithValue("@quantity",  quantity);
-
+            command.Parameters.AddWithValue("@materialId", material.MaterialId);
+            command.Parameters.AddWithValue("@quantity",  material.MaterialQuantity);
             connection.Open();
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)

@@ -6,33 +6,47 @@
                 <button (click)="getMaterialById(materialId)" class="btn btn-success">Search</button>
             </div>
             
-<form   *ngIf="material && material.materialId !=0" (ngSubmit)="updateMaterial()">
-  <div class="card card-chart">
-    
-      <div class="card-header card-header-success">
-          <div class="ct-chart" id="dailySalesChart"></div>
-          <img src="{{material.materialImgUrl}}" alt="">
-      </div>
-      <div class="card-body">
-          <h4 class="card-title">Material Id: {{material.materialId}}</h4>
-          <h4 class="card-title">Material Type: {{material.materialType}}</h4>
-          <h4 class="card-title">Material Name: {{material.materialName}}</h4>
-          <h4 class="card-title">Current Quantity: {{material.materialQuantity}}</h4>
-          <mat-form-field class="example-full-width">
-              <input matInput placeholder="Qunatity" type="number" #quantity>
-          </mat-form-field>
-          <button class="btn btn-danger pull-left" type="submit">Update</button>
-      </div>
-
-  </div>
-</form>
         </div>
+   
     </div>
 </div>
+
+
+
+<!-- <div *ngIf="account">
+  <div class="form-floating mb-3">
+    <input type="number" name="accountNumber" class="form-control" placeholder="Enter Account Number"
+      #accountNumber="ngModel" [(ngModel)]="account.accountNumber" /><label
+      for="accountNumber">AccountNumber</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" name="ifscCode" class="form-control" #ifscCode="ngModel"
+      [(ngModel)]=" account.ifscCode "><label for="ifscCode">IFSCCode</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" placeholder="YYYY-MM-DD" name="registerDate" class="form-control"
+      #registerDate="ngModel" [(ngModel)]="account.registerDate "><label
+      for="registerDate">RegisterDate</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" name="balance" class="form-control" #balance="ngModel"
+      [(ngModel)]=" account.balance"><label for="balance">Balance</label>
+  </div>
+  <div>
+    <button class="btn btn-primary fw-bold" (click)="update()" (click)="status = false">Update</button>
+  </div>
+
+
+
+  <div *ngIf="status">
+    <p>Account updated sucessfully</p>
+  </div>
+
+  <div *ngIf="status == false">
+    <p>Error While updating data</p>
+  </div>
+</div> -->
 <!-- 
-
-
-
 <form #updateMaterial="ngForm" *ngIf="material && material.materialId !=0" (ngSubmit)="Update(updateMaterial.value)">
   <div class="row">
       <div class="col-md-8">
@@ -82,4 +96,91 @@
   </form>
  -->
 
+<!-- 
+ <form  #UpdateForm="ngForm" (ngSubmit)="Update(UpdateForm.value)" *ngIf="material && material.materialId !=0" >
+  <div class="card card-chart">
+    
+      <div class="card-header card-header-success">
+          <div class="ct-chart" id="dailySalesChart"></div>
+          <img src="{{material.materialImgUrl}}" alt="">
+      </div>
+      <div class="card-body">
+        <input type="number"  [(ngModel)]="material.materialId">
+        <input type="text"  [(ngModel)]="material.materialName">
+        <input type="text"  [(ngModel)]="material.materialType">
+           <h4 class="card-title">Material Id: {{material.materialId}}</h4>
+          <h4 class="card-title">Material Type: {{material.materialType}}</h4>
+          <h4 class="card-title">Material Name: {{material.materialName}}</h4>
+          <h4 class="card-title">Current Quantity: {{material.materialQuantity}}</h4> 
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Qunatity" type="number" [(ngModel)]="material.materialQuantity">
+          </mat-form-field>
+          <button class="btn btn-danger pull-left" type="submit">Update</button>
+      </div>
 
+  </div>
+</form> -->
+
+
+
+<!-- 
+<div class="row">
+  <div class="col-md-7">
+      <div class="card">
+          <div class="card-header card-header-danger">
+              <h4 class="card-title">Register Form</h4>
+          </div>
+          <div class="card-body">
+            <form #RegisterForm="ngForm" (ngSubmit)="Register (RegisterForm.value)">
+              <div class="row">
+                <div class="col-md-8">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="id" type="number" id="id" [(ngModel)]="material.materialId">
+                  </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="material name" type="text"  [(ngModel)]="material.materialName" readonly>
+                  </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="material type" type="text"  [(ngModel)]="material.materialType" readonly>
+                  </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Ouantity" type="text"  [(ngModel)]="material.materialQuantity" readonly>  
+                  </mat-form-field>
+                </div>
+            </div>
+          
+            <div class="row">
+                <div class="col-md-8">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Ouantity" type="text"  [(ngModel)]="material.materialQuantity" readonly>
+                  </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="updateQuantity" type="number" id="quantity">
+                  </mat-form-field>
+                </div>
+            </div>
+              
+                  <button mat-raised-button type="submit" class="btn btn-danger pull-right">Register</button>
+                  <div class="clearfix"></div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+</div>  --> 

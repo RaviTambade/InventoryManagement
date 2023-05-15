@@ -21,10 +21,13 @@ export class MaterialService {
     let url ="http://localhost:5176/api/Materials/getmaterial/"+ materialId;
     return this.http.get<Material>(url);
   }
-  updateQuantity(id:number, qunatity:number):Observable<any>
+  update(material:Material):Observable<any>
   {
-    let url ="http://localhost:5176/api/Materials/updateMaterial/"+ id;
-    return this.http.put<any>(url, qunatity);
+    console.log("service called")
+    let url ="http://localhost:5176/api/Materials/updateMaterial/"+ material.materialId ;
+    console.log(url)
+    return this.http.put<Material>(url, material);
+    
   }
 
 }

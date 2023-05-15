@@ -23,7 +23,7 @@ export class EmployeeServiceService {
   }
   getById(employeeId:number):Observable<Employee>
   {
-    let url ="http://localhost:5224/api/employees/getemployee/"+ employeeId;
+    let url ="http://localhost:5224/api/employees/getemployee/"+ employeeId ;
     return this.http.get<Employee>(url);
   }
  
