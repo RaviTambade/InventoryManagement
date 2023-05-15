@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Material } from 'app/Material';
 import { MaterialService } from 'app/material.service';
 import { quantity } from 'chartist';
+import { response } from 'express';
 
 @Component({
   selector: 'app-material-update-form',
@@ -12,8 +13,8 @@ export class MaterialUpdateFormComponent implements OnInit {
 
   @Input() materialId: number | undefined;
   material: Material | undefined;
-  q
   status: boolean | undefined;
+
   constructor(private svc: MaterialService ) { }
   
   ngOnInit(): void {
@@ -23,14 +24,19 @@ export class MaterialUpdateFormComponent implements OnInit {
       })
     }
   }
-
-  getValue(qunatity: number,materialId:number) {
-    this.svc.updateQuantity(qunatity).subscribe((response) => {
+  getMaterialById(id: any) {
+    this.svc.getById(id).subscribe((response) => {
       this.material = response;
-      console.log(materialId);
-      console.log(qunatity);
+      console.log(this.material);
+    })
+  }
+
+  updateMaterial(id:number, quantity:number){
+    this.svc.updateQuantity(id,quantity).subscribe((response)=>{
+      this.status= response;
       console.log(response);
     })
   }
+
 
 }

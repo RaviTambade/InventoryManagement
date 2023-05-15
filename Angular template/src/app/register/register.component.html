@@ -25,28 +25,35 @@
                         <div class="row">
                             <div class="col-md-8">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="BirthDate" type="text"  [(ngModel)]="employee.birthDate">
+                                <input matInput placeholder="BirthDate" type="date"  [(ngModel)]="employee.birthDate">
                               </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-8">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="HireDate" type="text"  [(ngModel)]="employee.hireDate">
+                                <input matInput placeholder="HireDate" type="date"  [(ngModel)]="employee.hireDate">
                               </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
+                          <div class="col-md-8">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="imgage URL" type="text"  [(ngModel)]="employee.imgUrl">
+                            </mat-form-field>
+                          </div>
+                      </div>
+                        <div class="row">
                             <div class="col-md-8">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Contact Number" type="text"  [(ngModel)]="employee.contactNumber">
+                                <input matInput placeholder="Contact Number" type="number"  [(ngModel)]="employee.contactNumber">
                               </mat-form-field>
                             </div>
                         </div>
                             <div class="row">
                                 <div class="col-md-8">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email" type="text"  [(ngModel)]="employee.email">
+                                    <input matInput placeholder="Email" type="email"  [(ngModel)]="employee.email">
                                   </mat-form-field>
                                 </div>
   
@@ -61,42 +68,40 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6><span class="tim-note"></span>Gender</h6>
-                                  <input type="radio" id="Male" name="gender" value="1"  [(ngModel)]="employee.gender">
+                                  <input type="radio" id="Male" name="gender" value="1"  [(ngModel)]="employee.genderId">
                                     <label for="Male">Male</label><br>
-                                    <input type="radio" id="Female" name="gender" value="2"  [(ngModel)]="employee.gender">
+                                    <input type="radio" id="Female" name="gender" value="2"  [(ngModel)]="employee.genderId">
                                     <label for="Female">Female</label><br>
-                                    <input type="radio" id="Others" name="gender" value="3"  [(ngModel)]="employee.gender">
+                                    <input type="radio" id="Others" name="gender" value="3"  [(ngModel)]="employee.genderId">
                                     <label for="Others">Others</label>
                                 </div>
                             </div>     
                             <div class="row">
                                 <div class="col-md-8">
                                   <h6><span class="tim-note"></span>Department</h6>
-                                  <input type="radio" id="hr" name="department" value="1"  [(ngModel)]="employee.department">
-                                    <label for="hr">HR</label><br>
-                                    <input type="radio" id="store" name="department" value="2"  [(ngModel)]="employee.department">
+                                  <input type="radio" id="hr" name="department" value="1"  [(ngModel)]="employee.departmentId">                                    <label for="hr">HR</label><br>
+                                    <input type="radio" id="store" name="department" value="2"  [(ngModel)]="employee.departmentId">
                                     <label for="store">Store</label><br>
-                                    <input type="radio" id="gb550" name="department" value="3"  [(ngModel)]="employee.department">
+                                    <input type="radio" id="gb550" name="department" value="3"  [(ngModel)]="employee.departmentId">
                                     <label for="gb550">GB550 Line</label><br>
-                                    <input type="radio" id="gb400" name="department" value="4"  [(ngModel)]="employee.department">
+                                    <input type="radio" id="gb400" name="department" value="4"  [(ngModel)]="employee.departmentId">
                                     <label for="gb400">GB400 Line</label><br>
-                                    <input type="radio" id="gb540" name="department" value="5"  [(ngModel)]="employee.department">
+                                    <input type="radio" id="gb540" name="department" value="5"  [(ngModel)]="employee.departmentId">
                                     <label for="gb540">GB540 Line</label><br>
-                                    <input type="radio" id="worker" name="department" value="6"  [(ngModel)]="employee.department">
+                                    <input type="radio" id="worker" name="department" value="6"  [(ngModel)]="employee.departmentId">
                                     <label for="worker">Store worker</label>
                                 </div>
                             </div>
                             <div class="row"> 
                                 <div class="col-md-8">
                                   <h6><span class="tim-note"></span>Role</h6>
-                                  <input type="radio" id="incharge" name="role" value="1"  [(ngModel)]="employee.role">
+                                  <input type="radio" id="incharge" name="role" value=1  [(ngModel)]="employee.roleId">
                                     <label for="incharge">Incharge</label><br>
-                                    <input type="radio" id="storeManager" name="role" value="2"  [(ngModel)]="employee.role">
+                                    <input type="radio" id="storeManager" name="role" value=2 [(ngModel)]="employee.roleId">
                                     <label for="storeManager">Store Manager</label><br>
-                                    <input type="radio" id="supervisor" name="role" value="3"  [(ngModel)]="employee.role">
-                                    <label for="supervisor">Supervisor</label><br>
-                                    <input type="radio" id="storeworker" name="role" value="4"  [(ngModel)]="employee.role">
-                                    <label for="storeworker">Supervisor</label>
+                                    <input type="radio" id="supervisor" name="role" value=3  [(ngModel)]="employee.roleId">
+                                    <label for="supervisor">Supervisor</label>
+                                    
                                 </div>
                             </div>
                         

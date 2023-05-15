@@ -21,9 +21,9 @@ export class MaterialService {
     let url ="http://localhost:5176/api/Materials/getmaterial/"+ materialId;
     return this.http.get<Material>(url);
   }
-  updateQuantity(materialId:number, qunatity:number):Observable<Material>
+  updateQuantity(id:number, qunatity:number):Observable<any>
   {
-    let url ="http://localhost:5176/api/Materials/updateMaterial/"+ materialId;
+    let url ="http://localhost:5176/api/Materials/updateMaterial/"+ id;
     return this.http.put<any>(url, qunatity);
   }
 

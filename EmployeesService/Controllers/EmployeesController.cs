@@ -31,6 +31,16 @@ namespace EmployeesService.Controllers
             return employee;
         }
 
+            [HttpPost]
+        [Route("insertEmployee")]
+        public bool InsertEmployee( [FromBody] Employee employee)
+        {
+            Console.WriteLine(employee.EmployeeFirstName ,employee.EmployeeLastName, employee.DepartmentId, employee.HireDate, employee.BirthDate, employee.GenderId ,employee.RoleId);
+            bool status = _empsrv.Insert( employee);
+            return status;
+        }
+
+
         // [HttpPut]
         // [Route("updateEmployee/{id}")]
         // public bool UpdateEmployee(int id, [FromBody] Employee employee)

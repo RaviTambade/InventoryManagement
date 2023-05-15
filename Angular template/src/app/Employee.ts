@@ -12,6 +12,9 @@ export class Employee{
         public gender:string,
         public department:string,
         public role:string,
+        public genderId:number,
+        public departmentId:number,
+        public roleId:number,
     ){}
 }
 

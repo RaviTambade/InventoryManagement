@@ -18,7 +18,7 @@ export class EmployeeServiceService {
   insertEmployee(employee:Employee):Observable<any>
   {
     console.log(employee);
-    let url ="http://localhost:5224/api/employees/getallemployees";
+    let url ="http://localhost:5224/api/employees/insertEmployee";
     return this.http.post<Employee>(url, employee);
   }
   getById(employeeId:number):Observable<Employee>

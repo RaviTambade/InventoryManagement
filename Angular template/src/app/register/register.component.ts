@@ -20,7 +20,10 @@ export class RegisterComponent  {
      "imgUrl":'',
      "gender":'',
      "department":'',
-     "role":''
+     "role":'',
+     "genderId":0,
+     "roleId":0,
+     "departmentId":0
   };
   status: boolean | undefined;
 

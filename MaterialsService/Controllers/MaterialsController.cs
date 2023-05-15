@@ -32,9 +32,9 @@ namespace MaterialsService.Controllers
 
         [HttpPut]
         [Route("updateMaterial/{id}")]
-        public bool Update(int id, [FromBody] Material material)
+        public bool Update(int id, [FromBody] int quantity)
         {
-            bool status = _matsrv.Update(id, material);
+            bool status = _matsrv.Update(id, quantity);
             return status;
         }
 

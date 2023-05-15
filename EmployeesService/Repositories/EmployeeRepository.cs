@@ -113,44 +113,44 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employee;
     }
-    // public bool Insert(Employee employee)
-    // {
-    //      bool status = false;
-    //     MySqlConnection connection = new MySqlConnection();
-    //     connection.ConnectionString = _conString;
-    //     try
-    //     {
-    //         string query = "INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender)VALUES(@empfirstname,@emplastname,@birthdate,@hiredate,@contactno,@departmentid,@roleid,@email,@password,@imgurl,@gender)";
-    //         MySqlCommand command = new MySqlCommand(query, connection);
-    //         command.Parameters.AddWithValue("@empfirstname", employee.EmployeeFirstName);
-    //         command.Parameters.AddWithValue("@emplastname", employee.EmployeeLastName);
-    //         command.Parameters.AddWithValue("@birthdate", employee.BirthDate);
-    //         command.Parameters.AddWithValue("@hiredate", employee.HireDate);
-    //         command.Parameters.AddWithValue("@contactno", employee.ContactNumber);
-    //         command.Parameters.AddWithValue("@departmentid", employee.DepartmentId);
-    //         command.Parameters.AddWithValue("@roleid", employee.RoleId);
-    //         command.Parameters.AddWithValue("@email", employee.email);
-    //         command.Parameters.AddWithValue("@password", employee.password);
-    //         command.Parameters.AddWithValue("@imgurl", employee.ImgUrl);
-    //         command.Parameters.AddWithValue("@gender", employee.Gender);
-    //         connection.Open();
-    //         int rowsAffected = command.ExecuteNonQuery();
-    //         if (rowsAffected > 0)
-    //         {
-    //             status = true;
-    //         }
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         throw e;
-    //     }
-    //     finally
-    //     {
-    //         connection.Close();
-    //     }
-    //     return status;
+    public bool Insert(Employee employee)
+    {
+         bool status = false;
+        MySqlConnection connection = new MySqlConnection();
+        connection.ConnectionString = _conString;
+        try
+        {
+            string query = "INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender_id)VALUES(@empfirstname,@emplastname,@birthdate,@hiredate,@contactno,@departmentid,@roleid,@email,@password,@imgurl,@gender)";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@empfirstname", employee.EmployeeFirstName);
+            command.Parameters.AddWithValue("@emplastname", employee.EmployeeLastName);
+            command.Parameters.AddWithValue("@birthdate", employee.BirthDate);
+            command.Parameters.AddWithValue("@hiredate", employee.HireDate);
+            command.Parameters.AddWithValue("@contactno", employee.ContactNumber);
+            command.Parameters.AddWithValue("@departmentid", employee.DepartmentId);
+            command.Parameters.AddWithValue("@roleid", employee.RoleId);
+            command.Parameters.AddWithValue("@email", employee.email);
+            command.Parameters.AddWithValue("@password", employee.password);
+            command.Parameters.AddWithValue("@imgurl", employee.ImgUrl);
+            command.Parameters.AddWithValue("@gender", employee.GenderId);
+            connection.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
+        return status;
     
-    // }
+    }
     // public bool Update(int employeeId, Employee employee)
     // {
     //     bool status = false;
