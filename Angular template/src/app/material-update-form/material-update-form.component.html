@@ -47,10 +47,18 @@
                 <div class="row">
                     <div class="col-md-8">
                       <mat-form-field class="example-full-width">
-                        <input matInput placeholder="updateQuantity" type="number" name="materialQuantity" #materialQuantity="ngModel" [(ngModel)]="material.materialQuantity">
+                        <input matInput placeholder="Current quantity" type="number" name="materialQuantity" #materialQuantity="ngModel" [(ngModel)]="material.materialQuantity">
                       </mat-form-field>
                     </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-md-8">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="updateQuantity" type="number" name="updateQuantity" #updateQuantity="ngModel" [(ngModel)]="material.updateQuantity">
+                    </mat-form-field>
+                  </div>
+              </div>
                   
                       <button mat-raised-button type="submit" class="btn btn-danger pull-right"  (click)="update()">Register</button>
                       <div class="clearfix"></div>

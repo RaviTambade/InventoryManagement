@@ -56,6 +56,7 @@ export class MaterialUpdateFormComponent implements OnInit {
 
   
   update() {
+    this.material.materialQuantity = this.material.materialQuantity + this.material.updateQuantity;
       this.svc.update(this.material).subscribe((response)=>{
         this.status = response;
         console.log(response);
