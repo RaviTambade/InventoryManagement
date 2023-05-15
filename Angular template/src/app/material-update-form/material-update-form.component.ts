@@ -53,14 +53,14 @@ export class MaterialUpdateFormComponent implements OnInit {
   //     console.log(Response);
   //   })
 
-    Register(_RegisterForm:any){
 
-      this.svc.update(this.material).subscribe((Response)=>{
-        this.status=Response;
-        console.log(Response);
-      })
-    }
   
-
+  update() {
+      this.svc.update(this.material).subscribe((response)=>{
+        this.status = response;
+        console.log(response);
+      })
+  
+    }
 }
 

@@ -1,14 +1,67 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <input type="number" [(ngModel)]="materialId">
-                <button (click)="getMaterialById(materialId)" class="btn btn-success">Search</button>
-            </div>
-            
-        </div>
-   
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <input type="number" [(ngModel)]="materialId">
+        <button (click)="getMaterialById(materialId)" class="btn btn-success">Search</button>
+      </div>
     </div>
+    <div class="row"  *ngIf="material && material.materialId !=0">
+      <div class="col-md-7">
+          <div class="card">
+              <div class="card-header card-header-danger">
+                  <h4 class="card-title">Register Form</h4>
+              </div>
+              <div class="card-body">
+                
+                  <div class="row">
+                    <div class="col-md-8">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="id" type="number" name="materialId" #materialId="ngModel" [(ngModel)]="material.materialId">
+                      </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="material name" type="text"name="materialName" #materialName="ngModel" [(ngModel)]="material.materialName">
+                      </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="material type" type="text"  name="materialType" #materialType="ngModel" [(ngModel)]="material.materialType">
+                      </mat-form-field>
+                    </div>
+                </div>
+
+              
+                <!-- <div class="row">
+                    <div class="col-md-8">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Ouantity" type="text"  [(ngModel)]="material.materialQuantity" readonly>
+                      </mat-form-field>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-md-8">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="updateQuantity" type="number" name="materialQuantity" #materialQuantity="ngModel" [(ngModel)]="material.materialQuantity">
+                      </mat-form-field>
+                    </div>
+                </div>
+                  
+                      <button mat-raised-button type="submit" class="btn btn-danger pull-right"  (click)="update()">Register</button>
+                      <div class="clearfix"></div>
+                  
+              </div>
+          </div>
+      </div>
+    
+    </div>
+
+  </div>
 </div>
 
 
@@ -176,11 +229,55 @@
                 </div>
             </div>
               
-                  <button mat-raised-button type="submit" class="btn btn-danger pull-right">Register</button>
+                  <button mat-raised-button type="submit" class="btn btn-danger pull-right"  (click)="update()">Register</button>
                   <div class="clearfix"></div>
               </form>
           </div>
       </div>
   </div>
 
-</div>  --> 
+</div>  -->
+
+
+
+<!-- 
+
+<div *ngIf="material && material.materialId !=0">
+  <div class="card card-chart">
+    <div class="card-header card-header-success">
+  <div class="form-floating mb-3">
+    <input type="number" name="materialId" class="form-control" placeholder="Enter material id"
+      #materialId="ngModel" [(ngModel)]="material.materialId" /><label
+      for="materialId">materialId</label>
+  </div> 
+  <div class="row">
+    <div class="col-md-8">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="id" type="number" id="id"  name="materialId"  #materialId="ngModel" [(ngModel)]="material.materialId">
+      </mat-form-field>
+    </div>
+</div>
+  <div class="form-floating mb-3">
+    <input type="text" name="materialName" class="form-control" #materialName="ngModel"
+      [(ngModel)]=" material.materialName "><label for="materialName">material Name</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" name="materialQuantity" class="form-control" #materialQuantity="ngModel"
+      [(ngModel)]="material.materialQuantity"><label for="materialQuantity">Quantity</label>
+  </div>
+  <div>
+    <button class="btn btn-primary fw-bold" (click)="update()" >Update</button>
+  </div>
+    </div>
+</div>
+
+
+  <div *ngIf="status">
+    <p>Account updated sucessfully</p>
+  </div>
+
+  <div *ngIf="status == false">
+    <p>Error While updating data</p>
+  </div>
+
+</div> -->
