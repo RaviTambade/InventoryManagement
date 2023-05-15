@@ -33,6 +33,9 @@ export class RegisterComponent  {
 
   Register(_RegisterForm:any){
     console.log("emp" + this.employee);
+    this.employee.genderId = Number.parseInt( this.employee.gender);
+    this.employee.roleId = Number.parseInt( this.employee.role);
+    this.employee.departmentId = Number.parseInt( this.employee.department);
     this.svc.insertEmployee(this.employee).subscribe((Response)=>{
       this.status=Response;
       console.log(Response);

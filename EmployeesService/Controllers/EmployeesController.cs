@@ -35,6 +35,7 @@ namespace EmployeesService.Controllers
         [Route("insertEmployee")]
         public bool InsertEmployee( [FromBody] Employee employee)
         {
+
             Console.WriteLine(employee.EmployeeFirstName ,employee.EmployeeLastName, employee.DepartmentId, employee.HireDate, employee.BirthDate, employee.GenderId ,employee.RoleId);
             bool status = _empsrv.Insert( employee);
             return status;
