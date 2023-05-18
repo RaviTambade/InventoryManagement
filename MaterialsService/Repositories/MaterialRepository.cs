@@ -235,4 +235,52 @@ public class MaterialRepository : IMaterialRepository
         return location;
     }
 
+    
+     public IEnumerable<Material> GetByType(string type)
+    {
+        List<Material> materials = new List<Material>();
+        MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT * FROM materials where material_type=@materialtype";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@materialtype", type);
+            connection.Open();
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+
+                int id = Int32.Parse(reader["material_id"].ToString());
+                string? materialname = reader["material_name"].ToString();
+                string? materialtype = reader["material_type"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                int price = int.Parse(reader["unit_price"].ToString());
+                string? imgUrl = reader["photo"].ToString();
+
+                Material material = new Material
+                {
+                    MaterialId = id,
+                    MaterialName = materialname,
+                    MaterialType = materialtype,
+                    MaterialQuantity = quantity,
+                    MaterialUnitPrice = price,
+                    MaterialImgUrl = imgUrl,
+
+                };
+
+                materials.Add(material);
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
+
+        return materials;
+}
 }

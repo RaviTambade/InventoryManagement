@@ -67,5 +67,12 @@ namespace MaterialsService.Controllers
             return location;
         }
 
+        [HttpGet]
+        [Route("getMaterialByCatagory")]
+        public Material GetMaterialByType(string type)
+        {
+            Material material = _matsrv.GetByType(type);
+        }
+
     }
 } 

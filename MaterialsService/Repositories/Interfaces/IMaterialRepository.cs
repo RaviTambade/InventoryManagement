@@ -10,4 +10,5 @@ public interface IMaterialRepository
     bool Update(Material material);
     bool Delete(int materialId);
     Location GetLocation(int mid);
+    Material GetByType(string type);
 }
