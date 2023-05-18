@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { MaterialListComponent } from './material-list/material-list.component';
 import { MaterialUpdateFormComponent } from './material-update-form/material-update-form.component';
 import { SearchMaterialComponent } from './search-material/search-material.component';
+import { MaterialTestModule } from './material-test/material-test.module';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { SearchMaterialComponent } from './search-material/search-material.compo
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MaterialTestModule
   ],
   declarations: [
     AppComponent,
