@@ -14,6 +14,7 @@ import { MaterialListComponent } from './material-list/material-list.component';
 import { MaterialUpdateFormComponent } from './material-update-form/material-update-form.component';
 import { SearchMaterialComponent } from './search-material/search-material.component';
 import { MaterialTestModule } from './material-test/material-test.module';
+import { CatagorySearchModule } from './catagory-search/catagory-search.module';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { MaterialTestModule } from './material-test/material-test.module';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    MaterialTestModule
+    MaterialTestModule,
+    CatagorySearchModule
   ],
   declarations: [
     AppComponent,
