@@ -17,6 +17,6 @@ public class MaterialService : IMaterialService
     public bool Update(Material material) => _repo.Update(material);
     public bool Delete(int materialId) => _repo.Delete(materialId);
     public Location GetLocation(int mid)=> _repo.GetLocation(mid);
-    public Material GetByType(string type)=> _repo.GetByType(type);
+    public IEnumerable<Material> GetByType(string type)=> _repo.GetByType(type);
 
 }

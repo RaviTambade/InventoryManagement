@@ -69,9 +69,10 @@ namespace MaterialsService.Controllers
 
         [HttpGet]
         [Route("getMaterialByCatagory")]
-        public Material GetMaterialByType(string type)
+        public IEnumerable<Material> GetMaterialByType([FromBody] string type)
         {
-            Material material = _matsrv.GetByType(type);
+            IEnumerable<Material> materials = _matsrv.GetByType(type);
+            return materials;
         }
 
     }
