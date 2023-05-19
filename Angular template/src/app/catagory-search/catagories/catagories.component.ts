@@ -11,10 +11,15 @@ export class CatagoriesComponent  {
 
   isSubmitted = false;
   materials  = [
-      'Bearings',
-      'Housing',
-      'Top Cover',
+      'Bearing',
+      '1st Gear',
+      '2nd Gear',
+      '3rd Gear',
+      'Reverse Gear',
       'Main Shaft',
+      'Counter Shaft',
+      'Housing',
+      
   ];
 
   constructor(public fb : FormBuilder,private svc : CatagoryService) { }

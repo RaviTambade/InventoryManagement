@@ -1,7 +1,10 @@
 <div *ngFor="let material of materials">
-    <p>Material name : {{material.name}}</p>
+    <img src="{{material.materialImgUrl}}" alt="">
+    <p>Material ID : {{material.materialId}}</p>
+    <p>Material Name : {{material.materialName}}</p>
     <p>Material type :{{material.materialType}}</p>
-    <p>Quantity :{{material.quantity}}</p>
-    <p>Unit Price :{{material.unitPrice}}</p>
-    <p>Employee Id : {{material.empId}}</p> 
+    <p>Quantity :{{material.materialQuantity}}</p>
+    <p>Unit Price :{{material.materialUnitPrice}}</p>
     <hr>
+
+ 

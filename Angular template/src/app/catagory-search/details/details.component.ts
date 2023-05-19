@@ -13,16 +13,15 @@ export class DetailsComponent implements OnInit {
   message: string|undefined;
    
   materials : any [];
-
+  material :string;
   constructor(private svc :CatagoryService) { }
 
   ngOnInit(): void {
-    let theObservable:Observable<any> = this.svc.getData();
-    this.subscription =theObservable.subscribe(
-      msg => { 
-        this.materials = msg;
-        console.log(this.materials);
-     })
-
+    this.subscription = this.svc.getData().subscribe((response) =>{
+      this.material = response.material;
+      this.materials = response.data;
+      console.log(this.material);
+      console.log(response);
+    })
 }
 }

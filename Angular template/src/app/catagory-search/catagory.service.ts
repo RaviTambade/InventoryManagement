@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Material } from 'app/Material';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -11,17 +12,78 @@ export class CatagoryService {
   //target
   private subject = new Subject<any>();
 
-  // materials = [
-  //   { name: 'Bearings', id: '1', materialType: 'ball bearing', quantity: 54, unitPrice: 20, empId: 1 },
-  //   { name: 'Housing', id: '2', materialType: 'Front Half', quantity: 754, unitPrice: 74, empId: 1 },
-  //   { name: 'Top Cover', id: '3', materialType: '30% top cover', quantity: 74, unitPrice: 400, empId: 1 },
-  //   { name: 'Main Shaft', id: '3', materialType: '400 main shaft', quantity: 88, unitPrice: 208, empId: 1 },
+  sendData(data:any){
+    let material = data.MaterialName;
+    console.log("Service is called");
+    console.log(material);
 
-  // ];
+    switch(material){
+      case "Bearing":{
+        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+material;
+        this.http.get(url).subscribe((data) =>{
+          console.log(data);
+          this.subject.next({data,material});
+        });
+        break;
+      }
+      case "2nd Gear":{
+        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ material;
+        this.http.get(url).subscribe((data) =>{
+          console.log(data);
+          this.subject.next({data,material});
+        });
+        break;
+      }
+      case "1st Gear":{
+        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ material;
+        this.http.get(url).subscribe((data) =>{
+          console.log(data);
+          this.subject.next({data,material});
+        });
+        break;  
+      }
+      case "3rd Gear":{
+        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ material;
+        this.http.get(url).subscribe((data) =>{
+          console.log(data);
+          this.subject.next({data,material});
+        });
+        break;  
+      }
+      case "Reverse Gear":{
+        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ material;
+        this.http.get(url).subscribe((data) =>{
+          console.log(data);
+          this.subject.next({data,material});
+        });
+        break;  
+      }
+      case "Housing":{
+        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ material;
+        this.http.get(url).subscribe((data) =>{
+          console.log(data);
+          this.subject.next({data,material});
+        });
+        break;  
+      }
+      case "Main Shaft":{
+        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ material;
+        this.http.get(url).subscribe((data) =>{
+          console.log(data);
+          this.subject.next({data,material});
+        });
+        break;  
+      }
+      case "Counter Shaft":{
+        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ material;
+        this.http.get(url).subscribe((data) =>{
+          console.log(data);
+          this.subject.next({data,material});
+        });
+        break;  
+      }
+    }
 
-  sendData(data: any) {
-    let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/";
-    return this.http.get<any>(url, data);
   }
 
   clearData() {
