@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { AdminLayoutRoutes } from 'app/layouts/admin-layout/admin-layout.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,13 +10,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { RegisterComponent } from './register/register.component';
-
 
 
 @NgModule({
-  declarations: [EmployeeDetailsComponent,EmployeeListComponent,RegisterComponent],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
@@ -30,4 +27,4 @@ import { RegisterComponent } from './register/register.component';
     MatTooltipModule,
   ]
 })
-export class EmployeeModule { }
+export class AuthenticationModule { }

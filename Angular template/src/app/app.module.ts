@@ -8,6 +8,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CatagorySearchModule } from './catagory-search/catagory-search.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   imports: [
@@ -18,11 +19,14 @@ import { CatagorySearchModule } from './catagory-search/catagory-search.module';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    CatagorySearchModule
+    CatagorySearchModule,
+    
+    
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

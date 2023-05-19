@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'app/app.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent  {
   };
   status: boolean | undefined;
 
-  constructor(private svc:AppService) { }
+  constructor(private svc:AuthService) { }
 
  
 
