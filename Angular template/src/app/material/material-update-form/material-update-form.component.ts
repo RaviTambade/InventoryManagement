@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Material } from 'app/Material';
-import { MaterialService } from 'app/material.service';
 import { quantity } from 'chartist';
 import { response } from 'express';
+import { Material } from '../Material';
+import { MaterialService } from '../material.service';
 
 @Component({
   selector: 'app-material-update-form',
@@ -37,23 +37,6 @@ export class MaterialUpdateFormComponent implements OnInit {
       console.log(this.material);
     })
   }
-
-  // onUpdte(materialId:number, quantity:any){
-  //   console.log(materialId);
-  //   console.log(quantity)
-  //   this.svc.updateQuantity(materialId,quantity).subscribe((response)=>{
-  //     this.status= response;
-  //     console.log(response);
-  //   })
-  // }
-
-  // Update(_UpdateForm:any){
-  //   this.svc.update(this.Material).subscribe((Response)=>{
-  //     this.status=Response;
-  //     console.log(Response);
-  //   })
-
-
   
   update() {
     this.material.materialQuantity = this.material.materialQuantity + this.material.updateQuantity;

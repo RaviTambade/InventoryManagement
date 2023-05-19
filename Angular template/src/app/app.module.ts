@@ -7,13 +7,6 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { LoginComponent } from './login/login.component';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
-import { RegisterComponent } from './register/register.component';
-import { MaterialListComponent } from './material-list/material-list.component';
-import { MaterialUpdateFormComponent } from './material-update-form/material-update-form.component';
-import { SearchMaterialComponent } from './search-material/search-material.component';
-import { MaterialTestModule } from './material-test/material-test.module';
 import { CatagorySearchModule } from './catagory-search/catagory-search.module';
 
 @NgModule({
@@ -25,7 +18,6 @@ import { CatagorySearchModule } from './catagory-search/catagory-search.module';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    MaterialTestModule,
     CatagorySearchModule
   ],
   declarations: [

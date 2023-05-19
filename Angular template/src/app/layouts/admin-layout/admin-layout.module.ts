@@ -18,13 +18,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { LoginComponent } from 'app/login/login.component';
-import { EmployeeListComponent } from 'app/employee-list/employee-list.component';
-import { EmployeeDetailsComponent } from 'app/employee-details/employee-details.component';
-import { RegisterComponent } from 'app/register/register.component';
-import { MaterialListComponent } from 'app/material-list/material-list.component';
-import { MaterialUpdateFormComponent } from 'app/material-update-form/material-update-form.component';
-import { searchconsole } from 'googleapis/build/src/apis/searchconsole';
-import { SearchMaterialComponent } from 'app/search-material/search-material.component';
+import { EmployeeModule } from 'app/employee/employee.module';
+import { MaterialModule } from 'app/material/material.module';
 
 @NgModule({
   imports: [
@@ -38,23 +33,19 @@ import { SearchMaterialComponent } from 'app/search-material/search-material.com
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    EmployeeModule,
+    MaterialModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     LoginComponent,
-    EmployeeListComponent,
     TableListComponent,
     TypographyComponent,
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    EmployeeDetailsComponent,
-    RegisterComponent,
-    MaterialListComponent,
-    MaterialUpdateFormComponent,
-    SearchMaterialComponent
   ]
 })
 

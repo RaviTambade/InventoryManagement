@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Material } from 'app/Material';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({

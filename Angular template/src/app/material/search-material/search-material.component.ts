@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Material } from 'app/Material';
-import { MaterialService } from 'app/material.service';
+import { MaterialService } from '../material.service';
+import { Material } from '../Material';
 
 @Component({
   selector: 'app-search-material',

@@ -9,12 +9,12 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { LoginComponent } from 'app/login/login.component';
-import { EmployeeListComponent } from 'app/employee-list/employee-list.component';
-import { EmployeeDetailsComponent } from 'app/employee-details/employee-details.component';
-import { RegisterComponent } from 'app/register/register.component';
-import { MaterialListComponent } from 'app/material-list/material-list.component';
-import { MaterialUpdateFormComponent } from 'app/material-update-form/material-update-form.component';
-import { SearchMaterialComponent } from 'app/search-material/search-material.component';
+import { EmployeeListComponent } from 'app/employee/employee-list/employee-list.component';
+import { EmployeeDetailsComponent } from 'app/employee/employee-details/employee-details.component';
+import { RegisterComponent } from 'app/employee/register/register.component';
+import { MaterialListComponent } from 'app/material/material-list/material-list.component';
+import { MaterialUpdateFormComponent } from 'app/material/material-update-form/material-update-form.component';
+import { SearchMaterialComponent } from 'app/material/search-material/search-material.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
