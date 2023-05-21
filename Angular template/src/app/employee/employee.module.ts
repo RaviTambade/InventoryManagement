@@ -12,11 +12,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { RegisterComponent } from './register/register.component';
+import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 
 
 
 @NgModule({
-  declarations: [EmployeeDetailsComponent,EmployeeListComponent,RegisterComponent],
+  declarations: [EmployeeDetailsComponent,EmployeeListComponent,RegisterComponent, UpdateEmployeeComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
