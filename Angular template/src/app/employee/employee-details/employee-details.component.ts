@@ -23,6 +23,10 @@ export class EmployeeDetailsComponent  {
 })
 }
 }
+  onUpdate(employeeId:number){
+    console.log(employeeId);
+    this.svc.SendData(employeeId);
+  }
 
   getEmployeeById(id: any) {
     this.svc.getById(id).subscribe((response) => {

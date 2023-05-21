@@ -42,13 +42,13 @@ namespace EmployeesService.Controllers
         }
 
 
-        // [HttpPut]
-        // [Route("updateEmployee/{id}")]
-        // public bool UpdateEmployee(int id, [FromBody] Employee employee)
-        // {
-        //     bool status = _empsrv.Update(id, employee);
-        //     return status;
-        // }
+        [HttpPut]
+        [Route("updateEmployee")]
+        public bool UpdateEmployee([FromBody] Employee employee)
+        {
+            bool status = _empsrv.Update( employee);
+            return status;
+        }
 
 
 

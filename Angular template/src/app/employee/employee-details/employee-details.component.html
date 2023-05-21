@@ -2,12 +2,12 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <input type="number" [(ngModel)]="employeeId">
                 <button (click)="getEmployeeById(employeeId)" class="btn btn-success">Search</button>
 
                 <div class="card card-profile" *ngIf="employee && employee.employeeId !=0">
-                    <div class="card-avatar">
+                    <div >
                         <a href="javascript:void(0)">
                             <img class="img" src="{{ employee.imgUrl }}" />
                         </a>
@@ -23,15 +23,15 @@
                         <h5><span class="tim-note"></span>BirthDate: {{ employee.birthDate}}</h5>
                         <h5><span class="tim-note"></span>Hire Date: {{ employee.hireDate}}</h5>
                         <h5><span class="tim-note"></span>gender: {{ employee.gender}}</h5>
+                        <button mat-raised-button type="submit" (click)="onUpdate(employeeId)" class="btn btn-danger center">Update</button>
                     </div>
-                </div>
-
-
+                </div>               
             </div>
         </div>
     </div>
 </div>
 
+<app-update-employee></app-update-employee>
 
 
 
