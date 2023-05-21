@@ -30,6 +30,13 @@ namespace EmployeesService.Controllers
             Employee employee = _empsrv.GetById(id);
             return employee;
         }
+        [HttpGet]
+        [Route("getemployeeForUpdate/{id}")]
+        public Employee GetEmployeeUpdate(int id)
+        {
+            Employee employee = _empsrv.GetByIdUpdate(id);
+            return employee;
+        }
 
             [HttpPost]
         [Route("insertEmployee")]

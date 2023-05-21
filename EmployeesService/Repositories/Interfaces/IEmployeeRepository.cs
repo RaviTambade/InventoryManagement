@@ -8,5 +8,7 @@ public interface IEmployeeRepository
     Employee GetById(int employeeId);
     bool Insert(Employee employee);
     bool Update(Employee employee);
+    Employee GetByIdUpdate(int employeeId);
+  
     // bool Delete(int employeeId);
 }
