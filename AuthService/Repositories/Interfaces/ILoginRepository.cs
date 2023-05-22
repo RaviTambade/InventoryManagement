@@ -5,4 +5,5 @@ namespace AuthService.Repositories.Interfaces;
 public interface ILoginRepository
 {
     public bool Login(Credential credential);
+    Task<AuthenticateResponse> Authenticate(AuthenticateRequest request);
 }
