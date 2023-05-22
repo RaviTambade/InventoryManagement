@@ -11,8 +11,6 @@ public class LoginService : ILoginService
     {
        _repo = repo;
     }
-
-    public bool Login(Credential credential)=> _repo.Login(credential);
     public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request) => await _repo.Authenticate(request);
 
 }

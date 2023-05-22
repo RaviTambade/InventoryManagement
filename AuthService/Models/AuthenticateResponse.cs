@@ -15,10 +15,10 @@ namespace AuthService.Models
 
 
 
-    public AuthenticateResponse(User user, string token){
-      UserId =user.UserId;
-      ContactNumber= user.ContactNumber;
-      Password=user.Password;
+    public AuthenticateResponse(Employee employee, string token){
+      UserId =employee.EmployeeId;
+      ContactNumber= employee.ContactNumber;
+      Password=employee.password;
       Token=token;
     }
 

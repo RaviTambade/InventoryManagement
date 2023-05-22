@@ -16,22 +16,15 @@ namespace AuthService.Controllers
         }
 
             [HttpPost("authenticate")]
-        public IActionResult Authenticate(User user)
+        public IActionResult Authenticate([FromBody] AuthenticateRequest request)
         {
-            var response = _lgsvr.Authenticate(user);
+            var response = _lgsvr.Authenticate(request);
 
             if (response == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
                return Ok(response);
         }
    
-        [HttpPost]
-        [Route("Login")]
-        public bool Login([FromBody] Credential credential)
-        {
-            bool status = _lgsvr.Login(credential);
-            return status;
-        }
 
     }
 }
