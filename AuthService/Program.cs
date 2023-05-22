@@ -3,6 +3,7 @@ using AuthService.Repositories.Interfaces;
 using AuthService.Repositories;
 using AuthService.Services.Interfaces;
 using AuthService.Services;
+using AuthService.Helpers;
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -22,6 +23,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddScoped<ILoginRepository,LoginRepository>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

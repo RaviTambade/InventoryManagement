@@ -1,4 +1,5 @@
 -- Database Creation
+DROP DATABASE IF EXISTS inventorymanagement;
 create database inventorymanagement;
 use inventorymanagement;
 -- Table Creation
@@ -192,34 +193,34 @@ INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023
 INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-01-16  09:35:25',11,3,'delivered');
 INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-04-12  12:35:25',12, 3,'delivered');
 
-select * from orderdetails;
-select employees.employee_id, employees.empfirst_name, employees.emplast_name, roles.role
-from employees
-Inner join roles on employees.role_id= roles.role_id;  
+-- select * from orderdetails;
+-- select employees.employee_id, employees.empfirst_name, employees.emplast_name, roles.role
+-- from employees
+-- Inner join roles on employees.role_id= roles.role_id;  
 
 
--- query for orders history
-select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity
-from orders
-inner join materials on orders.orderdetails_id = materials.material_id
-inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id
-inner join employees on employees.employee_id = orders.employee_id  where employees.employee_id=3;
+-- -- query for orders history
+-- select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity
+-- from orders
+-- inner join materials on orders.orderdetails_id = materials.material_id
+-- inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id
+-- inner join employees on employees.employee_id = orders.employee_id  where employees.employee_id=3;
 
--- query for materials location
-select warehouses.warehouse_id, warehouses.warehouse_name, sections.section_name,floors.floor_number,materials.material_id, materials.material_name, materials.material_type 
-FROM warehouses 
-INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
-INNER JOIN floors ON  sections.floors_id=  floors.floor_id
-INNER JOIN materials ON  floors.mid=  materials.material_id ;
+-- -- query for materials location
+-- select warehouses.warehouse_id, warehouses.warehouse_name, sections.section_name,floors.floor_number,materials.material_id, materials.material_name, materials.material_type 
+-- FROM warehouses 
+-- INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
+-- INNER JOIN floors ON  sections.floors_id=  floors.floor_id
+-- INNER JOIN materials ON  floors.mid=  materials.material_id ;
 
--- order details and location in warehouse
-Select  employees.empfirst_name,employees.emplast_name, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity, warehouses.warehouse_name ,section_name,floor_number
-from orderdetails  
-inner join employees on orderdetails.assigned_worker_id = employees.employee_id
-inner join warehouses on orderdetails.location_id= warehouses.warehouse_id
- INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
- INNER JOIN floors ON  sections.floors_id=  floors.floor_id
- inner join materials on orderdetails.material_id = materials.material_id 
+-- -- order details and location in warehouse
+-- Select  employees.empfirst_name,employees.emplast_name, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity, warehouses.warehouse_name ,section_name,floor_number
+-- from orderdetails  
+-- inner join employees on orderdetails.assigned_worker_id = employees.employee_id
+-- inner join warehouses on orderdetails.location_id= warehouses.warehouse_id
+--  INNER JOIN sections ON  warehouses.sections_id=  sections.section_id
+--  INNER JOIN floors ON  sections.floors_id=  floors.floor_id
+--  inner join materials on orderdetails.material_id = materials.material_id 
 
 
 
