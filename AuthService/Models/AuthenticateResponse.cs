@@ -18,7 +18,7 @@ namespace AuthService.Models
     public AuthenticateResponse(Employee employee, string token){
       UserId =employee.EmployeeId;
       ContactNumber= employee.ContactNumber;
-      Password=employee.password;
+      Password=employee.Password;
       Token=token;
     }
 

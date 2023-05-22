@@ -3,7 +3,7 @@ namespace AuthService.Models
 {
     public class AuthenticateRequest
     {
-        public string ContactNumber { get; set; }
-        public string Password { get; set; }
+        public string contactnumber { get; set; }
+        public string password { get; set; }
     }
 }

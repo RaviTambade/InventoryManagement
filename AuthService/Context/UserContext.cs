@@ -1,6 +1,6 @@
 using AuthService.Models;
 using Microsoft.EntityFrameworkCore;
-namespace AuthAPI.Context;
+namespace AuthService.Context;
 public class UserContext : DbContext
 {
     private readonly IConfiguration _configuration;
@@ -28,11 +28,18 @@ public class UserContext : DbContext
             entity.HasKey(e => e.EmployeeId);
             entity.HasKey(e => e.EmployeeFirstName);
             entity.HasKey(e => e.EmployeeLastName);
-            entity.HasKey(e => e.email);
+            entity.HasKey(e => e.Email);
             entity.HasKey(e => e.ContactNumber);
-            entity.HasKey(e => e.password);
+            entity.HasKey(e => e.Password);
+            entity.HasKey(e => e.BirthDate);
+            entity.HasKey(e => e.HireDate);
+            entity.HasKey(e => e.Photo);
+            entity.HasKey(e => e.RoleId);
+            entity.HasKey(e => e.GenderId);
+            entity.HasKey(e => e.DepatmentId);
+
             
-            modelBuilder.Entity<Employee>().ToTable("employees");
+             modelBuilder.Entity<Employee>().ToTable("employees");
         });
 
          modelBuilder.Entity<Role>(entity =>

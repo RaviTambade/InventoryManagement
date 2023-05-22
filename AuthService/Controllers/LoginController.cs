@@ -15,15 +15,19 @@ namespace AuthService.Controllers
             _lgsvr = lgsvr;
         }
 
-            [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] AuthenticateRequest request)
-        {
-            var response = _lgsvr.Authenticate(request);
+       
+    [HttpPost]
+    [Route("authenticate")]
+    public async Task<IActionResult> Authenticate([FromBody] AuthenticateRequest request)
+    {
+        var user = await _lgsvr.Authenticate(request);
 
-            if (response == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-               return Ok(response);
-        }
+        if (user == null)
+            return BadRequest(new { message = "Username or password is incorrect" });
+
+        return Ok(user);
+    }
+
    
 
     }

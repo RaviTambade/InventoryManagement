@@ -5,6 +5,6 @@ public class Role
     [Column("role_id")]
     public int RoleId { get; set; }
 
-    [Column("role_name")]
+    [Column("role")]
     public string? RoleName { get; set; }
 }
