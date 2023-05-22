@@ -53,6 +53,8 @@ namespace EmployeesService.Controllers
         [Route("updateEmployee")]
         public bool UpdateEmployee([FromBody] Employee employee)
         {
+            string[] subs = employee.BirthDate.Split(' ');
+            Console.WriteLine(employee.EmployeeId);
             bool status = _empsrv.Update( employee);
             return status;
         }

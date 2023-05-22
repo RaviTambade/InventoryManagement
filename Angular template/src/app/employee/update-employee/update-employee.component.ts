@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeServiceService } from '../employee-service.service';
 import { Subscription } from 'rxjs';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-update-employee',
@@ -46,16 +47,18 @@ ngOnInit(): void {
    this.employee.genderId = Number.parseInt( this.employee.gender);
    this.employee.roleId = Number.parseInt( this.employee.role);
    this.employee.departmentId = Number.parseInt( this.employee.department);
-   this.svc.insertEmployee(this.employee).subscribe((Response)=>{
+   
+   this.employee.gender ="null";
+   this.employee.role ="null";
+   this.employee.department ="null";
+   this.employee.password ="null";
+    console.log(this.employee)
+   this.svc.UpdateEmployee(this.employee).subscribe((Response)=>{
      this.status=Response;
      console.log(Response);
    })
  }
 }
 
-// subscription: Subscription|undefined;
-// message: string|undefined;
- 
-// materials : any [];
-// material :string;
-// constructor(private svc :CatagoryService) { }
+
+

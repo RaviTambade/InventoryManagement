@@ -5,7 +5,7 @@ use inventorymanagement;
 CREATE TABLE roles(role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, role varchar(50));
 create table departments(department_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, department varchar(50));
 Create table genders(gender_id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY, gender varchar(50));
-create table employees(employee_id INT NOT NULL auto_increment primary KEY,empfirst_name VARCHAR(100),emplast_name VARCHAR(50),birth_date DATETIME,hire_date DATETIME,contact_number VARCHAR(20),email VARCHAR(50),password VARCHAR(15) NOT NULL,photo varchar (50),gender int not null,  constraint fk_gender_id foreign key(gender) references genders(gender_id) on update cascade on delete cascade   ,department_id  int not null,constraint fk_department_id foreign key(department_id) references departments(department_id) on update cascade on delete cascade,role_id int not null,constraint fk_role foreign key(role_id) references roles(role_id) on update cascade on delete cascade);
+create table employees(employee_id INT NOT NULL auto_increment primary KEY,empfirst_name VARCHAR(100),emplast_name VARCHAR(50),birth_date DATETIME,hire_date DATETIME,contact_number VARCHAR(20),email VARCHAR(50),password VARCHAR(15) NOT NULL,photo varchar (50),gender_id int not null,  constraint fk_gender_id foreign key(gender_id) references genders(gender_id) on update cascade on delete cascade   ,department_id  int not null,constraint fk_department_id foreign key(department_id) references departments(department_id) on update cascade on delete cascade,role_id int not null,constraint fk_role foreign key(role_id) references roles(role_id) on update cascade on delete cascade);
 CREATE TABLE materials(material_id INT NOT NULL AUTO_INCREMENT primary KEY, material_name VARCHAR(100),material_type VARCHAR(100),quantity INT NOT NULL,unit_price INT NOT NULL, photo varchar (50));
 create table floors(floor_id INT NOT NULL AUTO_INCREMENT primary KEY, floor_number varchar(20), mid int not null,constraint fk_mid foreign key(mid) references materials(material_id) on update cascade on delete cascade);
 create table sections(section_id INT NOT NULL AUTO_INCREMENT primary KEY,section_name VARCHAR(20), floors_id int not null,constraint fk_floors foreign key(floors_id) references floors(floor_id) on update cascade on delete cascade);
@@ -158,6 +158,7 @@ INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_nu
 INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender_id)VALUES('shubham','ghanekar','1998-03-22','2018-03-11','8955746251',6, 4,'SGgmail.com','SG788813' ,'/assets/img/mEmp.jpeg', 1);
 INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender_id)VALUES('vinaya','satpute','1998-01-06','2018-03-11','9587994765',6, 4 ,'VS@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 2);
 
+
 -- insertion for orderdetails
 insert into orderdetails(assigned_worker_id, material_id, quantity, location_id)values(10,3,100,1);
 insert into orderdetails(assigned_worker_id, material_id, quantity,location_id)values(11,4,50,2);
@@ -191,6 +192,7 @@ INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023
 INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-06-04  08:35:25',10 , 4,'delivered');
 INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-01-16  09:35:25',11,3,'delivered');
 INSERT INTO orders(order_date, orderdetails_id, employee_id,status)VALUES ('2023-04-12  12:35:25',12, 3,'delivered');
+
 
 select * from orderdetails;
 select employees.employee_id, employees.empfirst_name, employees.emplast_name, roles.role

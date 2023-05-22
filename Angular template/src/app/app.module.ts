@@ -20,7 +20,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     RouterModule,
     AppRoutingModule,
     CatagorySearchModule,
-    
+    AuthenticationModule
     
   ],
   declarations: [

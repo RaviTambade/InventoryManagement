@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [LoginComponent],
+  exports:[LoginComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
