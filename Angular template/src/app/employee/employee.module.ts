@@ -14,11 +14,12 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { RegisterComponent } from './register/register.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { OrdersHistoryComponent } from './orders-history/orders-history.component';
+import { TasksHistoryComponent } from './tasks-history/tasks-history.component';
 
 
 
 @NgModule({
-  declarations: [EmployeeDetailsComponent,EmployeeListComponent,RegisterComponent, UpdateEmployeeComponent, OrdersHistoryComponent],
+  declarations: [EmployeeDetailsComponent,EmployeeListComponent,RegisterComponent, UpdateEmployeeComponent, OrdersHistoryComponent, TasksHistoryComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
