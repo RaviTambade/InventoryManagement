@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class OrdersHistoryComponent implements OnInit {
   orderId:number=3;
   orders:Order[] |undefined;
-  constructor(private svc:EmployeeServiceService, private router:Router){}
+  constructor(private svc:EmployeeServiceService){}
   
   ngOnInit(): void {
     

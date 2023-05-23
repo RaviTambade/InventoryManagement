@@ -1,1 +1,60 @@
-<p>tasks-history works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Tasks</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table" >
+                                <thead class=" text-primary">
+                                    <th>
+                                        material Id 
+                                    </th>
+                                    <th>
+                                        Material Name
+                                    </th>
+                                    <th>
+                                        Material Type
+                                    </th>
+                                    <th>
+                                        Quantity
+                                    </th>
+                                    
+                                    <th>
+                                        Status
+                                    </th>
+                                </thead>
+                                <tbody *ngFor="let task of tasks">
+                                    <tr>
+                                        <td  >
+                                            {{task.materialId}}
+                                        </td>
+                                        <td>
+                                            {{task.materialName}}
+                                        </td>
+                                        <td>
+                                            {{task.materialType}}
+                                        </td>
+                                        <td>
+                                            {{task.quantity}}
+                                        </td>
+                                      <td>
+                                           {{task.status}}
+                                    </td>
+                                       
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+  

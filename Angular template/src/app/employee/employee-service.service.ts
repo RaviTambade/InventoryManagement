@@ -48,8 +48,10 @@ export class EmployeeServiceService {
   getOrders(employeeId:number):Observable<any>{
 
     let url ="http://localhost:5082/api/orders/ordershistory/"+ employeeId ;
-    return this.http.get<Order>(url);
-
-    
+    return this.http.get<Order>(url);    
+  }
+  getTasks(empid:number):Observable<any>{
+    let url ="http://localhost:5082/api/orders/Taskshistory/"+ empid ;
+    return this.http.get<Order>(url);   
   }
 }
