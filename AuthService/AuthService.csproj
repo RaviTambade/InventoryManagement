@@ -17,6 +17,8 @@
        <PrivateAssets>all</PrivateAssets>
      </PackageReference>
      <PackageReference Include="Mysql.EntityFrameWorkCore" Version="6.0.7" />
+      <PackageReference Include="mysql.data" Version="8.0.32.1" />
+
   </ItemGroup>
 
 </Project>

@@ -13,4 +13,6 @@ public class LoginService : ILoginService
     }
     public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request) => await _repo.Authenticate(request);
 
+    public Employee GetById(int employeeId) => _repo.GetById(employeeId);
+
 }

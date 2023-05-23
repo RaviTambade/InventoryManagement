@@ -5,4 +5,5 @@ namespace AuthService.Repositories.Interfaces;
 public interface ILoginRepository
 {
     Task<AuthenticateResponse> Authenticate(AuthenticateRequest request);
+    Employee GetById(int employeeId);
 }

@@ -33,12 +33,10 @@ public class UserContext : DbContext
             entity.HasKey(e => e.Password);
             entity.HasKey(e => e.BirthDate);
             entity.HasKey(e => e.HireDate);
-            entity.HasKey(e => e.Photo);
+            entity.HasKey(e => e.ImgUrl);
             entity.HasKey(e => e.RoleId);
             entity.HasKey(e => e.GenderId);
             entity.HasKey(e => e.DepatmentId);
-
-            
              modelBuilder.Entity<Employee>().ToTable("employees");
         });
 

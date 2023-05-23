@@ -16,10 +16,10 @@ public class Employee{
     public string ContactNumber{get;set;}
 
     [Column("birth_date")]
-    public DateTime BirthDate{get;set;}
+    public string BirthDate{get;set;}
 
     [Column("hire_date")]
-    public DateTime HireDate{get;set;}
+    public string HireDate{get;set;}
 
     [Column("email")]
     public string Email{get;set;}
@@ -28,7 +28,7 @@ public class Employee{
     public string Password{get;set;}
 
     [Column("photo")]
-    public string Photo{get;set;}
+    public string ImgUrl{get;set;}
 
 [Column("department_id")]
     public Int32 DepatmentId{get;set;}
@@ -38,5 +38,8 @@ public class Employee{
 
     [Column("gender_id")]
     public Int32 GenderId{get;set;}
+     public string Gender{get;set;}  
+    public string Department{get;set;}
+    public string Role{get;set;}
     
 }

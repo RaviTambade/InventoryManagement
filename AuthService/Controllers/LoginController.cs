@@ -28,6 +28,14 @@ namespace AuthService.Controllers
         return Ok(user);
     }
 
+    [HttpGet]
+    [Route("getEmpById/{id}")]
+    public  Employee getEmpById(int id)
+    {
+       Employee employee = _lgsvr.GetById(id);
+            return employee;
+    }
+
    
 
     }
