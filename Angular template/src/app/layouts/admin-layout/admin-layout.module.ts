@@ -14,6 +14,7 @@ import { LoginComponent } from 'app/authentication/login/login.component';
 import { EmployeeModule } from 'app/employee/employee.module';
 import { MaterialModule } from 'app/material/material.module';
 import { DashboardsModule } from 'app/dashboards/dashboards.module';
+import { OrderModule } from 'app/order/order.module';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { DashboardsModule } from 'app/dashboards/dashboards.module';
     MatTooltipModule,
     EmployeeModule,
     MaterialModule,
-    DashboardsModule
+    DashboardsModule,
+    OrderModule
   ],
   declarations: [
     DashboardComponent,

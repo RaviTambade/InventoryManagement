@@ -9,6 +9,7 @@ import { MaterialListComponent } from 'app/material/material-list/material-list.
 import { MaterialUpdateFormComponent } from 'app/material/material-update-form/material-update-form.component';
 import { SearchMaterialComponent } from 'app/material/search-material/search-material.component';
 import { SupervisorsDashboardComponent } from 'app/dashboards/supervisors-dashboard/supervisors-dashboard.component';
+import { OrderComponent } from 'app/order/order/order.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -61,4 +62,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'search-material',        component: SearchMaterialComponent },
     { path: 'employee-list',   component: EmployeeListComponent },
     { path: 'employee-details',   component: EmployeeDetailsComponent },
+    { path: 'order',   component: OrderComponent },
+    
 ];
