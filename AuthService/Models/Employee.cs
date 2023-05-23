@@ -38,8 +38,4 @@ public class Employee{
 
     [Column("gender_id")]
     public Int32 GenderId{get;set;}
-     public string Gender{get;set;}  
-    public string Department{get;set;}
-    public string Role{get;set;}
-    
 }
