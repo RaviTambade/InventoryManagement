@@ -171,7 +171,7 @@ public class OrderRepository : IOrderRepository
          MySqlConnection connection = new MySqlConnection(_conString);
         try
         {
-            string query ="Select  employees.empfirst_name,employees.emplast_name, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity from orderdetails   inner join materials on orderdetails.material_id = materials.material_id  inner join employees on orderdetails.assigned_worker_id = employees.employee_id where employees.employee_id=@employeeId";
+            string query ="Select  employees.empfirst_name,employees.emplast_name, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity, orders.status from orderdetails    inner join materials on orderdetails.material_id = materials.material_id   inner join orders on orderdetails.orderdetails_id = orders.orderdetails_id inner join employees on orderdetails.assigned_worker_id = employees.employee_id where employees.employee_id=@employeeId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@employeeId", id);
             connection.Open();
@@ -184,6 +184,7 @@ public class OrderRepository : IOrderRepository
                 string? materialname = reader["material_name"].ToString();
                 string? matrialtype = reader["material_type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
+                string ? deliveryStatus=reader["status"].ToString();
                 
                 TheTask task = new TheTask()
                 {
@@ -192,7 +193,8 @@ public class OrderRepository : IOrderRepository
                     MaterialId=materialid,
                     MaterialName=materialname,
                     MaterialType=matrialtype,
-                    Quantity=quantity
+                    Quantity=quantity,
+                    status=deliveryStatus
                 };
                 tasks.Add(task);
             }

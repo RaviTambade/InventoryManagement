@@ -18,6 +18,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/material-update-form', title: 'Update Material',  icon:'', class: '' },
     { path: '/order', title: 'Order',  icon:'', class: '' },
     { path: '/orders-history', title: 'Orders History',  icon:'', class: '' },
+    { path: '/tasks-history', title: 'Tasks History',  icon:'', class: '' },
+
 
     // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
     // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },

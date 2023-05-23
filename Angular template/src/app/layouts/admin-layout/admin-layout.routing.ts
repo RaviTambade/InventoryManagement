@@ -11,6 +11,7 @@ import { SearchMaterialComponent } from 'app/material/search-material/search-mat
 import { SupervisorsDashboardComponent } from 'app/dashboards/supervisors-dashboard/supervisors-dashboard.component';
 import { OrderComponent } from 'app/order/order/order.component';
 import { OrdersHistoryComponent } from 'app/employee/orders-history/orders-history.component';
+import { TasksHistoryComponent } from 'app/employee/tasks-history/tasks-history.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -64,6 +65,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'employee-list',   component: EmployeeListComponent },
     { path: 'employee-details',   component: EmployeeDetailsComponent },
     { path: 'order',   component: OrderComponent },
-    {path:'orders-history', component:OrdersHistoryComponent}
+    {path:'orders-history', component:OrdersHistoryComponent},
+    {path:'tasks-history', component:TasksHistoryComponent},
+
+    
     
 ];
