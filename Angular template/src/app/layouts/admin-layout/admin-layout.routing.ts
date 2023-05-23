@@ -10,6 +10,7 @@ import { MaterialUpdateFormComponent } from 'app/material/material-update-form/m
 import { SearchMaterialComponent } from 'app/material/search-material/search-material.component';
 import { SupervisorsDashboardComponent } from 'app/dashboards/supervisors-dashboard/supervisors-dashboard.component';
 import { OrderComponent } from 'app/order/order/order.component';
+import { OrdersHistoryComponent } from 'app/employee/orders-history/orders-history.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -63,5 +64,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'employee-list',   component: EmployeeListComponent },
     { path: 'employee-details',   component: EmployeeDetailsComponent },
     { path: 'order',   component: OrderComponent },
+    {path:'orders-history', component:OrdersHistoryComponent}
     
 ];

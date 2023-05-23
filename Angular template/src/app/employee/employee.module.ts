@@ -13,11 +13,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { RegisterComponent } from './register/register.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 
 
 
 @NgModule({
-  declarations: [EmployeeDetailsComponent,EmployeeListComponent,RegisterComponent, UpdateEmployeeComponent],
+  declarations: [EmployeeDetailsComponent,EmployeeListComponent,RegisterComponent, UpdateEmployeeComponent, OrdersHistoryComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),

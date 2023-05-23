@@ -1,4 +1,4 @@
-<div class="main-content">
+<!-- <div class="main-content">
     <div class="container-fluid">
 
         <div class="row">
@@ -6,12 +6,7 @@
                 <input type="number" [(ngModel)]="employeeId">
                 <button (click)="getEmployeeById(employeeId)" class="btn btn-success">Search</button>
 
-                <div class="card card-profile" *ngIf="employee && employee.employeeId !=0">
-                    <div >
-                        <a href="javascript:void(0)">
-                            <img class="img" src="{{ employee.imgUrl }}" />
-                        </a>
-                    </div>
+                <div class="card card-profile" *ngIf="order && order.orderId !=0">
                     <div class="card-body">
                         <h6 class="card-category text-gray">{{employee.role}}</h6>
                         <h4 class="card-title"> {{employee.employeeFirstName}} {{ employee.employeeLastName}}</h4>
@@ -32,4 +27,4 @@
 </div>
 
 
-<app-update-employee></app-update-employee>
+ -->

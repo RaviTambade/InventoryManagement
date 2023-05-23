@@ -17,6 +17,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/material-list', title: 'Matetrial list',  icon:'', class: '' },
     { path: '/material-update-form', title: 'Update Material',  icon:'', class: '' },
     { path: '/order', title: 'Order',  icon:'', class: '' },
+    { path: '/orders-history', title: 'Orders History',  icon:'', class: '' },
+
     // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
     // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
     // { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },

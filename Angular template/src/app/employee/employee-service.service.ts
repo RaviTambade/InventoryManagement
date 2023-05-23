@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Employee } from './Employee';
+import { Order } from 'app/order/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,12 @@ export class EmployeeServiceService {
   }
   getData():Observable<any>{
     return this.subject.asObservable()
+  }
+  getOrders(employeeId:number):Observable<any>{
+
+    let url ="http://localhost:5082/api/orders/ordershistory/"+ employeeId ;
+    return this.http.get<Order>(url);
+
+    
   }
 }

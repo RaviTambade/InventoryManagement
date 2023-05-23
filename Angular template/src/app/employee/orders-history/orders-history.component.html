@@ -1,0 +1,65 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Orders</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table" >
+                                <thead class=" text-primary">
+                                    <th>
+                                        Material Id 
+                                    </th>
+                                    <th>
+                                        Material Name
+                                    </th>
+                                    <th>
+                                        Material Type
+                                    </th>
+                                    <th>
+                                        Quantity
+                                    </th>
+                                    <th>
+                                        OrderDate
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                </thead>
+                                <tbody *ngFor="let order of orders">
+                                    <tr>
+                                        <td  >
+                                            {{order.MaterialId}}
+                                        </td>
+                                        <td>
+                                            {{order.MaterialName}}
+                                        </td>
+                                        <td>
+                                            {{order.MaterialType}}
+                                        </td>
+                                        <td>
+                                            {{order.Quantity}}
+                                        </td>
+                                        <td>
+                                            {{order.OrderDate}} 
+                                      </td>
+                                      <td>
+                                           {{order.Status}}
+                                    </td>
+                                       
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+  
