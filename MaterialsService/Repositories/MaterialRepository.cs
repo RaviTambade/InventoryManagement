@@ -1,7 +1,3 @@
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using System.Collections;
-using System.Data;
 using MaterialsService.Models;
 using MaterialsService.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
@@ -27,7 +23,6 @@ public class MaterialRepository : IMaterialRepository
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-
                 int id = Int32.Parse(reader["material_id"].ToString());
                 string? materialname = reader["material_name"].ToString();
                 string? materialtype = reader["material_type"].ToString();
@@ -43,7 +38,6 @@ public class MaterialRepository : IMaterialRepository
                     MaterialQuantity = quantity,
                     MaterialUnitPrice = price,
                     MaterialImgUrl = imgUrl,
-
                 };
 
                 materials.Add(material);
@@ -144,7 +138,7 @@ public class MaterialRepository : IMaterialRepository
             string query = "UPDATE materials SET  quantity=@quantity  WHERE material_id=@materialId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@materialId", material.MaterialId);
-            command.Parameters.AddWithValue("@quantity",  material.MaterialQuantity);
+            command.Parameters.AddWithValue("@quantity", material.MaterialQuantity);
             connection.Open();
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)
@@ -198,8 +192,6 @@ public class MaterialRepository : IMaterialRepository
         {
             string query = "select  warehouses.warehouse_name, sections.section_name,floors.floor_number, materials.material_name, materials.material_type FROM warehouses INNER JOIN sections ON  warehouses.sections_id=sections.section_id INNER JOIN floors ON  sections.floors_id= floors.floor_id INNER JOIN materials ON  floors.mid=materials.material_id where  materials.material_id=@materialid";
             MySqlCommand command = new MySqlCommand(query, connection);
-            Console.WriteLine("q"+query);
-            Console.WriteLine("id"+id);
             command.Parameters.AddWithValue("@materialid", id);
             connection.Open();
             MySqlDataReader reader = command.ExecuteReader();
@@ -211,7 +203,7 @@ public class MaterialRepository : IMaterialRepository
                 string? materialname = reader["material_name"].ToString();
                 string? materialtype = reader["material_type"].ToString();
 
-                Console.WriteLine(warehouse,sectionname,floor,materialname,materialtype);
+                Console.WriteLine(warehouse, sectionname, floor, materialname, materialtype);
                 location = new Location()
                 {
                     WarehouseName = warehouse,
@@ -235,8 +227,8 @@ public class MaterialRepository : IMaterialRepository
         return location;
     }
 
-    
-     public IEnumerable<Material> GetByType(string type)
+
+    public IEnumerable<Material> GetByType(string type)
     {
         List<Material> materials = new List<Material>();
         MySqlConnection connection = new MySqlConnection(_conString);
@@ -280,7 +272,6 @@ public class MaterialRepository : IMaterialRepository
         {
             connection.Close();
         }
-
         return materials;
-}
+    }
 }

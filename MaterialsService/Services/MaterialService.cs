@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Threading.Tasks;
 using MaterialsService.Models;
 using MaterialsService.Repositories.Interfaces;
 using MaterialsService.Services.Interfaces;

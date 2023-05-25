@@ -15,15 +15,15 @@ namespace MaterialsService.Controllers
         }
 
         [HttpGet]
-        [Route("getallmaterials")]
+        [Route("materials")]
         public IEnumerable<Material> GetAllMaterials()
         {
-            IEnumerable<Material> allMaterials = _matsrv.GetAll();
-            return allMaterials;
+            IEnumerable<Material> Materials = _matsrv.GetAll();
+            return Materials;
         }
 
         [HttpGet]
-        [Route("getmaterial/{id}")]
+        [Route("material/{id}")]
         public Material GetMaterial(int id)
         {
             Material material = _matsrv.GetById(id);
@@ -31,29 +31,24 @@ namespace MaterialsService.Controllers
         }
 
         [HttpPut]
-        [Route("updateMaterial/{id}")]
-        public bool Update([FromBody] Material material)
+        [Route("material/{id}")]
+        public bool UpdateMaterial([FromBody] Material material)
         {
-            Console.WriteLine(material.MaterialId);
-            Console.WriteLine(material.MaterialName);
-            Console.WriteLine(material.MaterialType);
-            Console.WriteLine(material.MaterialQuantity);
-
             bool status = _matsrv.Update(material);
             return status;
         }
 
         [HttpPost]
-        [Route("addmaterial")]
-        public bool Insert([FromBody] Material material)
+        [Route("material")]
+        public bool InsertMaterial([FromBody] Material material)
         {
             bool status = _matsrv.Insert(material);
             return status;
         }
 
         [HttpDelete]
-        [Route("deletematerial/{id}")]
-        public bool Delete(int id)
+        [Route("material/{id}")]
+        public bool DeleteMaterial(int id)
         {
             bool status = _matsrv.Delete(id);
             return status;
@@ -68,7 +63,7 @@ namespace MaterialsService.Controllers
         }
 
         [HttpGet]
-        [Route("getMaterialByCatagory")]
+        [Route("MaterialByCatagory")]
         public IEnumerable<Material> GetMaterialByType([FromBody] string type)
         {
             IEnumerable<Material> materials = _matsrv.GetByType(type);
