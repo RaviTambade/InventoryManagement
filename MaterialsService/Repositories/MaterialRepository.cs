@@ -101,8 +101,7 @@ public class MaterialRepository : IMaterialRepository
     public bool Insert(Material material)
     {
         bool status = false;
-        MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _conString;
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "INSERT INTO Materials(material_name,material_type,quantity,unit_price,photo)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
