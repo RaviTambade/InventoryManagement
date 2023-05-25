@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using System.Collections;
-using System.Data;
 using EmployeesService.Models;
 using EmployeesService.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
