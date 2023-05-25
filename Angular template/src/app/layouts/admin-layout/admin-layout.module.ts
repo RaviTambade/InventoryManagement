@@ -13,7 +13,6 @@ import {MatSelectModule} from '@angular/material/select';
 import { LoginComponent } from 'app/authentication/login/login.component';
 import { EmployeeModule } from 'app/employee/employee.module';
 import { MaterialModule } from 'app/material/material.module';
-import { DashboardsModule } from 'app/dashboards/dashboards.module';
 import { OrderModule } from 'app/order/order.module';
 
 @NgModule({
@@ -30,13 +29,13 @@ import { OrderModule } from 'app/order/order.module';
     MatTooltipModule,
     EmployeeModule,
     MaterialModule,
-    DashboardsModule,
     OrderModule
   ],
   declarations: [
     DashboardComponent,
     
   ]
+
 })
 
 export class AdminLayoutModule {}

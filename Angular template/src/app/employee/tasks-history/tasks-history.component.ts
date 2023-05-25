@@ -8,7 +8,7 @@ import { EmployeeServiceService } from '../employee-service.service';
   styleUrls: ['./tasks-history.component.scss']
 })
 export class TasksHistoryComponent implements OnInit {
-  empid:number=13 ;
+  empid:number=13   ;
   tasks : Task |undefined
   constructor(private svc:EmployeeServiceService){}
 

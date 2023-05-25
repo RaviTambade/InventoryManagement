@@ -8,7 +8,6 @@ import { RegisterComponent } from 'app/employee/register/register.component';
 import { MaterialListComponent } from 'app/material/material-list/material-list.component';
 import { MaterialUpdateFormComponent } from 'app/material/material-update-form/material-update-form.component';
 import { SearchMaterialComponent } from 'app/material/search-material/search-material.component';
-import { SupervisorsDashboardComponent } from 'app/dashboards/supervisors-dashboard/supervisors-dashboard.component';
 import { OrderComponent } from 'app/order/order/order.component';
 import { OrdersHistoryComponent } from 'app/employee/orders-history/orders-history.component';
 import { TasksHistoryComponent } from 'app/employee/tasks-history/tasks-history.component';
@@ -17,9 +16,10 @@ export const AdminLayoutRoutes: Routes = [
     // {
     //   path: '',
     //   children: [ {
-    //     path: 'dashboard',
-    //     component: DashboardComponent
-    // }]}, {
+    //     path: 'login',
+    //     component: LoginComponent
+    // }]},
+// }, {
     // path: '',
     // children: [ {
     //   path: 'userprofile',
@@ -56,8 +56,9 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: SupervisorsDashboardComponent },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login',        component: LoginComponent },
+    { path: 'dashboard',      component: DashboardComponent },
     { path: 'register',        component: RegisterComponent },
     { path: 'material-list',        component: MaterialListComponent },
     { path: 'material-update-form',        component: MaterialUpdateFormComponent },

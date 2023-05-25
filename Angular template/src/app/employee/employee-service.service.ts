@@ -14,24 +14,24 @@ export class EmployeeServiceService {
 
   getAll():Observable<any>
   {
-    let url =" http://localhost:5224/api/employees/getallemployees";
+    let url =" http://localhost:5224/api/employees/employees";
     return this.http.get(url); 
   }
   insertEmployee(employee:Employee):Observable<any>
   {
     console.log(employee);
-    let url ="http://localhost:5224/api/employees/insertEmployee";
+    let url ="http://localhost:5224/api/employees/employee";
     return this.http.post<Employee>(url, employee);
   }
   getById(employeeId:number):Observable<Employee>
   {
-    let url ="http://localhost:5224/api/employees/getemployee/"+ employeeId ;
+    let url ="http://localhost:5224/api/employees/employee/"+ employeeId ;
     return this.http.get<Employee>(url);
   }
   UpdateEmployee(employee:Employee):Observable<any>{
     console.log("service");
     console.log(employee)
-    let url ="http://localhost:5224/api/employees/updateEmployee";
+    let url ="http://localhost:5224/api/employees/employee";
     return this.http.put<Employee>(url,employee);
   }  
   SendData(employeeId:number)
