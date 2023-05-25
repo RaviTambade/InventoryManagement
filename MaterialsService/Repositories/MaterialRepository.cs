@@ -14,33 +14,33 @@ public class MaterialRepository : IMaterialRepository
     public IEnumerable<Material> GetAll()
     {
         List<Material> materials = new List<Material>();
-        MySqlConnection connection = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "SELECT * FROM materials";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            connection.Open();
-            MySqlDataReader reader = command.ExecuteReader();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["material_id"].ToString());
-                string? materialname = reader["material_name"].ToString();
-                string? materialtype = reader["material_type"].ToString();
+                string? name = reader["material_name"].ToString();
+                string? type = reader["material_type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unit_price"].ToString());
                 string? imgUrl = reader["photo"].ToString();
 
-                Material material = new Material
+                Material TheMaterial = new Material
                 {
-                    MaterialId = id,
-                    MaterialName = materialname,
-                    MaterialType = materialtype,
-                    MaterialQuantity = quantity,
-                    MaterialUnitPrice = price,
-                    MaterialImgUrl = imgUrl,
+                    Id = id,
+                    Name = name,
+                    Type = type,
+                    Quantity = quantity,
+                    UnitPrice = price,
+                    ImgUrl = imgUrl,
                 };
 
-                materials.Add(material);
+                materials.Add(TheMaterial);
             }
             reader.Close();
         }
@@ -50,39 +50,39 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            connection.Close();
+            con.Close();
         }
 
         return materials;
     }
-    public Material GetById(int materialId)
+    public Material Get(int Mid)
     {
-        Material material = new Material();
-        MySqlConnection connection = new MySqlConnection(_conString);
+        Material Thematerial = null;
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "SELECT * FROM materials where material_id=@materialId";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@materialId", materialId);
-            connection.Open();
-            MySqlDataReader reader = command.ExecuteReader();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialId", Mid);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["material_id"].ToString());
-                string? materialname = reader["material_name"].ToString();
-                string? materialtype = reader["material_type"].ToString();
+                string? name = reader["material_name"].ToString();
+                string? type = reader["material_type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unit_price"].ToString());
                 string? imgUrl = reader["photo"].ToString();
 
-                material = new Material()
+                Thematerial = new Material()
                 {
-                    MaterialId = id,
-                    MaterialName = materialname,
-                    MaterialType = materialtype,
-                    MaterialQuantity = quantity,
-                    MaterialUnitPrice = price,
-                    MaterialImgUrl = imgUrl,
+                    Id = id,
+                    Name = name,
+                    Type = type,
+                    Quantity = quantity,
+                    UnitPrice = price,
+                    ImgUrl = imgUrl,
                 };
 
             }
@@ -94,26 +94,26 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            connection.Close();
+            con.Close();
         }
-        return material;
+        return Thematerial;
     }
     public bool Insert(Material material)
     {
         bool status = false;
-        MySqlConnection connection = new MySqlConnection();
-        connection.ConnectionString = _conString;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
         try
         {
             string query = "INSERT INTO Materials(material_name,material_type,quantity,unit_price,photo)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@materialName", material.MaterialName);
-            command.Parameters.AddWithValue("@materialType", material.MaterialType);
-            command.Parameters.AddWithValue("@quantity", material.MaterialQuantity);
-            command.Parameters.AddWithValue("@unitPrice", material.MaterialUnitPrice);
-            command.Parameters.AddWithValue("@imgurl", material.MaterialImgUrl);
-            connection.Open();
-            int rowsAffected = command.ExecuteNonQuery();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialName", material.Name);
+            cmd.Parameters.AddWithValue("@materialType", material.Type);
+            cmd.Parameters.AddWithValue("@quantity", material.Quantity);
+            cmd.Parameters.AddWithValue("@unitPrice", material.UnitPrice);
+            cmd.Parameters.AddWithValue("@imgurl", material.ImgUrl);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
                 status = true;
@@ -125,22 +125,22 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            connection.Close();
+            con.Close();
         }
         return status;
     }
     public bool Update(Material material)
     {
         bool status = false;
-        MySqlConnection connection = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "UPDATE materials SET  quantity=@quantity  WHERE material_id=@materialId";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@materialId", material.MaterialId);
-            command.Parameters.AddWithValue("@quantity", material.MaterialQuantity);
-            connection.Open();
-            int rowsAffected = command.ExecuteNonQuery();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialId", material.Id);
+            cmd.Parameters.AddWithValue("@quantity", material.Quantity);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
                 status = true;
@@ -152,22 +152,21 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            connection.Close();
+            con.Close();
         }
         return status;
     }
-
-    public bool Delete(int materialId)
+    public bool Delete(int id)
     {
         bool status = false;
-        MySqlConnection connection = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "DELETE FROM materials WHERE material_id=@materialId";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@materialId", materialId);
-            connection.Open();
-            int rowsAffected = command.ExecuteNonQuery();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialId", id);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
                 status = true;
@@ -179,22 +178,21 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            connection.Close();
+            con.Close();
         }
         return status;
     }
-
     public Location GetLocation(int id)
     {
-        Location location = new Location();
-        MySqlConnection connection = new MySqlConnection(_conString);
+        Location loc =null;
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "select  warehouses.warehouse_name, sections.section_name,floors.floor_number, materials.material_name, materials.material_type FROM warehouses INNER JOIN sections ON  warehouses.sections_id=sections.section_id INNER JOIN floors ON  sections.floors_id= floors.floor_id INNER JOIN materials ON  floors.mid=materials.material_id where  materials.material_id=@materialid";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@materialid", id);
-            connection.Open();
-            MySqlDataReader reader = command.ExecuteReader();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialid", id);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 string? warehouse = reader["warehouse_name"].ToString();
@@ -203,8 +201,7 @@ public class MaterialRepository : IMaterialRepository
                 string? materialname = reader["material_name"].ToString();
                 string? materialtype = reader["material_type"].ToString();
 
-                Console.WriteLine(warehouse, sectionname, floor, materialname, materialtype);
-                location = new Location()
+                loc = new Location()
                 {
                     WarehouseName = warehouse,
                     SectionName = sectionname,
@@ -222,26 +219,23 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            connection.Close();
+            con.Close();
         }
-        return location;
+        return loc;
     }
-
-
     public IEnumerable<Material> GetByType(string type)
     {
         List<Material> materials = new List<Material>();
-        MySqlConnection connection = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "SELECT * FROM materials where material_type=@materialtype";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@materialtype", type);
-            connection.Open();
-            MySqlDataReader reader = command.ExecuteReader();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialtype", type);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-
                 int id = Int32.Parse(reader["material_id"].ToString());
                 string? materialname = reader["material_name"].ToString();
                 string? materialtype = reader["material_type"].ToString();
@@ -249,18 +243,17 @@ public class MaterialRepository : IMaterialRepository
                 int price = int.Parse(reader["unit_price"].ToString());
                 string? imgUrl = reader["photo"].ToString();
 
-                Material material = new Material
+                Material TheMaterial = new Material
                 {
-                    MaterialId = id,
-                    MaterialName = materialname,
-                    MaterialType = materialtype,
-                    MaterialQuantity = quantity,
-                    MaterialUnitPrice = price,
-                    MaterialImgUrl = imgUrl,
+                    Id = id,
+                    Name = materialname,
+                    Type = materialtype,
+                    Quantity = quantity,
+                    UnitPrice = price,
+                    ImgUrl = imgUrl,
 
                 };
-
-                materials.Add(material);
+                materials.Add(TheMaterial);
             }
             reader.Close();
         }
@@ -270,8 +263,9 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            connection.Close();
+            con.Close();
         }
         return materials;
     }
+
 }

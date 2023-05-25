@@ -2,6 +2,7 @@ using MaterialsService.Repositories.Interfaces;
 using MaterialsService.Repositories;
 using MaterialsService.Services.Interfaces;
 using MaterialsService.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -35,9 +36,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

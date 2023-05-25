@@ -5,7 +5,7 @@ namespace MaterialsService.Repositories.Interfaces;
 public interface IMaterialRepository
 {
     IEnumerable<Material> GetAll();
-    Material GetById(int materialId);
+    Material Get(int materialId);
     bool Insert(Material material);
     bool Update(Material material);
     bool Delete(int materialId);

@@ -6,6 +6,7 @@ namespace MaterialsService.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
+    //each controller should be impliment with auth attribute
     public class MaterialsController : ControllerBase
     {
         private readonly IMaterialService _matsrv;
@@ -16,22 +17,22 @@ namespace MaterialsService.Controllers
 
         [HttpGet]
         [Route("materials")]
-        public IEnumerable<Material> GetAllMaterials()
+        public IEnumerable<Material> GetAll()
         {
             IEnumerable<Material> Materials = _matsrv.GetAll();
             return Materials;
         }
 
         [HttpGet]
-        [Route("material/{id}")]
-        public Material GetMaterial(int id)
+        [Route("materials/{id}")]
+        public Material Get(int id)
         {
-            Material material = _matsrv.GetById(id);
+            Material material = _matsrv.Get(id);
             return material;
         }
 
         [HttpPut]
-        [Route("material/{id}")]
+        [Route("materials/{id}")]
         public bool UpdateMaterial([FromBody] Material material)
         {
             bool status = _matsrv.Update(material);
@@ -39,23 +40,23 @@ namespace MaterialsService.Controllers
         }
 
         [HttpPost]
-        [Route("material")]
-        public bool InsertMaterial([FromBody] Material material)
+        [Route("materials")]
+        public bool Insert([FromBody] Material material)
         {
             bool status = _matsrv.Insert(material);
             return status;
         }
 
         [HttpDelete]
-        [Route("material/{id}")]
-        public bool DeleteMaterial(int id)
+        [Route("materials/{id}")]
+        public bool Delete(int id)
         {
             bool status = _matsrv.Delete(id);
             return status;
         }
 
         [HttpGet]
-        [Route("getlocation/{id}")]
+        [Route("materials/locations/{id}")]
         public Location GetLocation(int id)
         {
             Location location =_matsrv.GetLocation(id);
@@ -63,7 +64,7 @@ namespace MaterialsService.Controllers
         }
 
         [HttpGet]
-        [Route("MaterialByCatagory")]
+        [Route("materials/type")]
         public IEnumerable<Material> GetMaterialByType([FromBody] string type)
         {
             IEnumerable<Material> materials = _matsrv.GetByType(type);

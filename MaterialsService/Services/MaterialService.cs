@@ -10,7 +10,7 @@ public class MaterialService : IMaterialService
         _repo = repo;
     }
     public IEnumerable<Material> GetAll() =>_repo.GetAll();
-    public Material GetById(int materialId) => _repo.GetById(materialId);
+    public Material Get(int materialId) => _repo.Get(materialId);
     public bool Insert(Material material) => _repo.Insert(material);
     public bool Update(Material material) => _repo.Update(material);
     public bool Delete(int materialId) => _repo.Delete(materialId);

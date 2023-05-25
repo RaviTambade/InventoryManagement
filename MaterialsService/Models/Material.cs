@@ -1,10 +1,9 @@
 namespace MaterialsService.Models;
 public class Material{
-    public int MaterialId{get;set;}
-    public string MaterialName{get;set;}
-    public string MaterialType{get;set;}
-    public int MaterialQuantity{get;set;}
-    public int MaterialUnitPrice{get;set;}
-    public string MaterialImgUrl{get;set;}
-    
+    public int Id{get;set;}
+    public string? Name{get;set;}
+    public string? Type{get;set;}
+    public int Quantity{get;set;}
+    public int UnitPrice{get;set;}
+    public string? ImgUrl{get;set;}   
 }
