@@ -108,60 +108,7 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employee;
     }
-   
-    public Employee GetByIdUpdate(int employeeId)
-    {
-        Employee employee = new Employee();
-        MySqlConnection connection = new MySqlConnection(_conString);
-        try
-        {
-            string query ="select  employees.employee_id, DATE(employees.birth_date), DATE(employees.hire_date), employees.empfirst_name, employees.emplast_name, employees.email,employees.contact_number, employees.photo, departments.department, roles.role , genders.gender  from employees  inner join departments on employees.department_id=departments.department_id  inner join genders on employees.gender_id=genders.gender_id inner join roles on employees.role_id=roles.role_id  where   employee_id=@employeeId";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@employeeId", employeeId);
-            connection.Open();
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                int id = Int32.Parse(reader["employee_id"].ToString());
-                string? empfirstname = reader["empfirst_name"].ToString();
-                string? emplastname = reader["emplast_name"].ToString();
-                string? birthdate = reader["DATE(employees.birth_date)"].ToString();
-                string? hiredate = reader["DATE(employees.hire_date)"].ToString();
-                string? contactno = reader["contact_number"].ToString();
-                string? email = reader["email"].ToString();
-                string? imgurl = reader["photo"].ToString();
-                string? gender = reader["gender"].ToString();
-                string? department = reader["department"].ToString();
-                string? role = reader["role"].ToString();
-                employee = new Employee
-                {
-                    EmployeeId = id,
-                    EmployeeFirstName = empfirstname,
-                    EmployeeLastName = emplastname,
-                    BirthDate = birthdate,
-                    HireDate = hiredate,
-                    ContactNumber = contactno,
-                    email = email,
-                    ImgUrl = imgurl,
-                    Gender = gender,
-                    Department = department,
-                    Role = role,
-                };
-
-            }
-            reader.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            connection.Close();
-        }
-        return employee;
-    }
-   
+      
     public bool Insert(Employee employee)
     {
          bool status = false;
@@ -201,7 +148,6 @@ public class EmployeeRepository : IEmployeeRepository
     
     }
  
- 
     public bool Update(Employee employee)
     {
         bool status = false;
@@ -239,8 +185,7 @@ public class EmployeeRepository : IEmployeeRepository
         return status;
     }
 
-
-public IEnumerable<Employee> GetByDepartment(int departmentId)
+    public IEnumerable<Employee> GetByDepartment(int departmentId)
     {
         List<Employee> employees = new List<Employee>();
         MySqlConnection connection = new MySqlConnection(_conString);
@@ -288,32 +233,31 @@ public IEnumerable<Employee> GetByDepartment(int departmentId)
         return employees;
     }
 
-
-    // public bool Delete(int employeeId)
-    // {
-    //     bool status = false;
-    //      MySqlConnection connection = new MySqlConnection(_conString);
-    //     try
-    //     {
-    //         string query = "DELETE FROM employees WHERE employee_id=@empid";
-    //         MySqlCommand command = new MySqlCommand(query, connection);
-    //         command.Parameters.AddWithValue("@empid", employeeId);
-    //         connection.Open();
-    //         int rowsAffected = command.ExecuteNonQuery();
-    //         if (rowsAffected > 0)
-    //         {
-    //             status = true;
-    //         }
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         throw e;
-    //     }
-    //     finally
-    //     {
-    //         connection.Close();
-    //     }
-    //     return status;
-    // }
+    public bool Delete(int employeeId)
+    {
+        bool status = false;
+         MySqlConnection connection = new MySqlConnection(_conString);
+        try
+        {
+            string query = "DELETE FROM employees WHERE employee_id=@empid";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@empid", employeeId);
+            connection.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            connection.Close();
+        }
+        return status;
+    }
 
 }

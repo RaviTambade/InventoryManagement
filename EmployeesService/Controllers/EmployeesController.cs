@@ -9,7 +9,7 @@ namespace EmployeesService.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeService _empsrv;
-        
+
         public EmployeesController(IEmployeeService empsvr)
         {
             _empsrv = empsvr;
@@ -17,59 +17,52 @@ namespace EmployeesService.Controllers
 
         [HttpGet]
         [Route("employees")]
-        public IEnumerable<Employee> GetAllEmployees()
+        public IEnumerable<Employee> GetAll()
         {
-          IEnumerable<Employee> employees= _empsrv.GetAll();
-          return employees;
+            IEnumerable<Employee> employees = _empsrv.GetAll();
+            return employees;
         }
 
         [HttpGet]
         [Route("employee/{id}")]
-        public Employee GetEmployee(int id)
+        public Employee GetById(int id)
         {
             Employee employee = _empsrv.GetById(id);
             return employee;
         }
-        [HttpGet]
-        [Route("getemployeeForUpdate/{id}")]
-        public Employee GetEmployeeUpdate(int id)
-        {
-            Employee employee = _empsrv.GetByIdUpdate(id);
-            return employee;
-        }
-
-            [HttpPost]
+ 
+        [HttpPost]
         [Route("employee")]
-        public bool InsertEmployee( [FromBody] Employee employee)
+        public bool Insert([FromBody] Employee employee)
         {
-            bool status = _empsrv.Insert( employee);
+            bool status = _empsrv.Insert(employee);
             return status;
         }
 
 
         [HttpPut]
         [Route("employee")]
-        public bool UpdateEmployee([FromBody] Employee employee)
+        public bool Update([FromBody] Employee employee)
         {
-            bool status = _empsrv.Update( employee);
+            bool status = _empsrv.Update(employee);
             return status;
         }
 
-         [HttpGet]
+        [HttpGet]
         [Route("department/{id}")]
-        public IEnumerable<Employee> GetAllEmployees(int id)
+        public IEnumerable<Employee> GetByDepartment(int id)
         {
-          IEnumerable<Employee> employees= _empsrv.GetByDepartment(id);
-          return employees;
+            IEnumerable<Employee> employees = _empsrv.GetByDepartment(id);
+            return employees;
         }
 
-        // [HttpDelete]
-        // [Route("employee/{id}")]
-        // public bool DeleteEmployee(int id)
-        // {
-        //     bool status = _empsrv.Delete(id);
-        //     return status;
-        // }
+        [HttpDelete]
+        [Route("employee/{id}")]
+        public bool DeleteEmployee(int id)
+        {
+            bool status = _empsrv.Delete(id);
+            return status;
+        }
 
     }
 }
