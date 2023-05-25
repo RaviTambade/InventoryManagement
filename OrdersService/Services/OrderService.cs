@@ -13,9 +13,6 @@ public class OrderService : IOrderService
     }
 
     public IEnumerable<Order> OrdersHistory(int id)=> _repo.OrdersHistory(id);
-    public IEnumerable<Order> AllOrdersHistory()=> _repo.AllOrdersHistory();
-    public TheTask TaskDetails()=> _repo.TaskDetails();
-    public IEnumerable<TheTask> AllTasks(int id)=> _repo.AllTasks(id);
-
+    public IEnumerable<Order> OrdersHistory()=> _repo.OrdersHistory();
 
 }

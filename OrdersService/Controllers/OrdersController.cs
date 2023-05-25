@@ -13,35 +13,21 @@ public class OrdersController : ControllerBase
         _ordsvs = ordsvs;
     }
         [HttpGet]
-        [Route("ordershistory/{id}")]
-        public IEnumerable<Order> OrdersHistoryOfEmployee(int id)
+        [Route("orders/History")]
+        public IEnumerable<Order> GetAll()
         {
-            IEnumerable<Order> orders = _ordsvs.OrdersHistory(id);
+            IEnumerable<Order> orders = _ordsvs.OrdersHistory();
             return orders;
         }
 
         [HttpGet]
-        [Route("allordershistory")]
-        public IEnumerable<Order> AllOrdersHistoryOfEmployees()
+        [Route("orders/History/{id}")]
+        public IEnumerable<Order> Get(int id)
         {
-            IEnumerable<Order> orders = _ordsvs.AllOrdersHistory();
+            IEnumerable<Order> orders = _ordsvs.OrdersHistory(id);
             return orders;
         }
     
-          [HttpGet]
-        [Route("Task")]
-        public TheTask Task()
-        {
-            TheTask task = _ordsvs.TaskDetails();
-            return task;
-        }
 
-          [HttpGet]
-        [Route("Taskshistory/{id}")]
-        public IEnumerable<TheTask> TasksHistory(int id)
-        {
-            IEnumerable<TheTask> tasks = _ordsvs.AllTasks(id);
-            return tasks;
-        }
 }
 
