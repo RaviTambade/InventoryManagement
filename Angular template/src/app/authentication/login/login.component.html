@@ -7,12 +7,12 @@
                       <h4 class="card-title">Login Form</h4>
                   </div>
                   <div class="card-body">
-                    <form #loginForm="ngForm" (ngSubmit)="Login (loginForm.value)">
+                    <form (ngSubmit)="LogIn()">
                           
                           <div class="row">
                               <div class="col-md-8">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Email" type="text"  [(ngModel)]="login.email">
+                                  <input matInput placeholder="ContactNumber" type="text"  [(ngModel)]="login.contactNumber">
                                 </mat-form-field>
                               </div>
 
@@ -28,10 +28,10 @@
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right">Login</button>
                           <div class="clearfix"></div>
                       </form>
+
                   </div>
               </div>
           </div>
-
       </div>
   </div>
 </div>
