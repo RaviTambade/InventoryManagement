@@ -1,7 +1,4 @@
-namespace AuthService.Helpers
-{
-    public class AppSettings
-    {
-        public string Secret { get; set; }
-    }
+namespace AuthService.Helpers;
+public class AppSettings{
+    public string Secret { get; set; }
 }

@@ -1,27 +1,12 @@
 namespace AuthService.Models
-
 {
+public class AuthenticateResponse{
+  public string Token { get; set; }
 
-    public class AuthenticateResponse{
+  public AuthenticateResponse(string token)
+  {
+    Token = token;
+  }
+}
 
-     public int UserId {get;set;}
-
-     public string ContactNumber{get;set;}
-
-     public string Password{get;set;}
-
-
-     public string Token {get;set;}
-
-
-
-    public AuthenticateResponse(Employee employee, string token){
-      UserId =employee.EmployeeId;
-      ContactNumber= employee.ContactNumber;
-      Password=employee.Password;
-      Token=token;
-    }
-
-    }
-    
 }

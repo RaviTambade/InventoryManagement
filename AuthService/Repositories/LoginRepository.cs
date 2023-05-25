@@ -19,36 +19,17 @@ public class LoginRepository : ILoginRepository
         _configuration = configuration;
 
     }
-
     public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
     {
-        Console.WriteLine("authenticate method is called");
-        Employee employee = await GetUser(request);
-
-
+        Employee employee = await Get(request);
         // return null if user not found
         if (employee == null) { return null; }
         // authentication successful so generate jwt token
         var token = await generateJwtToken(employee);
-        return new AuthenticateResponse(employee, token);
+        return new AuthenticateResponse(token);
     }
 
-    private async Task<string> generateJwtToken(Employee employee)
-    {
-        // generate token that is valid for 7 days
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.ASCII.GetBytes(_appsettings.Secret);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(await AllClaims(employee)),
-            Expires = DateTime.UtcNow.AddDays(7),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-       SecurityAlgorithms.HmacSha256Signature)
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
-    }
-    public async Task<Employee> GetUser(AuthenticateRequest request)
+    public async Task<Employee> Get(AuthenticateRequest request)
     {
         using (var context = new UserContext(_configuration))
         {
@@ -56,82 +37,43 @@ public class LoginRepository : ILoginRepository
             return employee;
         }
     }
-    private async Task<List<Claim>> AllClaims(Employee employee)
+    
+    private async Task<string> generateJwtToken(Employee employee)
+    {
+        // generate token that is valid for 7 days
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = System.Text.Encoding.ASCII.GetBytes(_appsettings.Secret);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(await Claims(employee)),
+            Expires = DateTime.UtcNow.AddDays(7),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+       SecurityAlgorithms.HmacSha256Signature)
+        };
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+    }
+
+    private async Task<List<Claim>> Claims(Employee employee)
     {
         List<Claim> claims = new List<Claim>();
         //you can add custom Claims here
         claims.Add(new Claim("empId", employee.EmployeeId.ToString()));
-        List<string> roles = await GetRolesOfUser(employee.EmployeeId);
+        List<string> roles = await GetRolesOfEmployee(employee.EmployeeId);
         foreach (string role in roles)
         {
             claims.Add(new Claim("role", role));
         }
-
-        // foreach (string role in roles)
-        // {
-        //     if (role == "farmer")
-        //     {
-        //         int farmerId = await GetIdOfFarmer(user.UserId);
-        //         if (farmerId != 0)
-        //         {
-        //             claims.Add(new Claim("farmerId", farmerId.ToString()));
-        //         }
-        //     }
-
-        //     if (role == "admin")
-        //     {
-        //         int adminId = await GetIdOfAdmin(user.UserId);
-        //         if (adminId != 0)
-        //         {
-        //             claims.Add(new Claim("adminId", adminId.ToString()));
-        //         }
-        //     }
-
-        //     if (role == "transport")
-        //     {
-        //         int transportId = await GetIdOfTransport(user.UserId);
-        //         if (transportId != 0)
-        //         {
-        //             claims.Add(new Claim("transportId", transportId.ToString()));
-        //         }
-        //     }
-
-        //     if (role == "employee")
-        //     {
-        //         int employeeId = await GetIdOfEmployee(user.UserId);
-        //         if (employeeId != 0)
-        //         {
-        //             claims.Add(new Claim("employeeId", employeeId.ToString()));
-        //         }
-        //     }
-
-        //     if (role == "merchant")
-        //     {
-        //         int merchantId = await GetIdOfMerchant(user.UserId);
-        //         if (merchantId != 0)
-        //         {
-        //             claims.Add(new Claim("merchantId", merchantId.ToString()));
-        //         }
-        //     }
-        // }
-
         return claims;
     }
-    private async Task<List<string>> GetRolesOfUser(int empid)
-    {
+    private async Task<List<string>> GetRolesOfEmployee(int empid){
         try
         {
-            using (var context = new UserContext(_configuration))
-            {
+            using (var context = new UserContext(_configuration)){
                 var roles = await (from role in context.Roles
                                    join employees in context.employees on role.RoleId equals employees.RoleId
                                    where employees.EmployeeId == empid
                                    select role.RoleName).ToListAsync();
-
-                foreach (var role in roles)
-                {
-                    Console.WriteLine(role);
-                }
                 return roles;
             }
         }
