@@ -1,3 +1,4 @@
+using System;
 using MaterialsService.Models;
 using MaterialsService.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
@@ -308,24 +309,34 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
-    public IEnumerable<Material>OrderedMaterialsInADay(){
-        List<Material> materials =new  List<Material>();
+    public IEnumerable<Order>OrderedMaterialsInADay(){
+        List<Order> orders =new  List<Order>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orderdetails.material_id from orders inner join orderdetails on orders.orderdetails_id=orderdetails.orderdetails_id WHERE order_date >= CAST(CURRENT_TIMESTAMP AS date)";
+            string query = "select orders.order_id, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity, orders.status from orders inner join materials on orders.orderdetails_id = materials.material_id inner join orderdetails on orders.orderdetails_id=orderdetails.orderdetails_id WHERE order_date >= CAST(CURRENT_TIMESTAMP AS date)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["material_id"].ToString());
+                int id = Int32.Parse(reader["order_id"].ToString());
+                int materialId = Int32.Parse(reader["material_id"].ToString());
+                string? name = reader["material_name"].ToString();
+                string? type = reader["material_type"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                string status =  reader["status"].ToString();
  
-                Material TheMaterial = new Material
+                Order theOrder = new Order
                 {
                     Id = id,
+                    MaterialId = materialId,
+                    Name=name,
+                    Type = type,
+                    Quantity = quantity,
+                    Status =status
                 };
-                materials.Add(TheMaterial);
+                orders.Add(theOrder);
             }
             reader.Close();
         }
@@ -337,7 +348,7 @@ public class MaterialRepository : IMaterialRepository
         {
             con.Close();
         }
-        return materials;
+        return orders;
     }
 
 
