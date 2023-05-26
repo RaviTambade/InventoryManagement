@@ -63,6 +63,9 @@ namespace MaterialsService.Controllers
             return location;
         }
 
+
+
+        //Get all materials based on material type
         [HttpGet]
         [Route("materials/type")]
         public IEnumerable<Material> GetMaterialByType([FromBody] string type)
@@ -70,6 +73,20 @@ namespace MaterialsService.Controllers
             IEnumerable<Material> materials = _matsrv.GetByType(type);
             return materials;
         }
+
+        //Get out of stock  materials list
+        [HttpGet]
+        [Route("materials/outofstock")]
+        public IEnumerable<Material> GetMaterialByType()
+        {
+            IEnumerable<Material> materials = _matsrv.GetByType(type);
+            return materials;
+        }
+
+        //Get list of materials ordered in a day
+
+
+
 
     }
 } 
