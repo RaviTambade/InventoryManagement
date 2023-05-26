@@ -77,14 +77,20 @@ namespace MaterialsService.Controllers
         //Get out of stock  materials list
         [HttpGet]
         [Route("materials/outofstock")]
-        public IEnumerable<Material> GetMaterialByType()
+        public IEnumerable<Material> GetOutOfStockMaterials()
         {
-            IEnumerable<Material> materials = _matsrv.GetByType(type);
+            IEnumerable<Material> materials = _matsrv.GetOutOfStockMaterials();
             return materials;
         }
 
         //Get list of materials ordered in a day
-
+        [HttpGet]
+        [Route("materials/orderedInADay")]
+        public IEnumerable<Material> OrderedMaterialsInADay()
+        {
+            IEnumerable<Material> materials = _matsrv.OrderedMaterialsInADay();
+            return materials;
+        }
 
 
 

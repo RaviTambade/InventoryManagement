@@ -98,8 +98,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return Thematerial;
     }
-    public bool Insert(Material material)
-    {
+    public bool Insert(Material material) {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -155,8 +154,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
-    public bool Delete(int id)
-    {
+    public bool Delete(int id){
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -222,7 +220,6 @@ public class MaterialRepository : IMaterialRepository
         }
         return loc;
     }
-    
     public IEnumerable<Material> GetByType(string type)
     {
         List<Material> materials = new List<Material>();
@@ -267,5 +264,81 @@ public class MaterialRepository : IMaterialRepository
         }
         return materials;
     }
+
+    public IEnumerable<Material>GetOutOfStockMaterials(){
+        List<Material> materials =new  List<Material>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["material_id"].ToString());
+                string? materialname = reader["material_name"].ToString();
+                string? materialtype = reader["material_type"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                int price = int.Parse(reader["unit_price"].ToString());
+                string? imgUrl = reader["photo"].ToString();
+
+                Material TheMaterial = new Material
+                {
+                    Id = id,
+                    Name = materialname,
+                    Type = materialtype,
+                    Quantity = quantity,
+                    UnitPrice = price,
+                    ImgUrl = imgUrl,
+
+                };
+                materials.Add(TheMaterial);
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return materials;
+    }
+
+    public IEnumerable<Material>OrderedMaterialsInADay(){
+        List<Material> materials =new  List<Material>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select orderdetails.material_id from orders inner join orderdetails on orders.orderdetails_id=orderdetails.orderdetails_id WHERE order_date >= CAST(CURRENT_TIMESTAMP AS date)";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["material_id"].ToString());
+ 
+                Material TheMaterial = new Material
+                {
+                    Id = id,
+                };
+                materials.Add(TheMaterial);
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return materials;
+    }
+
 
 }

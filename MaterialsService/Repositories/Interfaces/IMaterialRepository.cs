@@ -11,4 +11,6 @@ public interface IMaterialRepository
     bool Delete(int materialId);
     Location GetLocation(int mid);
     IEnumerable<Material> GetByType(string type);
+    IEnumerable<Material>GetOutOfStockMaterials();
+    IEnumerable<Material>OrderedMaterialsInADay();
 }
