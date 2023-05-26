@@ -1,44 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
 using WarehousesService.Models;
+using WarehousesService.Services.Interfaces;
+
 namespace WarehousesService.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class WarehousesController : ControllerBase
+ [Route("/api/[controller]")]
+ public class WarehousesController : ControllerBase
 {
  
-    public WarehousesController()
+  private readonly IWarehouseService _svc;
+  public WarehousesController(IWarehouseService svc)
+  {
+      _svc = svc;
+  }
+
+  [HttpGet]
+    [Route("warehouses")]
+    public IEnumerable<Warehouse> Warehouse()
     {
-        
+        IEnumerable<Warehouse> warehouses = _svc.Get();
+        return warehouses;
     }
 
-     [HttpGet]
-        [Route("")]
-        public IEnumerable<Warehouse> GetAllWarehouses()
-        {
-            IEnumerable<Warehouse> warehouses = new IEnumerable<Warehouse>();
-            return warehouses;
-        }
-
-        [HttpGet]
-        [Route("")]
-        public  GetAllSections()
-        {
-            
-        }
-
-          [HttpGet]
-        [Route("")]
-        public  GetAllFloors()
-        {
-            TheTask task = _ordsvs.TaskDetails();
-            return task;
-        }
-
-          [HttpGet]
-        [Route("")]
-        public GetAllMaterials()
-        {
-
-        }
 }

@@ -4,5 +4,5 @@ using WarehousesService.Models;
 namespace WarehousesService.Repositories.Interfaces;
 public interface IWarehouseRepository
 {
-
+    IEnumerable<Warehouse> Get();
 }

@@ -12,4 +12,6 @@ public class WarehouseService : IWarehouseService
         _repo = repo;
     }
 
+    public IEnumerable<Warehouse> Get()=> _repo.Get();
+
 }
