@@ -222,6 +222,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return loc;
     }
+    
     public IEnumerable<Material> GetByType(string type)
     {
         List<Material> materials = new List<Material>();
