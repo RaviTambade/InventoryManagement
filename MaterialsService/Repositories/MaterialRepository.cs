@@ -357,7 +357,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.id, materials.name, materials.type, orderdetails.quantity from orders inner join materials on orders.orderdetails_id = materials.id inner join employees on employees.employee_id = orders.employee_id  inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id  WHERE (order_date BETWEEN @FromDate AND @ToDate)";
+            string query = "select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id, materials.name, materials.type, orderdetails.quantity from orders inner join materials on orders.orderdetailid = materials.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN @FromDate AND @ToDate );";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@FromDate", fromDate);
             cmd.Parameters.AddWithValue("@ToDate", toDate);
