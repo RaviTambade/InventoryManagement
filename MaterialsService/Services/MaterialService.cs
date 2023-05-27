@@ -18,4 +18,6 @@ public class MaterialService : IMaterialService
     public IEnumerable<Material> GetByType(string type)=> _repo.GetByType(type);
     public IEnumerable<Material> GetOutOfStockMaterials()=> _repo.GetOutOfStockMaterials();
     public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
+    public IEnumerable<Order> OrderedFromDateToDate(OrderDate date)=> _repo.OrderedFromDateToDate(date);
+
 }

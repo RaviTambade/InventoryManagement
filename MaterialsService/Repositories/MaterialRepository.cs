@@ -308,8 +308,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return materials;
     }
-
-    public IEnumerable<Order>OrderedMaterialsInADay(){
+    public IEnumerable<Order> OrderedMaterialsInADay(){
         List<Order> orders =new  List<Order>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -350,6 +349,54 @@ public class MaterialRepository : IMaterialRepository
         }
         return orders;
     }
+
+       public IEnumerable<Order> OrderedFromDateToDate(OrderDate date){
+        string fromDate = date.FromDate.ToString("yyyy-MM-dd");   
+        string toDate = date.ToDate.ToString("yyyy-MM-dd");   
+        List<Order> orders =new  List<Order>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity from orders inner join materials on orders.orderdetails_id = materials.material_id inner join employees on employees.employee_id = orders.employee_id  inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id  WHERE (order_date BETWEEN @FromDate AND @ToDate)";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@FromDate", fromDate);
+            cmd.Parameters.AddWithValue("@ToDate", toDate);
+
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["order_id"].ToString());
+                int materialId = Int32.Parse(reader["material_id"].ToString());
+                string? name = reader["material_name"].ToString();
+                string? type = reader["material_type"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                string status =  reader["status"].ToString();
+ 
+                Order theOrder = new Order
+                {
+                    Id = id,
+                    MaterialId = materialId,
+                    Name=name,
+                    Type = type,
+                    Quantity = quantity,
+                    Status =status
+                };
+                orders.Add(theOrder);
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return orders;
+    }
+
 
 
 }

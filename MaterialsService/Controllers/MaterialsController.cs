@@ -85,12 +85,24 @@ namespace MaterialsService.Controllers
 
         //Get list of materials ordered in a day
         [HttpGet]
-        [Route("orders/orderedInADay")]
+        [Route("orderedInADay")]
         public IEnumerable<Order> OrderedMaterialsInADay()
         {
             IEnumerable<Order> orders= _matsrv.OrderedMaterialsInADay();
             return orders;
         }
+
+        //Get list of materials ordered from date to to date
+
+        [HttpPost]
+        [Route("orderedFromDateToDate")]
+        public IEnumerable<Order> OrderedFromDateToDate( [FromBody] OrderDate date)
+        {
+            IEnumerable<Order> orders= _matsrv.OrderedFromDateToDate(date);
+            return orders;
+        }
+        
+        
 
 
 

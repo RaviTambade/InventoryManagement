@@ -12,5 +12,6 @@ public interface IMaterialRepository
     Location GetLocation(int mid);
     IEnumerable<Material> GetByType(string type);
     IEnumerable<Material>GetOutOfStockMaterials();
-    IEnumerable<Order>OrderedMaterialsInADay();
+    IEnumerable<Order> OrderedMaterialsInADay();
+    IEnumerable<Order> OrderedFromDateToDate(OrderDate date);
 }
