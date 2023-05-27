@@ -186,7 +186,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  warehouses.warehouse_name, sections.section_name,floors.floor_number, materials.name, materials.type FROM warehouses INNER JOIN sections ON  warehouses.sections_id=sections.section_id INNER JOIN floors ON  sections.floors_id= floors.floor_id INNER JOIN materials ON  floors.mid=materials.id where  materials.id=@materialid";
+            string query = "select  warehouses.name, sections.name,floors.name, materials.name, materials.type FROM warehouses INNER JOIN sections ON  warehouses.sectionid=sections.id INNER JOIN floors ON  sections.floorid= floors.materialid INNER JOIN materials ON  floors.materialid=materials.id where  materials.id=@materialid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialid", id);
             con.Open();
@@ -278,8 +278,8 @@ public class MaterialRepository : IMaterialRepository
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["id"].ToString());
-                string? materialname = reader["name"].ToString();
-                string? materialtype = reader["type"].ToString();
+                string? name = reader["name"].ToString();
+                string? type = reader["type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unitprice"].ToString());
                 string? imgUrl = reader["photo"].ToString();
@@ -287,8 +287,8 @@ public class MaterialRepository : IMaterialRepository
                 Material TheMaterial = new Material
                 {
                     Id = id,
-                    Name = materialname,
-                    Type = materialtype,
+                    Name = name,
+                    Type = type,
                     Quantity = quantity,
                     UnitPrice = price,
                     ImgUrl = imgUrl,
@@ -313,7 +313,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.order_id, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity, orders.status from orders inner join materials on orders.orderdetails_id = materials.material_id inner join orderdetails on orders.orderdetails_id=orderdetails.orderdetails_id WHERE order_date >= CAST(CURRENT_TIMESTAMP AS date)";
+            string query = "select orders.id, materials.id, materials.name, materials.type, orderdetails.quantity, orders.status from orders inner join materials on orders.orderdetailid = materials.id inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE date >= CAST(CURRENT_TIMESTAMP AS date)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
