@@ -20,13 +20,6 @@ export const ROUTES: RouteInfo[] = [
     { path: '/orders-history', title: 'Orders History',  icon:'', class: '' },
     { path: '/tasks-history', title: 'Tasks History',  icon:'', class: '' },
 
-
-    // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
-    // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
-    // { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
-    // { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    // { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-
 ];
 
 @Component({

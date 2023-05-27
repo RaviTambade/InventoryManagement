@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeServiceService } from '../employee-service.service';
 import { Subscription } from 'rxjs';
-import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-update-employee',

@@ -1,14 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeServiceService } from '../employee-service.service';
 import { Employee } from '../Employee';
 
 @Component({
-  selector: 'app-employee-details',
-  templateUrl: './employee-details.component.html',
-  styleUrls: ['./employee-details.component.scss']
+  selector: 'employee-details',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.scss']
 })
-export class EmployeeDetailsComponent  {
+export class DetailsComponent  {
   
 
   @Input() employeeId: number | undefined;

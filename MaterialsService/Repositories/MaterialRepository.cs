@@ -221,7 +221,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return loc;
     }
-    public IEnumerable<Material> GetByType(string type)
+    public IEnumerable<Material> GetMaterials(string type)
     {
         List<Material> materials = new List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -350,7 +350,7 @@ public class MaterialRepository : IMaterialRepository
         return orders;
     }
 
-       public IEnumerable<Order> OrderedFromDateToDate(OrderDate date){
+       public IEnumerable<Order> GetOrders(Period date){
         string fromDate = date.FromDate.ToString("yyyy-MM-dd");   
         string toDate = date.ToDate.ToString("yyyy-MM-dd");   
         List<Order> orders =new  List<Order>();

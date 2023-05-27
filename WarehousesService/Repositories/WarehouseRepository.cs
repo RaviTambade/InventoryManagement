@@ -25,23 +25,23 @@ public class WarehousesRepository : IWarehouseRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select warehouses.warehouse_name, sections.section_name,floors.floor_number,materials.material_id, materials.material_type  FROM warehouses  INNER JOIN sections ON  warehouses.sections_id=  sections.section_id INNER JOIN floors ON  sections.floors_id=  floors.floor_id INNER JOIN materials ON  floors.mid = materials.material_id ";
+            string query = "select warehouses.warehouse_id, sections.section_id,floors.floor_id,materials.material_id, materials.material_type  FROM warehouses  INNER JOIN sections ON  warehouses.sections_id=  sections.section_id INNER JOIN floors ON  sections.floors_id=  floors.floor_id INNER JOIN materials ON  floors.mid = materials.material_id ";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                string? warehouse = reader["warehouse_name"].ToString();
-                string? section = reader["section_name"].ToString();
-                string floor = reader["floor_number"].ToString();
-                string material = reader["material_type"].ToString();
-                int id = Int32.Parse(reader["material_id"].ToString());
+                int warehouse = Int32.Parse(reader["warehouse_id"].ToString());
+                int section = Int32.Parse(reader["section_id"].ToString());
+                int floor = Int32.Parse(reader["floor_id"].ToString());
+                string material = reader["material_id"].ToString();
+                int id = Int32.Parse(reader["material id "].ToString());
 
                 Warehouse TheWarehouse = new Warehouse
                 {
-                    warehouse = warehouse,
-                    Section = section,
-                    Floor = floor,
+                    warehouseId = warehouse,
+                    SectionId = section,
+                    FloorId = floor,
                     Material = material,
                     MaterialId = id
                 };

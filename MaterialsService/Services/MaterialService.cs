@@ -15,9 +15,9 @@ public class MaterialService : IMaterialService
     public bool Update(Material material) => _repo.Update(material);
     public bool Delete(int materialId) => _repo.Delete(materialId);
     public Location GetLocation(int mid)=> _repo.GetLocation(mid);
-    public IEnumerable<Material> GetByType(string type)=> _repo.GetByType(type);
+    public IEnumerable<Material> GetMaterials(string type)=> _repo.GetMaterials(type);
     public IEnumerable<Material> GetOutOfStockMaterials()=> _repo.GetOutOfStockMaterials();
     public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
-    public IEnumerable<Order> OrderedFromDateToDate(OrderDate date)=> _repo.OrderedFromDateToDate(date);
+    public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
 
 }

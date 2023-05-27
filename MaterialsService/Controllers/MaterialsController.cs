@@ -68,9 +68,9 @@ namespace MaterialsService.Controllers
         //Get all materials based on material type
         [HttpGet]
         [Route("materials/type")]
-        public IEnumerable<Material> GetMaterialByType([FromBody] string type)
+        public IEnumerable<Material> GetMaterials([FromBody] string type)
         {
-            IEnumerable<Material> materials = _matsrv.GetByType(type);
+            IEnumerable<Material> materials = _matsrv.GetMaterials(type);
             return materials;
         }
 
@@ -93,18 +93,13 @@ namespace MaterialsService.Controllers
         }
 
         //Get list of materials ordered from date to to date
-
         [HttpPost]
         [Route("orderedFromDateToDate")]
-        public IEnumerable<Order> OrderedFromDateToDate( [FromBody] OrderDate date)
+        public IEnumerable<Order> GetOrders( [FromBody] Period date)
         {
-            IEnumerable<Order> orders= _matsrv.OrderedFromDateToDate(date);
+            IEnumerable<Order> orders= _matsrv.GetOrders(date);
             return orders;
         }
         
-        
-
-
-
     }
 } 
