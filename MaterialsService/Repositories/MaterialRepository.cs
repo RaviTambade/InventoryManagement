@@ -24,11 +24,11 @@ public class MaterialRepository : IMaterialRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["material_id"].ToString());
-                string? name = reader["material_name"].ToString();
-                string? type = reader["material_type"].ToString();
+                int id = Int32.Parse(reader["id"].ToString());
+                string? name = reader["name"].ToString();
+                string? type = reader["type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                int price = int.Parse(reader["unit_price"].ToString());
+                int price = int.Parse(reader["unitprice"].ToString());
                 string? imgUrl = reader["photo"].ToString();
 
                 Material TheMaterial = new Material
@@ -62,18 +62,18 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "SELECT * FROM materials where material_id=@materialId";
+            string query = "SELECT * FROM materials where id=@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialId", Mid);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["material_id"].ToString());
-                string? name = reader["material_name"].ToString();
-                string? type = reader["material_type"].ToString();
+                int id = Int32.Parse(reader["id"].ToString());
+                string? name = reader["name"].ToString();
+                string? type = reader["type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                int price = int.Parse(reader["unit_price"].ToString());
+                int price = int.Parse(reader["unitprice"].ToString());
                 string? imgUrl = reader["photo"].ToString();
 
                 Thematerial = new Material()
@@ -104,7 +104,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "INSERT INTO Materials(material_name,material_type,quantity,unit_price,photo)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
+            string query = "INSERT INTO Materials(name,type,quantity,unitprice,photo)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialName", material.Name);
             cmd.Parameters.AddWithValue("@materialType", material.Type);
@@ -134,7 +134,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "UPDATE materials SET  quantity=@quantity  WHERE material_id=@materialId";
+            string query = "UPDATE materials SET  quantity=@quantity  WHERE id=@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialId", material.Id);
             cmd.Parameters.AddWithValue("@quantity", material.Quantity);
@@ -160,7 +160,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "DELETE FROM materials WHERE material_id=@materialId";
+            string query = "DELETE FROM materials WHERE id=@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialId", id);
             con.Open();
@@ -186,7 +186,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  warehouses.warehouse_name, sections.section_name,floors.floor_number, materials.material_name, materials.material_type FROM warehouses INNER JOIN sections ON  warehouses.sections_id=sections.section_id INNER JOIN floors ON  sections.floors_id= floors.floor_id INNER JOIN materials ON  floors.mid=materials.material_id where  materials.material_id=@materialid";
+            string query = "select  warehouses.warehouse_name, sections.section_name,floors.floor_number, materials.name, materials.type FROM warehouses INNER JOIN sections ON  warehouses.sections_id=sections.section_id INNER JOIN floors ON  sections.floors_id= floors.floor_id INNER JOIN materials ON  floors.mid=materials.id where  materials.id=@materialid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialid", id);
             con.Open();
@@ -196,8 +196,8 @@ public class MaterialRepository : IMaterialRepository
                 string? warehouse = reader["warehouse_name"].ToString();
                 string? sectionname = reader["section_name"].ToString();
                 string? floor = reader["floor_number"].ToString();
-                string? materialname = reader["material_name"].ToString();
-                string? materialtype = reader["material_type"].ToString();
+                string? materialname = reader["name"].ToString();
+                string? materialtype = reader["type"].ToString();
 
                 loc = new Location()
                 {
@@ -227,7 +227,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "SELECT * FROM materials where material_type=@materialtype";
+            string query = "SELECT * FROM materials where type=@materialtype";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialtype", type);
             con.Open();
@@ -277,11 +277,11 @@ public class MaterialRepository : IMaterialRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["material_id"].ToString());
-                string? materialname = reader["material_name"].ToString();
-                string? materialtype = reader["material_type"].ToString();
+                int id = Int32.Parse(reader["id"].ToString());
+                string? materialname = reader["name"].ToString();
+                string? materialtype = reader["type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                int price = int.Parse(reader["unit_price"].ToString());
+                int price = int.Parse(reader["unitprice"].ToString());
                 string? imgUrl = reader["photo"].ToString();
 
                 Material TheMaterial = new Material
@@ -357,7 +357,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity from orders inner join materials on orders.orderdetails_id = materials.material_id inner join employees on employees.employee_id = orders.employee_id  inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id  WHERE (order_date BETWEEN @FromDate AND @ToDate)";
+            string query = "select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.id, materials.name, materials.type, orderdetails.quantity from orders inner join materials on orders.orderdetails_id = materials.id inner join employees on employees.employee_id = orders.employee_id  inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id  WHERE (order_date BETWEEN @FromDate AND @ToDate)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@FromDate", fromDate);
             cmd.Parameters.AddWithValue("@ToDate", toDate);
@@ -367,9 +367,9 @@ public class MaterialRepository : IMaterialRepository
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["order_id"].ToString());
-                int materialId = Int32.Parse(reader["material_id"].ToString());
-                string? name = reader["material_name"].ToString();
-                string? type = reader["material_type"].ToString();
+                int materialId = Int32.Parse(reader["id"].ToString());
+                string? name = reader["name"].ToString();
+                string? type = reader["type"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status =  reader["status"].ToString();
  
