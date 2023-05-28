@@ -17,16 +17,16 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  employees.employee_id, employees.empfirst_name,employees.emplast_name,employees.email,employees.contact_number, departments.department, roles.role from employees inner join departments on employees.department_id=departments.department_id  inner join roles on employees.role_id=roles.role_id";
+            string query = "select  employees.id, employees.firstname,employees.lastname,employees.email,employees.contactnumber, departments.department, roles.role from employees inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["employee_id"].ToString());
-                string? firstname = reader["empfirst_name"].ToString();
-                string? lastname = reader["emplast_name"].ToString();
-                string? contactno = reader["contact_number"].ToString();
+                int id = Int32.Parse(reader["id"].ToString());
+                string? firstname = reader["firstname"].ToString();
+                string? lastname = reader["lastname"].ToString();
+                string? contactno = reader["contactnumber"].ToString();
                 string? email = reader["email"].ToString();
                 string? department = reader["department"].ToString();
                 string? role = reader["role"].ToString();
@@ -190,7 +190,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.employee_id, DATE(employees.birth_date), DATE(employees.hire_date), employees.empfirst_name, employees.emplast_name, employees.email,employees.contact_number, employees.photo, departments.department, roles.role , genders.gender  from employees  inner join departments on employees.department_id=departments.department_id  inner join genders on employees.gender_id=genders.gender_id inner join roles on employees.role_id=roles.role_id  where   department_id=@departmentId";
+            string query ="select  employees.id, DATE(employees.birthdate), DATE(employees.hiredate), employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.photo, departments.department, roles.role , genders.gender  from employees  inner join departments on employees.departmentid=departments.id  inner join genders on employees.genderid=genders.id inner join roles on employees.roleid=roles.id  where   department_id=@departmentId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@departmentId", departmentId);
 
@@ -238,7 +238,7 @@ public class EmployeeRepository : IEmployeeRepository
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "DELETE FROM employees WHERE employee_id=@empid";
+            string query = "DELETE FROM employees WHERE id=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", employeeId);
             con.Open();
