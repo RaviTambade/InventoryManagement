@@ -17,7 +17,5 @@ public class MaterialService : IMaterialService
     public Location GetLocation(int mid)=> _repo.GetLocation(mid);
     public IEnumerable<Material> GetMaterials(int id)=> _repo.GetMaterials(id);
     public IEnumerable<Material> GetOutOfStockMaterials()=> _repo.GetOutOfStockMaterials();
-    public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
-    public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
-
+    
 }

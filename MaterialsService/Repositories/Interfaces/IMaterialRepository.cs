@@ -12,6 +12,5 @@ public interface IMaterialRepository
     Location GetLocation(int mid);
     IEnumerable<Material> GetMaterials(int id);
     IEnumerable<Material>GetOutOfStockMaterials();
-    IEnumerable<Order> OrderedMaterialsInADay();
-    IEnumerable<Order> GetOrders(Period date);
+    
 }
