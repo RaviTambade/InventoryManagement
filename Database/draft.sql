@@ -250,3 +250,35 @@ INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  1
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-26  12:35:25',13, 3,'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-26  12:40:25',14, 3,'delivered');
 
+
+-- today's orders
+select orders.id, materials.id, materials.title, catagories.catagory, orderdetails.quantity, orders.status 
+from orders 
+inner join materials on orders.orderdetailid = materials.id
+inner join catagories on materials.catagoryid = catagories.id
+ inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date);
+
+
+-- employees and their role and department
+select  employees.id, employees.firstname,employees.lastname,employees.email,employees.contactnumber, departments.department, roles.role
+ from employees 
+ inner join departments on employees.departmentid=departments.id  
+ inner join roles on employees.roleid=roles.id;
+
+-- material location in warehouse
+--  select  warehouses.name, sections.title,employees.firstname,employees.lastname 
+--  FROM warehouses 
+--  INNER JOIN sections ON  warehouses.sectionid=sections.id
+--  inner join employees on sections.employeeid = employees.id
+--  INNER JOIN floors ON  sections.floorid= floors.materialid 
+--  inner join catagories on catagories.id = materials.catagoryid
+
+
+
+-- get orders from date - to date
+select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id, materials.title, catagories.catagory, orderdetails.quantity
+ from orders
+ inner join materials on orders.orderdetailid = materials.id 
+ inner join employees on employees.id = orders.employeeid 
+ inner join catagories on catagories.id = materials.catagoryid
+ inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN '2023-01-01' AND '2023-05-05' );
