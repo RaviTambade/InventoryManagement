@@ -36,8 +36,8 @@ public class TaskRepository : ITaskRepository
                 
                  task = new Tasks()
                 {
-                    EmployeeFirstName=empfirstname,
-                    EmployeeLastName=emplastname,
+                    FirstName=empfirstname,
+                    LastName=emplastname,
                     MaterialId=materialid,
                     MaterialName=materialname,
                     MaterialType=matrialtype,
