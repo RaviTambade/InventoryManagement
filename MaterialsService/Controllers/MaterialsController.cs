@@ -67,7 +67,7 @@ namespace MaterialsService.Controllers
 
         //Get all materials based on material type
         [HttpGet]
-        [Route("materials/{id}")]
+        [Route("catagory/{id}")]
         public IEnumerable<Material> GetMaterials(int id)
         {
             IEnumerable<Material> materials = _matsrv.GetMaterials(id);

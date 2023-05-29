@@ -1,8 +1,12 @@
 using System;
 using MaterialsService.Models;
 using MaterialsService.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 namespace MaterialsService.Repositories;
+
+[ApiController]
+[Route("/api/[controller]")]
 public class MaterialRepository : IMaterialRepository
 {
     private IConfiguration _configuration;
@@ -12,6 +16,7 @@ public class MaterialRepository : IMaterialRepository
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
+
     public IEnumerable<Material> GetAll()
     {
         List<Material> materials = new List<Material>();
@@ -25,7 +30,7 @@ public class MaterialRepository : IMaterialRepository
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["id"].ToString());
-                string? name = reader["name"].ToString();
+                string? name = reader["title"].ToString();
                 string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unitprice"].ToString());
@@ -56,6 +61,8 @@ public class MaterialRepository : IMaterialRepository
 
         return materials;
     }
+
+
     public Material Get(int Mid)
     {
         Material Thematerial = null;
@@ -70,7 +77,7 @@ public class MaterialRepository : IMaterialRepository
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["id"].ToString());
-                string? name = reader["name"].ToString();
+                string? name = reader["title"].ToString();
                 string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unitprice"].ToString());
@@ -99,6 +106,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return Thematerial;
     }
+
     public bool Insert(Material material) {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -128,6 +136,8 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
+   
+
     public bool Update(Material material)
     {
         bool status = false;
@@ -155,6 +165,8 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
+   
+ 
     public bool Delete(int id){
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -180,6 +192,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
+
 
     public IEnumerable<Material> GetMaterials(int cid)
     {
@@ -226,12 +239,13 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
+  
     public IEnumerable<Material>GetOutOfStockMaterials(){
         List<Material> materials =new  List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select * from materials where quantity = 0";
+            string query = "select  materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid  where quantity = 0";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -242,7 +256,7 @@ public class MaterialRepository : IMaterialRepository
                 string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unitprice"].ToString());
-                string? imgUrl = reader["photo"].ToString();
+                string? imgUrl = reader["imageurl"].ToString();
 
                 Material TheMaterial = new Material
                 {
@@ -268,12 +282,14 @@ public class MaterialRepository : IMaterialRepository
         }
         return materials;
     }
+
+
     public IEnumerable<Order> OrderedMaterialsInADay(){
         List<Order> orders =new  List<Order>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.id, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date)";
+                string query = "select orders.id, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -397,5 +413,4 @@ public class MaterialRepository : IMaterialRepository
         return loc;
     }
     
-
 }
