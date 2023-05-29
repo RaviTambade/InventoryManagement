@@ -13,20 +13,20 @@ public class TasksController : ControllerBase
         _tsksvs = tsksvs;
     }
          
-        [HttpGet]
-        [Route("Task")]
-        public Tasks Get()
-        {
-            Tasks task = _tsksvs.Task();
-            return task;
-        }
+        // [HttpGet]
+        // [Route("Task")]
+        // public Tasks Get()
+        // {
+        //     Tasks task = _tsksvs.Task();
+        //     return task;
+        // }
 
-          [HttpGet]
-        [Route("Tasks/history/{id}")]
-        public IEnumerable<Tasks> GetAll(int id)
-        {
-            IEnumerable<Tasks> tasks = _tsksvs.GetAll(id);
-            return tasks;
-        }
+        //   [HttpGet]
+        // [Route("Tasks/history/{id}")]
+        // public IEnumerable<Tasks> GetAll(int id)
+        // {
+        //     IEnumerable<Tasks> tasks = _tsksvs.GetAll(id);
+        //     return tasks;
+        // }
 
 }

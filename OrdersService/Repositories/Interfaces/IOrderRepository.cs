@@ -4,7 +4,8 @@ using OrdersService.Models;
 namespace OrdersService.Repositories.Interfaces;
 public interface IOrderRepository
 {
-    IEnumerable<Order> OrdersHistory(int empid);
-    IEnumerable<Order> OrdersHistory();
-
+    // IEnumerable<Order> OrdersHistory(int empid);
+    // IEnumerable<Order> OrdersHistory();
+    IEnumerable<Order> OrderedMaterialsInADay();
+    IEnumerable<Order> GetOrders(Period date);
 }

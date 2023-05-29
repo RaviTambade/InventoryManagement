@@ -12,7 +12,7 @@ public class TaskService : ITaskService
         _repo = repo;
     }
 
-    public Tasks Task()=> _repo.Task();
-    public IEnumerable<Tasks> GetAll(int id)=> _repo.GetAll(id);
+    // public Tasks Task()=> _repo.Task();
+    // public IEnumerable<Tasks> GetAll(int id)=> _repo.GetAll(id);
 
 }
