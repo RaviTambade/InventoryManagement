@@ -62,19 +62,19 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.employee_id, DATE(employees.birth_date), DATE(employees.hire_date), employees.empfirst_name, employees.emplast_name, employees.email,employees.contact_number, employees.photo, departments.department, roles.role , genders.gender  from employees  inner join departments on employees.department_id=departments.department_id  inner join genders on employees.gender_id=genders.gender_id inner join roles on employees.role_id=roles.role_id  where   employee_id=@employeeId";
+            string query ="select  employees.id, DATE(employees.birthdate), DATE(employees.hiredate), employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.photo, departments.department, roles.role , genders.gender  from employees  inner join departments on employees.departmentid=departments.id  inner join genders on employees.genderid=genders.id inner join roles on employees.roleid=roles.id  where   id=@employeeId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@employeeId", employeeId);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["employee_id"].ToString());
-                string? firstname = reader["empfirst_name"].ToString();
-                string? lastname = reader["emplast_name"].ToString();
-                string? birthdate = reader["DATE(employees.birth_date)"].ToString();
-                string? hiredate = reader["DATE(employees.hire_date)"].ToString();
-                string? contactno = reader["contact_number"].ToString();
+                int id = Int32.Parse(reader["id"].ToString());
+                string? firstname = reader["firstname"].ToString();
+                string? lastname = reader["lastname"].ToString();
+                string? birthdate = reader["DATE(employees.birthdate)"].ToString();
+                string? hiredate = reader["DATE(employees.hiredate)"].ToString();
+                string? contactno = reader["contactnumber"].ToString();
                 string? email = reader["email"].ToString();
                 string? imgurl = reader["photo"].ToString();
                 string? gender = reader["gender"].ToString();
@@ -115,7 +115,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "INSERT INTO employees(empfirst_name,emplast_name,birth_date,hire_date,contact_number,department_id, role_id,email,password,photo,gender_id)VALUES(@empfirstname,@emplastname,@birthdate,@hiredate,@contactno,@departmentid,@roleid,@email,@password,@imgurl,@gender)";
+            string query = "INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,photo,genderid)VALUES(@empfirstname,@emplastname,@birthdate,@hiredate,@contactno,@departmentid,@roleid,@email,@password,@imgurl,@gender)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empfirstname", employee.FirstName);
             cmd.Parameters.AddWithValue("@emplastname", employee.LastName);
@@ -153,7 +153,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "UPDATE employees SET empfirst_name=@empfirstname, emplast_name=@emplastname, birth_date=@birthdate, hire_date=@hiredate, contact_number=@contactno, department_id=@departmentid, role_id=@roleid, email=@email, photo=@imgurl, gender_id=@gender WHERE employee_id=@empid";
+            string query = "UPDATE employees SET firstname=@empfirstname, lastname=@emplastname, birthdate=@birthdate, hiredate=@hiredate, contactnumber=@contactno, departmentid=@departmentid, roleid=@roleid, email=@email, photo=@imgurl, genderid=@gender WHERE id=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", employee.Id);
             cmd.Parameters.AddWithValue("@empfirstname", employee.FirstName);
@@ -184,7 +184,7 @@ public class EmployeeRepository : IEmployeeRepository
         return status;
     }
 
-    public IEnumerable<Employee> GetByDepartment(int departmentId)
+    public IEnumerable<Employee> GetByDepartment(int departmentId)  
     {
         List<Employee> employees = new List<Employee>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -198,10 +198,10 @@ public class EmployeeRepository : IEmployeeRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["employee_id"].ToString());
-                string? firstname = reader["empfirst_name"].ToString();
-                string? lastname = reader["emplast_name"].ToString();
-                string? contactno = reader["contact_number"].ToString();
+                int id = Int32.Parse(reader["id"].ToString());
+                string? firstname = reader["firstname"].ToString();
+                string? lastname = reader["lastname"].ToString();
+                string? contactno = reader["contactnumber"].ToString();
                 string? email = reader["email"].ToString();
                 string? department = reader["department"].ToString();
                 string? role = reader["role"].ToString();
