@@ -67,10 +67,10 @@ namespace MaterialsService.Controllers
 
         //Get all materials based on material type
         [HttpGet]
-        [Route("materials/type")]
-        public IEnumerable<Material> GetMaterials([FromBody] string type)
+        [Route("materials/{id}")]
+        public IEnumerable<Material> GetMaterials(int id)
         {
-            IEnumerable<Material> materials = _matsrv.GetMaterials(type);
+            IEnumerable<Material> materials = _matsrv.GetMaterials(id);
             return materials;
         }
 

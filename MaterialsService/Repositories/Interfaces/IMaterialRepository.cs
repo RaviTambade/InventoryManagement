@@ -10,7 +10,7 @@ public interface IMaterialRepository
     bool Update(Material material);
     bool Delete(int materialId);
     Location GetLocation(int mid);
-    IEnumerable<Material> GetMaterials(string type);
+    IEnumerable<Material> GetMaterials(int id);
     IEnumerable<Material>GetOutOfStockMaterials();
     IEnumerable<Order> OrderedMaterialsInADay();
     IEnumerable<Order> GetOrders(Period date);

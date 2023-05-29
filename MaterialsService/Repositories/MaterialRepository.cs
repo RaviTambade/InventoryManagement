@@ -18,7 +18,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "SELECT * FROM materials";
+            string query = " select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category  from materials inner join categories on categories.id=materials.categoryid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -26,10 +26,10 @@ public class MaterialRepository : IMaterialRepository
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 string? name = reader["name"].ToString();
-                string? type = reader["type"].ToString();
+                string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unitprice"].ToString());
-                string? imgUrl = reader["photo"].ToString();
+                string? imgUrl = reader["imageurl"].ToString();
 
                 Material TheMaterial = new Material
                 {
@@ -62,7 +62,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "SELECT * FROM materials where id=@materialId";
+            string query = "select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.id =@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialId", Mid);
             con.Open();
@@ -71,10 +71,10 @@ public class MaterialRepository : IMaterialRepository
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 string? name = reader["name"].ToString();
-                string? type = reader["type"].ToString();
+                string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unitprice"].ToString());
-                string? imgUrl = reader["photo"].ToString();
+                string? imgUrl = reader["imageurl"].ToString();
 
                 Thematerial = new Material()
                 {
@@ -104,7 +104,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "INSERT INTO Materials(name,type,quantity,unitprice,photo)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
+            string query = "INSERT INTO Materials(name,categoryid,quantity,unitprice,imageurl)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialName", material.Name);
             cmd.Parameters.AddWithValue("@materialType", material.Type);
@@ -180,66 +180,26 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
-    public Location GetLocation(int id)
+
+    public IEnumerable<Material> GetMaterials(int cid)
     {
-        Location loc =null;
+        List<Material> materials = new List<Material>();    
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  warehouses.name, sections.name,floors.name, materials.name, materials.type FROM warehouses INNER JOIN sections ON  warehouses.sectionid=sections.id INNER JOIN floors ON  sections.floorid= floors.materialid INNER JOIN materials ON  floors.materialid=materials.id where  materials.id=@materialid";
+            string query = "select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.categoryid =@categoryId";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@materialid", id);
+            cmd.Parameters.AddWithValue("@categoryId", cid);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                string? warehouse = reader["warehouse_name"].ToString();
-                string? sectionname = reader["section_name"].ToString();
-                string? floor = reader["floor_number"].ToString();
-                string? materialname = reader["name"].ToString();
-                string? materialtype = reader["type"].ToString();
-
-                loc = new Location()
-                {
-                    WarehouseName = warehouse,
-                    SectionName = sectionname,
-                    Floor = floor,
-                    MaterialName = materialname,
-                    MaterialType = materialtype
-                };
-            }
-
-            reader.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return loc;
-    }
-    public IEnumerable<Material> GetMaterials(string type)
-    {
-        List<Material> materials = new List<Material>();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "SELECT * FROM materials where type=@materialtype";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@materialtype", type);
-            con.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                int id = Int32.Parse(reader["material_id"].ToString());
-                string? materialname = reader["material_name"].ToString();
-                string? materialtype = reader["material_type"].ToString();
+                int id = Int32.Parse(reader["id"].ToString());
+                string? materialname = reader["title"].ToString();
+                string? materialtype = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                int price = int.Parse(reader["unit_price"].ToString());
-                string? imgUrl = reader["photo"].ToString();
+                int price = int.Parse(reader["unitprice"].ToString());
+                string? imgUrl = reader["imageurl"].ToString();
 
                 Material TheMaterial = new Material
                 {
@@ -278,8 +238,8 @@ public class MaterialRepository : IMaterialRepository
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["id"].ToString());
-                string? name = reader["name"].ToString();
-                string? type = reader["type"].ToString();
+                string? name = reader["title"].ToString();
+                string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int price = int.Parse(reader["unitprice"].ToString());
                 string? imgUrl = reader["photo"].ToString();
@@ -313,16 +273,16 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.id, materials.id, materials.name, materials.type, orderdetails.quantity, orders.status from orders inner join materials on orders.orderdetailid = materials.id inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE date >= CAST(CURRENT_TIMESTAMP AS date)";
+            string query = "select orders.id, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["order_id"].ToString());
-                int materialId = Int32.Parse(reader["material_id"].ToString());
-                string? name = reader["material_name"].ToString();
-                string? type = reader["material_type"].ToString();
+                int id = Int32.Parse(reader["id"].ToString());
+                int materialId = Int32.Parse(reader["id"].ToString());
+                string? name = reader["title"].ToString();
+                string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status =  reader["status"].ToString();
  
@@ -350,14 +310,14 @@ public class MaterialRepository : IMaterialRepository
         return orders;
     }
 
-       public IEnumerable<Order> GetOrders(Period date){
+    public IEnumerable<Order> GetOrders(Period date){
         string fromDate = date.FromDate.ToString("yyyy-MM-dd");   
         string toDate = date.ToDate.ToString("yyyy-MM-dd");   
         List<Order> orders =new  List<Order>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id, materials.name, materials.type, orderdetails.quantity from orders inner join materials on orders.orderdetailid = materials.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN @FromDate AND @ToDate );";
+            string query = "select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id, materials.title, categories.category, orderdetails.quantity from orders inner join materials on orders.orderdetailid = materials.id  inner join employees on employees.id = orders.employeeid   inner join categories on categories.id = materials.categoryid  inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN @fromDate AND @ToDate)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@FromDate", fromDate);
             cmd.Parameters.AddWithValue("@ToDate", toDate);
@@ -366,10 +326,10 @@ public class MaterialRepository : IMaterialRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["order_id"].ToString());
+                int id = Int32.Parse(reader["id"].ToString());
                 int materialId = Int32.Parse(reader["id"].ToString());
-                string? name = reader["name"].ToString();
-                string? type = reader["type"].ToString();
+                string? name = reader["title"].ToString();
+                string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status =  reader["status"].ToString();
  
@@ -397,6 +357,45 @@ public class MaterialRepository : IMaterialRepository
         return orders;
     }
 
+    public Location GetLocation(int id)
+    {
+        Location loc =null;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select  warehouses.name, sections.name,floors.name, materials.name, materials.type FROM warehouses INNER JOIN sections ON  warehouses.sectionid=sections.id INNER JOIN floors ON  sections.floorid= floors.materialid INNER JOIN materials ON  floors.materialid=materials.id where  materials.id=@materialid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialid", id);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string? warehouse = reader["name"].ToString();
+                string? sectionname = reader["title"].ToString();
+                string? floor = reader["level"].ToString();
+                string? materialtype = reader["category"].ToString();
 
+                loc = new Location()
+                {
+                    WarehouseName = warehouse,
+                    SectionName = sectionname,
+                    Floor = floor,
+                    MaterialType = materialtype
+                };
+            }
+
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return loc;
+    }
+    
 
 }
