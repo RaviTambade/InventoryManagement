@@ -12,8 +12,5 @@ public class Employee{
     public string Gender{get;set;}  
     public string Department{get;set;}
     public string Role{get;set;}
-    public int DepartmentId{get;set;}
-    public int RoleId{get;set;}
-    public int GenderId{get;set;}
-    
+
 }

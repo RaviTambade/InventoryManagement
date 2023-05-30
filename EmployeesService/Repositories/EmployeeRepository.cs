@@ -17,7 +17,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  employees.id, employees.firstname,employees.lastname,employees.email,employees.contactnumber, employees.gender, employees.imageurl,departments.department, roles.role from employees inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id";
+            string query = "select  employees.id, employees.firstname,employees.lastname,employees.birthdate, employees.hiredate,employees.email,employees.contactnumber, employees.gender, employees.password, employees.imageurl,departments.department, roles.role from employees inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -25,6 +25,9 @@ public class EmployeeRepository : IEmployeeRepository
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 string? firstname = reader["firstname"].ToString();
+                string? birthdate = reader["birthdate"].ToString();
+                string? hiredate = reader["hiredate"].ToString();
+                string? password = reader["password"].ToString();
                 string? lastname = reader["lastname"].ToString();
                 string? contactno = reader["contactnumber"].ToString();
                 string? email = reader["email"].ToString();
@@ -37,6 +40,9 @@ public class EmployeeRepository : IEmployeeRepository
                     Id = id,
                     FirstName = firstname,
                     LastName = lastname,
+                    BirthDate = birthdate,
+                    HireDate = hiredate,
+                    password = password,
                     ContactNumber = contactno,
                     email = email,
                     Department = department,
@@ -65,7 +71,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.imageurl, employees.gender ,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id =@employeeId";
+            string query ="select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname,employees.password, employees.email,employees.contactnumber, employees.imageurl, employees.gender,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id =@employeeId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@employeeId", employeeId);
             con.Open();
@@ -77,6 +83,7 @@ public class EmployeeRepository : IEmployeeRepository
                 string? lastname = reader["lastname"].ToString();
                 string? birthdate = reader["birthdate"].ToString();
                 string? hiredate = reader["hiredate"].ToString();
+                string? password = reader["password"].ToString();
                 string? contactno = reader["contactnumber"].ToString();
                 string? email = reader["email"].ToString();
                 string? imgurl = reader["imageurl"].ToString();
@@ -88,8 +95,9 @@ public class EmployeeRepository : IEmployeeRepository
                     Id = id,
                     FirstName = firstname,
                     LastName = lastname,
-                    BirthDate = birthdate.Remove(10,9),
-                    HireDate = hiredate.Remove(10,9),
+                    BirthDate = birthdate,
+                    HireDate = hiredate,
+                    password = password,
                     ContactNumber = contactno,
                     email = email,
                     ImgUrl = imgurl,
@@ -125,12 +133,12 @@ public class EmployeeRepository : IEmployeeRepository
             cmd.Parameters.AddWithValue("@birthdate", employee.BirthDate);
             cmd.Parameters.AddWithValue("@hiredate", employee.HireDate);
             cmd.Parameters.AddWithValue("@contactno", employee.ContactNumber);
-            cmd.Parameters.AddWithValue("@departmentid", employee.DepartmentId);
-            cmd.Parameters.AddWithValue("@roleid", employee.RoleId);
+            cmd.Parameters.AddWithValue("@departmentid", employee.Department);
+            cmd.Parameters.AddWithValue("@roleid", employee.Role);
             cmd.Parameters.AddWithValue("@email", employee.email);
             cmd.Parameters.AddWithValue("@password", employee.password);
             cmd.Parameters.AddWithValue("@imgurl", employee.ImgUrl);
-            cmd.Parameters.AddWithValue("@gender", employee.GenderId);
+            cmd.Parameters.AddWithValue("@gender", employee.Gender);
             con.Open();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
@@ -164,8 +172,8 @@ public class EmployeeRepository : IEmployeeRepository
             cmd.Parameters.AddWithValue("@birthdate", employee.BirthDate);
             cmd.Parameters.AddWithValue("@hiredate", employee.HireDate);
             cmd.Parameters.AddWithValue("@contactno", employee.ContactNumber);
-            cmd.Parameters.AddWithValue("@departmentid", employee.DepartmentId);
-            cmd.Parameters.AddWithValue("@roleid", employee.RoleId);
+            cmd.Parameters.AddWithValue("@departmentid", employee.Department);
+            cmd.Parameters.AddWithValue("@roleid", employee.Role);
             cmd.Parameters.AddWithValue("@email", employee.email);
             cmd.Parameters.AddWithValue("@imgurl", employee.ImgUrl);
             cmd.Parameters.AddWithValue("@gender", employee.Gender);
@@ -193,7 +201,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.gender, employees.imageurl, departments.department, roles.role   from employees  inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where   department_id=@departmentId";
+            string query ="select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.gender, employees.imageurl, employees.password, departments.department, roles.role   from employees  inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where   departmentid=@departmentId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@departmentId", departmentId);
 
@@ -204,6 +212,9 @@ public class EmployeeRepository : IEmployeeRepository
                 int id = Int32.Parse(reader["id"].ToString());
                 string? firstname = reader["firstname"].ToString();
                 string? lastname = reader["lastname"].ToString();
+                string? birthdate = reader["birthdate"].ToString();
+                string? hiredate = reader["hiredate"].ToString();
+                string? password = reader["password"].ToString();
                 string? contactno = reader["contactnumber"].ToString();
                 string? email = reader["email"].ToString();
                 string? department = reader["department"].ToString();
@@ -214,6 +225,9 @@ public class EmployeeRepository : IEmployeeRepository
                     Id = id,
                     FirstName = firstname,
                     LastName = lastname,
+                    BirthDate = birthdate,
+                    HireDate = hiredate,
+                    password = password,
                     ContactNumber = contactno,
                     email = email,
                     Department = department,
