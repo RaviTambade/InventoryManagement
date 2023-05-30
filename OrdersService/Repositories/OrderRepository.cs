@@ -128,7 +128,7 @@ public class OrderRepository : IOrderRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-                string query = "select orders.id, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date)";
+            string query = "select orders.id,employees.firstname,employees.lastname, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -136,6 +136,8 @@ public class OrderRepository : IOrderRepository
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 int materialId = Int32.Parse(reader["id"].ToString());
+                string? empfirstname = reader["firstname"].ToString();
+                string? emplastname = reader["lastname"].ToString();
                 string? name = reader["title"].ToString();
                 string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
@@ -145,6 +147,8 @@ public class OrderRepository : IOrderRepository
                 {
                     Id = id,
                     MaterialId = materialId,
+                    EmployeeFirstName = empfirstname,
+                    EmployeeLastName = emplastname,
                     Name=name,
                     Type = type,
                     Quantity = quantity,
@@ -185,6 +189,8 @@ public class OrderRepository : IOrderRepository
                 int materialId = Int32.Parse(reader["id"].ToString());
                 string? name = reader["title"].ToString();
                 string? type = reader["category"].ToString();
+                string? empfirstname = reader["firstname"].ToString();
+                string? emplastname = reader["lastname"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status =  reader["status"].ToString();
  
@@ -192,6 +198,8 @@ public class OrderRepository : IOrderRepository
                 {
                     Id = id,
                     MaterialId = materialId,
+                    EmployeeFirstName = empfirstname,
+                    EmployeeLastName = emplastname,
                     Name=name,
                     Type = type,
                     Quantity = quantity,
