@@ -1,4 +1,6 @@
+-- Active: 1678859769284@@127.0.0.1@3306@inventorymanagement
 
+DROP DATABASE inventorymanagement;
 create database inventorymanagement;
 use inventorymanagement;
 -- Table Creation
@@ -53,15 +55,7 @@ CREATE TABLE orders(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     employeeid INT NOT NULL,CONSTRAINT fk_employees_id FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE ,
                     status ENUM('delivered','inprogress','cancelled') NOT NULL);
 
--- add table catagories  -
--- enum for gender    -
--- material name = title  -
--- material types = categoryid  -
--- photo to imageurl         -
--- floor name to level add employee id -
--- inside floor store material category-
--- section name = title add emplyeeid -
--- worker id = employeeid -
+
 -- Insertion for material
 INSERT INTO categories(category) VALUES ("Bearings");
 INSERT INTO categories(category) VALUES ("1st Gear");
@@ -157,30 +151,30 @@ insert into floors(level,categoryid) values('H2',8);
 insert into floors(level,categoryid) values('H3',8);
 
 -- Insertion for Sections
-insert into sections(title, floorid,employeeid)values('Section 1', 1,4);
-insert into sections(title, floorid,employeeid)values('Section 1', 2,4);
-insert into sections(title, floorid,employeeid)values('Section 1', 3,4);
-insert into sections(title, floorid,employeeid)values('Section 2', 4,3);
-insert into sections(title, floorid,employeeid)values('Section 2', 5,3);
-insert into sections(title, floorid,employeeid)values('Section 2', 6,3);
+insert into sections(title, floorid,employeeid)values('Section 1', 1,1);
+insert into sections(title, floorid,employeeid)values('Section 1', 2,1);
+insert into sections(title, floorid,employeeid)values('Section 1', 3,1);
+insert into sections(title, floorid,employeeid)values('Section 2', 4,2);
+insert into sections(title, floorid,employeeid)values('Section 2', 5,2);
+insert into sections(title, floorid,employeeid)values('Section 2', 6,2);
 insert into sections(title, floorid,employeeid)values('Section 3', 7,3);
-insert into sections(title, floorid,employeeid)values('Section 3', 8,4);
+insert into sections(title, floorid,employeeid)values('Section 3', 8,3);
 insert into sections(title, floorid,employeeid)values('Section 3', 9 ,3);
-insert into sections(title, floorid,employeeid)values('Section 4', 10,3);
-insert into sections(title, floorid,employeeid)values('Section 4', 11,3);
-insert into sections(title, floorid,employeeid)values('Section 4', 12,3);
-insert into sections(title, floorid,employeeid)values('Section 5', 13,3);
-insert into sections(title, floorid,employeeid)values('Section 5', 14,3);
-insert into sections(title, floorid,employeeid)values('Section 5', 15,3);
-insert into sections(title, floorid,employeeid)values('Section 6', 16,3);
-insert into sections(title, floorid,employeeid)values('Section 6', 17,3);
-insert into sections(title, floorid,employeeid)values('Section 6', 18,4);
-insert into sections(title, floorid,employeeid)values('Section 7', 19,4);
-insert into sections(title, floorid,employeeid)values('Section 7', 20,4);
-insert into sections(title, floorid,employeeid)values('Section 7', 21,4);
-insert into sections(title, floorid,employeeid)values('Section 8', 22,4);
-insert into sections(title, floorid,employeeid)values('Section 8', 23,4);
-insert into sections(title, floorid,employeeid)values('Section 8', 24,4);
+insert into sections(title, floorid,employeeid)values('Section 4', 10,4);
+insert into sections(title, floorid,employeeid)values('Section 4', 11,4);
+insert into sections(title, floorid,employeeid)values('Section 4', 12,4);
+insert into sections(title, floorid,employeeid)values('Section 5', 13,5);
+insert into sections(title, floorid,employeeid)values('Section 5', 14,5);
+insert into sections(title, floorid,employeeid)values('Section 5', 15,5);
+insert into sections(title, floorid,employeeid)values('Section 6', 16,6);
+insert into sections(title, floorid,employeeid)values('Section 6', 17,6);
+insert into sections(title, floorid,employeeid)values('Section 6', 18,6);
+insert into sections(title, floorid,employeeid)values('Section 7', 19,7);
+insert into sections(title, floorid,employeeid)values('Section 7', 20,7);
+insert into sections(title, floorid,employeeid)values('Section 7', 21,7);
+insert into sections(title, floorid,employeeid)values('Section 8', 22,8);
+insert into sections(title, floorid,employeeid)values('Section 8', 23,8);
+insert into sections(title, floorid,employeeid)values('Section 8', 24,8);
 
 
 -- Insertion for warehouses
@@ -247,3 +241,46 @@ INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  0
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',12, 3,'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-26  12:35:25',13, 3,'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-29  12:40:25',19, 3,'delivered');
+
+
+
+-- get material by id
+select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.id = 5;
+ 
+ -- get all materials
+ select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category  from materials inner join categories on categories.id =materials.categoryid;
+
+-- get material by category
+select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.categoryid =7;
+
+-- employees and their role and department
+select  employees.id, employees.firstname,employees.lastname,employees.email,employees.contactnumber, departments.department, roles.role
+ from employees 
+ inner join departments on employees.departmentid=departments.id  
+ inner join roles on employees.roleid=roles.id;
+
+
+-- get employee by id
+select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.imageurl, employees.gender ,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id = 2;
+
+
+-- get orders from date - to date
+select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id, materials.title, categories.category, orderdetails.quantity from orders inner join materials on orders.orderdetailid = materials.id  inner join employees on employees.id = orders.employeeid   inner join categories on categories.id = materials.categoryid  inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN '2023-03-01' AND '2023-05-05' );
+
+-- get orders ordered today
+select orders.id, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date);
+
+-- out of stock material
+select  materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid  where quantity = 0
+
+
+
+-- add table catagories  -
+-- enum for gender    -
+-- material name = title  -
+-- material types = categoryid  -
+-- photo to imageurl         -
+-- floor name to level add employee id -
+-- inside floor store material category-
+-- section name = title add emplyeeid -
+-- worker id = employeeid -
