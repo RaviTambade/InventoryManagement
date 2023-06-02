@@ -12,8 +12,8 @@ public class OrdersController : ControllerBase
     {
         _ordsvs = ordsvs;
     }
-        // [HttpGet]
-        // [Route("orders/History")]
+        [HttpGet]
+        [Route("orders/History")]
         // public IEnumerable<Order> GetAll()
         // {
         //     IEnumerable<Order> orders = _ordsvs.OrdersHistory();

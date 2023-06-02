@@ -136,8 +136,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
-   
-
+    
     public bool Update(Material material)
     {
         bool status = false;
@@ -166,7 +165,6 @@ public class MaterialRepository : IMaterialRepository
         return status;
     }
    
- 
     public bool Delete(int id){
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -192,7 +190,6 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
-
 
     public IEnumerable<Material> GetMaterials(int cid)
     {
@@ -239,7 +236,6 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
-  
     public IEnumerable<Material>GetOutOfStockMaterials(){
         List<Material> materials =new  List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -282,8 +278,6 @@ public class MaterialRepository : IMaterialRepository
         }
         return materials;
     }
-
-
 
     public Location GetLocation(int id)
     {
