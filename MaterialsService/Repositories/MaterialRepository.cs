@@ -191,7 +191,7 @@ public class MaterialRepository : IMaterialRepository
         return status;
     }
 
-    public IEnumerable<Material> GetMaterials(int cid)
+    public IEnumerable<Material> GetMaterials(int categoryid)
     {
         List<Material> materials = new List<Material>();    
         MySqlConnection con = new MySqlConnection(_conString);
