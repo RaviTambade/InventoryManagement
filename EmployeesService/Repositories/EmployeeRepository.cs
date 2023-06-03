@@ -11,8 +11,7 @@ public class EmployeeRepository : IEmployeeRepository
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
-    public IEnumerable<Employee> GetAll()
-    {
+    public IEnumerable<Employee> GetAll(){
         List<Employee> employees = new List<Employee>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -195,8 +194,7 @@ public class EmployeeRepository : IEmployeeRepository
         return status;
     }
 
-    public IEnumerable<Employee> GetByDepartment(int departmentId)  
-    {
+    public IEnumerable<Employee> GetByDepartment(int departmentId)  {
         List<Employee> employees = new List<Employee>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -248,7 +246,7 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employees;
     }
-
+   
     public bool Delete(int employeeId)
     {
         bool status = false;
@@ -275,5 +273,7 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return status;
     }
+
+    //
 
 }
