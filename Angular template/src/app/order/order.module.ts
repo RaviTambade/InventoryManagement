@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { OrderComponent } from './order/order.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 
-
-
 @NgModule({
   declarations: [
     OrderComponent,
@@ -13,6 +11,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+
 })
 export class OrderModule { }
