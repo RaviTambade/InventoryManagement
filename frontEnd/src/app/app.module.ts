@@ -7,12 +7,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RequestDetailsComponent } from './request-details/request-details.component';
+import { CatagorySearchComponent } from './catagory-search/catagory-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RequestListComponent,
-    RequestDetailsComponent
+    RequestDetailsComponent,
+    CatagorySearchComponent
   ],
   imports: [
     BrowserModule,
