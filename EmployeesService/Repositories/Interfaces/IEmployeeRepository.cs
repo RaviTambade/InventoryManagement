@@ -9,6 +9,8 @@ public interface IEmployeeRepository
     bool Insert(Employee employee);
     bool Update(Employee employee);
     IEnumerable<Employee> GetByDepartment(int departmentId);
-  
+
+    IEnumerable<Employee> GetByRole(string role);
+
     bool Delete(int employeeId);
 }

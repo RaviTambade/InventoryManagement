@@ -247,6 +247,54 @@ public class EmployeeRepository : IEmployeeRepository
         return employees;
     }
    
+
+       public IEnumerable<Employee> GetByRole(string theRole)  {
+        List<Employee> employees = new List<Employee>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query ="select  employees.id, employees.firstname,employees.lastname,employees.email,employees.contactnumber, departments.department, roles.role from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where roles.role =@role ";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@role", theRole);
+
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                string? firstname = reader["firstname"].ToString();
+                string? lastname = reader["lastname"].ToString();
+                string? contactno = reader["contactnumber"].ToString();
+                string? email = reader["email"].ToString();
+                string? department = reader["department"].ToString();
+                string? role = reader["role"].ToString();
+
+                Employee employee = new Employee
+                {
+                    Id = id,
+                    FirstName = firstname,
+                    LastName = lastname,
+                    ContactNumber = contactno,
+                    email = email,
+                    Department = department,
+                    Role = role,
+                };
+
+                employees.Add(employee);
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return employees;
+    }
+   
     public bool Delete(int employeeId)
     {
         bool status = false;

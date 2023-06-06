@@ -56,6 +56,15 @@ namespace EmployeesService.Controllers
             return employees;
         }
 
+        [HttpGet]
+        [Route("employees/role/{role}")]
+        public IEnumerable<Employee> GetByDepartment(string role)
+        {
+            IEnumerable<Employee> employees = _empsrv.GetByRole(role);
+            return employees;
+        }
+
+
         [HttpDelete]
         [Route("employees/{id}")]
         public bool Delete(int id)
