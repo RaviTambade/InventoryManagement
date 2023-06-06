@@ -21,5 +21,23 @@
               </form>
         </div>
     </div>
+
+    <ol   type="number">    
+    <div *ngFor="let employee of employees">
+        <li>
+          <p>Employee ID :{{employee.id}}</p>
+          <p>Name :{{employee.firstName}} {{employee.lastName}}</p>
+          <p>Employee role :{{employee.role}}</p>
+          <p>Employee department :{{employee.department}}</p>
+          <p>Employee contact number :{{employee.contactNumber}}</p>
+          <p>Employee email :{{employee.email}}</p>
+        </li>
+        
+        <hr/>
+  </div>
+</ol>
 </div>
 
+
+
+ 

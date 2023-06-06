@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AppService } from '../app.service';
+import { Subscription } from 'rxjs';
+import { Employee } from '../Employee';
 
 @Component({
   selector: 'app-roles',
@@ -15,6 +17,9 @@ export class RolesComponent {
       'Supervisor',
       'Store Worker',     
   ];
+
+  subscription: Subscription|undefined;
+  employees : any  | undefined;
 
   constructor(public fb : FormBuilder,private svc : AppService) { }
 
@@ -34,6 +39,14 @@ export class RolesComponent {
     return this.registrationForm.get('roleName');
   }
 
+  ngOnInit(): void {
+    this.subscription = this.svc.getData().subscribe((response) =>{
+      this.employees = response.data;
+      console.log(this.employees);
+      console.log(response);
+    })
+  }
+
   onSubmit ():void {
     console.log(this.registrationForm);
     this.isSubmitted= true;
@@ -43,7 +56,8 @@ export class RolesComponent {
     else{
       console.log("onSubmit");           
       console.log(JSON.stringify(this.registrationForm.value));
-        }
+      this.svc.sendData(this.registrationForm.value);
+    }
   }
 
 

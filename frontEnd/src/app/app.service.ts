@@ -24,20 +24,20 @@ export class AppService {
 
 
   sendData(data:any){
-    let role = data.role;
+    let role = data.roleName;
     console.log("Service is called");
     console.log(role);
 
     switch(role){
       case "Incharge":{
-        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+role;
+        let url =" http://localhost:5224/api/employees/employees/role/"+role;
         this.http.get(url).subscribe((data) =>{
           console.log(data);
         });
         break;
       }
       case "Store Manager":{
-        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ role;
+        let url =" http://localhost:5224/api/employees/employees/role/"+ role;
         this.http.get(url).subscribe((data) =>{
           console.log(data);
           this.subject.next({data});
@@ -45,7 +45,7 @@ export class AppService {
         break;
       }
       case "Supervisor":{
-        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ role;
+        let url =" http://localhost:5224/api/employees/employees/role/"+ role;
         this.http.get(url).subscribe((data) =>{
           console.log(data);
           this.subject.next({data});
@@ -53,7 +53,7 @@ export class AppService {
         break;  
       }
       case "Store Worker":{
-        let url ="http://localhost:5176/api/Materials/getmaterialByCatagory/"+ role;
+        let url =" http://localhost:5224/api/employees/employees/role/"+ role;
         this.http.get(url).subscribe((data) =>{
           console.log(data);
           this.subject.next({data});
