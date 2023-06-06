@@ -20,13 +20,13 @@ public class OrdersController : ControllerBase
         //     return orders;
         // }
 
-        // [HttpGet]
-        // [Route("orders/History/{id}")]
-        // public IEnumerable<Order> Get(int id)
-        // {
-        //     IEnumerable<Order> orders = _ordsvs.OrdersHistory(id);
-        //     return orders;
-        // }
+        [HttpGet]
+        [Route("orders/History/{id}")]
+        public IEnumerable<Order> Get(int id)
+        {
+            IEnumerable<Order> orders = _ordsvs.OrdersHistory(id);
+            return orders;
+        }
     
          //Get list of materials ordered in a day
         [HttpGet]
