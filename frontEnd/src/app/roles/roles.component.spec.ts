@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CatagorySearchComponent } from './catagory-search.component';
+import { RolesComponent } from './roles.component';
 
-describe('CatagorySearchComponent', () => {
-  let component: CatagorySearchComponent;
-  let fixture: ComponentFixture<CatagorySearchComponent>;
+describe('RolesComponent', () => {
+  let component: RolesComponent;
+  let fixture: ComponentFixture<RolesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CatagorySearchComponent ]
+      declarations: [ RolesComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CatagorySearchComponent);
+    fixture = TestBed.createComponent(RolesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

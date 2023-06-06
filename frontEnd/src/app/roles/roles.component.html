@@ -1,0 +1,25 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                <h3>catagories</h3>
+                <div class="d-grid">
+                  <select
+                    (change)="changeMaterial($event)"
+                    formControlName="roleName">
+                    <option disabled>Choose Material</option>
+                    <option *ngFor="let role of roles" [ngValue]="role">
+                      {{ role }}
+                    </option>
+                  </select>
+                  <!-- error block --> 
+                  <div  *ngIf="isSubmitted && roleName?.invalid">
+                    <sup>*</sup>Please provide material name
+                  </div>
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
+
