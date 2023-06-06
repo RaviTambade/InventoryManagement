@@ -1,21 +1,25 @@
-<form [formGroup]="registrationForm"  (ngSubmit)="onSubmit()">
+<form [formGroup]="listForm"  (ngSubmit)="onSubmit()">
     <div class="d-grid">
       <select
         formControlName="OrderDate">
         <option >Today's Orders </option>
-        <option >Yesterday's Orders </option>
       </select>
       <!-- error block --> 
-      <button type="submit">Submit</button>
+      <button type="submit">Search</button>
     </div>
   </form>
 
-
-  <ol  *ngFor="let Order of orders">
+  <div  *ngFor="let Order of orders">
+<form>
+  <ul>
     <li> <b> Order:</b> {{Order.name}}. <b> status: </b>{{Order.status}}</li>    
-    <button type="submit">details</button>
-</ol>
+  </ul>
+</form>
+</div>
 
+<div ngFor="let orderdetail of orderdetails ">
+
+</div>
 
 
 

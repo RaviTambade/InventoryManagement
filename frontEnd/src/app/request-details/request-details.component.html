@@ -1,0 +1,16 @@
+    <input type="number" [(ngModel)]="orderId">
+    <button (click)="getOrderDetails(orderId)" class="btn btn-success">Search</button>
+
+
+    <div *ngIf="orderDetails">
+            <h4>Employee Name: {{orderDetails.employeeFirstName}} {{orderDetails.employeeLastName}}</h4>
+            <h4>Order ID: {{orderDetails.id}} </h4>
+            <h4 >Material Id: {{orderDetails.materialId}}</h4>
+            <h4 >Material Name: {{orderDetails.name}}</h4>
+            <h4 >Material Type: {{orderDetails.type}}</h4>
+            <h4 >Order Date: {{orderDetails.orderdate}}</h4>
+            <h4 >Quantity: {{orderDetails.quantity}}</h4>
+            <h4 >Staus: {{orderDetails.status}}</h4>
+
+    </div>
+ 

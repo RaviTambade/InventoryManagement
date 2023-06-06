@@ -11,9 +11,12 @@ export class AppService {
   constructor(private http:HttpClient) { }
 
  getOrders():Observable<any>{
-    console.log("Service is called");
     let url ="http://localhost:5082/api/Orders/orderedInADay" ;
     return this.http.get(url);
 
+  }
+  getOrderDetails(id :number):Observable<any>{
+    let url ="http://localhost:5082/api/orders/orders/History/" +id ;
+    return this.http.get(url);
   }
 }

@@ -6,11 +6,13 @@ import { RequestListComponent } from './request-list/request-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RequestDetailsComponent } from './request-details/request-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RequestListComponent
+    RequestListComponent,
+    RequestDetailsComponent
   ],
   imports: [
     BrowserModule,
