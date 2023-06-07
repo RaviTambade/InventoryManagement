@@ -69,4 +69,9 @@ export class AppService {
     let url ="http://localhost:5082/api/Orders/orderedFromDateToDate" ;
     return this.http.post(url,period);
   }
+
+  getByGender(gender:any):Observable<any>{
+    let url ="http://localhost:5224/api/employees/gender/"+ gender ;
+    return this.http.get(url);
+  }
 }
