@@ -24,9 +24,6 @@ export class AppService {
 
   sendData(data:any){
     let role = data.roleName;
-    console.log("Service is called");
-    console.log(role);
-
     switch(role){
       case "Incharge":{
         let url =" http://localhost:5224/api/employees/role/"+role;

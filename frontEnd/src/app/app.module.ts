@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { RolesComponent } from './roles/roles.component';
 import { DateSearchComponent } from './date-search/date-search.component';
+import { RadioSearchComponent } from './radio-search/radio-search.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DateSearchComponent } from './date-search/date-search.component';
     RequestListComponent,
     RequestDetailsComponent,
     RolesComponent,
-    DateSearchComponent
+    DateSearchComponent,
+    RadioSearchComponent
   ],
   imports: [
     BrowserModule,
