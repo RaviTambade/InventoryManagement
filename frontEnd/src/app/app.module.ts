@@ -10,6 +10,7 @@ import { RequestDetailsComponent } from './request-details/request-details.compo
 import { RolesComponent } from './roles/roles.component';
 import { DateSearchComponent } from './date-search/date-search.component';
 import { RadioSearchComponent } from './radio-search/radio-search.component';
+import { NestedDropdownComponent } from './nested-dropdown/nested-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RadioSearchComponent } from './radio-search/radio-search.component';
     RequestDetailsComponent,
     RolesComponent,
     DateSearchComponent,
-    RadioSearchComponent
+    RadioSearchComponent,
+    NestedDropdownComponent
   ],
   imports: [
     BrowserModule,
