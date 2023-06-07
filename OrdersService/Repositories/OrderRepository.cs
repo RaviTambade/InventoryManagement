@@ -18,9 +18,9 @@ public class OrderRepository : IOrderRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public IEnumerable<Order> OrdersHistory(int orderid)
+    public Order OrdersHistory(int orderid)
     {
-        List<Order> orders = new List<Order>();
+        Order order = null;
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -41,7 +41,7 @@ public class OrderRepository : IOrderRepository
                 string? matrialtype = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 
-                Order order = new Order()
+                order = new Order()
                 {
                     Id=id,
                     EmployeeFirstName=empfirstname,
@@ -53,9 +53,6 @@ public class OrderRepository : IOrderRepository
                     Type=matrialtype,
                     Quantity=quantity
                 };
-
-                orders.Add(order);
-
             }
             reader.Close();
         }
@@ -67,7 +64,7 @@ public class OrderRepository : IOrderRepository
         {
             con.Close();
         }
-        return orders;
+        return order;
     }
 
     // public IEnumerable<Order> OrdersHistory()
@@ -121,9 +118,7 @@ public class OrderRepository : IOrderRepository
     //     return orders;
     // }
 
-    
-
-       public IEnumerable<Order> OrderedMaterialsInADay(){
+    public IEnumerable<Order> OrderedMaterialsInADay(){
         List<Order> orders =new  List<Order>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -171,27 +166,27 @@ public class OrderRepository : IOrderRepository
 
     public IEnumerable<Order> GetOrders(Period date){
         string fromDate = date.FromDate.ToString("yyyy-MM-dd");   
-        string toDate = date.ToDate.ToString("yyyy-MM-dd");   
+        string toDate = date.ToDate.ToString("yyyy-MM-dd");  
         List<Order> orders =new  List<Order>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id, materials.title, categories.category, orderdetails.quantity from orders inner join materials on orders.orderdetailid = materials.id  inner join employees on employees.id = orders.employeeid   inner join categories on categories.id = materials.categoryid  inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN @fromDate AND @ToDate)";
+            string query = "select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id as materialid, materials.title, categories.category, orderdetails.quantity from orders inner join materials on orders.orderdetailid = materials.id  inner join employees on employees.id = orders.employeeid   inner join categories on categories.id = materials.categoryid  inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN @fromDate AND @ToDate)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@FromDate", fromDate);
             cmd.Parameters.AddWithValue("@ToDate", toDate);
-
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["id"].ToString());
-                int materialId = Int32.Parse(reader["id"].ToString());
+                int materialId = Int32.Parse(reader["materialid"].ToString());
                 string? name = reader["title"].ToString();
                 string? type = reader["category"].ToString();
                 string? empfirstname = reader["firstname"].ToString();
                 string? emplastname = reader["lastname"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
+                DateTime orderdate = DateTime.Parse(reader["date"].ToString());
                 string status =  reader["status"].ToString();
  
                 Order theOrder = new Order
@@ -203,7 +198,8 @@ public class OrderRepository : IOrderRepository
                     Name=name,
                     Type = type,
                     Quantity = quantity,
-                    Status =status
+                    Status =status,
+                    Orderdate = orderdate
                 };
                 orders.Add(theOrder);
             }

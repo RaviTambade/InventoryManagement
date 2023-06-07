@@ -22,9 +22,9 @@ public class OrdersController : ControllerBase
 
         [HttpGet]
         [Route("orders/History/{id}")]
-        public IEnumerable<Order> Get(int id)
+        public Order Get(int id)
         {
-            IEnumerable<Order> orders = _ordsvs.OrdersHistory(id);
+            Order orders = _ordsvs.OrdersHistory(id);
             return orders;
         }
     
