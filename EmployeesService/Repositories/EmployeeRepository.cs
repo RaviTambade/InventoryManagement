@@ -11,7 +11,8 @@ public class EmployeeRepository : IEmployeeRepository
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
-    public IEnumerable<Employee> GetAll(){
+    public IEnumerable<Employee> GetAll()
+    {
         List<Employee> employees = new List<Employee>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -70,7 +71,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname,employees.password, employees.email,employees.contactnumber, employees.imageurl, employees.gender,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id =@employeeId";
+            string query = "select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname,employees.password, employees.email,employees.contactnumber, employees.imageurl, employees.gender,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id =@employeeId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@employeeId", employeeId);
             con.Open();
@@ -118,10 +119,10 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employee;
     }
-   
+
     public bool Insert(Employee employee)
     {
-         bool status = false;
+        bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -154,9 +155,9 @@ public class EmployeeRepository : IEmployeeRepository
             con.Close();
         }
         return status;
-    
+
     }
- 
+
     public bool Update(Employee employee)
     {
         bool status = false;
@@ -194,14 +195,15 @@ public class EmployeeRepository : IEmployeeRepository
         return status;
     }
 
-    public IEnumerable<Employee> GetByDepartment(int departmentId)  {
+    public IEnumerable<Employee> GetByDepartment(string theDepartment)
+    {
         List<Employee> employees = new List<Employee>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.gender, employees.imageurl, employees.password, departments.department, roles.role   from employees  inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where   departmentid=@departmentId";
+            string query = "select  employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.gender, employees.imageurl, departments.department, roles.role   from employees  inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where   departments.department=@department";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@departmentId", departmentId);
+            cmd.Parameters.AddWithValue("@department", theDepartment);
 
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -212,8 +214,9 @@ public class EmployeeRepository : IEmployeeRepository
                 string? lastname = reader["lastname"].ToString();
                 string? birthdate = reader["birthdate"].ToString();
                 string? hiredate = reader["hiredate"].ToString();
-                string? password = reader["password"].ToString();
                 string? contactno = reader["contactnumber"].ToString();
+                string? imgurl = reader["imageurl"].ToString();
+                string? geder = reader["gender"].ToString();
                 string? email = reader["email"].ToString();
                 string? department = reader["department"].ToString();
                 string? role = reader["role"].ToString();
@@ -225,11 +228,12 @@ public class EmployeeRepository : IEmployeeRepository
                     LastName = lastname,
                     BirthDate = birthdate,
                     HireDate = hiredate,
-                    password = password,
                     ContactNumber = contactno,
                     email = email,
                     Department = department,
                     Role = role,
+                    ImgUrl= imgurl,
+                    Gender = geder
                 };
 
                 employees.Add(employee);
@@ -246,14 +250,14 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employees;
     }
-   
 
-       public IEnumerable<Employee> GetByRole(string theRole)  {
+    public IEnumerable<Employee> GetByRole(string theRole)
+    {
         List<Employee> employees = new List<Employee>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query ="select  employees.id, employees.firstname,employees.lastname,employees.email,employees.contactnumber, departments.department, roles.role from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where roles.role =@role ";
+            string query = "select   employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.gender, employees.imageurl, departments.department, roles.role from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where roles.role =@role ";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@role", theRole);
 
@@ -264,7 +268,11 @@ public class EmployeeRepository : IEmployeeRepository
                 int id = Int32.Parse(reader["id"].ToString());
                 string? firstname = reader["firstname"].ToString();
                 string? lastname = reader["lastname"].ToString();
+                string? birthdate = reader["birthdate"].ToString();
+                string? hiredate = reader["hiredate"].ToString();
                 string? contactno = reader["contactnumber"].ToString();
+                string? imgurl = reader["imageurl"].ToString();
+                string? geder = reader["gender"].ToString();
                 string? email = reader["email"].ToString();
                 string? department = reader["department"].ToString();
                 string? role = reader["role"].ToString();
@@ -274,10 +282,14 @@ public class EmployeeRepository : IEmployeeRepository
                     Id = id,
                     FirstName = firstname,
                     LastName = lastname,
+                    BirthDate = birthdate,
+                    HireDate = hiredate,
                     ContactNumber = contactno,
                     email = email,
                     Department = department,
                     Role = role,
+                    ImgUrl= imgurl,
+                    Gender = geder
                 };
 
                 employees.Add(employee);
@@ -294,11 +306,11 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employees;
     }
-   
+  
     public bool Delete(int employeeId)
     {
         bool status = false;
-         MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "DELETE FROM employees WHERE id=@empid";
@@ -322,6 +334,6 @@ public class EmployeeRepository : IEmployeeRepository
         return status;
     }
 
-    //
+
 
 }

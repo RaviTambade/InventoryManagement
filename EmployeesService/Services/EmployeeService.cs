@@ -13,7 +13,7 @@ public class EmployeeService : IEmployeeService
     public Employee GetById(int employeeId) => _repo.GetById(employeeId);
     public bool Insert(Employee employee) => _repo.Insert(employee);
     public bool Update(Employee employee) => _repo.Update(employee);
-    public IEnumerable<Employee> GetByDepartment(int departmentId) =>_repo.GetByDepartment(departmentId);
+    public IEnumerable<Employee> GetByDepartment(string theDepartment) =>_repo.GetByDepartment(theDepartment);
     public IEnumerable<Employee> GetByRole(string role) =>_repo.GetByRole(role);
 
     public bool Delete(int employeeId) => _repo.Delete(employeeId);

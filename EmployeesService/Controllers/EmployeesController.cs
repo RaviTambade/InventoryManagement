@@ -49,16 +49,16 @@ namespace EmployeesService.Controllers
         }
 
         [HttpGet]
-        [Route("employees/department/{id}")]
-        public IEnumerable<Employee> GetByDepartment(int id)
+        [Route("department/{theDepartment}")]
+        public IEnumerable<Employee> GetByDepartment(string theDepartment)
         {
-            IEnumerable<Employee> employees = _empsrv.GetByDepartment(id);
+            IEnumerable<Employee> employees = _empsrv.GetByDepartment(theDepartment);
             return employees;
         }
 
         [HttpGet]
-        [Route("employees/role/{role}")]
-        public IEnumerable<Employee> GetByDepartment(string role)
+        [Route("role/{role}")]
+        public IEnumerable<Employee> GetByRole(string role)
         {
             IEnumerable<Employee> employees = _empsrv.GetByRole(role);
             return employees;
