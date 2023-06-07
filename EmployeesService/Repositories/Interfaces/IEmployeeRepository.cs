@@ -12,5 +12,6 @@ public interface IEmployeeRepository
 
     IEnumerable<Employee> GetByRole(string role);
 
+    IEnumerable<Employee> GetByGender(string gender);
     bool Delete(int employeeId);
 }

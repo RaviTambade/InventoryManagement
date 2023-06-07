@@ -16,6 +16,8 @@ public class EmployeeService : IEmployeeService
     public IEnumerable<Employee> GetByDepartment(string theDepartment) =>_repo.GetByDepartment(theDepartment);
     public IEnumerable<Employee> GetByRole(string role) =>_repo.GetByRole(role);
 
+    public IEnumerable<Employee> GetByGender(string gender) =>_repo.GetByGender(gender);
+
     public bool Delete(int employeeId) => _repo.Delete(employeeId);
  
 }

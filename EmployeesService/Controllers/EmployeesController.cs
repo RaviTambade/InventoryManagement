@@ -64,6 +64,14 @@ namespace EmployeesService.Controllers
             return employees;
         }
 
+        [HttpGet]
+        [Route("gender/{gender}")]
+        public IEnumerable<Employee> GetByGender(string gender)
+        {
+            IEnumerable<Employee> employees = _empsrv.GetByGender(gender);
+            return employees;
+        }
+
 
         [HttpDelete]
         [Route("employees/{id}")]
