@@ -1,0 +1,18 @@
+<div class="d-grid">
+    <input type="date" [(ngModel)]="fDate">
+    <input type="date" [(ngModel)]="tDate">
+    <button type="submit" (click)="getOrderHistoryByDate(fDate,tDate)">Search</button>
+
+    <ol type="number">
+        <div *ngFor="let order of orders">
+            <li>
+                <p>order ID :{{order.id}}</p>
+                <p>material Name :{{order.name}}</p>
+                <p>quantity :{{order.quantity}}</p>
+                <p>status :{{order.status}}</p>
+                <p>employee name :{{order.employeeFirstName}} {{order.employeeLastName}}</p>
+            </li>
+            <hr />
+        </div>
+    </ol>
+</div>

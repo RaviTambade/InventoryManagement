@@ -22,7 +22,6 @@ export class AppService {
     return this.http.get(url);
   }
 
-
   sendData(data:any){
     let role = data.roleName;
     console.log("Service is called");
@@ -30,14 +29,14 @@ export class AppService {
 
     switch(role){
       case "Incharge":{
-        let url =" http://localhost:5224/api/employees/employees/role/"+role;
+        let url =" http://localhost:5224/api/employees/role/"+role;
         this.http.get(url).subscribe((data) =>{
           console.log(data);
         });
         break;
       }
       case "Store Manager":{
-        let url =" http://localhost:5224/api/employees/employees/role/"+ role;
+        let url =" http://localhost:5224/api/employees/role/"+ role;
         this.http.get(url).subscribe((data) =>{
           console.log(data);
           this.subject.next({data});
@@ -45,7 +44,7 @@ export class AppService {
         break;
       }
       case "Supervisor":{
-        let url =" http://localhost:5224/api/employees/employees/role/"+ role;
+        let url =" http://localhost:5224/api/employees/role/"+ role;
         this.http.get(url).subscribe((data) =>{
           console.log(data);
           this.subject.next({data});
@@ -53,7 +52,7 @@ export class AppService {
         break;  
       }
       case "Store Worker":{
-        let url =" http://localhost:5224/api/employees/employees/role/"+ role;
+        let url =" http://localhost:5224/api/employees/role/"+ role;
         this.http.get(url).subscribe((data) =>{
           console.log(data);
           this.subject.next({data});
@@ -67,5 +66,10 @@ export class AppService {
 
   getData(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  getOrderHistoryByDate(period:any):Observable<any>{
+    let url ="http://localhost:5082/api/Orders/orderedFromDateToDate" ;
+    return this.http.post(url,period);
   }
 }

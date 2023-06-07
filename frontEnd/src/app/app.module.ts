@@ -8,13 +8,15 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { RolesComponent } from './roles/roles.component';
+import { DateSearchComponent } from './date-search/date-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RequestListComponent,
     RequestDetailsComponent,
-    RolesComponent
+    RolesComponent,
+    DateSearchComponent
   ],
   imports: [
     BrowserModule,

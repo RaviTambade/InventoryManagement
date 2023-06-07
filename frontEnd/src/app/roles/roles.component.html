@@ -8,7 +8,7 @@
                     (change)="changeMaterial($event)"
                     formControlName="roleName">
                     <option disabled>Choose Material</option>
-                    <option *ngFor="let role of roles" [ngValue]="role">
+                    <option *ngFor="let role of roles">
                       {{ role }}
                     </option>
                   </select>
@@ -16,7 +16,7 @@
                   <div  *ngIf="isSubmitted && roleName?.invalid">
                     <sup>*</sup>Please provide material name
                   </div>
-                  <button type="submit">Submit</button>
+                  <button type="submit" >Submit</button>
                 </div>
               </form>
         </div>
@@ -36,6 +36,7 @@
         <hr/>
   </div>
 </ol>
+
 </div>
 
 
