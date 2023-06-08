@@ -41,6 +41,7 @@ public class UserContext : DbContext{
            entity.Property(e => e.RoleName);
            modelBuilder.Entity<Role>().ToTable("roles");
        });
+       
 
     }
 }
