@@ -1,0 +1,40 @@
+<table style="width:100%">
+    <thead>
+        <th>
+            Material Name
+        </th>
+        <th>
+            Floor
+        </th>
+        <th>
+            Section
+        </th>
+        <th>
+            Warehouse
+        </th>
+        <th>
+             Quantity
+        </th>
+    </thead>
+    <tbody *ngFor="let material of materialInfo">
+        <tr>
+            <td>
+                {{material.name}}
+            </td>
+            <td>
+                {{material.floor}}
+            </td>
+            <td>
+                {{material.section}}
+            </td>
+            <td>
+                {{material.warehouse}}
+            </td>
+            <td>
+                {{material.quantity}}
+            </td>
+
+        </tr>
+
+    </tbody>
+</table>

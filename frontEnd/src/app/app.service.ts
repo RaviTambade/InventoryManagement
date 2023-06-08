@@ -123,4 +123,9 @@ export class AppService {
   }
     return  cities;
   }
+
+  getMaterialInfo():Observable<any>{
+    let url ="http://localhost:5176/api/Materials/locations" ;
+    return this.http.get(url);
+  }
 }

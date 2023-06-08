@@ -11,6 +11,7 @@ import { RolesComponent } from './roles/roles.component';
 import { DateSearchComponent } from './date-search/date-search.component';
 import { RadioSearchComponent } from './radio-search/radio-search.component';
 import { NestedDropdownComponent } from './nested-dropdown/nested-dropdown.component';
+import { GridListComponent } from './grid-list/grid-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NestedDropdownComponent } from './nested-dropdown/nested-dropdown.compo
     RolesComponent,
     DateSearchComponent,
     RadioSearchComponent,
-    NestedDropdownComponent
+    NestedDropdownComponent,
+    GridListComponent
   ],
   imports: [
     BrowserModule,
