@@ -14,7 +14,7 @@ public class MaterialService : IMaterialService
     public bool Insert(Material material) => _repo.Insert(material);
     public bool Update(Material material) => _repo.Update(material);
     public bool Delete(int materialId) => _repo.Delete(materialId);
-    public Location GetLocation(int mid)=> _repo.GetLocation(mid);
+    public  IEnumerable<Location> GetLocation()=> _repo.GetLocation();
     public IEnumerable<Material> GetMaterials(int id)=> _repo.GetMaterials(id);
     public IEnumerable<Material> GetOutOfStockMaterials()=> _repo.GetOutOfStockMaterials();
     

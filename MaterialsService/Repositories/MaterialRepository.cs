@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System;
 using MaterialsService.Models;
 using MaterialsService.Repositories.Interfaces;
@@ -199,7 +201,7 @@ public class MaterialRepository : IMaterialRepository
         {
             string query = "select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.categoryid =@categoryId";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@categoryId", cid);
+            cmd.Parameters.AddWithValue("@categoryId", categoryid);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -236,7 +238,7 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
-    public IEnumerable<Material>GetOutOfStockMaterials(){
+    public IEnumerable<Material> GetOutOfStockMaterials(){
         List<Material> materials =new  List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -279,15 +281,14 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
-    public Location GetLocation(int id)
+    public IEnumerable<Location> GetLocation()
     {
-        Location loc =null;
+        List<Location> locations = new List<Location>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  warehouses.name, sections.name,floors.name, materials.name, materials.type FROM warehouses INNER JOIN sections ON  warehouses.sectionid=sections.id INNER JOIN floors ON  sections.floorid= floors.materialid INNER JOIN materials ON  floors.materialid=materials.id where  materials.id=@materialid";
+            string query = "select  warehouses.name, sections.title,floors.level,  categories.category, materials.title as materialname, materials.quantity FROM warehouses   INNER JOIN sections ON  warehouses.sectionid=sections.id  INNER JOIN floors ON  sections.floorid= floors.categoryid Inner JOIN categories ON  floors.categoryid=categories.id   INNER JOIN materials ON  materials.categoryid=categories.id";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@materialid", id);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -295,15 +296,20 @@ public class MaterialRepository : IMaterialRepository
                 string? warehouse = reader["name"].ToString();
                 string? sectionname = reader["title"].ToString();
                 string? floor = reader["level"].ToString();
-                string? materialtype = reader["category"].ToString();
+                string? name = reader["materialname"].ToString();
+                string? type = reader["category"].ToString();
+                int quantity = int.Parse(reader["quantity"].ToString());
 
-                loc = new Location()
+                Location loc  = new Location()
                 {
-                    WarehouseName = warehouse,
-                    SectionName = sectionname,
+                    Warehouse = warehouse,
+                    Section = sectionname,
                     Floor = floor,
-                    MaterialType = materialtype
+                    Name = name,
+                    Type = type,
+                    Quantity=quantity
                 };
+                locations.Add(loc);
             }
 
             reader.Close();
@@ -316,7 +322,7 @@ public class MaterialRepository : IMaterialRepository
         {
             con.Close();
         }
-        return loc;
+        return locations;
     }
     
 }

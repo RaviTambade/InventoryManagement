@@ -56,10 +56,10 @@ namespace MaterialsService.Controllers
         }
 
         [HttpGet]
-        [Route("materials/locations/{id}")]
-        public Location GetLocation(int id)
+        [Route("locations")]
+        public  IEnumerable<Location> GetLocation()
         {
-            Location location =_matsrv.GetLocation(id);
+             IEnumerable<Location> location =_matsrv.GetLocation();
             return location;
         }
 
