@@ -281,7 +281,7 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
-    public IEnumerable<Location> GetLocation()
+    public IEnumerable<Location> GetLocations()
     {
         List<Location> locations = new List<Location>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -323,6 +323,51 @@ public class MaterialRepository : IMaterialRepository
             con.Close();
         }
         return locations;
+    }
+    
+     public Location GetLocation(int materialId)
+    {
+        Location location = null;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select  warehouses.name, sections.title,floors.level,  categories.category, materials.title as materialname, materials.quantity FROM warehouses   INNER JOIN sections ON  warehouses.sectionid=sections.id  INNER JOIN floors ON  sections.floorid= floors.categoryid Inner JOIN categories ON  floors.categoryid=categories.id   INNER JOIN materials ON  materials.categoryid=categories.id where materials.id=@materialid" ;
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialid", materialId);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string? warehouse = reader["name"].ToString();
+                string? sectionname = reader["title"].ToString();
+                string? floor = reader["level"].ToString();
+                string? name = reader["materialname"].ToString();
+                string? type = reader["category"].ToString();
+                int quantity = int.Parse(reader["quantity"].ToString());
+
+                location  = new Location()
+                {
+                    Warehouse = warehouse,
+                    Section = sectionname,
+                    Floor = floor,
+                    Name = name,
+                    Type = type,
+                    Quantity=quantity
+                };
+                
+            }
+
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return location;
     }
     
 }

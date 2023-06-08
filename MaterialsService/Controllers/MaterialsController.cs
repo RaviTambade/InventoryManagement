@@ -55,14 +55,22 @@ namespace MaterialsService.Controllers
             return status;
         }
 
+        //get location of materials
         [HttpGet]
         [Route("locations")]
-        public  IEnumerable<Location> GetLocation()
+        public  IEnumerable<Location> GetLocations()
         {
-             IEnumerable<Location> location =_matsrv.GetLocation();
-            return location;
+             IEnumerable<Location> locations =_matsrv.GetLocations();
+            return locations;
         }
 
+        [HttpGet]
+        [Route("location/{id}")]
+        public Location GetLocation(int id)
+        {
+             Location location =_matsrv.GetLocation(id);
+            return location;
+        }
 
 
         //Get all materials based on material type
