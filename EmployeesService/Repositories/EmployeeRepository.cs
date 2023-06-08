@@ -232,7 +232,7 @@ public class EmployeeRepository : IEmployeeRepository
                     email = email,
                     Department = department,
                     Role = role,
-                    ImgUrl= imgurl,
+                    ImgUrl = imgurl,
                     Gender = geder
                 };
 
@@ -288,7 +288,7 @@ public class EmployeeRepository : IEmployeeRepository
                     email = email,
                     Department = department,
                     Role = role,
-                    ImgUrl= imgurl,
+                    ImgUrl = imgurl,
                     Gender = geder
                 };
 
@@ -306,8 +306,8 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employees;
     }
-  
-        public IEnumerable<Employee> GetByGender(string theGender)
+
+    public IEnumerable<Employee> GetByGender(string theGender)
     {
         List<Employee> employees = new List<Employee>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -344,7 +344,7 @@ public class EmployeeRepository : IEmployeeRepository
                     email = email,
                     Department = department,
                     Role = role,
-                    ImgUrl= imgurl,
+                    ImgUrl = imgurl,
                     Gender = geder
                 };
 
@@ -362,7 +362,62 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employees;
     }
-  
+
+    //     public Employee GetBySection(string section)
+    // {
+    //     Employee employee = null;
+    //     MySqlConnection con = new MySqlConnection(_conString);
+    //     try
+    //     {
+    //         string query = "select   employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.gender, employees.imageurl, departments.department, roles.role from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where employees.gender=@gender ";
+    //         MySqlCommand cmd = new MySqlCommand(query, con);
+    //         cmd.Parameters.AddWithValue("@section", section);
+
+    //         con.Open();
+    //         MySqlDataReader reader = cmd.ExecuteReader();
+    //         while (reader.Read())
+    //         {
+    //             int id = Int32.Parse(reader["id"].ToString());
+    //             string? firstname = reader["firstname"].ToString();
+    //             string? lastname = reader["lastname"].ToString();
+    //             string? birthdate = reader["birthdate"].ToString();
+    //             string? hiredate = reader["hiredate"].ToString();
+    //             string? contactno = reader["contactnumber"].ToString();
+    //             string? imgurl = reader["imageurl"].ToString();
+    //             string? geder = reader["gender"].ToString();
+    //             string? email = reader["email"].ToString();
+    //             string? department = reader["department"].ToString();
+    //             string? role = reader["role"].ToString();
+
+    //             employee = new Employee
+    //             {
+    //                 Id = id,
+    //                 FirstName = firstname,
+    //                 LastName = lastname,
+    //                 BirthDate = birthdate,
+    //                 HireDate = hiredate,
+    //                 ContactNumber = contactno,
+    //                 email = email,
+    //                 Department = department,
+    //                 Role = role,
+    //                 ImgUrl = imgurl,
+    //                 Gender = geder
+    //             };
+
+    //         }
+    //         reader.Close();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         throw e;
+    //     }
+    //     finally
+    //     {
+    //         con.Close();
+    //     }
+    //     return employee;
+    // }
+
     public bool Delete(int employeeId)
     {
         bool status = false;

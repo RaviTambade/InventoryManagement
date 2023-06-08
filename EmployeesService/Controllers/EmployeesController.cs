@@ -81,11 +81,6 @@ namespace EmployeesService.Controllers
             return status;
         }
 
-    
-    //get employees  orderhistory
-    //orders ordered in a day by employee(supervisors)
-    //tasks complete in a day(store workers)
-    //
-    //
+        
     }
 }
