@@ -12,6 +12,7 @@ import { DateSearchComponent } from './date-search/date-search.component';
 import { RadioSearchComponent } from './radio-search/radio-search.component';
 import { NestedDropdownComponent } from './nested-dropdown/nested-dropdown.component';
 import { GridListComponent } from './grid-list/grid-list.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GridListComponent } from './grid-list/grid-list.component';
     DateSearchComponent,
     RadioSearchComponent,
     NestedDropdownComponent,
-    GridListComponent
+    GridListComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

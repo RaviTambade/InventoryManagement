@@ -19,5 +19,6 @@ export class GridListComponent {
         console.log(this.materialInfo)
     })
   }
-
+ 
+  
 }
