@@ -1,5 +1,6 @@
 -- Active: 1678859769284@@127.0.0.1@3306@inventorymanagement
 
+
 DROP DATABASE inventorymanagement;
 create database inventorymanagement;
 use inventorymanagement;
@@ -30,24 +31,17 @@ CREATE TABLE materials(id INT NOT NULL AUTO_INCREMENT primary KEY,
 						unitprice INT NOT NULL,
 						imageurl varchar (50));
  
-create table floors(id INT NOT NULL AUTO_INCREMENT primary KEY, 
-					level varchar(20),
-					categoryid int not null,constraint fk_category_id foreign key(categoryid) references categories(id) on update cascade on delete cascade);
 
-create table sections(id INT NOT NULL AUTO_INCREMENT primary KEY,
-					 title VARCHAR(20), 
-                     floorid int not null,constraint fk_floorid foreign key(floorid) references floors(id) on update cascade on delete cascade,
+create table Warehouse(id INT NOT NULL AUTO_INCREMENT primary KEY,
+					 section VARCHAR(20), 
+                     categoryid int not null,constraint fk_category_id foreign key(categoryid) references categories(id) on update cascade on delete cascade,
                      employeeid int not null,constraint fk_employeeid foreign key(employeeid) references employees(id) on update cascade on delete cascade);
 
-CREATE TABLE warehouses(id INT NOT NULL AUTO_INCREMENT primary KEY,
-						name VARCHAR(20),
-                        sectionid int not null,constraint fk_sectionid foreign key(sectionid) references sections(id) on update cascade on delete cascade);
 
 CREATE TABLE orderdetails(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 							employeeid INT NOT NULL,CONSTRAINT fk_employee_id FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
                             materialid INT NOT NULL,CONSTRAINT fk_materialid FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                            quantity INT NOT NULL,
-                            warehouseid int not null,constraint fk_warehouseid foreign key(warehouseid) references warehouses(id) on update cascade on delete cascade);  
+                            quantity INT NOT NULL);
 
 CREATE TABLE orders(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -108,11 +102,11 @@ INSERT INTO departments(department) VALUES("worker");
 -- Insertion for Employees
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Sahil','Mankar','1997-05-19','2021-07-07','8756789158',2, 2 ,'Sahil22@gmail.com','SM569654' ,'/assets/img/mEmp.jpeg', 'male');
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Rahul','Desai','1995-08-11','2021-08-04','9856789157',2, 2 ,'RD@gmail.com','RD854466' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Siddhesh','Pandit','1996-01-02','2021-09-12','7845967845',3, 3 ,'SP@gmail.com','SP789956' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Tejaswini','Salvi','1992-11-19','2020-09-01','9888754415',4, 3 ,'TS22@gmail.com','TS337845' ,'/assets/img/fEmp.jpeg', 'female');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('samiksha','raut','1992-11-19','2020-09-01','7844726596',5, 3 ,'TS22@gmail.com','TS337845' ,'/assets/img/fEmp.jpeg', 'female');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Vedant','Yadav','1987-01-07','2009-03-11','99887564123',1, 1 ,'VY@gmail.com','VY788814' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('sameer','jadhav','1999-05-12','2018-03-11','8455786547',6,4,'SM@gmail.com','VY788815' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Siddhesh','Pandit','1996-01-02','2021-09-12','7845967845',2, 2 ,'SP@gmail.com','SP789956' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Tejaswini','Salvi','1992-11-19','2020-09-01','9888754415',2, 2 ,'TS22@gmail.com','TS337845' ,'/assets/img/fEmp.jpeg', 'female');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('samiksha','raut','1992-11-19','2020-09-01','7844726596',2, 2 ,'TS22@gmail.com','TS337845' ,'/assets/img/fEmp.jpeg', 'female');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Vedant','Yadav','1987-01-07','2009-03-11','99887564123',2, 2 ,'VY@gmail.com','VY788814' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('sameer','jadhav','1999-05-12','2018-03-11','8455786547',2,2,'SM@gmail.com','VY788815' ,'/assets/img/mEmp.jpeg', 'male');
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('kalpesh','joshi','1998-01-14','2018-03-11','9987458745',6, 4 ,'KJgmail.com','KG788816' ,'/assets/img/mEmp.jpeg', 'male');
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('suraj','Yadav','1998-02-07','2018-03-11','8755469321',6 , 4,'SY@gmail.com','SY88817' ,'/assets/img/mEmp.jpeg', 'male');
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('manoj','sharma','1998-04-20','2018-03-11','9766132597',6, 4,'MS@gmail.com','MS788818' ,'/assets/img/mEmp.jpeg', 'male');
@@ -124,106 +118,39 @@ INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,depart
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('vinaya','satpute','1998-01-06','2018-03-11','9587994765',6, 4 ,'VS@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 'female');
 
 
--- Insertion for floors
-insert into floors(level,categoryid) values('A1',1);
-insert into floors(level,categoryid) values('A2',1);
-insert into floors(level,categoryid) values('A3',1);
-insert into floors(level,categoryid) values('B1',2);
-insert into floors(level,categoryid) values('B2',2);
-insert into floors(level,categoryid) values('B3',2);
-insert into floors(level,categoryid) values('C1',3);
-insert into floors(level,categoryid) values('C2',3);
-insert into floors(level,categoryid) values('C3',3);
-insert into floors(level,categoryid) values('D1',4);
-insert into floors(level,categoryid) values('D2',4);
-insert into floors(level,categoryid) values('D3',4);
-insert into floors(level,categoryid) values('E1',5);
-insert into floors(level,categoryid) values('E2',5);
-insert into floors(level,categoryid) values('E3',5);
-insert into floors(level,categoryid) values('F1',6);
-insert into floors(level,categoryid) values('F2',6);
-insert into floors(level,categoryid) values('F3',6);
-insert into floors(level,categoryid) values('G1',7);
-insert into floors(level,categoryid) values('G2',7);
-insert into floors(level,categoryid) values('G3',7);
-insert into floors(level,categoryid) values('H1',8);
-insert into floors(level,categoryid) values('H2',8);
-insert into floors(level,categoryid) values('H3',8);
 
 -- Insertion for Sections
-insert into sections(title, floorid,employeeid)values('Section 1', 1,1);
-insert into sections(title, floorid,employeeid)values('Section 1', 2,1);
-insert into sections(title, floorid,employeeid)values('Section 1', 3,1);
-insert into sections(title, floorid,employeeid)values('Section 2', 4,2);
-insert into sections(title, floorid,employeeid)values('Section 2', 5,2);
-insert into sections(title, floorid,employeeid)values('Section 2', 6,2);
-insert into sections(title, floorid,employeeid)values('Section 3', 7,3);
-insert into sections(title, floorid,employeeid)values('Section 3', 8,3);
-insert into sections(title, floorid,employeeid)values('Section 3', 9 ,3);
-insert into sections(title, floorid,employeeid)values('Section 4', 10,4);
-insert into sections(title, floorid,employeeid)values('Section 4', 11,4);
-insert into sections(title, floorid,employeeid)values('Section 4', 12,4);
-insert into sections(title, floorid,employeeid)values('Section 5', 13,5);
-insert into sections(title, floorid,employeeid)values('Section 5', 14,5);
-insert into sections(title, floorid,employeeid)values('Section 5', 15,5);
-insert into sections(title, floorid,employeeid)values('Section 6', 16,6);
-insert into sections(title, floorid,employeeid)values('Section 6', 17,6);
-insert into sections(title, floorid,employeeid)values('Section 6', 18,6);
-insert into sections(title, floorid,employeeid)values('Section 7', 19,7);
-insert into sections(title, floorid,employeeid)values('Section 7', 20,7);
-insert into sections(title, floorid,employeeid)values('Section 7', 21,7);
-insert into sections(title, floorid,employeeid)values('Section 8', 22,8);
-insert into sections(title, floorid,employeeid)values('Section 8', 23,8);
-insert into sections(title, floorid,employeeid)values('Section 8', 24,8);
+insert into warehouse(section,  categoryid,employeeid)values('Section 1', 1,1);
+insert into warehouse(section, categoryid,employeeid)values('Section 2', 2,2);
+insert into warehouse(section, categoryid,employeeid)values('Section 3', 3,3);
+insert into warehouse(section, categoryid,employeeid)values('Section 4', 4,4);
+insert into warehouse(section, categoryid,employeeid)values('Section 5', 5,5);
+insert into warehouse(section, categoryid,employeeid)values('Section 6', 6,6);
+insert into warehouse(section, categoryid,employeeid)values('Section 7', 7,7);
+insert into warehouse(section, categoryid,employeeid)values('Section 8', 8,8);
 
-
--- Insertion for warehouses
-insert into warehouses(name, sectionid) values ('warehouse 1', 1);
-insert into warehouses(name, sectionid) values ('warehouse 1', 2);
-insert into warehouses(name, sectionid) values ('warehouse 1', 3);
-insert into warehouses(name, sectionid) values ('warehouse 1', 4);
-insert into warehouses(name, sectionid) values ('warehouse 1', 5);
-insert into warehouses(name, sectionid) values ('warehouse 1', 6);
-insert into warehouses(name, sectionid) values ('warehouse 1', 7);
-insert into warehouses(name, sectionid) values ('warehouse 1', 8);
-insert into warehouses(name, sectionid) values ('warehouse 1', 9);
-insert into warehouses(name, sectionid) values ('warehouse 1', 10);
-insert into warehouses(name, sectionid) values ('warehouse 1', 11);
-insert into warehouses(name, sectionid) values ('warehouse 1', 12);
-insert into warehouses(name, sectionid) values ('warehouse 2', 13);
-insert into warehouses(name, sectionid) values ('warehouse 2', 14);
-insert into warehouses(name, sectionid) values ('warehouse 2', 15);
-insert into warehouses(name, sectionid) values ('warehouse 2', 16);
-insert into warehouses(name, sectionid) values ('warehouse 2', 17);
-insert into warehouses(name, sectionid) values ('warehouse 2', 18);
-insert into warehouses(name, sectionid) values ('warehouse 2', 19);
-insert into warehouses(name, sectionid) values ('warehouse 2', 20);
-insert into warehouses(name, sectionid) values ('warehouse 2', 21);
-insert into warehouses(name, sectionid) values ('warehouse 2', 22);
-insert into warehouses(name, sectionid) values ('warehouse 2', 23);
-insert into warehouses(name, sectionid) values ('warehouse 2', 24);
 
 
 -- insertion for orderdetails
-insert into orderdetails(employeeid, materialid, quantity, warehouseid)values(10,3,100,1);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(11,4,50,2);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(12,5,30,3);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(13,4,74,4);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(14,7,40,5);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(15,8,7,6);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(16,9,89,7);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(12,14,30,13);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(13,15,74,14);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(14,16,40,15);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(15,17,78,16);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(16,18,89,17);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(12,14,30,13);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(12,15,74,14);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(12,16,40,15);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(12,17,78,16);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(12,18,89,17);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(13,18,100,17);
-insert into orderdetails(employeeid, materialid, quantity,warehouseid)values(14,17,10,16);
+insert into orderdetails(employeeid, materialid, quantity)values(10,3,100);
+insert into orderdetails(employeeid, materialid, quantity)values(11,4,50);
+insert into orderdetails(employeeid, materialid, quantity)values(12,5,30);
+insert into orderdetails(employeeid, materialid, quantity)values(13,4,74);
+insert into orderdetails(employeeid, materialid, quantity)values(14,7,40);
+insert into orderdetails(employeeid, materialid, quantity)values(15,8,7);
+insert into orderdetails(employeeid, materialid, quantity)values(16,9,89);
+insert into orderdetails(employeeid, materialid, quantity)values(12,14,30);
+insert into orderdetails(employeeid, materialid, quantity)values(13,15,74);
+insert into orderdetails(employeeid, materialid, quantity)values(14,16,40);
+insert into orderdetails(employeeid, materialid, quantity)values(15,17,78);
+insert into orderdetails(employeeid, materialid, quantity)values(16,18,89);
+insert into orderdetails(employeeid, materialid, quantity)values(12,14,30);
+insert into orderdetails(employeeid, materialid, quantity)values(12,15,74);
+insert into orderdetails(employeeid, materialid, quantity)values(12,16,40);
+insert into orderdetails(employeeid, materialid, quantity)values(12,17,78);
+insert into orderdetails(employeeid, materialid, quantity)values(12,18,89);
+insert into orderdetails(employeeid, materialid, quantity)values(13,18,100);
+insert into orderdetails(employeeid, materialid, quantity)values(14,17,10);
 
 
 -- insertion for orders
@@ -241,7 +168,6 @@ INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  0
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',12, 3,'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-26  12:35:25',13, 3,'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-29  12:40:25',19, 3,'delivered');
-
 
 
 -- get material by id
