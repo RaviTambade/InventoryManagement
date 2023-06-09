@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'pagination',
@@ -7,33 +8,41 @@ import { Component } from '@angular/core';
 })
 export class PaginationComponent {
 
-  items = ["abhay", "rohit", "pragati", "akash", "akshay", "rishikesh","rahul", "vedant","sumit","shankar","kalpehsh","siddhant"];  
-  gridItems =this.items.slice(0,5);
-  currentIndex=0;
-  endIndex=0;
- arrLength=0;
- constructor(){
-  this.arrLength=this.items.length
- }
- next(){
-  console.log("next is clicked");
-  this.gridItems=[];
-  if(this.currentIndex<this.arrLength){
-    this.currentIndex =this.currentIndex+5;
-    this.endIndex = this.currentIndex+5;
+  currentIndex = 0;
+  endIndex = 0;
+  arrLength = 0;
+  selectedItems:any[] ;
+  data:any[];
+  size:number=0;
+
+  constructor(private svc: AppService) {
+    this.data=[]
+    this.selectedItems=[]
   }
-  this.gridItems =this.items.slice(this.currentIndex, this.endIndex);
- }
- previous(){
-  console.log("privious is clicked");
-  this.gridItems=[];
-  console.log(this.currentIndex)
-  if(this.currentIndex < this.arrLength){
-    this.currentIndex =this.currentIndex -5;
-    this.endIndex = this.currentIndex+5;
+
+  ngOnInit(): void {
+    this.svc.getMaterialInfo().subscribe((response) => {
+      this.data =response;
+      console.log(this.data)
+    })
+    console.log("init")
+    this.size=5;
+    this.currentIndex=1;
+    this.endIndex=this.currentIndex+this.size;
+    this.selectedItems=this.data.slice(this.currentIndex,this.endIndex);
   }
-  this.gridItems =this.items.slice(this.currentIndex, this.endIndex);
- }
+  next() {
+    console.log("next is clicked");
+    this.currentIndex=this.currentIndex+this.size;
+    this.endIndex=this.currentIndex+this.size;
+    this.selectedItems=this.data.slice(this.currentIndex,this.endIndex);
+  
+  }
+  previous() {
+    this.currentIndex=this.currentIndex-this.size;
+    this.endIndex=this.currentIndex+this.size;
+    this.selectedItems=this.data.slice(this.currentIndex,this.endIndex);
+  }
 }
 
 
