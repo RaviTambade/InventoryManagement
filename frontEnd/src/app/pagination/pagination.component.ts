@@ -7,40 +7,59 @@ import { AppService } from '../app.service';
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent {
-
+  isDisabledPrev = false;
+  isDisabledNext = false;
   currentIndex = 0;
   endIndex = 0;
   arrLength = 0;
-  selectedItems:any[] |undefined;
-  data:any[] ;
-  size:number=0;
+  selectedItems: any[] | undefined;
+  data: any[];
+  size: number = 0;
+
   constructor(private svc: AppService) {
-    this.data=[]
-    }
+    this.data = []
+
+  }
 
   ngOnInit(): void {
     this.svc.getMaterialInfo().subscribe((response) => {
-      this.data =response;
+      this.data = response;
       console.log(this.data)
-      this.size=5;
-      this.currentIndex=0;
-      this.endIndex=this.currentIndex+this.size;
-      this.selectedItems=this.data.slice(this.currentIndex,this.endIndex);
+      this.arrLength = this.data.length;
+      this.size = 5;
+      this.currentIndex = 0;
+      this.endIndex = this.currentIndex + this.size;
+      this.selectedItems = this.data.slice(this.currentIndex, this.endIndex);
+
     })
- 
+    this.isDisabledPrev = true;
+
   }
 
-   next() {
-    console.log("next is clicked");
-    this.currentIndex=this.currentIndex+this.size;
-    this.endIndex=this.currentIndex+this.size;
-    this.selectedItems=this.data.slice(this.currentIndex,this.endIndex);
-  
+  next() {
+    this.currentIndex = this.currentIndex + this.size;
+    this.endIndex = this.currentIndex + this.size;
+    this.selectedItems = this.data.slice(this.currentIndex, this.endIndex);
+    //button unable disable code
+    this.isDisabledPrev = false;
+    if (this.endIndex >= this.arrLength)
+    {
+      this.isDisabledNext = true;
+    }
   }
+
   previous() {
-    this.currentIndex=this.currentIndex-this.size;
-    this.endIndex=this.currentIndex+this.size;
-    this.selectedItems=this.data.slice(this.currentIndex,this.endIndex);
+    this.currentIndex = this.currentIndex - this.size;
+    this.endIndex = this.currentIndex + this.size;
+    this.selectedItems = this.data.slice(this.currentIndex, this.endIndex);
+    //button unable disable code
+    this.isDisabledNext = false;
+    if (this.currentIndex <= 0) 
+    {
+      this.isDisabledPrev = true;
+    }
+
+
   }
 }
 
