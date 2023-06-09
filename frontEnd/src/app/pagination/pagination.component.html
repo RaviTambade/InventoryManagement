@@ -7,18 +7,18 @@
 
 <table style="width:100%">
     <thead>
+        <th> EmployeeId </th>
+        <th>Section</th>
         <th> Material Name </th>
-        <th> Floor </th>
-        <th> Section </th>
-        <th> Warehouse</th>
+        <th> Material Category</th>
         <th>Quantity </th>
     </thead>
     <tbody *ngFor="let item of selectedItems">
         <tr>
-            <td> {{item.name}} </td>
-            <td> {{item.floor}} </td>
+            <td> {{item.employeeId}} </td>
             <td> {{item.section}} </td>
-            <td> {{item.warehouse}} </td>
+            <td> {{item.name}} </td>
+            <td> {{item.category}} </td>
             <td> {{item.quantity}} </td>
         </tr>
     </tbody>
