@@ -59,7 +59,7 @@ INSERT INTO categories(category) VALUES ("Reverse Gear");
 INSERT INTO categories(category) VALUES ("Main Shaft");
 INSERT INTO categories(category) VALUES ("Counter Shaft");
 INSERT INTO categories(category) VALUES ("Housing");
-
+select * from materials;
 insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Needle Bearing',1,784,20, '/assets/img/Bearing.jpeg');
 insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Ball Bearing',1,800,30, '/assets/img/Bearing.jpeg');
 insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Bush Bearing',1,4500,15, '/assets/img/Bearing.jpeg');
@@ -107,15 +107,25 @@ INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,depart
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('samiksha','raut','1992-11-19','2020-09-01','7844726596',2, 2 ,'TS22@gmail.com','TS337845' ,'/assets/img/fEmp.jpeg', 'female');
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('Vedant','Yadav','1987-01-07','2009-03-11','99887564123',2, 2 ,'VY@gmail.com','VY788814' ,'/assets/img/mEmp.jpeg', 'male');
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('sameer','jadhav','1999-05-12','2018-03-11','8455786547',2,2,'SM@gmail.com','VY788815' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('kalpesh','joshi','1998-01-14','2018-03-11','9987458745',6, 4 ,'KJgmail.com','KG788816' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('suraj','Yadav','1998-02-07','2018-03-11','8755469321',6 , 4,'SY@gmail.com','SY88817' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('manoj','sharma','1998-04-20','2018-03-11','9766132597',6, 4,'MS@gmail.com','MS788818' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('sahil','dhumak','1998-08-14','2018-03-11','9877452163',6, 4,'SDgmail.com','SD788819' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('siddhesh','pandit','1998-11-22','2018-03-11','9987554412',6, 4 ,'VSPgmail.com','VSP788810' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('shankar','kambale','1998-10-26','2018-03-11','7877455512',6, 4 ,'SK@gmail.com','SK788811' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('sumit','malap','1998-01-02','2018-03-11','9989745624',6, 4,'SM@gmail.com','SM788812' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('kalpesh','joshi','1998-01-14','2018-03-11','9987458745',2, 2 ,'KJgmail.com','KG788816' ,'/assets/img/mEmp.jpeg', 'male');
+
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('suraj','Yadav','1998-02-07','2018-03-11','8755469321',3 , 3,'SY@gmail.com','SY88817' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('manoj','sharma','1998-04-20','2018-03-11','9766132597',3, 3,'MS@gmail.com','MS788818' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('sahil','dhumak','1998-08-14','2018-03-11','9877452163',4, 3,'SDgmail.com','SD788819' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('siddhesh','pandit','1998-11-22','2018-03-11','9987554412',4, 3,'VSPgmail.com','VSP788810' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('shankar','kambale','1998-10-26','2018-03-11','7877455512',5, 3 ,'SK@gmail.com','SK788811' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('sumit','malap','1998-01-02','2018-03-11','9989745624',5, 3,'SM@gmail.com','SM788812' ,'/assets/img/mEmp.jpeg', 'male');
+
 INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('shubham','ghanekar','1998-03-22','2018-03-11','8955746251',6, 4,'SGgmail.com','SG788813' ,'/assets/img/mEmp.jpeg', 'male');
-INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('vinaya','satpute','1998-01-06','2018-03-11','9587994765',6, 4 ,'VS@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 'female');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('vinaya','satpute','1997-01-01','2018-03-11','9287994765',6, 4 ,'VS@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 'female');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('shivam','kelkar','1999-03-22','2018-03-11','9955746251',6, 4,'Skgmail.com','SG788813' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('tejas','khapre','1998-07-02','2018-03-11','977994765',6, 4 ,'TK@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('sanket','rewale','1998-11-25','2018-03-11','7855746251',6, 4,'SRgmail.com','SG788813' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('aditya','rawnag','1999-11-16','2018-03-11','7787994765',6, 4 ,'AR@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('rohit','ghanekar','1995-05-12','2018-03-11','7455746251',6, 4,'SGgmail.com','SG788813' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('tejas','harekar','1994-09-23','2018-03-11','7487994765',6, 4 ,'VS@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('abhi','horambe','1996-07-14','2018-03-11','7955746251',6, 4,'SGgmail.com','SG788813' ,'/assets/img/mEmp.jpeg', 'male');
+INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('shila','joshi','1998-01-06','2018-03-11','9787994765',6, 4 ,'VS@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 'female');
 
 
 
@@ -129,46 +139,39 @@ insert into warehouse(section, categoryid,employeeid)values('Section 6', 6,6);
 insert into warehouse(section, categoryid,employeeid)values('Section 7', 7,7);
 insert into warehouse(section, categoryid,employeeid)values('Section 8', 8,8);
 
+select * from employees;
 
 
 -- insertion for orderdetails
-insert into orderdetails(employeeid, materialid, quantity)values(10,3,100);
-insert into orderdetails(employeeid, materialid, quantity)values(11,4,50);
-insert into orderdetails(employeeid, materialid, quantity)values(12,5,30);
-insert into orderdetails(employeeid, materialid, quantity)values(13,4,74);
-insert into orderdetails(employeeid, materialid, quantity)values(14,7,40);
-insert into orderdetails(employeeid, materialid, quantity)values(15,8,7);
-insert into orderdetails(employeeid, materialid, quantity)values(16,9,89);
-insert into orderdetails(employeeid, materialid, quantity)values(12,14,30);
-insert into orderdetails(employeeid, materialid, quantity)values(13,15,74);
-insert into orderdetails(employeeid, materialid, quantity)values(14,16,40);
-insert into orderdetails(employeeid, materialid, quantity)values(15,17,78);
-insert into orderdetails(employeeid, materialid, quantity)values(16,18,89);
-insert into orderdetails(employeeid, materialid, quantity)values(12,14,30);
-insert into orderdetails(employeeid, materialid, quantity)values(12,15,74);
-insert into orderdetails(employeeid, materialid, quantity)values(12,16,40);
-insert into orderdetails(employeeid, materialid, quantity)values(12,17,78);
-insert into orderdetails(employeeid, materialid, quantity)values(12,18,89);
-insert into orderdetails(employeeid, materialid, quantity)values(13,18,100);
-insert into orderdetails(employeeid, materialid, quantity)values(14,17,10);
+insert into orderdetails(employeeid, materialid, quantity)values(9,1,100);
+insert into orderdetails(employeeid, materialid, quantity)values(14,2,50);
+insert into orderdetails(employeeid, materialid, quantity)values(10,3,30);
+insert into orderdetails(employeeid, materialid, quantity)values(10,4,74);
+insert into orderdetails(employeeid, materialid, quantity)values(14,5,40);
+insert into orderdetails(employeeid, materialid, quantity)values(9,6,7);
+insert into orderdetails(employeeid, materialid, quantity)values(11,7,89);
+insert into orderdetails(employeeid, materialid, quantity)values(12,8,30);
+insert into orderdetails(employeeid, materialid, quantity)values(13,9,74);
+insert into orderdetails(employeeid, materialid, quantity)values(14,10,40);
+insert into orderdetails(employeeid, materialid, quantity)values(14,11,78);
+insert into orderdetails(employeeid, materialid, quantity)values(12,12,89);
+insert into orderdetails(employeeid, materialid, quantity)values(12,13,30);
 
 
 -- insertion for orders
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-02-04  08:35:25',1 , 4,'delivered');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  09:35:25',2 ,3,'delivered');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',3 , 3,'cancelled');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-25  06:35:25',4,4, 'delivered');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-04  08:35:25',5 , 4,'delivered');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  09:35:25',6,3,'delivered');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-02-04  08:35:25',1 , 1,'delivered');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  09:35:25',2 ,1,'delivered');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',3 , 1,'cancelled');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-25  06:35:25',4,2, 'delivered');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-04  08:35:25',5 , 2,'delivered');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  09:35:25',6,2,'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',7, 3,'cancelled');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',8 , 3,'cancelled');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-25  06:35:25',9,4, 'delivered');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-25  06:35:25',9,3, 'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-03-04  08:35:25',10 , 4,'delivered');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  09:35:25',11,3,'delivered');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',12, 3,'delivered');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-26  12:35:25',13, 3,'delivered');
-INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-29  12:40:25',19, 3,'delivered');
-
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  09:35:25',11,4,'delivered');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',12, 4,'delivered');
+INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-26  12:35:25',13, 5,'delivered');
 
 -- get material by id
 select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.id = 5;
