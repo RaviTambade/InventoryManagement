@@ -287,27 +287,25 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  warehouses.name, sections.title,floors.level,  categories.category, materials.title as materialname, materials.quantity FROM warehouses   INNER JOIN sections ON  warehouses.sectionid=sections.id  INNER JOIN floors ON  sections.floorid= floors.categoryid Inner JOIN categories ON  floors.categoryid=categories.id   INNER JOIN materials ON  materials.categoryid=categories.id";
+            string query = "select  warehouse.section,  categories.category, materials.title as materialname, materials.quantity, employees.id FROM warehouse  INNER JOIN materials ON  materials.categoryid=warehouse.categoryid  inner join categories on warehouse.categoryid = categories.id inner join employees on employees.id=warehouse.employeeid" ;
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                string? warehouse = reader["name"].ToString();
-                string? sectionname = reader["title"].ToString();
-                string? floor = reader["level"].ToString();
+                string? section = reader["section"].ToString();
                 string? name = reader["materialname"].ToString();
-                string? type = reader["category"].ToString();
+                string? category = reader["category"].ToString();
                 int quantity = int.Parse(reader["quantity"].ToString());
+                int empid = int.Parse(reader["id"].ToString());
 
-                Location loc  = new Location()
+                 Location loc  = new Location()
                 {
-                    Warehouse = warehouse,
-                    Section = sectionname,
-                    Floor = floor,
+                    Section = section,
                     Name = name,
-                    Type = type,
-                    Quantity=quantity
+                    category = category,
+                    Quantity=quantity,
+                    EmployeeId=empid
                 };
                 locations.Add(loc);
             }
@@ -331,28 +329,26 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  warehouses.name, sections.title,floors.level,  categories.category, materials.title as materialname, materials.quantity FROM warehouses   INNER JOIN sections ON  warehouses.sectionid=sections.id  INNER JOIN floors ON  sections.floorid= floors.categoryid Inner JOIN categories ON  floors.categoryid=categories.id   INNER JOIN materials ON  materials.categoryid=categories.id where materials.id=@materialid" ;
+            string query = "select  warehouse.section,  categories.category, materials.title as materialname, materials.quantity, employees.id FROM warehouse  INNER JOIN materials ON  materials.categoryid=warehouse.categoryid  inner join categories on warehouse.categoryid = categories.id inner join employees on employees.id=warehouse.employeeid where materials.id =@materialid" ;
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialid", materialId);
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                string? warehouse = reader["name"].ToString();
-                string? sectionname = reader["title"].ToString();
-                string? floor = reader["level"].ToString();
+                string? section = reader["section"].ToString();
                 string? name = reader["materialname"].ToString();
-                string? type = reader["category"].ToString();
+                string? category = reader["category"].ToString();
                 int quantity = int.Parse(reader["quantity"].ToString());
+                int empid = int.Parse(reader["id"].ToString());
 
                 location  = new Location()
                 {
-                    Warehouse = warehouse,
-                    Section = sectionname,
-                    Floor = floor,
+                    Section = section,
                     Name = name,
-                    Type = type,
-                    Quantity=quantity
+                    category = category,
+                    Quantity=quantity,
+                    EmployeeId=empid
                 };
                 
             }
