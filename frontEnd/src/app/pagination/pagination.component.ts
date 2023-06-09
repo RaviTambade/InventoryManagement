@@ -11,27 +11,26 @@ export class PaginationComponent {
   currentIndex = 0;
   endIndex = 0;
   arrLength = 0;
-  selectedItems:any[] ;
-  data:any[];
+  selectedItems:any[] |undefined;
+  data:any[] ;
   size:number=0;
-
   constructor(private svc: AppService) {
     this.data=[]
-    this.selectedItems=[]
-  }
+    }
 
   ngOnInit(): void {
     this.svc.getMaterialInfo().subscribe((response) => {
       this.data =response;
       console.log(this.data)
+      this.size=5;
+      this.currentIndex=0;
+      this.endIndex=this.currentIndex+this.size;
+      this.selectedItems=this.data.slice(this.currentIndex,this.endIndex);
     })
-    console.log("init")
-    this.size=5;
-    this.currentIndex=1;
-    this.endIndex=this.currentIndex+this.size;
-    this.selectedItems=this.data.slice(this.currentIndex,this.endIndex);
+ 
   }
-  next() {
+
+   next() {
     console.log("next is clicked");
     this.currentIndex=this.currentIndex+this.size;
     this.endIndex=this.currentIndex+this.size;
