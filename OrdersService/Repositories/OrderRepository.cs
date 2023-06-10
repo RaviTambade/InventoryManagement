@@ -44,11 +44,7 @@ public class OrderRepository : IOrderRepository
                 order = new Order()
                 {
                     Id=id,
-                    EmployeeFirstName=empfirstname,
-                    EmployeeLastName=emplastname,
-                    Orderdate=orderdate,
                     Status=status,
-                    MaterialId=materialid,
                     Name=materialname,
                     Type=matrialtype,
                     Quantity=quantity
@@ -67,56 +63,54 @@ public class OrderRepository : IOrderRepository
         return order;
     }
 
-    // public IEnumerable<Order> OrdersHistory()
-    // {
-    //     List<Order> orders = new List<Order>();
-    //      MySqlConnection con = new MySqlConnection(_conString);
-    //     try
-    //     {
-    //         string query = "select orders.order_id, employees.empfirst_name,employees.emplast_name, orders.order_date, orders.status, materials.material_id, materials.material_name, materials.material_type, orderdetails.quantity from orders inner join materials on orders.orderdetails_id = materials.material_id inner join orderdetails on orders.orderdetails_id = orderdetails.orderdetails_id inner join employees on employees.employee_id = orders.employee_id ";
-    //         MySqlCommand cmd = new MySqlCommand(query, con);
-    //         con.Open();
-    //         MySqlDataReader reader = cmd.ExecuteReader();
-    //         while (reader.Read())
-    //         {
-    //             int orderid = Int32.Parse(reader["order_id"].ToString());
-    //             string? empfirstname = reader["empfirst_name"].ToString();
-    //             string? emplastname = reader["emplast_name"].ToString();
-    //             DateTime orderdate = DateTime.Parse(reader["order_date"].ToString());
-    //             string? status = reader["status"].ToString();
-    //             int materialid = Int32.Parse(reader["material_id"].ToString());
-    //             string? materialname = reader["material_name"].ToString();
-    //             string? matrialtype = reader["material_type"].ToString();
-    //             int quantity = Int32.Parse(reader["quantity"].ToString());
+
+    //order history of supervisors id
+    public IEnumerable<Order> GetOrdersHistory(int empid)
+    {
+        List<Order> orders = new List<Order>();
+         MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = " select orderdetails.id, orders.date,orders.status, orderdetails.quantity, materials.title, categories.category from orders inner join orderdetails on orders.orderdetailid = orderdetails.id inner join materials on orderdetails.materialid=materials.id inner join categories on materials.categoryid=categories.id inner join employees on orderdetails.employeeid = employees.id where employees.id =@empid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+;
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int orderid = Int32.Parse(reader["id"].ToString());
+                DateTime orderdate = DateTime.Parse(reader["date"].ToString());
+                string? status = reader["status"].ToString();
+                string? materialname = reader["title"].ToString();
+                string? matrialtype = reader["category"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
                 
-    //             Order order = new Order()
-    //             {
-    //                 OrderId=orderid,
-    //                 EmployeeFirstName=empfirstname,
-    //                 EmployeeLastName=emplastname,
-    //                 OrderDate=orderdate,
-    //                 status=status,
-    //                 MaterialId=materialid,
-    //                 MaterialName=materialname,
-    //                 MaterialType=matrialtype,
-    //                 Quantity=quantity
-    //             };
+                Order order = new Order()
+                {
+                    Id=orderid,
+                    OrderDate=orderdate,
+                    Status=status,
+                    Name=materialname,
+                    Type=matrialtype,
+                    Quantity=quantity
+                };
 
-    //             orders.Add(order);
+                orders.Add(order);
 
-    //         }
-    //         reader.Close();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         throw e;
-    //     }
-    //     finally
-    //     {
-    //         con.Close();
-    //     }
-    //     return orders;
-    // }
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return orders;
+    }
 
     public IEnumerable<Order> OrderedMaterialsInADay(){
         List<Order> orders =new  List<Order>();
@@ -141,9 +135,7 @@ public class OrderRepository : IOrderRepository
                 Order theOrder = new Order
                 {
                     Id = id,
-                    MaterialId = materialId,
-                    EmployeeFirstName = empfirstname,
-                    EmployeeLastName = emplastname,
+
                     Name=name,
                     Type = type,
                     Quantity = quantity,
@@ -192,14 +184,10 @@ public class OrderRepository : IOrderRepository
                 Order theOrder = new Order
                 {
                     Id = id,
-                    MaterialId = materialId,
-                    EmployeeFirstName = empfirstname,
-                    EmployeeLastName = emplastname,
                     Name=name,
                     Type = type,
                     Quantity = quantity,
                     Status =status,
-                    Orderdate = orderdate
                 };
                 orders.Add(theOrder);
             }
@@ -215,5 +203,4 @@ public class OrderRepository : IOrderRepository
         }
         return orders;
     }
-
 }

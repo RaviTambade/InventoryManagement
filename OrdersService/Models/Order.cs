@@ -1,10 +1,7 @@
 namespace OrdersService.Models;
 public class Order{
      public int Id{get;set;}
-    public int MaterialId{get;set;}
-    public string EmployeeFirstName{get;set;}
-    public string EmployeeLastName{get;set;}
-    public DateTime Orderdate{get;set;}
+    public DateTime OrderDate{get;set;}
     public string Name{get;set;}
     public string Type{get;set;}
     public int Quantity{get;set;}

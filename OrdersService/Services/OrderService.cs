@@ -13,7 +13,7 @@ public class OrderService : IOrderService
     }
 
     public Order OrdersHistory(int orderid)=> _repo.OrdersHistory(orderid);
-    // public IEnumerable<Order> OrdersHistory()=> _repo.OrdersHistory();
+     public IEnumerable<Order> GetOrdersHistory(int empid)=> _repo.GetOrdersHistory(empid);
     public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
     public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
 

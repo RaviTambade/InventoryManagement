@@ -12,17 +12,18 @@ public class OrdersController : ControllerBase
     {
         _ordsvs = ordsvs;
     }
+        //get order history of supervisors
         [HttpGet]
-        [Route("orders/History")]
-        // public IEnumerable<Order> GetAll()
-        // {
-        //     IEnumerable<Order> orders = _ordsvs.OrdersHistory();
-        //     return orders;
-        // }
+        [Route("History/{empid}")]
+        public IEnumerable<Order> GetAll(int empid)
+        {
+            IEnumerable<Order> orders = _ordsvs.GetOrdersHistory(empid);
+            return orders;
+        }
 
         [HttpGet]
-        [Route("orders/History/{id}")]
-        public Order Get(int id)
+        [Route("orders/details/{id}")]
+        public Order GetOrderDetails(int id)
         {
             Order orders = _ordsvs.OrdersHistory(id);
             return orders;
