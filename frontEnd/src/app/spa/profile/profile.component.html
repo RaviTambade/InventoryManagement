@@ -1,1 +1,10 @@
-<p>profile works!</p>
+<div  *ngIf="employee ">
+    <h6>{{employee.role}}</h6>
+    <h4>Employee Name:  {{employee.firstName}} {{ employee.lastName}}</h4>
+    <h5>Email: {{ employee.email}}</h5>
+    <h5>Contact NO: {{ employee.contactNumber }} </h5>
+    <h5>Department: {{ employee.department }} </h5>
+    <h5>BirthDate: {{ employee.birthDate}}</h5>
+    <h5>Hire Date: {{ employee.hireDate}}</h5>
+    <h5>gender: {{ employee.gender}}</h5>
+</div>

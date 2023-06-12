@@ -12,6 +12,11 @@ export class AppService {
 
   constructor(private http:HttpClient) { }
 
+  getById(id:number):Observable<any>
+  {
+    let url ="http://localhost:5224/api/employees/employee/"+ id ;
+    return this.http.get<any>(url);
+  }
   getAllMaterials():Observable<any> 
   {
     let url = "http://localhost:5176/api/Materials/materials";
