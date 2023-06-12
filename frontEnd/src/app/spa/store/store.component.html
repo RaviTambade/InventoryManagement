@@ -1,1 +1,13 @@
-<p>store works!</p>
+<div *ngFor="let material of materials">
+    <h4 >Material Id:{{material.id}}</h4>
+    <h4 >Material Type:{{material.type}}</h4>
+    <h4 >Material Name: {{material.name}}</h4>
+    <h4>  Qunatity:{{material.quantity}}</h4>
+    <button type="submit" >Order</button>
+     <button type="submit" >Update</button>
+     <hr>
+    </div>   
+
+<button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
+<button type="button"  (click)="next()" [disabled]="isDisabledNext">Next</button>
+

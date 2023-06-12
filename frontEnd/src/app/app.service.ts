@@ -12,6 +12,12 @@ export class AppService {
 
   constructor(private http:HttpClient) { }
 
+  getAllMaterials():Observable<any> 
+  {
+    let url = "http://localhost:5176/api/Materials/materials";
+    return this.http.get(url);
+  }
+
  getOrders():Observable<any>{
     let url ="http://localhost:5082/api/Orders/orderedInADay" ;
     return this.http.get(url);
