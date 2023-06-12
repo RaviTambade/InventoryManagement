@@ -13,6 +13,7 @@ import { RadioSearchComponent } from './radio-search/radio-search.component';
 import { NestedDropdownComponent } from './nested-dropdown/nested-dropdown.component';
 import { GridListComponent } from './grid-list/grid-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { SpaModule } from './spa/spa.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SpaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

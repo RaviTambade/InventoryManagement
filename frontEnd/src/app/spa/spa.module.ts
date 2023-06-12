@@ -9,8 +9,15 @@ import { OrdersComponent } from './orders/orders.component';
 import { StoreComponent } from './store/store.component';
 import { MyProfleComponent } from './my-profle/my-profle.component';
 import { RequestsComponent } from './requests/requests.component';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes: Routes=
+  [   {path:'', redirectTo:'home',pathMatch:"full"},
+      { path: 'home', component: HomeComponent },
+      { path: 'store', component: StoreComponent },
+      { path: 'profile', component: MyProfleComponent },
+      { path:'requests', component: RequestsComponent},
+    ];
 
 @NgModule({
   declarations: [
@@ -24,8 +31,10 @@ import { RequestsComponent } from './requests/requests.component';
     MyProfleComponent,
     RequestsComponent
   ],
+  exports:[RouterContainerComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forRoot(routes)
   ]
 })
 export class SpaModule { }
