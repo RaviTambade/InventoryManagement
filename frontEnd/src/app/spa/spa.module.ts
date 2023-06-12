@@ -6,6 +6,9 @@ import { EmployeesComponent } from './employees/employees.component';
 import { MaterialsComponent } from './materials/materials.component';
 import { ProfileComponent } from './profile/profile.component';
 import { OrdersComponent } from './orders/orders.component';
+import { StoreComponent } from './store/store.component';
+import { MyProfleComponent } from './my-profle/my-profle.component';
+import { RequestsComponent } from './requests/requests.component';
 
 
 
@@ -16,7 +19,10 @@ import { OrdersComponent } from './orders/orders.component';
     EmployeesComponent,
     MaterialsComponent,
     ProfileComponent,
-    OrdersComponent
+    OrdersComponent,
+    StoreComponent,
+    MyProfleComponent,
+    RequestsComponent
   ],
   imports: [
     CommonModule
