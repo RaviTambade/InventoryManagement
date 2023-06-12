@@ -23,6 +23,12 @@ export class AppService {
     return this.http.get(url);
 
   }
+  getOrdersHistory(id:number):Observable<any>{
+    let url ="http://localhost:5082/api/Orders/history/" + id ;
+    return this.http.get(url);
+
+  }
+
   getOrderDetails(id :number):Observable<any>{
     let url ="http://localhost:5082/api/orders/orders/History/" +id ;
     return this.http.get(url);
