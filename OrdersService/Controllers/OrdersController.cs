@@ -46,5 +46,13 @@ public class OrdersController : ControllerBase
             IEnumerable<Order> orders= _ordsvs.GetOrders(date);
             return orders;
         }
+
+        [HttpPost]
+        [Route("order")]
+        public bool AddOrder( [FromBody] Order order)
+        {
+            bool status= _ordsvs.Order(order);
+            return status;
+        }
 }
 
