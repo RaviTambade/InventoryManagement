@@ -10,6 +10,7 @@ import { StoreComponent } from './store/store.component';
 import { MyProfleComponent } from './my-profle/my-profle.component';
 import { RequestsComponent } from './requests/requests.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -17,6 +18,7 @@ const routes: Routes=
       { path: 'store', component: StoreComponent },
       { path: 'profile', component: ProfileComponent },
       { path:'requests', component: RequestsComponent},
+      {path:'order',component:OrdersComponent}
     ];
 
 @NgModule({
@@ -34,7 +36,8 @@ const routes: Routes=
   exports:[RouterContainerComponent],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ]
 })
 export class SpaModule { }

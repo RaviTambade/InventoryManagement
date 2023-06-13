@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AppService } from 'src/app/app.service';
+import { MaterialService } from '../material.service';
+import { Route, Router } from '@angular/router';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-store',
@@ -15,8 +18,9 @@ export class StoreComponent {
   materials: any[] | undefined;
   data: any[];
   size: number = 0;
+  material:any;
 
-  constructor(private svc: AppService) {
+  constructor(private svc: MaterialService, private router:Router) {
     this.data = []
 
   }
@@ -56,8 +60,11 @@ export class StoreComponent {
     {
       this.isDisabledPrev = true;
     }
+  }
 
-
+  order(id:any){
+this.svc.getById(id);
+this.router.navigate(['order'])
   }
 
 }
