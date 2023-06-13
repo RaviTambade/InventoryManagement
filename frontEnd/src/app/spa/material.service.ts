@@ -8,6 +8,11 @@ import { Observable, Subject } from 'rxjs';
 export class MaterialService {
 
   constructor(private http:HttpClient) { }
+  Order(order:any):Observable<any> 
+  {
+    let url = "http://localhost:5082/api/orders/order";
+    return this.http.post(url,order);
+  }
   getById(materialId:number)
   {
     let url ="http://localhost:5176/api/Materials/materials/"+ materialId;

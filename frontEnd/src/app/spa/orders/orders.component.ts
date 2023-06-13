@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MaterialService } from '../material.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'orders',
@@ -11,16 +12,25 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class OrdersComponent {
   subscription: Subscription|undefined;
   material:any;
-constructor(public fb : FormBuilder,private svc:MaterialService){}
-
+  order:any;
+  
+  empid=12;
+constructor(public fb : FormBuilder,private svc:MaterialService, private router:Router){
+this.order={
+  "employeeid" :0,
+  "materialid":0,
+  "type":'',
+  "quantity":0
+};
+}
 
 
 orderForm = this.fb.group({
-  id : [ ' ', [Validators.required]],
+  id : [0 , [Validators.required]],
   name : [ ' ', [Validators.required]],
   type : [ ' ', [Validators.required]],
-  quantity : [ ' ', [Validators.required]],
-  orderQuantity: [ ' ', [Validators.required]],
+  quantity : [ 0, [Validators.required]],
+  orderQuantity: [ 0, [Validators.required]],
 });
 
 ngOnInit(): void {
@@ -31,14 +41,20 @@ ngOnInit(): void {
   })
 }
 onSubmit(){
-  console.log(this.orderForm.value);
-    // this.isSubmitted= true;
-    // if(!this.registrationForm.valid){
-    //   false;
-    // }
-    // else{
-    //   console.log("onSubmit");           
-    //   console.log(JSON.stringify(this.registrationForm.value));
-    //     }
+  if(this.orderForm.value!==undefined){
+    this.order.materialid=this.orderForm.value.id;
+    this.order.quantity=this.orderForm.value.orderQuantity;
+    this.order.employeeid=this.empid;
+    this.order.type=this.orderForm.value.type;
+    console.log(this.order);
+    this.svc.Order(this.order).subscribe((res)=>{
+      if(res){
+        alert("Ordered Successfully!");
+        this.router.navigate(['']);
+      }
+    })
+  }
+
+
 }
 }

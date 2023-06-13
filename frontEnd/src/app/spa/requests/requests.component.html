@@ -1,8 +1,11 @@
 <ol type="number">
     <div *ngFor="let order of orders">
-        <li>
-            <p>material Name: {{order.name}}  status: {{order.status}}</p>
+        <li >
+            material Name: {{order.name}} status: {{order.status}} <button type="submit" (click)="details(order.id)" >Details</button>
         </li>
         <hr />
     </div>
 </ol>
+<button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
+<button type="button"  (click)="next()" [disabled]="isDisabledNext">Next</button>
+
