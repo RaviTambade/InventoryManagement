@@ -1,8 +1,23 @@
-<form >
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
     <div *ngIf="material">
-        
-    <h4>material.id={{material.id}}</h4>
-      
-      <button type="submit">Submit</button>
+        <label for="id">Material Id: </label>
+        <input name="id" id="id" type="number" formControlName="id" [(ngModel)]="material.id" readonly>
+        <br>
+
+        <label for="title">Material Name: </label>
+        <input name="title" id="title" type="text" formControlName="name" [(ngModel)]="material.name" readonly>
+        <br>
+
+        <label for="type">Material Type: </label>
+        <input name="type" id="type" type="text" formControlName="type" [(ngModel)]="material.type" readonly>
+        <br>
+
+        <label for="quantity">Avilable Quantity: </label>
+        <input name="quantity" id="quantity" type="number" formControlName="quantity" [(ngModel)]="material.quantity" readonly>
+        <br>
+
+        <label for="orderQuantity">Order Quantity: </label>
+        <input name="orderQuantity" id="orderQuantity" formControlName="orderQuantity" type="number" placeholder="quntity">
+        <button type="submit">order</button>
     </div>
-  </form>
+</form>

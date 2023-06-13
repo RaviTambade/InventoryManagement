@@ -11,6 +11,7 @@ import { MyProfleComponent } from './my-profle/my-profle.component';
 import { RequestsComponent } from './requests/requests.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -37,7 +38,9 @@ const routes: Routes=
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SpaModule { }
