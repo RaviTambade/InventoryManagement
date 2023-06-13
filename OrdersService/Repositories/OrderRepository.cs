@@ -135,7 +135,6 @@ public class OrderRepository : IOrderRepository
                 Order theOrder = new Order
                 {
                     Id = id,
-
                     Name=name,
                     Type = type,
                     Quantity = quantity,
@@ -206,6 +205,30 @@ public class OrderRepository : IOrderRepository
 
     public bool Order(Order order){
         bool status =false;
+         MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "insert into orderdetails(employeeid,materialid,quantity,categoryid)values(@empid,@materialid,@quantity,(select id from categories where category=@category))";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", order.EmployeeId);
+            cmd.Parameters.AddWithValue("@materialid", order.MaterialId);
+            cmd.Parameters.AddWithValue("@quantity", order.Quantity);
+            cmd.Parameters.AddWithValue("@category", order.Type);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
         return status;
     }
 
