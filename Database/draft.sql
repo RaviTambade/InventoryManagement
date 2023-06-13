@@ -50,18 +50,19 @@ CREATE TABLE orders(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     status ENUM('delivered','inprogress','cancelled') NOT NULL);
 
 
--- TRIGGER (insert new entry in orders table find storemanagers id according to orderdetails)
-DELIMITER $$
+-- TRIGGER (insert new entry in orders table find storemanagers id according to orderdetails and update the material quantity)
 
+DELIMITER $$
 CREATE TRIGGER neworder
 AFTER INSERT
 ON orderdetails FOR EACH ROW
 BEGIN
         INSERT INTO orders (orderdetailid,employeeid, status)
         VALUES(new.id, (select warehouse.employeeid from warehouse  where warehouse.categoryid=new.categoryid),'inprogress');
+        UPDATE materials SET quantity=quantity-new.quantity where materials.id= new.materialid ;
 END$$
-
 DELIMITER ;
+
 
 -- Insertion for material
 INSERT INTO categories(category) VALUES ("Bearings");
