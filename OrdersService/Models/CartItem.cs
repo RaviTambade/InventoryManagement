@@ -4,4 +4,5 @@ public class CartItem{
     public int MaterialId{get;set;}
     public int CategoryId{get;set;}
     public int Quantity{get;set;}  
+    public int EmployeeId{get;set;}
 }

@@ -66,7 +66,34 @@ public class CartRepository : ICartRepository
 
     public bool AddItem(CartItem item){
         bool status =false;
+         MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            
+            string query = "insert into cartitems( cartid,materialid,categoryid,quantity) values ((select id from carts where employeeid=@empid),@materialid,@category,@quantity);";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", item.EmployeeId);
+            cmd.Parameters.AddWithValue("@materialid", item.MaterialId);
+            cmd.Parameters.AddWithValue("@quantity", item.Quantity);
+            cmd.Parameters.AddWithValue("@category", item.CategoryId);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+            con.Close();
+            
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
         return status;
+    
     }
-
 }
