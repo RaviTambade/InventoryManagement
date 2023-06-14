@@ -26,7 +26,7 @@ public class CartRepository : ICartRepository
           MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select cartitems.cartid, cartitems.materialid,cartitems.categoryid,cartitems.quantity from cartitems inner join carts on cartitems.cartid=carts.id where carts.employeeid =@empid";
+            string query = "select cartitems.cartid, carts.employeeid, cartitems.materialid, categories.category,cartitems.quantity from cartitems inner join carts on cartitems.cartid=carts.id inner join categories on categories.id=cartitems.categoryid where carts.employeeid =@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 ;
@@ -36,15 +36,17 @@ public class CartRepository : ICartRepository
             {
                 int cartid = Int32.Parse(reader["cartid"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
-                int categoryid = Int32.Parse(reader["categoryid"].ToString());
+                string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
+                int employeeid = Int32.Parse(reader["employeeid"].ToString());
                 
                 CartItem item = new CartItem()
                 {
                     CartId=cartid,
                     MaterialId=materialid,
-                    CategoryId=categoryid,
-                    Quantity=quantity
+                    Category=category,
+                    Quantity=quantity,
+                    EmployeeId=employeeid  
                 };
 
                 cartItems.Add(item);
@@ -66,18 +68,22 @@ public class CartRepository : ICartRepository
 
     public bool AddItem(CartItem item){
         bool status =false;
+        Console.WriteLine(item.Category);
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             
-            string query = "insert into cartitems( cartid,materialid,categoryid,quantity) values ((select id from carts where employeeid=@empid),@materialid,@category,@quantity);";
+            string query = "insert into cartitems( cartid,categoryid,materialid,quantity) values ((select id from carts where employeeid=@empid),(select id from categories where category=@category),@materialid,@quantity);";
             MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@category", item.Category);
             cmd.Parameters.AddWithValue("@empid", item.EmployeeId);
             cmd.Parameters.AddWithValue("@materialid", item.MaterialId);
             cmd.Parameters.AddWithValue("@quantity", item.Quantity);
-            cmd.Parameters.AddWithValue("@category", item.CategoryId);
+            
             con.Open();
+
             int rowsAffected = cmd.ExecuteNonQuery();
+            Console.WriteLine(query);
             if (rowsAffected > 0)
             {
                 status = true;
