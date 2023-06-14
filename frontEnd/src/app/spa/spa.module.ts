@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -21,8 +22,8 @@ const routes: Routes=
       { path: 'profile', component: ProfileComponent },
       { path:'requests', component: RequestsComponent},
       {path:'order',component:OrdersComponent},
-      {path:'orderdetails',component:OrderDetailsComponent}
-
+      {path:'orderdetails',component:OrderDetailsComponent},
+      {path:'carts',component:CartComponent}
     ];
 
 @NgModule({
@@ -36,7 +37,8 @@ const routes: Routes=
     StoreComponent,
     MyProfleComponent,
     RequestsComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    CartComponent
   ],
   exports:[RouterContainerComponent],
   imports: [
