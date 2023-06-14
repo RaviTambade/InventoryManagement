@@ -50,6 +50,17 @@ CREATE TABLE orders(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     status ENUM('delivered','inprogress','cancelled') NOT NULL);
 
 
+CREATE TABLE carts(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				   employeeid INT NOT NULL,
+				   CONSTRAINT fk_employee_id4 FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE);
+
+CREATE TABLE cartitems(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+						cartid INT NOT NULL,
+						CONSTRAINT fk_cartid FOREIGN KEY (cartid) REFERENCES carts(id)ON UPDATE CASCADE ON DELETE CASCADE,
+						materialid INT NOT NULL,CONSTRAINT fk_material_id4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
+                        categoryid INT NOT NULL, constraint fk_categoryid2 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
+                        quantity INT NOT NULL ); 
+
 -- TRIGGER (insert new entry in orders table find storemanagers id according to orderdetails and update the material quantity)
 
 DELIMITER $$
@@ -186,6 +197,22 @@ INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-03-04  0
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-01-16  09:35:25',11,4,'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-04-12  12:35:25',12, 4,'delivered');
 INSERT INTO orders(date, orderdetailid, employeeid,status)VALUES ('2023-05-26  12:35:25',13, 5,'delivered');
+
+
+INSERT INTO carts(employeeid) VALUES (9);
+INSERT INTO carts(employeeid) VALUES (10);
+INSERT INTO carts(employeeid) VALUES (11);
+INSERT INTO carts(employeeid) VALUES (12);
+INSERT INTO carts(employeeid) VALUES (13);
+INSERT INTO carts(employeeid) VALUES (14);
+
+INSERT INTO cartitems(cartid,materialid,categoryid,quantity) VALUES (1,2,1,50);
+INSERT INTO cartitems(cartid,materialid,categoryid,quantity) VALUES (4,4,2,5);
+INSERT INTO cartitems(cartid,materialid,categoryid,quantity) VALUES (4,5,2,15);
+INSERT INTO cartitems(cartid,materialid,categoryid,quantity) VALUES (4,2,1,16);
+INSERT INTO cartitems(cartid,materialid,categoryid,quantity) VALUES (6,2,1,17);
+INSERT INTO cartitems(cartid,materialid,categoryid,quantity) VALUES (6,4,2,18);
+INSERT INTO cartitems(cartid,materialid,categoryid,quantity) VALUES (6,1,1,20);
 
 -- get material by id
 select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.id = 5;
