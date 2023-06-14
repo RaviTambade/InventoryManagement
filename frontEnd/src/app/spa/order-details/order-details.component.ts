@@ -16,7 +16,7 @@ export class OrderDetailsComponent {
   }
   ngOnInit(){
     this.subscription=this.svc.GetDetails().subscribe((res)=>{
-      console.log(res);
+      console.log(res.data);
       this.orderDetail=res.data;
     })
   }

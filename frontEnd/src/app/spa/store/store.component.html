@@ -3,15 +3,12 @@
     <h4 >Material Type:{{material.type}}</h4>
     <h4 >Material Name: {{material.name}}</h4>
     <h4>  Qunatity:{{material.quantity}}</h4>
-    <label for="orderedQuantity">Add Quantity</label><br>
-    <input type="number"  name="orderedQuantity" #orderedQuantity >
-    <button type="submit" (click)="add(material.id,material.type,orderedQuantity.value)" >Select</button>
+    <button type="submit" (click)="add(material.id)" >Add</button>
      <hr>
 </div>   
 <button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
 <button type="button"  (click)="next()" [disabled]="isDisabledNext">Next</button> 
 
-<button type="submit" (click)="order()" >Order</button>
 
 
 <!-- 

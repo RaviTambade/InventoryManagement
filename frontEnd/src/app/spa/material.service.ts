@@ -10,10 +10,16 @@ export class MaterialService {
   constructor(private http:HttpClient) { }
   private subject = new Subject<any>();
   private subject2 = new Subject<any>();
-  Order(cart:any):Observable<any> 
+  // Order(cart:any):Observable<any> 
+  // {
+  //   console.log(cart);
+  //   let url = "http://localhost:5082/api/orders/order";
+  //   return this.http.post(url,cart);
+  // }
+  addToCart(cart:any):Observable<any> 
   {
     console.log(cart);
-    let url = "http://localhost:5082/api/orders/order";
+    let url = "http://localhost:5082/api/carts/addtocart";
     return this.http.post(url,cart);
   }
   getById(materialId:number)
@@ -26,6 +32,7 @@ export class MaterialService {
   }
   getOrderDetails(orderid:number)
   {
+    console.log(orderid)
     let url ="http://localhost:5082/api/orders/orders/details/"+ orderid;
 
      this.http.get(url).subscribe((data)=>{
@@ -36,7 +43,6 @@ export class MaterialService {
   getOrdersHistory(id:number):Observable<any>{
     let url ="http://localhost:5082/api/Orders/history/" + id ;
     return this.http.get(url);
-
   }
   
   getAllMaterials():Observable<any> 

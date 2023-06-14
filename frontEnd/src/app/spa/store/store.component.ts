@@ -79,20 +79,11 @@ export class StoreComponent {
     }
   }
 
-  add(materialId:any,materialType:any,quantity:any){
-    this.newOrder.materialid=materialId;
-    this.newOrder.quantity= Number.parseInt(quantity);
-    this.newOrder.type=materialType;
-    this.newOrder.employeeid=12;
-    this.cart.push(this.newOrder);
-    alert("added");
+  add(id:number){
+    this.svc.getById(id);
+    this.router.navigate(['order']);
   }
-  order(){
-    this.svc.Order(this.cart).subscribe((res)=>{
-      this.status=res;
-      console.log(res);
-    })
+
     
-  }
 
 }

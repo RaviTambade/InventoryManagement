@@ -19,7 +19,7 @@ constructor(public fb : FormBuilder,private svc:MaterialService, private router:
 this.order={
   "employeeid" :0,
   "materialid":0,
-  "type":'',
+  "category":'',
   "quantity":0
 };
 this.cart=[];
@@ -45,14 +45,15 @@ onSubmit(){
     this.order.materialid=this.orderForm.value.id;
     this.order.quantity=this.orderForm.value.orderQuantity;
     this.order.employeeid=this.empid;
-    this.order.type=this.orderForm.value.type;
+    this.order.category=this.orderForm.value.type;
 
-    // this.svc.Order(this.order).subscribe((res)=>{
-    //   if(res){
-    //     alert("Ordered Successfully!");
-    //     this.router.navigate(['requests']);
-    //   }
-    // })
+    this.svc.addToCart(this.order).subscribe((res)=>{
+      console.log(res);
+      if(res){
+        alert("added to cart!");
+        this.router.navigate(['store']);
+      }
+    })
   }
 
 
