@@ -204,11 +204,12 @@ public class OrderRepository : IOrderRepository
         return orders;
     }
 
-    public bool Order(Order order){
+    public bool Order(IEnumerable<Order> orders){
         bool status =false;
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
+            foreach(Order order  in orders){
             string query = "insert into orderdetails(employeeid,materialid,quantity,categoryid)values(@empid,@materialid,@quantity,(select id from categories where category=@category))";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", order.EmployeeId);
@@ -217,9 +218,12 @@ public class OrderRepository : IOrderRepository
             cmd.Parameters.AddWithValue("@category", order.Type);
             con.Open();
             int rowsAffected = cmd.ExecuteNonQuery();
+            con.Close();
             if (rowsAffected > 0)
             {
                 status = true;
+            }
+            
             }
         }
         catch (Exception e)

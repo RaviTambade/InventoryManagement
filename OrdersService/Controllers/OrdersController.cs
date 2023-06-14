@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using OrdersService.Models;
 using OrdersService.Services.Interfaces;
@@ -49,9 +50,9 @@ public class OrdersController : ControllerBase
 
         [HttpPost]
         [Route("order")]
-        public bool AddOrder( [FromBody] Order order)
+        public bool AddOrder( [FromBody] List<Order> orders)
         {
-            bool status= _ordsvs.Order(order);
+            bool status= _ordsvs.Order(orders);
             return status;
         }
 }
