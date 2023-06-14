@@ -1,5 +1,6 @@
 namespace OrdersService.Models;
 public class CartItem{
+    public int Id{get;set;}
      public int CartId{get;set;}
     public int MaterialId{get;set;}
     public string? Category{get;set;}

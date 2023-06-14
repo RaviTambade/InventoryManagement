@@ -7,4 +7,5 @@ public interface ICartRepository
   
     IEnumerable<CartItem> GetAll(int empid);
     bool AddItem(CartItem item);
+    bool Delete(int id);
 }

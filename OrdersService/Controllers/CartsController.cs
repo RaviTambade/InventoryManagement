@@ -22,13 +22,18 @@ public class CartsController : ControllerBase
             return cartItems;
         }
 
-  
-
         [HttpPost]
         [Route("addtocart")]
         public bool AddItem( [FromBody] CartItem item)
         {
             bool status=  _crtsvs.AddItem(item);
+            return status;
+        }
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public bool Delete( int id)
+        {
+            bool status=  _crtsvs.Delete(id);
             return status;
         }
 

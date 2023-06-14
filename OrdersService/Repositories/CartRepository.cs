@@ -26,7 +26,7 @@ public class CartRepository : ICartRepository
           MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select cartitems.cartid, carts.employeeid, cartitems.materialid, categories.category,cartitems.quantity from cartitems inner join carts on cartitems.cartid=carts.id inner join categories on categories.id=cartitems.categoryid where carts.employeeid =@empid";
+            string query = "select cartitems.id, cartitems.cartid, carts.employeeid, cartitems.materialid, categories.category,cartitems.quantity from cartitems inner join carts on cartitems.cartid=carts.id inner join categories on categories.id=cartitems.categoryid where carts.employeeid =@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 ;
@@ -34,6 +34,7 @@ public class CartRepository : ICartRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
+                int id = Int32.Parse(reader["id"].ToString());
                 int cartid = Int32.Parse(reader["cartid"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
                 string category = reader["category"].ToString();
@@ -42,6 +43,7 @@ public class CartRepository : ICartRepository
                 
                 CartItem item = new CartItem()
                 {
+                    Id=id,
                     CartId=cartid,
                     MaterialId=materialid,
                     Category=category,
@@ -65,10 +67,34 @@ public class CartRepository : ICartRepository
         return cartItems;
     }
 
+    public bool Delete(int id){
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "DELETE FROM cartitems WHERE id=@id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
 
     public bool AddItem(CartItem item){
         bool status =false;
-        Console.WriteLine(item.Category);
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -83,7 +109,6 @@ public class CartRepository : ICartRepository
             con.Open();
 
             int rowsAffected = cmd.ExecuteNonQuery();
-            Console.WriteLine(query);
             if (rowsAffected > 0)
             {
                 status = true;
