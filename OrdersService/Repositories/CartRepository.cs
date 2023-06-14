@@ -23,6 +23,43 @@ public class CartRepository : ICartRepository
     public IEnumerable<CartItem> GetAll(int empid)
     {
         List<CartItem> cartItems = new List<CartItem>();
+          MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select cartitems.cartid, cartitems.materialid,cartitems.categoryid,cartitems.quantity from cartitems inner join carts on cartitems.cartid=carts.id where carts.employeeid =@empid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+;
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int cartid = Int32.Parse(reader["cartid"].ToString());
+                int materialid = Int32.Parse(reader["materialid"].ToString());
+                int categoryid = Int32.Parse(reader["categoryid"].ToString());
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                
+                CartItem item = new CartItem()
+                {
+                    CartId=cartid,
+                    MaterialId=materialid,
+                    CategoryId=categoryid,
+                    Quantity=quantity
+                };
+
+                cartItems.Add(item);
+
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
         return cartItems;
     }
 
