@@ -8,25 +8,42 @@ import { Observable, Subject } from 'rxjs';
 export class MaterialService {
 
   constructor(private http:HttpClient) { }
-  Order(order:any):Observable<any> 
+  private subject = new Subject<any>();
+  private subject2 = new Subject<any>();
+  Order(cart:any):Observable<any> 
   {
+    console.log(cart);
     let url = "http://localhost:5082/api/orders/order";
-    return this.http.post(url,order);
+    return this.http.post(url,cart);
   }
   getById(materialId:number)
   {
     let url ="http://localhost:5176/api/Materials/materials/"+ materialId;
      this.http.get(url).subscribe((data)=>{
+      console.log(data);
       this.subject.next({data});
     })
   }
+  getOrderDetails(orderid:number)
+  {
+    let url ="http://localhost:5082/api/orders/orders/details/"+ orderid;
+
+     this.http.get(url).subscribe((data)=>{
+      console.log(data);
+      this.subject2.next({data});
+    })
+  }
+  getOrdersHistory(id:number):Observable<any>{
+    let url ="http://localhost:5082/api/Orders/history/" + id ;
+    return this.http.get(url);
+
+  }
+  
   getAllMaterials():Observable<any> 
   {
     let url = "http://localhost:5176/api/Materials/materials";
     return this.http.get(url);
   }
-  private subject = new Subject<any>();
-
 
 
   clearData() {
@@ -36,4 +53,10 @@ export class MaterialService {
   getData(): Observable<any> {
     return this.subject.asObservable();
   }
+  GetDetails(): Observable<any> {
+
+    return this.subject2.asObservable();
+  }
+
+
 }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
+import { MaterialService } from '../material.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-requests',
@@ -15,14 +18,15 @@ export class RequestsComponent {
   size: number = 0;
   endIndex = 0;
   arrLength = 0;
+  subscription: Subscription|undefined;
 
-  constructor(private svc: AppService) { 
+  constructor(private svc: MaterialService,private router:Router) { 
     this.result=[];
     this.orders=[];
   }
 
   ngOnInit(): void {
-    this.svc.getOrdersHistory(14).subscribe((res) => {
+    this.subscription =this.svc.getOrdersHistory(12).subscribe((res) => {
       this.result = res;
       console.log(res);
       this.result?.reverse();
@@ -59,7 +63,10 @@ export class RequestsComponent {
     }
   }
   details(id:number){
-console.log(id);
+       console.log(id);
+       this.svc.getOrderDetails(id);
+        this.router.navigate(['orderdetails'])
+     
   }
 
   

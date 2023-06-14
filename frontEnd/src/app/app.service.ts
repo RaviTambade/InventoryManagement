@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppService {
 
   private subject = new Subject<any>();
-
+  private subject2 = new Subject<any>();
   constructor(private http:HttpClient) { }
 
   getById(id:number):Observable<any>
@@ -26,6 +26,7 @@ export class AppService {
  getOrders():Observable<any>{
     let url ="http://localhost:5082/api/Orders/orderedInADay" ;
     return this.http.get(url);
+    
 
   }
   getOrdersHistory(id:number):Observable<any>{

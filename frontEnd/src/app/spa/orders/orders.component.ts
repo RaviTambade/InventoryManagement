@@ -13,8 +13,8 @@ export class OrdersComponent {
   subscription: Subscription|undefined;
   material:any;
   order:any;
-  
   empid=12;
+  cart:any[];
 constructor(public fb : FormBuilder,private svc:MaterialService, private router:Router){
 this.order={
   "employeeid" :0,
@@ -22,6 +22,7 @@ this.order={
   "type":'',
   "quantity":0
 };
+this.cart=[];
 }
 
 
@@ -34,10 +35,9 @@ orderForm = this.fb.group({
 });
 
 ngOnInit(): void {
-  this.subscription = this.svc.getData().subscribe((response) =>{
+    this.subscription= this.svc.getData().subscribe((response) =>{
     console.log(response.data);
-    console.log(response);
-    this.material=response.data
+    this.material=response.data;
   })
 }
 onSubmit(){
@@ -46,13 +46,13 @@ onSubmit(){
     this.order.quantity=this.orderForm.value.orderQuantity;
     this.order.employeeid=this.empid;
     this.order.type=this.orderForm.value.type;
-    console.log(this.order);
-    this.svc.Order(this.order).subscribe((res)=>{
-      if(res){
-        alert("Ordered Successfully!");
-        this.router.navigate(['']);
-      }
-    })
+
+    // this.svc.Order(this.order).subscribe((res)=>{
+    //   if(res){
+    //     alert("Ordered Successfully!");
+    //     this.router.navigate(['requests']);
+    //   }
+    // })
   }
 
 

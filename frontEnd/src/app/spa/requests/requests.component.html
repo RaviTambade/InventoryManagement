@@ -1,8 +1,9 @@
 <ol type="number">
     <div *ngFor="let order of orders">
-        <li >
-            material Name: {{order.name}} status: {{order.status}} <button type="submit" (click)="details(order.id)" >Details</button>
-        </li>
+        <li > material Name: {{order.name}} </li>
+        <li>status: {{order.status}}</li>
+        <li> Ordered Date: {{order.orderDate}} </li>
+        <button type="submit" (click)="details(order.id)" >Details</button>
         <hr />
     </div>
 </ol>

@@ -3,6 +3,8 @@ import { AppService } from 'src/app/app.service';
 import { MaterialService } from '../material.service';
 import { Route, Router } from '@angular/router';
 import { VirtualTimeScheduler } from 'rxjs';
+import { CartService } from '../cart.service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-store',
@@ -19,11 +21,25 @@ export class StoreComponent {
   data: any[];
   size: number = 0;
   material:any;
+  cart:any[];
+  newOrder:any;
+  status:boolean=false;
 
-  constructor(private svc: MaterialService, private router:Router) {
-    this.data = []
-
+  constructor( private fb: FormBuilder,private svc: MaterialService, private router:Router, private cartsvc:CartService) {
+    this.data = [];
+    this.cart=[];
+    this.newOrder={"employeeid" :0,
+    "materialid":0,
+    "type":'',
+    "quantity":0};
   }
+  orderForm = this.fb.group({
+    id : [0 , [Validators.required]],
+    name : [ ' ', [Validators.required]],
+    type : [ ' ', [Validators.required]],
+    quantity : [ 0, [Validators.required]],
+    orderQuantity: [ 0, [Validators.required]],
+  });
 
   ngOnInit(): void {
     this.svc.getAllMaterials().subscribe((response)=>{
@@ -35,6 +51,7 @@ export class StoreComponent {
       this.endIndex = this.currentIndex + this.size;
       this.materials = this.data.slice(this.currentIndex, this.endIndex);
     })
+    
     this.isDisabledPrev = true;
   }
   
@@ -62,9 +79,20 @@ export class StoreComponent {
     }
   }
 
-  order(id:any){
-this.svc.getById(id);
-this.router.navigate(['order'])
+  add(materialId:any,materialType:any,quantity:any){
+    this.newOrder.materialid=materialId;
+    this.newOrder.quantity= Number.parseInt(quantity);
+    this.newOrder.type=materialType;
+    this.newOrder.employeeid=12;
+    this.cart.push(this.newOrder);
+    alert("added");
+  }
+  order(){
+    this.svc.Order(this.cart).subscribe((res)=>{
+      this.status=res;
+      console.log(res);
+    })
+    
   }
 
 }

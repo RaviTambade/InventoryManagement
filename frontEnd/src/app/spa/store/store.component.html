@@ -3,13 +3,42 @@
     <h4 >Material Type:{{material.type}}</h4>
     <h4 >Material Name: {{material.name}}</h4>
     <h4>  Qunatity:{{material.quantity}}</h4>
-    <button type="submit" (click)="order(material.id)" >Order</button>
-     <button type="submit">Update</button>
+    <label for="orderedQuantity">Add Quantity</label><br>
+    <input type="number"  name="orderedQuantity" #orderedQuantity >
+    <button type="submit" (click)="add(material.id,material.type,orderedQuantity.value)" >Select</button>
      <hr>
 </div>   
 <button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
-<button type="button"  (click)="next()" [disabled]="isDisabledNext">Next</button>
+<button type="button"  (click)="next()" [disabled]="isDisabledNext">Next</button> 
+
+<button type="submit" (click)="order()" >Order</button>
 
 
+<!-- 
 
-<orders></orders>
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <div *ngFor="let material of materials">
+        <label for="id">Material Id: </label>
+        <input name="id" id="id" type="number" formControlName="id" [(ngModel)]="material.id" readonly>
+        <br>
+
+        <label for="title">Material Name: </label>
+        <input name="title" id="title" type="text" formControlName="name" [(ngModel)]="material.name" readonly>
+        <br>
+
+        <label for="type">Material Type: </label>
+        <input name="type" id="type" type="text" formControlName="type" [(ngModel)]="material.type" readonly>
+        <br>
+
+        <label for="quantity">Avilable Quantity: </label>
+        <input name="quantity" id="quantity" type="number" formControlName="quantity" [(ngModel)]="material.quantity" readonly>
+        <br>
+
+        <label for="orderQuantity">Order Quantity: </label>
+        <input name="orderQuantity" id="orderQuantity" formControlName="orderQuantity" type="number" placeholder="Enter the quantity">
+        <button type="submit">order</button><hr>
+    </div>
+</form>
+
+<button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
+<button type="button"  (click)="next()" [disabled]="isDisabledNext">Next</button> -->
