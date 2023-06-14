@@ -15,6 +15,10 @@ export class MaterialService {
     let url ="http://localhost:5082/api/carts/cart/" + id ;
     return this.http.get(url);
   }
+  remove(id:number):Observable<any>{
+    let url ="http://localhost:5082/api/carts/delete/" + id ;
+    return this.http.delete(url);
+  }
   addToCart(cart:any):Observable<any> 
   {
     console.log(cart);

@@ -1,7 +1,7 @@
 
 <ul>
     <div *ngFor="let cart of carts">
-        <li >material Id: {{cart.materialId}} material category: {{cart.category}}  Quantity: {{cart.quantity}}</li>
+        <li >material Id: {{cart.materialId }} material category: {{cart.category}}  Quantity: {{cart.quantity}}</li> <button (click)="onRemove(cart.id)">Remove</button>
     
         <hr />
     </div>

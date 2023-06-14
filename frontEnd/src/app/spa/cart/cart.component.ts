@@ -17,6 +17,7 @@ export class CartComponent {
   size: number = 0;
   endIndex = 0;
   arrLength = 0;
+  status:boolean=false;
   subscription: Subscription|undefined;
 
   constructor(private svc: MaterialService,private router:Router) { 
@@ -28,7 +29,6 @@ export class CartComponent {
     this.svc.getCart(12).subscribe((res) => {
       this.result = res;
       console.log(res);
-      
       this.result?.reverse();
       this.carts=this.result;
       this.arrLength = this.result.length;
@@ -61,6 +61,13 @@ export class CartComponent {
     {
       this.isDisabledPrev = true;
     }
+  }
+  onRemove(id:number){
+    this.svc.remove(id).subscribe((res)=>{
+      console.log(res);
+    
+      
+    })
   }
 
 
