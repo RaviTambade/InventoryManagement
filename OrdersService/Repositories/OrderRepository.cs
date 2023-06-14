@@ -24,7 +24,7 @@ public class OrderRepository : IOrderRepository
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.id,employees.firstname,employees.lastname,orders.date, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid=orderdetails.id where orders.id = @orderId ";
+            string query = " select orders.id,orders.date, materials.id as materialid, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid=orderdetails.id where orders.id = @orderId ";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@orderId", orderid);
             con.Open();
@@ -32,22 +32,23 @@ public class OrderRepository : IOrderRepository
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["id"].ToString());
-                string? empfirstname = reader["firstname"].ToString();
-                string? emplastname = reader["lastname"].ToString();
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
                 string? status = reader["status"].ToString();
-                int materialid = Int32.Parse(reader["id"].ToString());
+                int materialid = Int32.Parse(reader["materialid"].ToString());
                 string? materialname = reader["title"].ToString();
                 string? matrialtype = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                
+                Console.WriteLine(orderdate);
+
                 order = new Order()
                 {
                     Id=id,
                     Status=status,
+                    OrderDate=orderdate,
                     Name=materialname,
                     Type=matrialtype,
-                    Quantity=quantity
+                    Quantity=quantity,
+                    MaterialId=materialid
                 };
             }
             reader.Close();
@@ -71,7 +72,7 @@ public class OrderRepository : IOrderRepository
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = " select orderdetails.id, orders.date,orders.status, orderdetails.quantity, materials.title, categories.category from orders inner join orderdetails on orders.orderdetailid = orderdetails.id inner join materials on orderdetails.materialid=materials.id inner join categories on materials.categoryid=categories.id inner join employees on orderdetails.employeeid = employees.id where employees.id =@empid";
+            string query = " select orders.id, orders.date,orders.status, orderdetails.quantity, materials.title, categories.category from orders inner join orderdetails on orders.orderdetailid = orderdetails.id inner join materials on orderdetails.materialid=materials.id inner join categories on materials.categoryid=categories.id inner join employees on orderdetails.employeeid = employees.id where employees.id =@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 ;
@@ -131,7 +132,7 @@ public class OrderRepository : IOrderRepository
                 string? type = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status =  reader["status"].ToString();
- 
+                
                 Order theOrder = new Order
                 {
                     Id = id,
