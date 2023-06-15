@@ -36,7 +36,7 @@ public class OrderRepository : IOrderRepository
                 string? status = reader["status"].ToString();
                 int materialid = Int32.Parse(reader["materialid"].ToString());
                 string? materialname = reader["title"].ToString();
-                string? matrialtype = reader["category"].ToString();
+                string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 Console.WriteLine(orderdate);
 
@@ -46,7 +46,7 @@ public class OrderRepository : IOrderRepository
                     Status=status,
                     OrderDate=orderdate,
                     Name=materialname,
-                    Type=matrialtype,
+                    Category=category,
                     Quantity=quantity,
                     MaterialId=materialid
                 };
@@ -84,7 +84,7 @@ public class OrderRepository : IOrderRepository
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
                 string? status = reader["status"].ToString();
                 string? materialname = reader["title"].ToString();
-                string? matrialtype = reader["category"].ToString();
+                string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 
                 Order order = new Order()
@@ -93,7 +93,7 @@ public class OrderRepository : IOrderRepository
                     OrderDate=orderdate,
                     Status=status,
                     Name=materialname,
-                    Type=matrialtype,
+                    Category=category,
                     Quantity=quantity
                 };
 
@@ -129,7 +129,7 @@ public class OrderRepository : IOrderRepository
                 string? empfirstname = reader["firstname"].ToString();
                 string? emplastname = reader["lastname"].ToString();
                 string? name = reader["title"].ToString();
-                string? type = reader["category"].ToString();
+                string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status =  reader["status"].ToString();
                 
@@ -137,7 +137,7 @@ public class OrderRepository : IOrderRepository
                 {
                     Id = id,
                     Name=name,
-                    Type = type,
+                    Category = category,
                     Quantity = quantity,
                     Status =status
                 };
@@ -174,7 +174,7 @@ public class OrderRepository : IOrderRepository
                 int id = Int32.Parse(reader["id"].ToString());
                 int materialId = Int32.Parse(reader["materialid"].ToString());
                 string? name = reader["title"].ToString();
-                string? type = reader["category"].ToString();
+                string? category = reader["category"].ToString();
                 string? empfirstname = reader["firstname"].ToString();
                 string? emplastname = reader["lastname"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
@@ -185,7 +185,7 @@ public class OrderRepository : IOrderRepository
                 {
                     Id = id,
                     Name=name,
-                    Type = type,
+                    Category = category,
                     Quantity = quantity,
                     Status =status,
                 };
@@ -206,16 +206,21 @@ public class OrderRepository : IOrderRepository
 
     public bool Order(IEnumerable<Order> orders){
         bool status =false;
+        
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             foreach(Order order  in orders){
+                Console.WriteLine(order.EmployeeId);
+                Console.WriteLine(order.MaterialId);
+                Console.WriteLine(order.Quantity);
+                Console.WriteLine(order.Category);
             string query = "insert into orderdetails(employeeid,materialid,quantity,categoryid)values(@empid,@materialid,@quantity,(select id from categories where category=@category))";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", order.EmployeeId);
             cmd.Parameters.AddWithValue("@materialid", order.MaterialId);
             cmd.Parameters.AddWithValue("@quantity", order.Quantity);
-            cmd.Parameters.AddWithValue("@category", order.Type);
+            cmd.Parameters.AddWithValue("@category", order.Category);
             con.Open();
             int rowsAffected = cmd.ExecuteNonQuery();
             con.Close();
