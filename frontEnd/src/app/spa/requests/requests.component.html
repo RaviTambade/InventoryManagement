@@ -1,12 +1,13 @@
-<ol type="number">
+<h2>My Requests</h2>
+<ul >
     <div *ngFor="let order of orders">
         <li > material Name: {{order.name}} </li>
         <li>status: {{order.status}}</li>
         <li> Ordered Date: {{order.orderDate}} </li>
         <button type="submit" (click)="details(order.id)" >Details</button>
-        <hr />
+        <hr/>
     </div>
-</ol>
+</ul>
 <button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
 <button type="button"  (click)="next()" [disabled]="isDisabledNext">Next</button>
 

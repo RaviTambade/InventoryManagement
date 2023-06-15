@@ -19,7 +19,7 @@ export class CartComponent {
   }
 
   ngOnInit(): void {
-    this.svc.getCart(12).subscribe((res) => {
+    this.svc.getRequests(12).subscribe((res) => {
       this.result = res;
       console.log(res);
       this.result?.reverse();
@@ -31,6 +31,7 @@ export class CartComponent {
     this.svc.remove(id).subscribe((res)=>{
       console.log(res);  
     })
+    console.log("remove");
   }
 
   onOrder(){
@@ -39,6 +40,10 @@ export class CartComponent {
       console.log(res);
       this.router.navigate(['requests']);
     })
+  }
+  onRemoveAll(){
+    console.log("removeAll");
+
   }
 
 
