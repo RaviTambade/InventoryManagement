@@ -1,11 +1,12 @@
 
+<h2>My Cart</h2>
 <ul>
     <div *ngFor="let cart of carts">
-        <li >material Id: {{cart.materialId }} material category: {{cart.category}}  Quantity: {{cart.quantity}}</li> <button (click)="onRemove(cart.id)">Remove</button>
+        <li >material Id: {{cart.materialId }} material category: {{cart.category}}  Quantity: {{cart.quantity}}</li> <button (click)="onRemove(cart.id)">Remove</button>  <button >Edit</button>
     
         <hr />
     </div>
+    <button (click)="onOrder()" >Order</button>
 </ul>
-<button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
-<button type="button"  (click)="next()" [disabled]="isDisabledNext">Next</button>
+
 

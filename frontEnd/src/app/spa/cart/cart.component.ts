@@ -11,13 +11,6 @@ import { Subscription } from 'rxjs';
 export class CartComponent {
   carts: any[] ;
   result:any[];
-  isDisabledPrev = false;
-  isDisabledNext = false;
-  currentIndex = 0;
-  size: number = 0;
-  endIndex = 0;
-  arrLength = 0;
-  status:boolean=false;
   subscription: Subscription|undefined;
 
   constructor(private svc: MaterialService,private router:Router) { 
@@ -31,42 +24,20 @@ export class CartComponent {
       console.log(res);
       this.result?.reverse();
       this.carts=this.result;
-      this.arrLength = this.result.length;
-      this.size = 4;
-      this.currentIndex = 0;
-      this.endIndex = this.currentIndex + this.size;
-      this.carts = this.result.slice(this.currentIndex, this.endIndex);
     })
-    this.isDisabledPrev = true;
-  }
-  next() {
-    this.currentIndex = this.currentIndex + this.size;
-    this.endIndex = this.currentIndex + this.size;
-    this.carts = this.result.slice(this.currentIndex, this.endIndex);
-    //button unable disable code
-    this.isDisabledPrev = false;
-    if (this.endIndex >= this.arrLength)
-    {
-      this.isDisabledNext = true;
-    }
-  }
 
-  previous() {
-    this.currentIndex = this.currentIndex - this.size;
-    this.endIndex = this.currentIndex + this.size;
-    this.carts = this.result.slice(this.currentIndex, this.endIndex);
-    //button unable disable code
-    this.isDisabledNext = false;
-    if (this.currentIndex <= 0) 
-    {
-      this.isDisabledPrev = true;
-    }
   }
   onRemove(id:number){
     this.svc.remove(id).subscribe((res)=>{
+      console.log(res);  
+    })
+  }
+
+  onOrder(){
+    console.log(this.carts);
+    this.svc.order(this.carts).subscribe((res)=>{
       console.log(res);
-    
-      
+      this.router.navigate(['requests']);
     })
   }
 
