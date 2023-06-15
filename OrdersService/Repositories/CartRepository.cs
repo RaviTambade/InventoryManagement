@@ -19,7 +19,7 @@ public class CartRepository : ICartRepository
     }
 
  
-    //order history of supervisors id
+    //get cart Items of supervisors by sending supervisor's id
     public IEnumerable<CartItem> GetAll(int empid)
     {
         List<CartItem> cartItems = new List<CartItem>();
@@ -29,6 +29,54 @@ public class CartRepository : ICartRepository
             string query = "select cartitems.id, cartitems.cartid, carts.employeeid, cartitems.materialid, categories.category,cartitems.quantity from cartitems inner join carts on cartitems.cartid=carts.id inner join categories on categories.id=cartitems.categoryid where carts.employeeid =@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
+;
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                int cartid = Int32.Parse(reader["cartid"].ToString());
+                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string category = reader["category"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                int employeeid = Int32.Parse(reader["employeeid"].ToString());
+                
+                CartItem item = new CartItem()
+                {
+                    Id=id,
+                    CartId=cartid,
+                    MaterialId=materialid,
+                    Category=category,
+                    Quantity=quantity,
+                    EmployeeId=employeeid  
+                };
+
+                cartItems.Add(item);
+
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return cartItems;
+    }
+
+    //get cart items  of supervisors by sending request id
+    public IEnumerable<CartItem> GetCartItems(int requestid)
+    {
+        List<CartItem> cartItems = new List<CartItem>();
+          MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select cartitems.id, cartitems.cartid, carts.employeeid, cartitems.materialid, categories.category,cartitems.quantity  from cartitems inner join carts on cartitems.cartid=carts.id inner join categories on categories.id=cartitems.categoryid inner join requests on cartitems.requestid=requests.id where requests.id =@requestid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@requestid", requestid);
 ;
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();

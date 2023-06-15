@@ -16,5 +16,6 @@ public class CartService : ICartService
     public bool AddItem(CartItem cartItem)=> _repo.AddItem(cartItem);
     public bool Delete(int id)=> _repo.Delete(id);
     public IEnumerable<Request> GetAllRequests(int empid)=> _repo.GetAllRequests(empid);
+    public IEnumerable<CartItem> GetCartItems(int requestid)=> _repo.GetCartItems(requestid);
 
 }
