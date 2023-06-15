@@ -127,4 +127,45 @@ public class CartRepository : ICartRepository
         return status;
     
     }
+    public IEnumerable<Request> GetAllRequests(int empid)
+    {
+        List<Request> requests = new List<Request>();
+          MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select * from requests where employeeid=@empid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+;
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                DateTime date = DateTime.Parse(reader["date"].ToString());
+                string status = reader["status"].ToString();
+                
+                Request request = new Request()
+                {
+                    RequestId= id,
+                    Date=date,
+                    Status=status
+                };
+
+                requests.Add(request);
+
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return requests;
+    }
+
 }

@@ -22,6 +22,14 @@ public class CartsController : ControllerBase
             return cartItems;
         }
 
+        [HttpGet]
+        [Route("requests/{empid}")]
+        public IEnumerable<Request> GetAllRequests(int empid)
+        {
+            IEnumerable<Request> requests= _crtsvs.GetAllRequests(empid);
+            return requests;
+        }
+
         [HttpPost]
         [Route("addtocart")]
         public bool AddItem( [FromBody] CartItem item)
