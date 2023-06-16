@@ -243,6 +243,33 @@ select orders.id, materials.id, materials.title, categories.category, orderdetai
 -- out of stock material
 select  materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid  where quantity = 0
 
+-- store procedure to add new request after adding to the cart
+    DELIMITER $$
+CREATE PROCEDURE addtocart(IN cartid Int, in materialid int,in categoryid int,in quantity int )
+BEGIN
+DECLARE noMoreRow INT default 0; 
+DECLARE cart_sum  INT;
+DECLARE r1  INT;
+DECLARE reqid INTEGER DEFAULT 0;
+DEClARE requestcur CURSOR FOR SELECT id FROM requests  where employeeid =(select employeeid from carts where id=cartid);
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET noMoreRow = 1;
+SELECT COUNT(*) into cart_sum from (select c.cartid from cartitems c where c.cartid= cartid )sub;
+				if(cart_sum=0) then 
+			INSERT INTO requests (employeeid,status) VALUES ((select c.employeeid from carts c where c.id=cartid),'initiated');
+			end if;
+			open requestcur;
+            cartitem:Loop
+            FETCH requestcur INTO reqid;
+                IF noMoreRow=1 THEN 
+				LEAVE cartitem;
+				END IF;
+	END LOOP cartitem ;
+                SELECT reqid into r1  ORDER BY reqid DESC LIMIT 1;
+			insert into cartitems(cartid,materialid,categoryid,quantity,requestid) value( cartid,materialid, categoryid,quantity, r1);
+	CLOSE requestcur;
+END $$
+DELIMITER ;
+DELIMITER $$
 
 
 -- add table catagories  -
