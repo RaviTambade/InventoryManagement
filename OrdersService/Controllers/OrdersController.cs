@@ -48,11 +48,11 @@ public class OrdersController : ControllerBase
             return orders;
         }
 
-        [HttpPost]
-        [Route("order")]
-        public bool AddOrder( [FromBody] List<Order> orders)
+        [HttpGet]
+        [Route("order/{empid}")]
+        public bool AddOrder(int empid)
         {
-            bool status= _ordsvs.Order(orders);
+            bool status= _ordsvs.Order(empid);
             return status;
         }
 

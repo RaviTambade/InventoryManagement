@@ -204,23 +204,16 @@ public class OrderRepository : IOrderRepository
         return orders;
     }
 
-    public bool Order(IEnumerable<Order> orders){
+    public bool Order(int empid){
         bool status =false;
         
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            foreach(Order order  in orders){
-                Console.WriteLine(order.EmployeeId);
-                Console.WriteLine(order.MaterialId);
-                Console.WriteLine(order.Quantity);
-                Console.WriteLine(order.Category);
-            string query = "insert into orderdetails(employeeid,materialid,quantity,categoryid)values(@empid,@materialid,@quantity,(select id from categories where category=@category))";
+            string query = "call CreateOrder((select id from carts  where employeeid=@empid))";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@empid", order.EmployeeId);
-            cmd.Parameters.AddWithValue("@materialid", order.MaterialId);
-            cmd.Parameters.AddWithValue("@quantity", order.Quantity);
-            cmd.Parameters.AddWithValue("@category", order.Category);
+            cmd.Parameters.AddWithValue("@empid", empid);
+  
             con.Open();
             int rowsAffected = cmd.ExecuteNonQuery();
             con.Close();
@@ -229,7 +222,6 @@ public class OrderRepository : IOrderRepository
                 status = true;
             }
             
-            }
         }
         catch (Exception e)
         {

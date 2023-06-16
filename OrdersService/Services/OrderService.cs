@@ -17,6 +17,6 @@ public class OrderService : IOrderService
     public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
     public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
 
-    public bool Order(IEnumerable<Order> orders)=> _repo.Order(orders);
+    public bool Order(int empid)=> _repo.Order(empid);
 
 }
