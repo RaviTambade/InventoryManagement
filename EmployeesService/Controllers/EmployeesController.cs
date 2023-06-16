@@ -24,7 +24,7 @@ namespace EmployeesService.Controllers
         }
 
         [HttpGet]
-        [Route("employees/{id}")]
+        [Route("employee/{id}")]
         public Employee GetById(int id)
         {
             Employee employee = _empsrv.GetById(id);

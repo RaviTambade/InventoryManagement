@@ -13,6 +13,5 @@ public interface IEmployeeRepository
     // Employee GetBySection(string section);
     IEnumerable<Employee> GetByGender(string gender);
     bool Delete(int employeeId);
- 
 
 }

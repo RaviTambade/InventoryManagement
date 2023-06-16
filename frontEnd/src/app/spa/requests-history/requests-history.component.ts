@@ -1,29 +1,40 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MaterialService } from '../material.service';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  selector: 'app-requests-history',
+  templateUrl: './requests-history.component.html',
+  styleUrls: ['./requests-history.component.css']
 })
-export class CartComponent {
-  carts: any[] ;
+export class RequestsHistoryComponent {
+  requests: any[] ;
   result:any[];
+  carts: any[] ;
+  data:any[];
   subscription: Subscription|undefined;
 
   constructor(private svc: MaterialService,private router:Router) { 
     this.result=[];
+    this.requests=[];
     this.carts=[];
+    this.data=[];
   }
 
   ngOnInit(): void {
+    this.svc.getCart(12).subscribe((res) => {
+      this.data = res;
+      console.log(res);
+      this.data?.reverse();
+      this.carts=this.data;
+    })
+
     this.svc.getRequests(12).subscribe((res) => {
       this.result = res;
       console.log(res);
       this.result?.reverse();
-      this.carts=this.result;
+      this.requests=this.result;
     })
 
   }
@@ -31,20 +42,22 @@ export class CartComponent {
     this.svc.remove(id).subscribe((res)=>{
       console.log(res);  
     })
-    console.log("remove");
   }
 
   onOrder(){
-    console.log(this.carts);
-    this.svc.order(this.carts).subscribe((res)=>{
+    console.log(this.requests);
+    this.svc.order(this.requests).subscribe((res)=>{
       console.log(res);
       this.router.navigate(['requests']);
     })
   }
-  onRemoveAll(){
+  onRemoveAll(){  
     console.log("removeAll");
-
   }
 
+  onView(requestid:number){
+    this.svc.getCarts(requestid);
+    this.router.navigate(['requestDetails']);
 
+  }
 }

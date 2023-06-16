@@ -1,0 +1,27 @@
+
+<h1>My Requests</h1>
+
+<h2>Request</h2>
+
+<div *ngFor="let cart of carts">
+    <li >material Id: {{cart.materialId }}</li>
+        <li>material category: {{cart.category}}</li> 
+        <li>Ordered Quantity: {{cart.quantity}}</li>  
+        <button>Edit</button> <button (click)="onRemove(cart.id)">Remove</button>
+    <hr />
+</div>
+
+<button (click)="onOrder()" >Place Order</button>  <button (click)="onRemoveAll()" >RemoveAll</button> 
+
+
+<h2>Previous Requests</h2>
+<ul>
+    <div *ngFor="let request of requests">
+        <li >Request Id: {{request.requestId }}   Status: {{request.status}}</li>
+        <button  (click)="onView(request.requestId)">View</button>
+
+        <hr />
+    </div>
+</ul> 
+
+

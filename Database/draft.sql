@@ -272,6 +272,36 @@ DELIMITER ;
 DELIMITER $$
 
 
+
+
+DROP procedure CreateOrder
+
+    DELIMITER $$
+CREATE PROCEDURE CreateOrder(in cartId int)
+BEGIN
+DECLARE noMoreRow INT default 0; 
+DECLARE employeeId INT;
+DECLARE materialId INT;
+DECLARE categoryId INT;
+DECLARE quantity INT;
+DECLARE cart_cursor CURSOR  FOR SELECT (select c.employeeid from carts c where c.id=cartId),ct.materialid, ct.categoryid, ct.quantity FROM cartitems ct WHERE ct.cartid=cartId; 
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET noMoreRow = 1;
+
+OPEN cart_cursor ;
+cart_items:LOOP
+    FETCH cart_cursor INTO employeeId,materialId,categoryId,quantity;
+    IF noMoreRow=1 THEN 
+		LEAVE cart_items;
+    END IF;
+     INSERT INTO orderdetails(employeeid,materialid,categoryid,quantity)VALUES(employeeId,materialId,categoryId,quantity); 
+END LOOP cart_items;
+DELETE FROM cartitems c WHERE c.cartid=cartId;
+CLOSE cart_cursor;
+END $$
+DELIMITER ;
+
+    
+
 -- add table catagories  -
 -- enum for gender    -
 -- material name = title  -

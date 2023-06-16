@@ -1,0 +1,11 @@
+
+<h2>My Cart</h2>
+<ul>
+    <div *ngFor="let cart of carts">
+        <li >material Id: {{cart.materialId }}</li>
+            <li>material category: {{cart.category}}</li> 
+            <li>Ordered Quantity: {{cart.quantity}}</li>  
+            <button>Edit</button> <button>Remove</button>
+        <hr />
+    </div>
+</ul>
