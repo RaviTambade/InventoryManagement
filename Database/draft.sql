@@ -6,60 +6,69 @@ create database inventorymanagement;
 use inventorymanagement;
 -- Table Creation
 CREATE TABLE roles(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-					role varchar(50));
-create table departments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-						department varchar(50));
+						role varchar(50));
+	create table departments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+							department varchar(50));
 
-create table categories(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-						category varchar(50));
+	create table categories(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+							category varchar(50));
 
-create table employees(id INT NOT NULL auto_increment primary KEY,
-						firstname VARCHAR(100),
-						lastname VARCHAR(50),
-						birthdate DATETIME,hiredate DATETIME,
-						contactnumber VARCHAR(20),email VARCHAR(50),password VARCHAR(15) NOT NULL,
-						imageurl varchar (50),
-						gender ENUM('male','female','other') NOT NULL,
-						departmentid  int not null,constraint fk_departmentid foreign key(departmentid) references departments(id) on update cascade on delete cascade,
-						roleid int not null,constraint fk_roleid foreign key(roleid) references roles(id) on update cascade on delete cascade);
-
-
-CREATE TABLE materials(id INT NOT NULL AUTO_INCREMENT primary KEY,
-						title VARCHAR(100),
-						categoryid INT NOT NULL, constraint fk_categoryid FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
-						quantity INT NOT NULL,
-						unitprice INT NOT NULL,
-						imageurl varchar (50));
- 
-
-create table Warehouse(id INT NOT NULL AUTO_INCREMENT primary KEY,
-					 section VARCHAR(20), 
-                     categoryid int not null,constraint fk_category_id foreign key(categoryid) references categories(id) on update cascade on delete cascade,
-                     employeeid int not null,constraint fk_employeeid foreign key(employeeid) references employees(id) on update cascade on delete cascade);
+	create table employees(id INT NOT NULL auto_increment primary KEY,
+							firstname VARCHAR(100),
+							lastname VARCHAR(50),
+							birthdate DATETIME,hiredate DATETIME,
+							contactnumber VARCHAR(20),email VARCHAR(50),password VARCHAR(15) NOT NULL,
+							imageurl varchar (50),
+							gender ENUM('male','female','other') NOT NULL,
+							departmentid  int not null,constraint fk_departmentid foreign key(departmentid) references departments(id) on update cascade on delete cascade,
+							roleid int not null,constraint fk_roleid foreign key(roleid) references roles(id) on update cascade on delete cascade);
 
 
-CREATE TABLE orderdetails(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-							employeeid INT NOT NULL,CONSTRAINT fk_employee_id FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                            materialid INT NOT NULL,CONSTRAINT fk_materialid FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                            quantity INT NOT NULL);
+	CREATE TABLE materials(id INT NOT NULL AUTO_INCREMENT primary KEY,
+							title VARCHAR(100),
+							categoryid INT NOT NULL, constraint fk_category_id FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
+							quantity INT NOT NULL,
+							unitprice INT NOT NULL,
+							imageurl varchar (50));
+	 
 
-CREATE TABLE orders(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-					date DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    orderdetailid INT NOT NULL,CONSTRAINT fk_orderdetailsid FOREIGN KEY (orderdetailid) REFERENCES orderdetails(id) ON UPDATE CASCADE ON DELETE CASCADE ,
-                    employeeid INT NOT NULL,CONSTRAINT fk_employees_id FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE ,
-                    status ENUM('delivered','inprogress','cancelled') NOT NULL);
+	create table Warehouse(id INT NOT NULL AUTO_INCREMENT primary KEY,
+						 section VARCHAR(20), 
+						 categoryid int not null,constraint fk_category_id1 foreign key(categoryid) references categories(id) on update cascade on delete cascade,
+						 employeeid int not null,constraint fk_employeeid foreign key(employeeid) references employees(id) on update cascade on delete cascade);
+
+CREATE TABLE requests(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+						     date DATETIME DEFAULT CURRENT_TIMESTAMP,
+							employeeid INT NOT NULL,
+					        CONSTRAINT fk_employee_id5 FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+							status ENUM('delivered', 'initiated','inprogress','cancelled') NOT NULL);
+
+	CREATE TABLE orderdetails(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+								employeeid INT NOT NULL,CONSTRAINT fk_employee_id FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+								materialid INT NOT NULL,CONSTRAINT fk_materialid FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
+								categoryid INT NOT NULL, constraint fk_categoryid FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
+								requestid INT NOT NULL, constraint fk_reqid FOREIGN KEY(requestid) REFERENCES requests(id) on UPDATE cascade on delete cascade,
+								quantity INT NOT NULL);
+
+	CREATE TABLE orders(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+						date DATETIME DEFAULT CURRENT_TIMESTAMP,
+						orderdetailid INT NOT NULL,CONSTRAINT fk_orderdetailsid FOREIGN KEY (orderdetailid) REFERENCES orderdetails(id) ON UPDATE CASCADE ON DELETE CASCADE ,
+						employeeid INT NOT NULL,CONSTRAINT fk_employees_id FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE ,
+						status ENUM('delivered', 'initiated','inprogress','cancelled') NOT NULL);
 
 
-CREATE TABLE carts(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				   employeeid INT NOT NULL,
-				   CONSTRAINT fk_employee_id4 FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE);
+	CREATE TABLE carts(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+					   employeeid INT NOT NULL,
+					   CONSTRAINT fk_employee_id4 FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE);
 
-CREATE TABLE cartitems(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-						cartid INT NOT NULL,
-						CONSTRAINT fk_cartid FOREIGN KEY (cartid) REFERENCES carts(id)ON UPDATE CASCADE ON DELETE CASCADE,
-						materialid INT NOT NULL,CONSTRAINT fk_material_id4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                        categoryid INT NOT NULL, constraint fk_categoryid2 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
-                        quantity INT NOT NULL ); 
+
+
+	CREATE TABLE cartitems(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+							cartid INT NOT NULL,
+							CONSTRAINT fk_cartid FOREIGN KEY (cartid) REFERENCES carts(id)ON UPDATE CASCADE ON DELETE CASCADE,
+							materialid INT NOT NULL,CONSTRAINT fk_material_id4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
+							categoryid INT NOT NULL, constraint fk_categoryid2 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
+							quantity INT NOT NULL ); 
 
 -- TRIGGER (insert new entry in orders table find storemanagers id according to orderdetails and update the material quantity)
 
