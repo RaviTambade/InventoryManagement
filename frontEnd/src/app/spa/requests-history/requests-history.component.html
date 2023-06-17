@@ -2,7 +2,7 @@
 <h1>My Requests</h1>
 
 <h2>Request</h2>
-
+<div>
 <div *ngFor="let cart of carts">
     <li >material Id: {{cart.materialId }}</li>
         <li>material category: {{cart.category}}</li> 
@@ -12,6 +12,7 @@
 </div>
 
 <button (click)="onOrder()" >Place Order</button>  <button (click)="onRemoveAll()" >RemoveAll</button> 
+</div>
 
 
 <h2>Previous Requests</h2>
@@ -19,7 +20,6 @@
     <div *ngFor="let request of requests">
         <li >Request Id: {{request.requestId }}   Status: {{request.status}}</li>
         <button  (click)="onView(request.requestId)">View</button>
-
         <hr />
     </div>
 </ul> 

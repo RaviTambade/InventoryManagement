@@ -45,10 +45,9 @@ export class RequestsHistoryComponent {
   }
 
   onOrder(){
-    console.log(this.requests);
-    this.svc.order(this.requests).subscribe((res)=>{
+    this.svc.order(12).subscribe((res)=>{
       console.log(res);
-      this.router.navigate(['requests']);
+      this.router.navigate(['store']);
     })
   }
   onRemoveAll(){  
@@ -56,8 +55,8 @@ export class RequestsHistoryComponent {
   }
 
   onView(requestid:number){
-    this.svc.getCarts(requestid);
-    this.router.navigate(['requestDetails']);
+    // this.svc.getRequestDetails(requestid);
+    this.router.navigate(['requestDetails', requestid]);
 
   }
 }

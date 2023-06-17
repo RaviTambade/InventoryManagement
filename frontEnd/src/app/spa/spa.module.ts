@@ -16,6 +16,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { RequestsHistoryComponent } from './requests-history/requests-history.component';
 import { CartDetailsComponent } from './cart-details/cart-details.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -26,7 +27,9 @@ const routes: Routes=
       {path:'order',component:OrdersComponent},
       {path:'orderdetails',component:OrderDetailsComponent},
       {path:'requestHistory',component:RequestsHistoryComponent},
-      {path:'requestDetails',component:RequestDetailsComponent},
+      {path:'requestDetails/:requestid',component:RequestDetailsComponent},
+      {path:'orderhistory',component:OrderHistoryComponent},
+
     ];
 
 @NgModule({
@@ -43,7 +46,8 @@ const routes: Routes=
     OrderDetailsComponent,
     RequestsHistoryComponent,
     CartDetailsComponent,
-    RequestDetailsComponent
+    RequestDetailsComponent,
+    OrderHistoryComponent
   ],
   exports:[RouterContainerComponent],
   imports: [
