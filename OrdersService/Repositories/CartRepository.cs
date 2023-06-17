@@ -147,7 +147,7 @@ public class CartRepository : ICartRepository
         try
         {
             
-            string query = "call addtocart((select id from carts where employeeid=@empid),@materialid,(select id from categories where category=@category),@quantity);";
+            string query = "insert into cartitems(cartid,materialid,categoryid,quantity)values((select id from carts where employeeid=@empid),@materialid,(select id from categories where category=@category),@quantity);";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@category", item.Category);
             cmd.Parameters.AddWithValue("@empid", item.EmployeeId);
