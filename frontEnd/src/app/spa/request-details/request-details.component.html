@@ -2,10 +2,11 @@
 <h2>request</h2>
 <ul>
     <div *ngFor="let cart of carts">
+        <li>Request Date: {{cart.date}}</li> 
         <li >material Id: {{cart.materialId }}</li>
             <li>material category: {{cart.category}}</li> 
-            <li>Ordered Quantity: {{cart.quantity}}</li>  
-            <button>Edit</button> <button>Remove</button>
+            <li>Ordered Quantity: {{cart.quantity}}</li> 
+            <li>Status : {{cart.status}}</li>  
         <hr />
     </div>
 </ul>

@@ -38,10 +38,8 @@ export class RequestsHistoryComponent {
     })
 
   }
-  onRemove(id:number){
-    this.svc.remove(id).subscribe((res)=>{
-      console.log(res);  
-    })
+  onRemove(){
+
   }
 
   onOrder(){
@@ -53,6 +51,10 @@ export class RequestsHistoryComponent {
   onRemoveAll(){  
     console.log("removeAll");
   }
+  onEdit(){
+
+  }
+
 
   onView(requestid:number){
     // this.svc.getRequestDetails(requestid);

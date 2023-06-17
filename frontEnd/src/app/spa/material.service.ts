@@ -54,7 +54,7 @@ export class MaterialService {
   }
   getRequestDetails(requestid:number):Observable<any>
   {
-    let url ="http://localhost:5082/api/carts/carts/"+ requestid;
+    let url ="http://localhost:5082/api/carts/requestdetails/"+ requestid;
     return this.http.get(url)
 
 
