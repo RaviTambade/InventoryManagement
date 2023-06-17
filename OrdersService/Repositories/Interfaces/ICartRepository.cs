@@ -8,6 +8,6 @@ public interface ICartRepository
     bool AddItem(CartItem item);
     bool Delete(int id);
     IEnumerable<Request> GetAllRequests(int empid);
-    IEnumerable<CartItem> GetCartItems(int requestid);
+    IEnumerable<Request> GetRequestDetails(int requestid);
 
 }

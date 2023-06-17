@@ -68,13 +68,13 @@ public class CartRepository : ICartRepository
     }
 
     //get cart items  of supervisors by sending request id
-    public IEnumerable<CartItem> GetCartItems(int requestid)
+    public IEnumerable<Request> GetRequestDetails(int requestid)
     {
-        List<CartItem> cartItems = new List<CartItem>();
+        List<Request> requests = new List<Request>();
           MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select cartitems.id, cartitems.cartid, carts.employeeid, cartitems.materialid, categories.category,cartitems.quantity  from cartitems inner join carts on cartitems.cartid=carts.id inner join categories on categories.id=cartitems.categoryid inner join requests on cartitems.requestid=requests.id where requests.id =@requestid";
+            string query = "select o.requestid,requests.date, requests.status, o.materialid, categories.category, o.quantity  from orderdetails o inner join requests on requests.id=o.requestid inner join categories on categories.id=o.categoryid where o.requestid =@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
 ;
@@ -82,24 +82,24 @@ public class CartRepository : ICartRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int id = Int32.Parse(reader["id"].ToString());
-                int cartid = Int32.Parse(reader["cartid"].ToString());
+                int id = Int32.Parse(reader["requestid"].ToString());
+                DateTime date = DateTime.Parse(reader["date"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                int employeeid = Int32.Parse(reader["employeeid"].ToString());
+                string status = reader["status"].ToString();
                 
-                CartItem item = new CartItem()
+                Request request = new Request()
                 {
-                    Id=id,
-                    CartId=cartid,
+                    RequestId=id,
+                    Date=date,
                     MaterialId=materialid,
                     Category=category,
                     Quantity=quantity,
-                    EmployeeId=employeeid  
+                    Status=status
                 };
 
-                cartItems.Add(item);
+                requests.Add(request);
 
             }
             reader.Close();
@@ -112,7 +112,7 @@ public class CartRepository : ICartRepository
         {
             con.Close();
         }
-        return cartItems;
+        return requests;
     }
 
     public bool Delete(int id){

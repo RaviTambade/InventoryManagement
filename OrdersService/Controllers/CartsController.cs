@@ -22,6 +22,7 @@ public class CartsController : ControllerBase
             return cartItems;
         }
 
+        //get request history of employee
         [HttpGet]
         [Route("requests/{empid}")]
         public IEnumerable<Request> GetAllRequests(int empid)
@@ -31,11 +32,11 @@ public class CartsController : ControllerBase
         }
 
         [HttpGet]
-        [Route("carts/{requestid}")]
-        public IEnumerable<CartItem> GetAllCartItems(int requestid)
+        [Route("requestdetails/{requestid}")]
+        public IEnumerable<Request> GetRequestDetails(int requestid)
         {
-            IEnumerable<CartItem> cartItems= _crtsvs.GetCartItems(requestid);
-            return cartItems;
+            IEnumerable<Request> requests= _crtsvs.GetRequestDetails(requestid);
+            return requests;
         }
 
         [HttpPost]
