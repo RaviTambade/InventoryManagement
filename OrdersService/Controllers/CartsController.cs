@@ -46,11 +46,22 @@ public class CartsController : ControllerBase
             bool status=  _crtsvs.AddItem(item);
             return status;
         }
+
+        //delete cartitem
         [HttpDelete]
         [Route("delete/{id}")]
         public bool Delete( int id)
         {
             bool status=  _crtsvs.Delete(id);
+            return status;
+        }
+
+        //remove all items from cart 
+        [HttpDelete]
+        [Route("Emptycart/{employeeid}")]
+        public bool EmptyCart( int employeeid)
+        {
+            bool status= _crtsvs.EmptyCart(employeeid);
             return status;
         }
 

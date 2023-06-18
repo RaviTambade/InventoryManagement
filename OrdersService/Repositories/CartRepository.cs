@@ -216,4 +216,30 @@ public class CartRepository : ICartRepository
         return requests;
     }
 
+    public bool EmptyCart(int employeeid){
+    bool status = false;
+    MySqlConnection con = new MySqlConnection(_conString);
+    try
+    {
+        string query = "	DELETE FROM cartitems WHERE cartid=(select id from carts where employeeid=@employeeid)";
+        MySqlCommand cmd = new MySqlCommand(query, con);
+        cmd.Parameters.AddWithValue("@employeeid", employeeid);
+        con.Open();
+        int rowsAffected = cmd.ExecuteNonQuery();
+        if (rowsAffected > 0)
+        {
+            status = true;
+        }
+    }
+    catch (Exception e)
+    {
+        throw e;
+    }
+    finally
+    {
+        con.Close();
+    }
+    return status;
+}
+
 }

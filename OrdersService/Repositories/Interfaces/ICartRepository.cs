@@ -9,5 +9,6 @@ public interface ICartRepository
     bool Delete(int id);
     IEnumerable<Request> GetAllRequests(int empid);
     IEnumerable<Request> GetRequestDetails(int requestid);
+    bool EmptyCart(int employeeid);
 
 }
