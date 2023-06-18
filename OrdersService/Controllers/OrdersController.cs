@@ -13,7 +13,7 @@ public class OrdersController : ControllerBase
     {
         _ordsvs = ordsvs;
     }
-        //get order history of supervisors
+        //get order history of store managers
         [HttpGet]
         [Route("History/{empid}")]
         public IEnumerable<Order> GetAll(int empid)
@@ -23,10 +23,10 @@ public class OrdersController : ControllerBase
         }
 
         [HttpGet]
-        [Route("orders/details/{id}")]
-        public Order GetOrderDetails(int id)
+        [Route("details/{orderid}")]
+        public Order GetOrderDetails(int orderid)
         {
-            Order orders = _ordsvs.OrdersHistory(id);
+            Order orders = _ordsvs.GetOrderDetails(orderid);
             return orders;
         }
     
@@ -48,13 +48,6 @@ public class OrdersController : ControllerBase
             return orders;
         }
 
-        [HttpGet]
-        [Route("order/{empid}")]
-        public bool AddOrder(int empid)
-        {
-            bool status= _ordsvs.Order(empid);
-            return status;
-        }
 
 
 

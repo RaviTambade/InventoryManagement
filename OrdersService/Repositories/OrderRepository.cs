@@ -18,7 +18,7 @@ public class OrderRepository : IOrderRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public Order OrdersHistory(int orderid)
+    public Order GetOrderDetails(int orderid)
     {
         Order order = null;
          MySqlConnection con = new MySqlConnection(_conString);
@@ -65,14 +65,14 @@ public class OrderRepository : IOrderRepository
     }
 
 
-    //order history of supervisors id
+    //order history of supervisors 
     public IEnumerable<Order> GetOrdersHistory(int empid)
     {
         List<Order> orders = new List<Order>();
          MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = " select orders.id, orders.date,orders.status, orderdetails.quantity, materials.title, categories.category from orders inner join orderdetails on orders.orderdetailid = orderdetails.id inner join materials on orderdetails.materialid=materials.id inner join categories on materials.categoryid=categories.id inner join employees on orderdetails.employeeid = employees.id where employees.id =@empid";
+            string query = "select orders.id, orders.date,orders.status, orderdetails.quantity, orderdetails.materialid,orderdetails.employeeid,materials.title, categories.category from orders inner join orderdetails on orders.orderdetailid = orderdetails.id  inner join materials on orderdetails.materialid=materials.id  inner join categories on materials.categoryid=categories.id  inner join employees on orders.employeeid = employees.id where employees.id=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 ;
@@ -86,6 +86,7 @@ public class OrderRepository : IOrderRepository
                 string? materialname = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
+                int materialid=  Int32.Parse(reader["materialid"].ToString());
                 
                 Order order = new Order()
                 {
@@ -94,7 +95,8 @@ public class OrderRepository : IOrderRepository
                     Status=status,
                     Name=materialname,
                     Category=category,
-                    Quantity=quantity
+                    Quantity=quantity,
+                    MaterialId=materialid
                 };
 
                 orders.Add(order);
@@ -204,34 +206,5 @@ public class OrderRepository : IOrderRepository
         return orders;
     }
 
-    public bool Order(int empid){
-        bool status =false;
-        
-         MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "call CreateOrder((select id from carts  where employeeid=@empid))";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@empid", empid);
-  
-            con.Open();
-            int rowsAffected = cmd.ExecuteNonQuery();
-            con.Close();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-            
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return status;
-    }
 
 }

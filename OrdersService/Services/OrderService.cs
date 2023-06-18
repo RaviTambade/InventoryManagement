@@ -12,11 +12,10 @@ public class OrderService : IOrderService
         _repo = repo;
     }
 
-    public Order OrdersHistory(int orderid)=> _repo.OrdersHistory(orderid);
+    public Order GetOrderDetails(int orderid)=> _repo.GetOrderDetails(orderid);
      public IEnumerable<Order> GetOrdersHistory(int empid)=> _repo.GetOrdersHistory(empid);
     public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
     public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
 
-    public bool Order(int empid)=> _repo.Order(empid);
 
 }
