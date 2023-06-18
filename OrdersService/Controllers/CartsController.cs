@@ -15,10 +15,19 @@ public class CartsController : ControllerBase
     }
         //get order history of supervisors
         [HttpGet]
-        [Route("cart/{empid}")]
+        [Route("carts/{empid}")]
         public IEnumerable<CartItem> GetAll(int empid)
         {
             IEnumerable<CartItem> cartItems= _crtsvs.GetAll(empid);
+            return cartItems;
+        }
+
+        //get cart details
+        [HttpGet]
+        [Route("cart/{cartId}")]
+        public CartItem get(int cartId)
+        {
+            CartItem cartItems= _crtsvs.GetCartItem(cartId);
             return cartItems;
         }
 

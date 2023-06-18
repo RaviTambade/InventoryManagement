@@ -67,6 +67,49 @@ public class CartRepository : ICartRepository
         return cartItems;
     }
 
+    //get cartitem details
+        public CartItem GetCartItem(int cartId)
+    {
+        CartItem cartItem = null;
+          MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select c.id, c.cartid, c.materialid, categories.category, c.quantity from cartitems c inner join categories on categories.id=c.categoryid where c.id =@cartid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@cartid", cartId);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                int cartid = Int32.Parse(reader["cartid"].ToString());
+                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string category = reader["category"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                
+                cartItem = new CartItem()
+                {
+                    Id=id,
+                    CartId=cartid,
+                    MaterialId=materialid,
+                    Category=category,
+                    Quantity=quantity,
+                };
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return cartItem;
+    }
+
+
     //get cart items  of supervisors by sending request id
     public IEnumerable<Request> GetRequestDetails(int requestid)
     {
