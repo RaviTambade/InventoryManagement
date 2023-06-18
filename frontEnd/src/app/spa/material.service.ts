@@ -15,10 +15,7 @@ export class MaterialService {
     let url ="http://localhost:5082/api/orders/order/" +empid ;
     return this.http.get(url);
   }
-  orderHistory(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/orders/history/" +empid ;
-    return this.http.get(url);
-  }
+
   getCarts(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/carts/carts/" + empid ;
     return this.http.get(url);

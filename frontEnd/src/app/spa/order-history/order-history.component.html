@@ -1,9 +1,18 @@
+<h2>Orders</h2>
 <hr>
-<div *ngFor="let orderDetail of orders">
-<li>Order Id: {{orderDetail.id}}</li>
-<li>Order Date: {{orderDetail.orderDate}}</li>
-<li>Material Name: {{orderDetail.name}}</li>
-<li>Material Type: {{orderDetail.type}}</li>
-<li><b> Ordered Quantity: {{orderDetail.quantity}}</b></li>
-
+<div >
+    <table style="width:70%">
+        <thead>
+            <th>Material Name</th>
+            <th>Ordered Quantity</th>
+      
+        </thead>
+        <tbody *ngFor="let order of orders">
+            <tr>
+                <td> {{order.name}}</td>
+                <td> {{order.quantity}}</td> 
+                 <td><button (click)="onView(order.id)">View</button></td>
+            </tr>  
+        </tbody>
+    </table>
 </div>
