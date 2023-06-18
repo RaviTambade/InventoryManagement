@@ -13,7 +13,8 @@ export class RequestsHistoryComponent {
   result:any[];
   carts: any[] ;
   data:any[];
-  subscription: Subscription|undefined;
+  empid:number=12;
+  
 
   constructor(private svc: MaterialService,private router:Router) { 
     this.result=[];
@@ -23,14 +24,14 @@ export class RequestsHistoryComponent {
   }
 
   ngOnInit(): void {
-    this.svc.getCart(12).subscribe((res) => {
+    this.svc.getCart(this.empid).subscribe((res) => {
       this.data = res;
       console.log(res);
       this.data?.reverse();
       this.carts=this.data;
     })
 
-    this.svc.getRequests(12).subscribe((res) => {
+    this.svc.getRequests(this.empid).subscribe((res) => {
       this.result = res;
       console.log(res);
       this.result?.reverse();
@@ -43,13 +44,15 @@ export class RequestsHistoryComponent {
   }
 
   onOrder(){
-    this.svc.order(12).subscribe((res)=>{
+    this.svc.order(this.empid).subscribe((res)=>{
       console.log(res);
       this.router.navigate(['store']);
     })
   }
   onRemoveAll(){  
-    console.log("removeAll");
+    this.svc.removeAll(this.empid).subscribe((res)=>{
+      console.log(res);
+    })
   }
   onEdit(){
 
@@ -57,7 +60,6 @@ export class RequestsHistoryComponent {
 
 
   onView(requestid:number){
-    // this.svc.getRequestDetails(requestid);
     this.router.navigate(['requestDetails', requestid]);
 
   }

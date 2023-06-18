@@ -38,26 +38,25 @@ export class MaterialService {
     let url ="http://localhost:5082/api/carts/delete/" + id ;
     return this.http.delete(url);
   }
+  removeAll(empid:number):Observable<any>{
+    let url ="http://localhost:5082/api/carts/Emptycart/" + empid ;
+    return this.http.delete(url);
+  }
   addToCart(cart:any):Observable<any> 
   {
-    console.log(cart);
     let url = "http://localhost:5082/api/carts/addtocart";
     return this.http.post(url,cart);
   }
-  getById(materialId:number)
-  {
+
+  getById(materialId:number):Observable<any>{
     let url ="http://localhost:5176/api/Materials/materials/"+ materialId;
-     this.http.get(url).subscribe((data)=>{
-      console.log(data);
-      this.subject.next({data});
-    })
+    return this.http.get(url);
   }
+
   getRequestDetails(requestid:number):Observable<any>
   {
     let url ="http://localhost:5082/api/carts/requestdetails/"+ requestid;
     return this.http.get(url)
-
-
   }
   getOrderDetails(orderid:number)
   {

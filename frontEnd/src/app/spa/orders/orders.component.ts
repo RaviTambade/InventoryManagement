@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MaterialService } from '../material.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'orders',
@@ -10,12 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent {
-  subscription: Subscription|undefined;
   material:any;
   order:any;
   empid=12;
   cart:any[];
-constructor(public fb : FormBuilder,private svc:MaterialService, private router:Router){
+  id:any;
+  materialId:number=0;
+constructor(public fb : FormBuilder,private svc:MaterialService, private router:Router,private _Activatedroute:ActivatedRoute){
 this.order={
   "employeeid" :0,
   "materialid":0,
@@ -35,10 +36,18 @@ orderForm = this.fb.group({
 });
 
 ngOnInit(): void {
-    this.subscription= this.svc.getData().subscribe((response) =>{
-    console.log(response.data);
-    this.material=response.data;
+  this._Activatedroute.paramMap.subscribe((params) =>
+  {
+    this.id=params.get('id');
+    this.materialId=Number.parseInt(this.id);
+    console.log(this.materialId);
+  });
+  this.svc.getById(this.materialId).subscribe((res)=>{
+    console.log(res);
+    this.material=res;
   })
+
+
 }
 onSubmit(){
   if(this.orderForm.value!==undefined){
