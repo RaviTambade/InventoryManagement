@@ -3,39 +3,47 @@
 
 <h2>Request</h2>
 
-<table style="width:100%">
-    <thead>
-        <th> Material ID</th>
-        <th> Material Category</th>
-        <th> Order Qunatity</th>
-  
-    </thead>
-    <tbody *ngFor="let cart of carts">
-        <tr>
-            <td>{{cart.materialId}}  </td>
-            <td> {{cart.category}}</td>
-            <td> {{cart.quantity}}</td> 
-             <td><button (click)="onEdit(cart.id)" >Edit</button>  <button (click)="onRemove(cart.id)" >Remove</button> </td>
-        </tr>  
-    </tbody>
-</table>
+<div *ngIf="cart">
+    <table style="width:60%">
+        <thead>
+            <th> Material ID</th>
+            <th> Material Category</th>
+            <th> Order Qunatity</th>
+      
+        </thead>
+        <tbody *ngFor="let cart of carts">
+            <tr>
+                <td>{{cart.materialId}}  </td>
+                <td> {{cart.category}}</td>
+                <td> {{cart.quantity}}</td> 
+                 <td><button (click)="onEdit(cart.id)" >Edit</button>  <button (click)="onRemove(cart.id)" >Remove</button> </td>
+            </tr>  
+        </tbody>
+    </table>
+    <tr><button (click)="onOrder()" >Place Order</button>   <button (click)="onRemoveAll()" >RemoveAll</button> </tr>
+</div>
+
+<div *ngIf="emptycart">
+    <h2>No request!</h2>
+</div>
 
 <br>
-<tr><button (click)="onOrder()" >Place Order</button>   <button (click)="onRemoveAll()" >RemoveAll</button> </tr>
 
 
 <h2>Previous Requests</h2>
 
 
-<table style="width:100%">
+<table style="width:70%">
     <thead>
         <th> Request ID</th>
+        <th> Date</th>
         <th> Status</th>
   
     </thead>
     <tbody *ngFor="let request of requests">
         <tr>
             <td>{{request.requestId}}  </td>
+            <td>{{request.date}}  </td>
             <td> {{request.status}}</td>
         
              <td> <button  (click)="onView(request.requestId)">View</button> </td>

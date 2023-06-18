@@ -14,6 +14,10 @@ export class RequestsHistoryComponent {
   carts: any[] ;
   data:any[];
   empid:number=12;
+  cart:boolean |undefined;
+  emptycart:boolean |undefined;
+
+  request:boolean |undefined;
   
 
   constructor(private svc: MaterialService,private router:Router) { 
@@ -25,33 +29,48 @@ export class RequestsHistoryComponent {
 
   ngOnInit(): void {
     this.svc.getCarts(this.empid).subscribe((res) => {
-      this.data = res;
-      console.log(res);
-      this.data?.reverse();
-      this.carts=this.data;
+        this.data = res;
+        if(this.data.length==0){
+          this.emptycart=true
+        }
+        else{
+          this.cart=true;
+          this.data?.reverse();
+          this.carts=this.data;
+        }
+ 
     })
 
     this.svc.getRequests(this.empid).subscribe((res) => {
-      this.result = res;
-      console.log(res);
-      this.result?.reverse();
-      this.requests=this.result;
+      if(res){
+        Date.parse(res.date)
+        this.result = res;
+        console.log(res);
+        this.result?.reverse();
+        this.requests=this.result;
+        this.request=true;
+      }
     })
 
   }
-  onRemove(cartid:number){
-
+  onRemove(id:number){
+    this.svc.remove(id).subscribe((res)=>{
+      if(res){
+        window.location.reload();
+      }
+    })
   }
 
   onOrder(){
     this.svc.order(this.empid).subscribe((res)=>{
       console.log(res);
-      this.router.navigate(['store']);
+      window.location.reload();
     })
   }
   onRemoveAll(){  
     this.svc.removeAll(this.empid).subscribe((res)=>{
       console.log(res);
+      window.location.reload();
     })
   }
 
