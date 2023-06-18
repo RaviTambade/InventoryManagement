@@ -15,7 +15,7 @@
             <td>{{cart.materialId}}  </td>
             <td> {{cart.category}}</td>
             <td> {{cart.quantity}}</td> 
-             <td><button (click)="onEdit()" >Edit</button>  <button (click)="onRemove()" >Remove</button> </td>
+             <td><button (click)="onEdit(cart.id)" >Edit</button>  <button (click)="onRemove(cart.id)" >Remove</button> </td>
         </tr>  
     </tbody>
 </table>

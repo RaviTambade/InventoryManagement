@@ -24,7 +24,7 @@ export class RequestsHistoryComponent {
   }
 
   ngOnInit(): void {
-    this.svc.getCart(this.empid).subscribe((res) => {
+    this.svc.getCarts(this.empid).subscribe((res) => {
       this.data = res;
       console.log(res);
       this.data?.reverse();
@@ -39,7 +39,7 @@ export class RequestsHistoryComponent {
     })
 
   }
-  onRemove(){
+  onRemove(cartid:number){
 
   }
 
@@ -54,7 +54,9 @@ export class RequestsHistoryComponent {
       console.log(res);
     })
   }
-  onEdit(){
+
+  onEdit(cartid:number){
+    this.router.navigate(['editcart', cartid]);
 
   }
 

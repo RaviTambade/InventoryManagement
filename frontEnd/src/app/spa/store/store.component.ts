@@ -80,7 +80,6 @@ export class StoreComponent {
   }
 
   add(id:number){
-    // this.svc.getById(id);
     this.router.navigate(['order', id]);
   }
 

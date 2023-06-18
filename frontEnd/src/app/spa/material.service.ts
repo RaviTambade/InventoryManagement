@@ -19,16 +19,18 @@ export class MaterialService {
     let url ="http://localhost:5082/api/orders/history/" +empid ;
     return this.http.get(url);
   }
-  getCarts(id:number){
-    let url ="http://localhost:5082/api/carts/carts/" + id ;
-    this.http.get(url).subscribe((carts)=>{
-      console.log(carts);
-      this.subject.next({carts});
-    })
-  }
-  getCart(id:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/cart/" + id ;
+  getCarts(empid:number):Observable<any>{
+    let url ="http://localhost:5082/api/carts/carts/" + empid ;
     return this.http.get(url);
+
+  }
+  getCart(cartid:number):Observable<any>{
+    let url ="http://localhost:5082/api/carts/cart/" + cartid ;
+    return this.http.get(url);
+  }
+  updateQuantity(updateQuantity:any):Observable<any>{
+    let url ="http://localhost:5082/api/carts/updatequantity";
+    return this.http.put(url,updateQuantity);
   }
   getRequests(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/carts/requests/" + empid ;
