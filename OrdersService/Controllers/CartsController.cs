@@ -74,5 +74,14 @@ public class CartsController : ControllerBase
             return status;
         }
 
+        //update quantity 
+        [HttpPut]
+        [Route("updatequantity")]
+        public bool EmptyCart(CartItem item)
+        {
+            bool status= _crtsvs.UpdateQuantity(item);
+            return status;
+        }
+
 
 }

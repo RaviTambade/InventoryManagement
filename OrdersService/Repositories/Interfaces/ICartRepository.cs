@@ -12,5 +12,6 @@ public interface ICartRepository
     IEnumerable<Request> GetAllRequests(int empid);
     IEnumerable<Request> GetRequestDetails(int requestid);
     bool EmptyCart(int employeeid);
+    bool UpdateQuantity(CartItem item);
 
 }
