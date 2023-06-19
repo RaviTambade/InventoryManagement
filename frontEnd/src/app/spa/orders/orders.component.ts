@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { MaterialService } from '../material.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OrderService } from '../order.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'orders',
@@ -17,7 +19,7 @@ export class OrdersComponent {
   orderqunatity:number=0;
   id:any;
   materialId:number=0;
-constructor(private svc:MaterialService, private router:Router,private _Activatedroute:ActivatedRoute){
+constructor(private _materialsvc:MaterialService, private _cartsvc:CartService, private router:Router,private _Activatedroute:ActivatedRoute){
 this.order={
   "employeeid" :0,
   "materialid":0,
@@ -27,15 +29,6 @@ this.order={
 this.cart=[];
 }
 
-
-// orderForm = this.fb.group({
-//   id : [0 , [Validators.required]],
-//   name : [ ' ', [Validators.required]],
-//   type : [ ' ', [Validators.required]],
-//   quantity : [ 0, [Validators.required]],
-//   orderQuantity: [ 0, [Validators.required]],
-// });
-
 ngOnInit(): void {
   this._Activatedroute.paramMap.subscribe((params) =>
   {
@@ -43,7 +36,7 @@ ngOnInit(): void {
     this.materialId=Number.parseInt(this.id);
     console.log(this.materialId);
   });
-  this.svc.getById(this.materialId).subscribe((res)=>{
+  this._materialsvc.getById(this.materialId).subscribe((res)=>{
     console.log(res);
     this.material=res;
   })
@@ -57,7 +50,7 @@ this.order.employeeid=this.empid;
 this.order.materialid=materialid;
 this.order.category=category,
 this.order.quantity=quantity
-    this.svc.addToCart(this.order).subscribe((res)=>{
+    this._cartsvc.addToCart(this.order).subscribe((res)=>{
       console.log(res);
       if(res){
         alert("added to cart!");

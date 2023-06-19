@@ -8,81 +8,36 @@ import { Observable, Subject } from 'rxjs';
 export class MaterialService {
 
   constructor(private http:HttpClient) { }
-  private subject = new Subject<any>();
-  private subject2 = new Subject<any>();
+
   public response:any;
 
-  order(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/orders/order/" +empid ;
-    return this.http.get(url);
-  }
+
   getMaterial(materialid:any):Observable<any>{
     console.log(materialid);
       let url ="http://localhost:5176/api/Materials/materials/" +materialid ;
       return this.http.get(url);
   }
-  getCarts(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/carts/" + empid ;
-    return this.http.get(url);
-  }
-  getCart(cartid:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/cart/" + cartid ;
-    return this.http.get(url);
-  }
-  updateQuantity(updateQuantity:any):Observable<any>{
-    let url ="http://localhost:5082/api/carts/updatequantity";
-    return this.http.put(url,updateQuantity);
-  }
-  getRequests(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/requests/" + empid ;
-    return this.http.get(url);
-  }
-  remove(id:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/delete/" + id ;
-    return this.http.delete(url);
-  }
-  deleteRequest(reqid:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/delete/request/" + reqid ;
-    return this.http.delete(url);
-  }
-  removeAll(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/Emptycart/" + empid ;
-    return this.http.delete(url);
-  }
-  removeCartFromRequest(orderId:number):Observable<any>{
-    let url ="http://localhost:5082/api/orders/order/" + orderId ;
-    return this.http.delete(url);
-  }
-  addToCart(cart:any):Observable<any> 
-  {
-    let url = "http://localhost:5082/api/carts/addtocart";
-    return this.http.post(url,cart);
-  }
+
+
+
 
   getById(materialId:number):Observable<any>{
     let url ="http://localhost:5176/api/Materials/materials/"+ materialId;
     return this.http.get(url);
   }
 
-  getRequestDetails(requestid:number):Observable<any>
-  {
-    let url ="http://localhost:5082/api/carts/requestdetails/"+ requestid;
-    return this.http.get(url)
-  }
-  getOrderDetails(orderid:number)
-  {
-    console.log(orderid)
-    let url ="http://localhost:5082/api/orders/orders/details/"+ orderid;
 
-     this.http.get(url).subscribe((data)=>{
-      console.log(data);
-      this.subject2.next({data});
-    })
-  }
-  getOrdersHistory(id:number):Observable<any>{
-    let url ="http://localhost:5082/api/Orders/history/" + id ;
-    return this.http.get(url);
-  }
+  // getOrderDetails(orderid:number)
+  // {
+  //   console.log(orderid)
+  //   let url ="http://localhost:5082/api/orders/orders/details/"+ orderid;
+
+  //    this.http.get(url).subscribe((data)=>{
+  //     console.log(data);
+  //     this.subject2.next({data});
+  //   })
+  // }
+
   
   getAllMaterials():Observable<any> 
   {
@@ -91,17 +46,7 @@ export class MaterialService {
   }
 
 
-  clearData() {
-    this.subject.next(" ");
-  }
-
-  getData(): Observable<any> {
-    return this.subject.asObservable();
-  }
-  GetDetails(): Observable<any> {
-
-    return this.subject2.asObservable();
-  }
+ 
 
 
 

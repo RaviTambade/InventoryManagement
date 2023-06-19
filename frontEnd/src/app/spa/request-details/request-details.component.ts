@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { MaterialService } from '../material.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../cart.service';
+import { OrdersComponent } from '../orders/orders.component';
+import { OrderService } from '../order.service';
 
 @Component({
   selector: 'app-request-details',
@@ -16,7 +19,7 @@ export class RequestDetailsComponent {
   materialid: number = 0;
   subscription: Subscription | undefined;
 
-  constructor(private svc: MaterialService,  private _Activatedroute: ActivatedRoute) {
+  constructor( private _cartsvc:CartService, private _ordersvc:OrderService, private router:Router, private _Activatedroute: ActivatedRoute) {
     this.carts = [];
 
   }
@@ -26,15 +29,18 @@ export class RequestDetailsComponent {
       this.reqid = Number.parseInt(this.id);
       console.log(this.id);
     });
-    this.svc.getRequestDetails(this.reqid).subscribe((res) => {
+    this._cartsvc.getRequestDetails(this.reqid).subscribe((res) => {
       this.carts = res;
       console.log(this.carts);
     })
   }
   onRemove(orderid:number){
-    this.svc.removeCartFromRequest(orderid).subscribe((res)=>{
+    this._ordersvc.removeCartFromRequest(orderid).subscribe((res)=>{
       console.log(res);
       window.location.reload();
     })
+  }
+  onEdit(orderid:number){
+    this.router.navigate(["editRequest", orderid])
   }
 }

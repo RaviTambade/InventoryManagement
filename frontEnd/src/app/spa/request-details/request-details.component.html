@@ -7,7 +7,7 @@
             <li>material category: {{cart.category}}</li> 
             <li>Ordered Quantity: {{cart.quantity}}</li> 
             <li>Status : {{cart.status}}</li> 
-            <button>Edit</button> <button (click)="onRemove(cart.orderId)">Remove</button> 
+            <button (click)="onEdit(cart.orderId)">Edit</button> <button (click)="onRemove(cart.orderId)">Remove</button> 
         <hr />
     </div>
 </ul>

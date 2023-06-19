@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MaterialService } from '../material.service';
 import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
+import { OrderService } from '../order.service';
 
 @Component({
   selector: 'app-requests-history',
@@ -20,7 +22,7 @@ export class RequestsHistoryComponent {
   request:boolean |undefined;
   
 
-  constructor(private svc: MaterialService,private router:Router) { 
+  constructor(private _cartsvc: CartService, private _ordersvc:OrderService, private router:Router) { 
     this.result=[];
     this.requests=[];
     this.carts=[];
@@ -28,7 +30,7 @@ export class RequestsHistoryComponent {
   }
 
   ngOnInit(): void {
-    this.svc.getCarts(this.empid).subscribe((res) => {
+    this._cartsvc.getCarts(this.empid).subscribe((res) => {
       console.log(res);
         this.data = res;
         if(this.data.length==0){
@@ -42,7 +44,7 @@ export class RequestsHistoryComponent {
  
     })
 
-    this.svc.getRequests(this.empid).subscribe((res) => {
+    this._cartsvc.getRequests(this.empid).subscribe((res) => {
       if(res){
         Date.parse(res.date)
         this.result = res;
@@ -55,27 +57,27 @@ export class RequestsHistoryComponent {
 
   }
   onRemove(id:number){
-    this.svc.remove(id).subscribe((res)=>{
+    this._cartsvc.remove(id).subscribe((res)=>{
       if(res){
         window.location.reload();
       }
     })
   }
   onDeleteRequest(reqid:number){
-    this.svc.deleteRequest(reqid).subscribe((res)=>{
+    this._cartsvc.deleteRequest(reqid).subscribe((res)=>{
       console.log(res);
       window.location.reload();
     })
   }
 
   onOrder(){
-    this.svc.order(this.empid).subscribe((res)=>{
+    this._ordersvc.order(this.empid).subscribe((res)=>{
       console.log(res);
       window.location.reload();
     })
   }
   onRemoveAll(){  
-    this.svc.removeAll(this.empid).subscribe((res)=>{
+    this._cartsvc.removeAll(this.empid).subscribe((res)=>{
       console.log(res);
       window.location.reload();
     })

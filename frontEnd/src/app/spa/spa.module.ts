@@ -18,6 +18,7 @@ import { CartDetailsComponent } from './cart-details/cart-details.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { EditCartComponent } from './edit-cart/edit-cart.component';
+import { EditRequestComponent } from './edit-request/edit-request.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -31,6 +32,8 @@ const routes: Routes=
       {path:'requestDetails/:requestid',component:RequestDetailsComponent},
       {path:'orderhistory',component:OrderHistoryComponent},
       {path:'editcart/:cartId',component:EditCartComponent},
+      {path:'editRequest/:orderId',component:EditRequestComponent},
+
 
 
     ];
@@ -51,7 +54,8 @@ const routes: Routes=
     CartDetailsComponent,
     RequestDetailsComponent,
     OrderHistoryComponent,
-    EditCartComponent
+    EditCartComponent,
+    EditRequestComponent
   ],
   exports:[RouterContainerComponent],
   imports: [

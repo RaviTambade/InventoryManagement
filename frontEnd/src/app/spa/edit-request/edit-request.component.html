@@ -1,0 +1,10 @@
+
+<div *ngIf="material">
+    <div *ngIf="img">    
+        <img src="{{img.imgUrl}}" alt="">
+    </div>
+    <p>material Id:{{material.id}}</p>
+    <p>material Category:{{material.category}}</p>
+    <input name="quantity" id="quantity" type="number"  [(ngModel)]="material.quantity" >
+    <button (click)="editQuantity(material.id, material.quantity)">Edit</button>
+</div>

@@ -25,7 +25,7 @@ export class StoreComponent {
   newOrder:any;
   status:boolean=false;
 
-  constructor( private fb: FormBuilder,private svc: MaterialService, private router:Router, private cartsvc:CartService) {
+  constructor( private fb: FormBuilder,private _materialsvc: MaterialService, private router:Router) {
     this.data = [];
     this.cart=[];
     this.newOrder={"employeeid" :0,
@@ -42,7 +42,7 @@ export class StoreComponent {
   });
 
   ngOnInit(): void {
-    this.svc.getAllMaterials().subscribe((response)=>{
+    this._materialsvc.getAllMaterials().subscribe((response)=>{
       this.data =response;
       console.log(response);
       this.arrLength = this.data.length;

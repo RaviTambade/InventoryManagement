@@ -17,4 +17,16 @@ export class OrderService {
     let url ="http://localhost:5082/api/orders/details/" +orderid ;
     return this.http.get(url);
   }
+  order(empid:number):Observable<any>{
+    let url ="http://localhost:5082/api/orders/order/" +empid ;
+    return this.http.get(url);
+  }
+  removeCartFromRequest(orderId:number):Observable<any>{
+    let url ="http://localhost:5082/api/orders/order/" + orderId ;
+    return this.http.delete(url);
+  }
+  getOrdersHistory(id:number):Observable<any>{
+    let url ="http://localhost:5082/api/Orders/history/" + id ;
+    return this.http.get(url);
+  }
 }
