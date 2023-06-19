@@ -31,6 +31,14 @@ namespace MaterialsService.Controllers
             return material;
         }
 
+        [HttpGet]
+        [Route("image/{materialid}")]
+        public string GetImage(int materialid)
+        {
+            string imgUrl = _matsrv.GetImage(materialid);
+            return imgUrl;
+        }
+
         [HttpPut]
         [Route("materials/{id}")]
         public bool UpdateMaterial([FromBody] Material material)

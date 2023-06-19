@@ -6,6 +6,8 @@ public interface IMaterialRepository
 {
     IEnumerable<Material> GetAll();
     Material Get(int materialId);
+    string GetImage(int materialId);
+
     bool Insert(Material material);
     bool Update(Material material);
     bool Delete(int materialId);

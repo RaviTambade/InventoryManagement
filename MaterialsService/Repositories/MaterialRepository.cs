@@ -109,6 +109,36 @@ public class MaterialRepository : IMaterialRepository
         return Thematerial;
     }
 
+        public string GetImage(int Mid)
+    {
+        string? imgUrl = null;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select imageurl from materials where id =@materialId";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@materialId", Mid);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string? imgurl = reader["imageurl"].ToString();
+                imgUrl=imgurl;
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return imgUrl;
+    }
+
+
     public bool Insert(Material material) {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
