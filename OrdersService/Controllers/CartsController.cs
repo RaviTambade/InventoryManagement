@@ -25,11 +25,27 @@ public class CartsController : ControllerBase
         //get cart details
         [HttpGet]
         [Route("cart/{cartId}")]
-        public CartItem get(int cartId)
+        public CartItem Get(int cartId)
         {
             CartItem cartItems= _crtsvs.GetCartItem(cartId);
             return cartItems;
         }
+        [HttpGet]
+        [Route("request/cart/{cartId}")]
+        public CartItem GetCartItem(int cartId)
+        {
+            CartItem cartItems= _crtsvs.GetCartItemFromRequest(cartId);
+            return cartItems;
+        }
+
+        [HttpPut]
+        [Route("request/cart")]
+        public bool updateCartItemFromRequest(CartItem cartItem)
+        {
+            bool status= _crtsvs.UpdateQuantityOfRequestedCartItme(cartItem);
+            return status;
+        }
+
 
         //get request history of employee
         [HttpGet]

@@ -159,6 +159,45 @@ public class CartRepository : ICartRepository
         return requests;
     }
 
+        public CartItem GetCartItemFromRequest(int orderid)
+    {
+        CartItem cartItem = null;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "	select o.id, o.materialid, categories.category, o.quantity from orderdetails o inner join categories on categories.id=o.categoryid where o.id=@orderid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string category = reader["category"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+
+                cartItem = new CartItem()
+                {
+                    Id = id,
+                    MaterialId = materialid,
+                    Category = category,
+                    Quantity = quantity,
+                };
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return cartItem;
+    }
+
     public bool Delete(int id)
     {
         bool status = false;
@@ -345,5 +384,33 @@ public class CartRepository : ICartRepository
         return status;
     }
 
+    public bool UpdateQuantityOfRequestedCartItme(CartItem item)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "update orderdetails set quantity=@quantity where id=@id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", item.Id);
+            cmd.Parameters.AddWithValue("@quantity", item.Quantity);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
 
+  
 }

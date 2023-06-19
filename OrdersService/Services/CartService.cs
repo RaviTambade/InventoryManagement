@@ -12,8 +12,11 @@ public class CartService : ICartService
         _repo = repo;
     }
 
-     public IEnumerable<CartItem> GetAll(int empid)=> _repo.GetAll(empid);
+    public IEnumerable<CartItem> GetAll(int empid)=> _repo.GetAll(empid);
     public CartItem GetCartItem(int cartId)=> _repo.GetCartItem(cartId);
+    public CartItem GetCartItemFromRequest(int orderid)=> _repo.GetCartItemFromRequest(orderid);
+
+    public bool UpdateQuantityOfRequestedCartItme(CartItem item)=> _repo.UpdateQuantityOfRequestedCartItme(item);
 
     public bool AddItem(CartItem cartItem)=> _repo.AddItem(cartItem);
     public bool Delete(int id)=> _repo.Delete(id);
