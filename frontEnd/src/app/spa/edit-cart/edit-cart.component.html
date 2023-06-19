@@ -1,7 +1,7 @@
 
 <div *ngIf="material">
-    <h2>material Id:{{material.id}}</h2>
-    <h2>material Category:{{material.category}}</h2>
+    <p>material Id:{{material.id}}</p>
+    <p>material Category:{{material.category}}</p>
     <input name="quantity" id="quantity" type="number"  [(ngModel)]="material.quantity" >
     <button (click)="editQuantity(material.id, material.quantity)">Edit</button>
 </div>

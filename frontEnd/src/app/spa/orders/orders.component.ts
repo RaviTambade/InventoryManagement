@@ -14,9 +14,10 @@ export class OrdersComponent {
   order:any;
   empid=12;
   cart:any[];
+  orderqunatity:number=0;
   id:any;
   materialId:number=0;
-constructor(public fb : FormBuilder,private svc:MaterialService, private router:Router,private _Activatedroute:ActivatedRoute){
+constructor(private svc:MaterialService, private router:Router,private _Activatedroute:ActivatedRoute){
 this.order={
   "employeeid" :0,
   "materialid":0,
@@ -27,13 +28,13 @@ this.cart=[];
 }
 
 
-orderForm = this.fb.group({
-  id : [0 , [Validators.required]],
-  name : [ ' ', [Validators.required]],
-  type : [ ' ', [Validators.required]],
-  quantity : [ 0, [Validators.required]],
-  orderQuantity: [ 0, [Validators.required]],
-});
+// orderForm = this.fb.group({
+//   id : [0 , [Validators.required]],
+//   name : [ ' ', [Validators.required]],
+//   type : [ ' ', [Validators.required]],
+//   quantity : [ 0, [Validators.required]],
+//   orderQuantity: [ 0, [Validators.required]],
+// });
 
 ngOnInit(): void {
   this._Activatedroute.paramMap.subscribe((params) =>
@@ -49,13 +50,13 @@ ngOnInit(): void {
 
 
 }
-onSubmit(){
-  if(this.orderForm.value!==undefined){
-    this.order.materialid=this.orderForm.value.id;
-    this.order.quantity=this.orderForm.value.orderQuantity;
-    this.order.employeeid=this.empid;
-    this.order.category=this.orderForm.value.type;
+onOrder(materialid:number,category:any,quantity:number){
 
+console.log(this.empid,materialid,category,quantity)
+this.order.employeeid=this.empid;
+this.order.materialid=materialid;
+this.order.category=category,
+this.order.quantity=quantity
     this.svc.addToCart(this.order).subscribe((res)=>{
       console.log(res);
       if(res){
@@ -66,4 +67,4 @@ onSubmit(){
   }
 
 }
-}
+
