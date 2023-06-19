@@ -29,6 +29,7 @@ export class RequestsHistoryComponent {
 
   ngOnInit(): void {
     this.svc.getCarts(this.empid).subscribe((res) => {
+      console.log(res);
         this.data = res;
         if(this.data.length==0){
           this.emptycart=true

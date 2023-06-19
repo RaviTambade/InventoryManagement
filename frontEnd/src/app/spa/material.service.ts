@@ -10,16 +10,21 @@ export class MaterialService {
   constructor(private http:HttpClient) { }
   private subject = new Subject<any>();
   private subject2 = new Subject<any>();
+  public response:any;
 
   order(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/orders/order/" +empid ;
     return this.http.get(url);
   }
-
+  getMaterial(materialid:any):Observable<any>{
+    console.log(materialid);
+      let url ="http://localhost:5176/api/Materials/materials/" +materialid ;
+      return this.http.get(url);
+ 
+  }
   getCarts(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/carts/carts/" + empid ;
     return this.http.get(url);
-
   }
   getCart(cartid:number):Observable<any>{
     let url ="http://localhost:5082/api/carts/cart/" + cartid ;

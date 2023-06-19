@@ -11,6 +11,7 @@ export class EditCartComponent {
   material:any;
   empid=12;
   id:any;
+  img:any;
   cartId:number=0;
   updateQuantity:any;
 constructor(private svc:MaterialService, private router:Router,private _Activatedroute:ActivatedRoute){
@@ -18,6 +19,16 @@ constructor(private svc:MaterialService, private router:Router,private _Activate
     id:0,
     quantity:0
   }
+  this.material = {
+    "id": 0,
+    "cartId": 0,
+    "category": '',
+    "employeeId": 0,
+    "materialId": 0,
+    "quantity": 0,
+
+
+  };
 }
 
 ngOnInit(): void {
@@ -30,7 +41,24 @@ ngOnInit(): void {
   this.svc.getCart(this.cartId).subscribe((res)=>{
     console.log(res);
     this.material=res;
+    this.getImg(this.material.materialId);
+  });
+
+  // if(this.material.materialId!=0){
+  //   console.log("if")
+  //  let res= this.svc.getImageUrl(this.material.materialId);
+  //   console.log(res);
+  // } 
+}
+getImg(id:any){
+  console.log(id);
+  this.svc.getMaterial(id).subscribe((res)=>{
+    console.log(res);
+    this.img=res;
+    console.log(this.img);
+    
   })
+
 }
 
 editQuantity(id:any,quantity:any){
@@ -40,7 +68,6 @@ editQuantity(id:any,quantity:any){
   this.svc.updateQuantity(this.updateQuantity).subscribe((res)=>{
     if(res){
       this.router.navigate(["requestHistory"])
-
     }
   })
   
