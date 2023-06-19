@@ -17,8 +17,16 @@ export class CartService {
     let url ="http://localhost:5082/api/carts/cart/" + cartid ;
     return this.http.get(url);
   }
+  getCartFromRequest(orderid:number){
+    let url ="http://localhost:5082/api/carts/request/cart/" + orderid ;
+    return this.http.get(url);
+  }
   updateQuantity(updateQuantity:any):Observable<any>{
     let url ="http://localhost:5082/api/carts/updatequantity";
+    return this.http.put(url,updateQuantity);
+  }
+  updateQuantityOfCartFromRequest(updateQuantity:any):Observable<any>{
+    let url ="http://localhost:5082/api/carts/request/cart";
     return this.http.put(url,updateQuantity);
   }
   getRequests(empid:number):Observable<any>{

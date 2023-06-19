@@ -19,8 +19,6 @@ export class MaterialService {
   }
 
 
-
-
   getById(materialId:number):Observable<any>{
     let url ="http://localhost:5176/api/Materials/materials/"+ materialId;
     return this.http.get(url);
