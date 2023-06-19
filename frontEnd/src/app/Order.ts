@@ -1,13 +1,12 @@
 export class Order{
     constructor(
-        public orderId:number,
-        public employeeFirstName:string,
-        public employeeLastName:string,
+        public id:number,
         public orderDate:Date,
         public status:string,
         public materialId:Number,
-        public materialName:string,
-        public materialType:string,
+        public employeeId:Number,
+        public name:string,
+        public category:string,
         public quantity:Number,
 
     ){}

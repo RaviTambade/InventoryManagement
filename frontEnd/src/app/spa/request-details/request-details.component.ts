@@ -15,12 +15,13 @@ export class RequestDetailsComponent {
 
   carts: any[];
   id: any;
+  img: any;
   reqid: number = 0;
   materialid: number = 0;
   subscription: Subscription | undefined;
 
-  constructor( private _cartsvc:CartService, private _ordersvc:OrderService, private router:Router, private _Activatedroute: ActivatedRoute) {
-    this.carts = [];
+  constructor(private _cartsvc: CartService, private _materialsvc: MaterialService, private _ordersvc: OrderService, private router: Router, private _Activatedroute: ActivatedRoute) {
+    this.carts=[];
 
   }
   ngOnInit(): void {
@@ -29,18 +30,21 @@ export class RequestDetailsComponent {
       this.reqid = Number.parseInt(this.id);
       console.log(this.id);
     });
+
     this._cartsvc.getRequestDetails(this.reqid).subscribe((res) => {
       this.carts = res;
       console.log(this.carts);
     })
   }
-  onRemove(orderid:number){
-    this._ordersvc.removeCartFromRequest(orderid).subscribe((res)=>{
+
+  onRemove(orderid: number) {
+    this._ordersvc.removeCartFromRequest(orderid).subscribe((res) => {
       console.log(res);
-      window.location.reload();
+      this.router.navigate(["requestHistory"])
+
     })
   }
-  onEdit(orderid:number){
+  onEdit(orderid: number) {
     this.router.navigate(["editRequest", orderid])
   }
 }
