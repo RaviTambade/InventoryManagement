@@ -61,6 +61,12 @@ export class RequestsHistoryComponent {
       }
     })
   }
+  onDeleteRequest(reqid:number){
+    this.svc.deleteRequest(reqid).subscribe((res)=>{
+      console.log(res);
+      window.location.reload();
+    })
+  }
 
   onOrder(){
     this.svc.order(this.empid).subscribe((res)=>{

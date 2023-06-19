@@ -20,7 +20,6 @@ export class MaterialService {
     console.log(materialid);
       let url ="http://localhost:5176/api/Materials/materials/" +materialid ;
       return this.http.get(url);
- 
   }
   getCarts(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/carts/carts/" + empid ;
@@ -42,8 +41,16 @@ export class MaterialService {
     let url ="http://localhost:5082/api/carts/delete/" + id ;
     return this.http.delete(url);
   }
+  deleteRequest(reqid:number):Observable<any>{
+    let url ="http://localhost:5082/api/carts/delete/request/" + reqid ;
+    return this.http.delete(url);
+  }
   removeAll(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/carts/Emptycart/" + empid ;
+    return this.http.delete(url);
+  }
+  removeCartFromRequest(orderId:number):Observable<any>{
+    let url ="http://localhost:5082/api/orders/order/" + orderId ;
     return this.http.delete(url);
   }
   addToCart(cart:any):Observable<any> 

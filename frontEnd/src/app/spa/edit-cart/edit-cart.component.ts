@@ -55,8 +55,7 @@ getImg(id:any){
   this.svc.getMaterial(id).subscribe((res)=>{
     console.log(res);
     this.img=res;
-    console.log(this.img);
-    
+    console.log(this.img);   
   })
 
 }

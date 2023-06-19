@@ -16,7 +16,7 @@ export class RequestDetailsComponent {
   materialid: number = 0;
   subscription: Subscription | undefined;
 
-  constructor(private svc: MaterialService, private _Activatedroute: ActivatedRoute) {
+  constructor(private svc: MaterialService,  private _Activatedroute: ActivatedRoute) {
     this.carts = [];
 
   }
@@ -29,7 +29,12 @@ export class RequestDetailsComponent {
     this.svc.getRequestDetails(this.reqid).subscribe((res) => {
       this.carts = res;
       console.log(this.carts);
-
+    })
+  }
+  onRemove(orderid:number){
+    this.svc.removeCartFromRequest(orderid).subscribe((res)=>{
+      console.log(res);
+      window.location.reload();
     })
   }
 }
