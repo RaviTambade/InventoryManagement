@@ -8,5 +8,7 @@ public interface IOrderRepository
     IEnumerable<Order> GetOrdersHistory(int empid);
     IEnumerable<Order> OrderedMaterialsInADay();
     IEnumerable<Order> GetOrders(Period date);
+    bool Order(int empid);
+    bool DeleteOrder(int orderid);
 
 }

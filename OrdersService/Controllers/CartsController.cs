@@ -65,6 +65,15 @@ public class CartsController : ControllerBase
             return status;
         }
 
+        //remove request
+        [HttpDelete]
+        [Route("delete/request/{requestid}")]
+        public bool DeleteRequest( int requestid)
+        {
+            bool status=  _crtsvs.DeleteRequest(requestid);
+            return status;
+        }
+
         //remove all items from cart 
         [HttpDelete]
         [Route("Emptycart/{employeeid}")]

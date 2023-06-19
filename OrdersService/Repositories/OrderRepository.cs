@@ -12,7 +12,7 @@ public class OrderRepository : IOrderRepository
 {
     private IConfiguration _configuration;
     private string _conString;
-    public OrderRepository(IConfiguration configuration) 
+    public OrderRepository(IConfiguration configuration)
     {
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
@@ -21,7 +21,7 @@ public class OrderRepository : IOrderRepository
     public Order GetOrderDetails(int orderid)
     {
         Order order = null;
-         MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = " select orders.id,orders.date, materials.id as materialid, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid=orderdetails.id where orders.id = @orderId ";
@@ -42,13 +42,13 @@ public class OrderRepository : IOrderRepository
 
                 order = new Order()
                 {
-                    Id=id,
-                    Status=status,
-                    OrderDate=orderdate,
-                    Name=materialname,
-                    Category=category,
-                    Quantity=quantity,
-                    MaterialId=materialid
+                    Id = id,
+                    Status = status,
+                    OrderDate = orderdate,
+                    Name = materialname,
+                    Category = category,
+                    Quantity = quantity,
+                    MaterialId = materialid
                 };
             }
             reader.Close();
@@ -69,13 +69,13 @@ public class OrderRepository : IOrderRepository
     public IEnumerable<Order> GetOrdersHistory(int empid)
     {
         List<Order> orders = new List<Order>();
-         MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "select orders.id, orders.date,orders.status, orderdetails.quantity, orderdetails.materialid,orderdetails.employeeid,materials.title, categories.category from orders inner join orderdetails on orders.orderdetailid = orderdetails.id  inner join materials on orderdetails.materialid=materials.id  inner join categories on materials.categoryid=categories.id  inner join employees on orders.employeeid = employees.id where employees.id=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
-;
+            ;
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -86,17 +86,17 @@ public class OrderRepository : IOrderRepository
                 string? materialname = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                int materialid=  Int32.Parse(reader["materialid"].ToString());
-                
+                int materialid = Int32.Parse(reader["materialid"].ToString());
+
                 Order order = new Order()
                 {
-                    Id=orderid,
-                    OrderDate=orderdate,
-                    Status=status,
-                    Name=materialname,
-                    Category=category,
-                    Quantity=quantity,
-                    MaterialId=materialid
+                    Id = orderid,
+                    OrderDate = orderdate,
+                    Status = status,
+                    Name = materialname,
+                    Category = category,
+                    Quantity = quantity,
+                    MaterialId = materialid
                 };
 
                 orders.Add(order);
@@ -115,8 +115,9 @@ public class OrderRepository : IOrderRepository
         return orders;
     }
 
-    public IEnumerable<Order> OrderedMaterialsInADay(){
-        List<Order> orders =new  List<Order>();
+    public IEnumerable<Order> OrderedMaterialsInADay()
+    {
+        List<Order> orders = new List<Order>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -133,15 +134,15 @@ public class OrderRepository : IOrderRepository
                 string? name = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                string status =  reader["status"].ToString();
-                
+                string status = reader["status"].ToString();
+
                 Order theOrder = new Order
                 {
                     Id = id,
-                    Name=name,
+                    Name = name,
                     Category = category,
                     Quantity = quantity,
-                    Status =status
+                    Status = status
                 };
                 orders.Add(theOrder);
             }
@@ -158,10 +159,11 @@ public class OrderRepository : IOrderRepository
         return orders;
     }
 
-    public IEnumerable<Order> GetOrders(Period date){
-        string fromDate = date.FromDate.ToString("yyyy-MM-dd");   
-        string toDate = date.ToDate.ToString("yyyy-MM-dd");  
-        List<Order> orders =new  List<Order>();
+    public IEnumerable<Order> GetOrders(Period date)
+    {
+        string fromDate = date.FromDate.ToString("yyyy-MM-dd");
+        string toDate = date.ToDate.ToString("yyyy-MM-dd");
+        List<Order> orders = new List<Order>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -181,15 +183,15 @@ public class OrderRepository : IOrderRepository
                 string? emplastname = reader["lastname"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
-                string status =  reader["status"].ToString();
- 
+                string status = reader["status"].ToString();
+
                 Order theOrder = new Order
                 {
                     Id = id,
-                    Name=name,
+                    Name = name,
                     Category = category,
                     Quantity = quantity,
-                    Status =status,
+                    Status = status,
                 };
                 orders.Add(theOrder);
             }
@@ -206,5 +208,66 @@ public class OrderRepository : IOrderRepository
         return orders;
     }
 
+    public bool Order(int empid)
+    {
+        bool status = false;
+
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "call CreateOrder((select id from carts  where employeeid=@empid))";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
+
+   public bool DeleteOrder(int orderid)
+    {
+        bool status = false;
+
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "delete from orderdetails where id=@id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", orderid);
+
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
 
 }
