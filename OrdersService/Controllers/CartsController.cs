@@ -108,5 +108,12 @@ public class CartsController : ControllerBase
             return status;
         }
 
+        [HttpGet]
+        [Route("ChangeStatus")]
+        public bool ChangeStatus(ChangeStatus changeStatus){
+            bool status= _crtsvs.ChangeStatus(changeStatus);
+            return status;  
+        }
+
 
 }

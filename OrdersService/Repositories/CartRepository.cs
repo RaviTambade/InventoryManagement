@@ -412,5 +412,32 @@ public class CartRepository : ICartRepository
         return status;
     }
 
-  
+      public bool ChangeStatus(ChangeStatus changestatus)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "update orders set status=@status = where id=@id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", changestatus.OrderId);
+            cmd.Parameters.AddWithValue("@status", changestatus.StatusId);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
+
 }

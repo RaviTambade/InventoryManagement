@@ -38,8 +38,6 @@ public class OrderRepository : IOrderRepository
                 string? materialname = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                Console.WriteLine(orderdate);
-
                 order = new Order()
                 {
                     Id = id,
@@ -87,6 +85,8 @@ public class OrderRepository : IOrderRepository
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
+                int employeeid = Int32.Parse(reader["employeeid"].ToString());
+                
 
                 Order order = new Order()
                 {
@@ -96,7 +96,8 @@ public class OrderRepository : IOrderRepository
                     Name = materialname,
                     Category = category,
                     Quantity = quantity,
-                    MaterialId = materialid
+                    MaterialId = materialid,
+                    EmployeeId=employeeid
                 };
 
                 orders.Add(order);

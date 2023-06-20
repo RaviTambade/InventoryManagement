@@ -26,5 +26,7 @@ public class CartService : ICartService
     public IEnumerable<Request> GetRequestDetails(int requestid)=> _repo.GetRequestDetails(requestid);
     public bool EmptyCart(int employeeid)=> _repo.EmptyCart(employeeid);
     public bool UpdateQuantity(CartItem item)=> _repo.UpdateQuantity(item);
+    public bool ChangeStatus(ChangeStatus status)=> _repo.ChangeStatus(status);
+
 
 }
