@@ -3,6 +3,7 @@ import { MaterialService } from '../material.service';
 import { OrderService } from '../order.service';
 import { Router } from '@angular/router';
 import { Order } from 'src/app/Order';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-order-history',
@@ -11,38 +12,24 @@ import { Order } from 'src/app/Order';
 })
 export class OrderHistoryComponent {
 
-  orders: Order[];
+  orders: any[];
   employeeids: any[];
   locations: any[];
-  public constructor(private svc: OrderService, private materialsvc: MaterialService, private router: Router) {
+  orderDetails:any[];
+  public constructor(private svc: OrderService, private appsvc: AppService, private router: Router) {
     this.orders = [];
     this.employeeids = [];
     this.locations = [];
+    this.orderDetails=[];
   }
   ngOnInit() {
     this.svc.orderHistory(1).subscribe((res) => {
       console.log(res);
       this.orders = res;
-      this.getEmployeeid(this.orders);
+      console.log(this.orders);
     })
   }
-  getEmployeeid(orders: any) {
-    console.log("ord")
-    this.orders.forEach((item) => {
-      this.employeeids.push(item.employeeId)
-    });
-    console.log(this.employeeids);
-    this.getLocations(this.employeeids);
-  }
-
-  getLocations(employeeids: any) {
-    this.employeeids.forEach(element => {
-      this.materialsvc.getLocation(element).subscribe((res) => {
-        console.log(res);
-        this.locations = res;
-      })
-    });
-  }
+ 
 
   onView(orderId: number) {
     this.router.navigate(['orderdetails', orderId]);

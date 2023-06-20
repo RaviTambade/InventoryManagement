@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MaterialService } from '../material.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../cart.service';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-edit-request',
@@ -15,7 +16,7 @@ export class EditRequestComponent {
   img:any;
   orderId:number=0;
   updateQuantity:any;
-constructor(private _cartsvc:CartService,private _materialsvc:MaterialService, private router:Router,private _Activatedroute:ActivatedRoute){
+constructor(private _cartsvc:CartService,private _materialsvc:MaterialService,private _requestsvc:RequestService, private router:Router,private _Activatedroute:ActivatedRoute){
   this.updateQuantity={
     id:0,
     quantity:0
@@ -37,7 +38,7 @@ ngOnInit(): void {
     this.orderId=Number.parseInt(this.id);
     console.log(this.orderId);
   });
-  this._cartsvc.getCartFromRequest(this.orderId).subscribe((res)=>{
+  this._requestsvc.getCartFromRequest(this.orderId).subscribe((res)=>{
     console.log(res);
     this.material=res;
     this.getImg(this.material.materialId);
@@ -58,7 +59,7 @@ editQuantity(id:any,quantity:any){
   this.updateQuantity.id=id;
   this.updateQuantity.quantity=quantity;
   console.log(this.updateQuantity);
-  this._cartsvc.updateQuantityOfCartFromRequest(this.updateQuantity).subscribe((res)=>{
+  this._requestsvc.updateQuantityOfCartFromRequest(this.updateQuantity).subscribe((res)=>{
     console.log(res);
     if(res){
       this.router.navigate(["requestHistory"])

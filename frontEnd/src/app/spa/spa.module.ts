@@ -30,6 +30,8 @@ const routes: Routes=
       {path:'orderdetails/:orderId',component:OrderDetailsComponent},
       {path:'requestHistory',component:RequestsHistoryComponent},
       {path:'requestDetails/:requestid',component:RequestDetailsComponent},
+      {path:'requestDetails',component:RequestDetailsComponent},
+
       {path:'orderhistory',component:OrderHistoryComponent},
       {path:'editcart/:cartId',component:EditCartComponent},
       {path:'editRequest/:orderId',component:EditRequestComponent},

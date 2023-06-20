@@ -4,6 +4,7 @@ import { MaterialService } from '../material.service';
 import { Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { OrderService } from '../order.service';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-requests-history',
@@ -22,7 +23,7 @@ export class RequestsHistoryComponent {
   request:boolean |undefined;
   
 
-  constructor(private _cartsvc: CartService, private _ordersvc:OrderService, private router:Router) { 
+  constructor(private _cartsvc: CartService,private _requestsvc:RequestService, private _ordersvc:OrderService, private router:Router) { 
     this.result=[];
     this.requests=[];
     this.carts=[];
@@ -44,7 +45,7 @@ export class RequestsHistoryComponent {
  
     })
 
-    this._cartsvc.getRequests(this.empid).subscribe((res) => {
+    this._requestsvc.getRequests(this.empid).subscribe((res) => {
       if(res){
         Date.parse(res.date)
         this.result = res;
@@ -64,7 +65,7 @@ export class RequestsHistoryComponent {
     })
   }
   onDeleteRequest(reqid:number){
-    this._cartsvc.deleteRequest(reqid).subscribe((res)=>{
+    this._requestsvc.deleteRequest(reqid).subscribe((res)=>{
       console.log(res);
       window.location.reload();
     })

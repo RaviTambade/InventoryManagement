@@ -11,18 +11,33 @@ import { OrderService } from '../order.service';
 })
 export class OrderDetailsComponent {
 
-  result:any;
-  orderId:number=0;
-  orderDetail:any;
-  public constructor(private svc:OrderService,private activeRoute:ActivatedRoute){}
-  ngOnInit(){
-    this.activeRoute.paramMap.subscribe((param)=>{
-      this.result=param.get('orderId')
-      this.orderId=Number.parseInt(this.result)
+  result: any;
+  orderId: number = 0;
+  orderDetail: any;
+  img: any;
+  public constructor(private svc: OrderService, private _materialsvc: MaterialService, private activeRoute: ActivatedRoute) {
+    this.orderDetail = {
+      "id": 0,
+      "category": '',
+      "employeeId": 0,
+      "materialId": 0,
+      "name": '',
+      "orderDate": '',
+      "quantity": 0,
+      "status": ''
+
+    }
+  }
+  ngOnInit() {
+    this.activeRoute.paramMap.subscribe((param) => {
+      this.result = param.get('orderId')
+      this.orderId = Number.parseInt(this.result)
       console.log(this.orderId)
     })
-    this.svc.orderDetails(this.orderId).subscribe((res)=>{
+    this.svc.orderDetails(this.orderId).subscribe((res) => {
       console.log(res);
+      this.orderDetail=res;
     })
   }
+
 }
