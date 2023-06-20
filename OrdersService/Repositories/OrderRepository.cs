@@ -64,13 +64,14 @@ public class OrderRepository : IOrderRepository
 
 
     //order history of supervisors 
-    public IEnumerable<Order> GetOrdersHistory(int empid)
+
+    public IEnumerable<OrderDetails> GetAllOrders(int empid)
     {
-        List<Order> orders = new List<Order>();
+        List<OrderDetails> orders = new List<OrderDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.id, orders.date,orders.status, orderdetails.quantity, orderdetails.materialid,orderdetails.employeeid,materials.title, categories.category from orders inner join orderdetails on orders.orderdetailid = orderdetails.id  inner join materials on orderdetails.materialid=materials.id  inner join categories on materials.categoryid=categories.id  inner join employees on orders.employeeid = employees.id where employees.id=@empid";
+            string query = "select orders.id, orders.date,orders.status, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl from orders inner join orderdetails on orders.orderdetailid = orderdetails.id   inner join materials on orderdetails.materialid=materials.id    inner join categories on materials.categoryid=categories.id    inner join employees on orderdetails.employeeid = employees.id  inner join departments on departments.id= employees.departmentid inner join employees e2 on orders.employeeid = e2.id where  orders.employeeid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             ;
@@ -84,11 +85,14 @@ public class OrderRepository : IOrderRepository
                 string? materialname = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                int materialid = Int32.Parse(reader["materialid"].ToString());
-                int employeeid = Int32.Parse(reader["employeeid"].ToString());
+                string department = reader["department"].ToString();
+                string firstname = reader["firstname"].ToString();
+                string lastname = reader["lastname"].ToString();
+                string imgurl = reader["imageurl"].ToString();
+
                 
 
-                Order order = new Order()
+                OrderDetails orderdetails = new OrderDetails()
                 {
                     Id = orderid,
                     OrderDate = orderdate,
@@ -96,11 +100,13 @@ public class OrderRepository : IOrderRepository
                     Name = materialname,
                     Category = category,
                     Quantity = quantity,
-                    MaterialId = materialid,
-                    EmployeeId=employeeid
+                    Department=department,
+                    EmployeeFirstName=firstname,
+                    EmployeeLastName=lastname,
+                    ImageUrl=imgurl
                 };
 
-                orders.Add(order);
+                orders.Add(orderdetails);
 
             }
             reader.Close();

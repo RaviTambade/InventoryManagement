@@ -13,7 +13,9 @@ public class OrderService : IOrderService
     }
 
     public Order GetOrderDetails(int orderid)=> _repo.GetOrderDetails(orderid);
-     public IEnumerable<Order> GetOrdersHistory(int empid)=> _repo.GetOrdersHistory(empid);
+
+    public IEnumerable<OrderDetails> GetAllOrders(int empid)=> _repo.GetAllOrders(empid);
+
     public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
     public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
     public bool Order(int empid)=> _repo.Order(empid);

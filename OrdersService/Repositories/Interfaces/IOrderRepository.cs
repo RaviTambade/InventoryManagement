@@ -5,7 +5,8 @@ namespace OrdersService.Repositories.Interfaces;
 public interface IOrderRepository
 {
     Order GetOrderDetails(int orderid);
-    IEnumerable<Order> GetOrdersHistory(int empid);
+    IEnumerable<OrderDetails> GetAllOrders(int empid);
+
     IEnumerable<Order> OrderedMaterialsInADay();
     IEnumerable<Order> GetOrders(Period date);
     bool Order(int empid);
