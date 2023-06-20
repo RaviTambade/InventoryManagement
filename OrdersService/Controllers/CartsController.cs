@@ -30,39 +30,7 @@ public class CartsController : ControllerBase
             CartItem cartItems= _crtsvs.GetCartItem(cartId);
             return cartItems;
         }
-        [HttpGet]
-        [Route("request/cart/{cartId}")]
-        public CartItem GetCartItem(int cartId)
-        {
-            CartItem cartItems= _crtsvs.GetCartItemFromRequest(cartId);
-            return cartItems;
-        }
 
-        [HttpPut]
-        [Route("request/cart")]
-        public bool updateCartItemFromRequest(CartItem cartItem)
-        {
-            bool status= _crtsvs.UpdateQuantityOfRequestedCartItme(cartItem);
-            return status;
-        }
-
-
-        //get request history of employee
-        [HttpGet]
-        [Route("requests/{empid}")]
-        public IEnumerable<Request> GetAllRequests(int empid)
-        {
-            IEnumerable<Request> requests= _crtsvs.GetAllRequests(empid);
-            return requests;
-        }
-
-        [HttpGet]
-        [Route("requestdetails/{requestid}")]
-        public IEnumerable<Request> GetRequestDetails(int requestid)
-        {
-            IEnumerable<Request> requests= _crtsvs.GetRequestDetails(requestid);
-            return requests;
-        }
 
         [HttpPost]
         [Route("addtocart")]
@@ -78,15 +46,6 @@ public class CartsController : ControllerBase
         public bool Delete( int id)
         {
             bool status=  _crtsvs.Delete(id);
-            return status;
-        }
-
-        //remove request
-        [HttpDelete]
-        [Route("delete/request/{requestid}")]
-        public bool DeleteRequest( int requestid)
-        {
-            bool status=  _crtsvs.DeleteRequest(requestid);
             return status;
         }
 

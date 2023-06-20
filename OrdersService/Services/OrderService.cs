@@ -12,7 +12,7 @@ public class OrderService : IOrderService
         _repo = repo;
     }
 
-    public Order GetOrderDetails(int orderid)=> _repo.GetOrderDetails(orderid);
+    public OrderDetails GetOrderDetails(int orderid)=> _repo.GetOrderDetails(orderid);
 
     public IEnumerable<OrderDetails> GetAllOrders(int empid)=> _repo.GetAllOrders(empid);
 

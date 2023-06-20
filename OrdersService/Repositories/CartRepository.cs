@@ -109,94 +109,6 @@ public class CartRepository : ICartRepository
         return cartItem;
     }
 
-    //get cart items  of supervisors by sending request id
-    public IEnumerable<Request> GetRequestDetails(int requestid)
-    {
-        List<Request> requests = new List<Request>();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "select o.id,o.requestid,requests.date, requests.status, o.materialid, categories.category, o.quantity  from orderdetails o inner join requests on requests.id=o.requestid inner join categories on categories.id=o.categoryid where o.requestid =@requestid";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@requestid", requestid);
-            ;
-            con.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                int orderid =Int32.Parse(reader["id"].ToString());
-                int reqid = Int32.Parse(reader["requestid"].ToString());
-                DateTime date = DateTime.Parse(reader["date"].ToString());
-                int materialid = Int32.Parse(reader["materialid"].ToString());
-                string category = reader["category"].ToString();
-                int quantity = Int32.Parse(reader["quantity"].ToString());
-                string status = reader["status"].ToString();
-
-                Request request = new Request()
-                {
-                    OrderId=orderid,
-                    RequestId = reqid,
-                    Date = date,
-                    MaterialId = materialid,
-                    Category = category,
-                    Quantity = quantity,
-                    Status = status
-                };
-
-                requests.Add(request);
-
-            }
-            reader.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return requests;
-    }
-
-        public CartItem GetCartItemFromRequest(int orderid)
-    {
-        CartItem cartItem = null;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "	select o.id, o.materialid, categories.category, o.quantity from orderdetails o inner join categories on categories.id=o.categoryid where o.id=@orderid";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@orderid", orderid);
-            con.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                int id = Int32.Parse(reader["id"].ToString());
-                int materialid = Int32.Parse(reader["materialid"].ToString());
-                string category = reader["category"].ToString();
-                int quantity = Int32.Parse(reader["quantity"].ToString());
-
-                cartItem = new CartItem()
-                {
-                    Id = id,
-                    MaterialId = materialid,
-                    Category = category,
-                    Quantity = quantity,
-                };
-            }
-            reader.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return cartItem;
-    }
 
     public bool Delete(int id)
     {
@@ -226,32 +138,6 @@ public class CartRepository : ICartRepository
     }
 
 
-    public bool DeleteRequest(int requestid)
-    {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "DELETE FROM requests WHERE id=@id";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@id", requestid);
-            con.Open();
-            int rowsAffected = cmd.ExecuteNonQuery();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return status;
-    }
 
     public bool AddItem(CartItem item)
     {
@@ -287,46 +173,6 @@ public class CartRepository : ICartRepository
         }
         return status;
 
-    }
-    public IEnumerable<Request> GetAllRequests(int empid)
-    {
-        List<Request> requests = new List<Request>();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "select * from requests where employeeid=@empid";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@empid", empid);
-            ;
-            con.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                int id = Int32.Parse(reader["id"].ToString());
-                DateTime date = DateTime.Parse(reader["date"].ToString());
-                string status = reader["status"].ToString();
-
-                Request request = new Request()
-                {
-                    RequestId = id,
-                    Date = date,
-                    Status = status
-                };
-
-                requests.Add(request);
-
-            }
-            reader.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return requests;
     }
 
     public bool EmptyCart(int employeeid)
@@ -384,33 +230,6 @@ public class CartRepository : ICartRepository
         return status;
     }
 
-    public bool UpdateQuantityOfRequestedCartItme(CartItem item)
-    {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "update orderdetails set quantity=@quantity where id=@id";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@id", item.Id);
-            cmd.Parameters.AddWithValue("@quantity", item.Quantity);
-            con.Open();
-            int rowsAffected = cmd.ExecuteNonQuery();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return status;
-    }
 
       public bool ChangeStatus(ChangeStatus changestatus)
     {

@@ -15,7 +15,7 @@ public class OrdersController : ControllerBase
     }
     //get order history of store managers
     [HttpGet]
-    [Route("allHistory/{empid}")]
+    [Route("details/{empid}")]
     public IEnumerable<OrderDetails> GetAllOrders(int empid)
     {
         IEnumerable<OrderDetails> orders = _ordsvs.GetAllOrders(empid);
@@ -23,10 +23,10 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
-    [Route("details/{orderid}")]
-    public Order GetOrderDetails(int orderid)
+    [Route("detail/{orderid}")]
+    public OrderDetails GetOrderDetails(int orderid)
     {
-        Order orders = _ordsvs.GetOrderDetails(orderid);
+        OrderDetails orders = _ordsvs.GetOrderDetails(orderid);
         return orders;
     }
 

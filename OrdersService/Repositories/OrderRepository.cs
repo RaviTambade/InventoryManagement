@@ -18,35 +18,45 @@ public class OrderRepository : IOrderRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public Order GetOrderDetails(int orderid)
+    public OrderDetails GetOrderDetails(int orderid)
     {
-        Order order = null;
+        OrderDetails order = null;
         MySqlConnection con = new MySqlConnection(_conString);
-        try
+         try
         {
-            string query = " select orders.id,orders.date, materials.id as materialid, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid=orderdetails.id where orders.id = @orderId ";
-            MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@orderId", orderid);
+            string query = "select orders.id, orders.date,orders.status, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl from orders inner join orderdetails on orders.orderdetailid = orderdetails.id   inner join materials on orderdetails.materialid=materials.id    inner join categories on materials.categoryid=categories.id    inner join employees on orderdetails.employeeid = employees.id  inner join departments on departments.id= employees.departmentid inner join employees e2 on orders.employeeid = e2.id where  orders.id=@orderid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            ;
             con.Open();
-            MySqlDataReader reader = command.ExecuteReader();
+            MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
                 string? status = reader["status"].ToString();
-                int materialid = Int32.Parse(reader["materialid"].ToString());
                 string? materialname = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
-                order = new Order()
+                string department = reader["department"].ToString();
+                string firstname = reader["firstname"].ToString();
+                string lastname = reader["lastname"].ToString();
+                string imgurl = reader["imageurl"].ToString();
+
+                
+
+                order = new OrderDetails()
                 {
                     Id = id,
-                    Status = status,
                     OrderDate = orderdate,
+                    Status = status,
                     Name = materialname,
                     Category = category,
                     Quantity = quantity,
-                    MaterialId = materialid
+                    Department=department,
+                    EmployeeFirstName=firstname,
+                    EmployeeLastName=lastname,
+                    ImageUrl=imgurl
                 };
             }
             reader.Close();

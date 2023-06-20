@@ -4,7 +4,7 @@ using OrdersService.Models;
 namespace OrdersService.Repositories.Interfaces;
 public interface IOrderRepository
 {
-    Order GetOrderDetails(int orderid);
+    OrderDetails GetOrderDetails(int orderid);
     IEnumerable<OrderDetails> GetAllOrders(int empid);
 
     IEnumerable<Order> OrderedMaterialsInADay();
