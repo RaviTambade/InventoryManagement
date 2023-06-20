@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { OrderService } from '../order.service';
 import { RequestService } from '../request.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-requests-history',
@@ -19,8 +20,11 @@ export class RequestsHistoryComponent {
   empid:number=12;
   cart:boolean |undefined;
   emptycart:boolean |undefined;
-
   request:boolean |undefined;
+
+
+  names:any=[];
+  employees:any=[];
   
 
   constructor(private _cartsvc: CartService,private _requestsvc:RequestService, private _ordersvc:OrderService, private router:Router) { 
@@ -29,6 +33,9 @@ export class RequestsHistoryComponent {
     this.carts=[];
     this.data=[];
   }
+  form = new FormGroup({
+    request: new FormControl('', Validators.required)
+  });
 
   ngOnInit(): void {
     this._cartsvc.getCarts(this.empid).subscribe((res) => {
@@ -42,10 +49,9 @@ export class RequestsHistoryComponent {
           this.data?.reverse();
           this.carts=this.data;
         }
- 
     })
 
-    this._requestsvc.getRequests(this.empid).subscribe((res) => {
+    this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
       if(res){
         Date.parse(res.date)
         this.result = res;
@@ -92,6 +98,40 @@ export class RequestsHistoryComponent {
 
   onView(requestid:number){
     this.router.navigate(['requestDetails', requestid]);
+
+  }
+
+  get f(){
+    return this.form.controls;
+  }
+   
+
+  changeShow(e:any) {
+    console.log(e.target.value);
+    if(e.target.value==="myrequest"){
+      this._requestsvc.getAllRequest(this.empid).subscribe((res) => {
+        if(res){
+          Date.parse(res.date)
+          this.result = res;
+          console.log(res);
+          this.result?.reverse();
+          this.requests=this.result;
+          this.request=true;
+     }
+      })
+    }
+    if(e.target.value==="allrequests"){
+      this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
+        if(res){
+          Date.parse(res.date)
+          this.result = res;
+          console.log(res);
+          this.result?.reverse();
+          this.requests=this.result;
+          this.request=true;
+     }
+      })
+    }
 
   }
 }

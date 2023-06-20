@@ -22,8 +22,12 @@ export class RequestService {
     let url ="http://localhost:5082/api/requests/request/cart";
     return this.http.put(url,updateQuantity);
   }
-  getRequests(empid:number):Observable<any>{
+  getAllRequests(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/requests/requests/" + empid ;
+    return this.http.get(url);
+  }
+  getAllRequest(empid:number):Observable<any>{
+    let url ="http://localhost:5082/api/requests/request/" + empid ;
     return this.http.get(url);
   }
   deleteRequest(reqid:number):Observable<any>{

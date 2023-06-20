@@ -32,11 +32,29 @@
 
 <h2>Previous Requests</h2>
 
+<div>    
+    <form [formGroup]="form" >
+        <div>
+            <label for="gender">Gender:</label>
+            <div>
+              <input id="myrequest" type="radio" value="myrequest" name="request" formControlName="request" (change)="changeShow($event)">
+              <label for="male">My Requests</label>
+          
+              <input id="allrequests" type="radio" value="allrequests" name="request" formControlName="request" (change)="changeShow($event)">
+              <label for="female">All Requests</label>
+           </div>
+              
+            <div *ngIf="f.request.touched && f.request.invalid" class="alert alert-danger">
+            </div> </div>
+    
+        </form>
+    </div>
 
-<table style="width:70%">
+<table style="width:90%">
     <thead>
         <th> Request ID</th>
         <th> Date</th>
+        <th>Supervisor</th>
         <th> Status</th>
   
     </thead>
@@ -44,6 +62,7 @@
         <tr>
             <td>{{request.requestId}}  </td>
             <td>{{request.date}}  </td>
+            <td>{{request.employeeFirstName}} {{request.employeeLastName}} </td>
             <td> {{request.status}}</td>
              <td> <button  (click)="onView(request.requestId)">View</button> </td>
              <td> <button (click)="onDeleteRequest(request.requestId)">Delete request</button> </td>
