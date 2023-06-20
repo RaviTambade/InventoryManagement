@@ -237,7 +237,7 @@ public class CartRepository : ICartRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "update orders set status=@status = where id=@id";
+            string query = "update orders set status=@status where id=@id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", changestatus.OrderId);
             cmd.Parameters.AddWithValue("@status", changestatus.StatusId);

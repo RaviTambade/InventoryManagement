@@ -15,8 +15,10 @@ public class RequestService : IRequestService
     public bool UpdateQuantityOfRequestedCartItme(CartItem item) => _repo.UpdateQuantityOfRequestedCartItme(item);
     public bool DeleteRequest(int requestid) => _repo.DeleteRequest(requestid);
 
-    public IEnumerable<Request> GetAllRequests(int empid) => _repo.GetAllRequests(empid);
+    public IEnumerable<RequestDetails> GetAllRequests(int empid) => _repo.GetAllRequests(empid);
+    public IEnumerable<RequestDetails> GetAllRequest(int empid) => _repo.GetAllRequest(empid);
+
     public IEnumerable<Request> GetRequestDetails(int requestid) => _repo.GetRequestDetails(requestid);
-        public CartItem GetCartItemFromRequest(int orderid)=> _repo.GetCartItemFromRequest(orderid);
+    public CartItem GetCartItemFromRequest(int orderid)=> _repo.GetCartItemFromRequest(orderid);
 
 }

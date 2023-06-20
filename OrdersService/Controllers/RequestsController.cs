@@ -21,12 +21,20 @@ public class RequestsController : ControllerBase
         return status;
     }
 
-    //get request history of employee
+    //get request history of department 
     [HttpGet]
     [Route("requests/{empid}")]
-    public IEnumerable<Request> GetAllRequests(int empid)
+    public IEnumerable<RequestDetails> GetAllRequests(int empid)
     {
-        IEnumerable<Request> requests = _reqsvs.GetAllRequests(empid);
+        IEnumerable<RequestDetails> requests = _reqsvs.GetAllRequests(empid);
+        return requests;
+    }
+    //get request history of supervisors
+    [HttpGet]
+    [Route("request/{empid}")]
+    public IEnumerable<RequestDetails> GetAllRequest(int empid)
+    {
+        IEnumerable<RequestDetails> requests = _reqsvs.GetAllRequest(empid);
         return requests;
     }
 

@@ -32,7 +32,7 @@ public class RequestRepository : IRequestRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int orderid = Int32.Parse(reader["id"].ToString());
+                int orderid =Int32.Parse(reader["id"].ToString());
                 int reqid = Int32.Parse(reader["requestid"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
@@ -42,7 +42,7 @@ public class RequestRepository : IRequestRepository
 
                 Request request = new Request()
                 {
-                    OrderId = orderid,
+                    OrderId=orderid,
                     RequestId = reqid,
                     Date = date,
                     MaterialId = materialid,
@@ -67,7 +67,7 @@ public class RequestRepository : IRequestRepository
         return requests;
     }
 
-    public CartItem GetCartItemFromRequest(int orderid)
+        public CartItem GetCartItemFromRequest(int orderid)
     {
         CartItem cartItem = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -132,13 +132,13 @@ public class RequestRepository : IRequestRepository
         }
         return status;
     }
-    public IEnumerable<Request> GetAllRequests(int empid)
+    public IEnumerable<RequestDetails> GetAllRequests(int empid)
     {
-        List<Request> requests = new List<Request>();
+        List<RequestDetails> requests = new List<RequestDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select * from requests where employeeid=@empid";
+            string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.employeeid inner join  departments on employees.departmentid=departments.id where departments.id =(select departmentid from employees where employees.id=@empid)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             ;
@@ -149,12 +149,63 @@ public class RequestRepository : IRequestRepository
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
                 string status = reader["status"].ToString();
+                string firstname = reader["firstname"].ToString();
+                string lastname = reader["lastname"].ToString();
 
-                Request request = new Request()
+
+                RequestDetails request = new RequestDetails()
                 {
                     RequestId = id,
                     Date = date,
-                    Status = status
+                    Status = status,
+                    EmployeeFirstName=firstname,
+                    EmployeeLastName=lastname
+                };
+
+                requests.Add(request);
+
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return requests;
+    }
+
+     public IEnumerable<RequestDetails> GetAllRequest(int empid)
+    {
+        List<RequestDetails> requests = new List<RequestDetails>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "	select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.employeeid inner join  departments on employees.departmentid=departments.id where employees.id=@empid;";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            ;
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                DateTime date = DateTime.Parse(reader["date"].ToString());
+                string status = reader["status"].ToString();
+                string firstname = reader["firstname"].ToString();
+                string lastname = reader["lastname"].ToString();
+
+
+                RequestDetails request = new RequestDetails()
+                {
+                    RequestId = id,
+                    Date = date,
+                    Status = status,
+                    EmployeeFirstName=firstname,
+                    EmployeeLastName=lastname
                 };
 
                 requests.Add(request);

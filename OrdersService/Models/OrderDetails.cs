@@ -9,7 +9,6 @@ public class OrderDetails{
     public string Department{get;set;}    
     public string EmployeeFirstName{get;set;}   
     public string EmployeeLastName{get;set;}    
- 
     public string ImageUrl{get;set;}
 
 }
