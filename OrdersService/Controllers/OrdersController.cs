@@ -30,6 +30,15 @@ public class OrdersController : ControllerBase
         return orders;
     }
 
+// get order details by sending request Id (store Managers)
+    [HttpGet]
+    [Route("details/request/{reqid}")]
+    public IEnumerable<OrderDetails> GetOrderDetailsForStore(int reqid)
+    {
+        IEnumerable<OrderDetails> orders = _ordsvs.GetOrderDetailsForStore(reqid);
+        return orders;
+    }
+
     //Get list of materials ordered in a day
     [HttpGet]
     [Route("orderedInADay")]
@@ -68,7 +77,7 @@ public class OrdersController : ControllerBase
     [Route("requestdetails")]
     public IEnumerable<RequestDetails> GetDetails(int[]id )
     {
-        IEnumerable<RequestDetails> requests = _ordsvs.GetRequestDetailsForStoreManagers(id);
+        IEnumerable<RequestDetails> requests = _ordsvs.GetRequestDetails(id);
         return requests;
     }
 

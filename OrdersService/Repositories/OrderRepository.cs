@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 namespace OrdersService.Repositories;
 public class OrderRepository : IOrderRepository
 {
+
     private IConfiguration _configuration;
     private string _conString;
     public OrderRepository(IConfiguration configuration)
@@ -72,9 +73,67 @@ public class OrderRepository : IOrderRepository
         return order;
     }
 
+    //order history of store 
+    public IEnumerable<OrderDetails> GetOrderDetailsForStore(int reqid)
+    {
+        List<OrderDetails> orders = new List<OrderDetails>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+                string query = "select orders.id, orders.date,orders.status, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl  from orders inner join orderdetails on orders.orderdetailid = orderdetails.id    inner join materials on materials.id = orderdetails.materialid inner join employees on orderdetails.employeeid = employees.id inner join categories on categories.id = materials.categoryid  inner join departments on departments.id= employees.departmentid inner join requests on requests.id = orderdetails.requestid where  requestid=@requestid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@requestid", reqid);
+            ;
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int orderid = Int32.Parse(reader["id"].ToString());
+                DateTime orderdate = DateTime.Parse(reader["date"].ToString());
+                string? status = reader["status"].ToString();
+                string? materialname = reader["title"].ToString();
+                string? category = reader["category"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                string department = reader["department"].ToString();
+                string firstname = reader["firstname"].ToString();
+                string lastname = reader["lastname"].ToString();
+                string imgurl = reader["imageurl"].ToString();
+
+                
+
+                OrderDetails orderdetails = new OrderDetails()
+                {
+                    Id = orderid,
+                    OrderDate = orderdate,
+                    Status = status,
+                    Name = materialname,
+                    Category = category,
+                    Quantity = quantity,
+                    Department=department,
+                    EmployeeFirstName=firstname,
+                    EmployeeLastName=lastname,
+                    ImageUrl=imgurl
+                };
+
+                orders.Add(orderdetails);
+
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return orders;
+    }
+
+    
 
     //order history of supervisors 
-
     public IEnumerable<OrderDetails> GetAllOrders(int empid)
     {
         List<OrderDetails> orders = new List<OrderDetails>();
@@ -287,7 +346,7 @@ public class OrderRepository : IOrderRepository
         return status;
     }
 
-        public IEnumerable<RequestDetails> GetRequestDetailsForStoreManagers(int[] id)
+     public IEnumerable<RequestDetails> GetRequestDetails(int[] id)
     {
         List<RequestDetails> requests = new List<RequestDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
