@@ -9,5 +9,6 @@ table, th, td {
     display: inline-block;
     width: 25%;
     height: 30px;
+    text-align:center;
 
   }

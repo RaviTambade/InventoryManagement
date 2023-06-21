@@ -46,9 +46,6 @@ export class OrderDetailsComponent {
     //   "status": ''
     // }
 
-
-
-    "inprogress"
     this.changeStatus = {
       "statusId": 3,
       "orderId": 0
@@ -72,7 +69,7 @@ export class OrderDetailsComponent {
       this.dateTime = this.orderDetail.orderDate;
       this.date = this.dateTime.split('T');
       console.log(this.orderDetail)
-      console.log(this.date)
+
   }
   onProceed(orderId: number) {
     console.log(orderId);
