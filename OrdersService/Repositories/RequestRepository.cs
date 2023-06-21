@@ -32,7 +32,7 @@ public class RequestRepository : IRequestRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                int orderid =Int32.Parse(reader["id"].ToString());
+                int orderid = Int32.Parse(reader["id"].ToString());
                 int reqid = Int32.Parse(reader["requestid"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
@@ -42,7 +42,7 @@ public class RequestRepository : IRequestRepository
 
                 Request request = new Request()
                 {
-                    OrderId=orderid,
+                    OrderId = orderid,
                     RequestId = reqid,
                     Date = date,
                     MaterialId = materialid,
@@ -158,8 +158,8 @@ public class RequestRepository : IRequestRepository
                     RequestId = id,
                     Date = date,
                     Status = status,
-                    EmployeeFirstName=firstname,
-                    EmployeeLastName=lastname
+                    EmployeeFirstName = firstname,
+                    EmployeeLastName = lastname
                 };
 
                 requests.Add(request);
@@ -178,114 +178,117 @@ public class RequestRepository : IRequestRepository
         return requests;
     }
 
-     public IEnumerable<RequestDetails> GetAllRequest(int empid)
+    
+public IEnumerable<RequestDetails> GetAllRequest(int empid)
+{
+    List<RequestDetails> requests = new List<RequestDetails>();
+    MySqlConnection con = new MySqlConnection(_conString);
+    try
     {
-        List<RequestDetails> requests = new List<RequestDetails>();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
+        string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.employeeid inner join  departments on employees.departmentid=departments.id where employees.id=@empid;";
+        MySqlCommand cmd = new MySqlCommand(query, con);
+        cmd.Parameters.AddWithValue("@empid", empid);
+        ;
+        con.Open();
+        MySqlDataReader reader = cmd.ExecuteReader();
+        while (reader.Read())
         {
-            string query = "	select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.employeeid inner join  departments on employees.departmentid=departments.id where employees.id=@empid;";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@empid", empid);
-            ;
-            con.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            int id = Int32.Parse(reader["id"].ToString());
+            DateTime date = DateTime.Parse(reader["date"].ToString());
+            string status = reader["status"].ToString();
+            string firstname = reader["firstname"].ToString();
+            string lastname = reader["lastname"].ToString();
+
+
+            RequestDetails request = new RequestDetails()
             {
-                int id = Int32.Parse(reader["id"].ToString());
-                DateTime date = DateTime.Parse(reader["date"].ToString());
-                string status = reader["status"].ToString();
-                string firstname = reader["firstname"].ToString();
-                string lastname = reader["lastname"].ToString();
+                RequestId = id,
+                Date = date,
+                Status = status,
+                EmployeeFirstName = firstname,
+                EmployeeLastName = lastname
+            };
 
+            requests.Add(request);
 
-                RequestDetails request = new RequestDetails()
-                {
-                    RequestId = id,
-                    Date = date,
-                    Status = status,
-                    EmployeeFirstName=firstname,
-                    EmployeeLastName=lastname
-                };
-
-                requests.Add(request);
-
-            }
-            reader.Close();
         }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return requests;
+        reader.Close();
     }
-    public bool UpdateQuantityOfRequestedCartItme(CartItem item)
+    catch (Exception e)
     {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "update orderdetails set quantity=@quantity where id=@id";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@id", item.Id);
-            cmd.Parameters.AddWithValue("@quantity", item.Quantity);
-            con.Open();
-            int rowsAffected = cmd.ExecuteNonQuery();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return status;
+        throw e;
     }
-
-    public IEnumerable<Request> GetRequestId(int empid){
-        List<Request> requests = new List<Request>();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "SELECT DISTINCT C.requestid from orderdetails C inner join orders o on C.id= o.orderdetailid inner join employees e on o.employeeid=e.id where e.id=@empid";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@empid", empid);
-            ;
-            con.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                int reqid = Int32.Parse(reader["requestid"].ToString());
- 
-
-                Request request = new Request()
-                {
-                    RequestId = reqid
-                };
-
-                requests.Add(request);
-
-            }
-            reader.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return requests;
+    finally
+    {
+        con.Close();
     }
+    return requests;
+}
+public bool UpdateQuantityOfRequestedCartItme(CartItem item)
+{
+    bool status = false;
+    MySqlConnection con = new MySqlConnection(_conString);
+    try
+    {
+        string query = "update orderdetails set quantity=@quantity where id=@id";
+        MySqlCommand cmd = new MySqlCommand(query, con);
+        cmd.Parameters.AddWithValue("@id", item.Id);
+        cmd.Parameters.AddWithValue("@quantity", item.Quantity);
+        con.Open();
+        int rowsAffected = cmd.ExecuteNonQuery();
+        if (rowsAffected > 0)
+        {
+            status = true;
+        }
+    }
+    catch (Exception e)
+    {
+        throw e;
+    }
+    finally
+    {
+        con.Close();
+    }
+    return status;
+}
+
+public IEnumerable<Request> GetRequestId(int empid)
+{
+    List<Request> requests = new List<Request>();
+    MySqlConnection con = new MySqlConnection(_conString);
+    try
+    {
+        string query = "SELECT DISTINCT C.requestid from orderdetails C inner join orders o on C.id= o.orderdetailid inner join employees e on o.employeeid=e.id where e.id=@empid";
+        MySqlCommand cmd = new MySqlCommand(query, con);
+        cmd.Parameters.AddWithValue("@empid", empid);
+        ;
+        con.Open();
+        MySqlDataReader reader = cmd.ExecuteReader();
+        while (reader.Read())
+        {
+            int reqid = Int32.Parse(reader["requestid"].ToString());
+
+
+            Request request = new Request()
+            {
+                RequestId = reqid
+            };
+
+            requests.Add(request);
+
+        }
+        reader.Close();
+    }
+    catch (Exception e)
+    {
+        throw e;
+    }
+    finally
+    {
+        con.Close();
+    }
+    return requests;
+}
+
 
 }

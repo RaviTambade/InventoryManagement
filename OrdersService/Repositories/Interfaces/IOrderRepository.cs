@@ -11,5 +11,6 @@ public interface IOrderRepository
     IEnumerable<Order> GetOrders(Period date);
     bool Order(int empid);
     bool DeleteOrder(int orderid);
+    IEnumerable<RequestDetails> GetRequestDetailsForStoreManagers(int[] id);
 
 }

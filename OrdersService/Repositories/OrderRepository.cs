@@ -81,7 +81,7 @@ public class OrderRepository : IOrderRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orders.id, orders.date,orders.status, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl from orders inner join orderdetails on orders.orderdetailid = orderdetails.id   inner join materials on orderdetails.materialid=materials.id    inner join categories on materials.categoryid=categories.id    inner join employees on orderdetails.employeeid = employees.id  inner join departments on departments.id= employees.departmentid inner join employees e2 on orders.employeeid = e2.id where  orders.employeeid=@empid";
+                string query = "select orders.id, orders.date,orders.status, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl from orders inner join orderdetails on orders.orderdetailid = orderdetails.id   inner join materials on orderdetails.materialid=materials.id    inner join categories on materials.categoryid=categories.id    inner join employees on orderdetails.employeeid = employees.id  inner join departments on departments.id= employees.departmentid inner join employees e2 on orders.employeeid = e2.id where  orders.employeeid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             ;
@@ -286,5 +286,55 @@ public class OrderRepository : IOrderRepository
         }
         return status;
     }
+
+        public IEnumerable<RequestDetails> GetRequestDetailsForStoreManagers(int[] id)
+    {
+        List<RequestDetails> requests = new List<RequestDetails>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            foreach(int rid in id ){
+            string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.employeeid  inner join  departments on employees.departmentid=departments.id where requests.id =@reqid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@reqid", rid);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+              while (reader.Read())
+            {
+                int reqid = Int32.Parse(reader["id"].ToString());
+                DateTime orderdate = DateTime.Parse(reader["date"].ToString());
+                string firstname = reader["firstname"].ToString();
+                string lastname = reader["lastname"].ToString();
+                string status = reader["status"].ToString();
+
+                RequestDetails requestDetails = new RequestDetails()
+                {
+                    RequestId = reqid,
+                    Date = orderdate,
+                    Status = status,
+                    EmployeeFirstName=firstname,
+                    EmployeeLastName=lastname,
+                };
+              requests.Add(requestDetails);
+            } 
+             reader.Close();
+            con.Close();
+
+
+         }
+        }
+           
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return requests;
+    }
+
+    
 
 }

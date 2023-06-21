@@ -63,6 +63,14 @@ public class OrdersController : ControllerBase
         return status;
     }
 
+    //get request history For storemanagers id by sending requestids
+    [HttpPost]
+    [Route("requestdetails")]
+    public IEnumerable<RequestDetails> GetDetails(int[]id )
+    {
+        IEnumerable<RequestDetails> requests = _ordsvs.GetRequestDetailsForStoreManagers(id);
+        return requests;
+    }
 
 }
 

@@ -37,7 +37,15 @@ public class RequestsController : ControllerBase
         IEnumerable<RequestDetails> requests = _reqsvs.GetAllRequest(empid);
         return requests;
     }
-
+    //request IDs for Store Manager
+    [HttpGet]
+    [Route("requestid/{empid}")]
+    public IEnumerable<Request> GetRequestId(int empid)
+    {
+        IEnumerable<Request> requests = _reqsvs.GetRequestId(empid);
+        return requests;
+    }
+  
     //request details for supervisor
     [HttpGet]
     [Route("requestdetails/{requestid}")]
@@ -64,15 +72,7 @@ public class RequestsController : ControllerBase
         return cartItems;
     }
 
-    //request IDs for Store Manager
-    [HttpGet]
-    [Route("requestid/{empid}")]
-    public IEnumerable<Request> GetRequestId(int empid)
-    {
-        IEnumerable<Request> requests = _reqsvs.GetRequestId(empid);
-        return requests;
-    }
-  
+
     
 
 }

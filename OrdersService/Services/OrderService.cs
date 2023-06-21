@@ -21,4 +21,6 @@ public class OrderService : IOrderService
     public bool Order(int empid)=> _repo.Order(empid);
     public bool DeleteOrder(int orderid)=> _repo.DeleteOrder(orderid);
 
+    public IEnumerable<RequestDetails> GetRequestDetailsForStoreManagers(int[]id)=> _repo.GetRequestDetailsForStoreManagers(id);
+
 }
