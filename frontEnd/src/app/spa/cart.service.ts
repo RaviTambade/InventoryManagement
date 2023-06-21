@@ -38,6 +38,11 @@ export class CartService {
     let url = "http://localhost:5082/api/carts/addtocart";
     return this.http.post(url,cart);
   }
+  ChangeStatus(changeStatus:any):Observable<any> 
+  {
+    let url = "http://localhost:5082/api/carts/ChangeStatus";
+    return this.http.put(url,changeStatus);
+  }
 
 }
 

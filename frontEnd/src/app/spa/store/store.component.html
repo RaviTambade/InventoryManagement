@@ -1,9 +1,9 @@
-<h1>STORE</h1>
+<h1>Warehouse </h1>
 <div *ngFor="let material of materials">
     <img src="{{material.imgUrl}}" alt="">
     <h4 >Material Type:{{material.type}}</h4>
     <h4 >Material Name: {{material.name}}</h4>
-    <button type="submit" (click)="add(material.id)" >Add to Cart</button>
+    <button type="submit" (click)="add(material.id)" >Add to request</button>
      <hr>
 </div>   
 <button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>

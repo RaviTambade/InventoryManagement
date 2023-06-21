@@ -1,11 +1,37 @@
-<hr>
-<div *ngIf="orderDetail">
-    <div >    
-        <img src="{{orderDetail.imageUrl}}" alt="">
+<div class="container" >
+    <div class="product"> <p><b>Date: {{date[0]}} Time: {{date[1]}}</b></p> </div>
+    <div class="product" ><p><b>Employee: {{orderDetail.employeeFirstName}} {{orderDetail.employeeLastName}}</b></p>
     </div>
-<li>Order Id: {{orderDetail.id}}</li>
-<li>Material Name: {{orderDetail.name}}</li>
-<li><b> Ordered Quantity: {{orderDetail.quantity}}</b></li>
-
-<button>Accept</button>
+    <div class="product"><p> <b> DepartMent:{{orderDetail.department}} </b>    </p></div>
+    <div class="product">available Quantity:</div>
+   
 </div>
+
+<h2>Order List</h2>
+<div >
+    <table style="width:60%">
+        <thead>
+            <th></th>
+            <th>Order ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Approved Quantity</th>
+        </thead>
+
+        <tbody>
+            <tr  *ngFor="let order of orderDetails">
+                <td><img src="{{order.imageUrl}}" width="50" hight="50" alt=""></td>
+                <td> {{order.id}}</td> 
+                <td> {{order.name}}</td> 
+                <td> {{order.category}}</td> 
+                <td> {{order.quantity}}</td> 
+                <td><input name="orderQuantity"  id="orderQuantity"  type="number"></td>
+                 <td><button>Approved</button></td>
+            </tr>  
+
+        </tbody>
+
+    </table>
+</div>
+

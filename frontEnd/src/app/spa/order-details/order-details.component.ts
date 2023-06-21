@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { MaterialService } from '../material.service';
 import { Subscription, VirtualTimeScheduler } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../order.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'order-details',
@@ -12,32 +13,77 @@ import { OrderService } from '../order.service';
 export class OrderDetailsComponent {
 
   result: any;
-  orderId: number = 0;
+  dateTime: string = '';
+  date: any;
+  requestId: number = 0;
+  employee: string = '';
+  orderDetails: any;
   orderDetail: any;
-  img: any;
-  public constructor(private svc: OrderService, private _materialsvc: MaterialService, private activeRoute: ActivatedRoute) {
-    this.orderDetail = {
+  changeStatus: any;
+  public constructor(private svc: OrderService, private _cartsvc: CartService, private _materialsvc: MaterialService, private router: Router, private activeRoute: ActivatedRoute) {
+    this.orderDetails = {
       "id": 0,
       "category": '',
-      "employeeId": 0,
-      "materialId": 0,
-      "name": '',
+      "department": '',
+      "employeeFirstName": '',
+      "employeeLastName": '',
+      "imageUrl": '',
       "orderDate": '',
       "quantity": 0,
+      "name": '',
       "status": ''
+    }
+    // this.orderDetail = {
+    //   "id": 0,
+    //   "category": '',
+    //   "department": '',
+    //   "employeeFirstName": '',
+    //   "employeeLastName": '',
+    //   "imageUrl": '',
+    //   "orderDate": '',
+    //   "quantity": 0,
+    //   "name": '',
+    //   "status": ''
+    // }
 
+
+
+    "inprogress"
+    this.changeStatus = {
+      "statusId": 3,
+      "orderId": 0
     }
   }
   ngOnInit() {
     this.activeRoute.paramMap.subscribe((param) => {
-      this.result = param.get('orderId')
-      this.orderId = Number.parseInt(this.result)
-      console.log(this.orderId)
+      this.result = param.get('requestId')
+      this.requestId = Number.parseInt(this.result)
+      console.log(this.requestId)
     })
-    this.svc.orderDetails(this.orderId).subscribe((res) => {
+    this.svc.getOrderDetails(this.requestId).subscribe((res) => {
       console.log(res);
-      this.orderDetail=res;
+      this.orderDetails = res;
+      this.getData()
     })
   }
+
+  getData(){
+    this.orderDetail = this.orderDetails[0];
+      this.dateTime = this.orderDetail.orderDate;
+      this.date = this.dateTime.split('T');
+      console.log(this.orderDetail)
+      console.log(this.date)
+  }
+  onProceed(orderId: number) {
+    console.log(orderId);
+    this.changeStatus.orderId = orderId;
+    console.log(this.changeStatus)
+    this._cartsvc.ChangeStatus(this.changeStatus).subscribe((res) => {
+      console.log(res)
+    })
+    this.router.navigate(["orderhistory"])
+
+  }
+
 
 }

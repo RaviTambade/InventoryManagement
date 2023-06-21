@@ -17,6 +17,11 @@ export class OrderService {
     let url ="http://localhost:5082/api/orders/detail/" +orderid ;
     return this.http.get(url);
   }
+  //get order details by sending request id (store)
+  getOrderDetails(requestid:number):Observable<any>{
+    let url ="http://localhost:5082/api/orders/details/request/" +requestid ;
+    return this.http.get(url);
+  }
   order(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/orders/order/" +empid ;
     return this.http.get(url);
@@ -28,5 +33,9 @@ export class OrderService {
   getOrdersHistory(id:number):Observable<any>{
     let url ="http://localhost:5082/api/Orders/history/" + id ;
     return this.http.get(url);
+  }
+  getRequestHistory(request:any):Observable<any>{
+    let url ="http://localhost:5082/api/Orders/requestdetails"  ;
+    return this.http.post(url,request);
   }
 }

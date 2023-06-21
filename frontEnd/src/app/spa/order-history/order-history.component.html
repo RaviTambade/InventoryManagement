@@ -1,27 +1,23 @@
 <h2>Orders</h2>
 <hr>
 <div >
-    <table style="width:100%">
+    <table style="width:60%">
         <thead>
-            <th>Material Name</th>
-            <th>Ordered Quantity</th>
-            <th>Ordered Date</th>
-            <th>Department</th>
+            <th>Request ID</th>
+            <th>Request date</th>
             <th>Supervisor's name</th>
             <th>Status</th>
 
         </thead>
 
         <tbody>
-            <tr  *ngFor="let order of orders">
-                <td> {{order.name}}</td>
-                <td> {{order.quantity}}</td> 
-                <td> {{order.orderDate}}</td> 
-                <td> {{order.department}}</td> 
-                <td> {{order.employeeFirstName}}  {{order.employeeLastName}}</td> 
-                <td> {{order.status}}</td> 
+            <tr  *ngFor="let request of requests">
+                <td> {{request.requestId}}</td> 
+                <td> {{request.date}}</td> 
+                <td> {{request.employeeFirstName}}  {{request.employeeLastName}}</td> 
+                <td> {{request.status}}</td> 
 
-                 <td><button (click)="onView(order.id)">View</button></td>
+                 <td><button (click)="onView(request.requestId)">View</button></td>
             </tr>  
 
         </tbody>

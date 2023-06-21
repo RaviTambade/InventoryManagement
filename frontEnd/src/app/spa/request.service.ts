@@ -14,6 +14,11 @@ export class RequestService {
     let url ="http://localhost:5082/api/requests/requestdetails/"+ requestid;
     return this.http.get(url)
   }
+  getRequestId(empid:number):Observable<any>
+  {
+    let url ="http://localhost:5082/api/requests/requestid/"+ empid;
+    return this.http.get(url)
+  }
   getCartFromRequest(orderid:number){
     let url ="http://localhost:5082/api/requests/request/cart/" + orderid ;
     return this.http.get(url);
