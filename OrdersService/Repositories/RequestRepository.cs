@@ -67,7 +67,7 @@ public class RequestRepository : IRequestRepository
         return requests;
     }
 
-        public CartItem GetCartItemFromRequest(int orderid)
+    public CartItem GetCartItemFromRequest(int orderid)
     {
         CartItem cartItem = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -249,6 +249,43 @@ public class RequestRepository : IRequestRepository
             con.Close();
         }
         return status;
+    }
+
+    public IEnumerable<Request> GetRequestId(int empid){
+        List<Request> requests = new List<Request>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT DISTINCT C.requestid from orderdetails C inner join orders o on C.id= o.orderdetailid inner join employees e on o.employeeid=e.id where e.id=@empid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            ;
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int reqid = Int32.Parse(reader["requestid"].ToString());
+ 
+
+                Request request = new Request()
+                {
+                    RequestId = reqid
+                };
+
+                requests.Add(request);
+
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return requests;
     }
 
 }

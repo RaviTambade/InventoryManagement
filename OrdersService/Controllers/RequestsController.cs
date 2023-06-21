@@ -38,6 +38,7 @@ public class RequestsController : ControllerBase
         return requests;
     }
 
+    //request details for supervisor
     [HttpGet]
     [Route("requestdetails/{requestid}")]
     public IEnumerable<Request> GetRequestDetails(int requestid)
@@ -45,6 +46,7 @@ public class RequestsController : ControllerBase
         IEnumerable<Request> requests = _reqsvs.GetRequestDetails(requestid);
         return requests;
     }
+  
     //remove request
     [HttpDelete]
     [Route("delete/request/{requestid}")]
@@ -54,12 +56,23 @@ public class RequestsController : ControllerBase
         return status;
     }
 
-        [HttpGet]
-        [Route("request/cart/{cartId}")]
-        public CartItem GetCartItem(int cartId)
-        {
-            CartItem cartItems= _reqsvs.GetCartItemFromRequest(cartId);
-            return cartItems;
-        }
+    [HttpGet]
+    [Route("request/cart/{cartId}")]
+    public CartItem GetCartItem(int cartId)
+    {
+        CartItem cartItems= _reqsvs.GetCartItemFromRequest(cartId);
+        return cartItems;
+    }
+
+    //request IDs for Store Manager
+    [HttpGet]
+    [Route("requestid/{empid}")]
+    public IEnumerable<Request> GetRequestId(int empid)
+    {
+        IEnumerable<Request> requests = _reqsvs.GetRequestId(empid);
+        return requests;
+    }
+  
+    
 
 }

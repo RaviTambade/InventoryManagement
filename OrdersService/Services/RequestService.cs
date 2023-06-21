@@ -21,4 +21,6 @@ public class RequestService : IRequestService
     public IEnumerable<Request> GetRequestDetails(int requestid) => _repo.GetRequestDetails(requestid);
     public CartItem GetCartItemFromRequest(int orderid)=> _repo.GetCartItemFromRequest(orderid);
 
+    public IEnumerable<Request> GetRequestId(int empid) => _repo.GetRequestId(empid);
+
 }
