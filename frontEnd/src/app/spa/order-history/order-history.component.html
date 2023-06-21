@@ -14,7 +14,7 @@
             <tr  *ngFor="let request of requests">
                 <td> {{request.requestId}}</td> 
                 <td> {{request.date}}</td> 
-                <td> {{request.employeeFirstName}}  {{request.employeeLastName}}</td> 
+                <td> <a href=""> {{request.employeeFirstName}}  {{request.employeeLastName}}</a></td> 
                 <td> {{request.status}}</td> 
 
                  <td><button (click)="onView(request.requestId)">View</button></td>

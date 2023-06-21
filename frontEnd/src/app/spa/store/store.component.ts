@@ -43,41 +43,41 @@ export class StoreComponent {
 
   ngOnInit(): void {
     this._materialsvc.getAllMaterials().subscribe((response)=>{
-      this.data =response;
+      this.materials =response;
       console.log(response);
-      this.arrLength = this.data.length;
-      this.size = 3;
-      this.currentIndex = 0;
-      this.endIndex = this.currentIndex + this.size;
-      this.materials = this.data.slice(this.currentIndex, this.endIndex);
+      // this.arrLength = this.data.length;
+      // this.size = 3;
+      // this.currentIndex = 0;
+      // this.endIndex = this.currentIndex + this.size;
+      // this.materials = this.data.slice(this.currentIndex, this.endIndex);
     })
     
     this.isDisabledPrev = true;
   }
   
-  next() {
-    this.currentIndex = this.currentIndex + this.size;
-    this.endIndex = this.currentIndex + this.size;
-    this.materials = this.data.slice(this.currentIndex, this.endIndex);
-    //button unable disable code
-    this.isDisabledPrev = false;
-    if (this.endIndex >= this.arrLength)
-    {
-      this.isDisabledNext = true;
-    }
-  }
+  // next() {
+  //   this.currentIndex = this.currentIndex + this.size;
+  //   this.endIndex = this.currentIndex + this.size;
+  //   this.materials = this.data.slice(this.currentIndex, this.endIndex);
+  //   //button unable disable code
+  //   this.isDisabledPrev = false;
+  //   if (this.endIndex >= this.arrLength)
+  //   {
+  //     this.isDisabledNext = true;
+  //   }
+  // }
 
-  previous() {
-    this.currentIndex = this.currentIndex - this.size;
-    this.endIndex = this.currentIndex + this.size;
-    this.materials = this.data.slice(this.currentIndex, this.endIndex);
-    //button unable disable code
-    this.isDisabledNext = false;
-    if (this.currentIndex <= 0) 
-    {
-      this.isDisabledPrev = true;
-    }
-  }
+  // previous() {
+  //   this.currentIndex = this.currentIndex - this.size;
+  //   this.endIndex = this.currentIndex + this.size;
+  //   this.materials = this.data.slice(this.currentIndex, this.endIndex);
+  //   //button unable disable code
+  //   this.isDisabledNext = false;
+  //   if (this.currentIndex <= 0) 
+  //   {
+  //     this.isDisabledPrev = true;
+  //   }
+  // }
 
   add(id:number){
     this.router.navigate(['order', id]);

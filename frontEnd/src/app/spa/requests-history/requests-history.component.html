@@ -1,34 +1,6 @@
 
 <h1>My Requests</h1>
 
-<h2>Request</h2>
-
-<div *ngIf="cart">
-    <table style="width:60%">
-        <thead>
-            <th> Material ID</th>
-            <th> Material Category</th>
-            <th> Order Qunatity</th>
-      
-        </thead>
-        <tbody *ngFor="let cart of carts">
-            <tr>
-                <td>{{cart.materialId}}  </td>
-                <td> {{cart.category}}</td>
-                <td> {{cart.quantity}}</td> 
-                 <td><button (click)="onEdit(cart.id)" >Edit</button>  <button (click)="onRemove(cart.id)" >Remove</button> </td>
-            </tr>  
-        </tbody>
-    </table>
-    <tr><button (click)="onOrder()" >Place Order</button>   <button (click)="onRemoveAll()" >RemoveAll</button> </tr>
-</div>
-
-<div *ngIf="emptycart">
-    <h2>No request!</h2>
-</div>
-
-<br>
-
 
 <h2>Previous Requests</h2>
 
@@ -68,6 +40,37 @@
         </tr>  
     </tbody>
 </table>
+
+
+<h2>Request</h2>
+
+<div *ngIf="cart">
+    <h2>New Request</h2>
+    <table style="width:60%">
+        <thead>
+            <th> Material ID</th>
+            <th> Material Category</th>
+            <th> Order Qunatity</th>
+      
+        </thead>
+        <tbody *ngFor="let cart of carts">
+            <tr>
+                <td>{{cart.materialId}}  </td>
+                <td> {{cart.category}}</td>
+                <td> {{cart.quantity}}</td> 
+                 <td><button (click)="onEdit(cart.id)" >Edit</button>  <button (click)="onRemove(cart.id)" >Remove</button> </td>
+            </tr>  
+        </tbody>
+    </table>
+    <tr><button (click)="onOrder()" >Place Order</button>   <button (click)="onRemoveAll()" >RemoveAll</button> </tr>
+</div>
+
+<div *ngIf="emptycart">
+    <h2>No request!</h2>
+</div>
+
+<br>
+
 
 
 
