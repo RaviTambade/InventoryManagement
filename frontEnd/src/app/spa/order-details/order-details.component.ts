@@ -13,12 +13,12 @@ import { CartService } from '../cart.service';
 export class OrderDetailsComponent {
 
   result: any;
-  dateTime: string = '';
-  date: any;
   requestId: number = 0;
   employee: string = '';
   orderDetails: any;
   orderDetail: any;
+  dateTime: string = '';
+  date: any;
   changeStatus: any;
   public constructor(private svc: OrderService, private _cartsvc: CartService, private _materialsvc: MaterialService, private router: Router, private activeRoute: ActivatedRoute) {
     this.orderDetails = {

@@ -27,13 +27,17 @@
           </div>
         </div>
 </div> -->
-<div class="grid">
+<!-- <div class="grid">
     <ng-container *ngFor="let material of materials">
         <img src="{{material.imgUrl}}" alt="">
-        <div><input type="checkbox"></div>
     </ng-container>
-</div>
-
+</div> -->
+<div class="row">
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4" *ngFor="let material of materials">
+     {{material.name}}  <!-- display product data -->
+    </div>
+   </div>
+   
 <!-- <div class="row itemsBlock">
     <div *ngFor="let item of items" class="col-md-4 col-sm-6 col-12">
          <img class="itemImage" src="{{item.image}}" />
