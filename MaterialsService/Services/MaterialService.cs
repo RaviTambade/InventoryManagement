@@ -22,5 +22,6 @@ public class MaterialService : IMaterialService
 
     public IEnumerable<Material> GetMaterials(int id)=> _repo.GetMaterials(id);
     public IEnumerable<Material> GetOutOfStockMaterials()=> _repo.GetOutOfStockMaterials();
+    public IEnumerable<Material> GetCategories()=> _repo.GetCategories();
     
 }

@@ -99,6 +99,14 @@ namespace MaterialsService.Controllers
             return materials;
         }
 
+        [HttpGet]
+        [Route("categories")]
+        public IEnumerable<Material> GetCategories()
+        {
+            IEnumerable<Material> materials = _matsrv.GetCategories();
+            return materials;
+        }
+
 
     }
 } 

@@ -64,7 +64,6 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
-
     public Material Get(int Mid)
     {
         Material Thematerial = null;
@@ -109,7 +108,7 @@ public class MaterialRepository : IMaterialRepository
         return Thematerial;
     }
 
-        public string GetImage(int Mid)
+    public string GetImage(int Mid)
     {
         string? imgUrl = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -137,7 +136,6 @@ public class MaterialRepository : IMaterialRepository
         }
         return imgUrl;
     }
-
 
     public bool Insert(Material material) {
         bool status = false;
@@ -395,5 +393,38 @@ public class MaterialRepository : IMaterialRepository
         }
         return location;
     }
-    
+
+    public IEnumerable<Material> GetCategories()
+    {
+        List<Material> materials=new List<Material>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select category from categories" ;
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string? category = reader["category"].ToString();
+                Material material  = new Material()
+                {
+                    Type=category
+                };
+                materials.Add(material);
+            }
+
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return materials;
+    }
+        
 }

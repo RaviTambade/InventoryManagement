@@ -18,4 +18,6 @@ public interface IMaterialRepository
     IEnumerable<Material> GetMaterials(int id);
     IEnumerable<Material>GetOutOfStockMaterials();
     
+    IEnumerable<Material>GetCategories();
+
 }
