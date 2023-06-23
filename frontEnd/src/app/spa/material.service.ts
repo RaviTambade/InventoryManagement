@@ -18,7 +18,6 @@ export class MaterialService {
       return this.http.get(url);
   }
 
-
   getById(materialId:number):Observable<any>{
     let url ="http://localhost:5176/api/Materials/materials/"+ materialId;
     return this.http.get(url);
@@ -26,6 +25,11 @@ export class MaterialService {
 
   getLocation(materialId:number):Observable<any>{
     let url ="http://localhost:5176/api/Materials/location/"+ materialId;
+    return this.http.get(url);
+  }
+
+  getCategories():Observable<any>{
+    let url ="http://localhost:5176/api/Materials/categories";
     return this.http.get(url);
   }
 

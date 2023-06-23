@@ -4,19 +4,14 @@ import { MaterialService } from '../material.service';
 import { Route, Router } from '@angular/router';
 import { VirtualTimeScheduler } from 'rxjs';
 import { CartService } from '../cart.service';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css']
 })
 export class StoreComponent {
-  isDisabledPrev = false;
-  isDisabledNext = false;
-  currentIndex = 0;
-  endIndex = 0;
-  arrLength = 0;
+  categories:any[] |undefined
   materials: any[] | undefined;
   data: any[];
   size: number = 0;
@@ -24,6 +19,7 @@ export class StoreComponent {
   cart:any[];
   newOrder:any;
   status:boolean=false;
+  form: FormGroup;
 
   constructor( private fb: FormBuilder,private _materialsvc: MaterialService, private router:Router) {
     this.data = [];
@@ -32,7 +28,13 @@ export class StoreComponent {
     "materialid":0,
     "type":'',
     "quantity":0};
+
+
+    this.form = this.fb.group({
+      role: this.fb.array([], [Validators.required])
+    })
   }
+
   orderForm = this.fb.group({
     id : [0 , [Validators.required]],
     name : [ ' ', [Validators.required]],
@@ -41,48 +43,35 @@ export class StoreComponent {
     orderQuantity: [ 0, [Validators.required]],
   });
 
+
   ngOnInit(): void {
     this._materialsvc.getAllMaterials().subscribe((response)=>{
       this.materials =response;
       console.log(response);
-      // this.arrLength = this.data.length;
-      // this.size = 3;
-      // this.currentIndex = 0;
-      // this.endIndex = this.currentIndex + this.size;
-      // this.materials = this.data.slice(this.currentIndex, this.endIndex);
+    })
+    this._materialsvc.getCategories().subscribe((res)=>{
+      console.log(res);
+      this.categories=res;
     })
     
-    this.isDisabledPrev = true;
   }
   
-  // next() {
-  //   this.currentIndex = this.currentIndex + this.size;
-  //   this.endIndex = this.currentIndex + this.size;
-  //   this.materials = this.data.slice(this.currentIndex, this.endIndex);
-  //   //button unable disable code
-  //   this.isDisabledPrev = false;
-  //   if (this.endIndex >= this.arrLength)
-  //   {
-  //     this.isDisabledNext = true;
-  //   }
-  // }
-
-  // previous() {
-  //   this.currentIndex = this.currentIndex - this.size;
-  //   this.endIndex = this.currentIndex + this.size;
-  //   this.materials = this.data.slice(this.currentIndex, this.endIndex);
-  //   //button unable disable code
-  //   this.isDisabledNext = false;
-  //   if (this.currentIndex <= 0) 
-  //   {
-  //     this.isDisabledPrev = true;
-  //   }
-  // }
 
   add(id:number){
     this.router.navigate(['order', id]);
   }
 
+  onCheckboxChange(e:any) {
+    console.log("Something is happened");
+    const role: FormArray = this.form.get('role') as FormArray;
+    if (e.target.checked) {
+      role.push(new FormControl(e.target.value));
+    } else {
+       const index = role.controls.findIndex(x => x.value === e.target.value);
+       role.removeAt(index);
+      }
+    }
+      
     
 
 }

@@ -36,6 +36,39 @@ export class RequestsHistoryComponent {
   form = new FormGroup({
     request: new FormControl('', Validators.required)
   });
+  get f(){
+    return this.form.controls;
+  }
+   
+
+  changeShow(e:any) {
+    console.log(e.target.value);
+    if(e.target.value==="myrequest"){
+      this._requestsvc.getAllRequest(this.empid).subscribe((res) => {
+        if(res){
+          Date.parse(res.date)
+          this.result = res;
+          console.log(res);
+          this.result?.reverse();
+          this.requests=this.result;
+          this.request=true;
+     }
+      })
+    }
+    if(e.target.value==="allrequests"){
+      this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
+        if(res){
+          Date.parse(res.date)
+          this.result = res;
+          console.log(res);
+          this.result?.reverse();
+          this.requests=this.result;
+          this.request=true;
+     }
+      })
+    }
+
+  }
 
   ngOnInit(): void {
     this._cartsvc.getCarts(this.empid).subscribe((res) => {
@@ -101,37 +134,5 @@ export class RequestsHistoryComponent {
 
   }
 
-  get f(){
-    return this.form.controls;
-  }
-   
-
-  changeShow(e:any) {
-    console.log(e.target.value);
-    if(e.target.value==="myrequest"){
-      this._requestsvc.getAllRequest(this.empid).subscribe((res) => {
-        if(res){
-          Date.parse(res.date)
-          this.result = res;
-          console.log(res);
-          this.result?.reverse();
-          this.requests=this.result;
-          this.request=true;
-     }
-      })
-    }
-    if(e.target.value==="allrequests"){
-      this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
-        if(res){
-          Date.parse(res.date)
-          this.result = res;
-          console.log(res);
-          this.result?.reverse();
-          this.requests=this.result;
-          this.request=true;
-     }
-      })
-    }
-
-  }
+ 
 }

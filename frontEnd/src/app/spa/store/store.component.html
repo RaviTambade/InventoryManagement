@@ -1,11 +1,36 @@
 <h1>Warehouse </h1>
-<!-- <div class="container" >
-    <div class="product" *ngIf="orderDetails">  </div>
-    <div class="product" *ngIf="orderDetails" > </div>
-    <div class="product" *ngIf="orderDetails"><p>  </p></div>
-    <div class="product" *ngIf="orderDetails" ></div></div>
-   
+
+<!-- <div>    
+<label class="container">One
+  <input type="checkbox" checked="checked">
+  <span class="checkmark"></span>
+</label>
+<label class="container">Two
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</label>
+<label class="container">Three
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</label>
+<label class="container">Four
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</label>
 </div> -->
+
+<div class="row" >
+    <div class="col-sm-1 text-center">
+        <h5><b>Categories</b></h5>
+      </div>
+    <div class="col-sm-1 text-center"  *ngFor="let category of categories">
+        <label >
+            <input type="checkbox" [value]="category.type" (change)="onCheckboxChange($event)" />
+            {{category.type}}
+        </label>
+   </div>
+  </div>
+
 
 <div class="grid-container">
     <div class="grid-item"  *ngFor="let material of materials">
@@ -13,52 +38,5 @@
         <h4 >Material Type:{{material.type}}</h4>
         <h4 >Material Name: {{material.name}}</h4>
         <button type="submit" (click)="add(material.id)" >Add to request</button></div>
-    <!-- <div class="grid-item">2</div>
-    <div class="grid-item">3</div>  
-    <div class="grid-item">4</div>
-    <div class="grid-item">5</div>
-    <div class="grid-item">6</div>  
-    <div class="grid-item">7</div>
-    <div class="grid-item">8</div>
-    <div class="grid-item">9</div>   -->
   </div>
   
-<!-- <div *ngFor="let material of materials">
-    <img src="{{material.imgUrl}}" alt="">
-    <h4 >Material Type:{{material.type}}</h4>
-    <h4 >Material Name: {{material.name}}</h4>
-    <button type="submit" (click)="add(material.id)" >Add to request</button>
-     <hr>
-</div>    -->
-
-<!-- 
-    <div class="container">
-        <div class="row"  >
-          <div  *ngFor="let material of materials" class="col-md-4 col-sm-6 col-12">
-            <div >
-                <img src="{{material.imgUrl}}" alt="">
-                <span >Material Type:{{material.type}}</span> -->
-                <!-- <h4 >Material Name: {{material.name}}</h4>
-                <button type="submit" (click)="add(material.id)" >Add to request</button> -->
-            <!-- </div>
-
-          </div>
-        </div>
-</div> -->
-<!-- <div class="grid">
-    <ng-container *ngFor="let material of materials">
-        <img src="{{material.imgUrl}}" alt="">
-    </ng-container>
-</div> -->
-<!-- <div class="row">
-    <div class="col-4 col-sm-4 col-md-4 col-lg-4" *ngFor="let material of materials">
-     {{material.name}}   display product data 
-    </div>
-   </div>
-    -->
-<!-- <div class="row itemsBlock">
-    <div *ngFor="let item of items" class="col-md-4 col-sm-6 col-12">
-         <img class="itemImage" src="{{item.image}}" />
-         <span class=itemitle">{{item.title}}</span>
-    </div>
- </div> -->

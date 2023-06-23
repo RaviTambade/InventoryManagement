@@ -1,4 +1,4 @@
-<form >
+<!-- <form >
     <div *ngIf="material">
 
         <img src="{{material.imgUrl}}" ><br>
@@ -9,3 +9,15 @@
         <button (click)="onOrder(material.id ,material.type, orderqunatity) ">Add</button>
     </div>
 </form>
+ -->
+
+<div class="grid-container">
+    <div class="grid-item"  *ngIf="material">
+        <img src="{{material.imgUrl}}" ><br>
+        <h3>Material Name: {{material.name}}</h3> 
+        <label for="orderQuantity">Order Quantity: </label>
+        <input name="orderQuantity"  id="orderQuantity" [(ngModel)]="orderqunatity" type="number">
+        <button (click)="onOrder(material.id ,material.type, orderqunatity) ">Add</button>
+    </div>
+  </div>
+  
