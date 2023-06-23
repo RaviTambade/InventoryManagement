@@ -1,24 +1,16 @@
-<form [formGroup]="listForm"  (ngSubmit)="onSubmit()">
-    <div class="d-grid">
-      <select
-        formControlName="OrderDate">
-        <option >Today's Orders </option>
-      </select>
-      <!-- error block --> 
-      <button type="submit">Search</button>
-    </div>
-  </form>
-
-  <div  *ngFor="let Order of orders">
-<form>
-  <ul>
-    <li> <b> Order:</b> {{Order.name}}. <b> status: </b>{{Order.status}}</li>    
-  </ul>
+<form [formGroup]="listForm" (ngSubmit)="onSubmit()">
+  <div class="d-grid">
+    <select formControlName="OrderDate">
+      <option>Today's Orders </option>
+    </select>
+    <button type="submit">Search</button>
+  </div>
 </form>
+
+<div *ngFor="let Order of orders">
+  <form>
+    <ul>
+      <li> <b> Order:</b> {{Order.name}}. <b> status: </b>{{Order.status}}</li>
+    </ul>
+  </form>
 </div>
-
-
-
-
-
-    
