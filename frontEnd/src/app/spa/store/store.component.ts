@@ -11,8 +11,8 @@ import { FormBuilder, FormGroup, FormControl, Validators, FormArray} from '@angu
   styleUrls: ['./store.component.css']
 })
 export class StoreComponent {
-  categories:any[] |undefined
-  materials: any[] | undefined;
+  categories:any[] ;
+  materials: any[] ;
   data: any[];
   size: number = 0;
   material:any;
@@ -20,6 +20,9 @@ export class StoreComponent {
   newOrder:any;
   status:boolean=false;
   form: FormGroup;
+  selectedItemsList:any [];
+  checkedIDs = [];
+
 
   constructor( private fb: FormBuilder,private _materialsvc: MaterialService, private router:Router) {
     this.data = [];
@@ -28,10 +31,11 @@ export class StoreComponent {
     "materialid":0,
     "type":'',
     "quantity":0};
-
-
+    this.categories=[]
+    this.selectedItemsList=[]
+    this.materials=[];
     this.form = this.fb.group({
-      role: this.fb.array([], [Validators.required])
+      category: this.fb.array([], [Validators.required])
     })
   }
 
@@ -53,25 +57,25 @@ export class StoreComponent {
       console.log(res);
       this.categories=res;
     })
-    
   }
-  
+
+  onChange(res:string, isChecked: boolean) {
+    const emailFormArray = <FormArray>this.form.controls['category'];
+    console.log(res);
+    if(isChecked) {
+      emailFormArray.push(new FormControl(res));
+      console.log(emailFormArray)
+
+    } else {
+      let index = emailFormArray.controls.findIndex(x => x.value == res)
+      emailFormArray.removeAt(index);
+    }
+
+  }
 
   add(id:number){
     this.router.navigate(['order', id]);
   }
-
-  onCheckboxChange(e:any) {
-    console.log("Something is happened");
-    const role: FormArray = this.form.get('role') as FormArray;
-    if (e.target.checked) {
-      role.push(new FormControl(e.target.value));
-    } else {
-       const index = role.controls.findIndex(x => x.value === e.target.value);
-       role.removeAt(index);
-      }
-    }
-      
     
 
 }

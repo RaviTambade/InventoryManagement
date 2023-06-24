@@ -1,36 +1,15 @@
 <h1>Warehouse </h1>
 
-<!-- <div>    
-<label class="container">One
-  <input type="checkbox" checked="checked">
-  <span class="checkmark"></span>
-</label>
-<label class="container">Two
-  <input type="checkbox">
-  <span class="checkmark"></span>
-</label>
-<label class="container">Three
-  <input type="checkbox">
-  <span class="checkmark"></span>
-</label>
-<label class="container">Four
-  <input type="checkbox">
-  <span class="checkmark"></span>
-</label>
-</div> -->
 
 <div class="row" >
     <div class="col-sm-1 text-center">
         <h5><b>Categories</b></h5>
       </div>
     <div class="col-sm-1 text-center"  *ngFor="let category of categories">
-        <label >
-            <input type="checkbox" [value]="category.type" (change)="onCheckboxChange($event)" />
+            <input type="checkbox"  (change)="onChange(category.type, $any($event.target)?.checked)"  />
             {{category.type}}
-        </label>
    </div>
   </div>
-
 
 <div class="grid-container">
     <div class="grid-item"  *ngFor="let material of materials">
