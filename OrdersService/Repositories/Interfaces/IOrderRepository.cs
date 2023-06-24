@@ -7,8 +7,6 @@ public interface IOrderRepository
     OrderDetails GetOrderDetails(int orderid);
     IEnumerable<OrderDetails> GetAllOrders(int empid);
     IEnumerable<OrderDetails> GetOrderDetailsForStore(int reqid);
-
-
     IEnumerable<Order> OrderedMaterialsInADay();
     IEnumerable<Order> GetOrders(Period date);
     bool Order(int empid);
