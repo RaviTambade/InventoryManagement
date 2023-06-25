@@ -70,6 +70,23 @@ CREATE TABLE requests(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 							categoryid INT NOT NULL, constraint fk_categoryid2 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
 							quantity INT NOT NULL ); 
 
+
+CREATE TABLE shippment(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+						     date DATETIME DEFAULT CURRENT_TIMESTAMP,
+							employeeid INT NOT NULL,
+					        CONSTRAINT fk_employee_id6 FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+                            shipperid INT NOT NULL, CONSTRAINT fk_shipperid FOREIGN KEY (shipperid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+							status ENUM('Ready To Dispatch', 'Picked','In Transit','Delivered', 'Cancelled') NOT NULL);
+
+
+	CREATE TABLE shippingdetails(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+								employeeid INT NOT NULL,CONSTRAINT fk_employee_id7 FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+								materialid INT NOT NULL,CONSTRAINT fk_materialid_4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
+								categoryid INT NOT NULL, constraint fk_categoryid_5 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
+								shippingid INT NOT NULL,CONSTRAINT fk_shipping_id FOREIGN KEY (shippingid) REFERENCES shippment(id) ON UPDATE CASCADE ON DELETE CASCADE,
+								quantity INT NOT NULL);
+
+
 -- TRIGGER (insert new entry in orders table find storemanagers id according to orderdetails and update the material quantity)
 
 DELIMITER $$
