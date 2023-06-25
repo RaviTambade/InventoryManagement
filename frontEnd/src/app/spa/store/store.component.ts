@@ -14,19 +14,14 @@ export class StoreComponent {
   categories: any[];
   materials: any[];
   data: any[];
-  size: number = 0;
-  material: any;
-  cart: any[];
   newOrder: any;
-  status: boolean = false;
   form: FormGroup;
-  selectedItemsList: any[];
-  checked = [];
+  checked :any [];
 
 
   constructor(private fb: FormBuilder, private _materialsvc: MaterialService, private router: Router) {
     this.data = [];
-    this.cart = [];
+    this.checked=[];
     this.newOrder = {
       "employeeid": 0,
       "materialid": 0,
@@ -34,7 +29,6 @@ export class StoreComponent {
       "quantity": 0
     };
     this.categories = []
-    this.selectedItemsList = []
     this.materials = [{
       "id": 0,
       "imgUrl": '',
@@ -61,6 +55,7 @@ export class StoreComponent {
   ngOnInit(): void {
     this._materialsvc.getAllMaterials().subscribe((response) => {
       this.materials = response;
+      this.data=response;
       console.log(response);
     })
     this._materialsvc.getCategories().subscribe((res) => {
@@ -71,22 +66,19 @@ export class StoreComponent {
 
   onChange(res: string, isChecked: boolean) {
     const emailFormArray = <FormArray>this.form.controls['category'];
-    // console.log(emailFormArray);
     if (isChecked) {
       emailFormArray.push(new FormControl(res));
       this.checked = emailFormArray.value;
-      console.log(this.checked)
     } else {
       let index = emailFormArray.controls.findIndex(x => x.value == res)
       emailFormArray.removeAt(index);
+      this.checked = emailFormArray.value;
+
     }
-    // this.materials=[]
-    // var result = this.materials.filter( x => !this.checked.includes());
-
-    // const result = this.materials.filter(({ type }) => !this.checked.includes(this.materials.type));
+    this.materials = this.data.filter( x => this.checked.includes(x.type));
     console.log(this.materials)
-
   }
+
 
   add(id: number) {
     this.router.navigate(['order', id]);
