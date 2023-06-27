@@ -90,167 +90,112 @@ CREATE TABLE shipments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 								quantity INT NOT NULL);
                                 
 
-DELIMITER $$
+       DELIMITER $$
+CREATE PROCEDURE CreateOrder(in cartId int)
+BEGIN
+DECLARE employeeId INT;
+DECLARE materialId INT;
+DECLARE categoryId INT;
+DECLARE quantity INT;
+DECLARE requestId INT;
+DECLARE status BOOLEAN;
+DECLARE superviosrid INT;
+DECLARE noMoreRow1 INT default 0;
+DECLARE cart_cursor CURSOR  FOR SELECT  c.employeeid FROM carts c WHERE c.id=cartId; 
+DECLARE cartitem_cursor CURSOR  FOR SELECT ct.materialid, ct.categoryid, ct.quantity FROM cartitems ct WHERE ct.cartid=cartId; 
 
-CREATE PROCEDURE CREATEORDER(IN CARTID INT) BEGIN 
-	DECLARE noMoreRow INT default 0;
-	DECLARE employeeId INT;
-	DECLARE materialId INT;
-	DECLARE categoryId INT;
-	DECLARE quantity INT;
-	DECLARE requestId INT;
-	DECLARE cart_cursor CURSOR FOR
-	SELECT (
-	        select c.employeeid
-	        from carts c
-	        where
-	            c.id = cartId
-	    ),
-	    ct.materialid,
-	    ct.categoryid,
-	    ct.quantity
-	FROM cartitems ct
-	WHERE ct.cartid = cartId;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET noMoreRow = 1;
-	OPEN cart_cursor ;
-	INSERT INTO
-	    requests (employeeid, status)
-	VALUES ( (
-	            select
-	                c.employeeid
-	            from carts c
-	            where
-	                c.id = cartId
-	        ),
-	        'initiated'
-	    );
-	set requestId=( SELECT id FROM requests ORDER BY ID DESC LIMIT 1);
-	cart_items:
-	LOOP
-	    FETCH cart_cursor INTO employeeId,
-	    materialId,
-	    categoryId,
-	    quantity;
-	IF noMoreRow=1 THEN LEAVE cart_items;
-	END IF;
-	INSERT INTO
-	    orderdetails(
-	        employeeid,
-	        materialid,
-	        categoryid,
-	        quantity,
-	        requestid
-	    )
-	VALUES (
-	        employeeId,
-	        materialId,
-	        categoryId,
-	        quantity,
-	        requestId
-	    );
-	INSERT INTO
-	    shippingdetails(
-	        supervisorid,
-	        materialid,
-	        categoryid,
-	        quantity,
-	        requestid
-	    )
-	VALUES (
-	        employeeId,
-	        materialId,
-	        categoryId,
-	        quantity,
-	        requestId
-	    );
-	END LOOP cart_items;
-	DELETE FROM cartitems c WHERE c.cartid=cartId;
-	CLOSE cart_cursor;
-	END 
-$ 
 
-$ 
 
+INSERT INTO requests (employeeid,status) VALUES ((select c.employeeid from carts c where c.id=cartId ),'initiated');
+set requestId=( SELECT id FROM requests ORDER BY ID DESC LIMIT 1);
+
+OPEN cart_cursor ;
+begin
+DECLARE exit_flag INT DEFAULT 0;
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+cart:LOOP
+    FETCH cart_cursor INTO superviosrid;
+    IF exit_flag THEN 
+		LEAVE cart;
+    END IF;
+	INSERT INTO orders(supervisorid,requestid,status)VALUES(superviosrid,requestId,1); 
+    end loop cart;
+    end;
+    close cart_cursor;
+    
+    OPEN cartitem_cursor ;
+    begin
+    DECLARE exit_flag INT DEFAULT 0;
+     DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+    cartitems:loop
+    	FETCH cartitem_cursor INTO materialId,categoryId,quantity;
+    IF exit_flag=1 THEN 
+		LEAVE cartitems;
+    END IF;
+	INSERT INTO orderdetails(storemanagerid,orderid,materialid,categoryid,quantity)
+    VALUES((select warehouse.employeeid from warehouse  where warehouse.categoryid=categoryId),(select id from orders where requestid=requestId  ORDER BY ID DESC LIMIT 1),materialId,categoryId,quantity); 
+--  	INSERT INTO shippingdetails(storemanagerid,shipmentid,materialid,categoryid,quantity)VALUES(employeeId,new.shipments.id,materialId,categoryId,quantity); 
+
+END LOOP cartitems;
+end;
+CLOSE cartitem_cursor;
+
+ DELETE FROM cartitems c WHERE c.cartid=cartId;
+
+END $$
 DELIMITER ;
+	DELIMITER $$
+  
 
-DELIMITER $$ DELIMITER / /
+   DELIMITER !!
+CREATE TRIGGER newshipment
+after INSERT
+ON orders FOR EACH ROW
+BEGIN
+DECLARE workers INT;
+DECLARE status BOOLEAN;
+DECLARE lastworker INT;
+DECLARE worker INT;    
+DECLARE noMoreRow INT default 0; 
+DECLARE shipper_cursor CURSOR  FOR SELECT w.workerid,w.status FROM workerstatus w ; 
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET noMoreRow = 1;
+set lastworker=( SELECT workerid FROM workerstatus ORDER BY workerid DESC LIMIT 1);
 
-CREATE TRIGGER NEWORDER AFTER INSERT ON ORDERDETAILS 
-FOR EACH ROW BEGIN 
-	INSERT INTO
-	    orders (
-	        orderdetailid,
-	        employeeid,
-	        status
-	    )
-	VALUES(
-	        new.id, (
-	            select
-	                warehouse.employeeid
-	            from warehouse
-	            where
-	                warehouse.categoryid = new.categoryid
-	        ),
-	        'initiated'
-	    );
-	END// DELIMITER ;
-		DELIMITER !!
-	CREATE TRIGGER newshipment
-	after INSERT
-	ON shippingdetails FOR EACH ROW
-	BEGIN
-	DECLARE workers INT;
-	DECLARE status BOOLEAN;
-	DECLARE lastworker INT;
-	DECLARE worker INT;
-	DECLARE noMoreRow INT default 0;
-	DECLARE shipper_cursor CURSOR FOR
-	SELECT w.workerid, w.status
-	FROM workerstatus w;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET noMoreRow = 1;
-	set lastworker = (
-	        SELECT workerid
-	        FROM workerstatus
-	        ORDER BY workerid DESC
-	        LIMIT 1
-	    );
-	open shipper_cursor;
-	worker_status:LOOP FETCH shipper_cursor INTO workers,status;
-	IF noMoreRow=1 THEN LEAVE worker_status;
-	END IF;
-	if status = 0
-	and workers <> lastworker then
-	update workerstatus
-	set status = 1
-	where workerid = workers;
+open shipper_cursor;
+worker_status:LOOP
+    FETCH shipper_cursor INTO workers,status;
+    IF noMoreRow=1 THEN 
+		LEAVE worker_status;
+    END IF;
+    if status=0 and workers<>lastworker then
+    update workerstatus set status=1 where workerid=workers;
+    set worker=workers;
+   		LEAVE worker_status;
+    end if;
+    if status=0 and workers=lastworker then
 	set worker=workers;
-	LEAVE worker_status;
-	end if;
-	if status=0 and workers=lastworker then set worker=workers;
 	UPDATE workerstatus SET status = 0;
 	LEAVE worker_status;
-	end If;
-	END LOOP worker_status;
-	CLOSE shipper_cursor;
-	INSERT INTO
-	    shipments (
-	        shippingdetailsid,
-	        storemanagerid,
-	        shipperid,
-	        status
-	    )
-	VALUES(
-	        new.id, (
-	            select
-	                warehouse.employeeid
-	            from warehouse
-	            where
-	                warehouse.categoryid = new.categoryid
-	        ),
-	        worker,
-	        1
-	    );
-	END !! DELIMITER ;
+    
+    end If;
+END LOOP worker_status;
+CLOSE shipper_cursor;
+		INSERT INTO shipments(supervisorid,orderid,shipperid,status)VALUES(new.supervisorid,new.id,worker,1);
+	END !!
+	DELIMITER ;
+     
+
+   DELIMITER !!
+CREATE TRIGGER newshipmentdetails
+after INSERT
+ON orderdetails FOR EACH ROW
+BEGIN
+	INSERT INTO shippingdetails(storemanagerid,materialid,categoryid,quantity,shipmentid)
+    VALUES(new.storemanagerid,new.materialid,new.categoryid,new.quantity,(select id from shipments s where s.orderid=new.orderid )); 
+    end !!
+	DELIMITER ;
+
+
 	-- Insertion for material
 	INSERT INTO categories(category) VALUES ("Bearings");
 	INSERT INTO categories(category) VALUES ("1st Gear");
