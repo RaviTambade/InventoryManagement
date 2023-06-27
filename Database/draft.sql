@@ -1,13 +1,7 @@
 -- Active: 1678859769284@@127.0.0.1@3306@inventorymanagement
-
-	DROP DATABASE inventorymanagement;
-	create database inventorymanagement;
-	use inventorymanagement;
-
-	-- Table Creation
-	CREATE TABLE roles(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE roles(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 						role varchar(50));
-	create table departments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	create table departments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 							department varchar(50));
 
 	create table categories(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -23,7 +17,10 @@
 							departmentid  int not null,
                             constraint fk_departmentid foreign key(departmentid) references departments(id) on update cascade on delete cascade,
 							roleid int not null,constraint fk_roleid foreign key(roleid) references roles(id) on update cascade on delete cascade);
-
+		
+	create table workerstatus(id INT NOT NULL AUTO_INCREMENT primary KEY,
+							workerid INT NOT NULL,constraint fk_workerid foreign key(workerid) references employees(id) on update cascade on delete cascade,
+                            status boolean not null default 0);
 
 	CREATE TABLE materials(id INT NOT NULL AUTO_INCREMENT primary KEY,
 							title VARCHAR(100),
@@ -70,6 +67,22 @@ CREATE TABLE requests(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 							materialid INT NOT NULL,CONSTRAINT fk_material_id4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
 							categoryid INT NOT NULL, constraint fk_categoryid2 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
 							quantity INT NOT NULL ); 
+
+	CREATE TABLE shippingdetails(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+								supervisorid INT NOT NULL,CONSTRAINT fk_employee_id7 FOREIGN KEY (supervisorid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+								materialid INT NOT NULL,CONSTRAINT fk_materialid_4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
+								categoryid INT NOT NULL, constraint fk_categoryid_5 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
+                                requestid INT NOT NULL,CONSTRAINT fk_request_id FOREIGN KEY (requestid) REFERENCES requests(id) ON UPDATE CASCADE ON DELETE CASCADE,
+								quantity INT NOT NULL);
+                                
+CREATE TABLE shipments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+						     date DATETIME DEFAULT CURRENT_TIMESTAMP,
+							 storemanagerid INT NOT NULL,
+                             shippingdetailsid INT NOT NULL,CONSTRAINT fk_shipmentdetails_id FOREIGN KEY (shippingdetailsid) REFERENCES shippingdetails(id) ON UPDATE CASCADE ON DELETE CASCADE,
+					        CONSTRAINT fk_employee_id6 FOREIGN KEY (storemanagerid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+							shipperid INT NOT NULL, CONSTRAINT fk_shipperid FOREIGN KEY (shipperid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+							status ENUM('Pending', 'Ready To Dispatch', 'Picked','In Transit','Delivered', 'Cancelled') NOT NULL);
+
 
     DELIMITER $$
 CREATE PROCEDURE CreateOrder(in cartId int)
