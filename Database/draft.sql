@@ -127,6 +127,45 @@ DELIMITER ;
 	END//
 	DELIMITER ;
 
+
+	DELIMITER !!
+CREATE TRIGGER newshipment
+after INSERT
+ON shippingdetails FOR EACH ROW
+BEGIN
+DECLARE workers INT;
+DECLARE status BOOLEAN;
+DECLARE lastworker INT;
+DECLARE worker INT;    
+DECLARE noMoreRow INT default 0; 
+DECLARE shipper_cursor CURSOR  FOR SELECT w.workerid,w.status FROM workerstatus w ; 
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET noMoreRow = 1;
+set lastworker=( SELECT workerid FROM workerstatus ORDER BY workerid DESC LIMIT 1);
+
+open shipper_cursor;
+worker_status:LOOP
+    FETCH shipper_cursor INTO workers,status;
+    IF noMoreRow=1 THEN 
+		LEAVE worker_status;
+    END IF;
+    if status=0 and workers<>lastworker then
+    update workerstatus set status=1 where workerid=workers;
+    set worker=workers;
+   		LEAVE worker_status;
+    end if;
+    if status=0 and workers=lastworker then
+	set worker=workers;
+	UPDATE workerstatus SET status = 0;
+	LEAVE worker_status;
+    
+    end If;
+END LOOP worker_status;
+CLOSE shipper_cursor;
+			INSERT INTO shipments (shippingdetailsid,storemanagerid,shipperid, status)
+			VALUES( new.id, (select warehouse.employeeid from warehouse  where warehouse.categoryid=new.categoryid),worker,1);
+	END !!
+	DELIMITER ;
+
 	-- Insertion for material
 	INSERT INTO categories(category) VALUES ("Bearings");
 	INSERT INTO categories(category) VALUES ("1st Gear");
