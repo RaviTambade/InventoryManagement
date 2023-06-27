@@ -84,6 +84,7 @@ CREATE TABLE shipments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 							status ENUM('Pending', 'Ready To Dispatch', 'Picked','In Transit','Delivered', 'Cancelled') NOT NULL);
 
 
+
     DELIMITER $$
 CREATE PROCEDURE CreateOrder(in cartId int)
 BEGIN
@@ -104,9 +105,13 @@ cart_items:LOOP
 		LEAVE cart_items;
     END IF;
 	INSERT INTO orderdetails(employeeid,materialid,categoryid,quantity,requestid)VALUES(employeeId,materialId,categoryId,quantity,requestId); 
+	INSERT INTO shippingdetails(supervisorid,materialid,categoryid,quantity,requestid)VALUES(employeeId,materialId,categoryId,quantity,requestId); 
+
 END LOOP cart_items;
 DELETE FROM cartitems c WHERE c.cartid=cartId;
 CLOSE cart_cursor;
+
+
 END $$
 DELIMITER ;
 	DELIMITER $$
