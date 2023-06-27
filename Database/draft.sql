@@ -243,7 +243,10 @@ CLOSE shipper_cursor;
 	INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('abhi','horambe','1996-07-14','2018-03-11','7955746251',6, 4,'SGgmail.com','SG788813' ,'/assets/img/mEmp.jpeg', 'male');
 	INSERT INTO employees(firstname,lastname,birthdate,hiredate,contactnumber,departmentid, roleid,email,password,imageurl,gender)VALUES('shila','joshi','1998-01-06','2018-03-11','9787994765',6, 4 ,'VS@gmail.com','VS7888122' ,'/assets/img/fEmp.jpeg', 'female');
 
-
+INSERT INTO workerstatus(workerid)VALUES(21);
+INSERT INTO workerstatus(workerid)VALUES(22);
+INSERT INTO workerstatus(workerid)VALUES(23);
+INSERT INTO workerstatus(workerid)VALUES(24);
 
 	-- Insertion for Sections
 	insert into warehouse(section,  categoryid,employeeid)values('Section 1', 1,1);
