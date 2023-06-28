@@ -11,14 +11,15 @@ public class OrderService : IOrderService
     {
         _repo = repo;
     }
+    public IEnumerable<Order> GetOrders(int empid)=> _repo.GetOrders(empid);
 
-    public OrderDetails GetOrderDetails(int orderid)=> _repo.GetOrderDetails(orderid);
+    public  IEnumerable<OrderDetails> GetOrderDetails(int orderid)=> _repo.GetOrderDetails(orderid);
 
     public IEnumerable<OrderDetails> GetAllOrders(int empid)=> _repo.GetAllOrders(empid);
     public IEnumerable<OrderDetails> GetOrderDetailsForStore(int reqid)=> _repo.GetOrderDetailsForStore(reqid);
 
-    public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
-    public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
+    // public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
+    // public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
     public bool Order(int empid)=> _repo.Order(empid);
     public bool DeleteOrder(int orderid)=> _repo.DeleteOrder(orderid);
 

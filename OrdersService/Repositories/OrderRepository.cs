@@ -18,14 +18,57 @@ public class OrderRepository : IOrderRepository
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
-
-    public OrderDetails GetOrderDetails(int orderid)
+        public IEnumerable<Order> GetOrders(int empid)
     {
-        OrderDetails order = null;
+
+        List<Order> orders = new List<Order>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = " select o.id,o.date,o.status, employees.firstname,employees.lastname from orders o inner join orderdetails on o.id=orderdetails.orderid inner join employees on orderdetails.storemanagerid=employees.id  where orderdetails.storemanagerid=@empid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                string? empfirstname = reader["firstname"].ToString();
+                string? emplastname = reader["lastname"].ToString();
+                DateTime orderdate = DateTime.Parse(reader["date"].ToString());
+                string status = reader["status"].ToString();
+
+                Order theOrder = new Order
+                {
+                    Id = id,
+                    OrderDate = orderdate,
+                    FirstName = empfirstname,
+                    LastName = emplastname,
+                    Status = status,
+                };
+                orders.Add(theOrder);
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return orders;
+    }
+
+    public  IEnumerable<OrderDetails> GetOrderDetails(int orderid)
+    {
+        List<OrderDetails> orderdetails = new List<OrderDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
          try
         {
-            string query = "select orders.id, orders.date,orders.status, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl from orders inner join orderdetails on orders.orderdetailid = orderdetails.id   inner join materials on orderdetails.materialid=materials.id    inner join categories on materials.categoryid=categories.id    inner join employees on orderdetails.employeeid = employees.id  inner join departments on departments.id= employees.departmentid inner join employees e2 on orders.employeeid = e2.id where  orders.id=@orderid";
+            string query = "select orderdetails.id, orders.date,orders.status,materials.quantity as availablequantity, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl  from orderdetails   inner join orders on orders.id = orderdetails.orderid   inner join materials on orderdetails.materialid=materials.id   inner join categories on materials.categoryid=categories.id  inner join employees  on orders.supervisorid = employees.id inner join departments on departments.id= employees.departmentid  where  orders.id=@orderid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@orderid", orderid);
             ;
@@ -39,6 +82,7 @@ public class OrderRepository : IOrderRepository
                 string? materialname = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
+                int availablequantity = Int32.Parse(reader["availablequantity"].ToString());
                 string department = reader["department"].ToString();
                 string firstname = reader["firstname"].ToString();
                 string lastname = reader["lastname"].ToString();
@@ -46,7 +90,7 @@ public class OrderRepository : IOrderRepository
 
                 
 
-                order = new OrderDetails()
+                OrderDetails order = new OrderDetails()
                 {
                     Id = id,
                     OrderDate = orderdate,
@@ -57,8 +101,10 @@ public class OrderRepository : IOrderRepository
                     Department=department,
                     EmployeeFirstName=firstname,
                     EmployeeLastName=lastname,
-                    ImageUrl=imgurl
+                    ImageUrl=imgurl,
+                    AvailableQuantity=availablequantity
                 };
+                orderdetails.Add(order);
             }
             reader.Close();
         }
@@ -70,7 +116,7 @@ public class OrderRepository : IOrderRepository
         {
             con.Close();
         }
-        return order;
+        return orderdetails;
     }
 
     //order history of store 
@@ -195,99 +241,6 @@ public class OrderRepository : IOrderRepository
         return orders;
     }
 
-    public IEnumerable<Order> OrderedMaterialsInADay()
-    {
-        List<Order> orders = new List<Order>();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "select orders.id,employees.firstname,employees.lastname, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date)";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            con.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                int id = Int32.Parse(reader["id"].ToString());
-                int materialId = Int32.Parse(reader["id"].ToString());
-                string? empfirstname = reader["firstname"].ToString();
-                string? emplastname = reader["lastname"].ToString();
-                string? name = reader["title"].ToString();
-                string? category = reader["category"].ToString();
-                int quantity = Int32.Parse(reader["quantity"].ToString());
-                string status = reader["status"].ToString();
-
-                Order theOrder = new Order
-                {
-                    Id = id,
-                    Name = name,
-                    Category = category,
-                    Quantity = quantity,
-                    Status = status
-                };
-                orders.Add(theOrder);
-            }
-            reader.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return orders;
-    }
-
-    public IEnumerable<Order> GetOrders(Period date)
-    {
-        string fromDate = date.FromDate.ToString("yyyy-MM-dd");
-        string toDate = date.ToDate.ToString("yyyy-MM-dd");
-        List<Order> orders = new List<Order>();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id as materialid, materials.title, categories.category, orderdetails.quantity from orders inner join materials on orders.orderdetailid = materials.id  inner join employees on employees.id = orders.employeeid   inner join categories on categories.id = materials.categoryid  inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN @fromDate AND @ToDate)";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@FromDate", fromDate);
-            cmd.Parameters.AddWithValue("@ToDate", toDate);
-            con.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                int id = Int32.Parse(reader["id"].ToString());
-                int materialId = Int32.Parse(reader["materialid"].ToString());
-                string? name = reader["title"].ToString();
-                string? category = reader["category"].ToString();
-                string? empfirstname = reader["firstname"].ToString();
-                string? emplastname = reader["lastname"].ToString();
-                int quantity = Int32.Parse(reader["quantity"].ToString());
-                DateTime orderdate = DateTime.Parse(reader["date"].ToString());
-                string status = reader["status"].ToString();
-
-                Order theOrder = new Order
-                {
-                    Id = id,
-                    Name = name,
-                    Category = category,
-                    Quantity = quantity,
-                    Status = status,
-                };
-                orders.Add(theOrder);
-            }
-            reader.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return orders;
-    }
-
     public bool Order(int empid)
     {
         bool status = false;
@@ -398,6 +351,99 @@ public class OrderRepository : IOrderRepository
         return requests;
     }
 
-    
+
+    // public IEnumerable<Order> OrderedMaterialsInADay()
+    // {
+    //     List<Order> orders = new List<Order>();
+    //     MySqlConnection con = new MySqlConnection(_conString);
+    //     try
+    //     {
+    //         string query = "select orders.id,employees.firstname,employees.lastname, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date)";
+    //         MySqlCommand cmd = new MySqlCommand(query, con);
+    //         con.Open();
+    //         MySqlDataReader reader = cmd.ExecuteReader();
+    //         while (reader.Read())
+    //         {
+    //             int id = Int32.Parse(reader["id"].ToString());
+    //             int materialId = Int32.Parse(reader["id"].ToString());
+    //             string? empfirstname = reader["firstname"].ToString();
+    //             string? emplastname = reader["lastname"].ToString();
+    //             string? name = reader["title"].ToString();
+    //             string? category = reader["category"].ToString();
+    //             int quantity = Int32.Parse(reader["quantity"].ToString());
+    //             string status = reader["status"].ToString();
+
+    //             Order theOrder = new Order
+    //             {
+    //                 Id = id,
+    //                 Name = name,
+    //                 Category = category,
+    //                 Quantity = quantity,
+    //                 Status = status
+    //             };
+    //             orders.Add(theOrder);
+    //         }
+    //         reader.Close();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         throw e;
+    //     }
+    //     finally
+    //     {
+    //         con.Close();
+    //     }
+    //     return orders;
+    // }
+
+    // public IEnumerable<Order> GetOrders(Period date)
+    // {
+    //     string fromDate = date.FromDate.ToString("yyyy-MM-dd");
+    //     string toDate = date.ToDate.ToString("yyyy-MM-dd");
+    //     List<Order> orders = new List<Order>();
+    //     MySqlConnection con = new MySqlConnection(_conString);
+    //     try
+    //     {
+    //         string query = "select orders.id, employees.firstname,employees.lastname, orders.date, orders.status, materials.id as materialid, materials.title, categories.category, orderdetails.quantity from orders inner join materials on orders.orderdetailid = materials.id  inner join employees on employees.id = orders.employeeid   inner join categories on categories.id = materials.categoryid  inner join orderdetails on orders.orderdetailid = orderdetails.id  WHERE (date BETWEEN @fromDate AND @ToDate)";
+    //         MySqlCommand cmd = new MySqlCommand(query, con);
+    //         cmd.Parameters.AddWithValue("@FromDate", fromDate);
+    //         cmd.Parameters.AddWithValue("@ToDate", toDate);
+    //         con.Open();
+    //         MySqlDataReader reader = cmd.ExecuteReader();
+    //         while (reader.Read())
+    //         {
+    //             int id = Int32.Parse(reader["id"].ToString());
+    //             int materialId = Int32.Parse(reader["materialid"].ToString());
+    //             string? name = reader["title"].ToString();
+    //             string? category = reader["category"].ToString();
+    //             string? empfirstname = reader["firstname"].ToString();
+    //             string? emplastname = reader["lastname"].ToString();
+    //             int quantity = Int32.Parse(reader["quantity"].ToString());
+    //             DateTime orderdate = DateTime.Parse(reader["date"].ToString());
+    //             string status = reader["status"].ToString();
+
+    //             Order theOrder = new Order
+    //             {
+    //                 Id = id,
+    //                 Name = name,
+    //                 Category = category,
+    //                 Quantity = quantity,
+    //                 Status = status,
+    //             };
+    //             orders.Add(theOrder);
+    //         }
+    //         reader.Close();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         throw e;
+    //     }
+    //     finally
+    //     {
+    //         con.Close();
+    //     }
+    //     return orders;
+    // }
+
 
 }

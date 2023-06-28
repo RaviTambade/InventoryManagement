@@ -13,7 +13,25 @@ public class OrdersController : ControllerBase
     {
         _ordsvs = ordsvs;
     }
+
     //get order history of store managers
+    
+    [HttpGet]
+    [Route("orders/{empid}")]
+        public IEnumerable<Order> GetOrders(int empid)
+    {
+        IEnumerable<Order> orders = _ordsvs.GetOrders(empid);
+        return orders;
+    }
+
+    [HttpGet]
+    [Route("orders/details/{orderid}")]
+    public  IEnumerable<OrderDetails> GetOrderDetails(int orderid)
+    {
+         IEnumerable<OrderDetails> orders = _ordsvs.GetOrderDetails(orderid);
+        return orders;
+    }
+
     [HttpGet]
     [Route("details/{empid}")]
     public IEnumerable<OrderDetails> GetAllOrders(int empid)
@@ -22,13 +40,7 @@ public class OrdersController : ControllerBase
         return orders;
     }
 
-    [HttpGet]
-    [Route("detail/{orderid}")]
-    public OrderDetails GetOrderDetails(int orderid)
-    {
-        OrderDetails orders = _ordsvs.GetOrderDetails(orderid);
-        return orders;
-    }
+
 
 // get order details by sending request Id (store Managers)
     [HttpGet]
@@ -40,22 +52,22 @@ public class OrdersController : ControllerBase
     }
 
     //Get list of materials ordered in a day
-    [HttpGet]
-    [Route("orderedInADay")]
-    public IEnumerable<Order> OrderedMaterialsInADay()
-    {
-        IEnumerable<Order> orders = _ordsvs.OrderedMaterialsInADay();
-        return orders;
-    }
+    // [HttpGet]
+    // [Route("orderedInADay")]
+    // public IEnumerable<Order> OrderedMaterialsInADay()
+    // {
+    //     IEnumerable<Order> orders = _ordsvs.OrderedMaterialsInADay();
+    //     return orders;
+    // }
 
-    //Get list of materials ordered from date to to date
-    [HttpPost]
-    [Route("orderedFromDateToDate")]
-    public IEnumerable<Order> GetOrders([FromBody] Period date)
-    {
-        IEnumerable<Order> orders = _ordsvs.GetOrders(date);
-        return orders;
-    }
+     //Get list of materials ordered from date to to date
+    // [HttpPost]
+    // [Route("orderedFromDateToDate")]
+    // public IEnumerable<Order> GetOrders([FromBody] Period date)
+    // {
+    //     IEnumerable<Order> orders = _ordsvs.GetOrders(date);
+    //     return orders;
+    // }
 
     [HttpGet]
     [Route("order/{empid}")]
