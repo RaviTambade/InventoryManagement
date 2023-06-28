@@ -1,6 +1,26 @@
+using shipmentservice.Repositories.Interfaces;
+using shipmentservice.Repositories;
+using shipmentservice.Services.Interfaces;
+using shipmentservice.Services;
 var builder = WebApplication.CreateBuilder(args);
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://localhost:4200")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod();
+                          });
+});
 // Add services to the container.
+
+builder.Services.AddControllers();
+builder.Services.AddScoped<IShippingRepository,ShippingRepository>();
+builder.Services.AddScoped<IShippingService, ShippingService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -17,6 +37,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
