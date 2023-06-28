@@ -5,7 +5,7 @@ using shipmentservice.Services.Interfaces;
 namespace shipmentservice.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/api/[controller]")]
 public class ShippingController : ControllerBase
 {
     private readonly IShippingService _shipsvc;
