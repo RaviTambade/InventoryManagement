@@ -39,7 +39,7 @@ CREATE TABLE requests(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 						     date DATETIME DEFAULT CURRENT_TIMESTAMP,
 							employeeid INT NOT NULL,
 					        CONSTRAINT fk_employee_id5 FOREIGN KEY (employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
-							status ENUM('delivered', 'initiated','inprogress','cancelled') NOT NULL);
+							status ENUM('inprogress', 'Ready To Dispatch', 'Picked','In Transit','Delivered', 'Cancelled') NOT NULL);
 
 
 	CREATE TABLE orders(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -47,7 +47,7 @@ CREATE TABLE requests(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 						requestid INT NOT NULL, constraint fk_reqid FOREIGN KEY(requestid) REFERENCES requests(id) on UPDATE cascade on delete cascade,
 -- 						orderdetailid INT NOT NULL,CONSTRAINT fk_orderdetailsid FOREIGN KEY (orderdetailid) REFERENCES orderdetails(id) ON UPDATE CASCADE ON DELETE CASCADE ,
 						supervisorid INT NOT NULL,CONSTRAINT fk_employees_id FOREIGN KEY (supervisorid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE ,
-						status ENUM('inprogress', 'initiated','delivered','cancelled') NOT NULL);
+						status ENUM('inprogress', 'Ready To Dispatch', 'Picked','In Transit','Delivered', 'Cancelled') NOT NULL);
                         
 	CREATE TABLE orderdetails(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 								storemanagerid INT NOT NULL,CONSTRAINT fk_employee_id FOREIGN KEY (storemanagerid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -79,7 +79,7 @@ CREATE TABLE shipments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					        CONSTRAINT fk_employee_id6 FOREIGN KEY (supervisorid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
                             orderid INT NOT NULL,CONSTRAINT fk_order_id FOREIGN KEY (orderid) REFERENCES orders(id) ON UPDATE CASCADE ON DELETE CASCADE, 
 							shipperid INT NOT NULL, CONSTRAINT fk_shipperid FOREIGN KEY (shipperid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
-							status ENUM('Pending', 'Ready To Dispatch', 'Picked','In Transit','Delivered', 'Cancelled') NOT NULL);
+							status ENUM('inprogress', 'Ready To Dispatch', 'Picked','In Transit','Delivered', 'Cancelled') NOT NULL);
 
 
 	CREATE TABLE shippingdetails(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -87,9 +87,14 @@ CREATE TABLE shipments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 								materialid INT NOT NULL,CONSTRAINT fk_materialid_4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
 								categoryid INT NOT NULL, constraint fk_categoryid_5 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
 								shipmentid INT NOT NULL, constraint fk_shipmentid FOREIGN KEY(shipmentid) REFERENCES shipments(id) on UPDATE cascade on delete cascade,
+								status ENUM('unprepared', 'prepared') NOT NULL,
 								quantity INT NOT NULL);
                                 
 
+    
+
+   
+   
        DELIMITER $$
 CREATE PROCEDURE CreateOrder(in cartId int)
 BEGIN
@@ -106,7 +111,7 @@ DECLARE cartitem_cursor CURSOR  FOR SELECT ct.materialid, ct.categoryid, ct.quan
 
 
 
-INSERT INTO requests (employeeid,status) VALUES ((select c.employeeid from carts c where c.id=cartId ),'initiated');
+INSERT INTO requests (employeeid,status) VALUES ((select c.employeeid from carts c where c.id=cartId ),1);
 set requestId=( SELECT id FROM requests ORDER BY ID DESC LIMIT 1);
 
 OPEN cart_cursor ;
@@ -190,11 +195,12 @@ CREATE TRIGGER newshipmentdetails
 after INSERT
 ON orderdetails FOR EACH ROW
 BEGIN
-	INSERT INTO shippingdetails(storemanagerid,materialid,categoryid,quantity,shipmentid)
-    VALUES(new.storemanagerid,new.materialid,new.categoryid,new.quantity,(select id from shipments s where s.orderid=new.orderid )); 
+	INSERT INTO shippingdetails(storemanagerid,materialid,categoryid,quantity,shipmentid,status)
+    VALUES(new.storemanagerid,new.materialid,new.categoryid,new.quantity,(select id from shipments s where s.orderid=new.orderid ),1); 
     end !!
 	DELIMITER ;
 
+    
 
 
 	-- Insertion for material
