@@ -8,6 +8,18 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   constructor(private http:HttpClient) { }
+ 
+  getOrders(empid:number):Observable<any>{
+    let url ="http://localhost:5082/api/orders/orders/" +empid ;
+    return this.http.get(url);
+  }
+  getOrderDetails(orderId:number):Observable<any>{
+    let url ="http://localhost:5082/api/orders/orders/details/" +orderId ;
+    return this.http.get(url);
+  }
+
+
+  
 
   orderHistory(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/orders/details/" +empid ;
@@ -18,10 +30,10 @@ export class OrderService {
     return this.http.get(url);
   }
   //get order details by sending request id (store)
-  getOrderDetails(requestid:number):Observable<any>{
-    let url ="http://localhost:5082/api/orders/details/request/" +requestid ;
-    return this.http.get(url);
-  }
+  // getOrderDetails(requestid:number):Observable<any>{
+  //   let url ="http://localhost:5082/api/orders/details/request/" +requestid ;
+  //   return this.http.get(url);
+  // }
   order(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/orders/order/" +empid ;
     return this.http.get(url);

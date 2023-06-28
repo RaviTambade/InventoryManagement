@@ -14,24 +14,10 @@ import { pluck } from 'rxjs';
 })
 export class OrderHistoryComponent {
 
-  requests: any[];
-  requestIds: any[];
-  locations: any[];
-  request: any[];
-  empid: number = 1;
+  orders:Order[]|undefined;
+  storemanagerid: number = 2;
   public constructor(private _ordersvc: OrderService, private _requestsvc: RequestService, private appsvc: AppService, private router: Router) {
-    this.requests = [];
-    this.requestIds = [{
-      "category": '',
-      "date": '',
-      "materialId": 0,
-      "orderId": 0,
-      "quantity": 0,
-      "requestId": 0,
-      "status": ''
-    }];
-    this.locations = [];
-    this.request = [];
+    
   }
   ngOnInit() {
     // this.svc.orderHistory(1).subscribe((res) => {
@@ -40,30 +26,16 @@ export class OrderHistoryComponent {
     //   console.log(this.orders);
     // })
 
-    this._requestsvc.getRequestId(this.empid).subscribe((res) => {
-      this.requestIds = res;
-      console.log(this.requestIds)
-      this.requestIds.forEach(element => {
-        console.log(element.requestId); 
-        this.request.push(element.requestId);
-        console.log(this.request)
-      });
-      this.getRequest()
-    })
-
-  }
-
-  getRequest(){ 
-    console.log(this.request)
-    this._ordersvc.getRequestHistory(this.request).subscribe((res)=>{
+    this._ordersvc.getOrders(this.storemanagerid).subscribe((res) => {
       console.log(res);
-      this.requests=res;
+      this.orders=res;
     })
+
   }
 
 
-  onView(requestId: number) {
-    this.router.navigate(['orderdetails', requestId]);
+  onView(orderId: number) {
+    this.router.navigate(['orderdetails', orderId]);
 
   }
 }

@@ -3,7 +3,7 @@
 <div >
     <table style="width:60%">
         <thead>
-            <th>Request ID</th>
+            <th>Order ID</th>
             <th>Request date</th>
             <th>Supervisor's name</th>
             <th>Status</th>
@@ -11,13 +11,13 @@
         </thead>
 
         <tbody>
-            <tr  *ngFor="let request of requests">
-                <td> {{request.requestId}}</td> 
-                <td> {{request.date}}</td> 
-                <td> <a href=""> {{request.employeeFirstName}}  {{request.employeeLastName}}</a></td> 
-                <td> {{request.status}}</td> 
+            <tr  *ngFor="let order of orders">
+                <td> {{order.id}}</td> 
+                <td> {{order.orderDate}}</td> 
+                <td> <a href="orderdetails"> {{order.firstName}}  {{order.lastName}}</a></td> 
+                <td> {{order.status}}</td> 
 
-                 <td><button (click)="onView(request.requestId)">View</button></td>
+                 <td><button (click)="onView(order.id)">View</button></td>
             </tr>  
 
         </tbody>

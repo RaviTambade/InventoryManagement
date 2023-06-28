@@ -65,14 +65,14 @@ export class StoreComponent {
   }
 
   onChange(res: string, isChecked: boolean) {
-    const emailFormArray = <FormArray>this.form.controls['category'];
+    const categoryFormArray = <FormArray>this.form.controls['category'];
     if (isChecked) {
-      emailFormArray.push(new FormControl(res));
-      this.checked = emailFormArray.value;
+      categoryFormArray.push(new FormControl(res));
+      this.checked = categoryFormArray.value;
     } else {
-      let index = emailFormArray.controls.findIndex(x => x.value == res)
-      emailFormArray.removeAt(index);
-      this.checked = emailFormArray.value;
+      let index = categoryFormArray.controls.findIndex(x => x.value == res)
+      categoryFormArray.removeAt(index);
+      this.checked = categoryFormArray.value;
 
     }
     this.materials = this.data.filter( x => this.checked.includes(x.type));
