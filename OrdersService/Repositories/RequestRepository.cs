@@ -24,10 +24,10 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select o.id,o.requestid,requests.date, requests.status, o.materialid, categories.category, o.quantity  from orderdetails o inner join requests on requests.id=o.requestid inner join categories on categories.id=o.categoryid where o.requestid =@requestid";
+            string query = "select orderdetails.id,o.requestid,requests.date, requests.status, orderdetails.materialid, categories.category, orderdetails.quantity from orders o inner join requests on requests.id=o.requestid inner join orderdetails on orderdetails.orderid= o.id inner join categories on categories.id=orderdetails.categoryid where o.requestid =@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
-            ;
+            
             con.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
