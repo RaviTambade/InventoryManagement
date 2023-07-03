@@ -49,14 +49,8 @@ export class OrderDetailsComponent {
       console.log(this.orderDetail)
 
   }
-  onProceed(orderId: number) {
-    console.log(orderId);
-    this.changeStatus.orderId = orderId;
-    console.log(this.changeStatus)
-    this._cartsvc.ChangeStatus(this.changeStatus).subscribe((res) => {
-      console.log(res)
-    })
-    this.router.navigate(["orderhistory"])
+  onApproved() {
+
 
   }
 

@@ -1,0 +1,27 @@
+
+<h1>Tasks</h1>
+
+<h2>New Task</h2>
+<div>
+    <table style="width:60%">
+        <thead>
+            <th>Task ID</th>
+            <th> Date</th>
+            <th>department</th>
+            <th> Status</th>
+      
+        </thead>
+        <tbody *ngFor="let task of tasks">
+            <tr>
+                <td>{{task.id}}  </td>
+                <td>{{task.date}}  </td>
+                <td>{{task.department}}  </td>
+                <td> {{task.status}}</td>
+    
+            </tr>  
+        </tbody>
+    </table>
+</div>
+
+
+<h2>Previous Tasks</h2>
