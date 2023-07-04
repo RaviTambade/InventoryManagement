@@ -24,7 +24,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select orderdetails.id,o.requestid,requests.date, requests.status, orderdetails.materialid, categories.category, orderdetails.quantity from orders o inner join requests on requests.id=o.requestid inner join orderdetails on orderdetails.orderid= o.id inner join categories on categories.id=orderdetails.categoryid where o.requestid =@requestid";
+            string query = "select orderdetails.id, r.id as requestid,r.date, r.status, orderdetails.materialid, categories.category, orderdetails.quantity from requests r  inner join orderdetails on orderdetails.requestid= r.id  inner join categories on categories.id=orderdetails.categoryid  where r.id =@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
             
@@ -138,7 +138,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.employeeid inner join  departments on employees.departmentid=departments.id where departments.id =(select departmentid from employees where employees.id=@empid)";
+            string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.supervisorid inner join  departments on employees.departmentid=departments.id where departments.id =(select departmentid from employees where employees.id=@empid)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             ;
@@ -185,7 +185,7 @@ public IEnumerable<RequestDetails> GetAllRequest(int empid)
     MySqlConnection con = new MySqlConnection(_conString);
     try
     {
-        string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.employeeid inner join  departments on employees.departmentid=departments.id where employees.id=@empid;";
+        string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.supervisorid inner join  departments on employees.departmentid=departments.id where employees.id=@empid;";
         MySqlCommand cmd = new MySqlCommand(query, con);
         cmd.Parameters.AddWithValue("@empid", empid);
         ;
