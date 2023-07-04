@@ -28,7 +28,7 @@ const routes: Routes=
       { path: 'profile', component: ProfileComponent },
       { path:'requests', component: RequestsComponent},
       {path:'order/:id',component:OrdersComponent},
-      {path:'orderdetails/:orderId',component:OrderDetailsComponent},
+      {path:'orderdetails/:requestid',component:OrderDetailsComponent},
       {path:'requestHistory',component:RequestsHistoryComponent},
       {path:'requestDetails/:requestid',component:RequestDetailsComponent},
       {path:'requestDetails',component:RequestDetailsComponent},

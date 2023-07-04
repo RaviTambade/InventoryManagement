@@ -1,6 +1,6 @@
 using MaterialsService.Models;
 using MaterialsService.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 
 namespace MaterialsService.Controllers
 {
@@ -10,26 +10,27 @@ namespace MaterialsService.Controllers
     public class MaterialsController : ControllerBase
     {
         private readonly IMaterialService _matsrv;
+
         public MaterialsController(IMaterialService matsrv)
         {
             _matsrv = matsrv;
         }
 
-        [HttpGet]
-        [Route("materials")]
-        public IEnumerable<Material> GetAll()
-        {
-            IEnumerable<Material> Materials = _matsrv.GetAll();
-            return Materials;
-        }
+            [HttpGet]
+            [Route("materials")]
+            public IEnumerable<Material> GetAll()
+            {
+                IEnumerable<Material> Materials = _matsrv.GetAll();
+                return Materials;
+            }
 
-        [HttpGet]
-        [Route("materials/{id}")]
-        public Material Get(int id)
-        {
-            Material material = _matsrv.Get(id);
-            return material;
-        }
+            [HttpGet]
+            [Route("materials/{id}")]
+            public Material Get(int id)
+            {
+                Material material = _matsrv.Get(id);
+                return material;
+            }
 
         [HttpGet]
         [Route("image/{materialid}")]

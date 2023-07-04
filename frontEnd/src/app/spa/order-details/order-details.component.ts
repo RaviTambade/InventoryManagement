@@ -15,7 +15,7 @@ export class OrderDetailsComponent {
   
   orderDetails: OrderDetails[];
   result: any;
-  orderId: number = 0;
+  requestid: number = 0;
   employee: string = '';
   orderDetail: any;
   dateTime: string = '';
@@ -31,11 +31,11 @@ export class OrderDetailsComponent {
   }
   ngOnInit() {
     this.activeRoute.paramMap.subscribe((param) => {
-      this.result = param.get('orderId')
-      this.orderId = Number.parseInt(this.result)
-      console.log(this.orderId)
+      this.result = param.get('requestid')
+      this.requestid = Number.parseInt(this.result)
+      console.log(this.requestid)
     })
-    this.svc.getOrderDetails(this.orderId).subscribe((res) => {
+    this.svc.getOrderDetails(this.requestid).subscribe((res) => {
       console.log(res);
       this.orderDetails = res;
       this.getData()

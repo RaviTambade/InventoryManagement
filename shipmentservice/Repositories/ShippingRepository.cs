@@ -26,7 +26,7 @@ public class ShippingRepository : IShippingRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select s.id,s.date,s.status,departments.department from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.shipperid=@empid";
+            string query = "select s.id,s.date,departments.department from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.shipperid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             ;
@@ -36,7 +36,6 @@ public class ShippingRepository : IShippingRepository
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
-                string status = reader["status"].ToString();
                 string department = reader["department"].ToString();
 
   
@@ -45,7 +44,6 @@ public class ShippingRepository : IShippingRepository
                     Id = id,
                     Department = department,
                     Date = date,
-                    Status = status
                 };
 
                 shippings.Add(shipping);

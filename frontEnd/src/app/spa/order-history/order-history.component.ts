@@ -15,7 +15,7 @@ import { pluck } from 'rxjs';
 export class OrderHistoryComponent {
 
   orders:Order[]|undefined;
-  storemanagerid: number = 2;
+  storemanagerid: number = 1;
   public constructor(private _ordersvc: OrderService, private _requestsvc: RequestService, private appsvc: AppService, private router: Router) {
     
   }
@@ -34,8 +34,8 @@ export class OrderHistoryComponent {
   }
 
 
-  onView(orderId: number) {
-    this.router.navigate(['orderdetails', orderId]);
+  onView(requestid: number) {
+    this.router.navigate(['orderdetails', requestid]);
 
   }
 }

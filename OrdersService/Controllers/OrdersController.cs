@@ -25,10 +25,10 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
-    [Route("orders/details/{orderid}")]
-    public  IEnumerable<OrderDetails> GetOrderDetails(int orderid)
+    [Route("orders/details/{requestid}")]
+    public  IEnumerable<OrderDetails> GetOrderDetails(int requestid)
     {
-         IEnumerable<OrderDetails> orders = _ordsvs.GetOrderDetails(orderid);
+         IEnumerable<OrderDetails> orders = _ordsvs.GetOrderDetails(requestid);
         return orders;
     }
 
