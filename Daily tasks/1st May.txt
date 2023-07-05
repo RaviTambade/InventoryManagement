@@ -1,5 +1,0 @@
-1st may
-
-create required APIs
-make .md file for SRS document
-start writing the services, repository

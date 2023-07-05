@@ -1,6 +1,0 @@
-30 April
-
-start working on APIs
-create required APIs
-create skeleton structure for project
-make .md file for SRS document

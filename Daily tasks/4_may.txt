@@ -1,9 +1,0 @@
-4th may
-add order Service.
-methods
-        all orders history,
-        employees order history,
-        order details,
-        all order details.
-
-make application more loosely coupled highly cohesive.

@@ -1,3 +1,0 @@
-3rd May
-find the solution to get location of the material.
-make application loosely coupled highly cohesive.
