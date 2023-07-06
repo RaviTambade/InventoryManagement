@@ -1,17 +1,18 @@
+using System.Threading.Tasks;
 using System.Collections;
 using System.Net.Http.Headers;
 using OrdersService.Models;
 namespace OrdersService.Repositories.Interfaces;
 public interface IOrderRepository
 {
-    IEnumerable<Order> GetOrders(int empid);
-     IEnumerable<OrderDetails> GetOrderDetails(int requestid);
-    IEnumerable<OrderDetails> GetAllOrders(int empid);
-    IEnumerable<OrderDetails> GetOrderDetailsForStore(int reqid);
-    // IEnumerable<Order> OrderedMaterialsInADay();
-    // IEnumerable<Order> GetOrders(Period date);
-    bool Order(int empid);
-    bool DeleteOrder(int orderid);
-    IEnumerable<RequestDetails> GetRequestDetails(int[] id);
+    Task<IEnumerable<Order>> GetOrders(int empid);
+    Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid);
+    Task<IEnumerable<OrderDetails>> GetAllOrders(int empid);
+    Task<IEnumerable<OrderDetails>> GetOrderDetailsForStore(int reqid);
+    //Task< IEnumerable<Order>> OrderedMaterialsInADay();
+    // Task<IEnumerable<Order>> GetOrders(Period date);
+    Task<bool> Order(int empid);
+    Task<bool> DeleteOrder(int orderid);
+    Task<IEnumerable<RequestDetails>> GetRequestDetails(int[] id);
 
 }

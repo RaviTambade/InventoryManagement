@@ -11,18 +11,18 @@ public class OrderService : IOrderService
     {
         _repo = repo;
     }
-    public IEnumerable<Order> GetOrders(int empid)=> _repo.GetOrders(empid);
+    public async Task<IEnumerable<Order>> GetOrders(int empid)=>await _repo.GetOrders(empid);
 
-    public  IEnumerable<OrderDetails> GetOrderDetails(int requestid)=> _repo.GetOrderDetails(requestid);
+    public  async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid)=>await _repo.GetOrderDetails(requestid);
 
-    public IEnumerable<OrderDetails> GetAllOrders(int empid)=> _repo.GetAllOrders(empid);
-    public IEnumerable<OrderDetails> GetOrderDetailsForStore(int reqid)=> _repo.GetOrderDetailsForStore(reqid);
+    public async Task<IEnumerable<OrderDetails>> GetAllOrders(int empid)=>await _repo.GetAllOrders(empid);
+    public async Task<IEnumerable<OrderDetails>> GetOrderDetailsForStore(int reqid)=>await _repo.GetOrderDetailsForStore(reqid);
 
-    // public IEnumerable<Order> OrderedMaterialsInADay()=> _repo.OrderedMaterialsInADay();
-    // public IEnumerable<Order> GetOrders(Period date)=> _repo.GetOrders(date);
-    public bool Order(int empid)=> _repo.Order(empid);
-    public bool DeleteOrder(int orderid)=> _repo.DeleteOrder(orderid);
+    // public async Task<IEnumerable<Order>> OrderedMaterialsInADay()=>await _repo.OrderedMaterialsInADay();
+    // public async Task<IEnumerable<Order>> GetOrders(Period date)=>await _repo.GetOrders(date);
+    public async Task<bool> Order(int empid)=>await _repo.Order(empid);
+    public async Task<bool> DeleteOrder(int orderid)=>await _repo.DeleteOrder(orderid);
 
-    public IEnumerable<RequestDetails> GetRequestDetails(int[]id)=> _repo.GetRequestDetails(id);
+    public async Task<IEnumerable<RequestDetails>> GetRequestDetails(int[]id)=>await _repo.GetRequestDetails(id);
 
 }

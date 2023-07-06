@@ -15,60 +15,60 @@ public class RequestsController : ControllerBase
     }
     [HttpPut]
     [Route("request/cart")]
-    public bool updateCartItemFromRequest(CartItem cartItem)
+    public async Task<bool> updateCartItemFromRequest(CartItem cartItem)
     {
-        bool status = _reqsvs.UpdateQuantityOfRequestedCartItme(cartItem);
+        bool status =await _reqsvs.UpdateQuantityOfRequestedCartItme(cartItem);
         return status;
     }
 
     //get request history of department 
     [HttpGet]
     [Route("requests/{empid}")]
-    public IEnumerable<RequestDetails> GetAllRequests(int empid)
+    public async Task<IEnumerable<RequestDetails>> GetAllRequests(int empid)
     {
-        IEnumerable<RequestDetails> requests = _reqsvs.GetAllRequests(empid);
+        IEnumerable<RequestDetails> requests =await _reqsvs.GetAllRequests(empid);
         return requests;
     }
     //get request history of supervisors
     [HttpGet]
     [Route("request/{empid}")]
-    public IEnumerable<RequestDetails> GetAllRequest(int empid)
+    public async Task<IEnumerable<RequestDetails>> GetAllRequest(int empid)
     {
-        IEnumerable<RequestDetails> requests = _reqsvs.GetAllRequest(empid);
+        IEnumerable<RequestDetails> requests =await _reqsvs.GetAllRequest(empid);
         return requests;
     }
     //request IDs for Store Manager
     [HttpGet]
     [Route("requestid/{empid}")]
-    public IEnumerable<Request> GetRequestId(int empid)
+    public async Task<IEnumerable<Request>> GetRequestId(int empid)
     {
-        IEnumerable<Request> requests = _reqsvs.GetRequestId(empid);
+        IEnumerable<Request> requests =await _reqsvs.GetRequestId(empid);
         return requests;
     }
   
     //request details for supervisor
     [HttpGet]
     [Route("requestdetails/{requestid}")]
-    public IEnumerable<Request> GetRequestDetails(int requestid)
+    public async Task<IEnumerable<Request>> GetRequestDetails(int requestid)
     {
-        IEnumerable<Request> requests = _reqsvs.GetRequestDetails(requestid);
+        IEnumerable<Request> requests =await _reqsvs.GetRequestDetails(requestid);
         return requests;
     }
   
     //remove request
     [HttpDelete]
     [Route("delete/request/{requestid}")]
-    public bool DeleteRequest(int requestid)
+    public async Task<bool> DeleteRequest(int requestid)
     {
-        bool status = _reqsvs.DeleteRequest(requestid);
+        bool status =await _reqsvs.DeleteRequest(requestid);
         return status;
     }
 
     [HttpGet]
     [Route("request/cart/{cartId}")]
-    public CartItem GetCartItem(int cartId)
+    public async Task<CartItem> GetCartItem(int cartId)
     {
-        CartItem cartItems= _reqsvs.GetCartItemFromRequest(cartId);
+        CartItem cartItems=await _reqsvs.GetCartItemFromRequest(cartId);
         return cartItems;
     }
 

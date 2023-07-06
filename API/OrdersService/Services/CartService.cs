@@ -12,14 +12,14 @@ public class CartService : ICartService
         _repo = repo;
     }
 
-    public IEnumerable<CartItem> GetAll(int empid)=> _repo.GetAll(empid);
-    public CartItem GetCartItem(int cartId)=> _repo.GetCartItem(cartId);
-    public bool AddItem(CartItem cartItem)=> _repo.AddItem(cartItem);
-    public bool Delete(int id)=> _repo.Delete(id);
+    public async Task<IEnumerable<CartItem>> GetAll(int empid)=>await _repo.GetAll(empid);
+    public async Task<CartItem> GetCartItem(int cartId)=>await _repo.GetCartItem(cartId);
+    public async Task<bool> AddItem(CartItem cartItem)=>await _repo.AddItem(cartItem);
+    public async Task<bool> Delete(int id)=>await _repo.Delete(id);
 
-    public bool EmptyCart(int employeeid)=> _repo.EmptyCart(employeeid);
-    public bool UpdateQuantity(CartItem item)=> _repo.UpdateQuantity(item);
-    public bool ChangeStatus(ChangeStatus status)=> _repo.ChangeStatus(status);
+    public async Task<bool> EmptyCart(int employeeid)=>await _repo.EmptyCart(employeeid);
+    public async Task<bool> UpdateQuantity(CartItem item)=>await _repo.UpdateQuantity(item);
+    public async Task<bool> ChangeStatus(ChangeStatus status)=>await _repo.ChangeStatus(status);
 
 
 }

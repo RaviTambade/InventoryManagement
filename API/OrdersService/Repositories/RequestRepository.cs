@@ -18,7 +18,7 @@ public class RequestRepository : IRequestRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
     //get cart items  of supervisors by sending request id
-    public IEnumerable<Request> GetRequestDetails(int requestid)
+    public async Task<IEnumerable<Request>> GetRequestDetails(int requestid)
     {
         List<Request> requests = new List<Request>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -27,10 +27,9 @@ public class RequestRepository : IRequestRepository
             string query = "select orderdetails.id, r.id as requestid,r.date, r.status, orderdetails.materialid, categories.category, orderdetails.quantity from requests r  inner join orderdetails on orderdetails.requestid= r.id  inner join categories on categories.id=orderdetails.categoryid  where r.id =@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
-            
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int orderid = Int32.Parse(reader["id"].ToString());
                 int reqid = Int32.Parse(reader["requestid"].ToString());
@@ -54,7 +53,7 @@ public class RequestRepository : IRequestRepository
                 requests.Add(request);
 
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -62,12 +61,12 @@ public class RequestRepository : IRequestRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return requests;
     }
 
-    public CartItem GetCartItemFromRequest(int orderid)
+    public async Task<CartItem> GetCartItemFromRequest(int orderid)
     {
         CartItem cartItem = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -76,9 +75,9 @@ public class RequestRepository : IRequestRepository
             string query = "	select o.id, o.materialid, categories.category, o.quantity from orderdetails o inner join categories on categories.id=o.categoryid where o.id=@orderid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@orderid", orderid);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
@@ -106,7 +105,7 @@ public class RequestRepository : IRequestRepository
         return cartItem;
     }
 
-    public bool DeleteRequest(int requestid)
+    public async Task<bool> DeleteRequest(int requestid)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -115,7 +114,7 @@ public class RequestRepository : IRequestRepository
             string query = "DELETE FROM requests WHERE id=@id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", requestid);
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -128,11 +127,11 @@ public class RequestRepository : IRequestRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
-    public IEnumerable<RequestDetails> GetAllRequests(int empid)
+    public async Task<IEnumerable<RequestDetails>> GetAllRequests(int empid)
     {
         List<RequestDetails> requests = new List<RequestDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -141,17 +140,15 @@ public class RequestRepository : IRequestRepository
             string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.supervisorid inner join  departments on employees.departmentid=departments.id where departments.id =(select departmentid from employees where employees.id=@empid)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
-            ;
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
                 string status = reader["status"].ToString();
                 string firstname = reader["firstname"].ToString();
                 string lastname = reader["lastname"].ToString();
-
 
                 RequestDetails request = new RequestDetails()
                 {
@@ -165,7 +162,7 @@ public class RequestRepository : IRequestRepository
                 requests.Add(request);
 
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -173,13 +170,13 @@ public class RequestRepository : IRequestRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return requests;
     }
 
     
-public IEnumerable<RequestDetails> GetAllRequest(int empid)
+public async Task<IEnumerable<RequestDetails>> GetAllRequest(int empid)
 {
     List<RequestDetails> requests = new List<RequestDetails>();
     MySqlConnection con = new MySqlConnection(_conString);
@@ -188,17 +185,15 @@ public IEnumerable<RequestDetails> GetAllRequest(int empid)
         string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.supervisorid inner join  departments on employees.departmentid=departments.id where employees.id=@empid;";
         MySqlCommand cmd = new MySqlCommand(query, con);
         cmd.Parameters.AddWithValue("@empid", empid);
-        ;
-        con.Open();
+        await con.OpenAsync();
         MySqlDataReader reader = cmd.ExecuteReader();
-        while (reader.Read())
+        while (await reader.ReadAsync())
         {
             int id = Int32.Parse(reader["id"].ToString());
             DateTime date = DateTime.Parse(reader["date"].ToString());
             string status = reader["status"].ToString();
             string firstname = reader["firstname"].ToString();
             string lastname = reader["lastname"].ToString();
-
 
             RequestDetails request = new RequestDetails()
             {
@@ -212,7 +207,7 @@ public IEnumerable<RequestDetails> GetAllRequest(int empid)
             requests.Add(request);
 
         }
-        reader.Close();
+        await reader.CloseAsync();
     }
     catch (Exception e)
     {
@@ -220,11 +215,11 @@ public IEnumerable<RequestDetails> GetAllRequest(int empid)
     }
     finally
     {
-        con.Close();
+        await con.CloseAsync();
     }
     return requests;
 }
-public bool UpdateQuantityOfRequestedCartItme(CartItem item)
+public async Task<bool> UpdateQuantityOfRequestedCartItme(CartItem item)
 {
     bool status = false;
     MySqlConnection con = new MySqlConnection(_conString);
@@ -234,7 +229,7 @@ public bool UpdateQuantityOfRequestedCartItme(CartItem item)
         MySqlCommand cmd = new MySqlCommand(query, con);
         cmd.Parameters.AddWithValue("@id", item.Id);
         cmd.Parameters.AddWithValue("@quantity", item.Quantity);
-        con.Open();
+        await con.OpenAsync();
         int rowsAffected = cmd.ExecuteNonQuery();
         if (rowsAffected > 0)
         {
@@ -247,12 +242,12 @@ public bool UpdateQuantityOfRequestedCartItme(CartItem item)
     }
     finally
     {
-        con.Close();
+        await con.CloseAsync();
     }
     return status;
 }
 
-public IEnumerable<Request> GetRequestId(int empid)
+public async Task<IEnumerable<Request>> GetRequestId(int empid)
 {
     List<Request> requests = new List<Request>();
     MySqlConnection con = new MySqlConnection(_conString);
@@ -261,13 +256,11 @@ public IEnumerable<Request> GetRequestId(int empid)
         string query = "SELECT DISTINCT C.requestid from orderdetails C inner join orders o on C.id= o.orderdetailid inner join employees e on o.employeeid=e.id where e.id=@empid";
         MySqlCommand cmd = new MySqlCommand(query, con);
         cmd.Parameters.AddWithValue("@empid", empid);
-        ;
-        con.Open();
+        await con.OpenAsync();
         MySqlDataReader reader = cmd.ExecuteReader();
-        while (reader.Read())
+        while (await reader.ReadAsync())
         {
             int reqid = Int32.Parse(reader["requestid"].ToString());
-
 
             Request request = new Request()
             {
@@ -277,7 +270,7 @@ public IEnumerable<Request> GetRequestId(int empid)
             requests.Add(request);
 
         }
-        reader.Close();
+        await reader.CloseAsync();
     }
     catch (Exception e)
     {
@@ -285,7 +278,7 @@ public IEnumerable<Request> GetRequestId(int empid)
     }
     finally
     {
-        con.Close();
+        await con.CloseAsync();
     }
     return requests;
 }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +21,7 @@ public class CartRepository : ICartRepository
 
 
     //get cart Items of supervisors by sending supervisor's id
-    public IEnumerable<CartItem> GetAll(int empid)
+    public async Task<IEnumerable<CartItem>> GetAll(int empid)
     {
         List<CartItem> cartItems = new List<CartItem>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -29,10 +30,9 @@ public class CartRepository : ICartRepository
             string query = "select cartitems.id, cartitems.cartid, carts.employeeid, cartitems.materialid, categories.category,cartitems.quantity from cartitems inner join carts on cartitems.cartid=carts.id inner join categories on categories.id=cartitems.categoryid where carts.employeeid =@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
-            ;
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 int cartid = Int32.Parse(reader["cartid"].ToString());
@@ -54,7 +54,7 @@ public class CartRepository : ICartRepository
                 cartItems.Add(item);
 
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -62,13 +62,13 @@ public class CartRepository : ICartRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return cartItems;
     }
 
     //get cartitem details
-    public CartItem GetCartItem(int cartId)
+    public async Task<CartItem> GetCartItem(int cartId)
     {
         CartItem cartItem = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -77,9 +77,9 @@ public class CartRepository : ICartRepository
             string query = "select c.id, c.cartid, c.materialid, categories.category, c.quantity from cartitems c inner join categories on categories.id=c.categoryid where c.id =@cartid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@cartid", cartId);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 int cartid = Int32.Parse(reader["cartid"].ToString());
@@ -96,7 +96,7 @@ public class CartRepository : ICartRepository
                     Quantity = quantity,
                 };
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -104,13 +104,13 @@ public class CartRepository : ICartRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return cartItem;
     }
 
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -119,7 +119,7 @@ public class CartRepository : ICartRepository
             string query = "DELETE FROM cartitems WHERE id=@id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", id);
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -132,14 +132,14 @@ public class CartRepository : ICartRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
 
 
 
-    public bool AddItem(CartItem item)
+    public async Task<bool> AddItem(CartItem item)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -153,14 +153,14 @@ public class CartRepository : ICartRepository
             cmd.Parameters.AddWithValue("@materialid", item.MaterialId);
             cmd.Parameters.AddWithValue("@quantity", item.Quantity);
 
-            con.Open();
+            await con.OpenAsync();
 
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
                 status = true;
             }
-            con.Close();
+            await con.CloseAsync();
 
         }
         catch (Exception e)
@@ -169,13 +169,13 @@ public class CartRepository : ICartRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
 
     }
 
-    public bool EmptyCart(int employeeid)
+    public async Task<bool> EmptyCart(int employeeid)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -184,7 +184,7 @@ public class CartRepository : ICartRepository
             string query = "	DELETE FROM cartitems WHERE cartid=(select id from carts where employeeid=@employeeid)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@employeeid", employeeid);
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -197,12 +197,12 @@ public class CartRepository : ICartRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
 
-    public bool UpdateQuantity(CartItem item)
+    public async Task<bool> UpdateQuantity(CartItem item)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -212,7 +212,7 @@ public class CartRepository : ICartRepository
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", item.Id);
             cmd.Parameters.AddWithValue("@quantity", item.Quantity);
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -225,13 +225,13 @@ public class CartRepository : ICartRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
 
 
-      public bool ChangeStatus(ChangeStatus changestatus)
+      public async Task<bool> ChangeStatus(ChangeStatus changestatus)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -241,7 +241,7 @@ public class CartRepository : ICartRepository
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", changestatus.OrderId);
             cmd.Parameters.AddWithValue("@status", changestatus.StatusId);
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -254,7 +254,7 @@ public class CartRepository : ICartRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }

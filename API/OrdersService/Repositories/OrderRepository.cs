@@ -18,7 +18,7 @@ public class OrderRepository : IOrderRepository
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
-        public IEnumerable<Order> GetOrders(int empid)
+    public async Task<IEnumerable<Order>> GetOrders(int empid)
     {
 
         List<Order> orders = new List<Order>();
@@ -29,9 +29,9 @@ public class OrderRepository : IOrderRepository
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 string? empfirstname = reader["firstname"].ToString();
@@ -49,7 +49,7 @@ public class OrderRepository : IOrderRepository
                 };
                 orders.Add(theOrder);
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -57,12 +57,12 @@ public class OrderRepository : IOrderRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return orders;
     }
 
-    public  IEnumerable<OrderDetails> GetOrderDetails(int requestid)
+    public async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid)
     {
         List<OrderDetails> orderdetails = new List<OrderDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -71,10 +71,9 @@ public class OrderRepository : IOrderRepository
             string query = " select orderdetails.id, requests.date,requests.status,materials.quantity as availablequantity, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl  from orderdetails  inner join requests on requests.id = orderdetails.requestid  inner join materials on orderdetails.materialid=materials.id   inner join categories on materials.categoryid=categories.id  inner join employees  on requests.supervisorid = employees.id  inner join departments on departments.id= employees.departmentid  where  requests.id=@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
-            ;
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
@@ -87,8 +86,6 @@ public class OrderRepository : IOrderRepository
                 string firstname = reader["firstname"].ToString();
                 string lastname = reader["lastname"].ToString();
                 string imgurl = reader["imageurl"].ToString();
-
-                
 
                 OrderDetails order = new OrderDetails()
                 {
@@ -106,7 +103,7 @@ public class OrderRepository : IOrderRepository
                 };
                 orderdetails.Add(order);
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -114,13 +111,13 @@ public class OrderRepository : IOrderRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return orderdetails;
     }
 
     //order history of store 
-    public IEnumerable<OrderDetails> GetOrderDetailsForStore(int reqid)
+    public async Task<IEnumerable<OrderDetails>> GetOrderDetailsForStore(int reqid)
     {
         List<OrderDetails> orders = new List<OrderDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -129,10 +126,9 @@ public class OrderRepository : IOrderRepository
             string query = "select orders.id, materials.quantity as availablequntity, orders.date,orders.status,orderdetails.materialid, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl  from orders inner join orderdetails on orders.orderdetailid = orderdetails.id    inner join materials on materials.id = orderdetails.materialid inner join employees on orderdetails.employeeid = employees.id inner join categories on categories.id = materials.categoryid  inner join departments on departments.id= employees.departmentid inner join requests on requests.id = orderdetails.requestid where  requestid=@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", reqid);
-            ;
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int orderid = Int32.Parse(reader["id"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
@@ -146,8 +142,6 @@ public class OrderRepository : IOrderRepository
                 string firstname = reader["firstname"].ToString();
                 string lastname = reader["lastname"].ToString();
                 string imgurl = reader["imageurl"].ToString();
-
-                
 
                 OrderDetails orderdetails = new OrderDetails()
                 {
@@ -168,7 +162,7 @@ public class OrderRepository : IOrderRepository
                 orders.Add(orderdetails);
 
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -176,7 +170,7 @@ public class OrderRepository : IOrderRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return orders;
     }
@@ -184,19 +178,18 @@ public class OrderRepository : IOrderRepository
     
 
     //order history of supervisors 
-    public IEnumerable<OrderDetails> GetAllOrders(int empid)
+    public async Task<IEnumerable<OrderDetails>> GetAllOrders(int empid)
     {
         List<OrderDetails> orders = new List<OrderDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-                string query = "select orders.id, orders.date,orders.status, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl from orders inner join orderdetails on orders.orderdetailid = orderdetails.id   inner join materials on orderdetails.materialid=materials.id    inner join categories on materials.categoryid=categories.id    inner join employees on orderdetails.employeeid = employees.id  inner join departments on departments.id= employees.departmentid inner join employees e2 on orders.employeeid = e2.id where  orders.employeeid=@empid";
+            string query = "select orders.id, orders.date,orders.status, orderdetails.quantity,materials.title, categories.category,departments.department,employees.firstname, employees.lastname,materials.imageurl from orders inner join orderdetails on orders.orderdetailid = orderdetails.id   inner join materials on orderdetails.materialid=materials.id    inner join categories on materials.categoryid=categories.id    inner join employees on orderdetails.employeeid = employees.id  inner join departments on departments.id= employees.departmentid inner join employees e2 on orders.employeeid = e2.id where  orders.employeeid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
-            ;
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int orderid = Int32.Parse(reader["id"].ToString());
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
@@ -208,8 +201,6 @@ public class OrderRepository : IOrderRepository
                 string firstname = reader["firstname"].ToString();
                 string lastname = reader["lastname"].ToString();
                 string imgurl = reader["imageurl"].ToString();
-
-                
 
                 OrderDetails orderdetails = new OrderDetails()
                 {
@@ -228,7 +219,7 @@ public class OrderRepository : IOrderRepository
                 orders.Add(orderdetails);
 
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -236,15 +227,14 @@ public class OrderRepository : IOrderRepository
         }
         finally
         {
-            con.Close();
+           await con.CloseAsync();
         }
         return orders;
     }
 
-    public bool Order(int empid)
+    public async Task<bool> Order(int empid)
     {
         bool status = false;
-
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -252,7 +242,7 @@ public class OrderRepository : IOrderRepository
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             con.Close();
             if (rowsAffected > 0)
@@ -267,15 +257,14 @@ public class OrderRepository : IOrderRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
 
-   public bool DeleteOrder(int orderid)
+   public async Task<bool> DeleteOrder(int orderid)
     {
         bool status = false;
-
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -283,7 +272,7 @@ public class OrderRepository : IOrderRepository
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", orderid);
 
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             con.Close();
             if (rowsAffected > 0)
@@ -298,12 +287,12 @@ public class OrderRepository : IOrderRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
 
-     public IEnumerable<RequestDetails> GetRequestDetails(int[] id)
+     public async Task<IEnumerable<RequestDetails>> GetRequestDetails(int[] id)
     {
         List<RequestDetails> requests = new List<RequestDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -313,9 +302,9 @@ public class OrderRepository : IOrderRepository
             string query = "select employees.firstname, employees.lastname ,requests.id,requests.date,requests.status from requests inner join employees on employees.id=requests.employeeid  inner join  departments on employees.departmentid=departments.id where requests.id =@reqid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@reqid", rid);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-              while (reader.Read())
+              while (await reader.ReadAsync())
             {
                 int reqid = Int32.Parse(reader["id"].ToString());
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
@@ -333,10 +322,8 @@ public class OrderRepository : IOrderRepository
                 };
               requests.Add(requestDetails);
             } 
-             reader.Close();
-            con.Close();
-
-
+             await reader.CloseAsync();
+             await con.CloseAsync();
          }
         }
            
@@ -346,13 +333,13 @@ public class OrderRepository : IOrderRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return requests;
     }
 
 
-    // public IEnumerable<Order> OrderedMaterialsInADay()
+    // public async Task<IEnumerable<Order>> OrderedMaterialsInADay()
     // {
     //     List<Order> orders = new List<Order>();
     //     MySqlConnection con = new MySqlConnection(_conString);
@@ -360,9 +347,9 @@ public class OrderRepository : IOrderRepository
     //     {
     //         string query = "select orders.id,employees.firstname,employees.lastname, materials.id, materials.title, categories.category, orderdetails.quantity, orders.status  from orders  inner join materials on orders.orderdetailid = materials.id inner join categories on materials.categoryid = categories.id inner join employees on employees.id = orders.employeeid  inner join orderdetails on orders.orderdetailid=orderdetails.id WHERE orders.date >= CAST(CURRENT_TIMESTAMP AS date)";
     //         MySqlCommand cmd = new MySqlCommand(query, con);
-    //         con.Open();
+    //         await con.OpenAsync();
     //         MySqlDataReader reader = cmd.ExecuteReader();
-    //         while (reader.Read())
+    //         while (await reader.ReadAsync())
     //         {
     //             int id = Int32.Parse(reader["id"].ToString());
     //             int materialId = Int32.Parse(reader["id"].ToString());
@@ -383,7 +370,7 @@ public class OrderRepository : IOrderRepository
     //             };
     //             orders.Add(theOrder);
     //         }
-    //         reader.Close();
+    //         await reader.CloseAsync();
     //     }
     //     catch (Exception e)
     //     {
@@ -391,12 +378,12 @@ public class OrderRepository : IOrderRepository
     //     }
     //     finally
     //     {
-    //         con.Close();
+    //         await con.CloseAsync();
     //     }
     //     return orders;
     // }
 
-    // public IEnumerable<Order> GetOrders(Period date)
+    // public async Task<IEnumerable<Order>> GetOrders(Period date)
     // {
     //     string fromDate = date.FromDate.ToString("yyyy-MM-dd");
     //     string toDate = date.ToDate.ToString("yyyy-MM-dd");
@@ -408,9 +395,9 @@ public class OrderRepository : IOrderRepository
     //         MySqlCommand cmd = new MySqlCommand(query, con);
     //         cmd.Parameters.AddWithValue("@FromDate", fromDate);
     //         cmd.Parameters.AddWithValue("@ToDate", toDate);
-    //         con.Open();
+    //         await  con.OpenAsync();
     //         MySqlDataReader reader = cmd.ExecuteReader();
-    //         while (reader.Read())
+    //         while (await reader.ReadAsync())
     //         {
     //             int id = Int32.Parse(reader["id"].ToString());
     //             int materialId = Int32.Parse(reader["materialid"].ToString());
@@ -432,7 +419,7 @@ public class OrderRepository : IOrderRepository
     //             };
     //             orders.Add(theOrder);
     //         }
-    //         reader.Close();
+    //         await reader.CloseAsync();
     //     }
     //     catch (Exception e)
     //     {
@@ -440,7 +427,7 @@ public class OrderRepository : IOrderRepository
     //     }
     //     finally
     //     {
-    //         con.Close();
+    //         await con.CloseAsync();
     //     }
     //     return orders;
     // }

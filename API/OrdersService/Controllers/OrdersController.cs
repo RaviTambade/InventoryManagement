@@ -18,25 +18,25 @@ public class OrdersController : ControllerBase
     
     [HttpGet]
     [Route("orders/{empid}")]
-        public IEnumerable<Order> GetOrders(int empid)
+        public async Task<IEnumerable<Order>> GetOrders(int empid)
     {
-        IEnumerable<Order> orders = _ordsvs.GetOrders(empid);
+        IEnumerable<Order> orders =await _ordsvs.GetOrders(empid);
         return orders;
     }
 
     [HttpGet]
     [Route("orders/details/{requestid}")]
-    public  IEnumerable<OrderDetails> GetOrderDetails(int requestid)
+    public  async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid)
     {
-         IEnumerable<OrderDetails> orders = _ordsvs.GetOrderDetails(requestid);
+         IEnumerable<OrderDetails> orders =await _ordsvs.GetOrderDetails(requestid);
         return orders;
     }
 
     [HttpGet]
     [Route("details/{empid}")]
-    public IEnumerable<OrderDetails> GetAllOrders(int empid)
+    public  async Task<IEnumerable<OrderDetails>> GetAllOrders(int empid)
     {
-        IEnumerable<OrderDetails> orders = _ordsvs.GetAllOrders(empid);
+        IEnumerable<OrderDetails> orders =await _ordsvs.GetAllOrders(empid);
         return orders;
     }
 
@@ -45,51 +45,51 @@ public class OrdersController : ControllerBase
 // get order details by sending request Id (store Managers)
     [HttpGet]
     [Route("details/request/{reqid}")]
-    public IEnumerable<OrderDetails> GetOrderDetailsForStore(int reqid)
+    public  async Task<IEnumerable<OrderDetails>> GetOrderDetailsForStore(int reqid)
     {
-        IEnumerable<OrderDetails> orders = _ordsvs.GetOrderDetailsForStore(reqid);
+        IEnumerable<OrderDetails> orders =await _ordsvs.GetOrderDetailsForStore(reqid);
         return orders;
     }
 
     //Get list of materials ordered in a day
     // [HttpGet]
     // [Route("orderedInADay")]
-    // public IEnumerable<Order> OrderedMaterialsInADay()
+    // public async Task<IEnumerable<Order>> OrderedMaterialsInADay()
     // {
-    //     IEnumerable<Order> orders = _ordsvs.OrderedMaterialsInADay();
+    //     IEnumerable<Order> orders =await _ordsvs.OrderedMaterialsInADay();
     //     return orders;
     // }
 
      //Get list of materials ordered from date to to date
     // [HttpPost]
     // [Route("orderedFromDateToDate")]
-    // public IEnumerable<Order> GetOrders([FromBody] Period date)
+    // public  async Task<IEnumerable<Order>> GetOrders([FromBody] Period date)
     // {
-    //     IEnumerable<Order> orders = _ordsvs.GetOrders(date);
+    //     IEnumerable<Order> orders =await _ordsvs.GetOrders(date);
     //     return orders;
     // }
 
     [HttpGet]
     [Route("order/{empid}")]
-    public bool AddOrder(int empid)
+    public async Task<bool> AddOrder(int empid)
     {
-        bool status = _ordsvs.Order(empid);
+        bool status =await _ordsvs.Order(empid);
         return status;
     }
     [HttpDelete]
     [Route("order/{orderid}")]
-    public bool DeleteOrder(int orderid)
+    public async Task<bool> DeleteOrder(int orderid)
     {
-        bool status = _ordsvs.DeleteOrder(orderid);
+        bool status =await _ordsvs.DeleteOrder(orderid);
         return status;
     }
 
     //get request history For storemanagers id by sending requestids
     [HttpPost]
     [Route("requestdetails")]
-    public IEnumerable<RequestDetails> GetDetails(int[]id )
+    public async Task<IEnumerable<RequestDetails>> GetDetails(int[]id )
     {
-        IEnumerable<RequestDetails> requests = _ordsvs.GetRequestDetails(id);
+        IEnumerable<RequestDetails> requests =await _ordsvs.GetRequestDetails(id);
         return requests;
     }
 

@@ -12,13 +12,13 @@ public class RequestService : IRequestService
         _repo = repo;
     }
 
-    public bool UpdateQuantityOfRequestedCartItme(CartItem item) => _repo.UpdateQuantityOfRequestedCartItme(item);
-    public bool DeleteRequest(int requestid) => _repo.DeleteRequest(requestid);
+    public async Task<bool> UpdateQuantityOfRequestedCartItme(CartItem item) =>await _repo.UpdateQuantityOfRequestedCartItme(item);
+    public async Task<bool> DeleteRequest(int requestid) =>await _repo.DeleteRequest(requestid);
 
-    public IEnumerable<RequestDetails> GetAllRequests(int empid) => _repo.GetAllRequests(empid);
-    public IEnumerable<RequestDetails> GetAllRequest(int empid) => _repo.GetAllRequest(empid);
-    public IEnumerable<Request> GetRequestDetails(int requestid) => _repo.GetRequestDetails(requestid);
-    public CartItem GetCartItemFromRequest(int orderid)=> _repo.GetCartItemFromRequest(orderid);
+    public async Task<IEnumerable<RequestDetails>> GetAllRequests(int empid) =>await _repo.GetAllRequests(empid);
+    public async Task<IEnumerable<RequestDetails>> GetAllRequest(int empid) =>await _repo.GetAllRequest(empid);
+    public async Task<IEnumerable<Request>> GetRequestDetails(int requestid) =>await _repo.GetRequestDetails(requestid);
+    public async Task<CartItem> GetCartItemFromRequest(int orderid)=>await _repo.GetCartItemFromRequest(orderid);
 
-    public IEnumerable<Request> GetRequestId(int empid) => _repo.GetRequestId(empid);
+    public async Task<IEnumerable<Request>> GetRequestId(int empid) =>await _repo.GetRequestId(empid);
 }
