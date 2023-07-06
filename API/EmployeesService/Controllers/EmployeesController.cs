@@ -17,70 +17,69 @@ namespace EmployeesService.Controllers
 
         [HttpGet]
         [Route("employees")]
-        public IEnumerable<Employee> GetAll()
+        public async Task<IEnumerable<Employee>> GetAll()
         {
-            IEnumerable<Employee> employees = _empsrv.GetAll();
+            IEnumerable<Employee> employees =await _empsrv.GetAll();
             return employees;
         }
 
         [HttpGet]
         [Route("employee/{id}")]
-        public Employee GetById(int id)
+        public async Task<Employee> GetById(int id)
         {
-            Employee employee = _empsrv.GetById(id);
+            Employee employee = await _empsrv.GetById(id);
             return employee;
         }
  
         [HttpPost]
         [Route("employees")]
-        public bool Insert([FromBody] Employee employee)
+        public async Task<bool> Insert([FromBody] Employee employee)
         {
-            bool status = _empsrv.Insert(employee);
+            bool status = await _empsrv.Insert(employee);
             return status;
         }
 
 
         [HttpPut]
         [Route("employees")]
-        public bool Update([FromBody] Employee employee)
+        public async Task<bool> Update([FromBody] Employee employee)
         {
-            bool status = _empsrv.Update(employee);
+            bool status = await _empsrv.Update(employee);
             return status;
         }
 
         [HttpGet]
         [Route("department/{theDepartment}")]
-        public IEnumerable<Employee> GetByDepartment(string theDepartment)
+        public async Task<IEnumerable<Employee>> GetByDepartment(string theDepartment)
         {
-            IEnumerable<Employee> employees = _empsrv.GetByDepartment(theDepartment);
+            IEnumerable<Employee> employees = await _empsrv.GetByDepartment(theDepartment);
             return employees;
         }
 
         [HttpGet]
         [Route("role/{role}")]
-        public IEnumerable<Employee> GetByRole(string role)
+        public async Task<IEnumerable<Employee>> GetByRole(string role)
         {
-            IEnumerable<Employee> employees = _empsrv.GetByRole(role);
+            IEnumerable<Employee> employees = await _empsrv.GetByRole(role);
             return employees;
         }
 
         [HttpGet]
         [Route("gender/{gender}")]
-        public IEnumerable<Employee> GetByGender(string gender)
+        public async Task<IEnumerable<Employee>> GetByGender(string gender)
         {
-            IEnumerable<Employee> employees = _empsrv.GetByGender(gender);
+            IEnumerable<Employee> employees = await _empsrv.GetByGender(gender);
             return employees;
         }
 
 
         [HttpDelete]
         [Route("employees/{id}")]
-        public bool Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            bool status = _empsrv.Delete(id);
+            bool status = await _empsrv.Delete(id);
             return status;
         }
-
         
     }
 }
