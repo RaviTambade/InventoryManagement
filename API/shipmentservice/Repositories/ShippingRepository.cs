@@ -20,7 +20,7 @@ public class ShippingRepository : IShippingRepository
 
 
     //get cart Items of supervisors by sending supervisor's id
-    public IEnumerable<Shipping> GetShipments(int empid)
+    public async Task<IEnumerable<Shipping>> GetShipments(int empid)
     {
         List<Shipping> shippings = new List<Shipping>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -29,10 +29,9 @@ public class ShippingRepository : IShippingRepository
             string query = "select s.id,s.date,departments.department from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.shipperid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
-            ;
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
@@ -49,7 +48,7 @@ public class ShippingRepository : IShippingRepository
                 shippings.Add(shipping);
 
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -57,7 +56,7 @@ public class ShippingRepository : IShippingRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
     
         return shippings;

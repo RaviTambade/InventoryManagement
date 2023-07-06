@@ -4,6 +4,6 @@ using shipmentservice.Models;
 namespace shipmentservice.Repositories.Interfaces;
 public interface IShippingRepository
 {
-    IEnumerable<Shipping> GetShipments(int empid);
+    Task<IEnumerable<Shipping>> GetShipments(int empid);
 
 }

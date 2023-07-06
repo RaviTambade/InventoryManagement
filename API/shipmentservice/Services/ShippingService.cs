@@ -12,6 +12,6 @@ public class ShippingService : IShippingService
         _repo = repo;
     }
 
-    public IEnumerable<Shipping> GetShipments(int empid)=> _repo.GetShipments(empid);
+    public async Task<IEnumerable<Shipping>> GetShipments(int empid)=>await _repo.GetShipments(empid);
 
 }
