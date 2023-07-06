@@ -1,3 +1,4 @@
+using System.Security.AccessControl;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System;
@@ -19,7 +20,7 @@ public class MaterialRepository : IMaterialRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public IEnumerable<Material> GetAll()
+    public async Task<IEnumerable<Material>> GetAll()
     {
         List<Material> materials = new List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -27,9 +28,9 @@ public class MaterialRepository : IMaterialRepository
         {
             string query = " select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category  from materials inner join categories on categories.id=materials.categoryid";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 string? name = reader["title"].ToString();
@@ -50,7 +51,7 @@ public class MaterialRepository : IMaterialRepository
 
                 materials.Add(TheMaterial);
             }
-            reader.Close();
+           await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -58,13 +59,13 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
 
         return materials;
     }
 
-    public Material Get(int Mid)
+    public async Task<Material> Get(int Mid)
     {
         Material Thematerial = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -73,9 +74,9 @@ public class MaterialRepository : IMaterialRepository
             string query = "select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.id =@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialId", Mid);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 string? name = reader["title"].ToString();
@@ -95,7 +96,7 @@ public class MaterialRepository : IMaterialRepository
                 };
 
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -103,12 +104,12 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return Thematerial;
     }
 
-    public string GetImage(int Mid)
+    public async Task<string> GetImage(int Mid)
     {
         string? imgUrl = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -117,14 +118,14 @@ public class MaterialRepository : IMaterialRepository
             string query = "select imageurl from materials where id =@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialId", Mid);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 string? imgurl = reader["imageurl"].ToString();
                 imgUrl=imgurl;
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -132,12 +133,12 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return imgUrl;
     }
 
-    public bool Insert(Material material) {
+    public async Task<bool> Insert(Material material) {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -149,7 +150,7 @@ public class MaterialRepository : IMaterialRepository
             cmd.Parameters.AddWithValue("@quantity", material.Quantity);
             cmd.Parameters.AddWithValue("@unitPrice", material.UnitPrice);
             cmd.Parameters.AddWithValue("@imgurl", material.ImgUrl);
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -162,12 +163,12 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
     
-    public bool Update(Material material)
+    public async Task<bool> Update(Material material)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -177,7 +178,7 @@ public class MaterialRepository : IMaterialRepository
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialId", material.Id);
             cmd.Parameters.AddWithValue("@quantity", material.Quantity);
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -190,12 +191,12 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
    
-    public bool Delete(int id){
+    public async Task<bool> Delete(int id){
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -203,7 +204,7 @@ public class MaterialRepository : IMaterialRepository
             string query = "DELETE FROM materials WHERE id=@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialId", id);
-            con.Open();
+            await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -216,12 +217,12 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return status;
     }
 
-    public IEnumerable<Material> GetMaterials(int categoryid)
+    public async Task<IEnumerable<Material>> GetMaterials(int categoryid)
     {
         List<Material> materials = new List<Material>();    
         MySqlConnection con = new MySqlConnection(_conString);
@@ -230,9 +231,9 @@ public class MaterialRepository : IMaterialRepository
             string query = "select materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid where materials.categoryid =@categoryId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@categoryId", categoryid);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 string? materialname = reader["title"].ToString();
@@ -253,7 +254,7 @@ public class MaterialRepository : IMaterialRepository
                 };
                 materials.Add(TheMaterial);
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -261,21 +262,21 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return materials;
     }
 
-    public IEnumerable<Material> GetOutOfStockMaterials(){
+    public async Task<IEnumerable<Material>> GetOutOfStockMaterials(){
         List<Material> materials =new  List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "select  materials.id, materials.title, materials.quantity, materials.unitprice, materials.imageurl, categories.category from materials inner join categories on categories.id =materials.categoryid  where quantity = 0";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 string? name = reader["title"].ToString();
@@ -296,7 +297,7 @@ public class MaterialRepository : IMaterialRepository
                 };
                 materials.Add(TheMaterial);
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -304,12 +305,12 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+           await con.CloseAsync();
         }
         return materials;
     }
 
-    public IEnumerable<Location> GetLocations()
+    public async Task<IEnumerable<Location>> GetLocations()
     {
         List<Location> locations = new List<Location>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -317,9 +318,9 @@ public class MaterialRepository : IMaterialRepository
         {
             string query = "select  warehouse.section,  categories.category, materials.title as materialname, materials.quantity, employees.id FROM warehouse  INNER JOIN materials ON  materials.categoryid=warehouse.categoryid  inner join categories on warehouse.categoryid = categories.id inner join employees on employees.id=warehouse.employeeid" ;
             MySqlCommand cmd = new MySqlCommand(query, con);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 string? section = reader["section"].ToString();
                 string? name = reader["materialname"].ToString();
@@ -327,7 +328,7 @@ public class MaterialRepository : IMaterialRepository
                 int quantity = int.Parse(reader["quantity"].ToString());
                 int empid = int.Parse(reader["id"].ToString());
 
-                 Location loc  = new Location()
+                Location loc  = new Location()
                 {
                     Section = section,
                     Name = name,
@@ -338,7 +339,7 @@ public class MaterialRepository : IMaterialRepository
                 locations.Add(loc);
             }
 
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -346,12 +347,12 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return locations;
     }
     
-     public Location GetLocation(int materialId)
+     public async Task<Location> GetLocation(int materialId)
     {
         Location location = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -360,9 +361,9 @@ public class MaterialRepository : IMaterialRepository
             string query = "select  warehouse.section,  categories.category, materials.title as materialname, materials.quantity, employees.id FROM warehouse  INNER JOIN materials ON  materials.categoryid=warehouse.categoryid  inner join categories on warehouse.categoryid = categories.id inner join employees on employees.id=warehouse.employeeid where materials.id =@materialid" ;
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialid", materialId);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 string? section = reader["section"].ToString();
                 string? name = reader["materialname"].ToString();
@@ -381,7 +382,7 @@ public class MaterialRepository : IMaterialRepository
                 
             }
 
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -389,12 +390,12 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return location;
     }
 
-    public IEnumerable<Material> GetCategories()
+    public async Task<IEnumerable<Material>> GetCategories()
     {
         List<Material> materials=new List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -402,9 +403,9 @@ public class MaterialRepository : IMaterialRepository
         {
             string query = "select category from categories" ;
             MySqlCommand cmd = new MySqlCommand(query, con);
-            con.Open();
+            await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 string? category = reader["category"].ToString();
                 Material material  = new Material()
@@ -414,7 +415,7 @@ public class MaterialRepository : IMaterialRepository
                 materials.Add(material);
             }
 
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -422,7 +423,7 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return materials;
     }

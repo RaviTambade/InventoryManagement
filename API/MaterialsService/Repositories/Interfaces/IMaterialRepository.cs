@@ -1,23 +1,24 @@
+using System.Threading.Tasks;
 using System.Collections;
 using System.Net.Http.Headers;
 using MaterialsService.Models;
 namespace MaterialsService.Repositories.Interfaces;
 public interface IMaterialRepository
 {
-    IEnumerable<Material> GetAll();
-    Material Get(int materialId);
-    string GetImage(int materialId);
+    Task<IEnumerable<Material>> GetAll();
+    Task<Material> Get(int materialId);
+    Task<string> GetImage(int materialId);
 
-    bool Insert(Material material);
-    bool Update(Material material);
-    bool Delete(int materialId);
-     IEnumerable<Location> GetLocations();
+    Task<bool> Insert(Material material);
+    Task<bool> Update(Material material);
+    Task<bool> Delete(int materialId);
+    Task<IEnumerable<Location>> GetLocations();
 
-    Location GetLocation(int materialId);
+    Task<Location> GetLocation(int materialId);
 
-    IEnumerable<Material> GetMaterials(int id);
-    IEnumerable<Material>GetOutOfStockMaterials();
+    Task<IEnumerable<Material>> GetMaterials(int id);
+    Task<IEnumerable<Material>> GetOutOfStockMaterials();
     
-    IEnumerable<Material>GetCategories();
+    Task<IEnumerable<Material>> GetCategories();
 
 }

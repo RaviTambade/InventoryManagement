@@ -18,66 +18,66 @@ namespace MaterialsService.Controllers
 
             [HttpGet]
             [Route("materials")]
-            public IEnumerable<Material> GetAll()
+            public async Task<IEnumerable<Material>> GetAll()
             {
-                IEnumerable<Material> Materials = _matsrv.GetAll();
+                IEnumerable<Material> Materials =await _matsrv.GetAll();
                 return Materials;
             }
 
             [HttpGet]
             [Route("materials/{id}")]
-            public Material Get(int id)
+            public async Task<Material> Get(int id)
             {
-                Material material = _matsrv.Get(id);
+                Material material =await _matsrv.Get(id);
                 return material;
             }
 
         [HttpGet]
         [Route("image/{materialid}")]
-        public string GetImage(int materialid)
+        public async Task<string> GetImage(int materialid)
         {
-            string imgUrl = _matsrv.GetImage(materialid);
+            string imgUrl =await _matsrv.GetImage(materialid);
             return imgUrl;
         }
 
         [HttpPut]
         [Route("materials/{id}")]
-        public bool UpdateMaterial([FromBody] Material material)
+        public async Task<bool> UpdateMaterial([FromBody] Material material)
         {
-            bool status = _matsrv.Update(material);
+            bool status =await _matsrv.Update(material);
             return status;
         }
 
         [HttpPost]
         [Route("materials")]
-        public bool Insert([FromBody] Material material)
+        public async Task<bool> Insert([FromBody] Material material)
         {
-            bool status = _matsrv.Insert(material);
+            bool status =await _matsrv.Insert(material);
             return status;
         }
 
         [HttpDelete]
         [Route("materials/{id}")]
-        public bool Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            bool status = _matsrv.Delete(id);
+            bool status = await _matsrv.Delete(id);
             return status;
         }
 
         //get location of materials
         [HttpGet]
         [Route("locations")]
-        public  IEnumerable<Location> GetLocations()
+        public   async Task<IEnumerable<Location>> GetLocations()
         {
-             IEnumerable<Location> locations =_matsrv.GetLocations();
+             IEnumerable<Location> locations =await _matsrv.GetLocations();
             return locations;
         }
 
         [HttpGet]
         [Route("location/{id}")]
-        public Location GetLocation(int id)
+        public async Task<Location> GetLocation(int id)
         {
-             Location location =_matsrv.GetLocation(id);
+             Location location =await _matsrv.GetLocation(id);
             return location;
         }
 
@@ -85,26 +85,26 @@ namespace MaterialsService.Controllers
         //Get all materials based on material type
         [HttpGet]
         [Route("catagory/{id}")]
-        public IEnumerable<Material> GetMaterials(int id)
+        public  async Task<IEnumerable<Material>> GetMaterials(int id)
         {
-            IEnumerable<Material> materials = _matsrv.GetMaterials(id);
+            IEnumerable<Material> materials =await _matsrv.GetMaterials(id);
             return materials;
         }
 
         //Get out of stock  materials list
         [HttpGet]
         [Route("materials/outofstock")]
-        public IEnumerable<Material> GetOutOfStockMaterials()
+        public  async Task<IEnumerable<Material>> GetOutOfStockMaterials()
         {
-            IEnumerable<Material> materials = _matsrv.GetOutOfStockMaterials();
+            IEnumerable<Material> materials =await _matsrv.GetOutOfStockMaterials();
             return materials;
         }
 
         [HttpGet]
         [Route("categories")]
-        public IEnumerable<Material> GetCategories()
+        public  async Task<IEnumerable<Material>> GetCategories()
         {
-            IEnumerable<Material> materials = _matsrv.GetCategories();
+            IEnumerable<Material> materials = await _matsrv.GetCategories();
             return materials;
         }
 
