@@ -17,7 +17,7 @@ namespace WarehousesService.Controllers;
 
   [HttpGet]
     [Route("warehouses")]
-    public IEnumerable<Warehouse> Warehouse()
+    public  IEnumerable<Warehouse> Warehouse()
     {
         IEnumerable<Warehouse> warehouses = _svc.Get();
         return warehouses;
