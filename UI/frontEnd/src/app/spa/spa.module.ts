@@ -20,6 +20,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { EditCartComponent } from './edit-cart/edit-cart.component';
 import { EditRequestComponent } from './edit-request/edit-request.component';
 import { TaskshistoryComponent } from './taskshistory/taskshistory.component';
+import { InsertMaterialComponent } from './insert-material/insert-material.component';
+import { InsertEmployeeComponent } from './insert-employee/insert-employee.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -56,9 +58,11 @@ const routes: Routes=
     OrderHistoryComponent,
     EditCartComponent,
     EditRequestComponent,
-    TaskshistoryComponent
+    TaskshistoryComponent,
+    InsertMaterialComponent,
+    InsertEmployeeComponent
   ],
-  exports:[RouterContainerComponent],
+  exports:[RouterContainerComponent,InsertMaterialComponent],
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),

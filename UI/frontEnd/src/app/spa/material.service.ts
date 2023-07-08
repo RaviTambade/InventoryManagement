@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { Material } from './Material';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,11 @@ export class MaterialService {
   getCategories():Observable<any>{
     let url ="http://localhost:5176/api/Materials/categories";
     return this.http.get(url);
+  }
+
+  InsertMaterial(material:Material):Observable<any>{
+    let url ="http://localhost:5176/api/Materials/Materials";
+    return this.http.post(url,material);
   }
 
   // getOrderDetails(orderid:number)

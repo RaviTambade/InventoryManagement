@@ -143,7 +143,8 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "INSERT INTO Materials(name,categoryid,quantity,unitprice,imageurl)VALUES(@materialName,@materialType,@quantity,@unitPrice,@imgurl)";
+            Console.WriteLine(material.Type);
+            string query = "INSERT INTO Materials(title,categoryid,quantity,unitprice,imageurl)VALUES(@materialName,(select id from categories where category=@materialType),@quantity,@unitPrice,@imgurl)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialName", material.Name);
             cmd.Parameters.AddWithValue("@materialType", material.Type);
