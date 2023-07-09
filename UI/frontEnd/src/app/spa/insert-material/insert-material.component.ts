@@ -14,7 +14,7 @@ export class InsertMaterialComponent {
   progress: number =0;
   file:any;
   theCategory:any;
-  theImage:any;
+  path:string='/assets/img/'
   message: string | undefined;
 
   @Output() public onUploadFinished = new EventEmitter();
@@ -50,18 +50,18 @@ export class InsertMaterialComponent {
     if (files.length === 0) {
       return;
     }
-    let fileToUpload = <File>files[0];
-    this.file=fileToUpload;
+    this.file = <File>files[0];
+    // this.file=fileToUpload;
   }
 
 
   onSubmit(form:NgForm){
   
   this.theCategory=this.category.value;
-  //set material value  
+  //set material value
   this.material.name=form.value.name;
   this.material.type=this.theCategory;
-  this.material.imgUrl= "/assets/img/"+this.file.name;
+  this.material.imgUrl= this.path+this.file.name;
 
   //insert material in database
   this.svc.InsertMaterial(this.material).subscribe((res)=>{
