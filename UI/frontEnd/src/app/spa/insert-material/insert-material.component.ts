@@ -10,28 +10,28 @@ import { Material } from '../Material';
   styleUrls: ['./insert-material.component.css']
 })
 export class InsertMaterialComponent {
-  categories:any[];
-  progress: number =0;
-  file:any;
-  theCategory:any;
-  path:string='/assets/img/'
+  categories: any[];
+  progress: number = 0;
+  file: any;
+  theCategory: any;
+  path: string = '/assets/img/'
   message: string | undefined;
 
   @Output() public onUploadFinished = new EventEmitter();
 
-  material:Material= 
-  {
-    name:'',
-    type:'',
-    quantity:0,
-    unitPrice:500,
-    imgUrl:''
-  };;
+  material: Material =
+    {
+      name: '',
+      type: '',
+      quantity: 0,
+      unitPrice: 500,
+      imgUrl: ''
+    };;
 
   category = new FormControl(null, [Validators.required,]);
 
-  constructor(private svc:MaterialService,private http: HttpClient){
-    this.categories=[];    
+  constructor(private svc: MaterialService, private http: HttpClient) {
+    this.categories = [];
 
   }
 
@@ -55,41 +55,41 @@ export class InsertMaterialComponent {
   }
 
 
-  onSubmit(form:NgForm){
-  
-  this.theCategory=this.category.value;
-  //set material value
-  this.material.name=form.value.name;
-  this.material.type=this.theCategory;
-  this.material.imgUrl= this.path+this.file.name;
+  onSubmit(form: NgForm) {
 
-  //insert material in database
-  this.svc.InsertMaterial(this.material).subscribe((res)=>{
-    console.log(res);
-  });
+    this.theCategory = this.category.value;
+    //set material value
+    this.material.name = form.value.name;
+    this.material.type = this.theCategory;
+    this.material.imgUrl = this.path + this.file.name;
 
-
-  //save image in Rest API
-  const formData = new FormData();
-  formData.append('file', this.file, this.file.name);
-
-  this.http.post('http://localhost:5176/api/Materials/', formData, { reportProgress: true, observe: 'events' })
-    .subscribe({
-      next: (event) => {
-        console.log(event);
-         if (event.type === HttpEventType.UploadProgress && event.total) 
-         this.progress = Math.round(100 * event.loaded / event.total);
-        if (event.type === HttpEventType.Response) {
-          this.message = 'Upload success.';
-          this.onUploadFinished.emit(event.body);
-        }
-      },
-      error: (err: HttpErrorResponse) => console.log(err)
+    //insert material in database
+    this.svc.InsertMaterial(this.material).subscribe((res) => {
+      console.log(res);
     });
- }
 
 
-	}
+    //save image in Rest API
+    const formData = new FormData();
+    formData.append('file', this.file, this.file.name);
+
+    this.http.post('http://localhost:5176/api/Materials/', formData, { reportProgress: true, observe: 'events' })
+      .subscribe({
+        next: (event) => {
+          console.log(event);
+          if (event.type === HttpEventType.UploadProgress && event.total)
+            this.progress = Math.round(100 * event.loaded / event.total);
+          if (event.type === HttpEventType.Response) {
+            this.message = 'Upload success.';
+            this.onUploadFinished.emit(event.body);
+          }
+        },
+        error: (err: HttpErrorResponse) => console.log(err)
+      });
+  }
+
+
+}
 
 
 
