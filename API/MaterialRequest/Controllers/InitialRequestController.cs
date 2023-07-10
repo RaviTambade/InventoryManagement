@@ -5,7 +5,7 @@ using MaterialRequest.Services.Interfaces;
 namespace MaterialRequest.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/api/[controller]")]
 public class InitialRequestController : ControllerBase
 {
 
@@ -14,6 +14,8 @@ public class InitialRequestController : ControllerBase
     {
         _svs = svs;
     }
+    [HttpGet]
+    [Route("items/{empid}")]
     public async Task<List<InitialRequestItem>> GetAll(int empid)
     {
         List<InitialRequestItem> items =await _svs.GetAll(empid);
@@ -21,7 +23,7 @@ public class InitialRequestController : ControllerBase
     }
 
     [HttpGet]
-    [Route("cart/{cartId}")]
+    [Route("item/{cartId}")]
     public async Task<InitialRequestItem> Get(int cartId)
     {
         InitialRequestItem item =await _svs.GetById(cartId);
@@ -30,7 +32,7 @@ public class InitialRequestController : ControllerBase
 
 
     [HttpPost]
-    [Route("addtocart")]
+    [Route("item")]
     public async Task<bool> Insert([FromBody] InitialRequestItem item)
     {
         bool status =await _svs.Insert(item);
@@ -38,7 +40,7 @@ public class InitialRequestController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("delete/{id}")]
+    [Route("item/{id}")]
     public async Task<bool> Delete(int id)
     {
         bool status =await _svs.Delete(id);
@@ -47,7 +49,7 @@ public class InitialRequestController : ControllerBase
 
     //remove all items from cart 
     [HttpDelete]
-    [Route("Emptycart/{employeeid}")]
+    [Route("items/{employeeid}")]
     public async Task<bool> EmptyCart(int employeeid)
     {
         bool status =await _svs.RemoveAll(employeeid);
@@ -56,7 +58,7 @@ public class InitialRequestController : ControllerBase
 
     //update quantity 
     [HttpPut]
-    [Route("updatequantity")]
+    [Route("item")]
     public async Task<bool> UpdateQuantity(InitialRequestItem item)
     {
         bool status =await _svs.UpdateQuantity(item);

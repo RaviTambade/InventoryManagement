@@ -27,7 +27,7 @@ public class InitialRequestRepository : IInitialRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select cartitems.id, cartitems.cartid, carts.employeeid, cartitems.materialid, categories.category,cartitems.quantity from cartitems inner join carts on cartitems.cartid=carts.id inner join categories on categories.id=cartitems.categoryid where carts.employeeid =@empid";
+            string query = "select rt.id, rt.initialrequestid, initialrequest.employeeid, rt.materialid, categories.category,rt.quantity from InitialRequestItems rt inner join initialrequest on rt.initialrequestid=initialrequest.id  inner join categories on categories.id=rt.categoryid where initialrequest.employeeid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             await con.OpenAsync();
@@ -35,7 +35,7 @@ public class InitialRequestRepository : IInitialRequestRepository
             while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
-                int cartid = Int32.Parse(reader["cartid"].ToString());
+                int initialrequestid = Int32.Parse(reader["initialrequestid"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
@@ -44,7 +44,7 @@ public class InitialRequestRepository : IInitialRequestRepository
                 InitialRequestItem item = new InitialRequestItem()
                 {
                     Id = id,
-                    RequestId = cartid,
+                    RequestId = initialrequestid,
                     MaterialId = materialid,
                     Category = category,
                     Quantity = quantity,
@@ -68,21 +68,21 @@ public class InitialRequestRepository : IInitialRequestRepository
     }
 
     //get cartitem details
-    public async Task<InitialRequestItem> GetById(int cartId)
+    public async Task<InitialRequestItem> GetById(int requestid)
     {
         InitialRequestItem item = null;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select c.id, c.cartid, c.materialid, categories.category, c.quantity from cartitems c inner join categories on categories.id=c.categoryid where c.id =@cartid";
+            string query = "select rt.id, rt.initialrequestid,  rt.materialid, categories.category,rt.quantity from InitialRequestItems rt inner join categories on categories.id=rt.categoryid where rt.id  =@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@cartid", cartId);
+            cmd.Parameters.AddWithValue("@requestid", requestid);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["id"].ToString());
-                int cartid = Int32.Parse(reader["cartid"].ToString());
+                int initialrequestid = Int32.Parse(reader["initialrequestid"].ToString());
                 int materialid = Int32.Parse(reader["materialid"].ToString());
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
@@ -90,7 +90,7 @@ public class InitialRequestRepository : IInitialRequestRepository
                 item = new InitialRequestItem()
                 {
                     Id = id,
-                    RequestId = cartid,
+                    RequestId = initialrequestid,
                     MaterialId = materialid,
                     Category = category,
                     Quantity = quantity,
@@ -116,7 +116,7 @@ public class InitialRequestRepository : IInitialRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "DELETE FROM cartitems WHERE id=@id";
+            string query = "DELETE FROM InitialRequestItems WHERE id=@id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", id);
             await con.OpenAsync();
@@ -146,7 +146,7 @@ public class InitialRequestRepository : IInitialRequestRepository
         try
         {
 
-            string query = "insert into InitialRequestItems(cartid,materialid,categoryid,quantity)values((select id from carts where employeeid=@empid),@materialid,(select id from categories where category=@category),@quantity);";
+            string query = " insert into InitialRequestItems(initialrequestid,materialid,categoryid,quantity) values((select id from initialrequest where employeeid=@empid),@materialid,(select id from categories where category=@category),@quantity)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@category", item.Category);
             cmd.Parameters.AddWithValue("@empid", item.EmployeeId);
