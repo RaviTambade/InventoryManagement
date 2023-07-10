@@ -10,37 +10,37 @@ export class CartService {
   constructor(private http:HttpClient) { }
   
   getCarts(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/carts/" + empid ;
+    let url ="http://localhost:5164/api/InitialRequest/items/" + empid ;
     return this.http.get(url);
   }
   getCart(cartid:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/cart/" + cartid ;
+    let url ="http://localhost:5164/api/InitialRequest/item/" + cartid ;
     return this.http.get(url);
   }
 
   updateQuantity(updateQuantity:any):Observable<any>{
-    let url ="http://localhost:5082/api/carts/updatequantity";
+    let url ="http://localhost:5164/api/InitialRequest/item/";
     return this.http.put(url,updateQuantity);
   }
 
   remove(id:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/delete/" + id ;
+    let url ="http://localhost:5164/api/InitialRequest/item/" + id ;
     return this.http.delete(url);
   }
 
   removeAll(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/carts/Emptycart/" + empid ;
+    let url ="http://localhost:5164/api/InitialRequest/items/" + empid ;
     return this.http.delete(url);
   }
 
   addToCart(cart:any):Observable<any> 
   {
-    let url = "http://localhost:5082/api/carts/addtocart";
+    let url ="http://localhost:5164/api/InitialRequest/item";
     return this.http.post(url,cart);
   }
   ChangeStatus(changeStatus:any):Observable<any> 
   {
-    let url = "http://localhost:5082/api/carts/ChangeStatus";
+    let url ="http://localhost:5164/api/InitialRequest/ChangeStatus/"  ;
     return this.http.put(url,changeStatus);
   }
 

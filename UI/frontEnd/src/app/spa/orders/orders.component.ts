@@ -45,11 +45,11 @@ ngOnInit(): void {
 }
 onOrder(materialid:number,category:any,quantity:number){
 
-console.log(this.empid,materialid,category,quantity)
 this.order.employeeid=this.empid;
 this.order.materialid=materialid;
 this.order.category=category,
 this.order.quantity=quantity
+console.log(this.order)
     this._cartsvc.addToCart(this.order).subscribe((res)=>{
       console.log(res);
       if(res){
