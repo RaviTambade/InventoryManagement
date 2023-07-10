@@ -13,58 +13,58 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./requests-history.component.css']
 })
 export class RequestsHistoryComponent {
-  requests: any[] ;
-  result:any[];
-  carts: any[] ;
-  data:any[];
-  empid:number=11;
-  cart:boolean |undefined;
-  emptycart:boolean |undefined;
-  request:boolean |undefined;
+  requests: any[];
+  result: any[];
+  carts: any[];
+  data: any[];
+  empid: number = 11;
+  cart: boolean | undefined;
+  emptycart: boolean | undefined;
+  request: boolean | undefined;
 
 
-  names:any=[];
-  employees:any=[];
-  
+  names: any = [];
+  employees: any = [];
 
-  constructor(private _cartsvc: CartService,private _requestsvc:RequestService, private _ordersvc:OrderService, private router:Router) { 
-    this.result=[];
-    this.requests=[];
-    this.carts=[];
-    this.data=[];
+
+  constructor(private _cartsvc: CartService, private _requestsvc: RequestService, private _ordersvc: OrderService, private router: Router) {
+    this.result = [];
+    this.requests = [];
+    this.carts = [];
+    this.data = [];
   }
   form = new FormGroup({
     request: new FormControl('', Validators.required)
   });
-  get f(){
+  get f() {
     return this.form.controls;
   }
-   
 
-  changeShow(e:any) {
+
+  changeShow(e: any) {
     console.log(e.target.value);
-    if(e.target.value==="myrequest"){
+    if (e.target.value === "myrequest") {
       this._requestsvc.getAllRequest(this.empid).subscribe((res) => {
-        if(res){
+        if (res) {
           Date.parse(res.date)
           this.result = res;
           console.log(res);
           this.result?.reverse();
-          this.requests=this.result;
-          this.request=true;
-     }
+          this.requests = this.result;
+          this.request = true;
+        }
       })
     }
-    if(e.target.value==="allrequests"){
+    if (e.target.value === "allrequests") {
       this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
-        if(res){
+        if (res) {
           Date.parse(res.date)
           this.result = res;
           console.log(res);
           this.result?.reverse();
-          this.requests=this.result;
-          this.request=true;
-     }
+          this.requests = this.result;
+          this.request = true;
+        }
       })
     }
 
@@ -73,66 +73,63 @@ export class RequestsHistoryComponent {
   ngOnInit(): void {
     this._cartsvc.getCarts(this.empid).subscribe((res) => {
       console.log(res);
-        this.data = res;
-        if(this.data.length==0){
-          this.emptycart=true
-        }
-        else{
-          this.cart=true;
-          this.data?.reverse();
-          this.carts=this.data;
-        }
+      this.data = res;
+      if (this.data.length == 0) {
+        this.emptycart = true
+      }
+      else {
+        this.cart = true;
+        this.data?.reverse();
+        this.carts = this.data;
+      }
     })
 
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
-      if(res){
+      if (res) {
         Date.parse(res.date)
         this.result = res;
         console.log(res);
         this.result?.reverse();
-        this.requests=this.result;
-        this.request=true;
+        this.requests = this.result;
+        this.request = true;
       }
     })
 
   }
-  onRemove(id:number){
-    this._cartsvc.remove(id).subscribe((res)=>{
-      if(res){
+  onRemove(id: number) {
+    this._cartsvc.remove(id).subscribe((res) => {
+      if (res) {
         window.location.reload();
       }
     })
   }
-  onDeleteRequest(reqid:number){
-    this._requestsvc.deleteRequest(reqid).subscribe((res)=>{
+  onDeleteRequest(reqid: number) {
+    this._requestsvc.deleteRequest(reqid).subscribe((res) => {
       console.log(res);
       window.location.reload();
     })
   }
 
-  onOrder(){
-    this._ordersvc.order(this.empid).subscribe((res)=>{
+  onOrder() {
+    this._ordersvc.order(this.empid).subscribe((res) => {
       console.log(res);
       window.location.reload();
     })
   }
-  onRemoveAll(){  
-    this._cartsvc.removeAll(this.empid).subscribe((res)=>{
+  onRemoveAll() {
+    this._cartsvc.removeAll(this.empid).subscribe((res) => {
       console.log(res);
       window.location.reload();
     })
   }
-
-  onEdit(cartid:number){
+  onEdit(cartid: number) {
     this.router.navigate(['editcart', cartid]);
 
   }
-
-
-  onView(requestid:number){
+  onView(requestid: number) {
     this.router.navigate(['requestDetails', requestid]);
 
   }
 
- 
+
 }

@@ -28,7 +28,7 @@ export class RequestService {
     return this.http.put(url,updateQuantity);
   }
   getAllRequests(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/requests/requests/" + empid ;
+    let url ="http://localhost:5164/api/request/requests/" + empid ;
     return this.http.get(url);
   }
   getAllRequest(empid:number):Observable<any>{

@@ -35,7 +35,7 @@ export class OrderService {
   //   return this.http.get(url);
   // }
   order(empid:number):Observable<any>{
-    let url ="http://localhost:5082/api/orders/order/" +empid ;
+    let url ="http://localhost:5164/api/request/request/" +empid ;
     return this.http.get(url);
   }
   removeCartFromRequest(orderId:number):Observable<any>{
