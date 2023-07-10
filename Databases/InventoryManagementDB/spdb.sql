@@ -9,40 +9,39 @@ DECLARE quantity INT;
 DECLARE status BOOLEAN;
 DECLARE superviosrid INT;
 DECLARE noMoreRow1 INT default 0;
-DECLARE cartitem_cursor CURSOR  FOR SELECT ct.materialid, ct.categoryid, ct.quantity FROM cartitems ct WHERE ct.cartid=cartId; 
+DECLARE initialrequestitems_cursor CURSOR  FOR SELECT ct.materialid, ct.categoryid, ct.quantity FROM initialrequestitems ct WHERE ct.cartid=cartId; 
 
-INSERT INTO requests (supervisorid,status) VALUES ((select c.employeeid from carts c where c.id=cartId ),1);
+INSERT INTO materialrequests (supervisorid,status) VALUES ((select c.employeeid from initialrequest c where c.id=cartId ),1);
 set requestId=LAST_INSERT_ID();
-    OPEN cartitem_cursor ;
+    OPEN initialrequestitems_cursor ;
     begin
     DECLARE exit_flag INT DEFAULT 0;
      DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
-    cartitems:loop
-    	FETCH cartitem_cursor INTO materialId,categoryId,quantity;
+    initialrequestitems:loop
+    	FETCH initialrequestitems_cursor INTO materialId,categoryId,quantity;
     IF exit_flag=1 THEN 
-		LEAVE cartitems;
+		LEAVE initialrequestitems;
     END IF;
-	INSERT INTO orderdetails(storemanagerid,requestid,materialid,categoryid,quantity)
-    VALUES((select warehouse.employeeid from warehouse  where warehouse.categoryid=categoryId),requestId,materialId,categoryId,quantity); 
+	INSERT INTO materialrequestitems(storemanagerid,requestid,materialid,categoryid,quantity)
+    VALUES((select w.employeeid from warehousestaff w  where w.categoryid=categoryId),requestId,materialId,categoryId,quantity); 
 
-END LOOP cartitems;
+END LOOP initialrequestitems;
 end;
-CLOSE cartitem_cursor;
+CLOSE initialrequestitems_cursor;
 -- empty cart
- DELETE FROM cartitems c WHERE c.cartid=cartId;
+ DELETE FROM initialrequestitems c WHERE c.cartid=cartId;
 
 END $$
 DELIMITER ;
 	DELIMITER $$
-
-
-
-
-
-       DELIMITER !!
+  
+  
+  
+  
+   DELIMITER !!
 CREATE TRIGGER newshipment
 after INSERT
-ON requests FOR EACH ROW
+ON materialrequests FOR EACH ROW
 BEGIN
 DECLARE workers INT;
 DECLARE status BOOLEAN;
@@ -79,10 +78,10 @@ CLOSE shipper_cursor;
    DELIMITER !!
 CREATE TRIGGER newshipmentdetails
 after INSERT
-ON orderdetails FOR EACH ROW
+ON materialrequestitems FOR EACH ROW
 BEGIN
 	INSERT INTO shippingdetails(storemanagerid,materialid,categoryid,quantity,shipmentid)
-    VALUES(new.storemanagerid,new.materialid,new.categoryid,new.quantity,(select id from shipments s where s.requestid=new.requestid )); 
+    VALUES(new.storemanagerid,new.materialid,new.categoryid,new.quantity,(select id from shipments s where s.materialrequestid=new.materialrequestid )); 
     end !!
 	DELIMITER ;
     
