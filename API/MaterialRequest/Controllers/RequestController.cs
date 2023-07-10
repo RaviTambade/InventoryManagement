@@ -25,10 +25,10 @@ public class RequestController : ControllerBase
     }
 
     [HttpGet]
-    [Route("requests/{storemanagerid}")]
-    public async Task<List<Request>> GetAllRequests(int storemanagerid)
+    [Route("requests/store/{storemanagerid}")]
+    public async Task<List<Request>> GetRequests(int storemanagerid)
     {
-        List<Request> requests =await _reqsvs.GetAllRequests(storemanagerid);
+        List<Request> requests =await _reqsvs.GetRequests(storemanagerid);
         return requests;
     }
     [HttpGet]

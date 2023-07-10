@@ -133,6 +133,49 @@ public class RequestRepository : IRequestRepository
     // }
    
    
+    public async Task<List<Request>> GetRequests(int storemanagerid)
+    {
+        List<Request> requests = new List<Request>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select r.id,r.date,r.status, employees.userid from materialrequests r inner join materialrequestitems rt on r.id=rt.materialrequestid inner join employees on r.supervisorid=employees.id  where rt.storemanagerid=@empid)";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", storemanagerid);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                int userid = Int32.Parse(reader["userid"].ToString());
+                DateTime date = DateTime.Parse(reader["date"].ToString());
+                string status = reader["status"].ToString();
+
+                Request request = new Request()
+                {
+                    Id = id,
+                    Date = date,
+                    Status = status,
+                    UserId = userid
+                };
+
+                requests.Add(request);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return requests;
+    }
+
+
     public async Task<List<Request>> GetAllRequests(int empid)
     {
         List<Request> requests = new List<Request>();
@@ -174,6 +217,7 @@ public class RequestRepository : IRequestRepository
         }
         return requests;
     }
+
 
     public async Task<bool> Request(int empid)
     {

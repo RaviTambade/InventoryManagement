@@ -13,6 +13,7 @@ public class RequestService : IRequestService
     }
 
     public async Task<List<Request>> GetAllRequests(int empid) =>await _repo.GetAllRequests(empid);
+    public async Task<List<Request>> GetRequests(int storemanagerid) =>await _repo.GetAllRequests(storemanagerid);
     public async Task<bool> Request(int empid) =>await _repo.Request(empid);
 
     // public async Task<bool> UpdateQuantityOfRequestedCartItme(CartItem item) =>await _repo.UpdateQuantityOfRequestedCartItme(item);
