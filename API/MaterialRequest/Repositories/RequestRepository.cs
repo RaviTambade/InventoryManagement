@@ -17,122 +17,120 @@ public class RequestRepository : IRequestRepository
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
-    //get cart items  of supervisors by sending request id
-    // public async Task<IEnumerable<Request>> GetRequestDetails(int requestid)
-    // {
-    //     List<Request> requests = new List<Request>();
-    //     MySqlConnection con = new MySqlConnection(_conString);
-    //     try
-    //     {
-    //         string query = "select orderdetails.id, r.id as requestid,r.date, r.status, orderdetails.materialid, categories.category, orderdetails.quantity from requests r  inner join orderdetails on orderdetails.requestid= r.id  inner join categories on categories.id=orderdetails.categoryid  where r.id =@requestid";
-    //         MySqlCommand cmd = new MySqlCommand(query, con);
-    //         cmd.Parameters.AddWithValue("@requestid", requestid);
-    //         await con.OpenAsync();
-    //         MySqlDataReader reader = cmd.ExecuteReader();
-    //         while (await reader.ReadAsync())
-    //         {
-    //             int orderid = Int32.Parse(reader["id"].ToString());
-    //             int reqid = Int32.Parse(reader["requestid"].ToString());
-    //             DateTime date = DateTime.Parse(reader["date"].ToString());
-    //             int materialid = Int32.Parse(reader["materialid"].ToString());
-    //             string category = reader["category"].ToString();
-    //             int quantity = Int32.Parse(reader["quantity"].ToString());
-    //             string status = reader["status"].ToString();
 
-    //             Request request = new Request()
-    //             {
-    //                 OrderId = orderid,
-    //                 RequestId = reqid,
-    //                 Date = date,
-    //                 MaterialId = materialid,
-    //                 Category = category,
-    //                 Quantity = quantity,
-    //                 Status = status
-    //             };
+  //  get requested items  of supervisors by sending request id
+    public async Task<List<RequestDetails>> GetRequestDetails(int requestid)
+    {
+        List<RequestDetails> requests = new List<RequestDetails>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select ri.id,r.date, r.status, ri.materialid, categories.category, ri.quantity from materialrequests r  inner join materialrequestitems ri on ri.materialrequestid= r.id   inner join categories on categories.id=ri.categoryid  where r.id=@requestid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@requestid", requestid);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                DateTime date = DateTime.Parse(reader["date"].ToString());
+                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string category = reader["category"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+                string status = reader["status"].ToString();
 
-    //             requests.Add(request);
+                RequestDetails request = new RequestDetails()
+                {
+                    Id = id,
+                    Date = date,
+                    MaterialId = materialid,
+                    Category = category,
+                    Quantity = quantity,
+                    Status = status
+                };
 
-    //         }
-    //         await reader.CloseAsync();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         throw e;
-    //     }
-    //     finally
-    //     {
-    //         await con.CloseAsync();
-    //     }
-    //     return requests;
-    // }
+                requests.Add(request);
 
-    // public async Task<CartItem> GetCartItemFromRequest(int orderid)
-    // {
-    //     CartItem cartItem = null;
-    //     MySqlConnection con = new MySqlConnection(_conString);
-    //     try
-    //     {
-    //         string query = "	select o.id, o.materialid, categories.category, o.quantity from orderdetails o inner join categories on categories.id=o.categoryid where o.id=@orderid";
-    //         MySqlCommand cmd = new MySqlCommand(query, con);
-    //         cmd.Parameters.AddWithValue("@orderid", orderid);
-    //         await con.OpenAsync();
-    //         MySqlDataReader reader = cmd.ExecuteReader();
-    //         while (await reader.ReadAsync())
-    //         {
-    //             int id = Int32.Parse(reader["id"].ToString());
-    //             int materialid = Int32.Parse(reader["materialid"].ToString());
-    //             string category = reader["category"].ToString();
-    //             int quantity = Int32.Parse(reader["quantity"].ToString());
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return requests;
+    }
 
-    //             cartItem = new CartItem()
-    //             {
-    //                 Id = id,
-    //                 MaterialId = materialid,
-    //                 Category = category,
-    //                 Quantity = quantity,
-    //             };
-    //         }
-    //         reader.Close();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         throw e;
-    //     }
-    //     finally
-    //     {
-    //         con.Close();
-    //     }
-    //     return cartItem;
-    // }
+    public async Task<RequestDetails> GetItem(int id)
+    {
+        RequestDetails item = null;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select ri.id,r.date, r.status, ri.materialid, categories.category, ri.quantity from materialrequests r  inner join materialrequestitems ri on ri.materialrequestid= r.id   inner join categories on categories.id=ri.categoryid  where ri.id=@id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int rid = Int32.Parse(reader["id"].ToString());
+                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string category = reader["category"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
 
-    // public async Task<bool> DeleteRequest(int requestid)
-    // {
-    //     bool status = false;
-    //     MySqlConnection con = new MySqlConnection(_conString);
-    //     try
-    //     {
-    //         string query = "DELETE FROM requests WHERE id=@id";
-    //         MySqlCommand cmd = new MySqlCommand(query, con);
-    //         cmd.Parameters.AddWithValue("@id", requestid);
-    //         await con.OpenAsync();
-    //         int rowsAffected = cmd.ExecuteNonQuery();
-    //         if (rowsAffected > 0)
-    //         {
-    //             status = true;
-    //         }
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         throw e;
-    //     }
-    //     finally
-    //     {
-    //         await con.CloseAsync();
-    //     }
-    //     return status;
-    // }
-   
-   
+                item = new RequestDetails()
+                {
+                    Id = rid,
+                    MaterialId = materialid,
+                    Category = category,
+                    Quantity = quantity,
+                };
+
+            }
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return item;
+    }
+
+    public async Task<bool> DeleteRequest(int requestid)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "DELETE FROM materialrequests WHERE id=@id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", requestid);
+            await con.OpenAsync();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
     public async Task<List<Request>> GetRequests(int storemanagerid)
     {
         List<Request> requests = new List<Request>();
@@ -249,7 +247,34 @@ public class RequestRepository : IRequestRepository
         return status;
     }
 
-    
+    public async Task<bool> UpdateItem(RequestDetails item)
+{
+    bool status = false;
+    MySqlConnection con = new MySqlConnection(_conString);
+    try
+    {
+        string query = "update materialrequestitems set quantity=@quantity where id=@id";
+        MySqlCommand cmd = new MySqlCommand(query, con);
+        cmd.Parameters.AddWithValue("@id", item.Id);
+        cmd.Parameters.AddWithValue("@quantity", item.Quantity);
+        await con.OpenAsync();
+        int rowsAffected = cmd.ExecuteNonQuery();
+        if (rowsAffected > 0)
+        {
+            status = true;
+        }
+    }
+    catch (Exception e)
+    {
+        throw e;
+    }
+    finally
+    {
+        await con.CloseAsync();
+    }
+    return status;
+}
+
 // public async Task<IEnumerable<RequestDetails>> GetAllRequest(int empid)
 // {
 //     List<RequestDetails> requests = new List<RequestDetails>();

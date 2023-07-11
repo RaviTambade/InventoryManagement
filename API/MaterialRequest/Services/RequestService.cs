@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using System.Threading.Tasks;
 using MaterialRequest.Models;
@@ -15,13 +16,13 @@ public class RequestService : IRequestService
     public async Task<List<Request>> GetAllRequests(int empid) =>await _repo.GetAllRequests(empid);
     public async Task<List<Request>> GetRequests(int storemanagerid) =>await _repo.GetAllRequests(storemanagerid);
     public async Task<bool> Request(int empid) =>await _repo.Request(empid);
+    public async Task<List<RequestDetails>> GetRequestDetails(int requestid) =>await _repo.GetRequestDetails(requestid);
+     public async Task<bool> DeleteRequest(int requestid) =>await _repo.DeleteRequest(requestid);
+     public async Task<RequestDetails> GetItem(int id)=>await _repo.GetItem(id);
 
-    // public async Task<bool> UpdateQuantityOfRequestedCartItme(CartItem item) =>await _repo.UpdateQuantityOfRequestedCartItme(item);
-    // public async Task<bool> DeleteRequest(int requestid) =>await _repo.DeleteRequest(requestid);
+    public async Task<bool> UpdateItem(RequestDetails item) =>await _repo.UpdateItem(item);
 
     // public async Task<IEnumerable<RequestDetails>> GetAllRequest(int empid) =>await _repo.GetAllRequest(empid);
-    // public async Task<IEnumerable<Request>> GetRequestDetails(int requestid) =>await _repo.GetRequestDetails(requestid);
-    // public async Task<CartItem> GetCartItemFromRequest(int orderid)=>await _repo.GetCartItemFromRequest(orderid);
 
     // public async Task<IEnumerable<Request>> GetRequestId(int empid) =>await _repo.GetRequestId(empid);
 }

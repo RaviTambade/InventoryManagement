@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MaterialRequest.Models;
 using MaterialRequest.Services.Interfaces;
@@ -39,13 +40,22 @@ public class RequestController : ControllerBase
        return status;
     }
 
-    // [HttpPut]
-    // [Route("request/cart")]
-    // public async Task<bool> updateCartItemFromRequest(CartItem cartItem)
-    // {
-    //     bool status =await _reqsvs.UpdateQuantityOfRequestedCartItme(cartItem);
-    //     return status;
-    // }
+    
+    [HttpGet]
+    [Route("request/item/{id}")]
+    public async Task<RequestDetails> GetItem(int id)
+    {
+        RequestDetails request=await _reqsvs.GetItem(id);
+        return request;
+    }
+
+    [HttpPut]
+    [Route("request/item")]
+    public async Task<bool> Update(RequestDetails item)
+    {
+        bool status =await _reqsvs.UpdateItem(item);
+        return status;
+    }
 
 
     // //get request history of supervisors
@@ -65,31 +75,24 @@ public class RequestController : ControllerBase
     //     return requests;
     // }
   
-    // //request details for supervisor
-    // [HttpGet]
-    // [Route("requestdetails/{requestid}")]
-    // public async Task<IEnumerable<Request>> GetRequestDetails(int requestid)
-    // {
-    //     IEnumerable<Request> requests =await _reqsvs.GetRequestDetails(requestid);
-    //     return requests;
-    // }
+    //request details for supervisor
+    [HttpGet]
+    [Route("requestdetails/{requestid}")]
+    public async Task<List<RequestDetails>> GetRequestDetails(int requestid)
+    {
+        List<RequestDetails> requests =await _reqsvs.GetRequestDetails(requestid);
+        return requests;
+    }
   
-    // //remove request
-    // [HttpDelete]
-    // [Route("delete/request/{requestid}")]
-    // public async Task<bool> DeleteRequest(int requestid)
-    // {
-    //     bool status =await _reqsvs.DeleteRequest(requestid);
-    //     return status;
-    // }
+    //remove request
+    [HttpDelete]
+    [Route("delete/request/{requestid}")]
+    public async Task<bool> DeleteRequest(int requestid)
+    {
+        bool status =await _reqsvs.DeleteRequest(requestid);
+        return status;
+    }
 
-    // [HttpGet]
-    // [Route("request/cart/{cartId}")]
-    // public async Task<CartItem> GetCartItem(int cartId)
-    // {
-    //     CartItem cartItems=await _reqsvs.GetCartItemFromRequest(cartId);
-    //     return cartItems;
-    // }
 
 
 }
