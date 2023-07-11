@@ -26,6 +26,8 @@ builder.Services.AddScoped<IInitialRequestService, InitialRequestService>();
 builder.Services.AddScoped<IInitialRequestRepository,InitialRequestRepository>();
 builder.Services.AddScoped<IRequestService, RequestService>();
 builder.Services.AddScoped<IRequestRepository,RequestRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

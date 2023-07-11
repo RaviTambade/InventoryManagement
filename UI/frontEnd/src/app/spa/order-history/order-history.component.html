@@ -13,8 +13,8 @@
         <tbody>
             <tr  *ngFor="let order of orders">
                 <td> {{order.id}}</td> 
-                <td> {{order.orderDate}}</td> 
-                <td> <a href="orderdetails"> {{order.firstName}}  {{order.lastName}}</a></td> 
+                <td> {{order.date}}</td> 
+                <td> <a href="orderdetails"> {{order.userId}} </a></td> 
                 <td> {{order.status}}</td> 
 
                  <td><button (click)="onView(order.id)">View</button></td>

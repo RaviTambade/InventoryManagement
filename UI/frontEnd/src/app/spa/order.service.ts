@@ -10,12 +10,12 @@ export class OrderService {
   constructor(private http:HttpClient) { }
  
   getOrders(empid:number):Observable<any>{
-    let url ="http://localhost:5164/api/request/requests/store/" +empid ;
+    let url ="http://localhost:5164/api/order/orders/" +empid ;
     return this.http.get(url);
   }
   
-  getOrderDetails(orderId:number):Observable<any>{
-    let url ="http://localhost:5082/api/orders/orders/details/" +orderId ;
+  getOrderDetails(requestid:number):Observable<any>{
+    let url ="http://localhost:5164/api/order/orders/details/" +requestid ;
     return this.http.get(url);
   }
 
