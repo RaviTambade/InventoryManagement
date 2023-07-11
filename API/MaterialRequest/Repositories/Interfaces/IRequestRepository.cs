@@ -12,9 +12,10 @@ public interface IRequestRepository
     Task<List<Request>> GetRequests(int storemanagerid);
     Task<bool> Request(int empid);
     Task<bool> UpdateItem(RequestDetails item);
+    Task<bool> DeleteItem(int id);
+    Task<List<RequestDetails>> GetRequestDetails(int requestid);
 
     // Task<IEnumerable<RequestDetails>> GetAllRequest(int empid);
-    Task<List<RequestDetails>> GetRequestDetails(int requestid);
     // Task<IEnumerable<Request>> GetRequestId(int empid);
 
 }

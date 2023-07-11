@@ -43,8 +43,8 @@ export class RequestDetailsComponent {
     })
   }
 
-  onRemove(orderid: number) {
-    this._ordersvc.removeCartFromRequest(orderid).subscribe((res) => {
+  onRemove(id: number) {
+    this._requestsvc.removeItem(id).subscribe((res) => {
       console.log(res);
       window.location.reload();
 
