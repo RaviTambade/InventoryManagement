@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { RequestDetails } from '../RequestDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class RequestService {
 
   getRequestDetails(requestid:number):Observable<any>
   {
-    let url ="http://localhost:5082/api/requests/requestdetails/"+ requestid;
+    let url ="http://localhost:5164/api/request/requestdetails/"+ requestid;
     return this.http.get(url)
   }
   getRequestId(empid:number):Observable<any>
@@ -19,13 +20,13 @@ export class RequestService {
     let url ="http://localhost:5082/api/requests/requestid/"+ empid;
     return this.http.get(url)
   }
-  getCartFromRequest(orderid:number){
-    let url ="http://localhost:5082/api/requests/request/cart/" + orderid ;
+  getItemFromRequest(id:number){
+    let url ="http://localhost:5164/api/request/request/item/" + id ;
     return this.http.get(url);
   }
-  updateQuantityOfCartFromRequest(updateQuantity:any):Observable<any>{
-    let url ="http://localhost:5082/api/requests/request/cart";
-    return this.http.put(url,updateQuantity);
+  updateRequestedItem(item:RequestDetails):Observable<any>{
+    let url ="http://localhost:5164/api/request/request/item";
+    return this.http.put(url,item);
   }
   getAllRequests(empid:number):Observable<any>{
     let url ="http://localhost:5164/api/request/requests/" + empid ;
@@ -36,7 +37,7 @@ export class RequestService {
     return this.http.get(url);
   }
   deleteRequest(reqid:number):Observable<any>{
-    let url ="http://localhost:5082/api/requests/delete/request/" + reqid ;
+    let url ="http://localhost:5164/api/request/delete/request/" + reqid ;
     return this.http.delete(url);
   }
 }

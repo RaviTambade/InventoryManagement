@@ -31,12 +31,12 @@
     </thead>
     <tbody *ngFor="let request of requests">
         <tr>
-            <td>{{request.requestId}}  </td>
+            <td>{{request.id}}  </td>
             <td>{{request.date}}  </td>
             <td>{{request.employeeFirstName}} {{request.employeeLastName}} </td>
             <td> {{request.status}}</td>
-             <td> <button  (click)="onView(request.requestId)">View</button> </td>
-             <td> <button (click)="onDeleteRequest(request.requestId)">Delete request</button> </td>
+             <td> <button  (click)="onView(request.id)">View</button> </td>
+             <td> <button (click)="onDeleteRequest(request.id)">Delete request</button> </td>
         </tr>  
     </tbody>
 </table>

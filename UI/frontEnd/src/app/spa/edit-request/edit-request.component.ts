@@ -3,6 +3,7 @@ import { MaterialService } from '../material.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { RequestService } from '../request.service';
+import { RequestDetails } from 'src/app/RequestDetails';
 
 @Component({
   selector: 'app-edit-request',
@@ -14,13 +15,17 @@ export class EditRequestComponent {
   empid=12;
   id:any;
   img:any;
-  orderId:number=0;
-  updateQuantity:any;
+  requestId:number=0;
+  item:RequestDetails ;
 constructor(private _cartsvc:CartService,private _materialsvc:MaterialService,private _requestsvc:RequestService, private router:Router,private _Activatedroute:ActivatedRoute){
-  this.updateQuantity={
-    id:0,
-    quantity:0
-  }
+  this.item = {
+    "id": 0,
+    "date":new Date(),
+    "category": '',
+    "materialId": 0,
+    "quantity": 0,
+    "status":''
+  };
   this.material = {
     "id": 0,
     "cartId": 0,
@@ -34,11 +39,11 @@ constructor(private _cartsvc:CartService,private _materialsvc:MaterialService,pr
 ngOnInit(): void {
   this._Activatedroute.paramMap.subscribe((params) =>
   {
-    this.id=params.get('orderId');
-    this.orderId=Number.parseInt(this.id);
-    console.log(this.orderId);
+    this.id=params.get('id');
+    this.requestId=Number.parseInt(this.id);
+    console.log(this.requestId);
   });
-  this._requestsvc.getCartFromRequest(this.orderId).subscribe((res)=>{
+  this._requestsvc.getItemFromRequest(this.requestId).subscribe((res)=>{
     console.log(res);
     this.material=res;
     this.getImg(this.material.materialId);
@@ -56,10 +61,10 @@ getImg(id:any){
 }
 
 editQuantity(id:any,quantity:any){
-  this.updateQuantity.id=id;
-  this.updateQuantity.quantity=quantity;
-  console.log(this.updateQuantity);
-  this._requestsvc.updateQuantityOfCartFromRequest(this.updateQuantity).subscribe((res)=>{
+  this.item.id=id;
+  this.item.quantity=quantity;
+  console.log(this.item);
+  this._requestsvc.updateRequestedItem(this.item).subscribe((res)=>{
     console.log(res);
     if(res){
       this.router.navigate(["requestHistory"])

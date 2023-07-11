@@ -37,7 +37,7 @@ const routes: Routes=
       {path:'taskshistory',component:TaskshistoryComponent},
       {path:'orderhistory',component:OrderHistoryComponent},
       {path:'editcart/:cartId',component:EditCartComponent},
-      {path:'editRequest/:orderId',component:EditRequestComponent},
+      {path:'editRequest/:id',component:EditRequestComponent},
     ];
 
 @NgModule({

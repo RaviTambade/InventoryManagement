@@ -59,7 +59,7 @@ export class RequestDetailsComponent {
 
   }
 
-  onEdit(orderid: number) {
-    this.router.navigate(["editRequest", orderid])
+  onEdit(id: number) {
+    this.router.navigate(["editRequest", id])
   }
 }
