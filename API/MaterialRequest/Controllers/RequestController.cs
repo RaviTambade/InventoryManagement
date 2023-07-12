@@ -81,7 +81,7 @@ public class RequestController : ControllerBase
     [Route("item/{id}")]
     public async Task<bool> DeleteItem(int id)
     {
-        bool status =await _reqsvs.DeleteItem(id);
+        bool status =await _reqsvs.DeleteItem(id);  
         return status;
     }
     // //get request history of supervisors

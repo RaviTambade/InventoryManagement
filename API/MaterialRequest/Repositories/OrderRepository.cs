@@ -61,15 +61,17 @@ public class OrderRepository : IOrderRepository
     }
 
    
-    public async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid)
+    public async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid,int storemanagerid)
     {
         List<OrderDetails> orderdetails = new List<OrderDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
          try
         {
-            string query = "select ri.id, r.date,r.status,materials.quantity as availablequantity, ri.quantity,materials.title, categories.category,departments.department,employees.userid,materials.imageurl from materialrequestitems ri   inner join materialrequests r on r.id = ri.materialrequestid inner join materials on ri.materialid=materials.id inner join categories on materials.categoryid=categories.id    inner join employees  on r.supervisorid = employees.id  inner join departments on departments.id= employees.departmentid  where  r.id=@requestid";
+            string query = "    select ri.id, r.date,r.status,materials.quantity as availablequantity, ri.quantity,materials.title, categories.category,departments.department,employees.userid,materials.imageurl from materialrequestitems ri inner join materialrequests r on r.id = ri.materialrequestid inner join materials on ri.materialid=materials.id inner join categories on materials.categoryid=categories.id  inner join employees  on r.supervisorid = employees.id inner join employees e on ri.storemanagerid= e.id inner join departments on departments.id= employees.departmentid  where r.id=@requestid and ri.storemanagerid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
+            cmd.Parameters.AddWithValue("@empid", storemanagerid);
+
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())

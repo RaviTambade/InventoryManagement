@@ -13,7 +13,7 @@ public class OrderService : IOrderService
     }
     public async Task<IEnumerable<Request>> GetOrders(int empid)=>await _repo.GetOrders(empid);
 
-    public  async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid)=>await _repo.GetOrderDetails(requestid);
+    public  async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid,int storemanagerid)=>await _repo.GetOrderDetails(requestid,storemanagerid);
 
     // public async Task<IEnumerable<OrderDetails>> GetAllOrders(int empid)=>await _repo.GetAllOrders(empid);
     // public async Task<IEnumerable<OrderDetails>> GetOrderDetailsForStore(int reqid)=>await _repo.GetOrderDetailsForStore(reqid);
