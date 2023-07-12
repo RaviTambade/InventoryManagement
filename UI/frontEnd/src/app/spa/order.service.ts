@@ -14,8 +14,8 @@ export class OrderService {
     return this.http.get(url);
   }
   
-  getOrderDetails(requestid:number):Observable<any>{
-    let url ="http://localhost:5164/api/order/orders/details/" +requestid ;
+  getOrderDetails(requestid:number,storemanagerid:number):Observable<any>{
+    let url ="http://localhost:5164/api/order/orders/details/" +requestid+"/" + storemanagerid  ;
     return this.http.get(url);
   }
 

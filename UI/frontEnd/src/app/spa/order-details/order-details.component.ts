@@ -20,6 +20,7 @@ export class OrderDetailsComponent {
   orderDetail: any;
   dateTime: string = '';
   date: any;
+  storemanagerid:number=1;
   changeStatus: any;
   public constructor(private svc: OrderService, private _cartsvc: CartService, private _materialsvc: MaterialService, private router: Router, private activeRoute: ActivatedRoute) {
     this.orderDetails=[];
@@ -35,7 +36,7 @@ export class OrderDetailsComponent {
       this.requestid = Number.parseInt(this.result)
       console.log(this.requestid)
     })
-    this.svc.getOrderDetails(this.requestid).subscribe((res) => {
+    this.svc.getOrderDetails(this.requestid,this.storemanagerid).subscribe((res) => {
       console.log(res);
       this.orderDetails = res;
       this.getData()

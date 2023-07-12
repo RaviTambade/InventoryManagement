@@ -35,7 +35,7 @@ export class RequestDetailsComponent {
       console.log(this.id);
     });
 
-    this._requestsvc.getRequestDetails(this.reqid).subscribe((res) => {
+    this._requestsvc.getRequestDetails(this.reqid,).subscribe((res) => {
       this.carts = res;
       console.log(this.carts);
       this.getData();
