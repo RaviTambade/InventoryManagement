@@ -129,3 +129,41 @@ DELIMITER ;
     
   call Approved(4,9,20)
 
+
+
+
+
+      DELIMITER !!
+CREATE TRIGGER updatestatus
+after Update
+ON shippingdetails FOR EACH ROW
+BEGIN
+declare totalcount INT;
+declare shipmentid INT;
+declare status int;
+declare val INT;
+DECLARE shipping_cursor CURSOR  FOR SELECT  s.status FROM shippingdetails s WHERE s.shipmentid=new.shipmentid; 
+SELECT COUNT(*) into totalcount FROM shippingdetails s where s.shipmentid=new.shipmentid;
+set val=0;
+OPEN shipping_cursor ;
+begin
+DECLARE exit_flag INT DEFAULT 0;
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+shipment:LOOP
+    FETCH shipping_cursor INTO status;
+    IF exit_flag THEN 
+		LEAVE shipment;
+    END IF;
+        if status=0  then
+		LEAVE shipment;
+	end if;
+        set val=val+1;
+    end loop shipment;
+    end;
+    close shipping_cursor;  
+    if val=totalcount then 
+		update shipments s set s.date=CURRENT_TIMESTAMP where s.id = new.shipmentid;
+        update materialrequests r set r.status=3 where r.id=new.shipmentid;
+        end if;
+    end !!
+	DELIMITER ;
