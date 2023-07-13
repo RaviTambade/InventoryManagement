@@ -116,25 +116,22 @@ public class OrderRepository : IOrderRepository
     }
 
  
-     public async Task<bool> Approve(List<OrderDetails> orderDetails)
+     public async Task<bool> Approve(int id,int quantity)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            foreach(OrderDetails order in orderDetails ){
-            string query = " update shippingdetails set status=1,quantity=@quantity where itemid=@itemid)";
+            string query = " update shippingdetails set status=1,quantity=@quantity where itemid=@itemid";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@quantity", order.Quantity);
-            cmd.Parameters.AddWithValue("@itemid", order.Id);
+            cmd.Parameters.AddWithValue("@quantity", quantity);
+            cmd.Parameters.AddWithValue("@itemid", id);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
                 status = true;
             }
-             await con.CloseAsync();
-         }
         }
            
         catch (Exception e)

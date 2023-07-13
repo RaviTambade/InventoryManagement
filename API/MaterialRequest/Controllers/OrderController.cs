@@ -33,10 +33,10 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet]
-    [Route("order/approve")]
-    public  async Task<bool> Approve(List<OrderDetails> orderDetails)
+    [Route("approve/{id}/{quantity}")]
+    public  async Task<bool> Approve(int id,int quantity)
     {
-        bool status =await _ordsvs.Approve(orderDetails);
+        bool status =await _ordsvs.Approve(id,quantity);
         return status;
     }
 

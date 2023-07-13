@@ -32,7 +32,7 @@ public class InitialRequestController : ControllerBase
 
 
     [HttpPost]
-    [Route("items")]
+    [Route("item")]
     public async Task<bool> Insert([FromBody]InitialRequestItem item)
     {
         bool status =await _svs.Insert(item);
