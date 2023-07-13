@@ -67,7 +67,7 @@ public class OrderRepository : IOrderRepository
         MySqlConnection con = new MySqlConnection(_conString);
          try
         {
-            string query = "    select ri.id, r.date,r.status,materials.quantity as availablequantity, ri.quantity,materials.title, categories.category,departments.department,employees.userid,materials.imageurl from materialrequestitems ri inner join materialrequests r on r.id = ri.materialrequestid inner join materials on ri.materialid=materials.id inner join categories on materials.categoryid=categories.id  inner join employees  on r.supervisorid = employees.id inner join employees e on ri.storemanagerid= e.id inner join departments on departments.id= employees.departmentid  where r.id=@requestid and ri.storemanagerid=@empid";
+            string query = "select ri.id, r.date,r.status,materials.quantity as availablequantity, ri.quantity,materials.title, categories.category,departments.department,employees.userid,materials.imageurl from materialrequestitems ri inner join materialrequests r on r.id = ri.materialrequestid inner join materials on ri.materialid=materials.id inner join categories on materials.categoryid=categories.id  inner join employees  on r.supervisorid = employees.id inner join employees e on ri.storemanagerid= e.id inner join departments on departments.id= employees.departmentid  where r.id=@requestid and ri.storemanagerid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
             cmd.Parameters.AddWithValue("@empid", storemanagerid);
@@ -116,5 +116,36 @@ public class OrderRepository : IOrderRepository
     }
 
  
+     public async Task<bool> Approve(List<OrderDetails> orderDetails)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            foreach(OrderDetails order in orderDetails ){
+            string query = " update shippingdetails set status=1,quantity=@quantity where itemid=@itemid)";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@quantity", order.Quantity);
+            cmd.Parameters.AddWithValue("@itemid", order.Id);
+            await con.OpenAsync();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+             await con.CloseAsync();
+         }
+        }
+           
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
 
 }

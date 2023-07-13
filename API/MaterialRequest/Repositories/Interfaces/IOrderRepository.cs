@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Net.Http.Headers;
@@ -7,6 +8,7 @@ public interface IOrderRepository
 {
     Task<IEnumerable<Request>> GetOrders(int empid);
     Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid,int storemanagerid);
+    Task<bool> Approve(List<OrderDetails> orderDetails);
     // Task<IEnumerable<OrderDetails>> GetAllOrders(int empid);
     // Task<IEnumerable<OrderDetails>> GetOrderDetailsForStore(int reqid);
     // //Task< IEnumerable<Order>> OrderedMaterialsInADay();

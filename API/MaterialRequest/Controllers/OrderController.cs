@@ -32,6 +32,17 @@ public class OrderController : ControllerBase
         return orders;
     }
 
+    [HttpGet]
+    [Route("order/approve")]
+    public  async Task<bool> Approve(List<OrderDetails> orderDetails)
+    {
+        bool status =await _ordsvs.Approve(orderDetails);
+        return status;
+    }
+
+
+
+
 //     [HttpGet]
 //     [Route("details/{empid}")]
 //     public  async Task<IEnumerable<OrderDetails>> GetAllOrders(int empid)

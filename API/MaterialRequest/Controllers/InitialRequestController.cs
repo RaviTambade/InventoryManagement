@@ -32,8 +32,8 @@ public class InitialRequestController : ControllerBase
 
 
     [HttpPost]
-    [Route("item")]
-    public async Task<bool> Insert([FromBody] InitialRequestItem item)
+    [Route("items")]
+    public async Task<bool> Insert([FromBody]InitialRequestItem item)
     {
         bool status =await _svs.Insert(item);
         return status;

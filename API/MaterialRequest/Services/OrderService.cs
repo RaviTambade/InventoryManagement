@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using System.Threading.Tasks;
 using MaterialRequest.Models;
@@ -14,6 +15,7 @@ public class OrderService : IOrderService
     public async Task<IEnumerable<Request>> GetOrders(int empid)=>await _repo.GetOrders(empid);
 
     public  async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid,int storemanagerid)=>await _repo.GetOrderDetails(requestid,storemanagerid);
+    public  async Task<bool> Approve(List<OrderDetails> orderDetails)=>await _repo.Approve(orderDetails);
 
     // public async Task<IEnumerable<OrderDetails>> GetAllOrders(int empid)=>await _repo.GetAllOrders(empid);
     // public async Task<IEnumerable<OrderDetails>> GetOrderDetailsForStore(int reqid)=>await _repo.GetOrderDetailsForStore(reqid);
