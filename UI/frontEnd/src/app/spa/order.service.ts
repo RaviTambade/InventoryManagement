@@ -13,6 +13,11 @@ export class OrderService {
     let url ="http://localhost:5164/api/order/orders/" +empid ;
     return this.http.get(url);
   }
+
+  Approve(orderid:number,quantity:number):Observable<any>{
+    let url ="http://localhost:5164/api/order/approve/" +orderid+"/"+quantity ;
+    return this.http.get(url);
+  }
   
   getOrderDetails(requestid:number,storemanagerid:number):Observable<any>{
     let url ="http://localhost:5164/api/order/orders/details/" +requestid+"/" + storemanagerid  ;

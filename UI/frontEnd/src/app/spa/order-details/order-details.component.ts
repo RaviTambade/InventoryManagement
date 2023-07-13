@@ -22,6 +22,7 @@ export class OrderDetailsComponent {
   date: any;
   storemanagerid:number=1;
   changeStatus: any;
+  quantity:number=0;
   public constructor(private svc: OrderService, private _cartsvc: CartService, private _materialsvc: MaterialService, private router: Router, private activeRoute: ActivatedRoute) {
     this.orderDetails=[];
 
@@ -50,8 +51,14 @@ export class OrderDetailsComponent {
       console.log(this.orderDetail)
 
   }
-  onApproved() {
+  onApproved(orderid:any,q:any) {
+console.log(orderid);
+this.quantity=Number.parseInt(q)
+console.log(this.quantity);
 
+this.svc.Approve(orderid,this.quantity).subscribe((res)=>{
+  console.log(res);
+})
 
   }
 
