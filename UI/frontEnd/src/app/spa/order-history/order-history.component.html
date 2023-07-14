@@ -1,4 +1,4 @@
-<h2>Orders</h2>
+<h2>New Orders</h2>
 <hr>
 <div >
     <table style="width:60%">
@@ -25,3 +25,28 @@
     </table>
 </div>
 
+<h2>Completed Orders</h2>
+<div >
+    <table style="width:60%">
+        <thead>
+            <th>Order ID</th>
+            <th>Request date</th>
+            <th>Supervisor's name</th>
+            <th>Status</th>
+
+        </thead>
+
+        <tbody>
+            <tr  *ngFor="let order of completedOrder">
+                <td> {{order.id}}</td> 
+                <td> {{order.date}}</td> 
+                <td> <a href="orderdetails"> {{order.userId}} </a></td> 
+                <td> {{order.status}}</td> 
+
+                 <td><button (click)="onView(order.id)">View</button></td>
+            </tr>  
+
+        </tbody>
+
+    </table>
+</div>

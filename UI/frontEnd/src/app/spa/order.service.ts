@@ -14,6 +14,11 @@ export class OrderService {
     return this.http.get(url);
   }
 
+  getCompletedOrders(empid:number):Observable<any>{
+    let url ="http://localhost:5164/api/order/completed/orders/" +empid ;
+    return this.http.get(url);
+  }
+
   Approve(orderid:number,quantity:number):Observable<any>{
     let url ="http://localhost:5164/api/order/approve/" +orderid+"/"+quantity ;
     return this.http.get(url);

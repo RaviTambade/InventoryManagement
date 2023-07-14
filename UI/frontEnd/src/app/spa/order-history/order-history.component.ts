@@ -15,20 +15,21 @@ import { pluck } from 'rxjs';
 export class OrderHistoryComponent {
 
   orders:Order[]|undefined;
+  completedOrder:Order[]|undefined
   storemanagerid: number = 1;
   public constructor(private _ordersvc: OrderService, private _requestsvc: RequestService, private appsvc: AppService, private router: Router) {
     
   }
   ngOnInit() {
-    // this.svc.orderHistory(1).subscribe((res) => {
-    //   console.log(res);
-    //   this.orders = res;
-    //   console.log(this.orders);
-    // })
-
     this._ordersvc.getOrders(this.storemanagerid).subscribe((res) => {
       console.log(res);
       this.orders=res;
+    })
+
+    this._ordersvc.getCompletedOrders(this.storemanagerid).subscribe((res) => {
+      console.log("inside")
+      console.log(res);
+      this.completedOrder=res;
     })
 
   }
