@@ -7,6 +7,7 @@ namespace MaterialRequest.Repositories.Interfaces;
 public interface IOrderRepository
 {
     Task<IEnumerable<Request>> GetOrders(int empid);
+    Task<IEnumerable<Request>> GetCompletedOrders(int empid);
     Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid,int storemanagerid);
     Task<bool> Approve(int id,int quantity);
     // Task<IEnumerable<OrderDetails>> GetAllOrders(int empid);

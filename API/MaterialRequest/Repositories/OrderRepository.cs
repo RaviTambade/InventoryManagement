@@ -25,7 +25,49 @@ public class OrderRepository : IOrderRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select min(r.id) as id,r.date,r.status, employees.userid from materialrequests r inner join materialrequestitems ri on r.id=ri.materialrequestid inner join employees on r.supervisorid=employees.id  where ri.storemanagerid=@empid group by r.id";
+            string query = "select min(r.id) as id,r.date,r.status, employees.userid from materialrequests r inner join materialrequestitems ri on r.id=ri.materialrequestid inner join employees on r.supervisorid=employees.id  where r.status=1 and ri.storemanagerid=@empid group by r.id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                int userid = Int32.Parse(reader["userid"].ToString());
+                DateTime date = DateTime.Parse(reader["date"].ToString());
+                string status = reader["status"].ToString();
+
+                Request request = new Request()
+                {
+                    Id = id,
+                    Date = date,
+                    Status = status,
+                    UserId = userid
+                };
+                requests.Add(request);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return requests;
+    }
+
+        public async Task<IEnumerable<Request>> GetCompletedOrders(int empid)
+    {
+
+        List<Request> requests = new List<Request>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select min(r.id) as id,r.date,r.status, employees.userid   from materialrequests r inner join materialrequestitems ri on r.id=ri.materialrequestid  inner join employees on r.supervisorid=employees.id  where r.status<>1 and ri.storemanagerid=@empid group by r.id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 

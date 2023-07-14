@@ -25,6 +25,14 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet]
+    [Route("completed/orders/{empid}")]
+        public async Task<IEnumerable<Request>> GetCompletedOrders(int empid)
+    {
+        IEnumerable<Request> orders =await _ordsvs.GetCompletedOrders(empid);
+        return orders;
+    }
+
+    [HttpGet]
     [Route("orders/details/{requestid}/{storemanagerid}")]
     public  async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid,int storemanagerid)
     {
