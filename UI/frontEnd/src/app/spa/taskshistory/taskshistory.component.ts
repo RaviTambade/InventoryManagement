@@ -27,4 +27,11 @@ export class TaskshistoryComponent {
       }
     })
   }
+
+  onView(id:any){
+    console.log(id);
+    this._tastsvc.getTaskDetails(id).subscribe((res)=>{
+      console.log(res);
+    })
+  }
 }

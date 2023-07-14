@@ -16,7 +16,7 @@
                 <td>{{task.id}}  </td>
                 <td>{{task.date}}  </td>
                 <td>{{task.department}}  </td>
-                <td> {{task.status}}</td>
+                <td> <button  (click)="onView(task.id)">View</button> </td>
     
             </tr>  
         </tbody>

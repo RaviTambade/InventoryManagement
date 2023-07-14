@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using System.Threading.Tasks;
 using shipmentservice.Models;
@@ -12,6 +13,7 @@ public class ShippingService : IShippingService
         _repo = repo;
     }
 
-    public async Task<IEnumerable<Shipping>> GetShipments(int empid)=>await _repo.GetShipments(empid);
+    public async Task<List<Shipping>> GetShipments(int empid)=>await _repo.GetShipments(empid);
+    public async Task<List<ShippingDetails>> GetShippingDetails(int taskid)=>await _repo.GetShippingDetails(taskid);
 
 }

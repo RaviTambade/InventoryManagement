@@ -20,13 +20,13 @@ public class ShippingRepository : IShippingRepository
 
 
     //get cart Items of supervisors by sending supervisor's id
-    public async Task<IEnumerable<Shipping>> GetShipments(int empid)
+    public async Task<List<Shipping>> GetShipments(int empid)
     {
         List<Shipping> shippings = new List<Shipping>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select s.id,s.date,departments.department from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.shipperid=@empid";
+            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where  r.status=3 and s.shipperid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             await con.OpenAsync();
@@ -60,6 +60,51 @@ public class ShippingRepository : IShippingRepository
         }
     
         return shippings;
+    }
+
+
+    public async Task<List<ShippingDetails>> GetShippingDetails(int taskid)
+    {
+        List<ShippingDetails> shippingdetails = new List<ShippingDetails>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select sd.id as orderid,s.id as taskid , warehousestaff.section,departments.department from shipments s  inner join shippingdetails sd on s.id=sd.shipmentid inner join warehousestaff on warehousestaff.categoryid=sd.categoryid  inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where  s.id=@taskid ;";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@taskid", taskid);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int orderid = Int32.Parse(reader["orderid"].ToString());
+                int id = Int32.Parse(reader["taskid"].ToString());
+                string section = reader["section"].ToString();
+                string department = reader["department"].ToString();
+
+  
+                ShippingDetails details = new ShippingDetails()
+                {
+                    OrderId = orderid,
+                    TaskId=id,
+                    Department = department,
+                    Section = section,
+                };
+
+                shippingdetails.Add(details);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+    
+        return shippingdetails;
     }
 
 

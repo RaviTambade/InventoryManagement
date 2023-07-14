@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using shipmentservice.Models;
 using shipmentservice.Services.Interfaces;
@@ -16,9 +17,17 @@ public class ShippingController : ControllerBase
 
         [HttpGet]
     [Route("getshipments/{empid}")]
-    public async Task<IEnumerable<Shipping>> GetAll(int empid)
+    public async Task<List<Shipping>> GetAll(int empid)
     {
-        IEnumerable<Shipping> shipment = await _shipsvc.GetShipments(empid);
+        List<Shipping> shipment = await _shipsvc.GetShipments(empid);
         return shipment;
+    }
+
+    [HttpGet]
+    [Route("getshippingdetails/{taskid}")]
+    public async Task<List<ShippingDetails>> GetDetails(int taskid)
+    {
+        List<ShippingDetails> shippingDetails = await _shipsvc.GetShippingDetails(taskid);
+        return shippingDetails;
     }
 }
