@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TasksService } from '../tasks.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-taskshistory',
@@ -11,7 +12,7 @@ export class TaskshistoryComponent {
   result:any;
   tasks:any[];
   empid:number=16;
-  constructor(private _tastsvc:TasksService){
+  constructor(private _tastsvc:TasksService,private router: Router){
     this.tasks=[]
   }
 
@@ -28,10 +29,7 @@ export class TaskshistoryComponent {
     })
   }
 
-  onView(id:any){
-    console.log(id);
-    this._tastsvc.getTaskDetails(id).subscribe((res)=>{
-      console.log(res);
-    })
+  onView(taskid:any){
+    this.router.navigate(['taskdetails', taskid]);
   }
 }

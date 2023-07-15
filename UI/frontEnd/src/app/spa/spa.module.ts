@@ -22,6 +22,7 @@ import { EditRequestComponent } from './edit-request/edit-request.component';
 import { TaskshistoryComponent } from './taskshistory/taskshistory.component';
 import { InsertMaterialComponent } from './insert-material/insert-material.component';
 import { InsertEmployeeComponent } from './insert-employee/insert-employee.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -35,6 +36,7 @@ const routes: Routes=
       {path:'requestDetails/:requestid',component:RequestDetailsComponent},
       {path:'requestDetails',component:RequestDetailsComponent},
       {path:'taskshistory',component:TaskshistoryComponent},
+      {path:'taskdetails/:taskid',component:TaskDetailsComponent},
       {path:'orderhistory',component:OrderHistoryComponent},
       {path:'editcart/:cartId',component:EditCartComponent},
       {path:'editRequest/:id',component:EditRequestComponent},
@@ -60,7 +62,8 @@ const routes: Routes=
     EditRequestComponent,
     TaskshistoryComponent,
     InsertMaterialComponent,
-    InsertEmployeeComponent
+    InsertEmployeeComponent,
+    TaskDetailsComponent
   ],
   exports:[RouterContainerComponent,InsertMaterialComponent],
   imports: [

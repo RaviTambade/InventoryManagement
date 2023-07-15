@@ -1,0 +1,21 @@
+
+
+<h3>Task Details</h3>
+
+
+<table style="width:70%">
+    <thead>
+        <th>Order Id</th>
+        <th>Pick Up</th>
+        <th>Drop</th>
+  
+    </thead>
+    <tbody  *ngFor="let task of tasks">
+        <tr>
+            <td>{{task.orderId }}  </td>
+            <td> {{task.section}}</td>
+            <td> {{task.department}}</td>
+             <td>  <button>Picked</button> </td>
+        </tr>  
+    </tbody>
+</table>
