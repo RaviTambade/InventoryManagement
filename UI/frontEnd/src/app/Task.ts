@@ -1,7 +1,7 @@
 export class Task{
     constructor(
         public orderId:number,
-        public TaskId:number,
+        public taskId:number,
         public section:string,
         public department:string,
 
