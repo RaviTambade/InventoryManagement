@@ -7,5 +7,5 @@ public interface IShippingRepository
 {
     Task<List<Shipping>> GetShipments(int empid);
     Task<List<ShippingDetails>> GetShippingDetails(int taskid);
-
+    Task<bool> UpdateStatus(int id);
 }

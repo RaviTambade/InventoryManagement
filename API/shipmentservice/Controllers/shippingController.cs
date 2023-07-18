@@ -30,4 +30,12 @@ public class ShippingController : ControllerBase
         List<ShippingDetails> shippingDetails = await _shipsvc.GetShippingDetails(taskid);
         return shippingDetails;
     }
+
+    [HttpGet]
+    [Route("updatestatus")]
+    public async Task<bool> updatestatus(int id)
+    {
+        bool status = await _shipsvc.UpdateStatus(id);
+        return status;
+    }
 }

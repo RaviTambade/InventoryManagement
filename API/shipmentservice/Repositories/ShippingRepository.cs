@@ -107,5 +107,30 @@ public class ShippingRepository : IShippingRepository
         return shippingdetails;
     }
 
+        public async Task<bool> UpdateStatus(int id){
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = " update materialrequests set status=4 where id=@id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            await con.OpenAsync();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
 
 }
