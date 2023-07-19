@@ -25,3 +25,24 @@
 
 
 <h2>Previous Tasks</h2>
+
+<div>
+    <table style="width:60%">
+        <thead>
+            <th>Task ID</th>
+            <th> Date</th>
+            <th>department</th>
+            <th> Status</th>
+      
+        </thead>
+        <tbody *ngFor="let task of tasksHistory">
+            <tr>
+                <td>{{task.id}}  </td>
+                <td>{{task.date}}  </td>
+                <td>{{task.department}}  </td>
+                <td> <button  (click)="onView(task.id)">View</button> </td>
+    
+            </tr>  
+        </tbody>
+    </table>
+</div>

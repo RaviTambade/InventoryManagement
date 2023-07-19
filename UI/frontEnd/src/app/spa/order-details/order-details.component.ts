@@ -12,7 +12,7 @@ import { OrderDetails } from 'src/app/OrderDetails';
   styleUrls: ['./order-details.component.css']
 })
 export class OrderDetailsComponent {
-  
+
   orderDetails: OrderDetails[];
   result: any;
   requestid: number = 0;
@@ -20,11 +20,11 @@ export class OrderDetailsComponent {
   orderDetail: any;
   dateTime: string = '';
   date: any;
-  storemanagerid:number=1;
+  storemanagerid: number = 1;
   changeStatus: any;
-  quantity:number=0;
+  quantity: number = 0;
   public constructor(private svc: OrderService, private _cartsvc: CartService, private _materialsvc: MaterialService, private router: Router, private activeRoute: ActivatedRoute) {
-    this.orderDetails=[];
+    this.orderDetails = [];
 
     this.changeStatus = {
       "statusId": 3,
@@ -37,28 +37,26 @@ export class OrderDetailsComponent {
       this.requestid = Number.parseInt(this.result)
       console.log(this.requestid)
     })
-    this.svc.getOrderDetails(this.requestid,this.storemanagerid).subscribe((res) => {
+    this.svc.getOrderDetails(this.requestid, this.storemanagerid).subscribe((res) => {
       console.log(res);
       this.orderDetails = res;
       this.getData()
     })
   }
 
-  getData(){
+  getData() {
     this.orderDetail = this.orderDetails[0];
-      this.dateTime = this.orderDetail.orderDate;
-      this.date = this.dateTime.split('T');
-      console.log(this.orderDetail)
+    this.dateTime = this.orderDetail.orderDate;
+    this.date = this.dateTime.split('T');
+    console.log(this.orderDetail)
 
   }
-  onApproved(orderid:any,q:any) {
-console.log(orderid);
-this.quantity=Number.parseInt(q)
-console.log(this.quantity);
-
-this.svc.Approve(orderid,this.quantity).subscribe((res)=>{
-  console.log(res);
-})
+  onApproved(orderid: any, q: any) {
+    this.quantity = Number.parseInt(q)
+    this.svc.Approve(orderid, this.quantity).subscribe((res) => {
+      console.log(res);
+      window.location.reload();
+    })
 
   }
 

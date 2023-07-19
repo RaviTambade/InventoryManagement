@@ -9,8 +9,12 @@ export class TasksService {
 
   constructor(private http:HttpClient) { }
   
-  getTasksHistory(empid:number):Observable<any>{
+  getTasks(empid:number):Observable<any>{
     let url ="http://localhost:5070/api/shipping/getshipments/" + empid ;
+    return this.http.get(url);
+  }
+  getTasksHistory(empid:number):Observable<any>{
+    let url ="http://localhost:5070/api/shipping/getshipped/" + empid ;
     return this.http.get(url);
   }
   getTaskDetails(taskid:number):Observable<any>{
@@ -21,4 +25,5 @@ export class TasksService {
     let url ="http://localhost:5070/api/shipping/updatestatus/" + id ;
     return this.http.get(url);
   } 
+
 }

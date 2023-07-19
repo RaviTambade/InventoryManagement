@@ -11,7 +11,8 @@ export class OrderDetails{
         public quantity:number,
         public availableQuantity:number,
         public department:string,
-        public imageUrl:string
+        public imageUrl:string,
+        public itemStatus:boolean
     ){}
 }
 
