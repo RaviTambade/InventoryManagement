@@ -32,7 +32,7 @@ public class ShippingController : ControllerBase
     }
 
     [HttpGet]
-    [Route("updatestatus")]
+    [Route("updatestatus/{id}")]
     public async Task<bool> updatestatus(int id)
     {
         bool status = await _shipsvc.UpdateStatus(id);
