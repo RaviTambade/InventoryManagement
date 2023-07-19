@@ -15,6 +15,8 @@ public class ShippingService : IShippingService
     }
 
     public async Task<List<Shipping>> GetShipments(int empid)=>await _repo.GetShipments(empid);
+    public async Task<List<Shipping>> GetShipped(int empid)=>await _repo.GetShipped(empid);
+
     public async Task<List<ShippingDetails>> GetShippingDetails(int taskid)=>await _repo.GetShippingDetails(taskid);
     public async Task<bool> UpdateStatus(int id)=>await _repo.UpdateStatus(id);
 

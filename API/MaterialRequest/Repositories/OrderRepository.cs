@@ -25,7 +25,7 @@ public class OrderRepository : IOrderRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select min(r.id) as id,r.date,r.status, employees.userid from materialrequests r inner join materialrequestitems ri on r.id=ri.materialrequestid inner join employees on r.supervisorid=employees.id  where r.status=1 and ri.storemanagerid=@empid group by r.id";
+            string query = "select min(r.id) as id,r.date,r.status, employees.userid from materialrequests r inner join materialrequestitems ri on r.id=ri.materialrequestid inner join shippingdetails s on ri.id =s.itemid inner join employees on r.supervisorid=employees.id  where r.status=1 and s.status=0 and ri.storemanagerid=@empid group by r.id;";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 
@@ -109,7 +109,7 @@ public class OrderRepository : IOrderRepository
         MySqlConnection con = new MySqlConnection(_conString);
          try
         {
-            string query = "select ri.id, r.date,r.status,materials.quantity as availablequantity, ri.quantity,materials.title, categories.category,departments.department,employees.userid,materials.imageurl from materialrequestitems ri inner join materialrequests r on r.id = ri.materialrequestid inner join materials on ri.materialid=materials.id inner join categories on materials.categoryid=categories.id  inner join employees  on r.supervisorid = employees.id inner join employees e on ri.storemanagerid= e.id inner join departments on departments.id= employees.departmentid  where r.id=@requestid and ri.storemanagerid=@empid";
+            string query = " select ri.id, s.status as itemstatus, r.date,r.status, materials.quantity as availablequantity, ri.quantity,materials.title, categories.category,departments.department,employees.userid,materials.imageurl  from materialrequestitems ri inner join materialrequests r on r.id = ri.materialrequestid  inner join materials on ri.materialid=materials.id  inner join categories on materials.categoryid=categories.id  inner join employees  on r.supervisorid = employees.id  inner join employees e on ri.storemanagerid= e.id  inner join shippingdetails s on ri.id = s.itemid inner join departments on departments.id= employees.departmentid  where r.id=@requestid and ri.storemanagerid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
             cmd.Parameters.AddWithValue("@empid", storemanagerid);
@@ -121,6 +121,7 @@ public class OrderRepository : IOrderRepository
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
                 string? status = reader["status"].ToString();
+                bool itemstatus = bool.Parse(reader["itemstatus"].ToString());
                 string? materialname = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
@@ -140,7 +141,8 @@ public class OrderRepository : IOrderRepository
                     Department=department,
                     UserId=userid,
                     ImageUrl=imgurl,
-                    AvailableQuantity=availablequantity
+                    AvailableQuantity=availablequantity,
+                    ItemStatus=itemstatus
                 };
                 orderdetails.Add(order);
             }

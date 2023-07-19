@@ -12,7 +12,7 @@ export class TaskshistoryComponent {
   result:any;
   tasks:any[];
   tasksHistory:any[];
-  empid:number=18;
+  empid:number=16;
   constructor(private _tastsvc:TasksService,private router: Router){
     this.tasks=[]
     this.tasksHistory=[];
@@ -30,7 +30,7 @@ export class TaskshistoryComponent {
       }
     })
 
-    this._tastsvc.getTasks(this.empid).subscribe((res)=>{
+    this._tastsvc.getTasksHistory(this.empid).subscribe((res)=>{
       if(res){
         console.log(res);
         this.tasksHistory=res;

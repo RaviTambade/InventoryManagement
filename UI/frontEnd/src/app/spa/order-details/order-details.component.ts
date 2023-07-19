@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MaterialService } from '../material.service';
-import { Subscription, VirtualTimeScheduler } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { OrderService } from '../order.service';
 import { CartService } from '../cart.service';
 import { OrderDetails } from 'src/app/OrderDetails';
@@ -23,7 +23,7 @@ export class OrderDetailsComponent {
   storemanagerid: number = 1;
   changeStatus: any;
   quantity: number = 0;
-  public constructor(private svc: OrderService, private _cartsvc: CartService, private _materialsvc: MaterialService, private router: Router, private activeRoute: ActivatedRoute) {
+  public constructor(private _location:Location,private svc: OrderService, private _cartsvc: CartService, private _materialsvc: MaterialService, private router: Router, private activeRoute: ActivatedRoute) {
     this.orderDetails = [];
 
     this.changeStatus = {
@@ -58,6 +58,9 @@ export class OrderDetailsComponent {
       window.location.reload();
     })
 
+  }
+  onBack(){
+    this._location.back();
   }
 
 

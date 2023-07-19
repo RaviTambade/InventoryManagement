@@ -27,11 +27,12 @@
                 <td> {{order.category}}</td> 
                 <td> <span>{{order.quantity}}</span></td> 
                 <td><input  style="text-align:center;" name="orderQuantity" value="{{order.quantity}}" #quantity  type="number" ></td>
-                <td> <button *ngIf="order.itemStatus==false" (click)="onApproved(order.id, quantity.value)">Approved Request</button>   <span  class="glyphicon">&#xe013;</span> </td>
+                <td> <button *ngIf="order.itemStatus==false" (click)="onApproved(order.id, quantity.value)">Approved Request</button>   <span  *ngIf="order.itemStatus==true" class="glyphicon">&#xe013;</span> </td>
             </tr>  
 
         </tbody>
     </table>
+    <button (click)="onBack()">back</button>
 
 </div>
 

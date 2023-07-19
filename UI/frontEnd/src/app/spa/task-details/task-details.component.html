@@ -15,8 +15,8 @@
             <td>{{task.orderId }}  </td>
             <td> {{task.section}}</td>
             <td> {{task.department}}</td>
+            <td><button (click)="onUpdate(task.taskId)">Picked</button> </td>
         </tr>  
-        <button (click)="onUpdate(task.taskId)">Picked</button> 
 
     </tbody>
 

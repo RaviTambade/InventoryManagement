@@ -62,6 +62,47 @@ public class ShippingRepository : IShippingRepository
         return shippings;
     }
 
+    public async Task<List<Shipping>> GetShipped(int empid)
+    {
+        List<Shipping> shippings = new List<Shipping>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where  r.status=4 and s.shipperid=@empid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int id = Int32.Parse(reader["id"].ToString());
+                DateTime date = DateTime.Parse(reader["date"].ToString());
+                string department = reader["department"].ToString();
+
+                Shipping shipping = new Shipping()
+                {
+                    Id = id,
+                    Department = department,
+                    Date = date,
+                };
+
+                shippings.Add(shipping);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+    
+        return shippings;
+    }
+
 
     public async Task<List<ShippingDetails>> GetShippingDetails(int taskid)
     {
@@ -80,7 +121,6 @@ public class ShippingRepository : IShippingRepository
                 int id = Int32.Parse(reader["taskid"].ToString());
                 string section = reader["section"].ToString();
                 string department = reader["department"].ToString();
-
   
                 ShippingDetails details = new ShippingDetails()
                 {
