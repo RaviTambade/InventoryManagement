@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TasksService } from '../tasks.service';
 import { Router } from '@angular/router';
+import { Task } from 'src/app/Task';
 
 @Component({
   selector: 'app-taskshistory',
@@ -10,9 +11,10 @@ import { Router } from '@angular/router';
 export class TaskshistoryComponent {
 
   result:any;
+  task:Task | undefined;
   tasks:any[];
   tasksHistory:any[];
-  empid:number=16;
+  empid:number=17;
   constructor(private _tastsvc:TasksService,private router: Router){
     this.tasks=[]
     this.tasksHistory=[];
@@ -26,6 +28,7 @@ export class TaskshistoryComponent {
         this.result = res;
         console.log(res);
         this.result?.reverse();
+        this.task=this.result[0];
         this.tasks=this.result;
       }
     })

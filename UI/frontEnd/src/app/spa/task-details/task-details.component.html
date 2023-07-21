@@ -1,24 +1,22 @@
 
 
-<h3>Task Details</h3>
+<h3>Shipping Details</h3>
+<div class="container" >
+    <div class="product" *ngIf="department"> <p><b>Drop:{{department}}</b></p> </div>
+
+</div>
 
 
-<table style="width:70%">
-    <thead>
-        <th>Order Id</th>
-        <th>Pick Up</th>
-        <th>Drop</th>
-  
-    </thead>
-    <tbody  *ngFor="let task of tasks">
-        <tr>
-            <td>{{task.orderId }}  </td>
-            <td> {{task.section}}</td>
-            <td> {{task.department}}</td>
-            <td><button (click)="onUpdate(task.taskId)">Picked</button> </td>
-        </tr>  
-
-    </tbody>
-
-
-</table>
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Drop: {{department}} </h5>
+          <div *ngFor="let task of tasks">
+            <p class="card-text">Order Id : {{task.orderId}}  Pick Up : {{task.section}} </p><hr>
+          </div>
+          <a  (click)="onUpdate()" class="btn btn-primary">Picked</a>
+        </div>
+      </div>
+    </div>
+  </div>
