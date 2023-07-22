@@ -17,9 +17,9 @@ public class ShippingController : ControllerBase
 
         [HttpGet]
     [Route("getshipments/{empid}")]
-    public async Task<List<Shipping>> GetAll(int empid)
+    public async Task<Shipping> GetAll(int empid)
     {
-        List<Shipping> shipment = await _shipsvc.GetShipments(empid);
+        Shipping shipment = await _shipsvc.GetShipments(empid);
         return shipment;
     }
 

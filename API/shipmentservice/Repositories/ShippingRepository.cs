@@ -20,13 +20,13 @@ public class ShippingRepository : IShippingRepository
 
 
     //get cart Items of supervisors by sending supervisor's id
-    public async Task<List<Shipping>> GetShipments(int empid)
+    public async Task<Shipping> GetShipments(int empid)
     {
-        List<Shipping> shippings = new List<Shipping>();
+        Shipping shipping = null;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where  r.status=3 and s.shipperid=@empid";
+            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where  r.status=3 or r.status=4  and s.shipperid=@empid ORDER BY s.id DESC LIMIT 1";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             await con.OpenAsync();
@@ -38,14 +38,12 @@ public class ShippingRepository : IShippingRepository
                 string department = reader["department"].ToString();
 
   
-                Shipping shipping = new Shipping()
+                shipping = new Shipping()
                 {
                     Id = id,
                     Department = department,
                     Date = date,
                 };
-
-                shippings.Add(shipping);
 
             }
             await reader.CloseAsync();
@@ -59,7 +57,7 @@ public class ShippingRepository : IShippingRepository
             await con.CloseAsync();
         }
     
-        return shippings;
+        return shipping;
     }
 
     public async Task<List<Shipping>> GetShipped(int empid)
@@ -110,7 +108,7 @@ public class ShippingRepository : IShippingRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select sd.id as orderid,s.id as taskid , warehousestaff.section,departments.department from shipments s  inner join shippingdetails sd on s.id=sd.shipmentid inner join warehousestaff on warehousestaff.categoryid=sd.categoryid  inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where  s.id=@taskid ;";
+            string query = "select sd.id as orderid,s.id as taskid , materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=@taskid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@taskid", taskid);
             await con.OpenAsync();
@@ -121,6 +119,7 @@ public class ShippingRepository : IShippingRepository
                 int id = Int32.Parse(reader["taskid"].ToString());
                 string section = reader["section"].ToString();
                 string department = reader["department"].ToString();
+                string status= reader["status"].ToString();
   
                 ShippingDetails details = new ShippingDetails()
                 {
@@ -128,6 +127,7 @@ public class ShippingRepository : IShippingRepository
                     TaskId=id,
                     Department = department,
                     Section = section,
+                    Status=status
                 };
 
                 shippingdetails.Add(details);
