@@ -9,4 +9,6 @@ public interface IShippingRepository
     Task<List<Shipping>> GetShipped(int empid);
     Task<List<ShippingDetails>> GetShippingDetails(int taskid);
     Task<bool> UpdateStatus(int id);
+    Task<bool> ShipmentDeliver(int id);
+
 }

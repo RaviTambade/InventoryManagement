@@ -42,9 +42,17 @@ public class ShippingController : ControllerBase
 
     [HttpGet]
     [Route("updatestatus/{id}")]
-    public async Task<bool> updatestatus(int id)
+    public async Task<bool> UpdateStatus(int id)
     {
         bool status = await _shipsvc.UpdateStatus(id);
+        return status;
+    }
+
+        [HttpGet]
+    [Route("deliver/{id}")]
+    public async Task<bool> ShipmentDeliver(int id)
+    {
+        bool status = await _shipsvc.ShipmentDeliver(id);
         return status;
     }
 }

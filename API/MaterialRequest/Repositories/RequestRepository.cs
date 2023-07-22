@@ -178,7 +178,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select employees.userid ,r.id,r.date,r.status from materialrequests r inner join employees on employees.id=r.supervisorid  inner join  departments on employees.departmentid=departments.id where departments.id =(select departmentid from employees where employees.id=@empid)";
+            string query = "select employees.userid ,r.id,r.date,r.status from materialrequests r inner join employees on employees.id=r.supervisorid  inner join  departments on employees.departmentid=departments.id where departments.id =(select departmentid from employees where employees.id=@empid) ORDER BY r.id DESC";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             await con.OpenAsync();
