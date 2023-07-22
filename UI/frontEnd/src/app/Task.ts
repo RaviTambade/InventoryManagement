@@ -4,7 +4,7 @@ export class Task{
         public taskId:number,
         public section:string,
         public department:string,
-
+        public status:string,
     ){}
 }
 

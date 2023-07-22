@@ -11,10 +11,10 @@ import { Task } from 'src/app/Task';
 export class TaskshistoryComponent {
 
   result:any;
-  task:Task | undefined;
+  task:any | undefined;
   tasks:any[];
   tasksHistory:any[];
-  empid:number=17;
+  empid:number=18;
   constructor(private _tastsvc:TasksService,private router: Router){
     this.tasks=[]
     this.tasksHistory=[];
@@ -23,14 +23,8 @@ export class TaskshistoryComponent {
   ngOnInit():void{
 
     this._tastsvc.getTasks(this.empid).subscribe((res)=>{
-      if(res){
-        Date.parse(res.date)
-        this.result = res;
         console.log(res);
-        this.result?.reverse();
-        this.task=this.result[0];
-        this.tasks=this.result;
-      }
+        this.task=res;
     })
 
     this._tastsvc.getTasksHistory(this.empid).subscribe((res)=>{

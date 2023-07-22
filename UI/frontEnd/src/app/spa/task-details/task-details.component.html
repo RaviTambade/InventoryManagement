@@ -15,7 +15,8 @@
           <div *ngFor="let task of tasks">
             <p class="card-text">Order Id : {{task.orderId}}  Pick Up : {{task.section}} </p><hr>
           </div>
-          <a  (click)="onUpdate()" class="btn btn-primary">Picked</a>
+          <a  (click)="onUpdate()" *ngIf="status==false" class="btn btn-primary">Picked</a>
+          <a  *ngIf="status==true" (click)="onDeliver()" class="btn btn-primary">Deliver</a>
         </div>
       </div>
     </div>

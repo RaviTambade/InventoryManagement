@@ -13,6 +13,7 @@ export class TaskDetailsComponent {
 
   id: any;
   taskid: number = 0;
+  status:boolean=false;
   tasks: Task[]
   department:any;
   constructor(private _location:Location,private svc: TasksService, private _Activatedroute: ActivatedRoute) {
@@ -27,8 +28,13 @@ export class TaskDetailsComponent {
       console.log(res);
       this.tasks = res;
       this.department = this.tasks[0].department;
-
-
+      let result=this.tasks[0].status;
+      console.log(result)
+      if(result=="Picked"){
+        console.log("in IF");
+        this.status=true
+      }
+      console.log(this.status);
     })
   }
 
@@ -36,7 +42,13 @@ export class TaskDetailsComponent {
     this.svc.UpdateStatus(this.taskid).subscribe((res)=>{
       console.log(res);
     })
-    this._location.back();
+    window.location.reload();
+  }
+  onDeliver(){
+    this.svc.UpdateStatus(this.taskid).subscribe((res)=>{
+      console.log(res);
+    })
+    window.location.reload();
   }
 
 }

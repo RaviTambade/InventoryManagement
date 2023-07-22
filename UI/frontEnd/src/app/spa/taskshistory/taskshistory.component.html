@@ -1,6 +1,7 @@
 
 <h1>Tasks</h1>
 
+
 <h2>New Task</h2>
 <div>
     <table style="width:60%">
@@ -24,6 +25,18 @@
 </div>
 
 
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">New Task </h5>
+          <div *ngIf="task">
+            <button  (click)="onView(task.id)">View</button> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <h2>Previous Tasks</h2>
 
 <div>
