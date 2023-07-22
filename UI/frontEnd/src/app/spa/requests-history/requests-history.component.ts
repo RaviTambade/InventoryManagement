@@ -21,10 +21,15 @@ export class RequestsHistoryComponent {
   cart: boolean | undefined;
   emptycart: boolean | undefined;
   request: boolean | undefined;
-
-
   names: any = [];
   employees: any = [];
+
+  isDisabledPrev = false;
+  isDisabledNext = false;
+  currentIndex = 0;
+  endIndex = 0;
+  arrLength = 0;
+  size: number = 0;
 
 
   constructor(private _cartsvc: CartService, private _requestsvc: RequestService, private _ordersvc: OrderService, private router: Router) {
@@ -33,42 +38,7 @@ export class RequestsHistoryComponent {
     this.carts = [];
     this.data = [];
   }
-  form = new FormGroup({
-    request: new FormControl('', Validators.required)
-  });
-  get f() {
-    return this.form.controls;
-  }
 
-
-  changeShow(e: any) {
-    console.log(e.target.value);
-    if (e.target.value === "myrequest") {
-      this._requestsvc.getAllRequest(this.empid).subscribe((res) => {
-        if (res) {
-          Date.parse(res.date)
-          this.result = res;
-          console.log(res);
-          this.result?.reverse();
-          this.requests = this.result;
-          this.request = true;
-        }
-      })
-    }
-    if (e.target.value === "allrequests") {
-      this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
-        if (res) {
-          Date.parse(res.date)
-          this.result = res;
-          console.log(res);
-          this.result?.reverse();
-          this.requests = this.result;
-          this.request = true;
-        }
-      })
-    }
-
-  }
 
   ngOnInit(): void {
     this._cartsvc.getCarts(this.empid).subscribe((res) => {
@@ -89,11 +59,42 @@ export class RequestsHistoryComponent {
         Date.parse(res.date)
         this.result = res;
         console.log(res);
-        this.result?.reverse();
-        this.requests = this.result;
+        // this.result?.reverse();
+        // this.requests = this.result;
         this.request = true;
+        this.arrLength = this.result.length;
+        this.size = 5;
+        this.currentIndex = 0;
+        this.endIndex = this.currentIndex + this.size;
+        this.requests = this.result.slice(this.currentIndex, this.endIndex);
       }
     })
+
+  }
+
+  next() {
+    this.currentIndex = this.currentIndex + this.size;
+    this.endIndex = this.currentIndex + this.size;
+    this.requests = this.result.slice(this.currentIndex, this.endIndex);
+    //button unable disable code
+    this.isDisabledPrev = false;
+    if (this.endIndex >= this.arrLength)
+    {
+      this.isDisabledNext = true;
+    }
+  }
+
+  previous() {
+    this.currentIndex = this.currentIndex - this.size;
+    this.endIndex = this.currentIndex + this.size;
+    this.requests = this.result.slice(this.currentIndex, this.endIndex);
+    //button unable disable code
+    this.isDisabledNext = false;
+    if (this.currentIndex <= 0) 
+    {
+      this.isDisabledPrev = true;
+    }
+
 
   }
   onRemove(id: number) {

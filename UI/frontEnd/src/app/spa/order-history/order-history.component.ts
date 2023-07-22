@@ -15,6 +15,7 @@ import { pluck } from 'rxjs';
 export class OrderHistoryComponent {
 
   orders:Order[]|undefined;
+  noOrder:boolean=false;
   completedOrder:Order[]|undefined
   storemanagerid: number = 1;
   public constructor(private _ordersvc: OrderService, private _requestsvc: RequestService, private appsvc: AppService, private router: Router) {
@@ -24,6 +25,12 @@ export class OrderHistoryComponent {
     this._ordersvc.getOrders(this.storemanagerid).subscribe((res) => {
       console.log(res);
       this.orders=res;
+      console.log(this.orders)
+      if(res==0)
+      {
+        this.noOrder=true;
+      }
+      console.log(this.noOrder)
     })
 
     this._ordersvc.getCompletedOrders(this.storemanagerid).subscribe((res) => {

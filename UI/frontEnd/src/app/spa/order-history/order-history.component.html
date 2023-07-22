@@ -1,6 +1,7 @@
-<h2>New Orders</h2>
+
 <hr>
-<div >
+<div *ngIf="noOrder==false">
+    <h2>New Orders</h2>
     <table style="width:60%">
         <thead>
             <th>Order ID</th>
@@ -24,7 +25,8 @@
 
     </table>
 </div>
-
+<h2 *ngIf="noOrder">No Orders!</h2>
+<hr>
 <h2>Completed Orders</h2>
 <div >
     <table style="width:60%">

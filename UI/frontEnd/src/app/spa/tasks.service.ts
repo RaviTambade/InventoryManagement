@@ -25,5 +25,9 @@ export class TasksService {
     let url ="http://localhost:5070/api/shipping/updatestatus/" + id ;
     return this.http.get(url);
   } 
+  Deliver(id:number):Observable<any>{
+    let url ="http://localhost:5070/api/shipping/deliver/" + id ;
+    return this.http.get(url);
+  } 
 
 }

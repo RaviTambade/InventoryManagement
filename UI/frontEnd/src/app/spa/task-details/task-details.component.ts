@@ -13,7 +13,9 @@ export class TaskDetailsComponent {
 
   id: any;
   taskid: number = 0;
-  status:boolean=false;
+  picked:boolean=false;
+  deliver:boolean=false;
+
   tasks: Task[]
   department:any;
   constructor(private _location:Location,private svc: TasksService, private _Activatedroute: ActivatedRoute) {
@@ -32,9 +34,14 @@ export class TaskDetailsComponent {
       console.log(result)
       if(result=="Picked"){
         console.log("in IF");
-        this.status=true
+        this.picked=true
       }
-      console.log(this.status);
+      if(result=="Delivered"){
+        console.log("in de");
+        this.deliver=true
+      }
+      console.log(this.picked);
+      console.log(this.deliver);
     })
   }
 
@@ -45,10 +52,13 @@ export class TaskDetailsComponent {
     window.location.reload();
   }
   onDeliver(){
-    this.svc.UpdateStatus(this.taskid).subscribe((res)=>{
+    this.svc.Deliver(this.taskid).subscribe((res)=>{
       console.log(res);
     })
-    window.location.reload();
+    this._location.back();
+  }
+  onBack(){
+    this._location.back();
   }
 
 }

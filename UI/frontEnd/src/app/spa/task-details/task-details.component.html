@@ -13,11 +13,12 @@
         <div class="card-body">
           <h5 class="card-title">Drop: {{department}} </h5>
           <div *ngFor="let task of tasks">
-            <p class="card-text">Order Id : {{task.orderId}}  Pick Up : {{task.section}} </p><hr>
+            <p class="card-text">Order Id : <b>{{task.orderId}} </b>   Pick Up : <b>{{task.section}} </b> </p><hr>
           </div>
-          <a  (click)="onUpdate()" *ngIf="status==false" class="btn btn-primary">Picked</a>
-          <a  *ngIf="status==true" (click)="onDeliver()" class="btn btn-primary">Deliver</a>
+          <a  (click)="onUpdate()" *ngIf="picked==false && deliver==false" class="btn btn-primary">Picked</a>
+          <a  *ngIf="picked==true  && deliver==false" (click)="onDeliver()" class="btn btn-primary">Deliver</a>
         </div>
       </div>
+      <button (click)="onBack()">back</button>
     </div>
   </div>
