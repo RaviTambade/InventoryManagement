@@ -26,6 +26,7 @@ export class RequestsHistoryComponent {
 
   isDisabledPrev = false;
   isDisabledNext = false;
+  orderPicked=false;
   currentIndex = 0;
   endIndex = 0;
   arrLength = 0;
@@ -56,11 +57,9 @@ export class RequestsHistoryComponent {
 
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
       if (res) {
-        Date.parse(res.date)
+        // Date.parse(res.date)
         this.result = res;
         console.log(res);
-        // this.result?.reverse();
-        // this.requests = this.result;
         this.request = true;
         this.arrLength = this.result.length;
         this.size = 5;

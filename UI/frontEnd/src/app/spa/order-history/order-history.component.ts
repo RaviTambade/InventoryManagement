@@ -18,8 +18,18 @@ export class OrderHistoryComponent {
   noOrder:boolean=false;
   completedOrder:Order[]|undefined
   storemanagerid: number = 1;
+  result:Order[];
+
+  isDisabledPrev = false;
+  isDisabledNext = false;
+  orderPicked=false;
+  currentIndex = 0;
+  endIndex = 0;
+  arrLength = 0;
+  size: number = 0;
+
   public constructor(private _ordersvc: OrderService, private _requestsvc: RequestService, private appsvc: AppService, private router: Router) {
-    
+    this.result=[];
   }
   ngOnInit() {
     this._ordersvc.getOrders(this.storemanagerid).subscribe((res) => {
@@ -36,11 +46,39 @@ export class OrderHistoryComponent {
     this._ordersvc.getCompletedOrders(this.storemanagerid).subscribe((res) => {
       console.log("inside")
       console.log(res);
-      this.completedOrder=res;
+      this.result=res;
+      this.arrLength = this.result.length;
+      this.size = 5;
+      this.currentIndex = 0;
+      this.endIndex = this.currentIndex + this.size;
+      this.completedOrder = this.result.slice(this.currentIndex, this.endIndex);
     })
 
   }
- 
+  next() {
+    this.currentIndex = this.currentIndex + this.size;
+    this.endIndex = this.currentIndex + this.size;
+    this.completedOrder = this.result.slice(this.currentIndex, this.endIndex);
+    //button unable disable code
+    this.isDisabledPrev = false;
+    if (this.endIndex >= this.arrLength)
+    {
+      this.isDisabledNext = true;
+    }
+  }
+
+  previous() {
+    this.currentIndex = this.currentIndex - this.size;
+    this.endIndex = this.currentIndex + this.size;
+    this.completedOrder = this.result.slice(this.currentIndex, this.endIndex);
+    //button unable disable code
+    this.isDisabledNext = false;
+    if (this.currentIndex <= 0) 
+    {
+      this.isDisabledPrev = true;
+    }
+  }
+
 
   onView(requestid: number) {
     this.router.navigate(['orderdetails', requestid]);
