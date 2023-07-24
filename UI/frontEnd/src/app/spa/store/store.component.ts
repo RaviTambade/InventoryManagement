@@ -57,6 +57,8 @@ export class StoreComponent {
       this.materials = response;
       this.data=response;
       console.log(response);
+      
+
     })
     this._materialsvc.getCategories().subscribe((res) => {
       console.log(res);

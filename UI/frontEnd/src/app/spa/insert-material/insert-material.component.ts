@@ -21,6 +21,7 @@ export class InsertMaterialComponent {
 
   material: Material =
     {
+      id:0,
       name: '',
       type: '',
       quantity: 0,

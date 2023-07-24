@@ -19,7 +19,7 @@ export class OrderDetailsComponent {
   employee: string = '';
   orderDetail: any;
   dateTime: string = '';
-  date: any;
+  date: Date|undefined;
   storemanagerid: number = 1;
   changeStatus: any;
   quantity: number = 0;
@@ -40,17 +40,19 @@ export class OrderDetailsComponent {
     this.svc.getOrderDetails(this.requestid, this.storemanagerid).subscribe((res) => {
       console.log(res);
       this.orderDetails = res;
-      this.getData()
+      this.orderDetail=this.orderDetails[0];
+      console.log(this.orderDetail)
+      // this.getData()
     })
   }
 
-  getData() {
-    this.orderDetail = this.orderDetails[0];
-    this.dateTime = this.orderDetail.orderDate;
-    this.date = this.dateTime.split('T');
-    console.log(this.orderDetail)
+  // getData() {
+  //   this.orderDetail = this.orderDetails[0];
+  //   this.dateTime = this.orderDetail.orderDate;
+  //   this.date = this.dateTime.split('T');
+  //   console.log(this.orderDetail)
 
-  }
+  // }
   onApproved(orderid: any, q: any) {
     this.quantity = Number.parseInt(q)
     this.svc.Approve(orderid, this.quantity).subscribe((res) => {

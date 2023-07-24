@@ -61,7 +61,7 @@
             <td>{{request.employeeFirstName}} {{request.employeeLastName}} </td>
             <td> {{request.status}}</td>
              <td> <button  (click)="onView(request.id)">View</button> </td>
-             <td> <button (click)="onDeleteRequest(request.id)"  [disabled]=" request.status!=='inprogress'" >Delete request</button> </td>
+             <td> <button (click)="onCancelRequest(request.id)"  [disabled]=" request.status!=='inprogress'" >Cancel request</button> </td>
         </tr>  
     </tbody>
 </table>

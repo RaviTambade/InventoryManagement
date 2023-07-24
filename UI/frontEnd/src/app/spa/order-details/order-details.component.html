@@ -1,7 +1,5 @@
 <div class="container" >
-    <div class="product" *ngIf="orderDetails"> <p><b>Date: {{date[0]}} Time: {{date[1]}}</b></p> </div>
-    <div class="product" *ngIf="orderDetails" ><p><b>Supervisor: {{orderDetail.employeeFirstName}} {{orderDetail.employeeLastName}}</b></p>
-    </div>
+    <div class="product" *ngIf="orderDetails"> <p><b>Date: {{orderDetail.orderDate|date}} </b></p> </div>
     <div class="product" *ngIf="orderDetails"><p> <b> Department:{{orderDetail.department}} </b> </p></div>
     <div class="product" *ngIf="orderDetails" > <p><b>Available Quantity</b></p><div *ngFor="let order of orderDetails"> <b style="color:Tomato;"> {{order.name}} :{{order.availableQuantity}} </b></div></div>
    
@@ -36,4 +34,3 @@
 
 </div>
 
-<!-- -->

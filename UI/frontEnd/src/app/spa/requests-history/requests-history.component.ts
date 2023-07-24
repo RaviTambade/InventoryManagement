@@ -17,7 +17,7 @@ export class RequestsHistoryComponent {
   result: any[];
   carts: any[];
   data: any[];
-  empid: number = 11;
+  empid: number = 12;
   cart: boolean | undefined;
   emptycart: boolean | undefined;
   request: boolean | undefined;
@@ -103,8 +103,8 @@ export class RequestsHistoryComponent {
       }
     })
   }
-  onDeleteRequest(reqid: number) {
-    this._requestsvc.deleteRequest(reqid).subscribe((res) => {
+  onCancelRequest(reqid: number) {
+    this._requestsvc.cancelRequest(reqid).subscribe((res) => {
       console.log(res);
       window.location.reload();
     })

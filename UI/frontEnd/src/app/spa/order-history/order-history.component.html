@@ -41,7 +41,7 @@
         <tbody>
             <tr  *ngFor="let order of completedOrder">
                 <td> {{order.id}}</td> 
-                <td> {{order.date}}</td> 
+                <td> {{order.date | date}} </td> 
                 <td> <a href="orderdetails"> {{order.userId}} </a></td> 
                 <td> {{order.status}}</td> 
 

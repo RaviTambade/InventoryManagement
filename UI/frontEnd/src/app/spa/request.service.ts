@@ -40,6 +40,10 @@ export class RequestService {
     let url ="http://localhost:5164/api/request/delete/request/" + reqid ;
     return this.http.delete(url);
   }
+  cancelRequest(reqid:number):Observable<any>{
+    let url ="http://localhost:5164/api/request/cancel/" + reqid ;
+    return this.http.delete(url);
+  }
   removeItem(id:number):Observable<any>{
     let url ="http://localhost:5164/api/request/item/" + id ;
     return this.http.delete(url);
