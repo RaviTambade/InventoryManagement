@@ -39,7 +39,6 @@ public class RequestController : ControllerBase
        bool status =await _reqsvs.Request(empid);
        return status;
     }
-
     
     [HttpGet]
     [Route("request/item/{id}")]
@@ -84,24 +83,14 @@ public class RequestController : ControllerBase
         bool status =await _reqsvs.DeleteItem(id);  
         return status;
     }
-    // //get request history of supervisors
-    // [HttpGet]
-    // [Route("request/{empid}")]
-    // public async Task<IEnumerable<RequestDetails>> GetAllRequest(int empid)
-    // {
-    //     IEnumerable<RequestDetails> requests =await _reqsvs.GetAllRequest(empid);
-    //     return requests;
-    // }
-    // //request IDs for Store Manager
-    // [HttpGet]
-    // [Route("requestid/{empid}")]
-    // public async Task<IEnumerable<Request>> GetRequestId(int empid)
-    // {
-    //     IEnumerable<Request> requests =await _reqsvs.GetRequestId(empid);
-    //     return requests;
-    // }
-  
 
-
+    //remove request
+    [HttpDelete]
+    [Route("cancel/{requestid}")]
+    public async Task<bool> CancelRequest(int requestid)
+    {
+        bool status =await _reqsvs.CancelRequest(requestid);
+        return status;
+    }
 
 }

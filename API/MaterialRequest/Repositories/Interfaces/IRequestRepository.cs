@@ -7,6 +7,8 @@ namespace MaterialRequest.Repositories.Interfaces;
 public interface IRequestRepository
 {
     Task<bool> DeleteRequest(int requestid);
+    Task<bool> CancelRequest(int requestid);
+
     Task<RequestDetails> GetItem(int id);
     Task<List<Request>> GetAllRequests(int empid);
     Task<List<Request>> GetRequests(int storemanagerid);

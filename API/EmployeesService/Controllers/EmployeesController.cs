@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using EmployeesService.Models;
 using EmployeesService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,15 @@ namespace EmployeesService.Controllers
             IEnumerable<Employee> employees =await _empsrv.GetAll();
             return employees;
         }
+
+        [HttpGet]
+        [Route("ids")]
+        public async Task<List<int>> GetAllIds()
+        {
+            List<int> userids =await _empsrv.GetAllIds();
+            return userids;
+        }
+
 
         [HttpGet]
         [Route("employee/{id}")]
@@ -63,15 +73,6 @@ namespace EmployeesService.Controllers
             IEnumerable<Employee> employees = await _empsrv.GetByRole(role);
             return employees;
         }
-
-        [HttpGet]
-        [Route("gender/{gender}")]
-        public async Task<IEnumerable<Employee>> GetByGender(string gender)
-        {
-            IEnumerable<Employee> employees = await _empsrv.GetByGender(gender);
-            return employees;
-        }
-
 
         [HttpDelete]
         [Route("employees/{id}")]

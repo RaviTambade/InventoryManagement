@@ -18,6 +18,9 @@ public class RequestService : IRequestService
     public async Task<bool> Request(int empid) =>await _repo.Request(empid);
     public async Task<List<RequestDetails>> GetRequestDetails(int requestid) =>await _repo.GetRequestDetails(requestid);
      public async Task<bool> DeleteRequest(int requestid) =>await _repo.DeleteRequest(requestid);
+
+    public async Task<bool> CancelRequest(int requestid) =>await _repo.CancelRequest(requestid);
+
      public async Task<RequestDetails> GetItem(int id)=>await _repo.GetItem(id);
 
     public async Task<bool> UpdateItem(RequestDetails item) =>await _repo.UpdateItem(item);
