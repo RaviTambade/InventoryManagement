@@ -42,10 +42,10 @@ namespace MaterialsService.Controllers
         }
 
         [HttpPut]
-        [Route("materials/{id}")]
-        public async Task<bool> UpdateMaterial([FromBody] Material material)
+        [Route("material/{id}")]
+        public async Task<bool> Update(int id, [FromBody] int quantity)
         {
-            bool status = await _matsrv.Update(material);
+            bool status = await _matsrv.Update(id,quantity);
             return status;
         }
 

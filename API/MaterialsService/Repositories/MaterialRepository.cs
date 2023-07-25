@@ -169,16 +169,16 @@ public class MaterialRepository : IMaterialRepository
         return status;
     }
     
-    public async Task<bool> Update(Material material)
+    public async Task<bool> Update(int id, int quantity)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "UPDATE materials SET  quantity=@quantity  WHERE id=@materialId";
+            string query = "UPDATE materials SET  quantity=quantity+@quantity  WHERE id=@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@materialId", material.Id);
-            cmd.Parameters.AddWithValue("@quantity", material.Quantity);
+            cmd.Parameters.AddWithValue("@materialId", id);
+            cmd.Parameters.AddWithValue("@quantity", quantity);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)

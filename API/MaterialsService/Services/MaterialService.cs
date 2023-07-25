@@ -14,7 +14,7 @@ public class MaterialService : IMaterialService
     public async Task<string> GetImage(int materialId) =>await _repo.GetImage(materialId);
 
     public async Task<bool> Insert(Material material) =>await _repo.Insert(material);
-    public async Task<bool> Update(Material material) =>await _repo.Update(material);
+    public async Task<bool> Update(int id,int quantity) =>await _repo.Update(id,quantity);
     public async Task<bool> Delete(int materialId) =>await _repo.Delete(materialId);
     public  async Task<IEnumerable<Location>> GetLocations()=>await _repo.GetLocations();
 
