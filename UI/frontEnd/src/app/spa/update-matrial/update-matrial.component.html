@@ -1,0 +1,11 @@
+<div class="grid-container">
+    <div class="grid-item"  *ngIf="material">
+        <img src="{{material.imgUrl}}" ><br>
+        <h3>Material Name: {{material.name}}</h3> 
+        <h3>Available Quantity: {{material.quantity}}</h3> 
+        <label for="orderQuantity">Update Quantity: </label>
+        <input name="orderQuantity"  id="orderQuantity" [(ngModel)]="orderqunatity" type="number">
+         <button (click)="onUpdate(orderqunatity) ">Update</button> 
+    </div>
+  </div>
+  

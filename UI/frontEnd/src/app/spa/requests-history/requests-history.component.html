@@ -33,7 +33,7 @@
     <form [formGroup]="form" >
         <div>
             <div>
-              <input id="myrequest" type="radio" value="myrequest" name="request" formControlName="request" (change)="changeShow($event)">
+              <input id="myrequest" type="radio" value="myrequest" name="request" formControlName="request" (change)="onChange(category.type, $any($event.target)?.checked)">
               <label for="male">My Requests</label>
           
               <input id="allrequests" type="radio" value="allrequests" name="request" formControlName="request" (change)="changeShow($event)">
@@ -45,6 +45,7 @@
     
         </form>
 </div> -->
+
 
 <table style="width:90%">
     <thead>

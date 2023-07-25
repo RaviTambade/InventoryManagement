@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { OrderService } from '../order.service';
 import { RequestService } from '../request.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-requests-history',
@@ -23,7 +23,6 @@ export class RequestsHistoryComponent {
   request: boolean | undefined;
   names: any = [];
   employees: any = [];
-
   isDisabledPrev = false;
   isDisabledNext = false;
   orderPicked=false;
@@ -38,6 +37,7 @@ export class RequestsHistoryComponent {
     this.requests = [];
     this.carts = [];
     this.data = [];
+
   }
 
 

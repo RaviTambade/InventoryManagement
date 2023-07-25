@@ -25,7 +25,7 @@ export class InsertMaterialComponent {
       name: '',
       type: '',
       quantity: 0,
-      unitPrice: 500,
+      unitPrice: 0,
       imgUrl: ''
     };;
 
@@ -61,6 +61,8 @@ export class InsertMaterialComponent {
     this.theCategory = this.category.value;
     //set material value
     this.material.name = form.value.name;
+    this.material.quantity=form.value.quantity;
+    this.material.unitPrice=form.value.unitprice;
     this.material.type = this.theCategory;
     this.material.imgUrl = this.path + this.file.name;
 

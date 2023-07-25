@@ -39,16 +39,12 @@ export class MaterialService {
     return this.http.post(url,material);
   }
 
-  // getOrderDetails(orderid:number)
-  // {
-  //   console.log(orderid)
-  //   let url ="http://localhost:5082/api/orders/orders/details/"+ orderid;
+  updateQuantity(materialId:number, quantity:number):Observable<any>{
+    let url ="http://localhost:5176/api/Materials/material/"+ materialId;
+    return this.http.put(url,quantity);
+  }
 
-  //    this.http.get(url).subscribe((data)=>{
-  //     console.log(data);
-  //     this.subject2.next({data});
-  //   })
-  // }
+  
 
   
   getAllMaterials():Observable<any> 

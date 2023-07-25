@@ -85,6 +85,8 @@ export class StoreComponent {
   add(id: number) {
     this.router.navigate(['order', id]);
   }
-
+  update(id: number) {
+    this.router.navigate(['updatematerial', id]);
+  }
 
 }

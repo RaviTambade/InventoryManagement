@@ -23,6 +23,7 @@ import { TaskshistoryComponent } from './taskshistory/taskshistory.component';
 import { InsertMaterialComponent } from './insert-material/insert-material.component';
 import { InsertEmployeeComponent } from './insert-employee/insert-employee.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import { UpdateMatrialComponent } from './update-matrial/update-matrial.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -40,6 +41,7 @@ const routes: Routes=
       {path:'orderhistory',component:OrderHistoryComponent},
       {path:'editcart/:cartId',component:EditCartComponent},
       {path:'editRequest/:id',component:EditRequestComponent},
+      {path:'updatematerial/:id',component:UpdateMatrialComponent},
     ];
 
 @NgModule({
@@ -63,7 +65,8 @@ const routes: Routes=
     TaskshistoryComponent,
     InsertMaterialComponent,
     InsertEmployeeComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    UpdateMatrialComponent
   ],
   exports:[RouterContainerComponent,InsertMaterialComponent],
   imports: [
