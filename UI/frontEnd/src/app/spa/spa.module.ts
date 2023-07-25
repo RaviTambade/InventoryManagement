@@ -24,6 +24,7 @@ import { InsertMaterialComponent } from './insert-material/insert-material.compo
 import { InsertEmployeeComponent } from './insert-employee/insert-employee.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { UpdateMatrialComponent } from './update-matrial/update-matrial.component';
+import { WarehouseComponent } from './warehouse/warehouse.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -42,6 +43,7 @@ const routes: Routes=
       {path:'editcart/:cartId',component:EditCartComponent},
       {path:'editRequest/:id',component:EditRequestComponent},
       {path:'updatematerial/:id',component:UpdateMatrialComponent},
+      {path:'employees',component:EmployeesComponent},
     ];
 
 @NgModule({
@@ -66,7 +68,8 @@ const routes: Routes=
     InsertMaterialComponent,
     InsertEmployeeComponent,
     TaskDetailsComponent,
-    UpdateMatrialComponent
+    UpdateMatrialComponent,
+    WarehouseComponent
   ],
   exports:[RouterContainerComponent,InsertMaterialComponent],
   imports: [
