@@ -67,13 +67,19 @@ namespace EmployeesService.Controllers
         }
 
         [HttpGet]
-        [Route("role/{role}")]
+        [Route("{role}")]
         public async Task<IEnumerable<Employee>> GetByRole(string role)
         {
             IEnumerable<Employee> employees = await _empsrv.GetByRole(role);
             return employees;
         }
-
+        [HttpGet]
+        [Route("role/{id}")]
+        public async Task<Employee> GetRole(int id)
+        {
+            Employee emp = await _empsrv.GetRole(id);
+            return emp;
+        }
         [HttpDelete]
         [Route("employees/{id}")]
         public async Task<bool> Delete(int id)

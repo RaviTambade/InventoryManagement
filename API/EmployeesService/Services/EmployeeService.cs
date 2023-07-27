@@ -18,6 +18,7 @@ public class EmployeeService : IEmployeeService
     public async Task<bool> Update(Employee employee) =>await _repo.Update(employee);
     public  async Task<IEnumerable<Employee>> GetByDepartment(string theDepartment) => await _repo.GetByDepartment(theDepartment);
     public  async Task<IEnumerable<Employee>> GetByRole(string role) =>await _repo.GetByRole(role);
+    public  async Task<Employee> GetRole(int id) =>await _repo.GetRole(id);
     public async Task<bool> Delete(int employeeId) =>await _repo.Delete(employeeId);
  
 }

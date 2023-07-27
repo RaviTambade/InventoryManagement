@@ -82,13 +82,46 @@ public class EmployeeRepository : IEmployeeRepository
     }
   
    
+          public async Task<Employee> GetRole(int id)
+    {
+        MySqlConnection con = new MySqlConnection(_conString);
+        Employee emp=null;
+        try
+        {
+            string query = " select r.role from employees e inner join roles r on r.id = e.id where e.userid=@id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id",id);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                string role = reader["role"].ToString();
+
+                emp = new Employee(){
+                    Role=role
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return emp;
+    }
+  
+   
     public async Task<Employee> GetById(int employeeId)
     {
         Employee employee = null;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  employees.userid, ,employees.imageurl,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id =@employeeId";
+            string query = "select  employees.userid ,employees.imageurl,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id =@employeeId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@employeeId", employeeId);
             await con.OpenAsync();
