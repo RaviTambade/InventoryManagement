@@ -14,7 +14,13 @@ import { NestedDropdownComponent } from './nested-dropdown/nested-dropdown.compo
 import { GridListComponent } from './grid-list/grid-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SpaModule } from './spa/spa.module';
+import { AuthenticationRoutingComponent } from './spa/authentication/authentication-routing/authentication-routing.component';
+import { RouterModule, Routes } from '@angular/router';
+import { authRoutes } from './spa/authentication/authentication.module';
 
+const routes: Routes = [
+  {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
+  ]
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +37,7 @@ import { SpaModule } from './spa/spa.module';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(routes),
     HttpClientModule,
     SpaModule
   ],

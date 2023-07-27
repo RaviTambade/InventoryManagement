@@ -6,22 +6,31 @@ import { UpdateContactComponent } from './update-contact/update-contact.componen
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationRoutingComponent } from './authentication-routing/authentication-routing.component';
 
-
+export const authRoutes: Routes = [
+  {path:'login',component:LoginComponent},
+  {path:'register',component:RegisterComponent},
+  {path:'updatepassword',component:UpdatePasswordComponent},
+  {path:'updatecontact',component:UpdateContactComponent},
+]
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
     UpdateContactComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    AuthenticationRoutingComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     RouterModule,
     FormsModule
-  ]
+  ],
+  exports:[AuthenticationRoutingComponent]
+
 })
 export class AuthenticationModule { }

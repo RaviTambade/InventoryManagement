@@ -12,5 +12,13 @@ export class EmployeeService {
     let url ="http://localhost:5224/api/employees/employees"  ;
     return this.http.get(url);
   }
+  getEmployee(id:number):Observable<any>{
+    let url ="http://localhost:5224/api/employees/employee/" +id ;
+    return this.http.get(url);
+  }
+  getRole(id:number):Observable<any>{
+    let url ="http://localhost:5224/api/employees/role/"+id  ;
+    return this.http.get(url);
+  }
 
 }

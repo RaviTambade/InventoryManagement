@@ -10,6 +10,10 @@ export class UserService {
 
   constructor(private httpClient:HttpClient) {}
 
+  getUserIdByContact(contactNumber: string): Observable<number> {
+    let url = "http://localhost:5102/api/users/userid/" + contactNumber;
+    return this.httpClient.get<number>(url);
+  }
   addUser(user:User):Observable<any>{
     let url="http://localhost:5102/api/users/adduser"
     return this.httpClient.post<any>(url,user)
@@ -26,7 +30,7 @@ export class UserService {
   }
   
   getallUser():Observable<any>{
-    let url="http://localhost:5102/api/users/getall"
+    let url="http://localhost:5102/api/users"
     return this.httpClient.get<any>(url)
   }
   removeUser(userId:number):Observable<any>{
