@@ -17,6 +17,8 @@ import { SpaModule } from './spa/spa.module';
 import { AuthenticationRoutingComponent } from './spa/authentication/authentication-routing/authentication-routing.component';
 import { RouterModule, Routes } from '@angular/router';
 import { authRoutes } from './spa/authentication/authentication.module';
+import { ChartComponent } from './chart/chart.component';
+import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 
 const routes: Routes = [
   {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
@@ -31,9 +33,12 @@ const routes: Routes = [
     RadioSearchComponent,
     NestedDropdownComponent,
     GridListComponent,
-    PaginationComponent
+    PaginationComponent,
+    ChartComponent
   ],
   imports: [
+    NgChartsModule.forRoot({ defaults: { } }),
+    NgChartsModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -41,7 +46,7 @@ const routes: Routes = [
     HttpClientModule,
     SpaModule
   ],
-  providers: [],
+  providers: [{ provide: NgChartsConfiguration, useValue: { generateColors: false }}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
