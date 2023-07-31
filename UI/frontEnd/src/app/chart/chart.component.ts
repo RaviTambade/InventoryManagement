@@ -3,6 +3,10 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import { MaterialService } from '../spa/material.service';
+import { RequestService } from '../spa/request.service';
+import { Period } from '../Period';
+import { RequestReport } from '../RequestReport';
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -10,14 +14,23 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 })
 export class ChartComponent {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-
+  period:any={
+    "fromDate":"2023-07-17",
+    "toDate":"2023-07-23"
+  }
+  requestReport:RequestReport[]=[];
+  constructor(private svc:RequestService){}
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
       x: {},
       y: {
-        min: 10,
+        min: 0,
+        max:50,
+        ticks: {
+          stepSize: 5,
+        },
       },
     },
     plugins: {
@@ -33,12 +46,18 @@ export class ChartComponent {
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [DataLabelsPlugin];
 
+  ngOnInit():void{
+    this.svc.GetWeeklyReport(11,this.period).subscribe((res)=>{
+      console.log(res);
+      this.requestReport=res;
+      // this.barChartData.labels=this.requestReport.map((report)=>report.day);
+      this.barChartData.datasets[0].data=this.requestReport.map((report)=>report.requests);
+    })
+
+  }
   public barChartData: ChartData<'bar'> = {
-    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-    datasets: [
-      { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-      { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-    ],
+    labels: ['Monday','Tuesday','Wednesday','Thursday','Friday', 'Saturday','Sunday'],
+    datasets: [{ data: [], label: 'Requests' },],
   };
 
   // events
@@ -75,5 +94,10 @@ export class ChartComponent {
     ];
 
     this.chart?.update();
+  }
+
+  dates(fromDate:any,toDate:any){
+    console.log(fromDate);
+    console.log(toDate);
   }
 }

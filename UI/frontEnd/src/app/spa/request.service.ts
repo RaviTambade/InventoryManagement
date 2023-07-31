@@ -48,4 +48,8 @@ export class RequestService {
     let url ="http://localhost:5164/api/request/item/" + id ;
     return this.http.delete(url);
   }
+  GetWeeklyReport(empid:number,period:any):Observable<any>{
+    let url ="http://localhost:5164/api/request/weeklyorders/" + empid ;
+    return this.http.post(url,period);
+  }
 }
