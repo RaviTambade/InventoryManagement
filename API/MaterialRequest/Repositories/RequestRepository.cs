@@ -324,5 +324,44 @@ public class RequestRepository : IRequestRepository
         return status;
     }
   
+    public async Task<List<RequestReport>> WeeklyRequests(int empid,Period period)
+    {
+        List<RequestReport> requests = new List<RequestReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT DAYNAME(date) AS day, COUNT(*) AS requests FROM materialrequests WHERE date >= @FromDate AND date <= @ToDate and materialrequests.supervisorid=@empid GROUP BY DAYNAME(date) ORDER BY DAYNAME(date)";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@FromDate", period.FromDate);
+            cmd.Parameters.AddWithValue("@ToDate", period.ToDate);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int reqs = Int32.Parse(reader["requests"].ToString());
+                string day = reader["day"].ToString();
 
+                RequestReport request = new RequestReport()
+                {
+                    Day=day,
+                    Requests=reqs
+                };
+
+                requests.Add(request);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return requests;
+    }
+ 
 }

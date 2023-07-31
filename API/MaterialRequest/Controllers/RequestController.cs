@@ -92,5 +92,11 @@ public class RequestController : ControllerBase
         bool status =await _reqsvs.CancelRequest(requestid);
         return status;
     }
-
+    [HttpPost]
+    [Route("weeklyorders/{id}")]
+    public async Task<List<RequestReport>> WeeklyRequests(int id, Period period)
+    {
+        List<RequestReport> requests =await _reqsvs.WeeklyRequests(id,period);
+        return requests;
+    }
 }
