@@ -102,16 +102,27 @@ export class ChartComponent {
   }
 
   calculateWeekDates() {
-    console.log("in")
+
+
+
+  }
+
+
+  lastWeek(){
     const today = new Date();
-    const currentDayOfWeek = today.getDay(); // 0 (Sunday) to 6 (Saturday)
-    const diff = today.getDate() - currentDayOfWeek + (currentDayOfWeek === 0 ? -6 : 1); // Adjust for Sunday as 0
-    const firstDate = new Date(today.setDate(diff));
-    const lastDate = new Date(today.setDate(diff + 6));
-    this.startDate = formatDate(firstDate, 'yy/MM/dd', 'en-US');
-    this.endDate = formatDate(lastDate, 'yy/MM/dd', 'en-US');
-    console.log(this.startDate)
-    console.log(this.endDate);
+    const lastWeekFirstDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+    const lastWeekLastDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
+
+    this.period.startDate = formatDate(lastWeekFirstDate, 'yy/dd/MM', 'en-US');
+    this.period.lastDate = formatDate(lastWeekLastDate, 'yy/dd/MM', 'en-US');
+     console.log(this.startDate)
+     console.log(this.endDate);
+     this.svc.GetWeeklyReport(11,this.period).subscribe((res)=>{
+      console.log(res);
+      this.requestReport=res;
+      // this.barChartData.labels=this.requestReport.map((report)=>report.day);
+      this.barChartData.datasets[0].data=this.requestReport.map((report)=>report.requests);
+    })
   }
 }
 

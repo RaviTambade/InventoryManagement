@@ -19,6 +19,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { authRoutes } from './spa/authentication/authentication.module';
 import { ChartComponent } from './chart/chart.component';
 import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 const routes: Routes = [
   {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
@@ -34,7 +35,8 @@ const routes: Routes = [
     NestedDropdownComponent,
     GridListComponent,
     PaginationComponent,
-    ChartComponent
+    ChartComponent,
+    PieChartComponent
   ],
   imports: [
     NgChartsModule.forRoot({ defaults: { } }),
