@@ -428,5 +428,44 @@ public class MaterialRepository : IMaterialRepository
         }
         return materials;
     }
-        
+
+       public async Task<IEnumerable<StockReport>> GetStockReports(int empid){
+        List<StockReport> stocks =new  List<StockReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select m.title,m.quantity from warehousestaff w inner join materials m on m.categoryid=w.categoryid where w.employeeid=@empid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            cmd.Parameters.AddWithValue("@empid", empid);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                string? name = reader["title"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+
+
+                StockReport stock = new StockReport
+                {
+                    Name = name,
+                    Quantity = quantity,
+
+
+                };
+                stocks.Add(stock);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+           await con.CloseAsync();
+        }
+        return stocks;
+    }
+
+     
 }

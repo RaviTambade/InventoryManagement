@@ -102,6 +102,14 @@ namespace MaterialsService.Controllers
         }
 
         [HttpGet]
+        [Route("stockreport/{empid}")]
+        public async Task<IEnumerable<StockReport>> GetReport(int empid)
+        {
+            IEnumerable<StockReport> reports = await _matsrv.GetStockReports(empid);
+            return reports;
+        }
+
+        [HttpGet]
         [Route("categories")]
         public async Task<IEnumerable<Material>> GetCategories()
         {
