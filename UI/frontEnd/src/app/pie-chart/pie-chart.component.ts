@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { MaterialReport } from '../MaterialReport';
+import { MaterialService } from '../spa/material.service';
+import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-pie-chart',
@@ -11,41 +14,58 @@ import { BaseChartDirective } from 'ng2-charts';
 export class PieChartComponent {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  // Pie
-  public pieChartOptions: ChartConfiguration['options'] = {
+  materialReport:MaterialReport[]=[];
+
+  constructor(private svc:MaterialService){}
+
+  public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'top',
-      },
-      datalabels: {
-        formatter: (value: any, ctx: any) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      x: {},
+      y: {
+        min: 0,
+        max:2000,
+        ticks: {
+          stepSize: 200,
         },
       },
     },
-  };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'],
-    datasets: [
-      {
-        data: [300, 500, 100],
+    plugins: {
+      legend: {
+        display: true,
       },
-    ],
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      },
+    },
   };
-  public pieChartType: ChartType = 'pie';
-  public pieChartPlugins = [DatalabelsPlugin];
+  public barChartType: ChartType = 'bar';
+  public barChartPlugins = [DataLabelsPlugin];
+
+  ngOnInit():void{
+    this.svc.getStockReports(1).subscribe((res)=>{
+      console.log(res);
+      this.materialReport=res;
+      this.barChartData.datasets[0].data=this.materialReport.map((report)=>report.quantity);
+      this.barChartData.labels=this.materialReport.map((report)=>report.name);
+      console.log(this.barChartData.labels)
+      console.log(this.barChartData.datasets[0].data)
+    })
+  }
+  public barChartData: ChartData<'bar'> = {
+    labels: [],
+    datasets: [{ data: [], label: 'Quantity' },],
+  };
 
   // events
   public chartClicked({
     event,
     active,
   }: {
-    event: ChartEvent;
-    active: object[];
+    event?: ChartEvent;
+    active?: object[];
   }): void {
     console.log(event, active);
   }
@@ -54,108 +74,25 @@ export class PieChartComponent {
     event,
     active,
   }: {
-    event: ChartEvent;
-    active: object[];
+    event?: ChartEvent;
+    active?: object[];
   }): void {
     console.log(event, active);
   }
 
-  changeLabels(): void {
-    const words = [
-      'hen',
-      'variable',
-      'embryo',
-      'instal',
-      'pleasant',
-      'physical',
-      'bomber',
-      'army',
-      'add',
-      'film',
-      'conductor',
-      'comfortable',
-      'flourish',
-      'establish',
-      'circumstance',
-      'chimney',
-      'crack',
-      'hall',
-      'energy',
-      'treat',
-      'window',
-      'shareholder',
-      'division',
-      'disk',
-      'temptation',
-      'chord',
-      'left',
-      'hospital',
-      'beef',
-      'patrol',
-      'satisfied',
-      'academy',
-      'acceptance',
-      'ivory',
-      'aquarium',
-      'building',
-      'store',
-      'replace',
-      'language',
-      'redeem',
-      'honest',
-      'intention',
-      'silk',
-      'opera',
-      'sleep',
-      'innocent',
-      'ignore',
-      'suite',
-      'applaud',
-      'funny',
+  public randomize(): void {
+    // Only Change 3 values
+    this.barChartData.datasets[0].data = [
+      Math.round(Math.random() * 100),
+      59,
+      80,
+      Math.round(Math.random() * 100),
+      56,
+      Math.round(Math.random() * 100),
+      40,
     ];
-    const randomWord = () => words[Math.trunc(Math.random() * words.length)];
-    this.pieChartData.labels = new Array(3).map((_) => randomWord());
 
     this.chart?.update();
   }
 
-  addSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.push(['Line 1', 'Line 2', 'Line 3']);
-    }
-
-    this.pieChartData.datasets[0].data.push(400);
-
-    this.chart?.update();
-  }
-
-  removeSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.pop();
-    }
-
-    this.pieChartData.datasets[0].data.pop();
-
-    this.chart?.update();
-  }
-
-  changeLegendPosition(): void {
-    if (this.pieChartOptions?.plugins?.legend) {
-      this.pieChartOptions.plugins.legend.position =
-        this.pieChartOptions.plugins.legend.position === 'left'
-          ? 'top'
-          : 'left';
-    }
-
-    this.chart?.render();
-  }
-
-  toggleLegend(): void {
-    if (this.pieChartOptions?.plugins?.legend) {
-      this.pieChartOptions.plugins.legend.display =
-        !this.pieChartOptions.plugins.legend.display;
-    }
-
-    this.chart?.render();
-  }
 }

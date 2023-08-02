@@ -43,13 +43,15 @@ export class MaterialService {
     let url ="http://localhost:5176/api/Materials/material/"+ materialId;
     return this.http.put(url,quantity);
   }
-
-  
-
   
   getAllMaterials():Observable<any> 
   {
     let url = "http://localhost:5176/api/Materials/materials";
+    return this.http.get(url);
+  }
+  getStockReports(empid:number):Observable<any> 
+  {
+    let url = "http://localhost:5176/api/Materials/stockreports/"+empid;
     return this.http.get(url);
   }
 

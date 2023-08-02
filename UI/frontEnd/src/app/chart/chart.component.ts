@@ -57,7 +57,6 @@ export class ChartComponent {
       // this.barChartData.labels=this.requestReport.map((report)=>report.day);
       this.barChartData.datasets[0].data=this.requestReport.map((report)=>report.requests);
     })
-    this.calculateWeekDates()
 
   }
   public barChartData: ChartData<'bar'> = {
@@ -101,11 +100,7 @@ export class ChartComponent {
     this.chart?.update();
   }
 
-  calculateWeekDates() {
 
-
-
-  }
 
 
   lastWeek(){
