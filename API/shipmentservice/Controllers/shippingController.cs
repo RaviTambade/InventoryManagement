@@ -55,4 +55,12 @@ public class ShippingController : ControllerBase
         bool status = await _shipsvc.ShipmentDeliver(id);
         return status;
     }
+
+    [HttpGet]
+    [Route("report/{empid}")]
+    public async Task<List<TaskReport>> GetTaskReports(int empid)
+    {
+        List<TaskReport> reports = await _shipsvc.GetTaskReports(empid);
+        return reports;
+    }
 }
