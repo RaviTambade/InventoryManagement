@@ -27,15 +27,15 @@ public class EmployeesController {
         return _service.GetAll();
     }
 
-    @GetMapping("/{department}")
-    public List<Employee> GetByDepartment(String department) {
-        return _service.GetByDepartment(department);
-    }
+    // @GetMapping("/{department}")
+    // public List<Employee> GetByDepartment(String department) {
+    //     return _service.GetByDepartment(department);
+    // }
 
-    @GetMapping("/{department}")
-    public List<Employee> GetByRole(String role) {
-        return _service.GetByRole(role);
-    }
+    // @GetMapping("/{department}")
+    // public List<Employee> GetByRole(String role) {
+    //     return _service.GetByRole(role);
+    // }
 
     @PostMapping
     public Boolean Insert(@RequestBody Employee employee) {

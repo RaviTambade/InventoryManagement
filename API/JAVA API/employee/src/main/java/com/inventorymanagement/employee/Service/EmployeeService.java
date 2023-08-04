@@ -12,7 +12,7 @@ import com.inventorymanagement.employee.POJOs.Employee;
 @Service
 public class EmployeeService implements IEmployeeService{
 
-       @Autowired
+    @Autowired
     private IEmployeeRepository _repo;
 
     @Override
@@ -20,15 +20,15 @@ public class EmployeeService implements IEmployeeService{
         return _repo.findAll();
     }
 
-    @Override
-    public List<Employee> GetByDepartment(String department) {
-        return _repo.GetByDepartment(department);
-    }
+    // @Override
+    // public List<Employee> GetByDepartment(String department) {
+    //     return _repo.GetByDepartment(department);
+    // }
 
-    @Override
-    public List<Employee> GetByRole(String role) {
-        return _repo.GetByRole(role);
-    }
+    // @Override
+    // public List<Employee> GetByRole(String role) {
+    //     return _repo.GetByRole(role);
+    // }
 
 
     @Override

@@ -14,15 +14,16 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name="employee")
+@Table(name="employees")
 public class Employee {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Column(name = "userid")
     private Integer UserId;
      @Column(name = "imageurl")
     private String ImageUrl;
-    @Column(name = "department")
-    private String Department;
-    @Column(name = "role")
-    private String Role;
+    @Column(name = "departmentid")
+    private Integer Departmentid;
+    @Column(name = "roleid")
+    private Integer RoleId;
 }
