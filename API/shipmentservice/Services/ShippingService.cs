@@ -20,6 +20,6 @@ public class ShippingService : IShippingService
     public async Task<List<ShippingDetails>> GetShippingDetails(int taskid)=>await _repo.GetShippingDetails(taskid);
     public async Task<bool> UpdateStatus(int id)=>await _repo.UpdateStatus(id);
     public async Task<bool> ShipmentDeliver(int id)=>await _repo.ShipmentDeliver(id);
-    public async Task<List<TaskReport>> GetTaskReports(int empid)=>await _repo.GetTaskReports(empid);
+    public async Task<List<TaskReport>> GetTaskReports(int empid,Period period)=>await _repo.GetTaskReports(empid,period);
 
 }

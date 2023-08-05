@@ -19,7 +19,7 @@ public class RequestController : ControllerBase
         //get request history of department 
     [HttpGet]
     [Route("requests/{empid}")]
-    public async Task<List<Request>> GetAllRequests(int empid)
+    public async Task<List<Request>> GetAll(int empid)
     {
         List<Request> requests =await _reqsvs.GetAllRequests(empid);
         return requests;
@@ -27,7 +27,7 @@ public class RequestController : ControllerBase
 
     [HttpGet]
     [Route("requests/store/{storemanagerid}")]
-    public async Task<List<Request>> GetRequests(int storemanagerid)
+    public async Task<List<Request>> GetById(int storemanagerid)
     {
         List<Request> requests =await _reqsvs.GetRequests(storemanagerid);
         return requests;

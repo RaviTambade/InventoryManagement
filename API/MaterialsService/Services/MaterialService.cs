@@ -23,6 +23,7 @@ public class MaterialService : IMaterialService
     public async Task<IEnumerable<Material>> GetMaterials(int id)=>await _repo.GetMaterials(id);
     public async Task<IEnumerable<Material>> GetOutOfStockMaterials()=>await _repo.GetOutOfStockMaterials();
     public async Task<IEnumerable<StockReport>> GetStockReports(int empid)=>await _repo.GetStockReports(empid);
+    public async Task<IEnumerable<StockReport>> GetAllStockReports()=>await _repo.GetAllStockReports();
     public async Task<IEnumerable<Material>> GetCategories()=>await _repo.GetCategories();
     
 }

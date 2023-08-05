@@ -199,14 +199,16 @@ public class ShippingRepository : IShippingRepository
         return status;
     }
 
-        public async Task<List<TaskReport>> GetTaskReports(int empid){
+        public async Task<List<TaskReport>> GetTaskReports(int empid,Period period){
          List<TaskReport> reports = new List<TaskReport>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select DAYNAME(date) AS date, COUNT(*) AS tasks from shipments  WHERE date >= '2023-07-17' AND date <= '2023-07-23'and shipments.shipperid=@empid GROUP BY DAYNAME(date) ORDER BY DAYNAME(date);";
+            string query = "select DAYNAME(date) AS date, COUNT(*) AS tasks from shipments  WHERE date >= @fromdate AND date <= @todate and shipments.shipperid=@empid GROUP BY DAYNAME(date) ORDER BY DAYNAME(date);";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@fromdate", period.FromDate);
+            cmd.Parameters.AddWithValue("@todate", period.ToDate);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())

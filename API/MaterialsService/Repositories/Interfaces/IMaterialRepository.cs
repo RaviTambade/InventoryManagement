@@ -19,7 +19,7 @@ public interface IMaterialRepository
     Task<IEnumerable<Material>> GetMaterials(int id);
     Task<IEnumerable<Material>> GetOutOfStockMaterials();
     Task<IEnumerable<StockReport>> GetStockReports(int empid);
-    
+    Task<IEnumerable<StockReport>> GetAllStockReports();    
     Task<IEnumerable<Material>> GetCategories();
 
 }
