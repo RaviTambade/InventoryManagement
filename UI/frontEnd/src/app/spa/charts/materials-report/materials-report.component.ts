@@ -1,21 +1,19 @@
-import { Component, ViewChild } from '@angular/core';
-import DatalabelsPlugin from 'chartjs-plugin-datalabels';
+import { Component,ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { MaterialReport } from '../MaterialReport';
-import { MaterialService } from '../spa/material.service';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import { MaterialReport } from 'src/app/MaterialReport';
+import { MaterialService } from '../../material.service';
 
 @Component({
-  selector: 'app-pie-chart',
-  templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.css']
+  selector: 'app-materials-report',
+  templateUrl: './materials-report.component.html',
+  styleUrls: ['./materials-report.component.css']
 })
-export class PieChartComponent {
+export class MaterialsReportComponent {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   materialReport:MaterialReport[]=[];
-
   constructor(private svc:MaterialService){}
 
   public barChartOptions: ChartConfiguration['options'] = {
@@ -45,7 +43,7 @@ export class PieChartComponent {
   public barChartPlugins = [DataLabelsPlugin];
 
   ngOnInit():void{
-    this.svc.getStockReports(1).subscribe((res)=>{
+    this.svc.getAllStockReports().subscribe((res)=>{
       console.log(res);
       this.materialReport=res;
       this.barChartData.datasets[0].data=this.materialReport.map((report)=>report.quantity);
@@ -79,4 +77,6 @@ export class PieChartComponent {
   }): void {
     console.log(event, active);
   }
+
+
 }

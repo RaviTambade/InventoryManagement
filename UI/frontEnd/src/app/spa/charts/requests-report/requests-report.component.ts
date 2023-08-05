@@ -1,23 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
-import DatalabelsPlugin from 'chartjs-plugin-datalabels';
+import { RequestReport } from 'src/app/RequestReport';
+import { RequestService } from '../../request.service';
+import { Component,ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { MaterialReport } from '../MaterialReport';
-import { MaterialService } from '../spa/material.service';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-
 @Component({
-  selector: 'app-pie-chart',
-  templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.css']
+  selector: 'app-requests-report',
+  templateUrl: './requests-report.component.html',
+  styleUrls: ['./requests-report.component.css']
 })
-export class PieChartComponent {
+export class RequestsReportComponent {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-
-  materialReport:MaterialReport[]=[];
-
-  constructor(private svc:MaterialService){}
-
+  period:any={
+    "fromDate":"2023-07-17",
+    "toDate":"2023-07-23"
+  }
+  weekIso: string = "2023-W28";
+  startDate: string='';
+  endDate: string='';
+  requestReport:RequestReport[]=[];
+  fromDate: any;
+  constructor(private svc:RequestService){}
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -25,9 +28,9 @@ export class PieChartComponent {
       x: {},
       y: {
         min: 0,
-        max:2000,
+        max:50,
         ticks: {
-          stepSize: 200,
+          stepSize: 5,
         },
       },
     },
@@ -45,18 +48,17 @@ export class PieChartComponent {
   public barChartPlugins = [DataLabelsPlugin];
 
   ngOnInit():void{
-    this.svc.getStockReports(1).subscribe((res)=>{
+    this.svc.GetWeeklyReport(11,this.period).subscribe((res)=>{
       console.log(res);
-      this.materialReport=res;
-      this.barChartData.datasets[0].data=this.materialReport.map((report)=>report.quantity);
-      this.barChartData.labels=this.materialReport.map((report)=>report.name);
-      console.log(this.barChartData.labels)
-      console.log(this.barChartData.datasets[0].data)
+      this.requestReport=res;
+      // this.barChartData.labels=this.requestReport.map((report)=>report.day);
+      this.barChartData.datasets[0].data=this.requestReport.map((report)=>report.requests);
     })
+
   }
   public barChartData: ChartData<'bar'> = {
-    labels: [],
-    datasets: [{ data: [], label: 'Quantity' },],
+    labels: ['Monday','Tuesday','Wednesday','Thursday','Friday', 'Saturday','Sunday'],
+    datasets: [{ data: [], label: 'Requests' },],
   };
 
   // events
@@ -79,4 +81,8 @@ export class PieChartComponent {
   }): void {
     console.log(event, active);
   }
+
+
+
+
 }

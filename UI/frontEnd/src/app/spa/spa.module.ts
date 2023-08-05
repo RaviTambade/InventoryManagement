@@ -25,6 +25,8 @@ import { InsertEmployeeComponent } from './insert-employee/insert-employee.compo
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { UpdateMatrialComponent } from './update-matrial/update-matrial.component';
 import { WarehouseComponent } from './warehouse/warehouse.component';
+import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
+import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -73,11 +75,17 @@ const routes: Routes=
   ],
   exports:[RouterContainerComponent,InsertMaterialComponent],
   imports: [
+    NgChartsModule.forRoot({ defaults: { } }),
+    NgChartsModule,
     CommonModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    BrowserModule,
+
+  ],
+  providers: [{ provide: NgChartsConfiguration, useValue: { generateColors: false }}],
+
 })
 export class SpaModule { }

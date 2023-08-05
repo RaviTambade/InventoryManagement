@@ -55,6 +55,11 @@ export class MaterialService {
     return this.http.get(url);
   }
 
+  getAllStockReports():Observable<any> 
+  {
+    let url = "http://localhost:5176/api/Materials/stockreports";
+    return this.http.get(url);
+  }
 
  
 

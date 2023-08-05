@@ -20,6 +20,8 @@ import { authRoutes } from './spa/authentication/authentication.module';
 import { ChartComponent } from './chart/chart.component';
 import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { MaterialChartComponent } from './material-chart/material-chart.component';
+import { ChartsModule } from './spa/charts/charts.module';
 
 const routes: Routes = [
   {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
@@ -36,7 +38,8 @@ const routes: Routes = [
     GridListComponent,
     PaginationComponent,
     ChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    MaterialChartComponent
   ],
   imports: [
     NgChartsModule.forRoot({ defaults: { } }),
@@ -46,7 +49,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    SpaModule
+    SpaModule,
+    ChartsModule
   ],
   providers: [{ provide: NgChartsConfiguration, useValue: { generateColors: false }}],
   bootstrap: [AppComponent]
