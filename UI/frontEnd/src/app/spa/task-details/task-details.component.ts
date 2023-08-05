@@ -10,6 +10,8 @@ import { Task } from 'src/app/Task';
   styleUrls: ['./task-details.component.css']
 })
 export class TaskDetailsComponent {
+  showPopup: boolean = false;
+  inputValue: string = '';
 
   id: any;
   taskid: number = 0;
@@ -52,13 +54,30 @@ export class TaskDetailsComponent {
     window.location.reload();
   }
   onDeliver(){
-    this.svc.Deliver(this.taskid).subscribe((res)=>{
-      console.log(res);
-    })
-    this._location.back();
+    this.showPopup = true;
+
+    // this.svc.Deliver(this.taskid).subscribe((res)=>{
+    //   console.log(res);
+    // })
+    // this._location.back();
   }
   onBack(){
     this._location.back();
   }
 
+
+
+  closePopup() {
+    this.showPopup = false;
+  }
+
+  onPopupOk() {
+    console.log('User input:', this.inputValue);
+    // Do something with the user input (e.g., save to a variable, trigger an action, etc.).
+    this.closePopup();
+  }
+
+  onPopupCancel() {
+    this.closePopup();
+  }
 }

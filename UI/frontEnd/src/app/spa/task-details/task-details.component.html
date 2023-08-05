@@ -22,3 +22,13 @@
       <button (click)="onBack()">back</button>
     </div>
   </div>
+
+
+  <div class="popup-overlay" *ngIf="showPopup">
+    <div class="popup">
+      <h2>Enter Password</h2>
+      <input type="password" [(ngModel)]="inputValue" placeholder="Enter your input" />
+      <button (click)="onPopupOk()">OK</button>
+      <button (click)="onPopupCancel()">Cancel</button>
+    </div>
+  </div>
