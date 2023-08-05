@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { UpdatePassword } from '../update-password';
 import { UpdateContact } from '../update-contact';
 import { Credential } from 'src/app/credential';
+import { VerifyCredentials } from './VerifyCredentials';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,9 @@ export class AuthService {
   updateContact(credential: UpdateContact): Observable<boolean> {
     let url = "http://localhost:5077/api/authentication/update/contactnumber";
     return this.svc.put<any>(url, credential);
+  }
+  verify(credential:VerifyCredentials): Observable<boolean> {
+    let url = "http://localhost:5077/api/authentication/verify";
+    return this.svc.post<any>(url, credential);
   }
 }

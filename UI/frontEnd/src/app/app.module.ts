@@ -22,6 +22,7 @@ import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { MaterialChartComponent } from './material-chart/material-chart.component';
 import { ChartsModule } from './spa/charts/charts.module';
+import { PopupComponent } from './popup/popup.component';
 
 const routes: Routes = [
   {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
@@ -39,7 +40,8 @@ const routes: Routes = [
     PaginationComponent,
     ChartComponent,
     PieChartComponent,
-    MaterialChartComponent
+    MaterialChartComponent,
+    PopupComponent
   ],
   imports: [
     NgChartsModule.forRoot({ defaults: { } }),

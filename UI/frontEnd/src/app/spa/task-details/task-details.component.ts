@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { TasksService } from '../tasks.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Task } from 'src/app/Task';
+import { AuthService } from '../auth.service';
+import { VerifyCredentials } from '../VerifyCredentials';
 
 @Component({
   selector: 'app-task-details',
@@ -12,15 +14,18 @@ import { Task } from 'src/app/Task';
 export class TaskDetailsComponent {
   showPopup: boolean = false;
   inputValue: string = '';
-
+  credential: VerifyCredentials = {
+    "id": 0,
+    "password": ""
+  }
   id: any;
   taskid: number = 0;
-  picked:boolean=false;
-  deliver:boolean=false;
+  picked: boolean = false;
+  deliver: boolean = false;
 
   tasks: Task[]
-  department:any;
-  constructor(private _location:Location,private svc: TasksService, private _Activatedroute: ActivatedRoute) {
+  department: any;
+  constructor(private router: Router,private _location: Location, private authsvc: AuthService, private svc: TasksService, private _Activatedroute: ActivatedRoute) {
     this.tasks = [];
   }
   ngOnInit(): void {
@@ -31,37 +36,34 @@ export class TaskDetailsComponent {
     this.svc.getTaskDetails(this.taskid).subscribe((res) => {
       console.log(res);
       this.tasks = res;
+      this.credential.id = this.tasks[0].supervisorId
       this.department = this.tasks[0].department;
-      let result=this.tasks[0].status;
+      let result = this.tasks[0].status;
       console.log(result)
-      if(result=="Picked"){
-        console.log("in IF");
-        this.picked=true
+      if (result == "Picked") {
+        this.picked = true
       }
-      if(result=="Delivered"){
-        console.log("in de");
-        this.deliver=true
+      if (result == "Delivered") {
+        this.deliver = true
       }
       console.log(this.picked);
       console.log(this.deliver);
     })
+    this.authsvc.verify(this.credential).subscribe((res) => {
+      console.log(res);
+    })
   }
 
-  onUpdate(){
-    this.svc.UpdateStatus(this.taskid).subscribe((res)=>{
+  onUpdate() {
+    this.svc.UpdateStatus(this.taskid).subscribe((res) => {
       console.log(res);
     })
     window.location.reload();
   }
-  onDeliver(){
+  onDeliver() {
     this.showPopup = true;
-
-    // this.svc.Deliver(this.taskid).subscribe((res)=>{
-    //   console.log(res);
-    // })
-    // this._location.back();
   }
-  onBack(){
+  onBack() {
     this._location.back();
   }
 
@@ -73,6 +75,23 @@ export class TaskDetailsComponent {
 
   onPopupOk() {
     console.log('User input:', this.inputValue);
+    this.credential.password = this.inputValue;
+    console.log(this.credential)
+    this.authsvc.verify(this.credential).subscribe((res) => {
+      console.log(res);
+      //if true means employees password is varified successfully
+      if (res == true) {
+        this.svc.Deliver(this.taskid).subscribe((res) => {
+          console.log(res);
+        })
+        this.router.navigate(['taskshistory']);
+
+      }
+      else{
+        this.inputValue='';
+        alert("Incorrect Password!");
+      }
+    })
     // Do something with the user input (e.g., save to a variable, trigger an action, etc.).
     this.closePopup();
   }
