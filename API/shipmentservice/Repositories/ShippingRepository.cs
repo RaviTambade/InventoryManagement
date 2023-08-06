@@ -108,7 +108,7 @@ public class ShippingRepository : IShippingRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select sd.id as orderid,s.id as taskid , materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=@taskid";
+            string query = "select sd.id as orderid,s.supervisorid ,s.id as taskid , materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=@taskid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@taskid", taskid);
             await con.OpenAsync();
@@ -120,6 +120,8 @@ public class ShippingRepository : IShippingRepository
                 string section = reader["section"].ToString();
                 string department = reader["department"].ToString();
                 string status= reader["status"].ToString();
+                int supervisorid = Int32.Parse(reader["supervisorid"].ToString());
+              
   
                 ShippingDetails details = new ShippingDetails()
                 {
@@ -127,7 +129,8 @@ public class ShippingRepository : IShippingRepository
                     TaskId=id,
                     Department = department,
                     Section = section,
-                    Status=status
+                    Status=status,
+                    SupervisorId=supervisorid
                 };
 
                 shippingdetails.Add(details);

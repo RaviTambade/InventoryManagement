@@ -13,7 +13,9 @@ import { VerifyCredentials } from '../VerifyCredentials';
 })
 export class TaskDetailsComponent {
   showPopup: boolean = false;
+  showPopup2: boolean = false;
   inputValue: string = '';
+  orderImg:string='/assets/img/box.png'
   credential: VerifyCredentials = {
     "id": 0,
     "password": ""
@@ -54,11 +56,12 @@ export class TaskDetailsComponent {
     })
   }
 
-  onUpdate() {
-    this.svc.UpdateStatus(this.taskid).subscribe((res) => {
-      console.log(res);
-    })
-    window.location.reload();
+  onPicked() {
+    this.showPopup2 = true;
+    // this.svc.UpdateStatus(this.taskid).subscribe((res) => {
+    //   console.log(res);
+    // })
+    // window.location.reload();
   }
   onDeliver() {
     this.showPopup = true;
@@ -71,6 +74,33 @@ export class TaskDetailsComponent {
 
   closePopup() {
     this.showPopup = false;
+  }
+
+  onPopupOkForPicked() {
+    console.log('User input:', this.inputValue);
+    this.credential.password = this.inputValue;
+    console.log(this.credential)
+    this.authsvc.verify(this.credential).subscribe((res) => {
+      console.log(res);
+      //if true means employees password is varified successfully
+      if (res == true) {
+        this.svc.Deliver(this.taskid).subscribe((res) => {
+          console.log(res);
+        })
+        this.router.navigate(['taskshistory']);
+
+      }
+      else{
+        this.inputValue='';
+        alert("Incorrect Password!");
+      }
+    })
+    // Do something with the user input (e.g., save to a variable, trigger an action, etc.).
+    this.closePopup();
+  }
+
+  onPopupCancelForPicked() {
+    this.closePopup();
   }
 
   onPopupOk() {

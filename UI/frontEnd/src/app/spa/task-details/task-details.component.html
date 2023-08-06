@@ -6,7 +6,7 @@
 
 </div>
 
-
+<!-- 
 <div class="row">
     <div class="col-sm-6">
       <div class="card">
@@ -15,13 +15,35 @@
           <div *ngFor="let task of tasks">
             <p class="card-text">Order Id : <b>{{task.orderId}} </b>   Pick Up : <b>{{task.section}} </b> </p><hr>
           </div>
-          <a  (click)="onUpdate()" *ngIf="picked==false && deliver==false" class="btn btn-primary">Picked</a>
+          <a  (click)="onPicked()" *ngIf="picked==false && deliver==false" class="btn btn-primary">Picked</a>
           <a  *ngIf="picked==true  && deliver==false" (click)="onDeliver()" class="btn btn-primary">Deliver</a>
         </div>
       </div>
       <button (click)="onBack()">back</button>
     </div>
-  </div>
+  </div> -->
+
+  <div >
+    <table style="width:60%">
+        <thead>
+            <th></th>
+            <th>Order ID</th>
+            <th>Pick-Up</th>
+        </thead>
+
+        <tbody>
+            <tr  *ngFor="let task of tasks">
+                <td><img src="{{orderImg}}" width="50" hight="50" alt=""></td>
+                <td> {{task.orderId}}</td> 
+                <td> {{task.section}}</td> 
+                <td><a *ngIf="picked==false && deliver==false" (click)="onPicked()"  class="btn btn-primary">Picked</a></td>
+                <td *ngIf="picked==true  && deliver==false" ><a  (click)="onDeliver()" class="btn btn-primary">Deliver</a></td>
+            </tr>  
+
+        </tbody>
+    </table>
+
+</div>
 
 
   <div class="popup-overlay" *ngIf="showPopup">
@@ -30,5 +52,14 @@
       <input type="password" [(ngModel)]="inputValue" placeholder="Enter your input" />
       <button (click)="onPopupOk()">OK</button>
       <button (click)="onPopupCancel()">Cancel</button>
+    </div>
+  </div>
+
+  <div class="popup-overlay" *ngIf="showPopup2">
+    <div class="popup">
+      <h2>Enter Password</h2>
+      <input type="password" [(ngModel)]="inputValue" placeholder="Enter your input" />
+      <button (click)="onPopupOkForPicked()">OK</button>
+      <button (click)="onPopupCancelForPicked()">Cancel</button>
     </div>
   </div>
