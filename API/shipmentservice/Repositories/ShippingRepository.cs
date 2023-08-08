@@ -108,7 +108,7 @@ public class ShippingRepository : IShippingRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select sd.id as orderid,s.supervisorid ,s.id as taskid , materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=@taskid";
+            string query = "select sd.id as orderid,s.supervisorid ,s.id as taskid , sd.storemanagerid, materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=@taskid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@taskid", taskid);
             await con.OpenAsync();
@@ -121,7 +121,7 @@ public class ShippingRepository : IShippingRepository
                 string department = reader["department"].ToString();
                 string status= reader["status"].ToString();
                 int supervisorid = Int32.Parse(reader["supervisorid"].ToString());
-              
+                int storemanagerid = Int32.Parse(reader["storemanagerid"].ToString());              
   
                 ShippingDetails details = new ShippingDetails()
                 {
@@ -130,7 +130,8 @@ public class ShippingRepository : IShippingRepository
                     Department = department,
                     Section = section,
                     Status=status,
-                    SupervisorId=supervisorid
+                    SupervisorId=supervisorid,
+                    StoreManagerId=storemanagerid
                 };
 
                 shippingdetails.Add(details);
