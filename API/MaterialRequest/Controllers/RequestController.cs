@@ -93,10 +93,18 @@ public class RequestController : ControllerBase
         return status;
     }
     [HttpPost]
-    [Route("weeklyorders/{id}")]
+    [Route("weeklyrequests/{id}")]
     public async Task<List<RequestReport>> WeeklyRequests(int id, Period period)
     {
         List<RequestReport> requests =await _reqsvs.WeeklyRequests(id,period);
+        return requests;
+    }
+
+    [HttpPost]
+    [Route("monthlyrequests/{id}")]
+    public async Task<List<RequestReport>> MonthlyRequests(int id, Period period)
+    {
+        List<RequestReport> requests =await _reqsvs.MonthlyRequests(id,period);
         return requests;
     }
 }

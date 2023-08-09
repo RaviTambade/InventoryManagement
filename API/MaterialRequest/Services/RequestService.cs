@@ -27,6 +27,8 @@ public class RequestService : IRequestService
     public async Task<bool> DeleteItem(int id) =>await _repo.DeleteItem(id);
     public async Task <List<RequestReport>> WeeklyRequests(int id,Period period ) =>await _repo.WeeklyRequests(id,period);
 
+    public async Task <List<RequestReport>> MonthlyRequests(int id,Period period ) =>await _repo.MonthlyRequests(id,period);
+
     // public async Task<IEnumerable<RequestDetails>> GetAllRequest(int empid) =>await _repo.GetAllRequest(empid);
 
     // public async Task<IEnumerable<Request>> GetRequestId(int empid) =>await _repo.GetRequestId(empid);

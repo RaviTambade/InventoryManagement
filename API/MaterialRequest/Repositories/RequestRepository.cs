@@ -339,13 +339,13 @@ public class RequestRepository : IRequestRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                int reqs = Int32.Parse(reader["requests"].ToString());
-                string day = reader["day"].ToString();
+                int therequest = Int32.Parse(reader["requests"].ToString());
+                string theperiod = reader["day"].ToString();
 
                 RequestReport request = new RequestReport()
                 {
-                    Day=day,
-                    Requests=reqs
+                    Period=theperiod,
+                    Requests=therequest
                 };
 
                 requests.Add(request);
@@ -361,6 +361,47 @@ public class RequestRepository : IRequestRepository
         {
             await con.CloseAsync();
         }
+        return requests;
+    }
+
+
+    public async Task<List<RequestReport>> MonthlyRequests(int empid,Period period)
+    {
+       List<RequestReport> requests = new List<RequestReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT WEEK(date) AS week, COUNT(*) AS requests_count FROM  materialrequests WHERE date >=@FromDate AND date <= @ToDate AND supervisorid = @empid GROUP BY YEAR(date), WEEK(date);";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@FromDate", period.FromDate);
+            cmd.Parameters.AddWithValue("@ToDate", period.ToDate);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int therequest = Int32.Parse(reader["requests_count"].ToString());
+                string theperiod = reader["week"].ToString();
+
+                RequestReport request = new RequestReport()
+                {
+                    Period=theperiod,
+                    Requests=therequest
+                };
+                requests.Add(request);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+
         return requests;
     }
  

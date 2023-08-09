@@ -17,6 +17,7 @@ public interface IRequestRepository
     Task<bool> DeleteItem(int id);
     Task<List<RequestDetails>> GetRequestDetails(int requestid);
     Task<List<RequestReport>> WeeklyRequests(int id,Period period);
+    Task<List<RequestReport>> MonthlyRequests(int id,Period period);
 
     // Task<IEnumerable<RequestDetails>> GetAllRequest(int empid);
     // Task<IEnumerable<Request>> GetRequestId(int empid);
