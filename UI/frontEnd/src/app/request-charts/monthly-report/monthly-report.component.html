@@ -1,1 +1,6 @@
-<p>monthly-report works!</p>
+
+<input type="week" [(ngModel)]="selectedWeekValue" (change)="onWeekChange()">
+
+<div class="chart-container">
+    <canvas  id="MyChart" >{{ chart }}</canvas>
+</div>

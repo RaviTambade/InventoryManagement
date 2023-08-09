@@ -19,6 +19,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [DatePipe],
-  exports:[WeeklyReportComponent]
+  exports:[WeeklyReportComponent,MonthlyReportComponent]
 })
 export class RequestChartsModule { }

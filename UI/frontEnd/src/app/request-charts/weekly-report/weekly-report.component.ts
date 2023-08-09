@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// import { Chart } from 'chart.js';
 import { MaterialReport } from 'src/app/MaterialReport';
 import { RequestReport } from 'src/app/RequestReport';
 import { RequestService } from 'src/app/spa/request.service';
@@ -38,7 +37,7 @@ export class WeeklyReportComponent {
         console.log("in if");
         for (const day of this.days) {
           console.log("for")
-          const matchingData = this.report.find((item) => day.includes(item.day));
+          const matchingData = this.report.find((item) => day.includes(item.period));
           if (matchingData) {
             this.data.push(matchingData.requests);
             console.log(this.data);
@@ -114,7 +113,7 @@ export class WeeklyReportComponent {
         console.log("in if");
         for (const day of this.days) {
           console.log("for")
-          const matchingData = this.report.find((item) => day.includes(item.day));
+          const matchingData = this.report.find((item) => day.includes(item.period));
           if (matchingData) {
             this.data.push(matchingData.requests);
             console.log(this.data);

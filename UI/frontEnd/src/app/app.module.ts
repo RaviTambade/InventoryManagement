@@ -23,6 +23,8 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { MaterialChartComponent } from './material-chart/material-chart.component';
 import { ChartsModule } from './spa/charts/charts.module';
 import { PopupComponent } from './popup/popup.component';
+import { RequestReport } from './RequestReport';
+import { RequestChartsModule } from './request-charts/request-charts.module';
 
 const routes: Routes = [
   {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
@@ -52,7 +54,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     SpaModule,
-    ChartsModule
+    ChartsModule,
+    RequestChartsModule
   ],
   providers: [{ provide: NgChartsConfiguration, useValue: { generateColors: false }}],
   bootstrap: [AppComponent]

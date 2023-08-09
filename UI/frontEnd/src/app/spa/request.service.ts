@@ -49,7 +49,11 @@ export class RequestService {
     return this.http.delete(url);
   }
   GetWeeklyReport(empid:number,period:any):Observable<any>{
-    let url ="http://localhost:5164/api/request/weeklyorders/" + empid ;
+    let url ="http://localhost:5164/api/request/weeklyrequests/" + empid ;
+    return this.http.post(url,period);
+  }
+  GetMonthlyReport(empid:number,period:any):Observable<any>{
+    let url ="http://localhost:5164/api/request/monthlyrequests/" + empid ;
     return this.http.post(url,period);
   }
 }
