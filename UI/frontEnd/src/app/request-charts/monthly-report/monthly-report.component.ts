@@ -30,56 +30,36 @@ export class MonthlyReportComponent {
   year: number = 2023; // Replace with desired year
   currentMonth: any | undefined; // Use union type with undefined
   currentYear: number | undefined; // Use union type with undefined
-  numWeeks:any;
-  startDate: Date=new Date;
-  endDate: Date=new Date;
-  weekNumbers:any;
+  numWeeks:number | undefined ;
+  weekList: string[] = [];
   constructor(private svc: RequestService, private datePipe:DatePipe) {
     this.getCurrentMonthAndYear();
     this.calculateWeeks();
-    this.calculateWeekNumbers();  }
+   }
   ngOnInit(): void {
-    // this.svc.GetWeeklyReport(12, this.period).subscribe((res) => {
-    //   console.log(res);
-    //   this.report = res;
-    //   if (this.report != null) {
-    //     console.log("in if");
-    //     for (const day of this.days) {
-    //       console.log("for")
-    //       const matchingData = this.report.find((item) => day.includes(item.period));
-    //       if (matchingData) {
-    //         this.data.push(matchingData.requests);
-    //         console.log(this.data);
-    //       } else {
-    //         this.data.push(0); // If data not available for the day, use 0
-    //       }
-    //     }
-    //     this.createChart();
-    //   }
-    // })
-
-    this.svc.GetMonthlyReport(12,this.period).subscribe((res)=>{
+    this.svc.GetMonthlyReport(12, this.period).subscribe((res) => {
       console.log(res);
+      this.report = res;
+
+      if (this.report != null) {
+        console.log("in if");
+        for (const week of this.weekList) {
+          console.log("for")
+          const matchingData = this.report.find((item) => week.includes(item.period));
+          if (matchingData) {
+            this.data.push(matchingData.requests);
+            console.log(this.data);
+          } else {
+            this.data.push(0); // If data not available for the day, use 0
+          }
+        }
+
+        this.createChart();
+      }
     })
+
   }
 
-  calculateWeekNumbers() {
-    if(this.currentYear!=undefined && this.currentMonth!=undefined){
-      const startDate = startOfMonth(new Date(this.currentYear, this.currentMonth - 1, 1));
-      const lastDayOfMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
-  
-      const weekNumberArray = [];
-      for (let day = 1; day <= lastDayOfMonth; day++) {
-        const currentDate = addDays(startDate, day - 1);
-        const weekNumber = getISOWeek(currentDate);
-        weekNumberArray.push(weekNumber);
-      }
-  
-      const uniqueWeekNumbers = [...new Set(weekNumberArray)]; // Remove duplicate week numbers
-      this.weekNumbers = uniqueWeekNumbers.map(weekNumber => `W-${weekNumber}`).join(', ');
-      console.log(this.weekNumbers)
-    }
-    }
 
   
   
@@ -89,7 +69,7 @@ export class MonthlyReportComponent {
 
       type: 'bar', //this denotes tha type of chart
       data: {// values on X-Axis
-        labels: this.days,
+        labels: this.weekList,
 
         datasets: [
           {
@@ -132,10 +112,22 @@ export class MonthlyReportComponent {
       const numWeeks = Math.ceil(daysInMonth / 7);
       this.numWeeks = numWeeks;
       console.log(this.numWeeks);
+      if(this.numWeeks!=undefined){
+        this.generateWeekList()
+      }
     }
 
   }
 
+  generateWeekList() {
+    if(this.numWeeks!=undefined){
+      for (let i = 1; i <= this.numWeeks; i++) {
+        this.weekList.push(`week-${i}`);
+        console.log(this.weekList)
+      }
+    }
+   
+  }
   // calculateWeekDates() {
   //   if(this.currentYear!=undefined){
   //     const startDate = new Date(this.currentYear, 0, 1); // January 1 of the year
