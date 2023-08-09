@@ -1,5 +1,10 @@
 
-<input type="week" [(ngModel)]="selectedWeekValue" (change)="onWeekChange()">
+<input type="month" [(ngModel)]="selectedMonthValue" (change)="onMonthChange()">
+<div class="container" >
+    <!-- <div > <b>Month:</b> <b style="color:Tomato;"> {{currentMonth}} </b></div>
+    <div > <b>Year:</b> <b style="color:Tomato;"> {{currentYear}} </b></div> -->
+
+</div>
 
 <div class="chart-container">
     <canvas  id="MyChart" >{{ chart }}</canvas>
