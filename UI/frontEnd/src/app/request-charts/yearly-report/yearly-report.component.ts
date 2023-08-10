@@ -15,12 +15,16 @@ export class YearlyReportComponent {
   public currentDate=new Date();
   public chart: any;
   empid:number=11;
-
+  years: number[] = [];
   months:string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   data: any[] = [];
   report: RequestReport[] = [];
 
   constructor(private svc: RequestService, private datePipe:DatePipe) {
+    const currentYear = new Date().getFullYear();
+    for (let year = currentYear ; year >= currentYear - 10; year--) {
+      this.years.push(year);
+    }
   }
   ngOnInit(): void {
     this.svc.GetYearlyReport(this.empid, "2023").subscribe((res) => {
@@ -64,9 +68,9 @@ export class YearlyReportComponent {
           x: {},
           y: {
             min: 0,
-            max: 20,
+            max: 50,
             ticks: {
-              stepSize: 2,
+              stepSize: 5,
             },
           },
         },
@@ -84,14 +88,13 @@ export class YearlyReportComponent {
     this.data=[];
     console.log('Selected week:', this.selectedYearValue);
 
-    this.svc.GetYearlyReport(this.empid, "2023").subscribe((res) => {
+    this.svc.GetYearlyReport(this.empid, this.selectedYearValue).subscribe((res) => {
       console.log(res);
       this.report = res;
       if (this.report != null) {
-        console.log("in if");
-        for (const day of this.months) {
+        for (const month of this.months) {
           console.log("for")
-          const matchingData = this.report.find((item) => day.includes(item.period));
+          const matchingData = this.report.find((item) => month.includes(item.period));
           if (matchingData) {
             this.data.push(matchingData.requests);
             console.log(this.data);
