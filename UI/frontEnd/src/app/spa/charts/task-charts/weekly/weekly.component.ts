@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { MaterialReport } from 'src/app/MaterialReport';
-import { RequestReport } from 'src/app/RequestReport';
-import { RequestService } from 'src/app/spa/request.service';
 import Chart from 'chart.js/auto';
-import { Period } from 'src/app/Period';
 import { DatePipe } from '@angular/common';
+import { TasksService } from 'src/app/spa/tasks.service';
+import { TaskReport } from 'src/app/TaskReport';
+
 
 @Component({
-  selector: 'app-weekly-report',
-  templateUrl: './weekly-report.component.html',
-  styleUrls: ['./weekly-report.component.css']
+  selector: 'app-weekly',
+  templateUrl: './weekly.component.html',
+  styleUrls: ['./weekly.component.css']
 })
-export class WeeklyReportComponent {
+export class WeeklyComponent {
+
   selectedWeekValue: string='';
   public currentDate=new Date();
   public chart: any;
@@ -24,22 +24,21 @@ export class WeeklyReportComponent {
   }
   days: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   data: any[] = [];
-  report: RequestReport[] = [];
+  report: TaskReport[] = [];
 
-  constructor(private svc: RequestService, private datePipe:DatePipe) {
+  constructor(private svc: TasksService, private datePipe:DatePipe) {
     this.calculateWeekStartAndEnd(this.currentDate);
   }
   ngOnInit(): void {
-    this.svc.GetWeeklyReport(12, this.period).subscribe((res) => {
+    this.svc.getWeeklyReport(15, this.period).subscribe((res) => {
       console.log(res);
       this.report = res;
+      console.log(this.report);
       if (this.report != null) {
-        console.log("in if");
         for (const day of this.days) {
-          console.log("for")
           const matchingData = this.report.find((item) => day.includes(item.period));
           if (matchingData) {
-            this.data.push(matchingData.requests);
+            this.data.push(matchingData.tasks);
             console.log(this.data);
           } else {
             this.data.push(0); // If data not available for the day, use 0
@@ -60,7 +59,7 @@ export class WeeklyReportComponent {
 
         datasets: [
           {
-            label: "Requests",
+            label: "Tasks",
             data: this.data,
             backgroundColor: 'orange'
           }
@@ -106,16 +105,14 @@ export class WeeklyReportComponent {
     console.log('Selected week:', this.selectedWeekValue);
     this.getFirstAndLastDateOfWeek(this.selectedWeekValue);
 
-    this.svc.GetWeeklyReport(12, this.period).subscribe((res) => {
+    this.svc.getWeeklyReport(12, this.period).subscribe((res) => {
       console.log(res);
       this.report = res;
       if (this.report != null) {
-        console.log("in if");
         for (const day of this.days) {
-          console.log("for")
           const matchingData = this.report.find((item) => day.includes(item.period));
           if (matchingData) {
-            this.data.push(matchingData.requests);
+            this.data.push(matchingData.tasks);
             console.log(this.data);
           } else {
             this.data.push(0); // If data not available for the day, use 0
@@ -148,6 +145,4 @@ export class WeeklyReportComponent {
     console.log(this.period)
   }
   
-
-
 }

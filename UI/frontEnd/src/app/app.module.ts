@@ -24,7 +24,7 @@ import { MaterialChartComponent } from './material-chart/material-chart.componen
 import { ChartsModule } from './spa/charts/charts.module';
 import { PopupComponent } from './popup/popup.component';
 import { RequestReport } from './RequestReport';
-import { RequestChartsModule } from './request-charts/request-charts.module';
+import { RequestChartsModule } from './spa/charts/request-charts/request-charts.module';
 
 const routes: Routes = [
   {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
@@ -55,7 +55,7 @@ const routes: Routes = [
     HttpClientModule,
     SpaModule,
     ChartsModule,
-    RequestChartsModule
+    RequestChartsModule,
   ],
   providers: [{ provide: NgChartsConfiguration, useValue: { generateColors: false }}],
   bootstrap: [AppComponent]

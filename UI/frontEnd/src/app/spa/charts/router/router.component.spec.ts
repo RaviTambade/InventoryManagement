@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialReportComponent } from './material-report.component';
+import { RouterComponent } from './router.component';
 
-describe('MaterialReportComponent', () => {
-  let component: MaterialReportComponent;
-  let fixture: ComponentFixture<MaterialReportComponent>;
+describe('RouterComponent', () => {
+  let component: RouterComponent;
+  let fixture: ComponentFixture<RouterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MaterialReportComponent ]
+      declarations: [ RouterComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MaterialReportComponent);
+    fixture = TestBed.createComponent(RouterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

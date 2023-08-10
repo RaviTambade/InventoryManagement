@@ -61,8 +61,4 @@ export class MaterialService {
     return this.http.get(url);
   }
 
- 
-
-
-
 }

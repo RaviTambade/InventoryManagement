@@ -37,11 +37,6 @@ export class OrderService {
     let url ="http://localhost:5082/api/orders/detail/" +orderid ;
     return this.http.get(url);
   }
-  //get order details by sending request id (store)
-  // getOrderDetails(requestid:number):Observable<any>{
-  //   let url ="http://localhost:5082/api/orders/details/request/" +requestid ;
-  //   return this.http.get(url);
-  // }
   order(empid:number):Observable<any>{
     let url ="http://localhost:5164/api/request/request/" +empid ;
     return this.http.get(url);

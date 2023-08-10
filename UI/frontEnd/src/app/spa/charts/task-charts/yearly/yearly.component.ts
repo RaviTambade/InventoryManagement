@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { MaterialReport } from 'src/app/MaterialReport';
 import { RequestReport } from 'src/app/RequestReport';
 import { RequestService } from 'src/app/spa/request.service';
 import Chart from 'chart.js/auto';
-import { Period } from 'src/app/Period';
-import { DatePipe } from '@angular/common';
+import { TasksService } from 'src/app/spa/tasks.service';
+import { TaskReport } from 'src/app/TaskReport';
+
 @Component({
-  selector: 'app-yearly-report',
-  templateUrl: './yearly-report.component.html',
-  styleUrls: ['./yearly-report.component.css']
+  selector: 'app-yearly',
+  templateUrl: './yearly.component.html',
+  styleUrls: ['./yearly.component.css']
 })
-export class YearlyReportComponent {
+export class YearlyComponent {
   selectedYearValue: string='';
   public currentDate=new Date();
   public chart: any;
@@ -18,16 +18,17 @@ export class YearlyReportComponent {
   years: number[] = [];
   months:string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   data: any[] = [];
-  report: RequestReport[] = [];
-
-  constructor(private svc: RequestService, private datePipe:DatePipe) {
+  report: TaskReport[] = [];
+  currentYear:string='';
+  constructor(private svc: TasksService) {
     const currentYear = new Date().getFullYear();
     for (let year = currentYear ; year >= currentYear - 10; year--) {
       this.years.push(year);
     }
+    this.currentYear = new Date().getFullYear().toString();
   }
   ngOnInit(): void {
-    this.svc.GetYearlyReport(this.empid, "2023").subscribe((res) => {
+    this.svc.getYearlyReport(this.empid, this.currentYear).subscribe((res) => {
       console.log(res);
       this.report = res;
       if (this.report != null) {
@@ -35,7 +36,7 @@ export class YearlyReportComponent {
           console.log("for")
           const matchingData = this.report.find((item) => month.includes(item.period));
           if (matchingData) {
-            this.data.push(matchingData.requests);
+            this.data.push(matchingData.tasks);
             console.log(this.data);
           } else {
             this.data.push(0); // If data not available for the day, use 0
@@ -79,24 +80,20 @@ export class YearlyReportComponent {
     });
   }
 
-
-
-
   onYearChange() {
     this.chart.destroy();
     this.report=[];
     this.data=[];
     console.log('Selected week:', this.selectedYearValue);
 
-    this.svc.GetYearlyReport(this.empid, this.selectedYearValue).subscribe((res) => {
+    this.svc.getYearlyReport(this.empid, this.selectedYearValue).subscribe((res) => {
       console.log(res);
       this.report = res;
       if (this.report != null) {
         for (const month of this.months) {
-          console.log("for")
           const matchingData = this.report.find((item) => month.includes(item.period));
           if (matchingData) {
-            this.data.push(matchingData.requests);
+            this.data.push(matchingData.tasks);
             console.log(this.data);
           } else {
             this.data.push(0); // If data not available for the day, use 0
@@ -106,8 +103,5 @@ export class YearlyReportComponent {
       }
     })
     }
-
-
-
 
 }
