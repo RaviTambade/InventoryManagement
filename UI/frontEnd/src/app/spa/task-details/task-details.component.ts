@@ -57,11 +57,11 @@ export class TaskDetailsComponent {
   }
 
   onPicked() {
-    this.showPopup2 = true;
-    // this.svc.UpdateStatus(this.taskid).subscribe((res) => {
-    //   console.log(res);
-    // })
-    // window.location.reload();
+    // this.showPopup2 = true;
+    this.svc.UpdateStatus(this.taskid).subscribe((res) => {
+      console.log(res);
+    })
+    window.location.reload();
   }
   onDeliver() {
     this.showPopup = true;

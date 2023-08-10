@@ -56,4 +56,8 @@ export class RequestService {
     let url ="http://localhost:5164/api/request/monthlyrequests/" + empid ;
     return this.http.post(url,period);
   }
+  GetYearlyReport(empid:number,year:string):Observable<any>{
+    let url ="http://localhost:5164/api/request/yearlyrequests/" + empid+"/"+year ;
+    return this.http.get(url );
+  }
 }
