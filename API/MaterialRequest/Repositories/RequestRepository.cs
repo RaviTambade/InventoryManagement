@@ -371,7 +371,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "SELECT WEEK(date) AS week, COUNT(*) AS requests_count FROM  materialrequests WHERE date >=@FromDate AND date <= @ToDate AND supervisorid = @empid GROUP BY YEAR(date), WEEK(date);";
+            string query = "SELECT week_number, COUNT(*) AS requests_count FROM ( SELECT CONCAT('week-', WEEK(date, 2) - WEEK(DATE_SUB(date, INTERVAL DAYOFMONTH(date) - 1 DAY), 2) + 1) AS week_number, date  FROM  materialrequests  WHERE date >= @FromDate AND date <= @ToDate AND supervisorid = @empid) AS subquery GROUP BY  week_number;";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             cmd.Parameters.AddWithValue("@FromDate", period.FromDate);
@@ -381,7 +381,7 @@ public class RequestRepository : IRequestRepository
             while (await reader.ReadAsync())
             {
                 int therequest = Int32.Parse(reader["requests_count"].ToString());
-                string theperiod = reader["week"].ToString();
+                string theperiod = reader["week_number"].ToString();
 
                 RequestReport request = new RequestReport()
                 {
@@ -405,4 +405,45 @@ public class RequestRepository : IRequestRepository
         return requests;
     }
  
+
+     public async Task<List<RequestReport>> YearlyRequests(int empid,string year)
+    {
+       List<RequestReport> requests = new List<RequestReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT monthname(date) AS month, COUNT(*) AS requests FROM materialrequests WHERE YEAR(date) = @year AND materialrequests.supervisorid = @empid and materialrequests.status<>7 GROUP BY  monthname(date)";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@year", year);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int therequest = Int32.Parse(reader["requests"].ToString());
+                string theperiod = reader["month"].ToString();
+
+                RequestReport request = new RequestReport()
+                {
+                    Period=theperiod,
+                    Requests=therequest
+                };
+                requests.Add(request);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+
+        return requests;
+    }
+ 
+
 }

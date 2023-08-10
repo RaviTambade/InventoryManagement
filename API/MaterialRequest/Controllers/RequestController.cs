@@ -107,4 +107,12 @@ public class RequestController : ControllerBase
         List<RequestReport> requests =await _reqsvs.MonthlyRequests(id,period);
         return requests;
     }
+
+    [HttpGet]
+    [Route("yearlyrequests/{id}/{year}")]
+    public async Task<List<RequestReport>> YearlyRequests(int id, string year)
+    {
+        List<RequestReport> requests =await _reqsvs.YearlyRequests(id,year);
+        return requests;
+    }
 }
