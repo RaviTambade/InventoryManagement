@@ -1,5 +1,5 @@
 namespace shipmentservice.Models;
 public class Period{
-    public DateOnly FromDate{get;set;}
-    public DateOnly ToDate{get;set;}
+    public string FromDate{get;set;}
+    public string ToDate{get;set;}
 }

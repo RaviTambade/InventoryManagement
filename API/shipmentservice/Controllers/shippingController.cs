@@ -48,7 +48,7 @@ public class ShippingController : ControllerBase
         return status;
     }
 
-        [HttpGet]
+    [HttpGet]
     [Route("deliver/{id}")]
     public async Task<bool> ShipmentDeliver(int id)
     {
@@ -56,11 +56,26 @@ public class ShippingController : ControllerBase
         return status;
     }
 
-    [HttpGet]
-    [Route("report/{empid}")]
-    public async Task<List<TaskReport>> GetTaskReports(int empid,Period period)
+    [HttpPost]
+    [Route("weeklyreport/{empid}")]
+    public async Task<List<TaskReport>> GetWeeklyReports(int empid,Period period)
     {
-        List<TaskReport> reports = await _shipsvc.GetTaskReports(empid,period);
+        List<TaskReport> reports = await _shipsvc.GetWeeklyReports(empid,period);
+        return reports;
+    }
+    [HttpPost]
+    [Route("monthlyreport/{empid}")]
+    public async Task<List<TaskReport>> GetMonthlyReports(int empid,Period period)
+    {
+        List<TaskReport> reports = await _shipsvc.GetMonthlyReports(empid,period);
+        return reports;
+    }
+
+    [HttpPost]
+    [Route("yearlyreport/{empid}/{year}")]
+    public async Task<List<TaskReport>> GetYearlyReports(int empid,string year)
+    {
+        List<TaskReport> reports = await _shipsvc.GetYearlyReports(empid,year);
         return reports;
     }
 }

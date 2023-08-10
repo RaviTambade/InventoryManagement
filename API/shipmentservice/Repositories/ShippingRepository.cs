@@ -203,7 +203,7 @@ public class ShippingRepository : IShippingRepository
         return status;
     }
 
-        public async Task<List<TaskReport>> GetTaskReports(int empid,Period period){
+        public async Task<List<TaskReport>> GetWeeklyReports(int empid,Period period){
          List<TaskReport> reports = new List<TaskReport>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -222,8 +222,8 @@ public class ShippingRepository : IShippingRepository
 
                 TaskReport report = new TaskReport()
                 {
-                    Tasks=tasks,
-                    Date = date
+                    Period=date,
+                    Tasks = tasks
                 };
 
                 reports.Add(report);
@@ -242,5 +242,87 @@ public class ShippingRepository : IShippingRepository
     
         return reports;
     }
+
+
+
+        public async Task<List<TaskReport>> GetMonthlyReports(int empid,Period period){
+         List<TaskReport> reports = new List<TaskReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT week_number, COUNT(*) AS tasks FROM ( SELECT CONCAT('week-', WEEK(date, 2) - WEEK(DATE_SUB(date, INTERVAL DAYOFMONTH(date) - 1 DAY), 2) + 1) AS week_number, date  FROM  shipments  WHERE date >= @fromdate AND date <= @todate AND shipperid = @empid) AS subquery GROUP BY    week_number;";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@fromdate", period.FromDate);
+            cmd.Parameters.AddWithValue("@todate", period.ToDate);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int tasks = Int32.Parse(reader["tasks"].ToString());
+                string date = reader["week_number"].ToString();
+
+                TaskReport report = new TaskReport()
+                {
+                    Period=date,
+                    Tasks = tasks
+                };
+
+                reports.Add(report);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+    
+        return reports;
+    }
+
+        public async Task<List<TaskReport>> GetYearlyReports(int empid,string year){
+         List<TaskReport> reports = new List<TaskReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT monthname(date) AS month, COUNT(*) AS tasks FROM shipments WHERE YEAR(date) = @year AND shipments.shipperid = @empid  GROUP BY  monthname(date);";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@year", year);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int tasks = Int32.Parse(reader["tasks"].ToString());
+                string period = reader["month"].ToString();
+
+                TaskReport report = new TaskReport()
+                {
+                    Period=period,
+                    Tasks = tasks
+                };
+
+                reports.Add(report);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+    
+        return reports;
+    }
+
 
 }

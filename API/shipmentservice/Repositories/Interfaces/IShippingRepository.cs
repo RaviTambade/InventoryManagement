@@ -10,6 +10,8 @@ public interface IShippingRepository
     Task<List<ShippingDetails>> GetShippingDetails(int taskid);
     Task<bool> UpdateStatus(int id);
     Task<bool> ShipmentDeliver(int id);
-    Task<List<TaskReport>> GetTaskReports(int empid,Period period);
+    Task<List<TaskReport>> GetWeeklyReports(int empid,Period period);
+    Task<List<TaskReport>> GetMonthlyReports(int empid,Period period);
+    Task<List<TaskReport>> GetYearlyReports(int empid,string year);
 
 }
