@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Credential } from 'src/app/Credential';
 import { PersonalInfo } from 'src/app/PersonalInfo';
 import { User } from 'src/app/User';
@@ -27,7 +28,7 @@ export class PersonalInfoFormComponent {
     contactNumber: '',
     password:this.defaultPassword
   }
-  constructor(){
+  constructor(private router:Router, private svc:AuthService,private usrsvc:UserService){
 
   }
 
@@ -35,8 +36,11 @@ export class PersonalInfoFormComponent {
     console.log('Form submitted:', this.formData);
     this.credential.contactNumber=this.formData.contactNumber;
     localStorage.setItem("personalInfo",JSON.stringify(this.formData));
-    localStorage.setItem("credentials",JSON.stringify(this.credential));
+     localStorage.setItem("credentials",JSON.stringify(this.credential));
+    this.router.navigate(['profileform']);
+    // this.usrsvc.addUser(this.formData).subscribe((res)={
+    //   console.log(res)
+    // })
 
-    // Add your logic to submit the form data to a server or perform other actions
   }
 }

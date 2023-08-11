@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { RequestReport } from 'src/app/RequestReport';
-import { RequestService } from 'src/app/spa/request.service';
 import Chart from 'chart.js/auto';
 import { DatePipe } from '@angular/common';
 import { MaterialService } from 'src/app/spa/material.service';
@@ -24,6 +22,7 @@ export class MaterialsComponent {
   }
   days: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   data: string[] = [];
+  resData:string[]=[];
   report: MaterialReport[] = [];
 
   constructor(private svc: MaterialService, private datePipe:DatePipe) {
@@ -31,13 +30,15 @@ export class MaterialsComponent {
   }
   ngOnInit(): void {
     this.svc.getAllStockReports().subscribe((res) => {
-      console.log("called")
-      console.log(res);
       this.report = res;
-      if(this.report !==undefined){
-       this.data= this.report.map((report)=>report?.category || '');
-       console.log(this.data)
+      console.log(this.report)
+      if(this.report !=undefined){
+      this.resData = this.report.map((report)=>report.catagory );
+       console.log(this.data);
       }
+
+      this.data = this.getUniqueArray(this.resData);
+
      
     //   if (this.report != null) {
     //     for (const day of this.days) {
@@ -49,7 +50,7 @@ export class MaterialsComponent {
     //         this.data.push(0); // If data not available for the day, use 0
     //       }
     //     }
-    //     this.createChart();
+        this.createChart();
     //    }
      })
 
@@ -58,9 +59,9 @@ export class MaterialsComponent {
   createChart() {
     this.chart = new Chart("MyChart", {
 
-      type: 'bar', //this denotes tha type of chart
+      type: 'pie', //this denotes tha type of chart
       data: {// values on X-Axis
-        labels: this.report.map((report)=>report.category),
+        labels: this.data,
 
         datasets: [
           {
@@ -151,5 +152,11 @@ export class MaterialsComponent {
     this.period.toDate=this.datePipe.transform(lastWeekStart, 'yyyy/MM/dd');
     console.log(this.period)
   }
+
+  getUniqueArray(array: string[]): string[] {
+    return array.filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    });
   
+}
 }

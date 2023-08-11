@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/ht
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Employee } from 'src/app/Employee';
+import { PersonalInfo } from 'src/app/PersonalInfo';
 
 @Component({
   selector: 'profileform',
@@ -24,6 +25,7 @@ export class ProfileInfoFormComponent {
     'Supervisor',
     'Store Worker',     
 ];
+personalInfo:any;
 path: string = '/assets/img/'
   hiredate=new Date();
   progress: number = 0;
@@ -71,19 +73,19 @@ path: string = '/assets/img/'
   }
 
   submitForm() {
-    console.log('Form submitted:', this.employee);
     console.log(this.ngForm);
   
     if(this.ngForm.value.department!=null && this.ngForm.value.roleName!=null){
       this.employee.department=this.ngForm.value.department;
       this.employee.role=this.ngForm.value.roleName
-
     }
    
     const formData = new FormData();
     formData.append('file', this.file, this.file.name);
-    console.log(formData);
-    console.log(this.file.name);
+    this.employee.imgUrl= this.path + this.file.name;
+    this.personalInfo= localStorage.getItem("personalInfo")
+    console.log(this.personalInfo);
+    
     // this.http.post('http://localhost:5176/api/Materials/', formData, { reportProgress: true, observe: 'events' })
     //   .subscribe({
     //     next: (event) => {

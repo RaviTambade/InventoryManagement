@@ -124,7 +124,6 @@ export class RequestsHistoryComponent {
   }
   onEdit(cartid: number) {
     this.router.navigate(['editcart', cartid]);
-
   }
   onView(requestid: number) {
     this.router.navigate(['requestDetails', requestid]);
