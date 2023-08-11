@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { Credential } from 'src/app/credential';
+import { Credential } from 'src/app/Credential';
 import { Router } from '@angular/router';
 import { UserService } from '../../user.service';
 import { EmployeeService } from '../../employee.service';

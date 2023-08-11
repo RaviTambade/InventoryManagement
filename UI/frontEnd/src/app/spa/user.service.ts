@@ -10,13 +10,13 @@ export class UserService {
 
   constructor(private httpClient:HttpClient) {}
 
+    addUser(user:User):Observable<any>{
+    let url="http://localhost:5102/api/user"
+    return this.httpClient.post<any>(url,user)
+  }
   getUserIdByContact(contactNumber: string): Observable<number> {
     let url = "http://localhost:5102/api/users/userid/" + contactNumber;
     return this.httpClient.get<number>(url);
-  }
-  addUser(user:User):Observable<any>{
-    let url="http://localhost:5102/api/users/adduser"
-    return this.httpClient.post<any>(url,user)
   }
 
   updateUser(id:number,user:User):Observable<any>{

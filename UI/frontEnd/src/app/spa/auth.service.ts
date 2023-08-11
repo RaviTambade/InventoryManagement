@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UpdatePassword } from '../update-password';
 import { UpdateContact } from '../update-contact';
-import { Credential } from 'src/app/credential';
 import { VerifyCredentials } from './VerifyCredentials';
+import { Credential } from '../Credential';
 
 @Injectable({
   providedIn: 'root'

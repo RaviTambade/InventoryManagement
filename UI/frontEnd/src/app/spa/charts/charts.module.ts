@@ -10,6 +10,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MonthlyComponent } from './task-charts/monthly/monthly.component';
 import { WeeklyComponent } from './task-charts/weekly/weekly.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SectionMaterialComponent } from './material-charts/section-material/section-material.component';
+import { MaterialsComponent } from './material-charts/materials/materials.component';
 
 const routes: Routes=
   [   //{path:'', redirectTo:'home',pathMatch:"full"},
@@ -20,6 +22,9 @@ const routes: Routes=
       { path: 'monthlytasks', component: MonthlyComponent },
       { path: 'weeklytasks', component: WeeklyComponent },
       { path: 'yearlytasks', component: YearlyReportComponent },
+   
+      { path: 'allmaterials', component: MaterialsComponent },
+      { path: 'sectionmaterials', component: SectionMaterialComponent },
    
     ];
 
