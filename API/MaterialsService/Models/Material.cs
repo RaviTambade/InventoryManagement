@@ -7,4 +7,5 @@ public class Material{
     public int Quantity{get;set;}
     public int UnitPrice{get;set;}
     public string? ImgUrl{get;set;}   
+    
 }

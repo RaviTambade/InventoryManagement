@@ -33,11 +33,9 @@ export class MaterialsComponent {
       this.report = res;
       console.log(this.report)
       if(this.report !=undefined){
-      this.resData = this.report.map((report)=>report.catagory );
-       console.log(this.data);
+      this.data = this.report.map((report)=>report.name );
       }
 
-      this.data = this.getUniqueArray(this.resData);
 
      
     //   if (this.report != null) {
@@ -153,10 +151,5 @@ export class MaterialsComponent {
     console.log(this.period)
   }
 
-  getUniqueArray(array: string[]): string[] {
-    return array.filter((value, index, self) => {
-      return self.indexOf(value) === index;
-    });
-  
-}
+
 }

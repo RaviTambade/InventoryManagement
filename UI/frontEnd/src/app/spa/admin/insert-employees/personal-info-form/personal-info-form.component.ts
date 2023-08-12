@@ -37,8 +37,8 @@ export class PersonalInfoFormComponent {
     this.credential.contactNumber=this.formData.contactNumber;
     localStorage.setItem("personalInfo",JSON.stringify(this.formData));
      localStorage.setItem("credentials",JSON.stringify(this.credential));
-    this.router.navigate(['profileform']);
-    // this.usrsvc.addUser(this.formData).subscribe((res)={
+     this.router.navigate(['profileform']);
+     // this.usrsvc.addUser(this.formData).subscribe((res)={
     //   console.log(res)
     // })
 
