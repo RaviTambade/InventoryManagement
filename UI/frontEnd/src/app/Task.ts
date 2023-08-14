@@ -9,5 +9,3 @@ export class Task{
         public storemanagerId:number
     ){}
 }
-
-

@@ -26,6 +26,7 @@ import { PopupComponent } from './popup/popup.component';
 import { RequestReport } from './RequestReport';
 import { RequestChartsModule } from './spa/charts/request-charts/request-charts.module';
 import { InsertEmployeesModule } from './spa/admin/insert-employees/insert-employees.module';
+import { AdminModule } from './spa/admin/admin.module';
 
 const routes: Routes = [
   {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
@@ -57,7 +58,8 @@ const routes: Routes = [
     SpaModule,
     ChartsModule,
     RequestChartsModule,
-    InsertEmployeesModule
+    InsertEmployeesModule,
+    AdminModule
   ],
   providers: [{ provide: NgChartsConfiguration, useValue: { generateColors: false }}],
   bootstrap: [AppComponent]
