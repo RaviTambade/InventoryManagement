@@ -1,6 +1,4 @@
-1.User Story:  As a supervisor, I want to log in to the system so that I can access the store's ordering functionality.
 
-2.User Story: As a supervisor, I want to change my password in the system so that I can ensure the security of my account.
 
 3.User Story: As a supervisor, I want to search for specific materials in the store's inventory so that I can quickly order what I need.
 
@@ -29,9 +27,7 @@
 
 
 
-15.User Story: As a store manager, I want to log in to the system so that I can access the store management features.
 
-16.User Story: As a store manager, I want to change my password in the system so that I can ensure the security of my account.
 
 17.User Story: As a store manager, I want to view a dashboard so that i can get overview of current inventory levels and pending orders.
 
@@ -94,9 +90,6 @@
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-45.User Story: As a Store Worker, I want to view a dashboard that displays the orders I need to pick up and deliver, helping me manage my tasks efficiently.
-
-46.User Story: As a Store Worker, I want to change my password in the system so that I can ensure the security of my account.
 
 47.User Story: As a Store Worker, I want to receive notifications for new task that require pickup and delivery, ensuring I stay updated on my tasks.
 
