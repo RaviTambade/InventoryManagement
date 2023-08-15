@@ -1,0 +1,116 @@
+1.User Story:  As a supervisor, I want to log in to the system so that I can access the store's ordering functionality.
+
+2.User Story: As a supervisor, I want to change my password in the system so that I can ensure the security of my account.
+
+3.User Story: As a supervisor, I want to search for specific materials in the store's inventory so that I can quickly order what I need.
+
+4.User Story: As a  supervisor, I want to sort materials by categories in the store's inventory so that I can easily locate and order materials based on their types.
+
+5.User Story: As a supervisor, I want to add requested materials to my cart before sending an order, and be able to edit or remove materials from the cart as needed.
+
+6.User Story: As a  supervisor, I want to be able to select and send multiple material requests at once, making the ordering process more efficient.
+
+7.User Story: As a supervisor, I want to cancel an order that I have placed in the system, in case I no longer require the materials
+
+8.User Story:As a supervisor, I want to see status of my order (processing, shipped, delivered) so that I am aware of its progress.
+
+9.User Story: As a supervisor, I want to view the history of my past orders and their details so that I can reference them for future planning.
+
+10.*User Story: As a supervisor, I want to easily reorder previously ordered materials to save time on repetitive orders.
+
+11.User Story: As a supervisor, I want to access a dashboard that displays graphical representations of my monthly, yearly, and weekly material requests, so that I can visualize trends and patterns.
+
+12.User Story: As a supervisor, I want to choose a specific time frame (monthly, yearly, weekly) for the graph display on the dashboard, so that I can focus on the relevant data.
+
+13.*User Story: As a  supervisor, I want the option to download the graph as an image or a file for reporting purposes, enabling me to share the information with others.
+
+14.User Story: As a supervisor, I want to receive authentication that an order has been delivered by a store worker, ensuring accurate tracking and confirmation of materials received.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+15.User Story: As a store manager, I want to log in to the system so that I can access the store management features.
+
+16.User Story: As a store manager, I want to change my password in the system so that I can ensure the security of my account.
+
+17.User Story: As a store manager, I want to view a dashboard that provides an overview of current inventory levels and pending orders.
+
+18.User Story: As a store manager, I want to view detailed information about each material, including its description, Unit Price, and category.
+
+19.User Story: As a store manager, I want to view the availability of materials when approving orders.
+
+
+20.User Story: As a store manager, I want to view the department names and supervisor's associated with each request when reviewing and approving order requests, allowing me to identify the source of the request.
+
+21.User Story: As a store manager, I want to sort and filter order requests based on their status (pending, cancelled, completed) so that I can manage them efficiently.
+
+22.User Story: As a store manager, I want to mark materials as "out of stock" when they are no longer available, ensuring accurate inventory tracking.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+23.User Story: As a Store Incharge, I want to log in to the system using my credentials to access the store management features.
+
+24.User Story: As a Store Incharge, I want to change my password in the system so that I can ensure the security of my account.
+
+
+25.User Story: As a Store Incharge, I want to view a dashboard that provides an overview of current inventory levels,departments and assigned store manager.
+
+26.User Story: As a Store Incharge, I want to add new materials to the inventory along with their details.
+
+27.User Story: As a Store Incharge, I want to update material information such as description, and pricing, keeping the inventory data up to date.
+
+28.User Story: As a Store Incharge, I want to remove materials that are no longer needed from the inventory, ensuring a clean and relevant material list.
+
+29.User Story: As a store Incharge, I want to receive notifications when stock levels of certain critical materials fall below a defined limit.
+
+30.User Story: As a Store Incharge, I want to create new categories of materials and assign materials to these categories, helping organized inventory management.
+
+31.User Story: As a Store Incharge, I want to change the image associated with a material, allowing for visual representation of the items.
+
+32.User Story: As a Store Incharge, I want to edit the information of store managers and store workers, such as their personal details and department assignments.
+
+33.User Story: As a Store Incharge, I want to add new store managers and store workers to the system, providing them with access and assigning them to specific departments.
+
+34.User Story: As a Store Incharge, I want to receive notifications about critical inventory levels, ensuring that timely actions are taken to restock materials.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+35.User Story: As a Supervisors Incharge, I want to log in to the system using my credentials to access employee and order management features.
+
+36.User Story: As a Supervisors Incharge, I want to view a dashboard that provides an overview of employee information, order reports graphs.
+
+37.User Story: As a Supervisors Incharge, I want to add new supervior to the system by entering their personal information and assigning them to departments.
+
+38.User Story: As a Supervisors Incharge, I want to update personal information for supervisor.
+
+39.User Story: As a Supervisors Incharge, I want to switch the departments of employees when they move to different teams.
+
+40.User Story: As a Supervisors Incharge, I want to generate order reports for each supervisor, displaying their order history and details.
+
+41.User Story: As a Supervisors Incharge, I want to view a graph showing the total number of orders placed by each supervisor.
+
+42.User Story: As a Supervisors Incharge, I want to view graphical representations of weekly, monthly, and yearly order trends for analysis.
+
+43.User Story: As a Supervisors Incharge, I want to access a graph that shows the total ordered materials over different time periods.
+
+44.User Story: As a Supervisors Incharge, I want to see a graph that displays the number of cancelled orders for each supervisor.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+45.User Story: As a Store Worker, I want to view a dashboard that displays the orders I need to pick up and deliver, helping me manage my tasks efficiently.
+
+46.User Story: As a Store Worker, I want to change my password in the system so that I can ensure the security of my account.
+
+47.User Story: As a Store Worker, I want to receive notifications for new task that require pickup and delivery, ensuring I stay updated on my tasks.
+
+48.User Story: As a Store Worker, I want to access order details including the order-id, and pickup/delivery locations to prepare for the tasks.
+
+49.User Story: As a Store Worker, I want to mark orders as picked up when I collect the materials from the store's inventory.
+
+50.User Story: As a Store Worker, I want to mark orders as delivered when I successfully hand over the materials to the manufacturing supervisors.
+
+51.User Story: As a Store Worker, I want to view a graph that shows my daily, weekly, and monthly delivered orders, helping me monitor my performance.
+
+52.User Story: As a Store Worker, I want to access information about the supervisors who will receive the deliveries, including their contact details.
+
