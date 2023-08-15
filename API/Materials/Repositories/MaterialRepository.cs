@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 namespace Materials.Repositories;
 
 [ApiController]
-[Route("/api/[controller]")]
+[Route("/api/Materials")]
 public class MaterialRepository : IMaterialRepository
 {
     private IConfiguration _configuration;
@@ -169,16 +169,16 @@ public class MaterialRepository : IMaterialRepository
         return status;
     }
     
-    public async Task<bool> Update(Material material)
+    public async Task<bool> Update(int id, int quantity)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "UPDATE materials SET  quantity=@quantity  WHERE id=@materialId";
+            string query = "UPDATE materials SET  quantity=quantity+@quantity  WHERE id=@materialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@materialId", material.Id);
-            cmd.Parameters.AddWithValue("@quantity", material.Quantity);
+            cmd.Parameters.AddWithValue("@materialId", id);
+            cmd.Parameters.AddWithValue("@quantity", quantity);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
@@ -428,5 +428,83 @@ public class MaterialRepository : IMaterialRepository
         }
         return materials;
     }
+
+
+           public async Task<IEnumerable<StockReport>> GetStockReports(int empid){
+        List<StockReport> stocks =new  List<StockReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select m.title,m.quantity,c.category from warehousestaff w inner join materials m on m.categoryid=w.categoryid  inner join categories c on c.id=m.categoryid where w.employeeid=@empid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            cmd.Parameters.AddWithValue("@empid", empid);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                string? name = reader["title"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+
+
+                StockReport stock = new StockReport
+                {
+                    Name = name,
+                    Quantity = quantity,
+
+
+                };
+                stocks.Add(stock);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+           await con.CloseAsync();
+        }
+        return stocks;
+    }
+
+        public async Task<IEnumerable<StockReport>> GetAllStockReports(){
+        List<StockReport> stocks =new  List<StockReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = " select m.title,m.quantity ,c.category from warehousestaff w inner join materials m on m.categoryid=w.categoryid inner join categories c on c.id=m.categoryid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                string? category = reader["category"].ToString();            
+                string? name = reader["title"].ToString();
+                int quantity = Int32.Parse(reader["quantity"].ToString());
+
+
+                StockReport stock = new StockReport
+                {
+                    Catagory=category,
+                    Name = name,
+                    Quantity = quantity,
+                };
+                stocks.Add(stock);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+           await con.CloseAsync();
+        }
+        return stocks;
+    }
+
+     
         
 }

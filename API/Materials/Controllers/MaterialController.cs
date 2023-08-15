@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 namespace Materials.Controllers
 {
     [ApiController]
-    [Route("/api/[controller]")]
+    [Route("/api/materials")]
     public class MaterialController : ControllerBase
     {
         private readonly IMaterialService _matsrv;
@@ -17,6 +17,7 @@ namespace Materials.Controllers
         }
 
         [HttpGet]
+        [Route("materials")]
         public async Task<IEnumerable<Material>> GetAll()
         {
             IEnumerable<Material> Materials = await _matsrv.GetAll();
@@ -24,7 +25,7 @@ namespace Materials.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("materials/{id}")]
         public async Task<Material> Get(int id)
         {
             Material material = await _matsrv.Get(id);
@@ -32,7 +33,7 @@ namespace Materials.Controllers
         }
 
         [HttpGet]
-        [Route("{materialid}")]
+        [Route("image/{materialid}")]
         public async Task<string> GetImage(int materialid)
         {
             string imgUrl = await _matsrv.GetImage(materialid);
@@ -40,14 +41,15 @@ namespace Materials.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<bool> UpdateMaterial([FromBody] Material material)
+        [Route("material/{id}")]
+        public async Task<bool> Update(int id, [FromBody] int quantity)
         {
-            bool status = await _matsrv.Update(material);
+            bool status = await _matsrv.Update(id,quantity);
             return status;
         }
 
         [HttpPost]
+        [Route("materials")]
         public async Task<bool> Insert([FromBody] Material material)
         {
             bool status = await _matsrv.Insert(material);
@@ -55,7 +57,7 @@ namespace Materials.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("materials/{id}")]
         public async Task<bool> Delete(int id)
         {
             bool status = await _matsrv.Delete(id);
@@ -99,6 +101,23 @@ namespace Materials.Controllers
         }
 
         [HttpGet]
+        [Route("stockreports/{empid}")]
+        public async Task<IEnumerable<StockReport>> GetReport(int empid)
+        {
+            IEnumerable<StockReport> reports = await _matsrv.GetStockReports(empid);
+            return reports;
+        }
+       
+       
+        [HttpGet]
+        [Route("stockreports")]
+        public async Task<IEnumerable<StockReport>> GetAllReports()
+        {
+            IEnumerable<StockReport> reports = await _matsrv.GetAllStockReports();
+            return reports;
+        }
+
+        [HttpGet]
         [Route("categories")]
         public async Task<IEnumerable<Material>> GetCategories()
         {
@@ -136,5 +155,6 @@ namespace Materials.Controllers
             return StatusCode(500, $"Internal server error: {ex}");
         }
     }
+
     }
 }

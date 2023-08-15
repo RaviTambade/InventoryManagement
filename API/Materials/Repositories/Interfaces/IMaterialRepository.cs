@@ -10,15 +10,14 @@ public interface IMaterialRepository
     Task<string> GetImage(int materialId);
 
     Task<bool> Insert(Material material);
-    Task<bool> Update(Material material);
+    Task<bool> Update(int id, int quantity);
     Task<bool> Delete(int materialId);
     Task<IEnumerable<Location>> GetLocations();
-
     Task<Location> GetLocation(int materialId);
-
     Task<IEnumerable<Material>> GetMaterials(int id);
-    Task<IEnumerable<Material>> GetOutOfStockMaterials();
-    
+    Task<IEnumerable<Material>> GetOutOfStockMaterials(); 
     Task<IEnumerable<Material>> GetCategories();
+    Task<IEnumerable<StockReport>> GetStockReports(int empid);
+    Task<IEnumerable<StockReport>> GetAllStockReports();  
 
 }
