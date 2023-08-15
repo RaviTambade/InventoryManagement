@@ -8,23 +8,23 @@
 
 5.User Story: As a supervisor, I want to add requested materials to my cart before sending an order, and be able to edit or remove materials from the cart as needed.
 
-6.User Story: As a  supervisor, I want to be able to select and send multiple material requests at once, making the ordering process more efficient.
+6.User Story: As a  supervisor, I want to be able to select and send multiple material requests at once,so that I ordering process will be more efficient.
 
-7.User Story: As a supervisor, I want to cancel an order that I have placed in the system, in case I no longer require the materials
+7.User Story: As a supervisor, I want to cancel an order that I have placed in the system, so that I can remove materials which is not required.
 
-8.User Story:As a supervisor, I want to see status of my order (processing, shipped, delivered) so that I am aware of its progress.
+8.User Story:As a supervisor, I want to see status of my order (processing, shipped, delivered) so that I can see its progress.
 
 9.User Story: As a supervisor, I want to view the history of my past orders and their details so that I can reference them for future planning.
 
-10.*User Story: As a supervisor, I want to easily reorder previously ordered materials to save time on repetitive orders.
+10.*User Story: As a supervisor, I want to easily reorder previously ordered materials so that I can save time on repetitive orders.
 
 11.User Story: As a supervisor, I want to access a dashboard that displays graphical representations of my monthly, yearly, and weekly material requests, so that I can visualize trends and patterns.
 
 12.User Story: As a supervisor, I want to choose a specific time frame (monthly, yearly, weekly) for the graph display on the dashboard, so that I can focus on the relevant data.
 
-13.*User Story: As a  supervisor, I want the option to download the graph as an image or a file for reporting purposes, enabling me to share the information with others.
+13.*User Story: As a  supervisor, I want the option to download the graph as an image or a file for reporting purposes, so that I can share the information with others.
 
-14.User Story: As a supervisor, I want to receive authentication that an order has been delivered by a store worker, ensuring accurate tracking and confirmation of materials received.
+14.User Story: As a supervisor, I want to receive authentication that an order has been delivered by a store worker, so that I can track and confirm on materials received.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -33,33 +33,29 @@
 
 16.User Story: As a store manager, I want to change my password in the system so that I can ensure the security of my account.
 
-17.User Story: As a store manager, I want to view a dashboard that provides an overview of current inventory levels and pending orders.
+17.User Story: As a store manager, I want to view a dashboard so that i can get overview of current inventory levels and pending orders.
 
-18.User Story: As a store manager, I want to view detailed information about each material, including its description, Unit Price, and category.
+18.User Story: As a store manager, I want to view detailed information about each material, including its description, Unit Price, and category so that i can see all materials details.
 
-19.User Story: As a store manager, I want to view the availability of materials when approving orders.
+19.User Story: As a store manager, I want to view the availability of materials when approving orders so that i can approve material as per the availability.
 
 
-20.User Story: As a store manager, I want to view the department names and supervisor's associated with each request when reviewing and approving order requests, allowing me to identify the source of the request.
+20.User Story: As a store manager, I want to view the department names and supervisor's associated with each request when reviewing and approving order requests, so that i can identify the source of the request.
 
 21.User Story: As a store manager, I want to sort and filter order requests based on their status (pending, cancelled, completed) so that I can manage them efficiently.
 
-22.User Story: As a store manager, I want to mark materials as "out of stock" when they are no longer available, ensuring accurate inventory tracking.
+22.User Story: As a store manager, I want to mark materials as "out of stock" when they are no longer available, so that i can track accurate inventory.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-23.User Story: As a Store Incharge, I want to log in to the system using my credentials to access the store management features.
 
-24.User Story: As a Store Incharge, I want to change my password in the system so that I can ensure the security of my account.
-
-
-25.User Story: As a Store Incharge, I want to view a dashboard that provides an overview of current inventory levels,departments and assigned store manager.
+25.User Story: As a Store Incharge, I want to view a dashboard so that i can get overview of current inventory levels,departments and assigned store manager.
 
 26.User Story: As a Store Incharge, I want to add new materials to the inventory along with their details.
 
-27.User Story: As a Store Incharge, I want to update material information such as description, and pricing, keeping the inventory data up to date.
+27.User Story: As a Store Incharge, I want to update material information such as description, and pricing, so that i can keep the inventory data up to date.
 
-28.User Story: As a Store Incharge, I want to remove materials that are no longer needed from the inventory, ensuring a clean and relevant material list.
+28.User Story: As a Store Incharge, I want to remove materials that are no longer needed from the inventory, so that i can achieve clean and relevant material list.
 
 29.User Story: As a store Incharge, I want to receive notifications when stock levels of certain critical materials fall below a defined limit.
 
