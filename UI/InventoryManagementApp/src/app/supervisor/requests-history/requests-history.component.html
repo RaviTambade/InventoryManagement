@@ -1,0 +1,79 @@
+
+<div *ngIf="cart">
+    <h2>New Request</h2>
+    <table style="width:60%">
+        <thead>
+            <th> Material ID</th>
+            <th> Material Category</th>
+            <th> Order Qunatity</th>
+      
+        </thead>
+        <tbody *ngFor="let cart of carts">
+            <tr>
+                <td>{{cart.materialId}}  </td>
+                <td> {{cart.category}}</td>
+                <td> {{cart.quantity}}</td> 
+                 <td><button (click)="onEdit(cart.id)" >Edit</button>  <button (click)="onRemove(cart.id)" >Remove</button> </td>
+            </tr>  
+        </tbody>
+    </table>
+    <tr><button (click)="onOrder()" >Place Order</button>   <button (click)="onRemoveAll()" >RemoveAll</button> </tr>
+</div>
+
+<div *ngIf="emptycart">
+    <h2>No request!</h2>
+</div>
+
+<br>
+
+
+<h2>Previous Requests</h2>
+
+<!-- <div>    
+    <form [formGroup]="form" >
+        <div>
+            <div>
+              <input id="myrequest" type="radio" value="myrequest" name="request" formControlName="request" (change)="onChange(category.type, $any($event.target)?.checked)">
+              <label for="male">My Requests</label>
+          
+              <input id="allrequests" type="radio" value="allrequests" name="request" formControlName="request" (change)="changeShow($event)">
+              <label for="female">All Requests</label>
+           </div>
+              
+            <div *ngIf="f.request.touched && f.request.invalid" class="alert alert-danger">
+            </div> </div>
+    
+        </form>
+</div> -->
+
+
+<table style="width:90%">
+    <thead>
+        <th> Request ID</th>
+        <th> Date</th>
+        <th>Supervisor</th>
+        <th> Status</th>
+  
+    </thead>
+    <tbody *ngFor="let request of requests">
+        <tr>
+            <td>{{request.id}}  </td>
+            <td>{{request.date}}  </td>
+            <td>{{request.employeeFirstName}} {{request.employeeLastName}} </td>
+            <td> {{request.status}}</td>
+             <td> <button  (click)="onView(request.id)">View</button> </td>
+             <td> <button (click)="onCancelRequest(request.id)"  [disabled]=" request.status!=='inprogress'" >Cancel request</button> </td>
+        </tr>  
+    </tbody>
+</table>
+<button type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
+<button type="button" (click)="next()" [disabled]="isDisabledNext">Next</button>
+
+
+
+
+
+
+
+
+

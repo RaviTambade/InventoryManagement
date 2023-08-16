@@ -1,0 +1,26 @@
+
+
+<h3>Request Details</h3>
+<hr>
+<div class="container" >
+    <div class="product" > <p><b>Date: {{date[0]}} Time: {{date[1]}}</b></p> </div>
+</div>
+
+<table style="width:70%">
+    <thead>
+        <th>Material Id</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Quantity</th>
+    </thead>
+    <tbody  *ngFor="let cart of carts">
+        <tr>
+            <td>{{cart.materialId }}  </td>
+            <td> {{cart.category}}</td>
+            <td> {{cart.status}}</td>
+            <td>{{cart.quantity}}</td>
+             <td> <button [disabled]=" cart.status!=='inprogress'" (click)="onEdit(cart.id)">Edit</button> </td>
+             <td>  <button [disabled]=" cart.status!=='inprogress'" (click)="onRemove(cart.id)">Remove</button> </td>
+        </tr>  
+    </tbody>
+</table>
