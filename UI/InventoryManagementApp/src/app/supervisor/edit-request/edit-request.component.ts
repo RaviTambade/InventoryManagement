@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RequestDetails } from 'src/app/Models/RequestDetails';
+import { RequestDetails } from 'src/app/supervisor/Models/RequestDetails';
 import { MaterialService } from 'src/app/Services/material.service';
 import { RequestService } from 'src/app/Services/request.service';
 

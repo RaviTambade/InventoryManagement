@@ -5,6 +5,8 @@ import { RequestsHistoryComponent } from './requests-history/requests-history.co
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { EditRequestComponent } from './edit-request/edit-request.component';
 import { EditInitialRequestComponent } from './edit-initial-request/edit-initial-request.component';
+import { FormsModule } from '@angular/forms';
+import { RequestComponent } from './request/request.component';
 
 
 
@@ -14,10 +16,12 @@ import { EditInitialRequestComponent } from './edit-initial-request/edit-initial
     RequestsHistoryComponent,
     RequestDetailsComponent,
     EditRequestComponent,
-    EditInitialRequestComponent
+    EditInitialRequestComponent,
+    RequestComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class SupervisorModule { }

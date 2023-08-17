@@ -1,0 +1,36 @@
+<div class="container" >
+    <div class="product" *ngIf="orderDetails"> <p><b>Date: {{orderDetail.orderDate|date}} </b></p> </div>
+    <div class="product" *ngIf="orderDetails"><p> <b> Department:{{orderDetail.department}} </b> </p></div>
+    <div class="product" *ngIf="orderDetails" > <p><b>Available Quantity</b></p><div *ngFor="let order of orderDetails"> <b style="color:Tomato;"> {{order.name}} :{{order.availableQuantity}} </b></div></div>
+   
+</div>
+
+<h2>Order List</h2>
+<div >
+    <table style="width:60%">
+        <thead>
+            <th></th>
+            <th>Order ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Approved Quantity</th>
+        </thead>
+
+        <tbody>
+            <tr  *ngFor="let order of orderDetails">
+                <td><img src="{{order.imageUrl}}" width="50" hight="50" alt=""></td>
+                <td> {{order.id}}</td> 
+                <td> {{order.name}}</td> 
+                <td> {{order.category}}</td> 
+                <td> <span>{{order.quantity}}</span></td> 
+                <td><input  style="text-align:center;" name="orderQuantity" value="{{order.quantity}}" #quantity  type="number" ></td>
+                <td> <button *ngIf="order.itemStatus==false" (click)="onApproved(order.id, quantity.value)">Approved Request</button>   <span  *ngIf="order.itemStatus==true" class="glyphicon">&#xe013;</span> </td>
+            </tr>  
+
+        </tbody>
+    </table>
+    <button (click)="onBack()">back</button>
+
+</div>
+
