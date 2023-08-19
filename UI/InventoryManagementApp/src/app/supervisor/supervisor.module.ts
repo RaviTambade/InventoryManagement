@@ -7,8 +7,17 @@ import { EditRequestComponent } from './edit-request/edit-request.component';
 import { EditInitialRequestComponent } from './edit-initial-request/edit-initial-request.component';
 import { FormsModule } from '@angular/forms';
 import { RequestComponent } from './request/request.component';
+import { Routes } from '@angular/router';
 
-
+export const supervisorsRoutes: Routes = [
+  // { path: 'home', component: HomeComponent },
+  { path: 'editinitialrequest/:cartId', component: EditInitialRequestComponent },
+  { path: 'editrequest/:id', component: EditRequestComponent },
+  { path: 'request/:id', component: RequestComponent },
+  { path: 'requestdetails/:requestid', component: RequestDetailsComponent },
+  { path: 'requesthistory', component: RequestsHistoryComponent },
+  { path: 'store', component: StoreComponent }
+]
 
 @NgModule({
   declarations: [
