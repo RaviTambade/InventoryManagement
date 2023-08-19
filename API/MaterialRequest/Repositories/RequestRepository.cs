@@ -364,7 +364,6 @@ public class RequestRepository : IRequestRepository
         return requests;
     }
 
-
     public async Task<List<RequestReport>> MonthlyRequests(int empid,Period period)
     {
        List<RequestReport> requests = new List<RequestReport>();
@@ -405,7 +404,6 @@ public class RequestRepository : IRequestRepository
         return requests;
     }
  
-
      public async Task<List<RequestReport>> YearlyRequests(int empid,string year)
     {
        List<RequestReport> requests = new List<RequestReport>();
@@ -445,5 +443,4 @@ public class RequestRepository : IRequestRepository
         return requests;
     }
  
-
 }

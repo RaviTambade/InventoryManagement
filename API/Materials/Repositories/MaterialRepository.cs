@@ -51,7 +51,7 @@ public class MaterialRepository : IMaterialRepository
 
                 materials.Add(TheMaterial);
             }
-           await reader.CloseAsync();
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -123,7 +123,7 @@ public class MaterialRepository : IMaterialRepository
             while (await reader.ReadAsync())
             {
                 string? imgurl = reader["imageurl"].ToString();
-                imgUrl=imgurl;
+                imgUrl = imgurl;
             }
             await reader.CloseAsync();
         }
@@ -138,7 +138,8 @@ public class MaterialRepository : IMaterialRepository
         return imgUrl;
     }
 
-    public async Task<bool> Insert(Material material) {
+    public async Task<bool> Insert(Material material)
+    {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -168,7 +169,7 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
-    
+
     public async Task<bool> Update(int id, int quantity)
     {
         bool status = false;
@@ -196,8 +197,9 @@ public class MaterialRepository : IMaterialRepository
         }
         return status;
     }
-   
-    public async Task<bool> Delete(int id){
+
+    public async Task<bool> Delete(int id)
+    {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -225,7 +227,7 @@ public class MaterialRepository : IMaterialRepository
 
     public async Task<IEnumerable<Material>> GetMaterials(int categoryid)
     {
-        List<Material> materials = new List<Material>();    
+        List<Material> materials = new List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -268,8 +270,9 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
-    public async Task<IEnumerable<Material>> GetOutOfStockMaterials(){
-        List<Material> materials =new  List<Material>();
+    public async Task<IEnumerable<Material>> GetOutOfStockMaterials()
+    {
+        List<Material> materials = new List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -306,7 +309,7 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-           await con.CloseAsync();
+            await con.CloseAsync();
         }
         return materials;
     }
@@ -317,7 +320,7 @@ public class MaterialRepository : IMaterialRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  warehouse.section,  categories.category, materials.title as materialname, materials.quantity, employees.id FROM warehouse  INNER JOIN materials ON  materials.categoryid=warehouse.categoryid  inner join categories on warehouse.categoryid = categories.id inner join employees on employees.id=warehouse.employeeid" ;
+            string query = "select  warehouse.section,  categories.category, materials.title as materialname, materials.quantity, employees.id FROM warehouse  INNER JOIN materials ON  materials.categoryid=warehouse.categoryid  inner join categories on warehouse.categoryid = categories.id inner join employees on employees.id=warehouse.employeeid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -329,13 +332,13 @@ public class MaterialRepository : IMaterialRepository
                 int quantity = int.Parse(reader["quantity"].ToString());
                 int empid = int.Parse(reader["id"].ToString());
 
-                Location loc  = new Location()
+                Location loc = new Location()
                 {
                     Section = section,
                     Name = name,
                     category = category,
-                    Quantity=quantity,
-                    EmployeeId=empid
+                    Quantity = quantity,
+                    EmployeeId = empid
                 };
                 locations.Add(loc);
             }
@@ -352,14 +355,14 @@ public class MaterialRepository : IMaterialRepository
         }
         return locations;
     }
-    
-     public async Task<Location> GetLocation(int materialId)
+
+    public async Task<Location> GetLocation(int materialId)
     {
         Location location = null;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select  warehouse.section,  categories.category, materials.title as materialname, materials.quantity, employees.id FROM warehouse  INNER JOIN materials ON  materials.categoryid=warehouse.categoryid  inner join categories on warehouse.categoryid = categories.id inner join employees on employees.id=warehouse.employeeid where materials.id =@materialid" ;
+            string query = "select  warehouse.section,  categories.category, materials.title as materialname, materials.quantity, employees.id FROM warehouse  INNER JOIN materials ON  materials.categoryid=warehouse.categoryid  inner join categories on warehouse.categoryid = categories.id inner join employees on employees.id=warehouse.employeeid where materials.id =@materialid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@materialid", materialId);
             await con.OpenAsync();
@@ -372,15 +375,15 @@ public class MaterialRepository : IMaterialRepository
                 int quantity = int.Parse(reader["quantity"].ToString());
                 int empid = int.Parse(reader["id"].ToString());
 
-                location  = new Location()
+                location = new Location()
                 {
                     Section = section,
                     Name = name,
                     category = category,
-                    Quantity=quantity,
-                    EmployeeId=empid
+                    Quantity = quantity,
+                    EmployeeId = empid
                 };
-                
+
             }
 
             await reader.CloseAsync();
@@ -398,20 +401,20 @@ public class MaterialRepository : IMaterialRepository
 
     public async Task<IEnumerable<Material>> GetCategories()
     {
-        List<Material> materials=new List<Material>();
+        List<Material> materials = new List<Material>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select category from categories" ;
+            string query = "select category from categories";
             MySqlCommand cmd = new MySqlCommand(query, con);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
                 string? category = reader["category"].ToString();
-                Material material  = new Material()
+                Material material = new Material()
                 {
-                    Type=category
+                    Type = category
                 };
                 materials.Add(material);
             }
@@ -430,8 +433,9 @@ public class MaterialRepository : IMaterialRepository
     }
 
 
-           public async Task<IEnumerable<StockReport>> GetStockReports(int empid){
-        List<StockReport> stocks =new  List<StockReport>();
+    public async Task<IEnumerable<StockReport>> GetStockReports(int empid)
+    {
+        List<StockReport> stocks = new List<StockReport>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -463,31 +467,30 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-           await con.CloseAsync();
+            await con.CloseAsync();
         }
         return stocks;
     }
 
-        public async Task<IEnumerable<StockReport>> GetAllStockReports(){
-        List<StockReport> stocks =new  List<StockReport>();
+    public async Task<IEnumerable<StockReport>> GetAllStockReports()
+    {
+        List<StockReport> stocks = new List<StockReport>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = " select m.title,m.quantity ,c.category from warehousestaff w inner join materials m on m.categoryid=w.categoryid inner join categories c on c.id=m.categoryid";
+            string query = "SELECT SUM(m.quantity) AS quantity, c.category FROM warehousestaff w INNER JOIN materials m ON m.categoryid = w.categoryid INNER JOIN categories c ON c.id = m.categoryid GROUP BY c.category;";
             MySqlCommand cmd = new MySqlCommand(query, con);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                string? category = reader["category"].ToString();            
-                string? name = reader["title"].ToString();
+                string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
 
 
                 StockReport stock = new StockReport
                 {
-                    Catagory=category,
-                    Name = name,
+                    Category = category,
                     Quantity = quantity,
                 };
                 stocks.Add(stock);
@@ -500,11 +503,9 @@ public class MaterialRepository : IMaterialRepository
         }
         finally
         {
-           await con.CloseAsync();
+            await con.CloseAsync();
         }
         return stocks;
     }
 
-     
-        
 }
