@@ -6,14 +6,15 @@
 
 </div>
 
-<!-- 
+
 <div class="row">
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Drop: {{department}} </h5>
           <div *ngFor="let task of tasks">
-            <p class="card-text">Order Id : <b>{{task.orderId}} </b>   Pick Up : <b>{{task.section}} </b> </p><hr>
+            <p class="card-text"  *ngIf="picked==false && deliver==false" >Order Id : <b>{{task.orderId}} </b>   Pick Up : <b>{{task.section}} </b> </p><hr>
+            <p class="card-text"  *ngIf="picked==true  && deliver==false" >Order Id : <b>{{task.orderId}} </b>   Drop : <b>{{department}} </b> </p><hr>
           </div>
           <a  (click)="onPicked()" *ngIf="picked==false && deliver==false" class="btn btn-primary">Picked</a>
           <a  *ngIf="picked==true  && deliver==false" (click)="onDeliver()" class="btn btn-primary">Deliver</a>
@@ -21,9 +22,9 @@
       </div>
       <button (click)="onBack()">back</button>
     </div>
-  </div> -->
+  </div>
 
-  <div >
+  <!-- <div >
     <table style="width:60%">
         <thead>
             <th></th>
@@ -43,7 +44,7 @@
         </tbody>
     </table>
 
-</div>
+</div> -->
 
 
   <div class="popup-overlay" *ngIf="showPopup">

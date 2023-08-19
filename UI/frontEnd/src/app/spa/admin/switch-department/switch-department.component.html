@@ -2,9 +2,9 @@
 
   <div class="container mt-5">
     <form>
-      <table class="table">
+      <table class="table" *ngFor="let emp of employees">
         <tr>
-          <td><strong>Department:</strong> Fixed Department Name</td>
+          <td><strong>Department:</strong> {{emp.department}} </td>
           <td>
             <label for="supervisorSelect1">Select Supervisor 1:</label>
           </td>

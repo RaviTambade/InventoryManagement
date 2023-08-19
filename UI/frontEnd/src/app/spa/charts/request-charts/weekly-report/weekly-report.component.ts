@@ -27,7 +27,7 @@ export class WeeklyReportComponent {
   constructor(private svc: RequestService, private datePipe:DatePipe) {
     this.calculateWeekStartAndEnd(this.currentDate);
   }
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.svc.GetWeeklyReport(12, this.period).subscribe((res) => {
       console.log(res);
       this.report = res;
@@ -139,7 +139,7 @@ export class WeeklyReportComponent {
     const lastWeekStart = new Date(firstWeekStart);
     lastWeekStart.setDate(lastWeekStart.getDate() + 6);
   
-        this.period.fromDate= this.datePipe.transform(firstWeekStart, 'yyyy/MM/dd');
+    this.period.fromDate= this.datePipe.transform(firstWeekStart, 'yyyy/MM/dd');
     this.period.toDate=this.datePipe.transform(lastWeekStart, 'yyyy/MM/dd');
     console.log(this.period)
   }

@@ -15,49 +15,49 @@ export class MaterialService {
 
   getMaterial(materialid:any):Observable<any>{
     console.log(materialid);
-      let url ="http://localhost:5176/api/Materials/materials/" +materialid ;
+      let url ="http://localhost:5071/api/Materials/materials/" +materialid ;
       return this.http.get(url);
   }
 
   getById(materialId:number):Observable<any>{
-    let url ="http://localhost:5176/api/Materials/materials/"+ materialId;
+    let url ="http://localhost:5071/api/Materials/materials/"+ materialId;
     return this.http.get(url);
   }
 
   getLocation(materialId:number):Observable<any>{
-    let url ="http://localhost:5176/api/Materials/location/"+ materialId;
+    let url ="http://localhost:5071/api/Materials/location/"+ materialId;
     return this.http.get(url);
   }
 
   getCategories():Observable<any>{
-    let url ="http://localhost:5176/api/Materials/categories";
+    let url ="http://localhost:5071/api/Materials/categories";
     return this.http.get(url);
   }
 
   InsertMaterial(material:Material):Observable<any>{
-    let url ="http://localhost:5176/api/Materials/Materials";
+    let url ="http://localhost:5071/api/Materials/Materials";
     return this.http.post(url,material);
   }
 
   updateQuantity(materialId:number, quantity:number):Observable<any>{
-    let url ="http://localhost:5176/api/Materials/material/"+ materialId;
+    let url ="http://localhost:5071/api/Materials/material/"+ materialId;
     return this.http.put(url,quantity);
   }
   
   getAllMaterials():Observable<any> 
   {
-    let url = "http://localhost:5176/api/Materials/materials";
+    let url = "http://localhost:5071/api/Materials/materials";
     return this.http.get(url);
   }
   getStockReports(empid:number):Observable<any> 
   {
-    let url = "http://localhost:5176/api/Materials/stockreports/"+empid;
+    let url = "http://localhost:5071/api/Materials/stockreports/"+empid;
     return this.http.get(url);
   }
 
   getAllStockReports():Observable<any> 
   {
-    let url = "http://localhost:5176/api/Materials/stockreports";
+    let url = "http://localhost:5071/api/Materials/stockreports";
     return this.http.get(url);
   }
 

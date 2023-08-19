@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InsertEmployeesModule } from './insert-employees/insert-employees.module';
 import { SwitchDepartmentComponent } from './switch-department/switch-department.component';
+import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 
 
 
 @NgModule({
   declarations: [
   
-    SwitchDepartmentComponent
+    SwitchDepartmentComponent,
+       UpdateEmployeeComponent
   ],
   imports: [
     CommonModule,
@@ -17,6 +19,6 @@ import { SwitchDepartmentComponent } from './switch-department/switch-department
     InsertEmployeesModule,
     ReactiveFormsModule
   ],
-  exports:[SwitchDepartmentComponent]
+  exports:[SwitchDepartmentComponent,UpdateEmployeeComponent]
 })
 export class AdminModule { }

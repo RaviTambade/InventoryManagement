@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../../employee.service';
+import { Employee } from 'src/app/Employee';
 
 @Component({
   selector: 'switch-department',
@@ -9,10 +10,14 @@ import { EmployeeService } from '../../employee.service';
 })
 export class SwitchDepartmentComponent {
 
-  constructor(private svc:EmployeeService){}
+  employees:Employee[]=[];
+  constructor(private svc:EmployeeService){
+  
+  }
   ngOnInit() {
     this.svc.getEmployees().subscribe((res)=>{
       console.log(res);
+      this.employees=res;
     })
   }
 }

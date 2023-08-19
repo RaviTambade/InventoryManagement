@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import { MaterialReport } from 'src/app/MaterialReport';
-import { RequestReport } from 'src/app/RequestReport';
-import { RequestService } from 'src/app/spa/request.service';
 import Chart from 'chart.js/auto';
-import { Period } from 'src/app/Period';
 import { DatePipe } from '@angular/common';
-import { startOfMonth, addDays, format, getISOWeek } from 'date-fns';
 import { TasksService } from 'src/app/spa/tasks.service';
 import { TaskReport } from 'src/app/TaskReport';
 @Component({
@@ -16,14 +11,14 @@ import { TaskReport } from 'src/app/TaskReport';
 export class MonthlyComponent {
 
   selectedMonthValue: string = '';
-  empid:number=16;
+  empid: number = 16;
   public chart: any;
   data: any[] = [];
   report: TaskReport[] = [];
-  month: number = 0; // Replace with desired month name
-  year: number = 0; // Replace with desired year
-  currentMonth: any | undefined; // Use union type with undefined
-  currentYear: number | undefined; // Use union type with undefined
+  month: number = 0;
+  year: number = 0; 
+  currentMonth: any | undefined; 
+  currentYear: number | undefined; 
   numWeeks: number | undefined;
   weekList: string[] = [];
   firstDate = new Date;
@@ -90,7 +85,6 @@ export class MonthlyComponent {
     });
   }
 
-
   getCurrentMonthAndYear() {
     const currentDate = new Date();
     const formattedMonth = this.datePipe.transform(currentDate, 'MMMM');
@@ -100,7 +94,7 @@ export class MonthlyComponent {
     console.log(this.currentYear);
     const formattedDate = this.datePipe.transform(`${this.currentMonth} 1 2000`, 'M');
     var month = parseInt(formattedDate || '0');
-    this.selectedMonthValue=`${this.currentYear}-${month}`;
+    this.selectedMonthValue = `${this.currentYear}-${month}`;
     console.log(this.selectedMonthValue)
     this.getFirstAndLastDateOfMonth(this.selectedMonthValue);
 
