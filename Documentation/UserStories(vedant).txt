@@ -4,7 +4,7 @@
 
  As a  supervisor, I want to sort materials by categories so that I can easily find and order materials.
 
-As a supervisor, I want to add materials in cart before creating the request so that i can request multiple materials at one time.
+As a registered user, I want to be able to save items to my wishlist so that I can keep track of materials that I am interested in and request multiple materials at one time.
 
  As a supervisor, I want to edit or remove materials from the cart so that I can efficiently manage and refine the selection of materials.
 
@@ -24,6 +24,7 @@ As a  supervisor, I want the option to download the graph as a file for reportin
 
  As a supervisor, I want verification that an order has been delivered by a store worker, so that I can confirm on materials received.
 
+As a supervisor, I want to be able to reset my password in case I forget it.
 
 
 
@@ -43,6 +44,7 @@ As a store manager, I want to mark materials as "out of stock" when they are no 
 
 As a store manager, I want to choose a specific time frame (monthly, yearly, weekly) for the graph, so that I can focus on the relevant data.
 
+As a store manager, I want to be able to reset my password in case I forget it.
 
 
 
@@ -67,6 +69,7 @@ As a Store Incharge, I want to edit the personal information of store managers a
 
 As a Store Incharge, I want to update information of store manager and store worker  so that I can ensure that the records are accurate and up-to-date.
 
+As a Store Incharge, I want to be able to reset my password in case I forget it.
 
 
 
@@ -89,6 +92,8 @@ As a Supervisors Incharge, I want to view graphical representations of weekly, m
 
 As a Supervisors Incharge, I want to see a graph that displays the number of cancelled orders for each supervisor so that I can identify potential issues in order processing.
 
+As a  Supervisors Incharge, I want to be able to reset my password in case I forget it.
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -103,4 +108,6 @@ As a Store Worker, I want to mark orders as delivered when I successfully hand o
 As a Store Worker, I want to view a graph that shows my daily, weekly, and monthly delivered orders, so that i can monitor my performance.
 
 As a Store Worker, I want to access information about the supervisors who will receive the deliveries, including their contact details so that I can efficiently communicate regarding the delivery process and resolve any potential issues.
+
+As a  Store Worker, I want to be able to reset my password in case I forget it.
 
