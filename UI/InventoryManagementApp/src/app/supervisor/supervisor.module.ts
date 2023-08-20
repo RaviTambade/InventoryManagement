@@ -8,9 +8,10 @@ import { EditInitialRequestComponent } from './edit-initial-request/edit-initial
 import { FormsModule } from '@angular/forms';
 import { RequestComponent } from './request/request.component';
 import { Routes } from '@angular/router';
+import { SupervisorsDashboardComponent } from './supervisors-dashboard/supervisors-dashboard.component';
 
 export const supervisorsRoutes: Routes = [
-  // { path: 'home', component: HomeComponent },
+   { path: 'dashboard', component: SupervisorsDashboardComponent },
   { path: 'editinitialrequest/:cartId', component: EditInitialRequestComponent },
   { path: 'editrequest/:id', component: EditRequestComponent },
   { path: 'request/:id', component: RequestComponent },
@@ -26,7 +27,8 @@ export const supervisorsRoutes: Routes = [
     RequestDetailsComponent,
     EditRequestComponent,
     EditInitialRequestComponent,
-    RequestComponent
+    RequestComponent,
+    SupervisorsDashboardComponent
   ],
   imports: [
     CommonModule,

@@ -16,17 +16,15 @@ export class NavbarComponent {
 
   isroleStoreManager(): boolean {
     const role = localStorage.getItem("role")
-    return role == 'StoreManager';
+    return role == 'Store Manager';
   }
 
   isroleStoreWorker(): boolean {
     const role = localStorage.getItem("role")
-    return role == 'StoreWorker';
+    return role == 'Store Worker';
   }
 
-  openUserProfile() {
-    this.router.navigate(['userinfo']);
-}
+ 
 
 isUser():boolean{
   const userId = localStorage.getItem("userId")
@@ -37,11 +35,12 @@ isUser():boolean{
 }
 
 isLoggedIn():boolean{
-  const jwt =localStorage.getItem("jwt")
-  if (jwt != null) {
-    return false;
+  let role =localStorage.getItem("role")
+  console.log(role)
+  if (role != null) {
+    return true;
   }
-  return true;
+  return false;
 }
 loggedOut(){
   this.router.navigate(['userlogout']);

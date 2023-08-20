@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 import { Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-export const storeWorkerRoutes: Routes = [
-  // { path: 'home', component: HomeComponent },
+export const storeManagerRoutes: Routes = [
+   { path: 'dashboard', component: DashboardComponent },
   { path: 'orderdetails/:requestid', component: OrderDetailsComponent },
   { path: 'orderhistory', component: OrdersHistoryComponent }
 ]
@@ -14,10 +15,12 @@ export const storeWorkerRoutes: Routes = [
 @NgModule({
   declarations: [
     OrderDetailsComponent,
-    OrdersHistoryComponent
+    OrdersHistoryComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[DashboardComponent]
 })
 export class StoreManagerModule { }

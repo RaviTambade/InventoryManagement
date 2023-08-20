@@ -313,7 +313,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select   employees.id, employees.birthdate, employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.gender, employees.imageurl, departments.department, roles.role from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where employees.gender=@gender ";
+            string query = "select   employees.id,  employees.hiredate, employees.firstname, employees.lastname, employees.email,employees.contactnumber, employees.gender, employees.imageurl, departments.department, roles.role from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where employees.gender=@gender ";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@gender", theGender);
 
@@ -324,7 +324,6 @@ public class EmployeeRepository : IEmployeeRepository
                 int id = Int32.Parse(reader["id"].ToString());
                 string? firstname = reader["firstname"].ToString();
                 string? lastname = reader["lastname"].ToString();
-                string? birthdate = reader["birthdate"].ToString();
                 string? hiredate = reader["hiredate"].ToString();
                 string? contactno = reader["contactnumber"].ToString();
                 string? imgurl = reader["imageurl"].ToString();
@@ -338,7 +337,6 @@ public class EmployeeRepository : IEmployeeRepository
                     Id = id,
                     FirstName = firstname,
                     LastName = lastname,
-                    BirthDate = birthdate,
                     HireDate = hiredate,
                     ContactNumber = contactno,
                     email = email,
