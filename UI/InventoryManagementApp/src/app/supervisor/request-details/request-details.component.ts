@@ -59,6 +59,6 @@ export class RequestDetailsComponent {
   }
 
   onEdit(id: number) {
-    this.router.navigate(["editRequest", id])
+    this.router.navigate(["/supervisor/editRequest", id])
   }
 }

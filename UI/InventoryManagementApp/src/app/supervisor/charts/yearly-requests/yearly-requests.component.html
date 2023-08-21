@@ -1,1 +1,12 @@
-<p>yearly-requests works!</p>
+
+<!-- <input type="year" [(ngModel)]="selectedWeekValue" (change)="onWeekChange()"> -->
+
+<label for="year">Select a year:</label>
+<select id="year" name="year"  [(ngModel)]="selectedYearValue" (change)="onYearChange()">
+  <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+</select>
+
+          <div class="chart-container">
+              <canvas id="MyChart3">{{ chart }}</canvas>
+          </div>
+

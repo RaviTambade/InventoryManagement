@@ -1,1 +1,9 @@
-<p>monthly-requests works!</p>
+
+<input type="month" [(ngModel)]="selectedMonthValue" (change)="onMonthChange()">
+<div class="container" >
+
+</div>
+
+            <div class="chart-container">
+                <canvas id="MyChart2">{{ chart }}</canvas>
+            </div>

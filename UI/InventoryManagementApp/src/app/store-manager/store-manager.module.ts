@@ -4,11 +4,13 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { StoreComponent } from '../supervisor/store/store.component';
 
 export const storeManagerRoutes: Routes = [
    { path: 'dashboard', component: DashboardComponent },
   { path: 'orderdetails/:requestid', component: OrderDetailsComponent },
-  { path: 'orderhistory', component: OrdersHistoryComponent }
+  { path: 'orderhistory', component: OrdersHistoryComponent },
+  { path: 'store', component: StoreComponent }
 ]
 
 
@@ -16,7 +18,7 @@ export const storeManagerRoutes: Routes = [
   declarations: [
     OrderDetailsComponent,
     OrdersHistoryComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule

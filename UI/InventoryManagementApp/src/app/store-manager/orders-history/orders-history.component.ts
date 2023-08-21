@@ -39,7 +39,6 @@ export class OrdersHistoryComponent {
     })
 
     this._ordersvc.getCompletedOrders(this.storemanagerid).subscribe((res) => {
-      console.log("inside")
       console.log(res);
       this.result=res;
       this.arrLength = this.result.length;
@@ -76,7 +75,7 @@ export class OrdersHistoryComponent {
 
 
   onView(requestid: number) {
-    this.router.navigate(['orderdetails', requestid]);
+    this.router.navigate(['/storemanager/orderdetails', requestid]);
 
   }
 }

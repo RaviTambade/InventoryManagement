@@ -1,1 +1,60 @@
-<p>supervisors-dashboard works!</p>
+<!-- <div class="container text-center">
+    <div class="row">
+        <div class="col-sm-6 offset-md-3">
+            <div class="chart-container">
+                <canvas id="MyChart" >{{ chart }}</canvas>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="https://th.bing.com/th/id/R.edefeeb0847d280adc23302cb12240ba?rik=IH%2bIhTkPC%2bxz%2bg&riu=http%3a%2f%2fwww.carsaar.com%2fwp-content%2fuploads%2f2018%2f08%2fTata-Motors-Sanand-Plant-9-e1533626668662.jpg&ehk=GlDqP7KXlu%2fQ4uUh1nYE2a74l2HYqlPEVd%2fz33%2fkT6k%3d&risl=&pid=ImgRaw&r=0"  alt="Image">
+   
+      </div>
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+  
+<div class="container text-center">    
+  
+  <div class="row">
+    <div class="col-sm-4">
+             <h6>Week Report</h6>
+        <weekly-requests></weekly-requests>
+    </div>
+
+    <div class="col-sm-4">
+        <h6>Monthly Report</h6>
+   <app-monthly-requests></app-monthly-requests>
+</div>
+<div class="col-sm-4">
+    <h6>Year Report</h6>
+<yearly-requests></yearly-requests>
+ </div>
+    <!-- <div class="col-sm-6">
+      <h2>Out of stock
+      </h2>
+    </div> -->
+  </div>
+</div><br>

@@ -34,6 +34,6 @@ export class TaskHistoryComponent {
   }
 
   onView(taskid:any){
-    this.router.navigate(['taskdetails', taskid]);
+    this.router.navigate(['/storeworker/taskdetails', taskid]);
   }
 }

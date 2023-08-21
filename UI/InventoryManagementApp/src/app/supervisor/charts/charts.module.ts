@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { YearlyRequestsComponent } from './yearly-requests/yearly-requests.component';
 import { MonthlyRequestsComponent } from './monthly-requests/monthly-requests.component';
 import { WeeklyRequestsComponent } from './weekly-requests/weekly-requests.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,10 @@ import { WeeklyRequestsComponent } from './weekly-requests/weekly-requests.compo
     WeeklyRequestsComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  exports:[YearlyRequestsComponent,MonthlyRequestsComponent,WeeklyRequestsComponent]
 })
 export class ChartsModule { }

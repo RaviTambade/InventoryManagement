@@ -81,7 +81,7 @@ export class StoreComponent {
 
 
   add(id: number) {
-    this.router.navigate(['order', id]);
+    this.router.navigate(['/supervisor/request', id]);
   }
   update(id: number) {
     this.router.navigate(['updatematerial', id]);

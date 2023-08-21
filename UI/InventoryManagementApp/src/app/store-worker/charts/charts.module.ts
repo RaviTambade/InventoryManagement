@@ -14,6 +14,7 @@ import { YearlyTasksComponent } from './yearly-tasks/yearly-tasks.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[WeeklyTasksComponent,MonthlyTasksComponent,YearlyTasksComponent]
 })
 export class ChartsModule { }

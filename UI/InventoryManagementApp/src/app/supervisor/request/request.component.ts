@@ -50,7 +50,7 @@ export class RequestComponent {
       console.log(res);
       if (res) {
         alert("added to cart!");
-        this.router.navigate(['store']);
+        this.router.navigate(['/supervisor/store']);
       }
     })
   }

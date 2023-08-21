@@ -61,7 +61,7 @@ editQuantity(id:any,quantity:any){
   console.log(this.updateQuantity);
   this.svc.updateQuantity(this.updateQuantity).subscribe((res)=>{
     if(res){
-      this.router.navigate(["requestHistory"])
+      this.router.navigate(["/supervisor/requestHistory"])
     }
   })
   

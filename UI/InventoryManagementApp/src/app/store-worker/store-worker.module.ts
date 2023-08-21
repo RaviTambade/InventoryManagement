@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { TaskHistoryComponent } from './task-history/task-history.component';
 import { FormsModule } from '@angular/forms';
 import { Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreWorkerDashboardComponent } from './store-worker-dashboard/store-worker-dashboard.component';
+import { ChartsModule } from './charts/charts.module';
 
 export const storeWorkerRoutes: Routes = [
   { path: 'dashboard', component: StoreWorkerDashboardComponent },
@@ -22,7 +23,10 @@ export const storeWorkerRoutes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    ChartsModule
+  ],
+  providers: [DatePipe],
+
 })
 export class StoreWorkerModule { }

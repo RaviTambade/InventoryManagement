@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,DatePipe } from '@angular/common';
 import { StoreComponent } from './store/store.component';
 import { RequestsHistoryComponent } from './requests-history/requests-history.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { RequestComponent } from './request/request.component';
 import { Routes } from '@angular/router';
 import { SupervisorsDashboardComponent } from './supervisors-dashboard/supervisors-dashboard.component';
+import { MonthlyRequestsComponent } from './charts/monthly-requests/monthly-requests.component';
+import { ChartsModule } from './charts/charts.module';
 
 export const supervisorsRoutes: Routes = [
    { path: 'dashboard', component: SupervisorsDashboardComponent },
@@ -28,11 +30,15 @@ export const supervisorsRoutes: Routes = [
     EditRequestComponent,
     EditInitialRequestComponent,
     RequestComponent,
-    SupervisorsDashboardComponent
+    SupervisorsDashboardComponent,
+    
   ],
   imports: [
     CommonModule,
-    FormsModule
-  ]
+    FormsModule,
+    ChartsModule
+  ],
+  providers: [DatePipe],
+
 })
 export class SupervisorModule { }

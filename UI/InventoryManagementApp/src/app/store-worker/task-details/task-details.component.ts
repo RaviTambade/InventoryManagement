@@ -87,7 +87,7 @@ export class TaskDetailsComponent {
         this.svc.Deliver(this.taskid).subscribe((res) => {
           console.log(res);
         })
-        this.router.navigate(['taskshistory']);
+        this.router.navigate(['/storeworker/taskhistory']);
 
       }
       else{
@@ -114,7 +114,7 @@ export class TaskDetailsComponent {
         this.svc.Deliver(this.taskid).subscribe((res) => {
           console.log(res);
         })
-        this.router.navigate(['taskshistory']);
+        this.router.navigate(['/storeworker/taskhistory']);
 
       }
       else{
