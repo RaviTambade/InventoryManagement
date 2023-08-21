@@ -7,33 +7,33 @@ namespace Shipments.Controllers;
 
 [ApiController]
 [Route("/api/[controller]")]
-public class ShippingController : ControllerBase
+public class ShipmentController : ControllerBase
 {
     private readonly IShippingService _shipsvc;
-    public ShippingController(IShippingService svc)
+    public ShipmentController(IShippingService svc)
     {
         _shipsvc=svc;
     }
 
-        [HttpGet]
-    [Route("getshipments/{empid}")]
-    public async Task<Shipping> GetAll(int empid)
+    [HttpGet]
+    [Route("shipments/{employeeId}")]
+    public async Task<Shipping> GetAll(int employeeId)
     {
-        Shipping shipment = await _shipsvc.GetShipments(empid);
+        Shipping shipment = await _shipsvc.GetShipments(employeeId);
         return shipment;
     }
 
     [HttpGet]
-    [Route("getshipped/{empid}")]
-    public async Task<List<Shipping>> GetShipped(int empid)
+    [Route("shipped/{employeeId}")]
+    public async Task<List<Shipping>> GetShipped(int employeeId)
     {
-        List<Shipping> shipment = await _shipsvc.GetShipped(empid);
+        List<Shipping> shipment = await _shipsvc.GetShipped(employeeId);
         return shipment;
     }
 
 
     [HttpGet]
-    [Route("getshippingdetails/{taskid}")]
+    [Route("shippingdetails/{taskid}")]
     public async Task<List<ShippingDetails>> GetDetails(int taskid)
     {
         List<ShippingDetails> shippingDetails = await _shipsvc.GetShippingDetails(taskid);
@@ -50,7 +50,7 @@ public class ShippingController : ControllerBase
 
         [HttpGet]
     [Route("deliver/{id}")]
-    public async Task<bool> ShipmentDeliver(int id)
+    public async Task<bool> Deliver(int id)
     {
         bool status = await _shipsvc.ShipmentDeliver(id);
         return status;
