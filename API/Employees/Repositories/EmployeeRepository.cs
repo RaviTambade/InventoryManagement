@@ -420,7 +420,7 @@ public class EmployeeRepository : IEmployeeRepository
     }
  
     public async Task<List<string>> GetRoles()
-    {
+    { 
         List<string> roles = new List<string>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
@@ -432,7 +432,6 @@ public class EmployeeRepository : IEmployeeRepository
             while (await reader.ReadAsync())
             {
                 string? role = reader["role"].ToString();
-
                 roles.Add(role);
             }
             await reader.CloseAsync();
