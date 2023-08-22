@@ -71,7 +71,7 @@ public class ShippingController : ControllerBase
         return reports;
     }
 
-    [HttpPost]
+    [HttpGet]
     [Route("yearlyreport/{empid}/{year}")]
     public async Task<List<TaskReport>> GetYearlyReports(int empid,string year)
     {

@@ -181,7 +181,7 @@ public class InitialRequestRepository : IInitialRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "	DELETE FROM InitialRequestItems WHERE cartid=(select id from carts where employeeid=@employeeid)";
+            string query = "	DELETE FROM InitialRequestItems WHERE initialrequestid=(select id from initialrequest  where employeeid=@employeeid)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@employeeid", employeeid);
             await con.OpenAsync();
