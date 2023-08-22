@@ -12,6 +12,8 @@ import { Credential } from '../Credential';
 })
 export class LoginComponent {
 
+  // remove console.log() after testing is complete
+  //remove unwanted code  
   credential: Credential = {
     contactNumber: '',
     password: ''
@@ -47,6 +49,7 @@ export class LoginComponent {
             this.employee = res;
             console.log("🚀 ~ this.svc.getRolesOfUser ~ roles:", this.employee?.role);
             localStorage.setItem("role",this.employee.role);
+            // remove magical strings const strings
             if(this.employee.role=="Store Manager"){
               this.router.navigate(['storemanager/dashboard']);
             }

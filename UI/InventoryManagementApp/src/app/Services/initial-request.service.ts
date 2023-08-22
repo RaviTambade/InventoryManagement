@@ -17,7 +17,7 @@ export class InitialRequestService {
     let url ="http://localhost:5164/api/InitialRequest/item/" + cartid ;
     return this.http.get(url);
   }
-
+ // parameter updateQuantity replace quantity
   updateQuantity(updateQuantity:any):Observable<any>{
     let url ="http://localhost:5164/api/InitialRequest/item/";
     return this.http.put(url,updateQuantity);
@@ -38,6 +38,8 @@ export class InitialRequestService {
     let url ="http://localhost:5164/api/InitialRequest/item";
     return this.http.post(url,cart);
   }
+  //function name case
+  // parameter changeStatus => status
   ChangeStatus(changeStatus:any):Observable<any> 
   {
     let url ="http://localhost:5164/api/InitialRequest/ChangeStatus/"  ;

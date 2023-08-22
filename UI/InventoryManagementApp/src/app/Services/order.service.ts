@@ -17,7 +17,7 @@ export class OrderService {
     let url ="http://localhost:5164/api/order/completed/orders/" +empid ;
     return this.http.get(url);
   }
-
+  // fn name
   Approve(orderid:number,quantity:number):Observable<any>{
     let url ="http://localhost:5164/api/order/approve/" +orderid+"/"+quantity ;
     return this.http.get(url);
@@ -40,7 +40,7 @@ export class OrderService {
     let url ="http://localhost:5164/api/request/request/" +empid ;
     return this.http.get(url);
   }
-
+// url name casing  
   getOrdersHistory(id:number):Observable<any>{
     let url ="http://localhost:5082/api/Orders/history/" + id ;
     return this.http.get(url);

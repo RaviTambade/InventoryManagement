@@ -27,6 +27,7 @@ export class OrdersHistoryComponent {
     this.result=[];
   }
   ngOnInit() {
+    // use subscription 
     this._ordersvc.getOrders(this.storemanagerid).subscribe((res) => {
       console.log(res);
       this.orders=res;

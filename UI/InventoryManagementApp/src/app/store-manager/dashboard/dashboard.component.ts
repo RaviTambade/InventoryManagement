@@ -13,6 +13,7 @@ export class DashboardComponent {
 
   public chart: any;
   data: string[] = [];
+  // report array should be reports 
   report: MaterialReport[] = [];
   empid:number=2;
   constructor(private svc: MaterialService ) {
@@ -21,8 +22,8 @@ export class DashboardComponent {
     this.svc.getStockReports(this.empid).subscribe((res) => {
       this.report = res;
       console.log(this.report)
-      if(this.report !=undefined){
-      this.data = this.report.map((report)=>report.name );
+      if(this.report.length!=0){
+       this.data = this.report.map((report)=>report.name );
       }
         this.createChart();
      })

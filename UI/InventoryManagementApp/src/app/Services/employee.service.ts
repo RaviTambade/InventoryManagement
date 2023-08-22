@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class EmployeeService {
   constructor(private http:HttpClient) { }
   
+  // return actual type insted of any
   getEmployees():Observable<any>{
     let url ="http://localhost:5224/api/employees/employees"  ;
     return this.http.get(url);

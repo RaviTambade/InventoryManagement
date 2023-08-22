@@ -10,10 +10,11 @@ export class MaterialService {
 
 
   constructor(private http:HttpClient) { }
+ // parametr  materialid =>materialId
 
-  public response:any;
-
-
+ // url  casing  "http://localhost:5071/api/Materials/materials/" +materialid 
+ //  => "http://localhost:5071/api/materials/" +materialid
+ // remove Materials
   getMaterial(materialid:any):Observable<any>{
     console.log(materialid);
       let url ="http://localhost:5071/api/Materials/materials/" +materialid ;
@@ -34,7 +35,7 @@ export class MaterialService {
     let url ="http://localhost:5071/api/Materials/categories";
     return this.http.get(url);
   }
-
+  // fn casing
   InsertMaterial(material:Material):Observable<any>{
     let url ="http://localhost:5071/api/Materials/Materials";
     return this.http.post(url,material);

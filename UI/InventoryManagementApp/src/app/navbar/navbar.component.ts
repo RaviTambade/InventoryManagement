@@ -67,6 +67,9 @@ isLoggedIn():boolean{
     return true;
   }
   return false;
+// you can reolace it with
+  //return role != null;
+
 }
 loggedOut(){
   localStorage.clear();
