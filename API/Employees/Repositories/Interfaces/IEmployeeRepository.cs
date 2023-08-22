@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using System.Net.Http.Headers;
 using Employees.Models;
@@ -12,5 +13,7 @@ public interface IEmployeeRepository
     Task<IEnumerable<Employee>> GetByRole(string role);
     Task<IEnumerable<Employee>> GetByGender(string gender);
     Task <bool> Delete(int employeeId);
+    Task<List<string>> GetDepartments();
+    Task<List<string>> GetRoles();
 
 }

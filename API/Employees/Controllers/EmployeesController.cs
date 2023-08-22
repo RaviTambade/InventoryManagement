@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.ComponentModel;
 using Employees.Models;
 using Employees.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +21,7 @@ namespace Employees.Controllers
         [Route("employees")]
         public async Task<IEnumerable<Employee>> GetAll()
         {
-            IEnumerable<Employee> employees =await _empsrv.GetAll();
+            IEnumerable<Employee> employees = await _empsrv.GetAll();
             return employees;
         }
 
@@ -30,7 +32,7 @@ namespace Employees.Controllers
             Employee employee = await _empsrv.GetById(id);
             return employee;
         }
- 
+
         [HttpPost]
         [Route("employees")]
         public async Task<bool> Insert([FromBody] Employee employee)
@@ -80,6 +82,21 @@ namespace Employees.Controllers
             bool status = await _empsrv.Delete(id);
             return status;
         }
-        
+
+        [HttpGet]
+        [Route("departments")]
+        public async Task<List<string>> GetDepartments()
+        {
+            List<string> departments = await _empsrv.GetDepartments();
+            return departments;
+        }
+
+        [HttpGet]
+        [Route("roles")]
+        public async Task<List<string>> GetRoles()
+        {
+            List<string> roles = await _empsrv.GetRoles();
+            return roles;
+        }
     }
 }

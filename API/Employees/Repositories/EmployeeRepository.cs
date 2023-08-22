@@ -65,6 +65,7 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employees;
     }
+ 
     public async Task<Employee> GetById(int employeeId)
     {
         Employee employee = null;
@@ -389,6 +390,62 @@ public class EmployeeRepository : IEmployeeRepository
         return status;
     }
 
+    public async Task<List<string>> GetDepartments()
+    {
+        List<string> departments = new List<string>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select * from departments";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                string? department = reader["department"].ToString();
 
+                departments.Add(department);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return departments;
+    }
+ 
+    public async Task<List<string>> GetRoles()
+    {
+        List<string> roles = new List<string>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select * from roles";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                string? role = reader["role"].ToString();
 
+                roles.Add(role);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return roles;
+    }
+ 
 }

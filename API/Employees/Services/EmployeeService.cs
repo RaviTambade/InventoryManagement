@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Employees.Models;
 using Employees.Repositories.Interfaces;
 using Employees.Services.Interfaces;
@@ -18,5 +19,7 @@ public class EmployeeService : IEmployeeService
     public  async Task<IEnumerable<Employee>> GetByRole(string role) =>await _repo.GetByRole(role);
     public  async Task<IEnumerable<Employee>> GetByGender(string gender) =>await _repo.GetByGender(gender);
     public async Task<bool> Delete(int employeeId) =>await _repo.Delete(employeeId);
+    public async Task<List<string>> GetDepartments() =>await _repo.GetDepartments();
+   public async Task<List<string>> GetRoles() =>await _repo.GetDepartments();
  
 }
