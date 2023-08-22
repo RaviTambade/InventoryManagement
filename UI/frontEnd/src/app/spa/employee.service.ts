@@ -6,19 +6,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
-  constructor(private http:HttpClient) { }
-  
-  getEmployees():Observable<any>{
-    let url ="http://localhost:5224/api/employees/employees"  ;
+  constructor(private http: HttpClient) { }
+
+  getEmployees(): Observable<any> {
+    let url = "http://localhost:5224/api/employees/employees";
     return this.http.get(url);
   }
-  getEmployee(id:number):Observable<any>{
-    let url ="http://localhost:5224/api/employees/employee/" +id ;
+  getEmployee(id: number): Observable<any> {
+    let url = "http://localhost:5224/api/employees/employee/" + id;
     return this.http.get(url);
   }
-  getRole(id:number):Observable<any>{
-    let url ="http://localhost:5224/api/employees/role/"+id  ;
+  getRole(id: number): Observable<any> {
+    let url = "http://localhost:5224/api/employees/role/" + id;
     return this.http.get(url);
+  }
+  getDepartments(): Observable<string[]> {
+    let url = "http://localhost:5140/api/employees/departments";
+    return this.http.get<string[]>(url);
+  }
+  getRoles(): Observable<string[]> {
+    let url = "http://localhost:5140/api/employees/roles";
+    return this.http.get<string[]>(url);
   }
 
 }
