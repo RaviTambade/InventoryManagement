@@ -25,7 +25,6 @@ import { UpdateMatrialComponent } from './update-matrial/update-matrial.componen
 import { WarehouseComponent } from './warehouse/warehouse.component';
 import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 import { BrowserModule } from '@angular/platform-browser';
-import { ProfileInfoFormComponent } from './admin/insert-employees/profile-info-form/profile-info-form.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -44,7 +43,6 @@ const routes: Routes=
       {path:'editcart/:cartId',component:EditCartComponent},
       {path:'editRequest/:id',component:EditRequestComponent},
       {path:'updatematerial/:id',component:UpdateMatrialComponent},
-      {path:'profileform',component:ProfileInfoFormComponent},
     ];
 
 @NgModule({

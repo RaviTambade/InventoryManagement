@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InsertEmployeesModule } from './insert-employees/insert-employees.module';
 import { SwitchDepartmentComponent } from './switch-department/switch-department.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+import { Routes } from '@angular/router';
+import { InsertEmployeeComponent } from './insert-employee/insert-employee.component';
 
 
 
@@ -11,14 +12,15 @@ import { UpdateEmployeeComponent } from './update-employee/update-employee.compo
   declarations: [
   
     SwitchDepartmentComponent,
-       UpdateEmployeeComponent
+       UpdateEmployeeComponent,
+       InsertEmployeeComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    InsertEmployeesModule,
     ReactiveFormsModule
   ],
-  exports:[SwitchDepartmentComponent,UpdateEmployeeComponent]
+
+  exports:[SwitchDepartmentComponent,UpdateEmployeeComponent,InsertEmployeeComponent]
 })
 export class AdminModule { }
