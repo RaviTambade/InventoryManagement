@@ -6,9 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { StoreManagerModule } from '../store-manager/store-manager.module';
 
-
-
-
 @NgModule({
   declarations: [
     LoginComponent,

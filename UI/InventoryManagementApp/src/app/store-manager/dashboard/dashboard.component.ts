@@ -13,17 +13,16 @@ export class DashboardComponent {
 
   public chart: any;
   data: string[] = [];
-  // report array should be reports 
-  report: MaterialReport[] = [];
+  reports: MaterialReport[] = [];
   empid:number=2;
   constructor(private svc: MaterialService ) {
   }
   ngOnInit(): void {
     this.svc.getStockReports(this.empid).subscribe((res) => {
-      this.report = res;
-      console.log(this.report)
-      if(this.report.length!=0){
-       this.data = this.report.map((report)=>report.name );
+      this.reports = res;
+      console.log(this.reports)
+      if(this.reports.length!=0){
+       this.data = this.reports.map((report)=>report.name );
       }
         this.createChart();
      })
@@ -40,7 +39,7 @@ export class DashboardComponent {
         datasets: [
           {
             label: "Requests",
-            data: this.report.map((report)=>report.quantity),
+            data: this.reports.map((report)=>report.quantity),
             backgroundColor: 'orange'
           }
         ]

@@ -54,21 +54,13 @@ export class NavbarComponent {
 
 isUser():boolean{
   const userId = localStorage.getItem("userId")
-  if (userId != null) {
-    return true;
 
-  }
-  return false;
+  return userId!=null;
 }
 
 isLoggedIn():boolean{
   let role =localStorage.getItem("role")
-  if (role != null) {
-    return true;
-  }
-  return false;
-// you can reolace it with
-  //return role != null;
+  return role != null;
 
 }
 loggedOut(){

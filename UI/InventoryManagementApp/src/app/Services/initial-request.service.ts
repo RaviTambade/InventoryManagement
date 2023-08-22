@@ -17,10 +17,9 @@ export class InitialRequestService {
     let url ="http://localhost:5164/api/InitialRequest/item/" + cartid ;
     return this.http.get(url);
   }
- // parameter updateQuantity replace quantity
-  updateQuantity(updateQuantity:any):Observable<any>{
+  updateQuantity(quantity:any):Observable<any>{
     let url ="http://localhost:5164/api/InitialRequest/item/";
-    return this.http.put(url,updateQuantity);
+    return this.http.put(url,quantity);
   }
 
   remove(id:number):Observable<any>{
@@ -40,10 +39,10 @@ export class InitialRequestService {
   }
   //function name case
   // parameter changeStatus => status
-  ChangeStatus(changeStatus:any):Observable<any> 
+  changeStatus(status:any):Observable<any> 
   {
     let url ="http://localhost:5164/api/InitialRequest/ChangeStatus/"  ;
-    return this.http.put(url,changeStatus);
+    return this.http.put(url,status);
   }
 
 }
