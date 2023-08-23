@@ -34,7 +34,7 @@ namespace Employees.Controllers
         }
 
         [HttpPost]
-        [Route("employees")]
+        [Route("employee")]
         public async Task<bool> Insert([FromBody] Employee employee)
         {
             bool status = await _empsrv.Insert(employee);
@@ -43,7 +43,7 @@ namespace Employees.Controllers
 
 
         [HttpPut]
-        [Route("employees")]
+        [Route("employee")]
         public async Task<bool> Update([FromBody] Employee employee)
         {
             bool status = await _empsrv.Update(employee);
@@ -65,15 +65,6 @@ namespace Employees.Controllers
             IEnumerable<Employee> employees = await _empsrv.GetByRole(role);
             return employees;
         }
-
-        [HttpGet]
-        [Route("gender/{gender}")]
-        public async Task<IEnumerable<Employee>> GetByGender(string gender)
-        {
-            IEnumerable<Employee> employees = await _empsrv.GetByGender(gender);
-            return employees;
-        }
-
 
         [HttpDelete]
         [Route("employees/{id}")]

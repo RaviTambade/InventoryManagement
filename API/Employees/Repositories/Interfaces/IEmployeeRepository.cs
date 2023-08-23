@@ -11,7 +11,6 @@ public interface IEmployeeRepository
     Task <bool> Update(Employee employee);
     Task<IEnumerable<Employee>> GetByDepartment(string theDepartment);
     Task<IEnumerable<Employee>> GetByRole(string role);
-    Task<IEnumerable<Employee>> GetByGender(string gender);
     Task <bool> Delete(int employeeId);
     Task<List<string>> GetDepartments();
     Task<List<string>> GetRoles();
