@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Employee } from '../Employee';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class EmployeeService {
     let url = "http://localhost:5140/api/employees/roles";
     return this.http.get<string[]>(url);
   }
-
+  addEmployee(employee:Employee): Observable<any> {
+    let url = "http://localhost:5140/api/employees/employee";
+    return this.http.post(url, employee);
+  }
+ 
 }
