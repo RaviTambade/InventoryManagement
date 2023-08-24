@@ -9,11 +9,12 @@ public class WarehouseService : IWarehouseService
     {
         _repo = repo;
     }
-    public async Task<IEnumerable<Warehouse>> GetAll() =>await _repo.GetAll();
-    public async Task<Warehouse> GetById(int id) =>await _repo.GetById(id);
+    public async Task<IEnumerable<WarehouseStaff>> GetAll() =>await _repo.GetAll();
+    public async Task<List<int>> GetAllStoreManagers() =>await _repo.GetAllStoreManagers();
+    public async Task<WarehouseStaff> GetById(int id) =>await _repo.GetById(id);
 
-    public async Task<bool> Insert(Warehouse warehouse) =>await _repo.Insert(warehouse);
-    public async Task<bool> Update(Warehouse warehouse) =>await _repo.Update(warehouse);
+    public async Task<bool> Insert(WarehouseStaff warehouse) =>await _repo.Insert(warehouse);
+    public async Task<bool> Update(WarehouseStaff warehouse) =>await _repo.Update(warehouse);
     public async Task<bool> Delete(int id) =>await _repo.Delete(id);
  
 }

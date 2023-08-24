@@ -4,7 +4,7 @@ namespace Warehouses.Controllers;
 using Warehouses.Services.Interfaces;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/api/[controller]")]
 public class WarehouseController : ControllerBase
 {
     private readonly IWarehouseService _srv;
@@ -16,23 +16,31 @@ public class WarehouseController : ControllerBase
 
         [HttpGet]
         [Route("warehouses")]
-        public async Task<IEnumerable<Warehouse>> GetAll()
+        public async Task<IEnumerable<WarehouseStaff>> GetAll()
         {
-            IEnumerable<Warehouse> warehouses =await _srv.GetAll();
+            IEnumerable<WarehouseStaff> warehouses =await _srv.GetAll();
             return warehouses;
         }
 
         [HttpGet]
-        [Route("warehouse/{id}")]
-        public async Task<Warehouse> GetById(int id)
+        [Route("storemanagers")]
+        public async Task<List<int>> GetAllStoreManagers()
         {
-            Warehouse warehouse = await _srv.GetById(id);
+            List<int> storemanagers =await _srv.GetAllStoreManagers();
+            return storemanagers;
+        }
+
+        [HttpGet]
+        [Route("warehouse/{id}")]
+        public async Task<WarehouseStaff> GetById(int id)
+        {
+            WarehouseStaff warehouse = await _srv.GetById(id);
             return warehouse;
         }
  
         [HttpPost]
         [Route("warehouse")]
-        public async Task<bool> Insert([FromBody] Warehouse warehouse)
+        public async Task<bool> Insert([FromBody] WarehouseStaff warehouse)
         {
             bool status = await _srv.Insert(warehouse);
             return status;
@@ -41,7 +49,7 @@ public class WarehouseController : ControllerBase
 
         [HttpPut]
         [Route("warehouse")]
-        public async Task<bool> Update([FromBody] Warehouse warehouse)
+        public async Task<bool> Update([FromBody] WarehouseStaff warehouse)
         {
             bool status = await _srv.Update(warehouse);
             return status;

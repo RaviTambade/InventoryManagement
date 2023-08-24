@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using Warehouses.Models;
 using Warehouses.Repositories.Interfaces;
@@ -12,9 +13,9 @@ public class WarehouseRepository : IWarehouseRepository
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
-    public async Task<IEnumerable<Warehouse>> GetAll()
+    public async Task<IEnumerable<WarehouseStaff>> GetAll()
     {
-        List<Warehouse> warehouses = new List<Warehouse>();
+        List<WarehouseStaff> warehouses = new List<WarehouseStaff>();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -29,7 +30,7 @@ public class WarehouseRepository : IWarehouseRepository
                 string? section = reader["section"].ToString();
                 string? category = reader["category"].ToString();
 
-                Warehouse warehouse = new Warehouse
+                WarehouseStaff warehouse = new WarehouseStaff
                 {
                     Id = id,
                     EmployeeId=empid,
@@ -52,9 +53,39 @@ public class WarehouseRepository : IWarehouseRepository
         }
         return warehouses;
     }
-    public async Task<Warehouse> GetById(int id)
+  
+      public async Task<List<int>> GetAllStoreManagers()
     {
-        Warehouse warehouse = null;
+        List<int> storeManagers = new List<int>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "select userid from employees where roleid=(select id from roles where role='Store Manager')";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int empid = int.Parse(reader["userid"].ToString());
+                storeManagers.Add(empid);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return storeManagers;
+    }
+  
+  
+    public async Task<WarehouseStaff> GetById(int id)
+    {
+        WarehouseStaff warehouse = null;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -70,7 +101,7 @@ public class WarehouseRepository : IWarehouseRepository
                 string? section = reader["section"].ToString();
                 string? category = reader["category"].ToString();
 
-                 warehouse = new Warehouse
+                 warehouse = new WarehouseStaff
                 {
                     Id = theid,
                     EmployeeId=empid,
@@ -93,7 +124,7 @@ public class WarehouseRepository : IWarehouseRepository
         return warehouse;
     }
 
-    public async Task<bool> Insert(Warehouse warehouse)
+    public async Task<bool> Insert(WarehouseStaff warehouse)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -124,7 +155,7 @@ public class WarehouseRepository : IWarehouseRepository
 
     }
 
-    public async Task<bool> Update(Warehouse warehouse)
+    public async Task<bool> Update(WarehouseStaff warehouse)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
