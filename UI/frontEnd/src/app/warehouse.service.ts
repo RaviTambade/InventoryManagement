@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { warehouseStaff } from './WarehouseStaff';
+// import { warehouseStaff } from './WarehouseStaff';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,8 @@ export class WarehouseService {
     let url = "http://localhost:5131/api/warehouse/warehouse/" + id;
     return this.http.get(url);
   }
-  updateWarehouseStaff(warehouseStaff: warehouseStaff): Observable<any> {
-    let url = "http://localhost:5131/api/warehouse/warehouse" ;
+  updateWarehouseStaff(warehouseStaff: any): Observable<any> {
+    let url = "http://localhost:5131/api/warehouse/staff" ;
     return this.http.put(url,warehouseStaff);
   }
 }

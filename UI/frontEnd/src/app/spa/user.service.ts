@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private httpClient:HttpClient) {}
 
-    addUser(user:User):Observable<any>{
+  addUser(user:User):Observable<any>{
     let url="http://localhost:5102/api/user"
     return this.httpClient.post<any>(url,user)
   }
@@ -37,4 +37,11 @@ export class UserService {
     let url="http://localhost:5102/api/users/" +userId 
     return this.httpClient.delete<any>(url)
   }
+  getallByUserIds(ids:number[]):Observable<any>{
+    const data = { id: ids };
+    // Construct the URL with the comma-separated list of IDs as a query parameter
+    const url = "http://localhost:5102/api/users/getbyids";
+    return this.httpClient.post<any>(url,data);
+  }
+  
 }

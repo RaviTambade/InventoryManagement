@@ -1,63 +1,5 @@
-
-
-  <!-- <div class="container mt-5">
-    <form>
-      <table class="table" *ngFor="let emp of employees">
-        <tr>
-          <td><strong>Department:</strong> {{emp.department}} </td>
-          <td>
-            <label for="supervisorSelect1">Select Supervisor 1:</label>
-          </td>
-          <td>
-            <select class="form-select" id="supervisorSelect1">
-              <option value="1">Supervisor 1</option>
-              <option value="2">Supervisor 2</option>
-              <option value="3">Supervisor 3</option>
-               Add more supervisors here 
-            </select>
-          </td>
-          <td>
-            <label for="supervisorSelect2">Select Supervisor 2:</label>
-          </td>
-          <td>
-            <select class="form-select" id="supervisorSelect2">
-              <option value="1">Supervisor 1</option>
-              <option value="2">Supervisor 2</option>
-              <option value="3">Supervisor 3</option>
-            </select>
-          </td>
-          <td>
-            <button class="btn btn-primary" type="submit">Submit</button>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div> -->
-<!-- 
-  <div class="container mt-4">
-    <h2 class="h4">Inventory Sections</h2>
-  
-    <div class="row">
-      <div *ngFor="let section of sections" class="col-md-6">
-        <div class="card mb-2">
-          <div class="card-body p-2">
-            <h3 class="card-title h5 mb-0">Section {{ section.id }}</h3>
-            <p class="card-text mb-0">Assigned Employee: <span class="font-weight-bold">{{ section.employee }}</span></p>
-            <div class="form-group mb-0">
-              <label for="employeeSelect{{ section.id }}" class="small">Change Employee:</label>
-              <select id="employeeSelect{{ section.id }}" [(ngModel)]="section.employee" class="form-control form-control-sm" (change)="onEmployeeChange(section)">
-                <option *ngFor="let employee of employees" [value]="employee">{{ employee }}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-   -->
-
    <div class="container mt-5">
-    <h2 class="text-center mb-4">Inventory Management</h2>
+    <h2 class="text-center mb-4">Store Department</h2>
     <table class="table table-bordered text-center" >
       <thead>
         <tr>
@@ -71,41 +13,27 @@
         <tr >
           <td> {{ warehouse.section }}</td>
           <td>{{ warehouse.materialType }}</td>
-          <td>{{ warehouse.employeeId }}</td>
+          <td>{{ warehouse.name }}</td>
           <td>
-            <button class="btn btn-primary btn-sm" >Change Employee</button>
+            <!-- <button class="btn btn-primary btn-sm" (click)="openChangeEmployeeModal(section)">Change Employee</button> -->
+            <button class="btn btn-primary btn-sm  mx-2"*ngIf="selectSwap" (click)="selectEmployeeForSwap(warehouse)">Swap</button>
+            <button class="btn btn-primary btn-sm btn-danger  mx-2" *ngIf="swap" (click)="selectEmployeeForSwap(warehouse)">Swap</button>
+            
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Employee
+              </button>
+              <div class="dropdown-menu">
+                <!-- Generate dropdown items dynamically based on the employee array -->
+                <a class="dropdown-item"  *ngFor="let emp of employees" (click)="replaceEmployee(warehouse, emp)">{{ emp.name }}</a>
+              </div>
+            </div>
           </td>
-          <!-- (click)="openChangeEmployeeModal(section)" -->
+
         </tr>
       </tbody>
     </table>
+    <button class="btn btn-primary" (click)="onUpdate()" >Update</button>
   </div>
   
-  <!-- Change Employee Modal -->
-  <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Change Employee for Section {{ selectedSection.id }}</h5>
-          <button type="button" class="close" aria-label="Close" (click)="closeChangeEmployeeModal()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="employeeSelect">Select Employee:</label>
-            <select id="employeeSelect" [(ngModel)]="selectedEmployee" class="form-control">
-              <option value="" disabled>Select an Employee</option>
-              <option *ngFor="let employee of employees" [value]="employee">{{ employee }}</option>
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeChangeEmployeeModal()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="assignEmployeeToSection()">Assign</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
+
