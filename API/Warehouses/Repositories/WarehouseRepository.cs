@@ -4,6 +4,8 @@ using Warehouses.Models;
 using Warehouses.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
 namespace Warehouses.Repositories;
+using System.Data.SqlClient;
+
 public class WarehouseRepository : IWarehouseRepository
 {
     private IConfiguration _configuration;
@@ -186,6 +188,91 @@ public class WarehouseRepository : IWarehouseRepository
         return status;
     }
 
+ public async Task<bool> UpdateStaff(List<WarehouseStaff> warehouses)
+    {
+        bool allUpdated = true;
+
+        using (MySqlConnection connection = new MySqlConnection(_conString))
+        {
+            await connection.OpenAsync();
+            MySqlTransaction transaction = await connection.BeginTransactionAsync();
+
+            try
+            {
+                foreach (var warehouse in warehouses)
+                {
+                    bool updated = await UpdateSingleAsync(warehouse, connection, transaction);
+
+                    if (!updated)
+                    {
+                        // Handle the case where an update failed for a specific warehouse
+                        allUpdated = false;
+                        // You can log or handle this error as needed
+                    }
+                }
+
+                // Commit the transaction if all updates were successful
+                if (allUpdated)
+                {
+                    await transaction.CommitAsync();
+                }
+                else
+                {
+                    // Rollback the transaction if any update failed
+                    await transaction.RollbackAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                // Handle the exception here
+                // You can log or handle this error as needed
+                Console.WriteLine("Error: " + e.Message);
+                allUpdated = false;
+            }
+            finally
+            {
+                await connection.CloseAsync();
+            }
+        }
+
+        return allUpdated;
+    }
+
+    private async Task<bool> UpdateSingleAsync(WarehouseStaff warehouse, MySqlConnection connection, MySqlTransaction transaction)
+    {
+        bool updated = false;
+
+        try
+        {
+            // Define the UPDATE query
+            string updateQuery = "UPDATE Warehousestaff " +
+                                 "SET section = @section, categoryid = (SELECT id FROM categories WHERE category = @category), employeeid = @empid " +
+                                 "WHERE id = @id";
+
+            MySqlCommand cmd = new MySqlCommand(updateQuery, connection, transaction);
+            cmd.Parameters.AddWithValue("@id", warehouse.Id);
+            cmd.Parameters.AddWithValue("@category", warehouse.MaterialType);
+            cmd.Parameters.AddWithValue("@section", warehouse.Section);
+            cmd.Parameters.AddWithValue("@empid", warehouse.EmployeeId);
+
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+            if (rowsAffected > 0)
+            {
+                updated = true;
+            }
+        }
+        catch (Exception e)
+        {
+            // Handle the exception here
+            // You can log or handle this error as needed
+            Console.WriteLine("Error: " + e.Message);
+            updated = false;
+        }
+
+        return updated;
+    }
+   
     public async Task<bool> Delete(int id)
     {
         bool status = false;

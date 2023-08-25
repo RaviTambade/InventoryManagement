@@ -55,6 +55,13 @@ public class WarehouseController : ControllerBase
             return status;
         }
 
+        [HttpPut]
+        [Route("staff")]
+        public async Task<bool> UpdateStaff([FromBody] List<WarehouseStaff> warehouse)
+        {
+            bool status = await _srv.UpdateStaff(warehouse);
+            return status;
+        }
 
 
         [HttpDelete]

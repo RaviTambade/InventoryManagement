@@ -7,7 +7,8 @@ public interface IWarehouseRepository
     Task<List<int>> GetAllStoreManagers();
     Task <WarehouseStaff> GetById(int id);
     Task <bool> Insert(WarehouseStaff warehouse);
-    Task <bool> Update(WarehouseStaff warehouse);
+    Task <bool> Update(WarehouseStaff  warehouse);
+    Task <bool> UpdateStaff(List<WarehouseStaff> warehouse);
     Task <bool> Delete(int id);
 
 }
