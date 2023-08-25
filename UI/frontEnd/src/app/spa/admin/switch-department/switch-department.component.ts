@@ -21,11 +21,8 @@ export class SwitchDepartmentComponent {
   employees:any[]=[]
   ids: number[] = [];
   warehouses: warehouseStaff[] = []
-  warehouse: boolean = false;
   users: any[] = [];
   constructor(private svc: WarehouseService, private usrsvc: UserService) {
-
-
   }
   ngOnInit(): void {
     this.svc.getAllWarehouseStaff().subscribe((res) => {

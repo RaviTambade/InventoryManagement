@@ -39,7 +39,6 @@ export class UserService {
   }
   getallByUserIds(ids:number[]):Observable<any>{
     const data = { id: ids };
-    // Construct the URL with the comma-separated list of IDs as a query parameter
     const url = "http://localhost:5102/api/users/getbyids";
     return this.httpClient.post<any>(url,data);
   }
