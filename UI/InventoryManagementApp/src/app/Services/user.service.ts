@@ -37,4 +37,9 @@ export class UserService {
     let url="http://localhost:5102/api/users/" +userId 
     return this.httpClient.delete<any>(url)
   }
+  getallByUserIds(ids:number[]):Observable<any>{
+    const data = { id: ids };
+    const url = "http://localhost:5102/api/users/getbyids";
+    return this.httpClient.post<any>(url,data);
+  }
 }

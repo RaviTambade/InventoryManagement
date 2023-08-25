@@ -66,11 +66,13 @@ isLoggedIn():boolean{
 loggedOut(){
   localStorage.clear();
   this.router.navigate(['login']);
+
 }
 
 profile(){
-console.log("profile")
+ console.log("profile")
 }
+
 
 getUser(userid:number){
   this.usrsvc.getUser(userid).subscribe((res)=>{
