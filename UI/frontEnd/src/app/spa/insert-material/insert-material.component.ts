@@ -26,7 +26,7 @@ export class InsertMaterialComponent {
       type: '',
       quantity: 0,
       unitPrice: 0,
-      imgUrl: ''
+      imageUrl: ''
     };;
 
   category = new FormControl(null, [Validators.required,]);
@@ -64,7 +64,7 @@ export class InsertMaterialComponent {
     this.material.quantity=form.value.quantity;
     this.material.unitPrice=form.value.unitprice;
     this.material.type = this.theCategory;
-    this.material.imgUrl = this.path + this.file.name;
+    this.material.imageUrl = this.path + this.file.name;
 
     //insert material in database
     this.svc.InsertMaterial(this.material).subscribe((res) => {

@@ -6,6 +6,7 @@ import { UpdateEmployeeComponent } from './update-employee/update-employee.compo
 import { Routes } from '@angular/router';
 import { InsertEmployeeComponent } from './insert-employee/insert-employee.component';
 import { UpdateManterialsComponent } from './update-manterials/update-manterials.component';
+import { UpdateStockComponent } from './update-stock/update-stock.component';
 
 
 
@@ -15,7 +16,8 @@ import { UpdateManterialsComponent } from './update-manterials/update-manterials
     SwitchDepartmentComponent,
        UpdateEmployeeComponent,
        InsertEmployeeComponent,
-       UpdateManterialsComponent
+       UpdateManterialsComponent,
+       UpdateStockComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,6 @@ import { UpdateManterialsComponent } from './update-manterials/update-manterials
     ReactiveFormsModule
   ],
 
-  exports:[SwitchDepartmentComponent,UpdateEmployeeComponent,InsertEmployeeComponent,UpdateManterialsComponent]
+  exports:[SwitchDepartmentComponent,UpdateEmployeeComponent,InsertEmployeeComponent,UpdateManterialsComponent,UpdateStockComponent]
 })
 export class AdminModule { }
