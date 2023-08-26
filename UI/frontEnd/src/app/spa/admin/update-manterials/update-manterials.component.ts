@@ -11,20 +11,22 @@ import { Material } from '../../Material';
 export class UpdateManterialsComponent {
   materialForm: FormGroup;
   image:string='';
-  materialTypes: string[] = ['Type 1', 'Type 2', 'Type 3']; // Example array of material types
+  categories: string[] = [];
 
   constructor(private formBuilder: FormBuilder,private svc:MaterialService) {
     this.materialForm = this.formBuilder.group({
       name: [''],
       type: [''],
-      quantity: [0],
       unitPrice: [0],
       imgUrl: ['']
     });
   }
   
   ngOnInit() {
-
+    this.svc.getCategories().subscribe((res)=>{
+      console.log(res)
+      this.categories=res;
+    })
     this.svc.getById(2).subscribe((res)=>{
       console.log(res);
       this.materialForm.patchValue(res);
@@ -35,8 +37,8 @@ export class UpdateManterialsComponent {
   onSubmit() {
     const updatedMaterial: Material = this.materialForm.value;
     console.log(updatedMaterial)
-    // this.svc.updateMaterial(2,updatedMaterial).subscribe((res)=>{
-    //   console.log(res)
-    // })
+    this.svc.updateMaterial(2,updatedMaterial).subscribe((res)=>{
+      console.log(res)
+    })
   }
 }
