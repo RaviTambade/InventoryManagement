@@ -45,11 +45,11 @@
     <table class="table table-bordered mx-auto" style="background-color: #f5f5f5;">
   <thead class="bg-primary text-white">
     <tr>
-      <th scope="col">Image</th>
+      <th scope="col"></th>
       <th scope="col">Name</th>
       <th scope="col">Type</th>
       <th scope="col">Quantity</th>
-      <th scope="col">Update Quantity</th>
+      <th scope="col">Add Quantity</th>
     </tr>
   </thead>
   <tbody>
@@ -61,10 +61,10 @@
       <td>
         <div class="form-row align-items-center">
           <div class="col-auto">
-            <input #quantity type="number" class="form-control form-control-sm">
+            <input #quantity type="number" class="form-control ">
           </div>
           <div class="col-auto">
-            <button class="btn btn-primary btn-sm" (click)="updateQuantity(material, quantity.value)">Update</button>
+            <button class="btn btn-primary btn-sm" (click)="updateQuantity(material, quantity.value)">Add</button>
           </div>
         </div>
       </td>
