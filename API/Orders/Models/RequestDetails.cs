@@ -1,4 +1,4 @@
-namespace MaterialRequest.Models;
+namespace Transflower.MaterialRequest.Models;
 public class RequestDetails{
     
     public int Id{get;set;}

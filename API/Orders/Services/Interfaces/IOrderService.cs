@@ -1,5 +1,5 @@
-using Orders.Repositories.Interfaces;
-namespace Orders.Services.Interfaces;
+using Transflower.Orders.Repositories.Interfaces;
+namespace Transflower.Orders.Services.Interfaces;
 public interface IOrderService : IOrderRepository
 {
 }

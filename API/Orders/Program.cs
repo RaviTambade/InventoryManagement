@@ -1,7 +1,7 @@
-using Orders.Repositories.Interfaces;
-using Orders.Repositories;
-using Orders.Services.Interfaces;
-using Orders.Services;
+using Transflower.Orders.Repositories.Interfaces;
+using Transflower.Orders.Repositories;
+using Transflower.Orders.Services.Interfaces;
+using Transflower.Orders.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -16,17 +16,14 @@ builder.Services.AddCors(options =>
                                                   .AllowAnyMethod();
                           });
 });
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

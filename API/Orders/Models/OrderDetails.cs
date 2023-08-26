@@ -1,4 +1,4 @@
-namespace Orders.Models;
+namespace Transflower.Orders.Models;
 public class OrderDetails{
     public int Id{get;set;}
     public int MaterialId{get;set;}

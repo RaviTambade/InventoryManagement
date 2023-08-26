@@ -1,4 +1,4 @@
-namespace Orders.Models;
+namespace Transflower.Orders.Models;
 public class Order
 {
     public int Id { get; set; }
