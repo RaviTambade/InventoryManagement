@@ -1,7 +1,7 @@
-using Shipments.Repositories.Interfaces;
-using Shipments.Repositories;
-using Shipments.Services.Interfaces;
-using Shipments.Services;
+using Transflower.Shipments.Repositories.Interfaces;
+using Transflower.Shipments.Repositories;
+using Transflower.Shipments.Services.Interfaces;
+using Transflower.Shipments.Services;
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 

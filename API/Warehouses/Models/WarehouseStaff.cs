@@ -1,4 +1,4 @@
-namespace Warehouses.Models;
+namespace Transflower.Warehouses.Models;
 public class WarehouseStaff{
     public int Id{get;set;}
     public int EmployeeId{get;set;}

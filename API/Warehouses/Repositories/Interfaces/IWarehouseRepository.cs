@@ -1,6 +1,5 @@
-using System.Collections;
-using Warehouses.Models;
-namespace Warehouses.Repositories.Interfaces;
+using Transflower.Warehouses.Models;
+namespace Transflower.Warehouses.Repositories.Interfaces;
 public interface IWarehouseRepository
 {
     Task<IEnumerable<WarehouseStaff>> GetAll();
@@ -10,5 +9,4 @@ public interface IWarehouseRepository
     Task <bool> Update(WarehouseStaff  warehouse);
     Task <bool> UpdateStaff(List<WarehouseStaff> warehouse);
     Task <bool> Delete(int id);
-
 }

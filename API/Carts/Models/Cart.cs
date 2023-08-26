@@ -1,4 +1,4 @@
-namespace Carts.Models;
+namespace Transflower.Carts.Models;
 public class Cart{
     public int Id{get;set;}
     public int RequestId{get;set;}

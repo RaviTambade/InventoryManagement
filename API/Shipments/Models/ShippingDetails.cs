@@ -1,4 +1,4 @@
-namespace Shipments.Models;
+namespace Transflower.Shipments.Models;
 public class ShippingDetails
 {
     public int OrderId { get; set; }

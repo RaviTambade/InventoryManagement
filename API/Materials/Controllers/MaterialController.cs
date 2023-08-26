@@ -1,9 +1,9 @@
-using Materials.Models;
-using Materials.Services.Interfaces;
+using Transflower.Materials.Models;
+using Transflower.Materials.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
-namespace Materials.Controllers
+namespace Transflower.Materials.Controllers
 {
     [ApiController]
     [Route("/api/materials")]
@@ -42,9 +42,9 @@ namespace Materials.Controllers
 
         [HttpPut]
         [Route("material/{id}")]
-        public async Task<bool> Update(int id, [FromBody] int quantity)
+        public async Task<bool> Update(int id, [FromBody] Material material)
         {
-            bool status = await _matsrv.Update(id,quantity);
+            bool status = await _matsrv.Update(id,material);
             return status;
         }
 
@@ -62,23 +62,6 @@ namespace Materials.Controllers
         {
             bool status = await _matsrv.Delete(id);
             return status;
-        }
-
-        //get location of materials
-        [HttpGet]
-        [Route("locations")]
-        public async Task<IEnumerable<Location>> GetLocations()
-        {
-            IEnumerable<Location> locations = await _matsrv.GetLocations();
-            return locations;
-        }
-
-        [HttpGet]
-        [Route("location/{id}")]
-        public async Task<Location> GetLocation(int id)
-        {
-            Location location = await _matsrv.GetLocation(id);
-            return location;
         }
 
 
@@ -101,10 +84,10 @@ namespace Materials.Controllers
         }
 
         [HttpGet]
-        [Route("stockreports/{empid}")]
-        public async Task<IEnumerable<StockReport>> GetReport(int empid)
+        [Route("stockreports/{employeeId}")]
+        public async Task<IEnumerable<StockReport>> GetReport(int employeeId)
         {
-            IEnumerable<StockReport> reports = await _matsrv.GetStockReports(empid);
+            IEnumerable<StockReport> reports = await _matsrv.GetStockReports(employeeId);
             return reports;
         }
        
@@ -119,10 +102,10 @@ namespace Materials.Controllers
 
         [HttpGet]
         [Route("categories")]
-        public async Task<IEnumerable<Material>> GetCategories()
+        public async Task<List<string>> GetCategories()
         {
-            IEnumerable<Material> materials = await _matsrv.GetCategories();
-            return materials;
+            List<string> categories = await _matsrv.GetCategories();
+            return categories;
         }
 
 

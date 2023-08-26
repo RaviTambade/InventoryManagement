@@ -1,44 +1,41 @@
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using Warehouses.Models;
-using Warehouses.Repositories.Interfaces;
+using Transflower.Warehouses.Models;
+using Transflower.Warehouses.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-namespace Warehouses.Repositories;
-using System.Data.SqlClient;
+namespace Transflower.Warehouses.Repositories;
 
 public class WarehouseRepository : IWarehouseRepository
 {
-    private IConfiguration _configuration;
-    private string _conString;
+    private readonly IConfiguration _configuration;
+    private readonly string _connectionString;
     public WarehouseRepository(IConfiguration configuration)
     {
         _configuration = configuration;
-        _conString = this._configuration.GetConnectionString("DefaultConnection");
+        _connectionString = _configuration.GetConnectionString("DefaultConnection");
     }
     public async Task<IEnumerable<WarehouseStaff>> GetAll()
     {
-        List<WarehouseStaff> warehouses = new List<WarehouseStaff>();
-        MySqlConnection con = new MySqlConnection(_conString);
+        List<WarehouseStaff> warehouses = new();
+        MySqlConnection con = new(_connectionString);
         try
         {
             string query = "select w.id ,e.id as employeeid, w.section, c.category from warehousestaff w inner join categories c on c.id=w.categoryid inner join employees e on e.id=w.employeeid;";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new(query, con);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                int id = Int32.Parse(reader["id"].ToString());
-                int empid = Int32.Parse(reader["employeeid"].ToString());
+                int id = int.Parse(reader["id"].ToString());
+                int employeeId = int.Parse(reader["employeeid"].ToString());
                 string? section = reader["section"].ToString();
                 string? category = reader["category"].ToString();
 
-                WarehouseStaff warehouse = new WarehouseStaff
+                WarehouseStaff warehouse = new()
                 {
                     Id = id,
-                    EmployeeId=empid,
+                    EmployeeId = employeeId,
                     Section = section,
                     MaterialType = category,
-    
+
                 };
 
                 warehouses.Add(warehouse);
@@ -55,21 +52,21 @@ public class WarehouseRepository : IWarehouseRepository
         }
         return warehouses;
     }
-  
-      public async Task<List<int>> GetAllStoreManagers()
+
+    public async Task<List<int>> GetAllStoreManagers()
     {
-        List<int> storeManagers = new List<int>();
-        MySqlConnection con = new MySqlConnection(_conString);
+        List<int> storeManagers = new();
+        MySqlConnection con = new(_connectionString);
         try
         {
             string query = "select userid from employees where roleid=(select id from roles where role='Store Manager')";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new(query, con);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                int empid = int.Parse(reader["userid"].ToString());
-                storeManagers.Add(empid);
+                int employeeId = int.Parse(reader["userid"].ToString());
+                storeManagers.Add(employeeId);
             }
             await reader.CloseAsync();
         }
@@ -83,33 +80,32 @@ public class WarehouseRepository : IWarehouseRepository
         }
         return storeManagers;
     }
-  
-  
+
     public async Task<WarehouseStaff> GetById(int id)
     {
         WarehouseStaff warehouse = null;
-        MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new(_connectionString);
         try
         {
             string query = "select w.id ,e.id as employeeid, w.section, c.category from warehousestaff w inner join categories c on c.id=w.categoryid inner join employees e on e.id=w.employeeid where w.id =@id";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@id", id);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-               int theid = Int32.Parse(reader["id"].ToString());
-                int empid = Int32.Parse(reader["employeeid"].ToString());
+                int theId = int.Parse(reader["id"].ToString());
+                int employeeId = int.Parse(reader["employeeid"].ToString());
                 string? section = reader["section"].ToString();
                 string? category = reader["category"].ToString();
 
-                 warehouse = new WarehouseStaff
+                warehouse = new()
                 {
-                    Id = theid,
-                    EmployeeId=empid,
+                    Id = theId,
+                    EmployeeId = employeeId,
                     Section = section,
                     MaterialType = category,
-    
+
                 };
 
             }
@@ -129,15 +125,15 @@ public class WarehouseRepository : IWarehouseRepository
     public async Task<bool> Insert(WarehouseStaff warehouse)
     {
         bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new(_connectionString);
         try
         {
             string query = "insert into Warehousestaff(section, categoryid,employeeid)values(@section, (select id from categories where category=@category),@empid);";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@section", warehouse.Section);
             cmd.Parameters.AddWithValue("@category", warehouse.MaterialType);
             cmd.Parameters.AddWithValue("@empid", warehouse.EmployeeId);
-            
+
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
@@ -160,11 +156,11 @@ public class WarehouseRepository : IWarehouseRepository
     public async Task<bool> Update(WarehouseStaff warehouse)
     {
         bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new(_connectionString);
         try
         {
             string query = "UPDATE Warehousestaff SET section=@section, categoryid=(select id from categories where category=@category), employeeid=@empid WHERE id=@id;";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@id", warehouse.Id);
             cmd.Parameters.AddWithValue("@category", warehouse.MaterialType);
             cmd.Parameters.AddWithValue("@section", warehouse.Section);
@@ -188,11 +184,11 @@ public class WarehouseRepository : IWarehouseRepository
         return status;
     }
 
- public async Task<bool> UpdateStaff(List<WarehouseStaff> warehouses)
+    public async Task<bool> UpdateStaff(List<WarehouseStaff> warehouses)
     {
         bool allUpdated = true;
 
-        using (MySqlConnection connection = new MySqlConnection(_conString))
+        using (MySqlConnection connection = new(_connectionString))
         {
             await connection.OpenAsync();
             MySqlTransaction transaction = await connection.BeginTransactionAsync();
@@ -205,27 +201,20 @@ public class WarehouseRepository : IWarehouseRepository
 
                     if (!updated)
                     {
-                        // Handle the case where an update failed for a specific warehouse
                         allUpdated = false;
-                        // You can log or handle this error as needed
                     }
                 }
-
-                // Commit the transaction if all updates were successful
                 if (allUpdated)
                 {
                     await transaction.CommitAsync();
                 }
                 else
                 {
-                    // Rollback the transaction if any update failed
                     await transaction.RollbackAsync();
                 }
             }
             catch (Exception e)
             {
-                // Handle the exception here
-                // You can log or handle this error as needed
                 Console.WriteLine("Error: " + e.Message);
                 allUpdated = false;
             }
@@ -241,10 +230,8 @@ public class WarehouseRepository : IWarehouseRepository
     private async Task<bool> UpdateSingleAsync(WarehouseStaff warehouse, MySqlConnection connection, MySqlTransaction transaction)
     {
         bool updated = false;
-
         try
         {
-            // Define the UPDATE query
             string updateQuery = "UPDATE Warehousestaff " +
                                  "SET section = @section, categoryid = (SELECT id FROM categories WHERE category = @category), employeeid = @empid " +
                                  "WHERE id = @id";
@@ -264,23 +251,21 @@ public class WarehouseRepository : IWarehouseRepository
         }
         catch (Exception e)
         {
-            // Handle the exception here
-            // You can log or handle this error as needed
             Console.WriteLine("Error: " + e.Message);
             updated = false;
         }
 
         return updated;
     }
-   
+
     public async Task<bool> Delete(int id)
     {
         bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new (_connectionString);
         try
         {
             string query = "DELETE FROM warehousestaff WHERE id=@id";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new (query, con);
             cmd.Parameters.AddWithValue("@id", id);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
@@ -295,11 +280,8 @@ public class WarehouseRepository : IWarehouseRepository
         }
         finally
         {
-           await con.CloseAsync();
+            await con.CloseAsync();
         }
         return status;
     }
-
-
-
 }

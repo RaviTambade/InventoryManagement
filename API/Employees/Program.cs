@@ -1,7 +1,7 @@
-using Employees.Repositories.Interfaces;
-using Employees.Repositories;
-using Employees.Services.Interfaces;
-using Employees.Services;
+using Transflower.Employees.Repositories.Interfaces;
+using Transflower.Employees.Repositories;
+using Transflower.Employees.Services.Interfaces;
+using Transflower.Employees.Services;
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,4 @@
-namespace Materials.Models;
+namespace Transflower.Materials.Models;
 public class Material{
     
     public int Id{get;set;}
@@ -6,5 +6,5 @@ public class Material{
     public string? Type{get;set;}
     public int Quantity{get;set;}
     public int UnitPrice{get;set;}
-    public string? ImgUrl{get;set;}   
+    public string? ImageUrl{get;set;}   
 }

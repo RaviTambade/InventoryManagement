@@ -82,7 +82,7 @@ public class EmployeeRepository : IEmployeeRepository
     }
   
    
-          public async Task<Employee> GetRole(int id)
+    public async Task<Employee> GetRole(int id)
     {
         MySqlConnection con = new MySqlConnection(_conString);
         Employee emp=null;
@@ -298,8 +298,6 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employees;
     }
-
-
     public async Task<bool> Delete(int employeeId)
     {
         bool status = false;

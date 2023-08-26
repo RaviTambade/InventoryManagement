@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Warehouses.Models;
-namespace Warehouses.Controllers;
-using Warehouses.Services.Interfaces;
+using Transflower.Warehouses.Models;
+using Transflower.Warehouses.Services.Interfaces;
+
+namespace Transflower.Warehouses.Controllers;
 
 [ApiController]
 [Route("/api/[controller]")]

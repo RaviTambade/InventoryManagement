@@ -1,43 +1,37 @@
-using System.Security.Cryptography.X509Certificates;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using System.Collections;
-using System.Data;
-using Shipments.Models;
-using Shipments.Repositories.Interfaces;
+using Transflower.Shipments.Models;
+using Transflower.Shipments.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-namespace Shipments.Repositories;
+namespace Transflower.Shipments.Repositories;
 public class ShippingRepository : IShippingRepository
 {
-    private IConfiguration _configuration;
-    private string _conString;
+    private readonly IConfiguration _configuration;
+    private readonly string _connectionString;
     public ShippingRepository(IConfiguration configuration)
     {
         _configuration = configuration;
-        _conString = this._configuration.GetConnectionString("DefaultConnection");
+        _connectionString = _configuration.GetConnectionString("DefaultConnection");
     }
 
 
     //get cart Items of supervisors by sending supervisor's id
-    public async Task<Shipping> GetShipments(int empid)
+    public async Task<Shipping> GetShipments(int employeeId)
     {
         Shipping shipping = null;
-        MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where s.shipperid=@empid and r.status=3 or r.status=4 ORDER BY s.id DESC LIMIT 1";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@empid", empid);
+            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where s.shipperid=@employeeId and r.status=3 or r.status=4 ORDER BY s.id DESC LIMIT 1";
+            MySqlCommand cmd = new(query, con);
+            cmd.Parameters.AddWithValue("@employeeId", employeeId);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                int id = Int32.Parse(reader["id"].ToString());
+                int id = int.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
                 string department = reader["department"].ToString();
 
-  
+
                 shipping = new Shipping()
                 {
                     Id = id,
@@ -56,28 +50,28 @@ public class ShippingRepository : IShippingRepository
         {
             await con.CloseAsync();
         }
-    
+
         return shipping;
     }
 
-    public async Task<List<Shipping>> GetShipped(int empid)
+    public async Task<List<Shipping>> GetShipped(int employeeId)
     {
-        List<Shipping> shippings = new List<Shipping>();
-        MySqlConnection con = new MySqlConnection(_conString);
+        List<Shipping> shippings = new();
+        MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where  r.status=6 and s.shipperid=@empid";
+            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where  r.status=6 and s.shipperid=@employeeId";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@employeeId", employeeId);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                int id = Int32.Parse(reader["id"].ToString());
+                int id = int.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
                 string department = reader["department"].ToString();
 
-                Shipping shipping = new Shipping()
+                Shipping shipping = new()
                 {
                     Id = id,
                     Department = department,
@@ -97,37 +91,37 @@ public class ShippingRepository : IShippingRepository
         {
             await con.CloseAsync();
         }
-    
+
         return shippings;
     }
 
 
-    public async Task<List<ShippingDetails>> GetShippingDetails(int taskid)
+    public async Task<List<ShippingDetails>> GetShippingDetails(int taskId)
     {
-        List<ShippingDetails> shippingdetails = new List<ShippingDetails>();
-        MySqlConnection con = new MySqlConnection(_conString);
+        List<ShippingDetails> shippingdetails = new();
+        MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select sd.id as orderid,s.id as taskid , materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=@taskid";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@taskid", taskid);
+            string query = "select sd.id as orderid,s.id as taskid , materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=@taskId";
+            MySqlCommand cmd = new(query, con);
+            cmd.Parameters.AddWithValue("@taskId", taskId);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                int orderid = Int32.Parse(reader["orderid"].ToString());
-                int id = Int32.Parse(reader["taskid"].ToString());
+                int orderId = int.Parse(reader["orderid"].ToString());
+                int id = int.Parse(reader["taskid"].ToString());
                 string section = reader["section"].ToString();
                 string department = reader["department"].ToString();
-                string status= reader["status"].ToString();
-  
-                ShippingDetails details = new ShippingDetails()
+                string status = reader["status"].ToString();
+
+                ShippingDetails details = new()
                 {
-                    OrderId = orderid,
-                    TaskId=id,
+                    OrderId = orderId,
+                    TaskId = id,
                     Department = department,
                     Section = section,
-                    Status=status
+                    Status = status
                 };
 
                 shippingdetails.Add(details);
@@ -143,17 +137,18 @@ public class ShippingRepository : IShippingRepository
         {
             await con.CloseAsync();
         }
-    
+
         return shippingdetails;
     }
 
-        public async Task<bool> UpdateStatus(int id){
+    public async Task<bool> UpdateStatus(int id)
+    {
         bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new(_connectionString);
         try
         {
             string query = " update materialrequests set status=4 where id=@id";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@id", id);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
@@ -173,13 +168,14 @@ public class ShippingRepository : IShippingRepository
         return status;
     }
 
-        public async Task<bool> ShipmentDeliver(int id){
+    public async Task<bool> ShipmentDeliver(int id)
+    {
         bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new(_connectionString);
         try
         {
             string query = " update materialrequests set status=6 where id=@id";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@id", id);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();

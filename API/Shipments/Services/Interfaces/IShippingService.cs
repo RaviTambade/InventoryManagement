@@ -1,5 +1,5 @@
-using Shipments.Repositories.Interfaces;
-namespace Shipments.Services.Interfaces;
+using Transflower.Shipments.Repositories.Interfaces;
+namespace Transflower.Shipments.Services.Interfaces;
 public interface IShippingService : IShippingRepository
 {
 }

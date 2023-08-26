@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using System.ComponentModel;
-using Employees.Models;
-using Employees.Services.Interfaces;
+using Transflower.Employees.Models;
+using Transflower.Employees.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Employees.Controllers
+namespace Transflower.Employees.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
@@ -51,10 +49,10 @@ namespace Employees.Controllers
         }
 
         [HttpGet]
-        [Route("department/{theDepartment}")]
-        public async Task<IEnumerable<Employee>> GetByDepartment(string theDepartment)
+        [Route("department/{department}")]
+        public async Task<IEnumerable<Employee>> GetByDepartment(string department)
         {
-            IEnumerable<Employee> employees = await _empsrv.GetByDepartment(theDepartment);
+            IEnumerable<Employee> employees = await _empsrv.GetByDepartment(department);
             return employees;
         }
 

@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Shipments.Models;
-using Shipments.Services.Interfaces;
+using Transflower.Shipments.Models;
+using Transflower.Shipments.Services.Interfaces;
 
-namespace Shipments.Controllers;
+namespace Transflower.Shipments.Controllers;
 
 [ApiController]
 [Route("/api/[controller]")]
@@ -33,10 +32,10 @@ public class ShipmentController : ControllerBase
 
 
     [HttpGet]
-    [Route("shippingdetails/{taskid}")]
-    public async Task<List<ShippingDetails>> GetDetails(int taskid)
+    [Route("shippingdetails/{taskId}")]
+    public async Task<List<ShippingDetails>> GetDetails(int taskId)
     {
-        List<ShippingDetails> shippingDetails = await _shipsvc.GetShippingDetails(taskid);
+        List<ShippingDetails> shippingDetails = await _shipsvc.GetShippingDetails(taskId);
         return shippingDetails;
     }
 

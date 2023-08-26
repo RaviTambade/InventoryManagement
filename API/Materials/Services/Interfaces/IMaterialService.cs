@@ -1,5 +1,5 @@
-using Materials.Repositories.Interfaces;
-namespace Materials.Services.Interfaces;
+using Transflower.Materials.Repositories.Interfaces;
+namespace Transflower.Materials.Services.Interfaces;
 public interface IMaterialService : IMaterialRepository
 {
 }

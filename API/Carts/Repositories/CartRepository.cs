@@ -1,14 +1,7 @@
-using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using System.Collections;
-using System.Data;
 using MySql.Data.MySqlClient;
-using Carts.Models;
-using Carts.Repositories.Interfaces;
-namespace Carts.Repositories;
+using Transflower.Carts.Models;
+using Transflower.Carts.Repositories.Interfaces;
+namespace Transflower.Carts.Repositories;
 public class CartRepository : ICartRepository
 {
     private IConfiguration _configuration;
@@ -16,7 +9,7 @@ public class CartRepository : ICartRepository
     public CartRepository(IConfiguration configuration)
     {
         _configuration = configuration;
-        _conString = this._configuration.GetConnectionString("DefaultConnection");
+        _conString = _configuration.GetConnectionString("DefaultConnection");
     }
 
 

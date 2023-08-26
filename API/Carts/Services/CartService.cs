@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Threading.Tasks;
-using Carts.Models;
-using Carts.Repositories.Interfaces;
-using Carts.Services.Interfaces;
-namespace Carts.Services;
+using Transflower.Carts.Models;
+using Transflower.Carts.Repositories.Interfaces;
+using Transflower.Carts.Services.Interfaces;
+namespace Transflower.Carts.Services;
 public class CartService : ICartService
 {
     private readonly ICartRepository _repo;

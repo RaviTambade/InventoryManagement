@@ -1,4 +1,4 @@
-namespace Employees.Models;
+namespace Transflower.Employees.Models;
 public class Employee{
      public int UserId{get;set;}
     public string ImageUrl{get;set;}

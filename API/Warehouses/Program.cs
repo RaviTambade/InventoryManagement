@@ -1,7 +1,7 @@
-using Warehouses.Repositories.Interfaces;
-using Warehouses.Repositories;
-using Warehouses.Services.Interfaces;
-using Warehouses.Services;
+using Transflower.Warehouses.Repositories.Interfaces;
+using Transflower.Warehouses.Repositories;
+using Transflower.Warehouses.Services.Interfaces;
+using Transflower.Warehouses.Services;
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);

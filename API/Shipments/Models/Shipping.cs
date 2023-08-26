@@ -1,4 +1,4 @@
-namespace Shipments.Models;
+namespace Transflower.Shipments.Models;
 public class Shipping{
     public int Id{get;set;}
     public string Department {get;set;}
