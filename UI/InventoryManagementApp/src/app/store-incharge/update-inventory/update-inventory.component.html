@@ -1,0 +1,48 @@
+
+   <div class="container">
+    <h2 class="text-center mt-4">Store</h2> <hr>
+    <div class="form-group">
+        <label class="col-sm-2">Select Material Type:</label>
+        <div class="col-sm-10">
+          <div class="row">
+            <div class="col-3" *ngFor="let uniqueType of uniqueMaterialTypes">
+              <label class="checkbox-inline">
+                <input type="checkbox" [(ngModel)]="selectedTypes[uniqueType]" (change)="filterMaterials()">
+                {{ uniqueType }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    <table class="table table-bordered mx-auto" style="background-color: #f5f5f5;">
+  <thead class="bg-primary text-white">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Add Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let material of filteredMaterials">
+      <td><img [src]="material.imageUrl" alt="{{ material.name }}" width="80"></td>
+      <td>{{ material.name }}</td>
+      <td>{{ material.type }}</td>
+      <td >{{ material.quantity }}</td>
+      <td>
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <input #quantity type="number" class="form-control ">
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-primary btn-sm" (click)="updateQuantity(material, quantity.value)">Add</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+  

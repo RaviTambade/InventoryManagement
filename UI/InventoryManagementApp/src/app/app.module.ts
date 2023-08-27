@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login/login.component';
 import { StoreManagerModule, storeManagerRoutes } from './store-manager/store-manager.module';
 import { supervisorsRoutes } from './supervisor/supervisor.module';
 import { storeWorkerRoutes } from './store-worker/store-worker.module';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule, sharedRoutes } from './shared/shared.module';
 
 const routes: Routes = [
   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'storemanager', children: storeManagerRoutes },
   { path: 'storeworker', children: storeWorkerRoutes },
   { path: 'supervisor', children: supervisorsRoutes },
+  { path: 'shared', children: sharedRoutes },
 ]
 
 @NgModule({

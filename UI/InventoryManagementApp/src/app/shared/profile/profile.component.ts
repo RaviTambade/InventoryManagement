@@ -34,15 +34,19 @@ imgurl:string='./assets/img/fEmp.jpeg'
   constructor(private usrsvc:UserService, private empsvc:EmployeeService){}
 
   ngOnInit(): void {
-    this.usrsvc.getUser(1).subscribe((res)=>{
-      console.log(res);
-      this.user=res;
-    })
+    const userId= localStorage.getItem("userId");
+    if(userId!=null){
+      this.usrsvc.getUser(parseInt(userId)).subscribe((res)=>{
+        console.log(res);
+        this.user=res;
+      })
+  
+      this.empsvc.getEmployee(parseInt(userId)).subscribe((res)=>{
+        console.log(res);
+        this.employee=res;
+      })
+    }
 
-    this.empsvc.getEmployee(1).subscribe((res)=>{
-      console.log(res);
-      this.employee=res;
-    })
 
   }
 }

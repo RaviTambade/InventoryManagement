@@ -42,8 +42,12 @@ export class MaterialService {
   }
 
   updateQuantity(materialId:number, quantity:number):Observable<any>{
-    let url ="http://localhost:5071/api/Materials/material/"+ materialId;
+    let url ="http://localhost:5071/api/Materials/material/stock/"+ materialId;
     return this.http.put(url,quantity);
+  }
+  updateMaterial(materialId:number,material:Material):Observable<any>{
+    let url ="http://localhost:5071/api/Materials/material/"+ materialId;
+    return this.http.put(url,material);
   }
   
   getAllMaterials():Observable<any> 

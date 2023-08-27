@@ -1,0 +1,45 @@
+<!-- material-update.component.html -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card  bg-light">
+          <div class="card-header bg-info bg-primary text-white">
+            <h4 class="mb-0">Update Material</h4>
+        </div>
+          <div class="card-body">
+            <form [formGroup]="materialForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <!-- First Row for Photo -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <img [src]="image" alt="Material Image" class="img-fluid rounded-circle">
+                  </div>
+                </div>
+                
+                <!-- Second Row for Input Fields -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="name">Material Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="type">Material Type</label>
+                    <select class="form-control" id="type" formControlName="type">
+                      <option *ngFor="let type of categories" [value]="type">{{ type }}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="unitPrice">Unit Price</label>
+                    <input type="number" step="5" class="form-control" id="unitPrice" formControlName="unitPrice">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-block">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
