@@ -48,6 +48,15 @@ namespace Transflower.Materials.Controllers
             return status;
         }
 
+         [HttpPut]
+        [Route("material/stock/{id}")]
+        public async Task<bool> UpdateStock(int id, [FromBody] int quantity)
+        {
+            bool status = await _matsrv.UpdateStock(id,quantity);
+            return status;
+        }
+
+           
         [HttpPost]
         [Route("materials")]
         public async Task<bool> Insert([FromBody] Material material)

@@ -192,6 +192,36 @@ public class MaterialRepository : IMaterialRepository
         return status;
     }
 
+    public async Task<bool> UpdateStock(int id, int quantity)
+    {
+        bool status = false;
+        MySqlConnection con = new (_connectionString);
+        try
+        {
+            string query = "UPDATE materials SET quantity=@quantity WHERE id=@materialId";
+            MySqlCommand cmd = new (query, con);
+            cmd.Parameters.AddWithValue("@materialId", id);
+            cmd.Parameters.AddWithValue("@quantity", quantity);
+
+            await con.OpenAsync();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
+
     public async Task<bool> Delete(int id)
     {
         bool status = false;

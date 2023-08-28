@@ -8,6 +8,7 @@ public interface IMaterialRepository
 
     Task<bool> Insert(Material material);
     Task<bool> Update(int id, Material material);
+    Task<bool> UpdateStock(int id, int quantity);
     Task<bool> Delete(int materialId);
     Task<IEnumerable<Material>> GetMaterials(int id);
     Task<IEnumerable<Material>> GetOutOfStockMaterials(); 

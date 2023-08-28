@@ -1,4 +1,4 @@
-namespace Requests.Models;
+namespace Transflower.Requests.Models;
 public class ChangeStatus{
     public int StatusId{get;set;}
     public int OrderId{get;set;}
