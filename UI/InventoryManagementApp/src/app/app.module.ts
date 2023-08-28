@@ -11,6 +11,7 @@ import { StoreManagerModule, storeManagerRoutes } from './store-manager/store-ma
 import { supervisorsRoutes } from './supervisor/supervisor.module';
 import { storeWorkerRoutes } from './store-worker/store-worker.module';
 import { SharedModule, sharedRoutes } from './shared/shared.module';
+import { storeInchargeRoutes } from './store-incharge/store-incharge.module';
 
 const routes: Routes = [
   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'storemanager', children: storeManagerRoutes },
   { path: 'storeworker', children: storeWorkerRoutes },
   { path: 'supervisor', children: supervisorsRoutes },
+  { path: 'storeincharge', children: storeInchargeRoutes },
   { path: 'shared', children: sharedRoutes },
 ]
 

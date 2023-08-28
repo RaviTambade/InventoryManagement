@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Store Department</h2>
+    <table class="table table-bordered text-center" >
+      <thead>
+        <tr>
+          <th>Section</th>
+          <th>Material type</th>
+          <th>Assigned Employee</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let warehouse of warehouses">
+        <tr >
+          <td> {{ warehouse.section }}</td>
+          <td>{{ warehouse.materialType }}</td>
+          <td>{{ warehouse.name }}</td>
+          <td>
+            <!-- <button class="btn btn-primary btn-sm" (click)="openChangeEmployeeModal(section)">Change Employee</button> -->
+            <button class="btn btn-primary btn-sm  mx-2"*ngIf="selectSwap" (click)="selectEmployeeForSwap(warehouse)">Swap</button>
+            <button class="btn btn-primary btn-sm btn-danger  mx-2" *ngIf="swap" (click)="selectEmployeeForSwap(warehouse)">Swap</button>
+            
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Employee
+              </button>
+              <div class="dropdown-menu">
+                <!-- Generate dropdown items dynamically based on the employee array -->
+                <a class="dropdown-item"  *ngFor="let emp of employees" (click)="replaceEmployee(warehouse, emp)">{{ emp.name }}</a>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="onUpdate()" >Update</button>
+  </div>
+  
+

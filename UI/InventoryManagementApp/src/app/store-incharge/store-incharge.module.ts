@@ -5,7 +5,16 @@ import { UpdateStaffComponent } from './update-staff/update-staff.component';
 import { UpdateInventoryComponent } from './update-inventory/update-inventory.component';
 import { UpdateMaterialComponent } from './update-material/update-material.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreDepartmentComponent } from './store-department/store-department.component';
+import { Routes } from '@angular/router';
 
+export const storeInchargeRoutes: Routes = [
+  { path: 'dashboard', component: StoreInchargeDashboardComponent },
+ { path: 'storedepartment', component: StoreDepartmentComponent },
+ { path: 'updateinventory', component: UpdateInventoryComponent },
+ { path: 'updateMaterial', component: UpdateMaterialComponent },
+
+]
 
 
 @NgModule({
@@ -13,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StoreInchargeDashboardComponent,
     UpdateStaffComponent,
     UpdateInventoryComponent,
-    UpdateMaterialComponent
+    UpdateMaterialComponent,
+    StoreDepartmentComponent
   ],
   imports: [
     CommonModule,

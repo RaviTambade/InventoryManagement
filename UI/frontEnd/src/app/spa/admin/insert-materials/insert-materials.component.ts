@@ -30,15 +30,11 @@ export class InsertMaterialsComponent {
       console.log(this.categories)
     });
   }
-  // onCategoryChange(event: any) {
-  //   // Enable/disable the custom category input based on dropdown selection
-  //   this.customCategoryDisabled = event.target.value !== '';
-  // }
+
 
   onSubmit() {
     console.log("btn")
     if (this.materialForm.valid) {
-      // Form data is valid, send it to your service or API
       const formData = this.materialForm.value;
       console.log(formData)
     }

@@ -49,7 +49,11 @@ export class NavbarComponent {
     const role = localStorage.getItem("role")
     return role == 'Store Worker';
   }
-
+  isroleStoreIncharge(): boolean {
+     console.log("storeincharge")
+    const role = localStorage.getItem("role")
+    return role == 'Store Incharge';
+  }
  
 
 isUser():boolean{
