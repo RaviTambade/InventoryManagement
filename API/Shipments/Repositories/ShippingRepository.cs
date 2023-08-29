@@ -141,6 +141,36 @@ public class ShippingRepository : IShippingRepository
         return shippingdetails;
     }
 
+
+    public async Task<int> GetTotalTasks(int employeeId)
+    {
+        int tasks = 0;
+        MySqlConnection con = new(_connectionString);
+        try
+        {
+            string query = "select count(*) as tasks from shipments where shipperid=@employeeId;";
+            MySqlCommand cmd = new(query, con);
+            cmd.Parameters.AddWithValue("@employeeId", employeeId);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                tasks = int.Parse(reader["tasks"].ToString());
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+
+        return tasks;
+    }
+
     public async Task<bool> UpdateStatus(int id)
     {
         bool status = false;

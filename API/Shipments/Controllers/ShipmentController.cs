@@ -29,7 +29,13 @@ public class ShipmentController : ControllerBase
         List<Shipping> shipment = await _shipsvc.GetShipped(employeeId);
         return shipment;
     }
-
+         [HttpGet]
+    [Route("totaltasks/{id}")]
+    public async Task<int> GetTotalTasks(int employeeId)
+    {
+        int requests=await _shipsvc.GetTotalTasks(employeeId);
+        return requests;
+    }
 
     [HttpGet]
     [Route("shippingdetails/{taskId}")]
