@@ -3,6 +3,8 @@ namespace Transflower.Materials.Repositories.Interfaces;
 public interface IMaterialRepository
 {
     Task<IEnumerable<Material>> GetAll();
+    Task<int> GetTotalMaterialCount();
+    Task<int> GetTotalCategoryCount();
     Task<Material> Get(int materialId);
     Task<string> GetImage(int materialId);
 

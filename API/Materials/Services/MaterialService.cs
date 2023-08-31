@@ -10,6 +10,8 @@ public class MaterialService : IMaterialService
         _repo = repo;
     }
    public async Task<IEnumerable<Material>> GetAll() =>await _repo.GetAll();
+   public async Task<int> GetTotalMaterialCount() =>await _repo.GetTotalMaterialCount();
+   public async Task<int> GetTotalCategoryCount() =>await _repo.GetTotalCategoryCount();
     public async Task<Material> Get(int materialId) =>await _repo.Get(materialId);
     public async Task<string> GetImage(int materialId) =>await _repo.GetImage(materialId);
     public async Task<bool> Insert(Material material) =>await _repo.Insert(material);

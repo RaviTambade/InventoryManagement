@@ -23,7 +23,22 @@ namespace Transflower.Materials.Controllers
             IEnumerable<Material> Materials = await _matsrv.GetAll();
             return Materials;
         }
+        
+        [HttpGet]
+        [Route("materialscount")]
+        public async Task<int> GetTotalMaterialCount()
+        {
+            int totalMaterialsCount = await _matsrv.GetTotalMaterialCount();
+            return totalMaterialsCount;
+        }
 
+        [HttpGet]
+        [Route("categorycount")]
+        public async Task<int> GetTotalCategoryCount()
+        {
+            int totalCategoryCount = await _matsrv.GetTotalCategoryCount();
+            return totalCategoryCount;
+        }
         [HttpGet]
         [Route("materials/{id}")]
         public async Task<Material> Get(int id)

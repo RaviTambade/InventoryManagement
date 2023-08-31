@@ -58,6 +58,63 @@ public class MaterialRepository : IMaterialRepository
         return materials;
     }
 
+    public async Task<int> GetTotalMaterialCount()
+    {
+        int count = 0;
+        MySqlConnection con = new (_connectionString);
+        try
+        {
+            string query = "select count(*) as  counts from materials";
+            MySqlCommand cmd = new (query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                count = int.Parse(reader["counts"].ToString());
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return count;
+    }
+
+    public async Task<int> GetTotalCategoryCount()
+    {
+        int count = 0;
+        MySqlConnection con = new (_connectionString);
+        try
+        {
+            string query = "select count(*) as  counts from categories";
+            MySqlCommand cmd = new (query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                count = int.Parse(reader["counts"].ToString());
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return count;
+    }
+
+
     public async Task<Material> Get(int materialId)
     {
         Material material = null;
