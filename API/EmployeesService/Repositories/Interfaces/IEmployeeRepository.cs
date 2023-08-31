@@ -7,6 +7,8 @@ public interface IEmployeeRepository
 {
     Task<IEnumerable<Employee>> GetAll();
     Task<List<int>> GetAllIds();
+    Task<int> GetTotalEmployeeCount();
+    Task<int> GetTotalEmployeeCountByRole(string role);
     Task <Employee> GetById(int employeeId);
     Task <bool> Insert(Employee employee);
     Task <bool> Update(Employee employee);

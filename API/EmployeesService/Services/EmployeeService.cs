@@ -12,6 +12,8 @@ public class EmployeeService : IEmployeeService
     }
     public async Task<IEnumerable<Employee>> GetAll() =>await _repo.GetAll();
     public async Task<List<int>> GetAllIds() =>await _repo.GetAllIds();
+    public async Task<int> GetTotalEmployeeCount() =>await _repo.GetTotalEmployeeCount();
+    public async Task<int> GetTotalEmployeeCountByRole(string role) =>await _repo.GetTotalEmployeeCountByRole(role);
     public async Task<Employee> GetById(int id) =>await _repo.GetById(id);
 
     public async Task<bool> Insert(Employee employee) =>await _repo.Insert(employee);

@@ -25,6 +25,21 @@ namespace EmployeesService.Controllers
         }
 
         [HttpGet]
+        [Route("employeecount")]
+        public async Task<int> GetTotalEmployeeCount()
+        {
+            int count =await _empsrv.GetTotalEmployeeCount();
+            return count;
+        }
+
+        [HttpGet]
+        [Route("employeecount/{role}")]
+        public async Task<int> GetTotalEmployeeCountByRole(string role)
+        {
+            int count =await _empsrv.GetTotalEmployeeCountByRole(role);
+            return count;
+        }
+        [HttpGet]
         [Route("ids")]
         public async Task<List<int>> GetAllIds()
         {
