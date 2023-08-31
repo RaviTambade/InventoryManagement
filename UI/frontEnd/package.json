@@ -23,6 +23,7 @@
     "chartjs-plugin-annotation": "^1.4.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^2.30.0",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.17.21",
     "ng2-charts": "^3.1.2",
     "rxjs": "~7.8.0",

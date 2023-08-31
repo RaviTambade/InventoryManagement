@@ -18,13 +18,13 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { EditCartComponent } from './edit-cart/edit-cart.component';
 import { EditRequestComponent } from './edit-request/edit-request.component';
 import { TaskshistoryComponent } from './taskshistory/taskshistory.component';
-import { InsertMaterialComponent } from './insert-material/insert-material.component';
 import { InsertEmployeeComponent } from './insert-employee/insert-employee.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { UpdateMatrialComponent } from './update-matrial/update-matrial.component';
 import { WarehouseComponent } from './warehouse/warehouse.component';
 import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 import { BrowserModule } from '@angular/platform-browser';
+import { CardsComponent } from './cards/cards.component';
 
 const routes: Routes=
   [   {path:'', redirectTo:'home',pathMatch:"full"},
@@ -62,13 +62,13 @@ const routes: Routes=
     EditCartComponent,
     EditRequestComponent,
     TaskshistoryComponent,
-    InsertMaterialComponent,
     InsertEmployeeComponent,
     TaskDetailsComponent,
     UpdateMatrialComponent,
-    WarehouseComponent
+    WarehouseComponent,
+    CardsComponent
   ],
-  exports:[RouterContainerComponent,InsertMaterialComponent],
+  exports:[RouterContainerComponent,CardsComponent],
   imports: [
     NgChartsModule.forRoot({ defaults: { } }),
     NgChartsModule,
