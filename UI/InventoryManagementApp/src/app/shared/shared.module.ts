@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 
 export const sharedRoutes: Routes = [
@@ -16,7 +16,8 @@ export const sharedRoutes: Routes = [
     
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule, 
 
   ],
   exports:[ProfileComponent,NavbarComponent]

@@ -52,28 +52,6 @@ export class NavbarComponent {
     }    
   }
 
-
-  // isroleSupervisor(): boolean {
-  //   const role = localStorage.getItem("role")
-  //   return role == 'Supervisor';
-  // }
-
-  // isroleStoreManager(): boolean {
-  //   const role = localStorage.getItem("role")
-  //   return role == 'Store Manager';
-  // }
-
-  // isroleStoreWorker(): boolean {
-  //   const role = localStorage.getItem("role")
-  //   return role == 'Store Worker';
-  // }
-  // isroleStoreIncharge(): boolean {
-  //    console.log("storeincharge")
-  //   const role = localStorage.getItem("role")
-  //   return role == 'Store Incharge';
-  // }
- 
-
 isUser():boolean{
   const userId = localStorage.getItem("userId")
   return userId!=null;
