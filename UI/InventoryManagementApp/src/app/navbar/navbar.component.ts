@@ -22,38 +22,58 @@ export class NavbarComponent {
     '' // contactNumber
   );
   id:number=0;
-
+  isroleSupervisor:boolean=false;
+  isroleStoreManager:boolean=false;
+  isroleStoreWorker:boolean=false;
+  isroleStoreIncharge:boolean=false;
+  isLoggedIn:boolean=false;
   constructor(private router: Router, private usrsvc :UserService) { 
-    
-
-  }
-  ngOnInit():void{
     const uid=localStorage.getItem("userId");
     if(uid!=null){
       this.id= parseInt(uid);
       this.getUser(this.id);
     }
+    const role=localStorage.getItem("role");
+    if(role){
+      this.isLoggedIn=true;
+    }
+    console.log(role);
+    if (role === 'Supervisor') {
+      this.isroleSupervisor = true;
+    } else if (role === 'Store Manager') {
+      this.isroleStoreManager = true;
+    } else if (role === 'Store Worker') {
+      this.isroleStoreWorker = true;
+    } else if (role === 'Store Incharge') {
+      this.isroleStoreIncharge = true;
+    }    
+
+  }
+  ngOnInit():void{
+  
+    
+
   }
 
-  isroleSupervisor(): boolean {
-    const role = localStorage.getItem("role")
-    return role == 'Supervisor';
-  }
+  // isroleSupervisor(): boolean {
+  //   const role = localStorage.getItem("role")
+  //   return role == 'Supervisor';
+  // }
 
-  isroleStoreManager(): boolean {
-    const role = localStorage.getItem("role")
-    return role == 'Store Manager';
-  }
+  // isroleStoreManager(): boolean {
+  //   const role = localStorage.getItem("role")
+  //   return role == 'Store Manager';
+  // }
 
-  isroleStoreWorker(): boolean {
-    const role = localStorage.getItem("role")
-    return role == 'Store Worker';
-  }
-  isroleStoreIncharge(): boolean {
-     console.log("storeincharge")
-    const role = localStorage.getItem("role")
-    return role == 'Store Incharge';
-  }
+  // isroleStoreWorker(): boolean {
+  //   const role = localStorage.getItem("role")
+  //   return role == 'Store Worker';
+  // }
+  // isroleStoreIncharge(): boolean {
+  //    console.log("storeincharge")
+  //   const role = localStorage.getItem("role")
+  //   return role == 'Store Incharge';
+  // }
  
 
 isUser():boolean{
@@ -62,11 +82,11 @@ isUser():boolean{
   return userId!=null;
 }
 
-isLoggedIn():boolean{
-  let role =localStorage.getItem("role")
-  return role != null;
+// isLoggedIn():boolean{
+//   let role =localStorage.getItem("role")
+//   return role != null;
 
-}
+// }
 loggedOut(){
   localStorage.clear();
   this.router.navigate(['login']);

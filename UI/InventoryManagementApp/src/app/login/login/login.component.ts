@@ -35,7 +35,6 @@ export class LoginComponent {
     this.svc.validate(form).subscribe((response) => {
       if (response.token != null) {
         localStorage.setItem("jwt", response.token)
-        alert("Login sucessfull")
 
         this.usersvc.getUserIdByContact(this.credential.contactNumber).subscribe((responseId) => {
           this.userId = responseId;
@@ -58,7 +57,6 @@ export class LoginComponent {
             }
           });
         });
-
       }
       else {
         alert("Incorrect Credentials");
