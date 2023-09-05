@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../login/login/User';
-import { UserService } from '../Services/user.service';
+import { UserService } from 'src/app/Services/user.service';
+import { User } from 'src/app/login/login/User';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-
 export class NavbarComponent {
-
   user: User = new User(
     1, // id
     '', // aadharId
@@ -27,7 +25,12 @@ export class NavbarComponent {
   isroleStoreWorker:boolean=false;
   isroleStoreIncharge:boolean=false;
   isLoggedIn:boolean=false;
+
+
   constructor(private router: Router, private usrsvc :UserService) { 
+   
+  }
+  ngOnInit():void{
     const uid=localStorage.getItem("userId");
     if(uid!=null){
       this.id= parseInt(uid);
@@ -47,13 +50,8 @@ export class NavbarComponent {
     } else if (role === 'Store Incharge') {
       this.isroleStoreIncharge = true;
     }    
-
   }
-  ngOnInit():void{
-  
-    
 
-  }
 
   // isroleSupervisor(): boolean {
   //   const role = localStorage.getItem("role")
@@ -78,15 +76,9 @@ export class NavbarComponent {
 
 isUser():boolean{
   const userId = localStorage.getItem("userId")
-
   return userId!=null;
 }
 
-// isLoggedIn():boolean{
-//   let role =localStorage.getItem("role")
-//   return role != null;
-
-// }
 loggedOut(){
   localStorage.clear();
   this.router.navigate(['login']);

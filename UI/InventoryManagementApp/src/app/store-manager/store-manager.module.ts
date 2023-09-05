@@ -5,6 +5,7 @@ import { OrdersHistoryComponent } from './orders-history/orders-history.componen
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StoreComponent } from '../supervisor/store/store.component';
+import { SharedModule } from '../shared/shared.module';
 
 export const storeManagerRoutes: Routes = [
    { path: 'dashboard', component: DashboardComponent },
@@ -21,7 +22,9 @@ export const storeManagerRoutes: Routes = [
     DashboardComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule  
+
   ],
   exports:[DashboardComponent]
 })

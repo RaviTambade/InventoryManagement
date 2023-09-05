@@ -7,6 +7,7 @@ import { UpdateMaterialComponent } from './update-material/update-material.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreDepartmentComponent } from './store-department/store-department.component';
 import { Routes } from '@angular/router';
+import { SharedModule, sharedRoutes } from '../shared/shared.module';
 
 export const storeInchargeRoutes: Routes = [
   { path: 'dashboard', component: StoreInchargeDashboardComponent },
@@ -28,7 +29,8 @@ export const storeInchargeRoutes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class StoreInchargeModule { }

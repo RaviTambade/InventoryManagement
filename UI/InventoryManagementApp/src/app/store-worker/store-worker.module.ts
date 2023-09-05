@@ -7,6 +7,8 @@ import { Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreWorkerDashboardComponent } from './store-worker-dashboard/store-worker-dashboard.component';
 import { ChartsModule } from './charts/charts.module';
+import { LoginModule } from '../login/login.module';
+import { SharedModule } from '../shared/shared.module';
 
 export const storeWorkerRoutes: Routes = [
   { path: 'dashboard', component: StoreWorkerDashboardComponent },
@@ -24,7 +26,8 @@ export const storeWorkerRoutes: Routes = [
     CommonModule,
     FormsModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    SharedModule
   ],
   providers: [DatePipe],
 

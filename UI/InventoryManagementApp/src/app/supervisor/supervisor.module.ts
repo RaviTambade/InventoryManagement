@@ -11,6 +11,7 @@ import { Routes } from '@angular/router';
 import { SupervisorsDashboardComponent } from './supervisors-dashboard/supervisors-dashboard.component';
 import { MonthlyRequestsComponent } from './charts/monthly-requests/monthly-requests.component';
 import { ChartsModule } from './charts/charts.module';
+import { SharedModule } from '../shared/shared.module';
 
 export const supervisorsRoutes: Routes = [
    { path: 'dashboard', component: SupervisorsDashboardComponent },
@@ -36,7 +37,8 @@ export const supervisorsRoutes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    SharedModule
   ],
   providers: [DatePipe],
 

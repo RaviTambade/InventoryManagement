@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule,DatePipe } from '@angular/common';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { LoginModule } from './login/login.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,10 +13,8 @@ import { SharedModule, sharedRoutes } from './shared/shared.module';
 import { storeInchargeRoutes } from './store-incharge/store-incharge.module';
 
 const routes: Routes = [
-  {path:'', redirectTo:'home',pathMatch:"full"},
-  { path: 'home', component: LoginComponent },
-  {path:'navbar',component:NavbarComponent},
-  {path:'login',component:LoginComponent},
+  {path:'', redirectTo:'login',pathMatch:"full"},
+   {path:'login',component:LoginComponent},
   { path: 'storemanager', children: storeManagerRoutes },
   { path: 'storeworker', children: storeWorkerRoutes },
   { path: 'supervisor', children: supervisorsRoutes },
@@ -28,7 +25,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    // NavbarComponent
   ],
   imports: [
     BrowserModule,
