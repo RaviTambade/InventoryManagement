@@ -52,6 +52,9 @@ export class LoginComponent {
             if (this.employee.role == "Supervisor") {
               this.router.navigate(['supervisor/dashboard']);
             }
+            if (this.employee.role == "Store Incharge") {
+              this.router.navigate(['storeincharge/dashboard']);
+            }
             if (this.employee.role == "Store Worker") {
               this.router.navigate(['storeworker/dashboard']);
             }

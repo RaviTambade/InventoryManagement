@@ -112,6 +112,9 @@ console.log(this.employees);
     console.log('Modified objects:', modifiedData);
     this.svc.updateWarehouseStaff(modifiedData).subscribe((res)=>{
       console.log(res);
+      if(res)
+      alert("update successfully!!")
+      window.location.reload();
     })
   }
 }

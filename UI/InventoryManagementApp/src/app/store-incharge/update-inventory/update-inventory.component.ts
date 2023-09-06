@@ -59,6 +59,7 @@ export class UpdateInventoryComponent {
     console.log(material, quantity);
     this.svc.updateQuantity(material.id, quantity).subscribe((res) => {
       console.log(res);
+      window.location.reload();
     });
   }
 }

@@ -38,7 +38,8 @@ export class UpdateMaterialComponent {
     const updatedMaterial: Material = this.materialForm.value;
     console.log(updatedMaterial)
     this.svc.updateMaterial(2,updatedMaterial).subscribe((res)=>{
-      console.log(res)
+      console.log(res);
+      
     })
   }
 }

@@ -11,7 +11,7 @@ import { SharedModule, sharedRoutes } from '../shared/shared.module';
 
 export const storeInchargeRoutes: Routes = [
   { path: 'dashboard', component: StoreInchargeDashboardComponent },
- { path: 'storedepartment', component: StoreDepartmentComponent },
+ { path: 'department', component: StoreDepartmentComponent },
  { path: 'updateinventory', component: UpdateInventoryComponent },
  { path: 'updateMaterial', component: UpdateMaterialComponent },
 

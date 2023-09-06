@@ -1,4 +1,4 @@
-
+<!-- 
 <hr>
 <div *ngIf="noOrder==false">
     <h2>New Orders</h2>
@@ -56,4 +56,59 @@
 
 
 
+</div> -->
+
+
+<hr>
+<div *ngIf="noOrder == false" class="container">
+    <h2>New Orders</h2>
+    <table class="table table-striped" style="width:60%">
+        <thead class="thead-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Request date</th>
+                <th>Supervisor's name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{ order.id }}</td>
+                <td>{{ order.date }}</td>
+                <td><a href="orderdetails">{{ order.userId }}</a></td>
+                <td>{{ order.status }}</td>
+                <td><button class="btn btn-primary" (click)="onView(order.id)">View</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h2 *ngIf="noOrder" class="container">No Orders!</h2>
+<hr>
+<h2>Completed Orders</h2>
+<div class="container">
+    <table class="table table-striped" style="width:60%">
+        <thead class="thead-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Request date</th>
+                <th>Supervisor's name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of completedOrder">
+                <td>{{ order.id }}</td>
+                <td>{{ order.date | date }}</td>
+                <td><a href="orderdetails">{{ order.userId }}</a></td>
+                <td>{{ order.status }}</td>
+                <td><button class="btn btn-primary" (click)="onView(order.id)">View</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <button class="btn btn-primary" type="button" (click)="previous()" [disabled]="isDisabledPrev">Previous</button>
+        <button class="btn btn-primary ml-2" type="button" (click)="next()" [disabled]="isDisabledNext">Next</button>
+    </div>
 </div>
