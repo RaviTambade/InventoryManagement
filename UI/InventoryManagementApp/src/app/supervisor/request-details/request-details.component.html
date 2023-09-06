@@ -1,4 +1,4 @@
-
+<!-- 
 
 <h3>Request Details</h3>
 <hr>
@@ -23,4 +23,42 @@
              <td>  <button [disabled]=" cart.status!=='inprogress'" (click)="onRemove(cart.id)">Remove</button> </td>
         </tr>  
     </tbody>
-</table>
+</table> -->
+
+<h3 class="mt-4">Request Details</h3>
+<hr>
+
+<div class="container">
+    <div class="product mt-4">
+        <p><b>Date: {{ date[0] }} Time: {{ date[1] }}</b></p>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <table class="table table-striped " style="width:70%">
+        <thead class="thead-dark">
+            <tr>
+                <th>Material Id</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Quantity</th>
+                <th>Action</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let cart of carts">
+            <tr>
+                <td>{{ cart.materialId }}</td>
+                <td>{{ cart.category }}</td>
+                <td>{{ cart.status }}</td>
+                <td>{{ cart.quantity }}</td>
+                <td>
+                    <button class="btn btn-primary" [disabled]="cart.status !== 'inprogress'" (click)="onEdit(cart.id)">Edit</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

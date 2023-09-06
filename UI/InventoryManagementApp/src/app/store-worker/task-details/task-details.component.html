@@ -1,13 +1,10 @@
 
 
  <h3>Shipping Details</h3>
- <div class="container" >
-     <!-- <div class="product" *ngIf="department"> <p><b>Drop:{{department}}</b></p> </div> -->
- 
- </div>
+
  
  
- <div class="row">
+ <!-- <div class="row">
      <div class="col-sm-6">
        <div class="card">
          <div class="card-body">
@@ -23,8 +20,39 @@
        <button (click)="onBack()">back</button>
      </div>
    </div>
- 
+  -->
 
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- Set a fixed width for the card -->
+            <div class="card" style="width: 300px;">
+                <div class="card-body text-center">
+                    <div *ngFor="let task of tasks">
+                        <p class="card-text" *ngIf="picked == false && deliver == false">
+                            Order Id : <b>{{ task.orderId }}</b>
+                            Pick Up : <b>{{ task.section }}</b>
+                        </p>
+                        <hr>
+                        <p class="card-text" *ngIf="picked == true && deliver == false">
+                            Order Id : <b>{{ task.orderId }}</b>
+                            Drop : <b>{{ department }}</b>
+                        </p>
+                        <hr>
+                        <p class="card-text" *ngIf="deliver == true">
+                            Order Id : <b>{{ task.orderId }}</b>
+                            Delivered : <b>{{ department }}</b>
+                        </p>
+                        <hr>
+                    </div>
+                    <a *ngIf="picked == false && deliver == false" (click)="onPicked()" class="btn btn-primary">Picked</a>
+                    <a *ngIf="picked == true && deliver == false" (click)="onDeliver()" class="btn btn-primary">Deliver</a>
+                </div>
+            </div>
+            <button (click)="onBack()" class="btn btn-secondary">Back</button>
+        </div>
+    </div>
+</div>
  
    <div class="popup-overlay" *ngIf="showPopup">
      <div class="popup">
