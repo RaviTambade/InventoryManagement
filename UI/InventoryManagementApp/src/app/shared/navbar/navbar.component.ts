@@ -20,10 +20,10 @@ export class NavbarComponent {
     '' // contactNumber
   );
   id:number=0;
-  isroleSupervisor:boolean=false;
-  isroleStoreManager:boolean=false;
-  isroleStoreWorker:boolean=false;
-  isroleStoreIncharge:boolean=false;
+  // isroleSupervisor:boolean=false;
+  // isroleStoreManager:boolean=false;
+  // isroleStoreWorker:boolean=false;
+  // isroleStoreIncharge:boolean=false;
   isLoggedIn:boolean=false;
 
 
@@ -35,23 +35,56 @@ export class NavbarComponent {
     if(uid!=null){
       this.id= parseInt(uid);
       this.getUser(this.id);
+      this.isLoggedIn=true;
+
     }
     const role=localStorage.getItem("role");
     if(role){
       this.isLoggedIn=true;
     }
     console.log(role);
-    if (role === 'Supervisor') {
-      this.isroleSupervisor = true;
-    } else if (role === 'Store Manager') {
-      this.isroleStoreManager = true;
-    } else if (role === 'Store Worker') {
-      this.isroleStoreWorker = true;
-    } else if (role === 'Store Incharge') {
-      this.isroleStoreIncharge = true;
-    }    
+    // if (role === 'Supervisor') {
+    //   this.isroleSupervisor = true;
+    // } else if (role === 'Store Manager') {
+    //   this.isroleStoreManager = true;
+    // } else if (role === 'Store Worker') {
+    //   this.isroleStoreWorker = true;
+    // } else if (role === 'Store Incharge') {
+    //   this.isroleStoreIncharge = true;
+    // }    
   }
 
+  isroleSupervisor(): boolean {
+    const role = localStorage.getItem("role")
+    return role == 'Supervisor';
+  }
+  isroleStoreIncharge(): boolean {
+    const role = localStorage.getItem("role")
+    return role == 'Store Incharge';
+  }
+  isroleStoreManager(): boolean {
+    const role = localStorage.getItem("role")
+    return role == 'Store Manager';
+  }
+
+  isroleStoreWorker(): boolean {
+    const role = localStorage.getItem("role")
+    return role == 'Store Worker';
+  }
+
+ 
+
+// isUser():boolean{
+//   const userId = localStorage.getItem("userId")
+
+//   return userId!=null;
+// }
+
+// isLoggedIn():boolean{
+//   let role =localStorage.getItem("role")
+//   return role != null;
+
+// }
 isUser():boolean{
   const userId = localStorage.getItem("userId")
   return userId!=null;
@@ -59,6 +92,7 @@ isUser():boolean{
 
 loggedOut(){
   localStorage.clear();
+  this.isLoggedIn=false;
   this.router.navigate(['login']);
 
 }

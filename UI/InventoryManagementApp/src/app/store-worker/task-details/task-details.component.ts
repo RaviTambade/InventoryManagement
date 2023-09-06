@@ -114,8 +114,8 @@ export class TaskDetailsComponent {
         this.svc.Deliver(this.taskid).subscribe((res) => {
           console.log(res);
         })
-        this.router.navigate(['/storeworker/taskhistory']);
-
+        // this.router.navigate(['/storeworker/taskhistory']);
+        window.location.reload();
       }
       else{
         this.inputValue='';

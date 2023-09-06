@@ -3,3 +3,24 @@ table, th, td {
     border-collapse:collapse;
     text-align: center;  
   }
+
+ 
+.container-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.card {
+  margin-bottom: 20px;
+}
+.content {
+  padding-top: 100px; /* Adjust the value as needed */
+}
