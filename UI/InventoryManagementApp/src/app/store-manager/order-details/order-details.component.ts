@@ -19,7 +19,7 @@ export class OrderDetailsComponent {
   orderDetail: any;
   dateTime: string = '';
   date: Date|undefined;
-  storemanagerid: number = 1;
+  storemanagerid: number = 2;
   changeStatus: any;
   quantity: number = 0;
   public constructor(private _location:Location,private svc: OrderService,  private activeRoute: ActivatedRoute) {

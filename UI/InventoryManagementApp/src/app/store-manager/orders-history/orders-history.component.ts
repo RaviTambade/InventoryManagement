@@ -12,7 +12,7 @@ export class OrdersHistoryComponent {
   orders:Order[]|undefined;
   noOrder:boolean=false;
   completedOrder:Order[]|undefined
-  storemanagerid: number = 1;
+  storemanagerid: number = 2;
   result:Order[];
 
   isDisabledPrev = false;
@@ -39,7 +39,7 @@ export class OrdersHistoryComponent {
       console.log(this.noOrder)
     })
 
-    this._ordersvc.getCompletedOrders(this.storemanagerid).subscribe((res) => {
+    this._ordersvc.getCompletedOrders(1).subscribe((res) => {
       console.log(res);
       this.result=res;
       this.arrLength = this.result.length;

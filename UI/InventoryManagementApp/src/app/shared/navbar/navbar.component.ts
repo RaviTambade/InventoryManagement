@@ -20,10 +20,7 @@ export class NavbarComponent {
     '' // contactNumber
   );
   id:number=0;
-  // isroleSupervisor:boolean=false;
-  // isroleStoreManager:boolean=false;
-  // isroleStoreWorker:boolean=false;
-  // isroleStoreIncharge:boolean=false;
+
   isLoggedIn:boolean=false;
 
 
@@ -73,18 +70,6 @@ export class NavbarComponent {
   }
 
  
-
-// isUser():boolean{
-//   const userId = localStorage.getItem("userId")
-
-//   return userId!=null;
-// }
-
-// isLoggedIn():boolean{
-//   let role =localStorage.getItem("role")
-//   return role != null;
-
-// }
 isUser():boolean{
   const userId = localStorage.getItem("userId")
   return userId!=null;
@@ -104,6 +89,7 @@ profile(){
 
 getUser(userid:number){
   this.usrsvc.getUser(userid).subscribe((res)=>{
+    console.log(res);
     console.log(res);
     this.user=res;
   })
