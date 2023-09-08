@@ -31,6 +31,7 @@ namespace Transflower.Employees.Controllers
             return employee;
         }
 
+
         [HttpPost]
         [Route("employee")]
         public async Task<bool> Insert([FromBody] Employee employee)
@@ -57,7 +58,7 @@ namespace Transflower.Employees.Controllers
         }
 
         [HttpGet]
-        [Route("role/{role}")]
+        [Route("roles/{role}")]
         public async Task<IEnumerable<Employee>> GetByRole(string role)
         {
             IEnumerable<Employee> employees = await _empsrv.GetByRole(role);
@@ -86,6 +87,19 @@ namespace Transflower.Employees.Controllers
         {
             List<string> roles = await _empsrv.GetRoles();
             return roles;
+        }
+        [HttpGet]
+        [Route("role/{employeeId}")]
+        public async Task<IActionResult> GetRole(int employeeId)
+        {
+            string role = await _empsrv.GetRole(employeeId);
+
+            var response = new
+            {
+                Role = role
+            };
+
+            return Ok(response);
         }
     }
 }

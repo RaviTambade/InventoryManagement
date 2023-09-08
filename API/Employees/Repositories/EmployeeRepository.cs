@@ -50,38 +50,38 @@ public class EmployeeRepository : IEmployeeRepository
     }
 
 
-    public async Task<Employee> GetRole(int id)
-    {
-        MySqlConnection con = new(_connectionString);
-        Employee emp = null;
-        try
-        {
-            string query = " select r.role from employees e inner join roles r on r.id = e.id where e.userid=@id";
-            MySqlCommand cmd = new(query, con);
-            cmd.Parameters.AddWithValue("@id", id);
-            await con.OpenAsync();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (await reader.ReadAsync())
-            {
-                string role = reader["role"].ToString();
+    // public async Task<Employee> GetRole(int id)
+    // {
+    //     MySqlConnection con = new(_connectionString);
+    //     Employee emp = null;
+    //     try
+    //     {
+    //         string query = " select r.role from employees e inner join roles r on r.id = e.id where e.userid=@id";
+    //         MySqlCommand cmd = new(query, con);
+    //         cmd.Parameters.AddWithValue("@id", id);
+    //         await con.OpenAsync();
+    //         MySqlDataReader reader = cmd.ExecuteReader();
+    //         while (await reader.ReadAsync())
+    //         {
+    //             string role = reader["role"].ToString();
 
-                emp = new Employee()
-                {
-                    Role = role
-                };
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return emp;
-    }
+    //             emp = new Employee()
+    //             {
+    //                 Role = role
+    //             };
+    //         }
+    //         await reader.CloseAsync();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         throw e;
+    //     }
+    //     finally
+    //     {
+    //         await con.CloseAsync();
+    //     }
+    //     return emp;
+    // }
 
 
     public async Task<Employee> GetById(int employeeId)
@@ -346,6 +346,36 @@ public class EmployeeRepository : IEmployeeRepository
             await con.CloseAsync();
         }
         return roles;
+    }
+
+
+    public async Task<string> GetRole(int employeeId)
+    {
+        string role ="";
+        MySqlConnection con = new(_connectionString);
+        try
+        {
+            string query = "select role from roles inner join employees e on e.roleid =roles.id where e.userid=@employeeId ";
+            MySqlCommand cmd = new(query, con);
+            cmd.Parameters.AddWithValue("@employeeId", employeeId);
+
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                role = reader["role"].ToString();
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return role;
     }
 
 }

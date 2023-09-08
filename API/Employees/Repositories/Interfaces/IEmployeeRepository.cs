@@ -11,5 +11,6 @@ public interface IEmployeeRepository
     Task <bool> Delete(int employeeId);
     Task<List<string>> GetDepartments();
     Task<List<string>> GetRoles();
+    Task<string> GetRole(int employeeId);
 
 }
