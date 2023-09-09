@@ -15,8 +15,9 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { storeInchargeRoutes } from './store-incharge/store-incharge.module';
 import { storeManagerRoutes } from './store-manager/store-manager.module';
 import { storeWorkerRoutes } from './store-worker/store-worker.module';
-import { supervisorRoutes } from './supervisor/supervisor.module';
+import { SupervisorModule, supervisorRoutes } from './supervisor/supervisor.module';
 import { supervisorInchargeRoutes } from './supervisor-incharge/supervisor-incharge.module';
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,14 @@ import { supervisorInchargeRoutes } from './supervisor-incharge/supervisor-incha
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
+    MenuBarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     AuthenticationModule,
+    SupervisorModule,
 
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
