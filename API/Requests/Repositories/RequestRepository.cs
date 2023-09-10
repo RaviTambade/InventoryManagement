@@ -5,8 +5,9 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Collections;
 using System.Data;
 using MySql.Data.MySqlClient;
-using Requests.Models;
+
 using Requests.Repositories.Interfaces;
+using Transflower.Requests.Models;
 namespace Requests.Repositories;
 public class RequestRepository : IRequestRepository
 {

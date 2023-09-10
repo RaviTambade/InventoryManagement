@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Net.Http.Headers;
-using Requests.Models;
+using Transflower.Requests.Models;
+
 namespace Requests.Repositories.Interfaces;
 public interface IRequestRepository
 {

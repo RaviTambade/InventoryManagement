@@ -89,9 +89,9 @@ export class RequestHistoryComponent {
       window.location.reload();
     })
   }
-  
+
   newOrder(){
-    this.router.navigate(["/store"])
+    this.router.navigate(["supervisor/store"])
   }
 
 }
