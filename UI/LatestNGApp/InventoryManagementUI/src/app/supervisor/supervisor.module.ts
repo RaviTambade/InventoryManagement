@@ -5,11 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { StoreComponent } from './store/store.component';
 import { RequestHistoryComponent } from './request-history/request-history.component';
 import { StoreWorkerModule } from '../store-worker/store-worker.module';
+import { RequestsComponent } from './requests/requests.component';
+import { RequestDetailsComponent } from './request-details/request-details.component';
 
 export const supervisorRoutes:Routes=[
   {path:'dashboard',component:DashboardComponent},
   {path:'store',component:StoreComponent},
-  {path:'requesthistory',component:RequestHistoryComponent},
+  {path:'requests',component:RequestsComponent},
+  {path:'requestshistory',component:RequestHistoryComponent},
+  {path:'requestdetails/:requestId',component:RequestDetailsComponent},
 
 ]
 
@@ -17,7 +21,9 @@ export const supervisorRoutes:Routes=[
   declarations: [
     DashboardComponent,
     StoreComponent,
-    RequestHistoryComponent
+    RequestHistoryComponent,
+    RequestsComponent,
+    RequestDetailsComponent
   ],
   imports: [
     CommonModule,
