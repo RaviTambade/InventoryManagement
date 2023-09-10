@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { RequestService } from 'src/app/Services/request.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class RequestHistoryComponent {
   size: number = 0;
 
 
-  constructor( private _requestsvc: RequestService) {
+  constructor( private _requestsvc: RequestService,private router:Router) {
     this.result = [];
     this.requests = [];
     this.carts = [];
@@ -88,8 +89,10 @@ export class RequestHistoryComponent {
       window.location.reload();
     })
   }
-
-
+  
+  newOrder(){
+    this.router.navigate(["/store"])
+  }
 
 }
 
