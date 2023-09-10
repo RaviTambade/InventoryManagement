@@ -1,66 +1,5 @@
 
   
-
-  <!-- <div class="container mt-4" *ngIf="details">
-    <table class="table table-striped " style="width:30%">
-        <thead class="thead-dark">
-            <tr>
-                <th>Material Id</th> 
-                <th>Category</th>
-                <th>Status</th>
-                <th>Quantity</th>
-                <th>Action</th>
-                <th>Action</th> 
-            </tr>
-        </thead>
-        <tbody *ngFor="let cart of carts">
-            <tr>
-                <td>{{ cart.materialId }}</td> 
-                <td>{{ cart.category }}</td>
-                <td>{{ cart.status }}</td>
-                <td>{{ cart.quantity }}</td>
-                 <td>
-                    <button class="btn btn-primary" [disabled]="cart.status !== 'inprogress'" >Edit</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
-                </td> 
-            </tr>
-        </tbody>
-    </table>
-</div> -->
-
-
-<!-- <div class="container " *ngIf="details">
-    <h2>Requests</h2>
-    <table class="table table-sm table-striped" style="width:60%">
-        <thead class="thead-dark">
-            <tr>
-                <th>Category</th>
-                <th>Status</th>
-                <th>Quantity</th>
-                <th>Action</th>
-                <th>Action</th> 
-            </tr>
-        </thead>
-        <tbody *ngFor="let cart of carts">
-            <tr>
-                <td>{{ cart.materialId }}</td> 
-                <td>{{ cart.category }}</td>
-                <td>{{ cart.status }}</td>
-                <td>{{ cart.quantity }}</td>
-                 <td>
-                    <button class="btn btn-primary" [disabled]="cart.status !== 'inprogress'" >Edit</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
-                </td> 
-
-            </tr>
-        </tbody>
-    </table>
-
-</div> -->
 <div *ngIf="details">
     <h2>Request Details</h2>
     <hr>
@@ -76,10 +15,14 @@
                 <h5 class="card-title">{{ cart.category }}</h5>
                 <p class="card-text">Status: {{ cart.status }}</p>
                 <p class="card-text">Quantity: {{ cart.quantity }}</p>
+                <label for="quantity" *ngIf="editQuantity" >Edit Quantity</label>
+                <input id="quantity" name="quantity" *ngIf="editQuantity" type="number"  [(ngModel)]="cart.quantity">
               </div>
               <div class="card-footer">
-                <button class="btn btn-primary" [disabled]="cart.status !== 'inprogress'">Edit</button>
-                <button class="btn btn-danger" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
+                <button class="btn btn-primary" *ngIf="editQuantity==false"  (click)="onEdit()">Edit</button>
+                <button class="btn btn-primary"*ngIf="editQuantity" (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
+                <button class="btn btn-danger" *ngIf="editQuantity==false" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
+                <button class="btn btn-danger" *ngIf="editQuantity"  (click)="onCancel()">Cancel</button>
               </div>
             </div>
           </div>

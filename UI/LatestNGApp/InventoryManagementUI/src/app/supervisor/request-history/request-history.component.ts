@@ -7,21 +7,7 @@ import { RequestService } from 'src/app/Services/request.service';
   styleUrls: ['./request-history.component.css']
 })
 export class RequestHistoryComponent {
-  @Output() requestSelected = new EventEmitter<number>(); // Emit the ID
 
-  // requests = [
-  //   { id: 1, name: 'Request 1' },
-  //   { id: 2, name: 'Request 2' },
-  //   { id: 3, name: 'Request 3' },
-  //   // Add more request items as needed
-  // ];
-
- 
-  selectRequest(id: number) {
-    this._requestsvc.setSelectedRequestId(id);
-  }
-
-  
   requests: any[];
   result: any[];
   carts: any[];
@@ -50,8 +36,6 @@ export class RequestHistoryComponent {
 
 
   ngOnInit(): void {
-
-
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
       if (res) {
         // Date.parse(res.date)
@@ -66,6 +50,10 @@ export class RequestHistoryComponent {
       }
     })
 
+  }
+
+  selectRequest(id: number) {
+    this._requestsvc.setSelectedRequestId(id);
   }
 
   next() {

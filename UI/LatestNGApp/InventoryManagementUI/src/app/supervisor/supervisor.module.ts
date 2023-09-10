@@ -7,6 +7,7 @@ import { RequestHistoryComponent } from './request-history/request-history.compo
 import { StoreWorkerModule } from '../store-worker/store-worker.module';
 import { RequestsComponent } from './requests/requests.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
+import { FormsModule } from '@angular/forms';
 
 export const supervisorRoutes:Routes=[
   {path:'dashboard',component:DashboardComponent},
@@ -27,7 +28,8 @@ export const supervisorRoutes:Routes=[
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports:[DashboardComponent]
 })

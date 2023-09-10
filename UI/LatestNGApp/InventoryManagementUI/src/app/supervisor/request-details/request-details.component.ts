@@ -8,8 +8,8 @@ import { RequestService } from 'src/app/Services/request.service';
   styleUrls: ['./request-details.component.css']
 })
 export class RequestDetailsComponent {
-  @Input() selectedRequestId: number | null = null; // Receive the selected request ID
-  requestDetails: any; // Define a variable to store details
+  @Input() selectedRequestId: number | null = null;
+  requestDetails: any; 
   details:boolean=false;
   requestId:number|undefined;
   carts: any[];
@@ -20,8 +20,9 @@ export class RequestDetailsComponent {
   orderDetail: any;
   dateTime: string = '';
   date: any;
-
-  constructor(private _requestsvc:RequestService,private route: ActivatedRoute) {
+  editQuantity:boolean=false;
+  item:any;
+  constructor(private _requestsvc:RequestService) {
     this.carts=[];
 
   }
@@ -33,7 +34,6 @@ export class RequestDetailsComponent {
     
     this._requestsvc.selectedRequestId$.subscribe((id) => {
       this.requestId = id;
-      console.log(this.requestId)
       if(this.requestId)
       this.getDetails(this.requestId);
       this.requestId=undefined;
@@ -41,13 +41,11 @@ export class RequestDetailsComponent {
     
   }
 
-
 getDetails(requestId:number){
   this._requestsvc.getRequestDetails(requestId).subscribe((res) => {
     this.carts = res;
     console.log(this.carts);
-    this.details=true;
-    
+    this.details=true; 
   })
 }
 
@@ -59,7 +57,25 @@ getDetails(requestId:number){
     })
   }
 
+  onEdit(){
+    this.editQuantity=true;
+  }
+  onCancel(){
+    this.editQuantity=false;
+  }
 
+  onEditQuantity(id:any, quantity:any){
+    console.log(id)
+    console.log(quantity);
+    this.editQuantity=false;
+    this.item.id=id;
+    this.item.quantity=quantity;
+    console.log(this.item);
+    // this._requestsvc.updateRequestedItem(this.item).subscribe((res)=>{
+    //   console.log(res);
+    // })
+    
+  }
 
 
 }
