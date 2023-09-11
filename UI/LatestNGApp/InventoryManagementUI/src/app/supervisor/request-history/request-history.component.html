@@ -5,16 +5,16 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                 <ul class="navbar-nav flex-grow">
                     <li class="nav-item">
-                        <a class="nav-link text-dark">Todays Requests:{{todaysCount}}</a>
+                        <a class="nav-link text-dark" (click)="todaysRequests()">Todays Requests:{{todaysCount}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark">Cancelled:{{cancelledCount}}</a>
+                        <a class="nav-link text-dark" (click)="cancelledRequests()">Cancelled:{{cancelledCount}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark">In progress:{{inprogressCount}}</a>
+                        <a class="nav-link text-dark" (click)="inprogressRequests()" >In progress:{{inprogressCount}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark">Delivered:{{deliveredCount}}</a>
+                        <a class="nav-link text-dark" (click)="deliveredRequests()" >Delivered:{{deliveredCount}}</a>
                     </li>
                 </ul>
             </div>

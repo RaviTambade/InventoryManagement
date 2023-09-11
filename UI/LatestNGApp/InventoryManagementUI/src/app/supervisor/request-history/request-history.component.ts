@@ -16,7 +16,7 @@ export class RequestHistoryComponent {
   requests: RequestDetails[];
   result: any[];
   carts: any[];
-  data: any[];
+  data: RequestDetails[];
   empid: number = 11;
   cart: boolean | undefined;
   emptycart: boolean | undefined;
@@ -35,6 +35,7 @@ export class RequestHistoryComponent {
   deliveredCount:number=0;
   inprogressCount:number=0;
   date:string =  '2023-09-07';
+
   constructor(private _requestsvc: RequestService,private _usersvc:UserService, private router: Router) {
     this.result = [];
     this.requests = [];
@@ -44,34 +45,42 @@ export class RequestHistoryComponent {
 
 
   ngOnInit(): void {
-    this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
-      if (res) {
-        this.requests = res;
-        if(this.requests!==null){
-          this.todaysRequestsCount();
-          this.cancelledRequestsCount();
-          this.deliveredRequestCount();
-          this.inprogressRequestCount();
-        }
-       
-        console.log(res);
+    // this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
+    //   if (res) {
+    //     this.requests = res;
+        // if(this.requests!==null){
+        //   this.todaysRequestsCount();
+        //   this.cancelledRequestsCount();
+        //   this.deliveredRequestCount();
+        //   this.inprogressRequestCount();
+        // }
+       this.requests= this._requestsvc.getAllRequests(this.empid);
+       this.data=this.requests;
+       console.log(this.requests);
+       this.todaysRequestsCount();
+       this.cancelledRequestsCount();
+       this.deliveredRequestCount();
+       this.inprogressRequestCount();
+        
 
 
-        const userIds = this.requests.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
-        this.userIds=userIds;
-        console.log(this.userIds);
-        this.getUser();
+        // const userIds = this.requests.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
+        // this.userIds=userIds;
+        // console.log(this.userIds);
+        // this.getUser();
 
-        this.request = true;
+        // this.request = true;
+
+
         // this.arrLength = this.result.length;
         // this.size = 5;
         // this.currentIndex = 0;
         // this.endIndex = this.currentIndex + this.size;
         // this.requests = this.result.slice(this.currentIndex, this.endIndex);
       }
-    })
+    // })
 
-  }
+  // }
   todaysRequestsCount(){
     this.todaysCount=12
  //   const todaysdate=new Date();
@@ -93,6 +102,28 @@ export class RequestHistoryComponent {
     const inprogressRequest = this.requests.filter(u => u.status=== "Inprogress").length;
     this.inprogressCount=inprogressRequest;
     console.log(inprogressRequest);
+  }
+
+  todaysRequests(){
+   
+  }
+
+  cancelledRequests(){
+    const cancelledrequest = this.data.filter(u => u.status=== "Cancelled");
+    this.requests=cancelledrequest;
+    console.log(this.requests);
+  }
+
+  inprogressRequests(){
+    const inprogressrequest = this.data.filter(u => u.status=== "Inprogress");
+    this.requests=inprogressrequest;
+    console.log(this.requests);
+  }
+
+  deliveredRequests(){
+    const deliveredrequest = this.data.filter(u => u.status=== "Delivered");
+    this.requests=deliveredrequest;
+    console.log(this.requests);
   }
 
   getUser(){
