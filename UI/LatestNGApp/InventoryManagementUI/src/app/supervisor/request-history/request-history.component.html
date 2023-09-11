@@ -17,8 +17,10 @@
                         <a class="nav-link text-dark" (click)="deliveredRequests()" >Delivered:{{deliveredCount}}</a>
                     </li>
                     <li class="nav-item">
-                        <input type="date" class="nav-link text-dark" (click)="onSelectDate()" [(ngModel)]="selectedDate">
-
+                        <input type="date" class="nav-link text-dark" (click)="onFromDate()" [(ngModel)]="fromDate">
+                    </li>
+                    <li class="nav-item">
+                        <input type="date" class="nav-link text-dark"  [disabled]="fromDateSelected==false" (click)="onToDate()" [(ngModel)]="toDate">
                     </li>
                 </ul>
             </div>

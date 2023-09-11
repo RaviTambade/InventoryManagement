@@ -20,7 +20,9 @@ export class RequestHistoryComponent {
   cancelledCount: number = 0;
   deliveredCount: number = 0;
   inprogressCount: number = 0;
-  selectedDate=new Date();
+  toDate=new Date();
+  fromDate=new Date();
+  fromDateSelected:boolean=false;
   constructor(private _requestsvc: RequestService, private _usersvc: UserService, private router: Router) {
     this.requests = [];
     this.data = [];
@@ -125,8 +127,15 @@ export class RequestHistoryComponent {
   newOrder() {
     this.router.navigate(["supervisor/store"])
   }
-  onSelectDate(){
-    console.log(this.selectedDate)
+  onFromDate(){
+    const todayString = this.fromDate.toISOString().split('T')[0];
+    console.log(todayString);
+    if(todayString)
+    this.fromDateSelected=true;
+
+  }
+  onToDate(){
+    console.log(this.toDate)
   }
 }
 
