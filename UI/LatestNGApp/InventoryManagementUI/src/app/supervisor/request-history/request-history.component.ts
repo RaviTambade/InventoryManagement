@@ -35,6 +35,7 @@ export class RequestHistoryComponent {
   deliveredCount:number=0;
   inprogressCount:number=0;
   date:string =  '2023-09-07';
+  cancelled:any =[];
 
   constructor(private _requestsvc: RequestService,private _usersvc:UserService, private router: Router) {
     this.result = [];
@@ -82,11 +83,17 @@ export class RequestHistoryComponent {
 
   // }
   todaysRequestsCount(){
-    this.todaysCount=12
- //   const todaysdate=new Date();
-    // const todaysrequest = this.requests.filter(u => u.date=== this.date);
-    // console.log(this.date);
-    // console.log(todaysrequest);
+    // this.todaysCount=12
+    const today=new Date();
+    const todayString = today.toISOString().split('T')[0].replace(/-/g, '/');;
+    console.log(todayString);
+    const todaysRequests=this.data.filter(request=>{
+      const requestDate=request.date.split('T')[0];
+      return requestDate==todayString;
+    })
+    console.log(todaysRequests);
+    this.todaysCount=todaysRequests.length;
+ 
   }
   cancelledRequestsCount(){
     const cancelledrequest = this.requests.filter(u => u.status=== "Cancelled").length;
@@ -105,10 +112,22 @@ export class RequestHistoryComponent {
   }
 
   todaysRequests(){
+    const today=new Date();
+    const todayString = today.toISOString().split('T')[0].replace(/-/g, '/');;
+    console.log(todayString);
+    const todaysRequests=this.data.filter(request=>{
+      const requestDate=request.date.split('T')[0];
+      return requestDate==todayString;
+    })
+    console.log(todaysRequests);
+    this.requests=todaysRequests;
+ 
+
    
   }
 
   cancelledRequests(){
+    const cancelled = this.data.filter(p => p.date === this.date )
     const cancelledrequest = this.data.filter(u => u.status=== "Cancelled");
     this.requests=cancelledrequest;
     console.log(this.requests);

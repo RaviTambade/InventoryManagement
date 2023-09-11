@@ -75,13 +75,13 @@ export class RequestService {
   getAllRequests(empid:number):RequestDetails[]{
     console.log("requests");
     var request :RequestDetails[]=[
-      {id:1, date:new Date('2023/09/07'),status:'Delivered' ,name:'pragati bangar', userId:1},
-      {id:2, date:new Date('2022/09/07') ,status:'Cancelled',name:'ovi pokharkar', userId:2},
-      {id:3, date:new Date('2022/09/07') ,status:'Inprogress',name:'shri tavhare', userId:3},
-      {id:4, date:new Date('2022/09/04') ,status:'Delivered',name:'shyam barve', userId:4},
-      {id:5, date:new Date('2022/09/05'),status:'Inprogress',name:'seeta bhor', userId:5},
-      {id:6, date:new Date('2022/09/06') ,status:'Delivered',name:'geeta borhade', userId:6},
-      {id:7, date:new Date('2022/09/09'),status:'Cancelled',name:'ramesh minde', userId:8},
+      {id:1, date:'2023/09/11T12:21:16',status:'Delivered' ,name:'pragati bangar', userId:1},
+      {id:2, date:'2023/09/11T12:24:16' ,status:'Cancelled',name:'ovi pokharkar', userId:2},
+      {id:3, date:'2023/09/11T12:27:16' ,status:'Inprogress',name:'shri tavhare', userId:3},
+      {id:4, date:'2023/09/11T12:21:16',status:'Delivered',name:'shyam barve', userId:4},
+      {id:5, date:'2022/09/05T12:21:16',status:'Inprogress',name:'seeta bhor', userId:5},
+      {id:6, date:'2022/09/11T12:21:16' ,status:'Delivered',name:'geeta borhade', userId:6},
+      {id:7, date:'2022/09/09T12:21:16',status:'Cancelled',name:'ramesh minde', userId:8},
     ];
     return request;
   }
