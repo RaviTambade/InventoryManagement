@@ -128,11 +128,9 @@ export class RequestHistoryComponent {
     this.router.navigate(["supervisor/store"])
   }
   onFromDate(){
-    const todayString = this.fromDate.toISOString().split('T')[0];
-    console.log(todayString);
-    if(todayString)
+    console.log(this.fromDate);
+    if(this.fromDate)
     this.fromDateSelected=true;
-
   }
   onToDate(){
     console.log(this.toDate)

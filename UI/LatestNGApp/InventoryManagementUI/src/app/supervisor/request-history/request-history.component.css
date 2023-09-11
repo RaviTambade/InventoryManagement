@@ -1,0 +1,53 @@
+/* Custom badge styles */
+.badge {
+    font-size: 14px; /* Adjust the font size */
+    padding: 6px 10px; /* Adjust the padding to control badge size */
+    border-radius: 20px; /* Adjust the border-radius for rounded badges */
+}
+
+/* Custom badge colors */
+.badge-primary {
+    background-color: #007bff; /* Blue color for primary */
+    color: #fff; /* Text color for primary */
+}
+
+.badge-danger {
+    background-color: #dc3545; /* Red color for danger */
+    color: #fff; /* Text color for danger */
+}
+
+.badge-warning {
+    background-color: #ffc107; /* Yellow color for warning */
+    color: #000; /* Text color for warning */
+}
+
+.badge-success {
+    background-color: #28a745; /* Green color for success */
+    color: #fff; /* Text color for success */
+}
+
+
+
+/* Hover effect for navigation links */
+.nav-link:hover {
+    background-color: #f8f9fa; /* Light gray background on hover */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Hover effect for date inputs */
+.nav-link[type="date"]:hover {
+    background-color: #f8f9fa; /* Light gray background on hover */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Label styles */
+.form-label {
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+/* CSS for hover effect */
+.nav-item:hover {
+    background-color: #f8f9fa; /* Light gray background on hover */
+    transition: background-color 0.2s ease-in-out;
+}
