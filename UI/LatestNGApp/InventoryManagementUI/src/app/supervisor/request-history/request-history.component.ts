@@ -20,8 +20,8 @@ export class RequestHistoryComponent {
   cancelledCount: number = 0;
   deliveredCount: number = 0;
   inprogressCount: number = 0;
-  toDate=new Date();
-  fromDate=new Date();
+  toDate:string="";
+  fromDate:string="";
   fromDateSelected:boolean=false;
   constructor(private _requestsvc: RequestService, private _usersvc: UserService, private router: Router) {
     this.requests = [];
@@ -40,6 +40,8 @@ export class RequestHistoryComponent {
           this.deliveredRequestCount();
           this.inprogressRequestCount();
         }
+        console.log(this.fromDate);
+        console.log(this.toDate);
         //  this.requests= this._requestsvc.getAllRequests(this.empid);
         //  this.data=this.requests;
         //  console.log(this.requests);
@@ -50,6 +52,20 @@ export class RequestHistoryComponent {
 
       }
     })
+  }
+  onFromDateChange(){
+    console.log(this.fromDate);
+  }
+  onToDateChange(){
+    console.log(this.toDate);
+    console.log(this.fromDate);
+    
+    let specificData = this.data.filter(
+      m => new Date(m.date) >= new Date(this.fromDate) && new Date(m.date) <= new Date(this.toDate)
+      );
+      console.log(specificData)
+      this.requests= specificData;
+      this._requestsvc.setSelectedRequestId(0);
   }
   todaysRequestsCount() {
     const today = new Date();
@@ -87,16 +103,20 @@ export class RequestHistoryComponent {
   cancelledRequests() {
     const cancelledrequest = this.data.filter(u => u.status === "Cancelled");
     this.requests = cancelledrequest;
+    this._requestsvc.setSelectedRequestId(0);
+
   }
 
   inprogressRequests() {
     const inprogressrequest = this.data.filter(u => u.status === "Inprogress");
     this.requests = inprogressrequest;
+    this._requestsvc.setSelectedRequestId(0);
   }
 
   deliveredRequests() {
     const deliveredrequest = this.data.filter(u => u.status === "Delivered");
     this.requests = deliveredrequest;
+    this._requestsvc.setSelectedRequestId(0);
   }
 
   getUser() {
@@ -127,13 +147,6 @@ export class RequestHistoryComponent {
   newOrder() {
     this.router.navigate(["supervisor/store"])
   }
-  onFromDate(){
-    console.log(this.fromDate);
-    if(this.fromDate)
-    this.fromDateSelected=true;
-  }
-  onToDate(){
-    console.log(this.toDate)
-  }
+
 }
 

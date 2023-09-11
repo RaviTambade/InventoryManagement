@@ -8,7 +8,6 @@ import { RequestService } from 'src/app/Services/request.service';
   styleUrls: ['./request-details.component.css']
 })
 export class RequestDetailsComponent {
-  @Input() selectedRequestId: number | null = null;
   requestDetails: any; 
   details:boolean=false;
   requestId:number|undefined;
@@ -27,13 +26,14 @@ export class RequestDetailsComponent {
 
   }
   ngOnInit(): void {
-    if(this.selectedRequestId!==null){
-      this.requestId =this.selectedRequestId;
-      console.log(this.requestId)
-    }
     
     this._requestsvc.selectedRequestId$.subscribe((id) => {
+      console.log(id)
       this.requestId = id;
+      if(this.requestId==0){
+        this.details=false;
+        this.carts=[];
+      }
       if(this.requestId)
       this.getDetails(this.requestId);
       this.requestId=undefined;
