@@ -1,6 +1,6 @@
 export class RequestDetails {
     constructor(
-                public date:string,
+                public date:Date,
                 public id:number,
                 public name:string,
                 public status:string,
