@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { RequestDetails } from 'src/app/Models/RequestDetails';
 import { RequestService } from 'src/app/Services/request.service';
 import { UserService } from 'src/app/Services/user.service';
 
@@ -11,7 +13,7 @@ import { UserService } from 'src/app/Services/user.service';
 export class RequestHistoryComponent {
 
   userIds:number[]=[]
-  requests: any[];
+  requests: RequestDetails[];
   result: any[];
   carts: any[];
   data: any[];
@@ -28,8 +30,11 @@ export class RequestHistoryComponent {
   endIndex = 0;
   arrLength = 0;
   size: number = 0;
-
-
+  todaysCount:number=0;
+  cancelledCount:number=0;
+  deliveredCount:number=0;
+  inprogressCount:number=0;
+  date:string =  '2023-09-07';
   constructor(private _requestsvc: RequestService,private _usersvc:UserService, private router: Router) {
     this.result = [];
     this.requests = [];
@@ -42,6 +47,13 @@ export class RequestHistoryComponent {
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
       if (res) {
         this.requests = res;
+        if(this.requests!==null){
+          this.todaysRequestsCount();
+          this.cancelledRequestsCount();
+          this.deliveredRequestCount();
+          this.inprogressRequestCount();
+        }
+       
         console.log(res);
 
 
@@ -59,6 +71,28 @@ export class RequestHistoryComponent {
       }
     })
 
+  }
+  todaysRequestsCount(){
+    this.todaysCount=12
+ //   const todaysdate=new Date();
+    // const todaysrequest = this.requests.filter(u => u.date=== this.date);
+    // console.log(this.date);
+    // console.log(todaysrequest);
+  }
+  cancelledRequestsCount(){
+    const cancelledrequest = this.requests.filter(u => u.status=== "Cancelled").length;
+    this.cancelledCount=cancelledrequest;
+    console.log(cancelledrequest);
+  }
+  deliveredRequestCount(){
+    const deliveredRequest = this.requests.filter(u => u.status=== "Delivered").length;
+    this.deliveredCount=deliveredRequest;
+    console.log(deliveredRequest);
+  }
+  inprogressRequestCount(){
+    const inprogressRequest = this.requests.filter(u => u.status=== "Inprogress").length;
+    this.inprogressCount=inprogressRequest;
+    console.log(inprogressRequest);
   }
 
   getUser(){
@@ -117,6 +151,5 @@ export class RequestHistoryComponent {
   newOrder() {
     this.router.navigate(["supervisor/store"])
   }
-
 }
 
