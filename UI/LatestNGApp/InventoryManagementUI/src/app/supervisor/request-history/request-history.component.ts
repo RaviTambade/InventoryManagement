@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from 'src/app/Services/request.service';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-request-history',
@@ -9,6 +10,7 @@ import { RequestService } from 'src/app/Services/request.service';
 })
 export class RequestHistoryComponent {
 
+  userIds:number[]=[]
   requests: any[];
   result: any[];
   carts: any[];
@@ -21,14 +23,14 @@ export class RequestHistoryComponent {
   employees: any = [];
   isDisabledPrev = false;
   isDisabledNext = false;
-  orderPicked=false;
+  orderPicked = false;
   currentIndex = 0;
   endIndex = 0;
   arrLength = 0;
   size: number = 0;
 
 
-  constructor( private _requestsvc: RequestService,private router:Router) {
+  constructor(private _requestsvc: RequestService,private _usersvc:UserService, private router: Router) {
     this.result = [];
     this.requests = [];
     this.carts = [];
@@ -39,49 +41,71 @@ export class RequestHistoryComponent {
   ngOnInit(): void {
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
       if (res) {
-        // Date.parse(res.date)
-        this.result = res;
+        this.requests = res;
         console.log(res);
+
+
+        const userIds = this.requests.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
+        this.userIds=userIds;
+        console.log(this.userIds);
+        this.getUser();
+
         this.request = true;
-        this.arrLength = this.result.length;
-        this.size = 5;
-        this.currentIndex = 0;
-        this.endIndex = this.currentIndex + this.size;
-        this.requests = this.result.slice(this.currentIndex, this.endIndex);
+        // this.arrLength = this.result.length;
+        // this.size = 5;
+        // this.currentIndex = 0;
+        // this.endIndex = this.currentIndex + this.size;
+        // this.requests = this.result.slice(this.currentIndex, this.endIndex);
       }
     })
 
+  }
+
+  getUser(){
+    for (const userId of this.userIds) {
+      this._usersvc.getUser(userId).subscribe(data => {  
+        console.log(`User ID ${userId}:`, data);
+
+          for (const responseItem of data) {
+            const users = this.requests.filter(u => u.userId === responseItem.id);
+            console.log(users)
+
+            for (const user of users) {
+              user.name = responseItem.name; 
+            }
+          }
+        
+         });
+    }
   }
 
   selectRequest(id: number) {
     this._requestsvc.setSelectedRequestId(id);
   }
 
-  next() {
-    this.currentIndex = this.currentIndex + this.size;
-    this.endIndex = this.currentIndex + this.size;
-    this.requests = this.result.slice(this.currentIndex, this.endIndex);
-    //button unable disable code
-    this.isDisabledPrev = false;
-    if (this.endIndex >= this.arrLength)
-    {
-      this.isDisabledNext = true;
-    }
-  }
+  // next() {
+  //   this.currentIndex = this.currentIndex + this.size;
+  //   this.endIndex = this.currentIndex + this.size;
+  //   this.requests = this.result.slice(this.currentIndex, this.endIndex);
+  //   //button unable disable code
+  //   this.isDisabledPrev = false;
+  //   if (this.endIndex >= this.arrLength) {
+  //     this.isDisabledNext = true;
+  //   }
+  // }
 
-  previous() {
-    this.currentIndex = this.currentIndex - this.size;
-    this.endIndex = this.currentIndex + this.size;
-    this.requests = this.result.slice(this.currentIndex, this.endIndex);
-    //button unable disable code
-    this.isDisabledNext = false;
-    if (this.currentIndex <= 0) 
-    {
-      this.isDisabledPrev = true;
-    }
+  // previous() {
+  //   this.currentIndex = this.currentIndex - this.size;
+  //   this.endIndex = this.currentIndex + this.size;
+  //   this.requests = this.result.slice(this.currentIndex, this.endIndex);
+  //   //button unable disable code
+  //   this.isDisabledNext = false;
+  //   if (this.currentIndex <= 0) {
+  //     this.isDisabledPrev = true;
+  //   }
 
 
-  }
+  // }
 
   onCancelRequest(reqid: number) {
     this._requestsvc.cancelRequest(reqid).subscribe((res) => {
@@ -90,7 +114,7 @@ export class RequestHistoryComponent {
     })
   }
 
-  newOrder(){
+  newOrder() {
     this.router.navigate(["supervisor/store"])
   }
 
