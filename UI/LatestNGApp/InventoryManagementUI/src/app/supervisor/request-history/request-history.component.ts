@@ -93,6 +93,5 @@ export class RequestHistoryComponent {
   newOrder(){
     this.router.navigate(["supervisor/store"])
   }
-
 }
 

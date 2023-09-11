@@ -29,15 +29,12 @@ export class LoginComponent {
           this.userService.getUserRole(this.userId).subscribe((response) => {
             this.role = response;
             console.log(this.role);
-             const role=this.role.role;
+            const role=this.role.role;
             this.navigateByRole(role);
           })
         })
       }
-
     })
-
-
   }
 
   navigateByRole(role: string) {

@@ -15,8 +15,7 @@ export class RequestService {
   setSelectedRequestId(id: number) {
     this.selectedRequestIdSubject.next(id);
   }
-
-  
+ 
   getRequestDetails(requestid:number):Observable<any>
   {
     let url ="http://localhost:5164/api/request/requestdetails/"+ requestid;

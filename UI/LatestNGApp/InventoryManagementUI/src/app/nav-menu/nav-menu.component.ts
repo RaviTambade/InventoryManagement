@@ -11,6 +11,7 @@ import { AuthenticationService } from '../Services/authentication.service';
 export class NavMenuComponent implements OnInit {
   isExpanded = false;
   name: string | undefined
+  
   constructor(private router: Router, private userService: UserService,private authService:AuthenticationService) { }
   ngOnInit(): void {
      let contactNumber =  this.authService.getContactNumberFromToken()
