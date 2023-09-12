@@ -25,19 +25,17 @@
                     <p class="card-text">
                       <strong>Quantity:</strong> {{ cart.quantity }}
                     </p>
-                    <label for="quantity" *ngIf="editQuantity">Edit Quantity</label>
-                    <input id="quantity" name="quantity" *ngIf="editQuantity" type="number" [(ngModel)]="cart.quantity" class="form-control form-control-sm">
-                  </div>
+                    <label for="quantity" *ngIf="editQuantity &&  cartId==cart.id" >Edit Quantity</label>
+                    <input id="quantity" name="quantity" *ngIf="editQuantity &&  cartId==cart.id" type="number"  [(ngModel)]="cart.quantity" class="form-control form-control-sm">
+                   </div>
                 </div>
               </div>
               <div class="card-footer">
-                <button class="btn btn-primary" *ngIf="!editQuantity" (click)="onEdit()">Edit</button>
-                <button class="btn btn-primary" *ngIf="editQuantity" (click)="onEditQuantity(cart.id, cart.quantity)">Edit Quantity</button>
-                <button class="btn btn-danger" *ngIf="!editQuantity" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
-                <button class="btn btn-danger" *ngIf="editQuantity" (click)="onCancel()">Cancel</button>
-              </div>
-            </div>
-            
+                  <button class="btn btn-primary" *ngIf="editQuantity==false || cartId!==cart.id"  (click)="onEdit(cart.id)">Edit</button>
+                  <button class="btn btn-primary" *ngIf="editQuantity && cartId==cart.id" (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
+                  <button class="btn btn-danger" *ngIf="editQuantity==false || cartId!==cart.id" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
+                  <button class="btn btn-danger" *ngIf="editQuantity && cartId==cart.id"  (click)="onCancel()">Cancel</button>  
+            </div>      
           </div>
         </div>
       </div>

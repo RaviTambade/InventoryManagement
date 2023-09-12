@@ -9,6 +9,7 @@ import { RequestService } from 'src/app/Services/request.service';
 })
 export class RequestDetailsComponent {
   requestDetails: any; 
+  changeQuantity:boolean=false;
   details:boolean=false;
   requestId:number|undefined;
   carts: any[];
@@ -21,6 +22,7 @@ export class RequestDetailsComponent {
   date: any;
   editQuantity:boolean=false;
   item:any;
+  cartId:number|any ;
   constructor(private _requestsvc:RequestService) {
     this.carts=[];
 
@@ -57,7 +59,9 @@ getDetails(requestId:number){
     })
   }
 
-  onEdit(){
+  onEdit(id:any){
+    console.log(id);
+    this.cartId=id;
     this.editQuantity=true;
   }
   onCancel(){
