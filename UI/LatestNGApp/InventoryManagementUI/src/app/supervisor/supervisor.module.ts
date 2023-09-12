@@ -8,6 +8,8 @@ import { StoreWorkerModule } from '../store-worker/store-worker.module';
 import { RequestsComponent } from './requests/requests.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialsComponent } from './materials/materials.component';
+import { MaterialDetailsComponent } from './material-details/material-details.component';
 
 export const supervisorRoutes:Routes=[
   {path:'dashboard',component:DashboardComponent},
@@ -24,7 +26,9 @@ export const supervisorRoutes:Routes=[
     StoreComponent,
     RequestHistoryComponent,
     RequestsComponent,
-    RequestDetailsComponent
+    RequestDetailsComponent,
+    MaterialsComponent,
+    MaterialDetailsComponent
   ],
   imports: [
     CommonModule,

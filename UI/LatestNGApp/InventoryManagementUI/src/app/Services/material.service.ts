@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +8,14 @@ import { Observable } from 'rxjs';
 export class MaterialService {
 
   constructor(private http:HttpClient) { }
-  // parametr  materialid =>materialId
- 
-  // url  casing  "http://localhost:5071/api/Materials/materials/" +materialid 
-  //  => "http://localhost:5071/api/materials/" +materialid
-  // remove Materials
+  private selectedMaterialIdSubject = new BehaviorSubject<any>(null);
+  selectedMaterialId$ = this.selectedMaterialIdSubject.asObservable();
+
+  setSelectedMaterialId(id: number) {
+    console.log(id);
+    this.selectedMaterialIdSubject.next(id);
+  }
+
    getMaterial(materialid:any):Observable<any>{
      console.log(materialid);
        let url ="http://localhost:5071/api/Materials/materials/" +materialid ;
