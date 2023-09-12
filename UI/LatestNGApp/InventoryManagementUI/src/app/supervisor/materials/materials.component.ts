@@ -32,6 +32,7 @@ export class MaterialsComponent implements OnInit{
 
   onSelectCategory(category:any){
     console.log(category);
+    this._materialsvc.setSelectedMaterialId(0);
     const sortedMaterials=this.data.filter(m=>m.type===category)
     console.log(sortedMaterials);
     this.materials=sortedMaterials;

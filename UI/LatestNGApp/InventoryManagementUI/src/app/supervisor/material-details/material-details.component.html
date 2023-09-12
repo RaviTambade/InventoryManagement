@@ -18,12 +18,19 @@
                   <!-- Right Half: Card Title and Text -->
                   <div class="col-md-6">
                     <p class="card-text">
-                      <strong>Title:</strong> {{material.name }}
+                      <span class="h4">Title : {{ material.name }}</span>
                     </p>
                     <p class="card-text">
-                      <strong>Quantity:</strong> {{material.quantity }}
+                      <span class="h4">Type :  {{ material.type }}</span>
                     </p>
-                   </div>
+                    <button type="submit" *ngIf="!add" class="btn btn-primary btn-sm" (click)="addNew()">
+                      <i class="fas fa-cart-plus"></i> Add 
+                    </button>
+                    <label for="quantity" *ngIf="add" >Quantity</label>
+                    <input id="quantity" *ngIf="add" name="quantity"  type="number"  [(ngModel)]="request.quantity"  class="form-control form-control-sm">
+                      <button class="btn btn-primary btn-block" *ngIf="add" (click)="onAdd(material.id,material.type,request.quantity)">Add to Tray</button>
+                    <button class="btn btn-danger btn-block" *ngIf="add" (click)="onCancel()">Cancel</button>     
+                  </div>     
                 </div>
               </div>
           </div>

@@ -1,24 +1,103 @@
-
+<!-- 
 <div class="container "  style="width:90%">
     <h2>Categories</h2>   
-    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-light bg-white">
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-            <div class="d-flex flex-wrap align-items-center mb-2">
-                <ul class="navbar-nav flex-grow">
-                    <li class="nav-item" *ngFor="let category of categories ">
-                        <a class="nav-link text-dark border rounded p-2" (click)="onSelectCategory(category)" >{{category}}</a>
-                    </li>
-                </ul>
+          <div class="d-flex flex-wrap align-items-center mb-2">
+            <div class="row">
+              <div class="col-md-3 mb-2" *ngFor="let category of categories">
+                <div class="nav-item">
+                  <a class="nav-link text-dark border rounded p-2" (click)="onSelectCategory(category)">{{category}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <hr>      
+      
+    <div class="container" style="width: 90%">
+        <div class="row">
+          <div class="col-md-4 mb-4" *ngFor="let material of materials">
+            <div class="grid-item border rounded p-3">
+              <img src="{{material.imageUrl}}" alt="" class="img-thumbnail">
+              <h4>{{material.name}}</h4>
+              <button type="submit" class="btn btn-primary btn-sm" (click)="selectedMaterialId(material.id)">
+                View
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+         
+</div> -->
+
+
+<!-- <div class="container" style="width: 100%">
+    <h2>Categories</h2>
+    <div class="row">
+        <div class="col-md-2 mr-2">
+            <div class="custom-nav">
+                <div class="card custom-card mb-2" *ngFor="let category of categories">
+                    <div class="card-body p-2 custom-link" (click)="onSelectCategory(category)">
+                        {{ category }}
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="grid-container">
-        <div class="grid-item"  *ngFor="let material of materials">
-            <img src="{{material.imageUrl}}" alt="">
-            <h4 >Material Type:{{material.type}}</h4>
-            <h4 >Material Name: {{material.name}}</h4>
-            <button type="submit"  (click)="selectedMaterialId(material.id)">Add to request</button>
-          </div>
-      </div> 
-    
+        <div class="col-md-1 border-right"></div>
 
+        <div class="col-md-9">
+
+            <div class="row">
+                <div class="col-md-4 mb-4" *ngFor="let material of materials">
+                    <div class="grid-item border rounded p-3">
+                        <img (click)="selectedMaterialId(material.id)" src="{{ material.imageUrl }}" alt=""
+                            class="img-thumbnail">
+                        <h4 (click)="selectedMaterialId(material.id)">{{ material.name }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="container" style="width: 100%">
+    <h2>Categories</h2>
+    <div class="row" >
+        <div class="col-md-2 mr-1">
+            <div class="custom-nav">
+              <!-- Left Partition -->
+              <div class="card custom-card mb-2" *ngFor="let category of categories.slice(0, categories.length / 2)">
+                <div class="card-body p-2 custom-link" (click)="onSelectCategory(category)">
+                  {{ category }}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-2  mr-1">
+            <div class="custom-nav">
+              <!-- Right Partition -->
+              <div class="card custom-card mb-2" *ngFor="let category of categories.slice(categories.length / 2)">
+                <div class="card-body p-2 custom-link" (click)="onSelectCategory(category)">
+                  {{ category }}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        <div class="col-md-1 mr-1 border-right"></div>
+
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-4 mb-4" *ngFor="let material of materials">
+                    <div class="grid-item border rounded p-3">
+                        <img (click)="selectedMaterialId(material.id)" src="{{ material.imageUrl }}" alt=""
+                            class="img-thumbnail">
+                        <h4 (click)="selectedMaterialId(material.id)">{{ material.name }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
