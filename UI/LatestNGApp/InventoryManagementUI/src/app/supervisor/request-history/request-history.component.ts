@@ -88,7 +88,7 @@ export class RequestHistoryComponent {
   inprogressRequestCount() {
     const inprogressRequest = this.data.filter(u => u.status === "Inprogress").length;
     this.inprogressCount = inprogressRequest;
-  }
+  } 
 
   todaysRequests() {
     const today = new Date();
