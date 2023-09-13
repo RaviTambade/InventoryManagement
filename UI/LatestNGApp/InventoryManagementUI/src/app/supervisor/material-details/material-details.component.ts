@@ -16,7 +16,8 @@ export class MaterialDetailsComponent implements OnInit{
     456, 
     '', 
     0 
-  );  add:boolean=false;
+  ); 
+  add:boolean=false;
   constructor(private materialSvc:MaterialService , private _initialReqSvc: InitialRequestService){
   }
 
