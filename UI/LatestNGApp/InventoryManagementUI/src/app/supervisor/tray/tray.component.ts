@@ -10,14 +10,14 @@ import { OrderService } from 'src/app/Services/order.service';
 export class TrayComponent implements OnInit{
 
   empid:number=11;
-  tray:any[]=[];
+  trays:any[]=[];
   trayId:number |undefined;
   onEditClick:boolean=false;
   constructor(private requestSvc:InitialRequestService,private orderSvc:OrderService){}
   
   ngOnInit(): void {
     this.requestSvc.getTray(this.empid).subscribe((res)=>{
-      this.tray=res;
+      this.trays=res;
       console.log(res);
     })
   }
@@ -56,5 +56,8 @@ export class TrayComponent implements OnInit{
 
   onCancel(cartid:number){
     this.onEditClick=false;
+  }
+  onOrder(){
+    
   }
 }
