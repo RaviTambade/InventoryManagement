@@ -31,8 +31,8 @@
                 </div>
               </div>
               <div class="card-footer">
-                  <button class="btn btn-primary" *ngIf="editQuantity==false || cartId!==cart.id"  (click)="onEdit(cart.id)">Edit</button>
-                  <button class="btn btn-primary" *ngIf="editQuantity && cartId==cart.id" (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
+                  <button class="btn btn-primary" *ngIf="!editQuantity==false || cartId!==cart.id"  (click)="onEdit(cart.id)">Edit</button>
+                  <button class="btn btn-primary" *ngIf="editQuantity && cartId!==cart.id" (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
                   <button class="btn btn-danger" *ngIf="editQuantity==false || cartId!==cart.id" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
                   <button class="btn btn-danger" *ngIf="editQuantity && cartId==cart.id"  (click)="onCancel()">Cancel</button>  
             </div>      

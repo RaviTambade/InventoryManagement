@@ -19,10 +19,10 @@
                         <input type="number" id="edit" *ngIf="onEditClick && trayId==cart.id" name="edit" >          
                     </td>
                     <td>   
-                        <button class="btn btn-primary" *ngIf="onEditClick" (click)="onCancel(cart.id)">Cancel</button>
-                        <button class="btn btn-primary" *ngIf="!onEditClick" (click)="onEdit(cart.id)">Edit</button>
-                        <button class="btn btn-danger" *ngIf="!onEditClick" (click)="onRemove(cart.id)">Remove</button>
-                        <button class="btn btn-danger" *ngIf="onEditClick" (click)="onEditQuantity(cart.id)">EditQuantity</button>
+                        <button class="btn btn-primary" *ngIf="onEditClick || trayId==cart.id" (click)="onCancel(cart.id)">Cancel</button>
+                        <button class="btn btn-primary" *ngIf="!onEditClick || trayId!==cart.id " (click)="onEdit(cart.id)">Edit</button>
+                        <button class="btn btn-danger" *ngIf="onEditClick || trayId!==cart.id" (click)="onRemove(cart.id)">Remove</button>
+                        <button class="btn btn-danger" *ngIf="onEditClick && trayId!==cart.id" (click)="onEditQuantity(cart.id,cart.quantity)">EditQuantity</button>
                     </td>
                 </tr>
             </tbody>

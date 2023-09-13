@@ -50,7 +50,7 @@ export class TrayComponent implements OnInit{
     this.onEditClick=true;
   }
 
-  onEditQuantity(cartid: number){
+  onEditQuantity(cartid: number,quantity:number){
     this.onEditClick=false;
   }
 
