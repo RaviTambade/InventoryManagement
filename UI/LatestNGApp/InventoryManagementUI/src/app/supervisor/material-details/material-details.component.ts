@@ -52,16 +52,14 @@ export class MaterialDetailsComponent implements OnInit{
       this.request.employeeId = 11;
       this.request.materialId = materialid;
       this.request.category = category,
-        this.request.quantity = quantity
+      this.request.quantity = quantity
       console.log(this.request)
-      // this._initialReqSvc.add(this.request).subscribe((res) => {
-      //   console.log(res);
-      //   if (res) {
-      //     alert("added to cart!");
-      //   }
-      // })
-      this.add=false;
-    
+      this._initialReqSvc.add(this.request).subscribe((res) => {
+        console.log(res);
+        if (res) {
+          alert("added to cart!");
+        }
+      })
+      this.add=false;  
   }
-
 }

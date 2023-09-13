@@ -10,12 +10,14 @@ import { RequestDetailsComponent } from './request-details/request-details.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialsComponent } from './materials/materials.component';
 import { MaterialDetailsComponent } from './material-details/material-details.component';
+import { TrayComponent } from './tray/tray.component';
 
 export const supervisorRoutes:Routes=[
   {path:'dashboard',component:DashboardComponent},
   {path:'store',component:StoreComponent},
   {path:'requests',component:RequestsComponent},
   {path:'requestshistory',component:RequestHistoryComponent},
+  {path:'tray',component:TrayComponent},
   {path:'requestdetails/:requestId',component:RequestDetailsComponent},
 
 ]
@@ -28,7 +30,8 @@ export const supervisorRoutes:Routes=[
     RequestsComponent,
     RequestDetailsComponent,
     MaterialsComponent,
-    MaterialDetailsComponent
+    MaterialDetailsComponent,
+    TrayComponent
   ],
   imports: [
     CommonModule,

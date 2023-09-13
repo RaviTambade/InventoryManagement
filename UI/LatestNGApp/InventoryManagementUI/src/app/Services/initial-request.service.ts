@@ -9,7 +9,7 @@ export class InitialRequestService {
 
   constructor(private http:HttpClient) { }
   
-  getCarts(empid:number):Observable<any>{
+  getTray(empid:number):Observable<any>{
     let url ="http://localhost:5164/api/InitialRequest/items/" + empid ;
     return this.http.get(url);
   }
