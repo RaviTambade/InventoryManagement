@@ -1,0 +1,6 @@
+/* Custom CSS to control the input size */
+.small-input {
+    width: 70px; /* Adjust the width as needed */
+    height: 30px; /* Adjust the height as needed */
+    /* Additional custom styles as needed */
+}

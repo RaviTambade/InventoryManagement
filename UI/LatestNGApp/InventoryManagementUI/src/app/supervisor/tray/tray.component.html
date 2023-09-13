@@ -1,34 +1,34 @@
-    <div *ngIf="tray" class="container">
+    <div *ngIf="trays" class="container">
         <h2 class="mt-5">New Request</h2>
         <table class="table table-striped" style="width:60%">
             <thead class="thead-dark">
                 <tr>
-                    <th>Material ID</th>
-                    <th>Material Category</th>
-                    <th>Order Quantity</th>
-                    <th>Action</th>
+                    <th>Material </th>
+                    <th>Category</th>
+                    <th>Quantity</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let cart of tray">
+            <tbody *ngFor="let tray of trays">
                 <tr>
-                    <td>{{ cart.materialId }}</td>
-                    <td>{{ cart.category }}</td>
-                    <td>{{ cart.quantity }}</td>
+                    <td><img src="./assets/img/Bearing.jpeg" width="30%" height="30%" alt=""></td>
+                    <td>{{ tray.category }}</td>
                     <td>
-                        <label for="edit" *ngIf="onEditClick && trayId==cart.id"> Edit</label>
-                        <input type="number" id="edit" *ngIf="onEditClick && trayId==cart.id" name="edit" >          
-                    </td>
+                        <div *ngIf="!onEditClick" >{{ tray.quantity }}</div> 
+                           <div *ngIf="onEditClick  && trayId!==tray.id" >{{tray.quantity}} </div> 
+                      <label for="edit" *ngIf="onEditClick && trayId==tray.id">Edit Quantity</label>
+                         <input type="number" id="edit" *ngIf="onEditClick && trayId==tray.id"[(ngModel)]="tray.quantity"  name="edit" class="form-control form-control-sm small-input">
+                        </td>
                     <td>   
-                        <button class="btn btn-primary" *ngIf="onEditClick || trayId==cart.id" (click)="onCancel(cart.id)">Cancel</button>
-                        <button class="btn btn-primary" *ngIf="!onEditClick || trayId!==cart.id " (click)="onEdit(cart.id)">Edit</button>
-                        <button class="btn btn-danger" *ngIf="onEditClick || trayId!==cart.id" (click)="onRemove(cart.id)">Remove</button>
-                        <button class="btn btn-danger" *ngIf="onEditClick && trayId!==cart.id" (click)="onEditQuantity(cart.id,cart.quantity)">EditQuantity</button>
+                        <button class="btn btn-primary" *ngIf="!onEditClick ||  trayId!==tray.id" (click)="onEdit(tray.id)">Edit</button>
+                        <button class="btn btn-danger" *ngIf="!onEditClick ||  trayId!==tray.id" (click)="onRemove(tray.id)">Remove</button>
+                        <button class="btn btn-success" *ngIf="onEditClick  && trayId==tray.id" (click)="onEditQuantity(tray.id,tray.quantity)">EditQuantity</button>
+                        <button class="btn btn-danger" *ngIf="onEditClick  && trayId==tray.id" (click)="onCancel(tray.id)">Cancel</button>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="mt-3">
-            <!-- <button class="btn btn-success" (click)="onOrder()">Place Order</button> -->
+            <button class="btn btn-success" (click)="onOrder()">Place Order</button>
             <button class="btn btn-danger ml-2" (click)="onRemoveAll()">Remove All</button>
         </div>
     </div>

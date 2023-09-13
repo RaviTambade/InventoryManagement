@@ -10,14 +10,21 @@ import { OrderService } from 'src/app/Services/order.service';
 export class TrayComponent implements OnInit{
 
   empid:number=11;
-  tray:any[]=[];
+  trays:any[]=[];
+  updatedTray:any;
   trayId:number |undefined;
   onEditClick:boolean=false;
-  constructor(private requestSvc:InitialRequestService,private orderSvc:OrderService){}
+  constructor(private requestSvc:InitialRequestService,private orderSvc:OrderService,private svc:InitialRequestService){
+
+    this.updatedTray={
+      id:0,
+      quantity:0
+    }
+  }
   
   ngOnInit(): void {
     this.requestSvc.getTray(this.empid).subscribe((res)=>{
-      this.tray=res;
+      this.trays=res;
       console.log(res);
     })
   }
@@ -30,12 +37,12 @@ export class TrayComponent implements OnInit{
     })
   }
 
-  // onOrder() {
-  //   this.orderSvc.order(this.empid).subscribe((res) => {
-  //     console.log(res);
-  //     window.location.reload();
-  //   })
-  // }
+  onOrder() {
+    this.orderSvc.order(this.empid).subscribe((res) => {
+      console.log(res);
+      window.location.reload();
+    })
+  }
 
   onRemoveAll() {
     this.requestSvc.removeAll(this.empid).subscribe((res) => {
@@ -50,8 +57,14 @@ export class TrayComponent implements OnInit{
     this.onEditClick=true;
   }
 
-  onEditQuantity(cartid: number,quantity:number){
+  onEditQuantity(trayId: number,quantity:number){
     this.onEditClick=false;
+    this.updatedTray.id=trayId;
+    this.updatedTray.quantity=quantity;
+    console.log(this.updatedTray);
+  this.svc.updateQuantity(this.updatedTray).subscribe((res)=>{
+    console.log(res);
+  })
   }
 
   onCancel(cartid:number){
