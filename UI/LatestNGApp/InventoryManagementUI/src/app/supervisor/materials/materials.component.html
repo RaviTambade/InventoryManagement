@@ -1,5 +1,23 @@
+ <table>
+      <tr>
+          <td>
+              <label>Category</label>
+          </td>
+          <td>
+              <select  [(ngModel)]="selectedCategory" (change)="onSelectedCategory()" name="category">
+              <option *ngFor="let category of categories" [value]="category">
+              {{ category}}
+              </option>
+              </select>
+          </td>
+      </tr>
+    
 
-<div class="container "  style="width:100%">
+
+
+
+
+<!-- <div class="container "  style="width:100%">
     <h2>Categories</h2>   
     <nav class="navbar navbar-expand-sm navbar-light bg-white">
       <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
@@ -14,7 +32,7 @@
         </div>
       </div>
     </nav>
-<hr>
+<hr>-->
 
 
 
@@ -34,7 +52,7 @@
         </div>
       </div>
          
-</div>
+
 
 
 <!-- <div class="container" style="width: 100%">

@@ -1,37 +1,45 @@
 
-    <div *ngIf="trays" class="Container">
+    <div *ngIf="trays" class="container" style="width: 80%">
         <h2 class="mt-5">New Request</h2>
-        <table class="table table-striped" style="width:60%">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Material </th>
-                    <th>Category</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let tray of trays">
-                <tr>
-                    <td><img src="{{tray.imageUrl}}" width="30%" height="30%" alt=""></td>
-                    <td>{{ tray.category }}</td>
-                    <td>
-                        <div *ngIf="!onEditClick" >{{ tray.quantity }}</div> 
-                           <div *ngIf="onEditClick  && trayId!==tray.id" >{{tray.quantity}} </div> 
-                      <label for="edit" *ngIf="onEditClick && trayId==tray.id">Edit Quantity</label>
-                         <input type="number" id="edit" *ngIf="onEditClick && trayId==tray.id"[(ngModel)]="tray.quantity"  name="edit" class="form-control form-control-sm small-input">
-                        </td>
-                    <td>   
-                        <button class="btn btn-primary" *ngIf="!onEditClick ||  trayId!==tray.id" (click)="onEdit(tray.id)">Edit</button>
-                        <button class="btn btn-danger" *ngIf="!onEditClick ||  trayId!==tray.id" (click)="onRemove(tray.id)">Remove</button>
-                        <button class="btn btn-success" *ngIf="onEditClick  && trayId==tray.id" (click)="onEditQuantity(tray.id,tray.quantity)">EditQuantity</button>
-                        <button class="btn btn-danger" *ngIf="onEditClick  && trayId==tray.id" (click)="onCancel(tray.id)">Cancel</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="mt-3">
-            <button class="btn btn-success" (click)="onOrder()">Place Order</button>
-            <button class="btn btn-danger ml-2" (click)="onRemoveAll()">Remove All</button>
+        
+        <!-- Card container -->
+        <div class="card mt-3" *ngFor="let tray of trays">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-2">
+                <img src="./assets/img/Bearing.jpeg" alt="Image" class="img-fluid" />
+              </div>
+              <div class="col-md-3">
+                <h5 class="card-title">{{ tray.category }}</h5>
+              </div>
+              <div class="col-md-4">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <button class="btn btn-danger btn-sm" (click)="decrement(tray.id)" type="button">-</button>
+                  </div>
+                  <div>
+                    <input type="text" [(ngModel)]="tray.quantity" class="form-control form-control-sm text-center" />
+                  </div>
+                  <div>
+                    <button class="btn btn-primary btn-sm" (click)="increment(tray.id)" type="button">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-sm float-right" (click)="onRemove(tray.id)">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+        
+        <div class="mt-3">
+          <button class="btn btn-success" (click)="onOrder()">Place Order</button>
+          <button class="btn btn-danger ml-2" (click)="onRemoveAll()">Remove All</button>
+        </div>
+      </div>
+      
 
 
+      

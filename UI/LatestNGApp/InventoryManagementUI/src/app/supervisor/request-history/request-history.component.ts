@@ -33,6 +33,7 @@ export class RequestHistoryComponent {
       if (res) {
         this.requests = res;
         this.data = res;
+        this.requests=this.data.slice(0,10);
         if (this.requests !== null) {
           this.getUser();
           this.todaysRequestsCount();
@@ -42,14 +43,6 @@ export class RequestHistoryComponent {
         }
         console.log(this.fromDate);
         console.log(this.toDate);
-        //  this.requests= this._requestsvc.getAllRequests(this.empid);
-        //  this.data=this.requests;
-        //  console.log(this.requests);
-        //  this.todaysRequestsCount();
-        //  this.cancelledRequestsCount();
-        //  this.deliveredRequestCount();
-        //  this.inprogressRequestCount();
-
       }
     })
   }
