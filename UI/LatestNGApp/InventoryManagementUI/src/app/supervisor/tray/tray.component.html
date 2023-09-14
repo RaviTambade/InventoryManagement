@@ -1,4 +1,5 @@
-    <div *ngIf="trays" class="container">
+
+    <div *ngIf="trays" class="Container">
         <h2 class="mt-5">New Request</h2>
         <table class="table table-striped" style="width:60%">
             <thead class="thead-dark">
@@ -10,7 +11,7 @@
             </thead>
             <tbody *ngFor="let tray of trays">
                 <tr>
-                    <td><img src="./assets/img/Bearing.jpeg" width="30%" height="30%" alt=""></td>
+                    <td><img src="{{tray.imageUrl}}" width="30%" height="30%" alt=""></td>
                     <td>{{ tray.category }}</td>
                     <td>
                         <div *ngIf="!onEditClick" >{{ tray.quantity }}</div> 
@@ -32,4 +33,5 @@
             <button class="btn btn-danger ml-2" (click)="onRemoveAll()">Remove All</button>
         </div>
     </div>
+
 
