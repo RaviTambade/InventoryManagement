@@ -27,7 +27,7 @@ public class InitialRequestRepository : IInitialRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select rt.id, rt.initialrequestid, initialrequest.employeeid, rt.materialid, categories.category,rt.quantity from InitialRequestItems rt inner join initialrequest on rt.initialrequestid=initialrequest.id  inner join categories on categories.id=rt.categoryid where initialrequest.employeeid=@empid";
+            string query = "select rt.id, rt.initialrequestid,initialrequest.employeeid, rt.materialid, categories.category,rt.quantity from InitialRequestItems rt inner join initialrequest on rt.initialrequestid=initialrequest.id inner join categories on categories.id=rt.categoryid where initialrequest.employeeid=@empid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
             await con.OpenAsync();
@@ -40,6 +40,7 @@ public class InitialRequestRepository : IInitialRequestRepository
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 int employeeid = Int32.Parse(reader["employeeid"].ToString());
+                
 
                 InitialRequestItem item = new InitialRequestItem()
                 {
@@ -48,7 +49,8 @@ public class InitialRequestRepository : IInitialRequestRepository
                     MaterialId = materialid,
                     Category = category,
                     Quantity = quantity,
-                    EmployeeId = employeeid
+                    EmployeeId = employeeid,
+                    
                 };
 
                 items.Add(item);
@@ -86,6 +88,8 @@ public class InitialRequestRepository : IInitialRequestRepository
                 int materialid = Int32.Parse(reader["materialid"].ToString());
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
+                
+                
 
                 item = new InitialRequestItem()
                 {
@@ -94,6 +98,7 @@ public class InitialRequestRepository : IInitialRequestRepository
                     MaterialId = materialid,
                     Category = category,
                     Quantity = quantity,
+                    
                 };
             }
             await reader.CloseAsync();
@@ -152,7 +157,6 @@ public class InitialRequestRepository : IInitialRequestRepository
             cmd.Parameters.AddWithValue("@empid", item.EmployeeId);
             cmd.Parameters.AddWithValue("@materialid", item.MaterialId);
             cmd.Parameters.AddWithValue("@quantity", item.Quantity);
-
             await con.OpenAsync();
 
             int rowsAffected = cmd.ExecuteNonQuery();
@@ -181,7 +185,7 @@ public class InitialRequestRepository : IInitialRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "	DELETE FROM InitialRequestItems WHERE initialrequestid=(select id from initialrequest  where employeeid=@employeeid)";
+            string query = "DELETE FROM InitialRequestItems WHERE initialrequestid=(select id from initialrequest  where employeeid=@employeeid)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@employeeid", employeeid);
             await con.OpenAsync();

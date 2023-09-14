@@ -122,6 +122,7 @@ export class RequestsHistoryComponent {
   onEdit(cartid: number) {
     this.router.navigate(['/supervisor/editrequest', cartid]);
   }
+  
   onView(requestid: number) {
     this.router.navigate(['/supervisor/requestdetails', requestid]);
 

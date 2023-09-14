@@ -25,7 +25,7 @@ public class OrderRepository : IOrderRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select min(r.id) as id,r.date,r.status, employees.userid from materialrequests r inner join materialrequestitems ri on r.id=ri.materialrequestid inner join shippingdetails s on ri.id =s.itemid inner join employees on r.supervisorid=employees.id  where r.status=1 and s.status=0 and ri.storemanagerid=@empid group by r.id;";
+            string query = "select r.id,r.date,r.status,r.supervisorid as userid from materialrequests r  inner join materialrequestitems ri on ri.id=r.id where ri.storemanagerid=1";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", empid);
 

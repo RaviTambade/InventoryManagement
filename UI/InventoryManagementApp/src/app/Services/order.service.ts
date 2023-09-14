@@ -48,6 +48,5 @@ export class OrderService {
   getRequestHistory(request:any):Observable<any>{
     let url ="http://localhost:5082/api/Orders/requestdetails"  ;
     return this.http.post(url,request);
-  }
-  
+  } 
 }

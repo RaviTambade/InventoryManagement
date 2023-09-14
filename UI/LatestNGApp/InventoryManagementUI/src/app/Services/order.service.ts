@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,13 @@ import { Observable } from 'rxjs';
 export class OrderService {
   constructor(private http:HttpClient) { }
  
+  private selectedOrderIdSubject = new BehaviorSubject<any>(null);
+  selectedOrderId$ = this.selectedOrderIdSubject.asObservable();
+
+  setSelectedOrderId(id: number) {
+    console.log(id);
+    this.selectedOrderIdSubject.next(id);
+  }
   getOrders(empid:number):Observable<any>{
     let url ="http://localhost:5164/api/order/orders/" +empid ;
     return this.http.get(url);

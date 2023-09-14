@@ -1,0 +1,42 @@
+<div *ngIf="orderDetails">
+    <h2>Order Details</h2>
+    <hr>
+    <div class="card" >
+      <div class="card-header bg-dark text-white">
+        order Details
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div>
+            <div class="card" *ngFor="let order of orderDetails">
+              <div class="card-body">
+                <div class="row">
+                  <!-- Left Half: Image -->
+                  <div class="col-md-6">
+                    <img src="{{order.imageUrl}}" alt="Image" class="img-fluid">
+                  </div>
+                  <!-- Right Half: Card Title and Text -->
+                  <div class="col-md-6">
+                    <p class="card-text">
+                      <strong>Status:</strong> {{ order.status }}
+                    </p>
+                    <p class="card-text">
+                      <strong>Quantity:</strong> {{ order.quantity }}
+                    </p>
+                    <!-- <label for="quantity" *ngIf="editQuantity &&  cartId==cart.id" >Edit Quantity</label>
+                    <input id="quantity" name="quantity" *ngIf="editQuantity &&  cartId==cart.id" type="number"  [(ngModel)]="cart.quantity" class="form-control form-control-sm"> -->
+                   </div>
+                </div>
+              </div>
+              <!-- <div class="card-footer">
+                  <button class="btn btn-primary" *ngIf="!editQuantity==false || cartId!==cart.id"  (click)="onEdit(cart.id)">Edit</button>
+                  <button class="btn btn-primary" *ngIf="editQuantity && cartId!==cart.id" (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
+                  <button class="btn btn-danger" *ngIf="editQuantity==false || cartId!==cart.id" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
+                  <button class="btn btn-danger" *ngIf="editQuantity && cartId==cart.id"  (click)="onCancel()">Cancel</button>  
+            </div>       -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
