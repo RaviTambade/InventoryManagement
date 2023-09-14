@@ -103,16 +103,15 @@ public class OrderRepository : IOrderRepository
     }
 
    
-    public async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid,int storemanagerid)
+    public async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid)
     {
         List<OrderDetails> orderdetails = new List<OrderDetails>();
         MySqlConnection con = new MySqlConnection(_conString);
          try
         {
-            string query = " select ri.id, s.status as itemstatus, r.date,r.status, materials.quantity as availablequantity, ri.quantity,materials.title, categories.category,departments.department,employees.userid,materials.imageurl  from materialrequestitems ri inner join materialrequests r on r.id = ri.materialrequestid  inner join materials on ri.materialid=materials.id  inner join categories on materials.categoryid=categories.id  inner join employees  on r.supervisorid = employees.id  inner join employees e on ri.storemanagerid= e.id  inner join shippingdetails s on ri.id = s.itemid inner join departments on departments.id= employees.departmentid  where r.id=@requestid and ri.storemanagerid=@empid";
+            string query = "select mri.id, m.quantity as availablequantity,e.userid, d.department,m.imageurl, c.category,m.title, mr.date,mri.quantity,mr.status  from materialrequestitems mri inner join materialrequests mr on mr.id=mri.materialrequestid inner join employees e on e.id=mr.supervisorid inner join departments d on e.departmentid=d.id inner join materials m on m.id=mri.materialid inner join categories c on c.id=mri.categoryid where materialrequestid=@requestId";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@requestid", requestid);
-            cmd.Parameters.AddWithValue("@empid", storemanagerid);
+            cmd.Parameters.AddWithValue("@requestId", requestid);
 
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -121,7 +120,6 @@ public class OrderRepository : IOrderRepository
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime orderdate = DateTime.Parse(reader["date"].ToString());
                 string? status = reader["status"].ToString();
-                bool itemstatus = bool.Parse(reader["itemstatus"].ToString());
                 string? materialname = reader["title"].ToString();
                 string? category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
@@ -142,8 +140,7 @@ public class OrderRepository : IOrderRepository
                     UserId=userid,
                     ImageUrl=imgurl,
                     AvailableQuantity=availablequantity,
-                    ItemStatus=itemstatus
-                };
+              };
                 orderdetails.Add(order);
             }
             await reader.CloseAsync();

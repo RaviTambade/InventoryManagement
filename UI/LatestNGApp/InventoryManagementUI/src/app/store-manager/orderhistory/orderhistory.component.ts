@@ -26,13 +26,14 @@ export class OrderhistoryComponent {
       console.log(res);
       this.orders=res;
       console.log(this.orders)
+          this.getUser();
+
     })
 
-    this._orderSvc.getCompletedOrders(1).subscribe((res) => {
-      console.log(res);
-      this.completedOrders=res;
-    this.getUser();
-    })
+    // this._orderSvc.getCompletedOrders(1).subscribe((res) => {
+    //   console.log(res);
+    //   this.completedOrders=res;
+    // })
 
 
   }

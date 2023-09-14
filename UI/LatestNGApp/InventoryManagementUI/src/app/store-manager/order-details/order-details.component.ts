@@ -10,19 +10,20 @@ import { OrderService } from 'src/app/Services/order.service';
 export class OrderDetailsComponent implements OnInit {
 
   orderDetails:OrderDetails |any;
-  orderId:number=2;
+  orderId:number=0;
   storeManagerId:number=1;
 
   constructor(private orderService:OrderService){}
   ngOnInit(): void {
     this.orderService.selectedOrderId$.subscribe((id) => {
       console.log(id)
+      this.orderId=id;
     this.getOrderDetails();
   })
   }
 
  getOrderDetails(){
-  this.orderService.getOrderDetails(this.orderId, this.storeManagerId).subscribe((res) => {
+  this.orderService.getOrderDetails(this.orderId).subscribe((res) => {
     console.log(res);
     this.orderDetails = res;
   })

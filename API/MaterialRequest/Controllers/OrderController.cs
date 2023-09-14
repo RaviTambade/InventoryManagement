@@ -33,10 +33,10 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet]
-    [Route("orders/details/{requestid}/{storemanagerid}")]
-    public  async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid,int storemanagerid)
+    [Route("orders/details/{requestid}")]
+    public  async Task<IEnumerable<OrderDetails>> GetOrderDetails(int requestid)
     {
-        IEnumerable<OrderDetails> orders =await _ordsvs.GetOrderDetails(requestid,storemanagerid);
+        IEnumerable<OrderDetails> orders =await _ordsvs.GetOrderDetails(requestid);
         return orders;
     }
 
