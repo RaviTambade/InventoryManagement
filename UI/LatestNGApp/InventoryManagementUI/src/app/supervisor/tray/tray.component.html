@@ -1,7 +1,8 @@
 
     <div *ngIf="trays" class="container" style="width: 80%">
-        <h2 class="mt-5">New Request</h2>
         
+        <h4 class="mt-5">New Request <button class="btn-float-right btn btn-danger btn-sm" (click)="onRemoveAll()">Remove All</button></h4>
+         <br>
         <!-- Card container -->
         <div class="card mt-3" *ngFor="let tray of trays">
           <div class="card-body">
@@ -25,6 +26,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="col-md-3">
                 <button class="btn btn-secondary btn-sm float-right" (click)="onRemove(tray.id)">
                   <i class="fas fa-times"></i>
@@ -36,7 +38,7 @@
         
         <div class="mt-3">
           <button class="btn btn-success" (click)="onOrder()">Place Order</button>
-          <button class="btn btn-danger ml-2" (click)="onRemoveAll()">Remove All</button>
+          
         </div>
       </div>
       
