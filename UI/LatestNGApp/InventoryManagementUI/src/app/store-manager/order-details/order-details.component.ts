@@ -12,12 +12,18 @@ export class OrderDetailsComponent implements OnInit {
   orderDetails:OrderDetails |any;
   orderId:number=0;
   storeManagerId:number=1;
+  newDetails:boolean=false;
 
   constructor(private orderService:OrderService){}
   ngOnInit(): void {
     this.orderService.selectedOrderId$.subscribe((id) => {
       console.log(id)
       this.orderId=id;
+      if(id==0 || id==null){
+        this.orderDetails=[];
+        this.newDetails=false;
+      }
+      else
     this.getOrderDetails();
   })
   }
@@ -26,6 +32,7 @@ export class OrderDetailsComponent implements OnInit {
   this.orderService.getOrderDetails(this.orderId).subscribe((res) => {
     console.log(res);
     this.orderDetails = res;
+    this.newDetails=true
   })
 }
 

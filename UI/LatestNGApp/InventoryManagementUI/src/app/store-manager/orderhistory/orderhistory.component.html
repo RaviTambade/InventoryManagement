@@ -6,17 +6,18 @@
             <div class="d-flex flex-wrap align-items-center mb-2">
                 <ul class="navbar-nav flex-grow">
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="completed()">
-                            <i class="fas fa-calendar-day me-2"></i> Completed Orders
-                            <span class="badge badge-primary">34</span>
+                        <a class="nav-link text-dark border rounded p-2" (click)="pendingOrders()">
+                            <i class="fas fa-spinner text-warning me-2"></i> Pending Orders
+                            <span class="badge badge-warning">{{pendingOrdercount}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="pending()">
-                            <i class="fas fa-times-circle text-danger me-2"></i> Pending Orders
-                            <span class="badge badge-danger">67</span>
+                        <a class="nav-link text-dark border rounded p-2" (click)="completedOrders()">
+                            <i class="fas fa-check-circle text-success me-2"></i> Completed Orders
+                            <span class="badge badge-success">{{completedOrdercount}}</span>
                         </a>
                     </li>
+                   
                 </ul>
             </div>
             <!-- <div class="d-flex flex-wrap align-items-center">

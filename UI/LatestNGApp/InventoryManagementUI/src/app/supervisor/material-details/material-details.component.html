@@ -28,7 +28,7 @@
                     </button>
                     <label for="quantity" *ngIf="add" >Quantity</label>
                     <input id="quantity" *ngIf="add" name="quantity"  type="number"  [(ngModel)]="request.quantity"  class="form-control form-control-sm">
-                      <button class="btn btn-primary btn-block" *ngIf="add" (click)="onAdd(material.id,material.type,request.quantity)">Add to Tray</button>
+                      <button class="btn btn-primary btn-block" *ngIf="add" (click)="onAdd(material.name,material.type,request.quantity)">Add to Tray</button>
                     <button class="btn btn-danger btn-block" *ngIf="add" (click)="onCancel()">Cancel</button>     
                   </div>     
                 </div>

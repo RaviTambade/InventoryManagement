@@ -80,7 +80,7 @@ export class RequestHistoryComponent {
     this.deliveredCount = deliveredRequest;
   }
   inprogressRequestCount() {
-    const inprogressRequest = this.data.filter(u => u.status === "Inprogress").length;
+    const inprogressRequest = this.data.filter(u => u.status === "inprogress").length;
     this.inprogressCount = inprogressRequest;
   }
 
@@ -102,7 +102,7 @@ export class RequestHistoryComponent {
   }
 
   inprogressRequests() {
-    const inprogressrequest = this.data.filter(u => u.status === "Inprogress");
+    const inprogressrequest = this.data.filter(u => u.status === "inprogress");
     this.requests = inprogressrequest;
     this._requestsvc.setSelectedRequestId(0);
   }

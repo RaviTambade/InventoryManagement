@@ -10,42 +10,44 @@ import { UserService } from 'src/app/Services/user.service';
 })
 export class OrderhistoryComponent {
 
-  orders:Order[]=[];
-  data:Order[]=[];
-  userIds:any[]=[];
-  completedOrders:Order[]=[];
-  storemanagerid:number=1;
+  orders: Order[] = [];
+  data: Order[] = [];
+  userIds: any[] = [];
+  storemanagerid: number = 1;
+  completedOrdercount: number = 0;
+  pendingOrdercount: number = 0;
 
-  constructor(private _orderSvc: OrderService,private _usersvc:UserService) {
+  constructor(private _orderSvc: OrderService, private _usersvc: UserService) {
     this.orders = [];
     this.data = [];
   }
 
   ngOnInit(): void {
-    this._orderSvc.getOrders(this.storemanagerid).subscribe((res) => {
-      console.log(res);
-      this.orders=res;
-      console.log(this.orders)
-          this.getUser();
-
-    })
-
-    // this._orderSvc.getCompletedOrders(1).subscribe((res) => {
-    //   console.log(res);
-    //   this.completedOrders=res;
-    // })
-
+    this.getOrders()
 
   }
 
+  getOrders() {
+    this._orderSvc.getOrders(this.storemanagerid).subscribe((res) => {
+      console.log(res);
+      this.data=res;
+      console.log(this.orders)
+      this.getUser();
+      this.completedCount();
+      this.pendingCount();
+      this.pendingOrders();
+      this.completedOrders();
+    })
+  }
+
   getUser() {
-    const userIds = this.completedOrders.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
+    const userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
     this.userIds = userIds;
     console.log(this.userIds);
     for (const userId of this.userIds) {
       this._usersvc.getUser(userId).subscribe(data => {
         for (const responseItem of data) {
-          const users = this.completedOrders.filter(u => u.userId === responseItem.id);
+          const users = this.data.filter(u => u.userId === responseItem.id);
           for (const user of users) {
             user.name = responseItem.name;
           }
@@ -56,14 +58,26 @@ export class OrderhistoryComponent {
   }
 
 
-  completed(){
-
+  completedCount() {
+    const completed = this.data.filter(u => u.status !== "inprogress").length;
+    this.completedOrdercount = completed;
   }
 
-  pending(){
-    
+  pendingCount() {
+    const pending = this.data.filter(u => u.status === "inprogress").length;
+    this.pendingOrdercount = pending;
   }
 
+  completedOrders() {
+    const completedOrders = this.data.filter(u => u.status !== "inprogress");
+    this.orders = completedOrders;
+    this._orderSvc.setSelectedOrderId(0);
+  }
+  pendingOrders() {
+    const pendingOrders = this.data.filter(u => u.status === "inprogress");
+    this.orders = pendingOrders;
+    this._orderSvc.setSelectedOrderId(0);
+  }
 
   // onFromDateChange(){
   //   console.log(this.fromDate);
@@ -71,7 +85,7 @@ export class OrderhistoryComponent {
   // onToDateChange(){
   //   console.log(this.toDate);
   //   console.log(this.fromDate);
-    
+
   //   let specificData = this.data.filter(
   //     m => new Date(m.date) >= new Date(this.fromDate) && new Date(m.date) <= new Date(this.toDate)
   //     );
@@ -79,28 +93,7 @@ export class OrderhistoryComponent {
   //     this.requests= specificData;
   //     this._requestsvc.setSelectedRequestId(0);
   // }
-  // todaysRequestsCount() {
-  //   const today = new Date();
-  //   const todayString = today.toISOString().split('T')[0].replace(/-/g, '/');;
-  //   const todaysRequests = this.data.filter(request => {
-  //     const requestDate = request.date.toString().split('T')[0];
-  //     return requestDate == todayString;
-  //   })
-  //   this.todaysCount = todaysRequests.length;
 
-  // }
-  // cancelledRequestsCount() {
-  //   const cancelledrequest = this.data.filter(u => u.status === "Cancelled").length;
-  //   this.cancelledCount = cancelledrequest;
-  // }
-  // deliveredRequestCount() {
-  //   const deliveredRequest = this.data.filter(u => u.status === "Delivered").length;
-  //   this.deliveredCount = deliveredRequest;
-  // }
-  // inprogressRequestCount() {
-  //   const inprogressRequest = this.data.filter(u => u.status === "Inprogress").length;
-  //   this.inprogressCount = inprogressRequest;
-  // } 
 
   // todaysRequests() {
   //   const today = new Date();
@@ -150,15 +143,6 @@ export class OrderhistoryComponent {
     this._orderSvc.setSelectedOrderId(id);
   }
 
-  // onCancelRequest(reqid: number) {
-  //   this._requestsvc.cancelRequest(reqid).subscribe((res) => {
-  //     window.location.reload();
-  //   })
-  // }
-
-  // newOrder() {
-  //   this.router.navigate(["supervisor/store"])
-  // }
 
 
 }

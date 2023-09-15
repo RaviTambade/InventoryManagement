@@ -12,7 +12,7 @@ import { MaterialService } from 'src/app/Services/material.service';
 export class MaterialDetailsComponent implements OnInit{
   material:Material |undefined;
   request = new Request(
-    123,
+    '',
     456, 
     '', 
     0 
@@ -51,10 +51,10 @@ export class MaterialDetailsComponent implements OnInit{
     this.add=false;
   }
  
-    onAdd(materialid: number, category: any, quantity: number) {
+    onAdd(name: string, category: any, quantity: number) {
 
       this.request.employeeId = 11;
-      this.request.materialId = materialid;
+      this.request.name = name;
       this.request.category = category,
       this.request.quantity = quantity
       console.log(this.request)

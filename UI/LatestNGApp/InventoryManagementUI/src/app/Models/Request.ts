@@ -1,6 +1,6 @@
 export class Request {
     constructor(
-                public materialId:number,
+                public name:string,
                 public employeeId:number,
                 public category:string,
                 public quantity:number,

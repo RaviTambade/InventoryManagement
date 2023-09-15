@@ -150,11 +150,11 @@ public class InitialRequestRepository : IInitialRequestRepository
         try
         {
 
-            string query = " insert into InitialRequestItems(initialrequestid,materialid,categoryid,quantity) values((select id from initialrequest where employeeid=@empid),@materialid,(select id from categories where category=@category),@quantity)";
+            string query = "insert into InitialRequestItems(initialrequestid,materialid,categoryid,quantity )values((select id from initialrequest where employeeid=@empid),(select id from materials where title=@name),(select id from categories where category=@category),@quantity) ";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@category", item.Category);
             cmd.Parameters.AddWithValue("@empid", item.EmployeeId);
-            cmd.Parameters.AddWithValue("@materialid", item.Name);
+            cmd.Parameters.AddWithValue("@name", item.Name);
             cmd.Parameters.AddWithValue("@quantity", item.Quantity);
             await con.OpenAsync();
 
