@@ -1,4 +1,4 @@
-
+<div *ngIf="trays.length>0">
     <div *ngIf="trays" class="container" style="width: 60%">
         
         <h4 class="mt-5">New Request <button class="btn-float-right btn btn-danger btn-sm" (click)="onRemoveAll()">Remove All</button></h4>
@@ -39,6 +39,14 @@
           
         </div>
       </div>
+      
+    </div>
+    <div *ngIf="trays.length==0" class="card mt-3">
+        <div class="card-body bg-danger text-white">
+            <h5 class="card-title"> No Material Found</h5>
+            <p class="card-text">There are currently no materials..</p>
+        </div>
+    </div>
       
 
 

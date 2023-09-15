@@ -17,6 +17,7 @@ export class TrayComponent implements OnInit {
   onEditClick: boolean = false;
   count = 0;
   modified: boolean = false;
+  
 
   constructor(private requestSvc: InitialRequestService, private orderSvc: OrderService, private svc: InitialRequestService) {
 
@@ -34,6 +35,7 @@ export class TrayComponent implements OnInit {
   getTray() {
     this.requestSvc.getTray(this.empid).subscribe((res) => {
       console.log(res);
+      this.data=res;
       this.trays = JSON.parse(JSON.stringify(res));
       this.data = JSON.parse(JSON.stringify(res));
     })
