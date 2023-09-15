@@ -20,45 +20,46 @@ export class RequestHistoryComponent {
   cancelledCount: number = 0;
   deliveredCount: number = 0;
   inprogressCount: number = 0;
-  toDate:string="";
-  fromDate:string="";
-  fromDateSelected:boolean=false;
+  toDate: string = "";
+  fromDate: string = "";
+  fromDateSelected: boolean = false;
   constructor(private _requestsvc: RequestService, private _usersvc: UserService, private router: Router) {
     this.requests = [];
     this.data = [];
   }
 
   ngOnInit(): void {
+    this.getRequests();
+  }
+  getRequests() {
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
       if (res) {
         this.requests = res;
         this.data = res;
-        this.requests=this.data.slice(0,10);
-        if (this.requests !== null) {
-          this.getUser();
-          this.todaysRequestsCount();
-          this.cancelledRequestsCount();
-          this.deliveredRequestCount();
-          this.inprogressRequestCount();
-        }
-        console.log(this.fromDate);
-        console.log(this.toDate);
+        this.getUser();
+        this.requests = this.data.slice(0, 10);
+        this.todaysRequestsCount();
+        this.cancelledRequestsCount();
+        this.deliveredRequestCount();
+        this.inprogressRequestCount();
       }
+
+
     })
   }
-  onFromDateChange(){
+  onFromDateChange() {
     console.log(this.fromDate);
   }
-  onToDateChange(){
+  onToDateChange() {
     console.log(this.toDate);
     console.log(this.fromDate);
-    
+
     let specificData = this.data.filter(
       m => new Date(m.date) >= new Date(this.fromDate) && new Date(m.date) <= new Date(this.toDate)
-      );
-      console.log(specificData)
-      this.requests= specificData;
-      this._requestsvc.setSelectedRequestId(0);
+    );
+    console.log(specificData)
+    this.requests = specificData;
+    this._requestsvc.setSelectedRequestId(0);
   }
   todaysRequestsCount() {
     const today = new Date();
@@ -81,7 +82,7 @@ export class RequestHistoryComponent {
   inprogressRequestCount() {
     const inprogressRequest = this.data.filter(u => u.status === "Inprogress").length;
     this.inprogressCount = inprogressRequest;
-  } 
+  }
 
   todaysRequests() {
     const today = new Date();

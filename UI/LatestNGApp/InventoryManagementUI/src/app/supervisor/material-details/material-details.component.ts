@@ -22,11 +22,15 @@ export class MaterialDetailsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log("material");
+    this.getMaterialId()
+ 
+  }
+
+  getMaterialId(){
     this.materialSvc.selectedMaterialId$.subscribe((res)=>{
       console.log(res);
       const materialid=res;
-      if(materialid ==0){
+      if(materialid ==0 || materialid==null){
         this.material=undefined;
       }
       if(materialid!=null )

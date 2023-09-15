@@ -8,10 +8,10 @@ import { RequestService } from 'src/app/Services/request.service';
   styleUrls: ['./request-details.component.css']
 })
 export class RequestDetailsComponent {
-  requestDetails: any; 
-  changeQuantity:boolean=false;
-  details:boolean=false;
-  requestId:number|undefined;
+  requestDetails: any;
+  changeQuantity: boolean = false;
+  details: boolean = false;
+  requestId: number | undefined;
   carts: any[];
   id: any;
   img: any;
@@ -20,36 +20,40 @@ export class RequestDetailsComponent {
   orderDetail: any;
   dateTime: string = '';
   date: any;
-  editQuantity:boolean=false;
-  item:any;
-  cartId:number|any ;
-  constructor(private _requestsvc:RequestService) {
-    this.carts=[];
+  editQuantity: boolean = false;
+  item: any;
+  cartId: number | any;
+  constructor(private _requestsvc: RequestService) {
+    this.carts = [];
 
   }
   ngOnInit(): void {
-    
-    this._requestsvc.selectedRequestId$.subscribe((id) => {
-      console.log(id)
-      this.requestId = id;
-      if(this.requestId==0){
-        this.details=false;
-        this.carts=[];
-      }
-      if(this.requestId)
-      this.getDetails(this.requestId);
-      this.requestId=undefined;
-    });
-    
+    const id = this.getRequestId();
   }
 
-getDetails(requestId:number){
-  this._requestsvc.getRequestDetails(requestId).subscribe((res) => {
-    this.carts = res;
-    console.log(this.carts);
-    this.details=true; 
-  })
-}
+  getRequestId() {
+    this._requestsvc.selectedRequestId$.subscribe((id) => {
+      console.log(id)
+      const requestId = id;
+      if (requestId == 0 || requestId == null) {
+        this.details = false;
+        this.carts = [];
+      }
+      else
+        this.getDetails(id);
+
+    });
+
+  }
+
+  getDetails(requestId: number) {
+    console.log("req", requestId)
+    this._requestsvc.getRequestDetails(requestId).subscribe((res) => {
+      this.carts = res;
+      console.log(this.carts);
+      this.details = true;
+    })
+  }
 
   onRemove(id: number) {
     this._requestsvc.removeItem(id).subscribe((res) => {
@@ -59,26 +63,26 @@ getDetails(requestId:number){
     })
   }
 
-  onEdit(id:any){
+  onEdit(id: any) {
     console.log(id);
-    this.cartId=id;
-    this.editQuantity=true;
+    this.cartId = id;
+    this.editQuantity = true;
   }
-  onCancel(){
-    this.editQuantity=false;
+  onCancel() {
+    this.editQuantity = false;
   }
 
-  onEditQuantity(id:any, quantity:any){
+  onEditQuantity(id: any, quantity: any) {
     console.log(id)
     console.log(quantity);
-    this.editQuantity=false;
-    this.item.id=id;
-    this.item.quantity=quantity;
+    this.editQuantity = false;
+    this.item.id = id;
+    this.item.quantity = quantity;
     console.log(this.item);
     // this._requestsvc.updateRequestedItem(this.item).subscribe((res)=>{
     //   console.log(res);
     // })
-    
+
   }
 
 

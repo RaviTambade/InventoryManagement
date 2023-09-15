@@ -12,17 +12,17 @@
                 </button>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="{{tray.imageUrl}}" alt="Image" width="40%" height="40%" class="img-fluid" />
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <img src="{{ tray.imageUrl }}" alt="Image" width="40%" height="40%" class="img-fluid" />
                     </div>
-                    
-                    <div class="col-md-2">
-                        <h4>{{tray.name}}</h4>
-                        </div>
-                  
+            
+                    <div class="col-md-5">
+                        <h4>{{ tray.name }}</h4>
+                    </div>
+            
                     <div class="col-md-4">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <button class="btn btn-danger btn-sm" (click)="decrement(tray.id)" type="button">-</button>
                             <input type="text" [(ngModel)]="tray.quantity" class="form-control form-control-sm text-center" />
                             <button class="btn btn-primary btn-sm" (click)="increment(tray.id)" type="button">+</button>
@@ -30,6 +30,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     
         
