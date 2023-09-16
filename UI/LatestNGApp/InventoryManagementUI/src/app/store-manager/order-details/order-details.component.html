@@ -38,7 +38,7 @@
                     <p class="card-text">
                       <strong>Quantity:</strong> {{ order.quantity }}
                     </p>
-                    <div *ngIf="inprogressOrder">
+                    <div *ngIf="inprogressOrder && !order.itemStatus">
                       <input style="text-align:center;" name="orderQuantity" value="{{order.quantity}}"
                         class="form-control form-control-sm" #quantity type="number">
 
@@ -46,10 +46,8 @@
                         (click)="onApproved(order.id, quantity.value)">
                         <span class="glyphicon glyphicon-ok"></span> Approve Request
                       </button>
-                      
-                      <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>
-
                     </div>
+                    <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>
                   </div>
                 </div>
               </div>
