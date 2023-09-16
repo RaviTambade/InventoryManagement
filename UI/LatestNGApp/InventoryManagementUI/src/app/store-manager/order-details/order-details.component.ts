@@ -13,7 +13,9 @@ export class OrderDetailsComponent implements OnInit {
   orderId:number=0;
   storeManagerId:number=1;
   newDetails:boolean=false;
-
+  department:string='';
+  orderDate=new Date()
+  inprogressOrder:boolean=false;
   constructor(private orderService:OrderService){}
   ngOnInit(): void {
     this.orderService.selectedOrderId$.subscribe((id) => {
@@ -31,9 +33,31 @@ export class OrderDetailsComponent implements OnInit {
  getOrderDetails(){
   this.orderService.getOrderDetails(this.orderId).subscribe((res) => {
     console.log(res);
-    this.orderDetails = res;
-    this.newDetails=true
+    this.orderDetails = res; 
+       this.newDetails=true;
+
+    this.department=this.orderDetails[0].department;
+    this.orderDate=this.orderDetails[0].orderDate;
+
+    if(this.orderDetails[0].status=='inprogress'){
+      this.inprogressOrder=true;
+    }
+    else
+    this.inprogressOrder=false;
+
   })
+}
+
+onApproved(orderid: any, q: any) {
+  const quantity = Number.parseInt(q)
+  console.log(quantity);
+  console.log(orderid)
+  this.orderService.Approve(orderid, quantity).subscribe((res) => {
+    console.log(res);
+    window.location.reload();
+
+  })
+
 }
 
 }

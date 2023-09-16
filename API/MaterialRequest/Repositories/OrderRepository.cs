@@ -109,7 +109,7 @@ public class OrderRepository : IOrderRepository
         MySqlConnection con = new MySqlConnection(_conString);
          try
         {
-            string query = "select mri.id, m.quantity as availablequantity,e.userid, d.department,m.imageurl, c.category,m.title, mr.date,mri.quantity,mr.status  from materialrequestitems mri inner join materialrequests mr on mr.id=mri.materialrequestid inner join employees e on e.id=mr.supervisorid inner join departments d on e.departmentid=d.id inner join materials m on m.id=mri.materialid inner join categories c on c.id=mri.categoryid where materialrequestid=@requestId";
+            string query = "    select mri.id, m.quantity as availablequantity,e.userid,s.status as itemstatus, d.department,m.imageurl, c.category,m.title, mr.date,mri.quantity,mr.status from materialrequestitems mri inner join materialrequests mr on mr.id=mri.materialrequestid inner join employees e on e.id=mr.supervisorid inner join departments d on e.departmentid=d.id inner join materials m on m.id=mri.materialid inner join categories c on c.id=mri.categoryid inner join shippingdetails s on s.itemid=mri.id where materialrequestid=@requestId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestId", requestid);
 
@@ -127,7 +127,7 @@ public class OrderRepository : IOrderRepository
                 string department = reader["department"].ToString();
                 int userid = Int32.Parse(reader["userid"].ToString());
                 string imgurl = reader["imageurl"].ToString();
-
+                bool itemStatus = bool.Parse(reader["itemstatus"].ToString());
                 OrderDetails order = new OrderDetails()
                 {
                     Id = id,
@@ -140,6 +140,7 @@ public class OrderRepository : IOrderRepository
                     UserId=userid,
                     ImageUrl=imgurl,
                     AvailableQuantity=availablequantity,
+                    ItemStatus=itemStatus
               };
                 orderdetails.Add(order);
             }

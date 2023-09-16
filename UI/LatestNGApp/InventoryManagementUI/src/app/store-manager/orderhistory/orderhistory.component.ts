@@ -31,7 +31,7 @@ export class OrderhistoryComponent {
     this._orderSvc.getOrders(this.storemanagerid).subscribe((res) => {
       console.log(res);
       this.data=res;
-      console.log(this.orders)
+     
       this.getUser();
       this.completedCount();
       this.pendingCount();
@@ -52,9 +52,12 @@ export class OrderhistoryComponent {
             user.name = responseItem.name;
           }
         }
-        console.log(this.completedOrders);
       });
     }
+     //by default pending
+     const pendingOrders = this.data.filter(u => u.status === "inprogress");
+     this.orders = pendingOrders;
+     console.log(this.orders)
   }
 
 
