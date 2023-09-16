@@ -1,19 +1,18 @@
-       DELIMITER $$
+        DELIMITER $$
 CREATE PROCEDURE CreateOrder(in cartId int)
-BEGIN
+BEGIN 
 DECLARE employeeId INT;
 DECLARE materialId INT;
 DECLARE categoryId INT;
-DECLARE requestId INT;
+DECLARE reqid INT;
 DECLARE quantity INT;
 DECLARE status BOOLEAN;
 DECLARE superviosrid INT;
 DECLARE noMoreRow1 INT default 0;
-DECLARE initialrequestitems_cursor CURSOR  FOR SELECT ct.materialid, ct.categoryid, ct.quantity FROM initialrequestitems ct WHERE ct.cartid=cartId; 
-
-INSERT INTO materialrequests (supervisorid,status) VALUES ((select c.employeeid from initialrequest c where c.id=cartId ),1);
-set requestId=LAST_INSERT_ID();
-    OPEN initialrequestitems_cursor ;
+DECLARE initialrequestitems_cursor CURSOR  FOR SELECT ct.materialid, ct.categoryid, ct.quantity FROM initialrequestitems ct WHERE ct.initialrequestid=cartId;
+insert into materialrequests(supervisorid,status)values((select ir.employeeid from initialrequest ir where ir.id=cartId),1);
+set reqid=(SELECT id FROM materialrequests ORDER BY ID DESC LIMIT 1);
+   OPEN initialrequestitems_cursor ;
     begin
     DECLARE exit_flag INT DEFAULT 0;
      DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
@@ -22,22 +21,21 @@ set requestId=LAST_INSERT_ID();
     IF exit_flag=1 THEN 
 		LEAVE initialrequestitems;
     END IF;
-	INSERT INTO materialrequestitems(storemanagerid,requestid,materialid,categoryid,quantity)
-    VALUES((select w.employeeid from warehousestaff w  where w.categoryid=categoryId),requestId,materialId,categoryId,quantity); 
+	INSERT INTO materialrequestitems(storemanagerid,materialrequestid,materialid,categoryid,quantity)
+    VALUES((select w.employeeid from warehousestaff w  where w.categoryid=categoryId),reqid,materialId,categoryId,quantity); 
 
 END LOOP initialrequestitems;
 end;
 CLOSE initialrequestitems_cursor;
 -- empty cart
- DELETE FROM initialrequestitems c WHERE c.cartid=cartId;
+DELETE FROM initialrequestitems c WHERE c.initialrequestid=cartId;
 
 END $$
 DELIMITER ;
 	DELIMITER $$
-  
-  
-  
-  
+ 
+ 
+ 
    DELIMITER !!
 CREATE TRIGGER newshipment
 after INSERT
@@ -70,7 +68,7 @@ worker_status:LOOP
     end If;
 END LOOP worker_status;
 CLOSE shipper_cursor;
-		INSERT INTO shipments(supervisorid,requestid,shipperid)VALUES(new.supervisorid,new.id,worker);
+		INSERT INTO shipments(supervisorid,materialrequestid,shipperid)VALUES(new.supervisorid,new.id,worker);
 	END !!
 	DELIMITER ;
      
@@ -80,16 +78,50 @@ CREATE TRIGGER newshipmentdetails
 after INSERT
 ON materialrequestitems FOR EACH ROW
 BEGIN
-	INSERT INTO shippingdetails(storemanagerid,materialid,categoryid,quantity,shipmentid)
-    VALUES(new.storemanagerid,new.materialid,new.categoryid,new.quantity,(select id from shipments s where s.materialrequestid=new.materialrequestid )); 
+	INSERT INTO shippingdetails(storemanagerid,materialid,categoryid,quantity,shipmentid,itemid)
+    VALUES(new.storemanagerid,new.materialid,new.categoryid,new.quantity,(select id from shipments s where s.materialrequestid=new.materialrequestid ),new.id); 
     end !!
 	DELIMITER ;
     
-    
+      DELIMITER !!
+CREATE TRIGGER updatestatus
+after Update
+ON shippingdetails FOR EACH ROW
+BEGIN
+declare totalcount INT;
+declare shipmentid INT;
+declare status int;
+declare val INT;
+DECLARE shipping_cursor CURSOR  FOR SELECT  s.status FROM shippingdetails s WHERE s.shipmentid=new.shipmentid; 
+SELECT COUNT(*) into totalcount FROM shippingdetails s where s.shipmentid=new.shipmentid;
 
+ update materials set quantity=quantity-new.quantity where id=new.materialid;
+ 
+set val=0;
+OPEN shipping_cursor ;
+begin
+DECLARE exit_flag INT DEFAULT 0;
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+shipment:LOOP
+    FETCH shipping_cursor INTO status;
+    IF exit_flag THEN 
+		LEAVE shipment;
+    END IF;
+        if status=0  then
+		LEAVE shipment;
+	end if;
+        set val=val+1;
+    end loop shipment;
+    end;
+    close shipping_cursor;  
+    if val=totalcount then 
+		update shipments s set s.date=NOW() where s.id = new.shipmentid;
+        update materialrequests r set r.status=3 where r.id=new.shipmentid;
+        end if;
+    end !!
+	DELIMITER ;
 
-
-     DELIMITER $$
+  DELIMITER $$
     Create procedure Approved(requestid int,itemid INT,quantity int)
     begin
 DECLARE status BOOLEAN;
@@ -120,50 +152,9 @@ shipment:LOOP
     end;
     close shipping_cursor;   
         if val=totalcount then 
-		update shipments s set s.date=CURRENT_TIMESTAMP where s.materialrequestid=requestid;
+		update shipments s set s.date=NOW() where s.materialrequestid=requestid;
         update materialrequests r set r.status=3 where r.id= requestid;
         end if;
     END $$
 DELIMITER ;
 	DELIMITER $$
-    
-  call Approved(4,9,20)
-
-
-
-
-
-      DELIMITER !!
-CREATE TRIGGER updatestatus
-after Update
-ON shippingdetails FOR EACH ROW
-BEGIN
-declare totalcount INT;
-declare shipmentid INT;
-declare status int;
-declare val INT;
-DECLARE shipping_cursor CURSOR  FOR SELECT  s.status FROM shippingdetails s WHERE s.shipmentid=new.shipmentid; 
-SELECT COUNT(*) into totalcount FROM shippingdetails s where s.shipmentid=new.shipmentid;
-set val=0;
-OPEN shipping_cursor ;
-begin
-DECLARE exit_flag INT DEFAULT 0;
- DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
-shipment:LOOP
-    FETCH shipping_cursor INTO status;
-    IF exit_flag THEN 
-		LEAVE shipment;
-    END IF;
-        if status=0  then
-		LEAVE shipment;
-	end if;
-        set val=val+1;
-    end loop shipment;
-    end;
-    close shipping_cursor;  
-    if val=totalcount then 
-		update shipments s set s.date=CURRENT_TIMESTAMP where s.id = new.shipmentid;
-        update materialrequests r set r.status=3 where r.id=new.shipmentid;
-        end if;
-    end !!
-	DELIMITER ;
