@@ -1,0 +1,20 @@
+
+<div *ngIf="tasks">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">TaskID</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr mat-row *ngFor="let task of tasks" (click)="selectedTask(task.id)">
+                <td class="text-center">{{ task.id }}</td>
+                <td class="text-center">{{ task.date | date:'dd/MM/yyyy' }}</td>
+                <td class="text-center">{{ task.status }}</td>      
+            </tr>
+        </tbody>
+    </table>
+   </div> 
+    
