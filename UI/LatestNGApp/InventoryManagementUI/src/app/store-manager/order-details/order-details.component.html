@@ -1,14 +1,26 @@
 <div *ngIf="newDetails">
+  <div>
     <h2>Order Details</h2>
+    <div class="container" style="width: 60%;" *ngIf="inprogressOrder">
+      <div>
+        <p><b>Date : {{orderDate|date}} </b></p>
+      </div>
+      <div>
+        <p> <b> Department :{{department}} </b> </p>
+      </div>
+    </div>
     <hr>
-    <div class="card" >
+    <div class="card" *ngFor="let order of orderDetails">
       <div class="card-header bg-dark text-white">
-        order Details
+        Details
+      </div>
+      <div class="card-header bg-dark text-white" *ngIf="inprogressOrder">
+        <b style="color:Tomato;">Available Quantity : {{order.name}} :{{order.availableQuantity}} </b>
       </div>
       <div class="card-body">
         <div class="row">
           <div>
-            <div class="card" *ngFor="let order of orderDetails">
+            <div class="card">
               <div class="card-body">
                 <div class="row">
                   <!-- Left Half: Image -->
@@ -18,25 +30,33 @@
                   <!-- Right Half: Card Title and Text -->
                   <div class="col-md-6">
                     <p class="card-text">
-                      <strong>Status:</strong> {{ order.status }}
+                      <strong>Name:</strong> {{ order.name }}
+                    </p>
+                    <p class="card-text">
+                      <strong>Category:</strong> {{ order.category }}
                     </p>
                     <p class="card-text">
                       <strong>Quantity:</strong> {{ order.quantity }}
                     </p>
-                    <!-- <label for="quantity" *ngIf="editQuantity &&  cartId==cart.id" >Edit Quantity</label>
-                    <input id="quantity" name="quantity" *ngIf="editQuantity &&  cartId==cart.id" type="number"  [(ngModel)]="cart.quantity" class="form-control form-control-sm"> -->
-                   </div>
+                    <div *ngIf="inprogressOrder">
+                      <input style="text-align:center;" name="orderQuantity" value="{{order.quantity}}"
+                        class="form-control form-control-sm" #quantity type="number">
+
+                      <button *ngIf="!order.itemStatus" class="btn btn-success"
+                        (click)="onApproved(order.id, quantity.value)">
+                        <span class="glyphicon glyphicon-ok"></span> Approve Request
+                      </button>
+                      
+                      <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>
+
+                    </div>
+                  </div>
                 </div>
               </div>
-              <!-- <div class="card-footer">
-                  <button class="btn btn-primary" *ngIf="!editQuantity==false || cartId!==cart.id"  (click)="onEdit(cart.id)">Edit</button>
-                  <button class="btn btn-primary" *ngIf="editQuantity && cartId!==cart.id" (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
-                  <button class="btn btn-danger" *ngIf="editQuantity==false || cartId!==cart.id" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
-                  <button class="btn btn-danger" *ngIf="editQuantity && cartId==cart.id"  (click)="onCancel()">Cancel</button>  
-            </div>       -->
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div> 
-  
+  </div>
+</div>
