@@ -1,7 +1,7 @@
 <div *ngIf="trays.length>0">
     <div *ngIf="trays" class="container" style="width: 60%">
         
-        <h4 class="mt-5">New Request <button class="btn-float-right btn btn-danger btn-sm" (click)="onRemoveAll()">Remove All</button></h4>
+        <h4 class="mt-5">My Request <button class="btn-float-right btn btn-danger btn-sm" (click)="onRemoveAll()">Remove All</button></h4>
          <br>
         <!-- Card container -->
         <div class="card mt-3" *ngFor="let tray of trays">

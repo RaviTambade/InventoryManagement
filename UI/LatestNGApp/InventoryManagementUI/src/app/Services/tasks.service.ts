@@ -20,8 +20,8 @@ export class TasksService {
     return this.http.get(url);
   }
   
-  getTaskDetails(taskid:number):Observable<any>{
-    let url ="http://localhost:5112/api/shipping/getshippingdetails/" + taskid ;
+  getTaskDetails(id:number):Observable<any>{
+    let url ="http://localhost:5112/api/shipping/getshippingdetails/" + id ;
     return this.http.get(url);
   }
   UpdateStatus(id:number):Observable<any>{

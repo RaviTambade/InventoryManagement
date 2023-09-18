@@ -12,10 +12,19 @@ export class TaskDetailsComponent implements OnInit{
   constructor(private svc :TasksService){}
 
   taskdetails:Task |any;
+  // taskId:number=2;
   
   ngOnInit(): void {
     this.svc.selectedTaskId$.subscribe((id) => {
-      console.log(id)
+      console.log(id);
+      // this.getTaskDetails(id);
   })
   }
+  // getTaskDetails(id:number){
+  //   this.svc.getTaskDetails(id).subscribe((res)=>{
+  //     this.taskdetails=res;
+  //     console.log(this.taskdetails);
+  //   })
+
+  // }
 }
