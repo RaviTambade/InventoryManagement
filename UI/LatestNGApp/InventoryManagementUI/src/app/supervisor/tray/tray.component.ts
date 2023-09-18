@@ -49,28 +49,28 @@ export class TrayComponent implements OnInit {
     })
   }
 
-  onOrder() {
-    // console.log(this.trays)
+  onRequest() {
+    console.log(this.trays)
 
-    // for (let i = 0; i < this.data.length; i++) {
-    //   const quantity1 = parseInt(this.data[i].quantity);
-    //   const quantity2 = parseInt(this.trays[i].quantity);
+    for (let i = 0; i < this.data.length; i++) {
+      const quantity1 = parseInt(this.data[i].quantity);
+      const quantity2 = parseInt(this.trays[i].quantity);
 
-    //   if (quantity1 !== quantity2) {
-    //     this.modified = true;
-    //     break;
-    //   }
-    // }
+      if (quantity1 !== quantity2) {
+        this.modified = true;
+        break;
+      }
+    }
 
-    // if (this.modified) {
-    //   console.log("Changes detected");
-    // } else {
-    //   console.log("No changes detected");
-    // }
-    this.orderSvc.order(this.empid).subscribe((res) => {
-      console.log(res);
-      window.location.reload();
-    })
+    if (this.modified) {
+      console.log("Changes detected");
+    } else {
+      console.log("No changes detected");
+    }
+    // this.orderSvc.order(this.empid).subscribe((res) => {
+    //   console.log(res);
+    //   window.location.reload();
+    // })
   }
 
   onRemoveAll() {

@@ -27,8 +27,11 @@
           <li class="nav-item">
             <a class="nav-link text-dark">About</a>
           </li>
-          <li class="nav-item" *ngIf="isLoggedIn()">
+          <li class="nav-item" *ngIf="isName()">
             <a class="nav-link text-dark">{{name}}</a>
+          </li>
+          <li class="nav-item" *ngIf=" isrole()" >
+            <a class="nav-link text-dark">{{role}}</a>
           </li>
         <li class="nav-item" *ngIf="isLoggedIn()">
           <a class="nav-link text-dark" (click)="logOut()">LogOut</a>

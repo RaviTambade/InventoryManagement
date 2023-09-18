@@ -25,7 +25,10 @@ export class RequestDetailsComponent {
   cartId: number | any;
   constructor(private _requestsvc: RequestService) {
     this.carts = [];
-
+    this.item = {
+      "id": 0,
+      "quantity": 0,
+    };
   }
   ngOnInit(): void {
     const id = this.getRequestId();
@@ -47,6 +50,7 @@ export class RequestDetailsComponent {
   }
 
   getDetails(requestId: number) {
+    this.editQuantity=false;
     console.log("req", requestId)
     this._requestsvc.getRequestDetails(requestId).subscribe((res) => {
       this.carts = res;
@@ -75,13 +79,15 @@ export class RequestDetailsComponent {
   onEditQuantity(id: any, quantity: any) {
     console.log(id)
     console.log(quantity);
-    this.editQuantity = false;
     this.item.id = id;
     this.item.quantity = quantity;
     console.log(this.item);
-    // this._requestsvc.updateRequestedItem(this.item).subscribe((res)=>{
-    //   console.log(res);
-    // })
+    this._requestsvc.updateRequestedItem(this.item).subscribe((res)=>{
+      console.log(res);
+      window.location.reload();
+
+    })
+    this.editQuantity=false;
 
   }
 

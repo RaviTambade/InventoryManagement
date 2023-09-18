@@ -20,21 +20,28 @@
                   <!-- Right Half: Card Title and Text -->
                   <div class="col-md-6">
                     <p class="card-text">
+                      <strong>Name:</strong> {{ cart.name }}
+                    </p>
+                    <p class="card-text">
+                      <strong>Category:</strong> {{ cart.category }}
+                    </p>
+                    <p class="card-text">
                       <strong>Status:</strong> {{ cart.status }}
                     </p>
                     <p class="card-text">
                       <strong>Quantity:</strong> {{ cart.quantity }}
                     </p>
-                    <label for="quantity" *ngIf="editQuantity &&  cartId==cart.id" >Edit Quantity</label>
-                    <input id="quantity" name="quantity" *ngIf="editQuantity &&  cartId==cart.id" type="number"  [(ngModel)]="cart.quantity" class="form-control form-control-sm">
+
+                    <label for="quantity" *ngIf="editQuantity && cart.id==cartId" >Edit Quantity</label>
+                    <input id="quantity" name="quantity" *ngIf="editQuantity && cart.id==cartId" type="number"  [(ngModel)]="cart.quantity" class="form-control form-control-sm">
                    </div>
                 </div>
               </div>
               <div class="card-footer">
-                  <button class="btn btn-primary" *ngIf="!editQuantity==false || cartId!==cart.id"  (click)="onEdit(cart.id)">Edit</button>
-                  <button class="btn btn-primary" *ngIf="editQuantity && cartId!==cart.id" (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
-                  <button class="btn btn-danger" *ngIf="editQuantity==false || cartId!==cart.id" [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
-                  <button class="btn btn-danger" *ngIf="editQuantity && cartId==cart.id"  (click)="onCancel()">Cancel</button>  
+                  <button class="btn btn-primary" *ngIf="!editQuantity || cart.id!==cartId" [disabled]="cart.status !== 'inprogress'"  (click)="onEdit(cart.id)">Edit</button>
+                  <button class="btn btn-danger" *ngIf="!editQuantity || cart.id!==cartId " [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
+                  <button class="btn btn-primary" *ngIf="editQuantity && cart.id==cartId " (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
+                  <button class="btn btn-danger" *ngIf="editQuantity && cart.id==cartId"  (click)="onCancel()">Cancel</button>  
             </div>      
           </div>
         </div>

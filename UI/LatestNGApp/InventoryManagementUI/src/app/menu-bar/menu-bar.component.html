@@ -14,16 +14,16 @@
               <!-- <a class="nav-link text-dark"  [routerLink]="['/supervisor/store']">Store</a> -->
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark"  [routerLink]="['/supervisor/requests']">Requests</a>
+              <a class="nav-link text-dark" *ngIf="isroleSupervisor()"  [routerLink]="['/supervisor/requests']">Requests</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark"  [routerLink]="['/supervisor/tray']">My Tray</a>
+              <a class="nav-link text-dark"  *ngIf="isroleSupervisor()"  [routerLink]="['/supervisor/tray']">My Tray</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark"  [routerLink]="['/storemanager/order']">Orders</a>
+              <a class="nav-link text-dark"  *ngIf="isroleStoreManager()" [routerLink]="['/storemanager/order']">Orders</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark"  [routerLink]="['/storeworker/tasks']">Tasks</a>
+              <a class="nav-link text-dark"  *ngIf="isroleStoreWorker()"  [routerLink]="['/storeworker/tasks']">Tasks</a>
             </li>
           </ul>
         </div>

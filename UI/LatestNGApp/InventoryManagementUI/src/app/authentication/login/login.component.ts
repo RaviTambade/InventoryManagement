@@ -25,11 +25,13 @@ export class LoginComponent {
         localStorage.setItem("JWT", response.token)
         this.userService.getUserByContact(this.credential.contactNumber).subscribe((response) => {
           this.userId = response.id;
+          localStorage.setItem("name", response.name)
           console.log(this.userId);
           this.userService.getUserRole(this.userId).subscribe((response) => {
             this.role = response;
             console.log(this.role);
             const role=this.role.role;
+            localStorage.setItem("role", role)
             this.navigateByRole(role);
           })
         })

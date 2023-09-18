@@ -64,6 +64,7 @@ export class MaterialDetailsComponent implements OnInit{
           alert("added to cart!");
         }
       })
+      
       this.add=false;  
   }
 }

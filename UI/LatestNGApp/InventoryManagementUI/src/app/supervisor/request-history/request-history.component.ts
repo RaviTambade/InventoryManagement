@@ -36,6 +36,7 @@ export class RequestHistoryComponent {
       if (res) {
         this.requests = res;
         this.data = res;
+        console.log(this.data)
         this.getUser();
         this.requests = this.data.slice(0, 10);
         this.todaysRequestsCount();
@@ -63,7 +64,7 @@ export class RequestHistoryComponent {
   }
   todaysRequestsCount() {
     const today = new Date();
-    const todayString = today.toISOString().split('T')[0].replace(/-/g, '/');;
+    const todayString = today.toISOString().split('T')[0];
     const todaysRequests = this.data.filter(request => {
       const requestDate = request.date.toString().split('T')[0];
       return requestDate == todayString;
@@ -86,7 +87,7 @@ export class RequestHistoryComponent {
 
   todaysRequests() {
     const today = new Date();
-    const todayString = today.toISOString().split('T')[0].replace(/-/g, '/');;
+    const todayString = today.toISOString().split('T')[0];
     const todaysRequests = this.data.filter(request => {
       const requestDate = request.date.toString().split('T')[0];
       return requestDate == todayString;
@@ -114,12 +115,12 @@ export class RequestHistoryComponent {
   }
 
   getUser() {
-    const userIds = this.requests.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
+    const userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
     this.userIds = userIds;
     for (const userId of this.userIds) {
       this._usersvc.getUser(userId).subscribe(data => {
         for (const responseItem of data) {
-          const users = this.requests.filter(u => u.userId === responseItem.id);
+          const users = this.data.filter(u => u.userId === responseItem.id);
           for (const user of users) {
             user.name = responseItem.name;
           }
