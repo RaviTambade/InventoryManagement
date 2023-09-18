@@ -24,4 +24,8 @@ body{
 
    .btn-float-right{
 	float: right;
-}
+   }
+
+   .btn1{
+    margin-left: 50px;  
+    }

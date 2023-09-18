@@ -17,6 +17,7 @@ export class TrayComponent implements OnInit {
   onEditClick: boolean = false;
   count = 0;
   modified: boolean = false;
+  modifiedId:number[]=[];
   
 
   constructor(private requestSvc: InitialRequestService, private orderSvc: OrderService, private svc: InitialRequestService) {
@@ -55,9 +56,21 @@ export class TrayComponent implements OnInit {
     for (let i = 0; i < this.data.length; i++) {
       const quantity1 = parseInt(this.data[i].quantity);
       const quantity2 = parseInt(this.trays[i].quantity);
-
+ 
+      
+      const change=this.trays.find((element)=>element.id==this.data[i].id);
+      console.log(change);
+      if(change.quantity!==this.data[i].quantity){
+        console.log(change.id);
+      }
       if (quantity1 !== quantity2) {
         this.modified = true;
+        // this.modifiedId.push(this.data[i]);
+        // console.log(this.modifiedId);
+
+
+        
+
         break;
       }
     }
@@ -91,9 +104,9 @@ export class TrayComponent implements OnInit {
     this.updatedTray.id = trayId;
     this.updatedTray.quantity = quantity;
     console.log(this.updatedTray);
-    // this.svc.updateQuantity(this.updatedTray).subscribe((res)=>{
-    //   console.log(res);
-    // })
+    this.svc.updateQuantity(this.updatedTray).subscribe((res)=>{
+      console.log(res);
+    })
   }
 
   increment(id: number) {
