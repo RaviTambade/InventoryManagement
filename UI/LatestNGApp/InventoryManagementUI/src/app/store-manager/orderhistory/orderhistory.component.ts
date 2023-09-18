@@ -16,6 +16,7 @@ export class OrderhistoryComponent {
   storemanagerid: number = 1;
   completedOrdercount: number = 0;
   pendingOrdercount: number = 0;
+  request:boolean=false;
 
   constructor(private _orderSvc: OrderService, private _usersvc: UserService) {
     this.orders = [];
@@ -72,11 +73,13 @@ export class OrderhistoryComponent {
   }
 
   completedOrders() {
+    this.request=false;
     const completedOrders = this.data.filter(u => u.status !== "inprogress");
     this.orders = completedOrders;
     this._orderSvc.setSelectedOrderId(0);
   }
   pendingOrders() {
+    this.request=true;
     const pendingOrders = this.data.filter(u => u.status === "inprogress");
     this.orders = pendingOrders;
     this._orderSvc.setSelectedOrderId(0);
