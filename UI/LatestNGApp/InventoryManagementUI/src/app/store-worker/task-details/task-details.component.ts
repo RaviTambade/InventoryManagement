@@ -17,14 +17,14 @@ export class TaskDetailsComponent implements OnInit{
   ngOnInit(): void {
     this.svc.selectedTaskId$.subscribe((id) => {
       console.log(id);
-      // this.getTaskDetails(id);
+      this.getTaskDetails(id);
   })
   }
-  // getTaskDetails(id:number){
-  //   this.svc.getTaskDetails(id).subscribe((res)=>{
-  //     this.taskdetails=res;
-  //     console.log(this.taskdetails);
-  //   })
+  getTaskDetails(id:number){
+    this.svc.getTaskDetails(id).subscribe((res)=>{
+      this.taskdetails=res;
+      console.log(this.taskdetails);
+    })
 
-  // }
+  }
 }

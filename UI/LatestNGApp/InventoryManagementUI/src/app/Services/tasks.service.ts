@@ -21,7 +21,7 @@ export class TasksService {
   }
   
   getTaskDetails(id:number):Observable<any>{
-    let url ="http://localhost:5112/api/shipping/getshippingdetails/" + id ;
+    let url ="http://localhost:5112/api/shipment/shippingdetails/" + id ;
     return this.http.get(url);
   }
   UpdateStatus(id:number):Observable<any>{
@@ -44,6 +44,4 @@ export class TasksService {
     let url ="http://localhost:5112/api/shipping/monthlyreport/" + empid ;
     return this.http.post(url,period);
   } 
-
-
 }

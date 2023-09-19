@@ -1,1 +1,49 @@
-<p>task-details works!</p>
+
+  
+<div *ngIf="taskdetails">
+    <h2>Request Details</h2>
+    <hr>
+    <div class="card" >
+      <div class="card-header bg-dark text-white">
+        Task details
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div>
+            <div class="card" *ngFor="let task of taskdetails">
+              <div class="card-body">
+                <div class="row">
+                  <!-- Left Half: Image -->
+                  
+                  <!-- Right Half: Card Title and Text -->
+                  <div class="col-md-6">
+                    <p class="card-text">
+                      <strong>Order Id:</strong> {{ task.orderId }}
+                    </p>
+                    <p class="card-text">
+                      <strong>Status:</strong> {{ task.status }}
+                    </p>
+                    <p class="card-text">
+                      <strong>Section:</strong> {{ task.section }}
+                    </p>
+                    <p class="card-text">
+                        <strong>Department:</strong> {{ task.department }}
+                      </p>
+
+                    <!-- <label for="quantity" *ngIf="editQuantity && cart.id==cartId" >Edit Quantity</label>
+                    <input id="quantity" name="quantity" *ngIf="editQuantity && cart.id==cartId" type="number"  [(ngModel)]="cart.quantity" class="form-control form-control-sm"> -->
+                   </div>
+                </div>
+              </div>
+              <!-- <div class="card-footer">
+                  <button class="btn btn-primary" *ngIf="!editQuantity || cart.id!==cartId" [disabled]="cart.status !== 'inprogress'"  (click)="onEdit(cart.id)">Edit</button>
+                  <button class="btn btn-danger" *ngIf="!editQuantity || cart.id!==cartId " [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
+                  <button class="btn btn-primary" *ngIf="editQuantity && cart.id==cartId " (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
+                  <button class="btn btn-danger" *ngIf="editQuantity && cart.id==cartId"  (click)="onCancel()">Cancel</button>  
+            </div>       -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  

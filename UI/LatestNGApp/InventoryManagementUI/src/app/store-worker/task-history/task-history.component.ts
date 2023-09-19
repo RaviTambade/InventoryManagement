@@ -10,7 +10,7 @@ import { TasksService } from 'src/app/Services/tasks.service';
 export class TaskHistoryComponent implements OnInit{
 
   tasks:Task[]=[];
-  empId:number=18;
+  empId:number=15;
 
   constructor(private svc:TasksService){}
 
