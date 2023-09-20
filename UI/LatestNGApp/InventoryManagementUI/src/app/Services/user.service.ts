@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../Models/user';
+import { User } from '../Models/User';
+import { UserDetails } from '../Models/UserDetails';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,10 @@ export class UserService {
   getUserByContact(contactNumber: string): Observable<User> {
     let url = "http://localhost:5102/api/users/username/" + contactNumber;
     return this.httpClient.get<User>(url);
+  }
+  updateUser(id :number,user: UserDetails): Observable<User> {
+    let url = "http://localhost:5102/api/users/" + id ;
+    return this.httpClient.put<User>(url,user);
   }
 
   getUserRole(userId:number):Observable<string>{

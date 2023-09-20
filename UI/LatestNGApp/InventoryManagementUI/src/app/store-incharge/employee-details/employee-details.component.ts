@@ -9,21 +9,21 @@ import { UserService } from 'src/app/Services/user.service';
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent {
-  userDetails:UserDetails|undefined;
   update:boolean=false;
+   userDetails:UserDetails | undefined;
+   employeeId:number=0;
   constructor(private _employeeSvc:EmployeeService,private _userSvc:UserService){
 
   }
   ngOnInit(): void {
     this._employeeSvc.selectedEmployeeId$.subscribe((id) => {
       console.log(id)
-      const employeeId=id;
+      this.employeeId=id;
       if(id==0 || id==null){
-        this.userDetails=undefined;
         // this.newDetails=false;
       }
       else
-    this.getUserDetails(employeeId);
+    this.getUserDetails(this.employeeId);
 
   }) 
   }
@@ -34,8 +34,15 @@ export class EmployeeDetailsComponent {
     })
   }
 
-  updateEmployee(){
+  onUpdate(){
     this.update=true;
+  }
+  updateEmployee(){
+    console.log(this.userDetails)
+    if(this.userDetails)
+    this._userSvc.updateUser(this.employeeId,this.userDetails).subscribe((res)=>{
+      console.log(res);
+    })
   }
 
 }

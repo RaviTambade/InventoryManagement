@@ -1,56 +1,75 @@
 <div *ngIf="userDetails">
-    <h2>User Details</h2>
+    <h2>Employee Details</h2>
     <hr>
-    <div class="card" >
-      <div class="card-header bg-dark text-white">
-        details
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div>
-            <div class="card" *ngIf="userDetails">
-              <div class="card-body">
-                <div class="row">
-                  <!-- Left Half: Image -->
-                  <div class="col-md-6">
-                    <img src="./assets/img/mEmp.jpeg" alt="Image" class="img-fluid">
-                  </div>
-                  <!-- Right Half: Card Title and Text -->
-                  <div class="col-md-6">
-                    <p class="card-text">
-                      <span class="h4">Name : {{ userDetails.firstName }}  {{ userDetails.lastName }}</span>
-                    </p>
-                    <label for="fname" *ngIf="update" >First Name</label>
-                    <input id="fname" *ngIf="update" name="fname"  type="text"  [(ngModel)]="userDetails.firstName"  class="form-control form-control-sm">
-
-                    <label for="lname" *ngIf="update" >Last Name</label>
-                    <input id="lname" *ngIf="update" name="lname"  type="text"  [(ngModel)]="userDetails.lastName"  class="form-control form-control-sm">
-                    <p class="card-text">
-                      <span class="h4">Birth Date :  {{ userDetails.birthDate }}</span>
-                    </p>
-                    <p class="card-text">
-                        <span class="h4">Gender :  {{ userDetails.gender }}</span>
-                      </p>
-
-                      <p class="card-text">
-                        <span class="h4">Email :  {{ userDetails.email }}</span>
-                      </p>
-                      <p class="card-text">
-                        <span class="h4">Contact Number :  {{ userDetails.contactNumber }}</span>
-                      </p>
-                      <p class="card-text">
-                        <span class="h4">Aadhaar Id :  {{ userDetails.aadharId }}</span>
-                      </p>
-                     <button type="submit" class="btn btn-primary btn-sm" (click)="updateEmployee()" > Update  </button>
-                      <button class="btn btn-primary btn-block btn-sm" >Delete </button>
-                  </div>     
-                </div>
-              </div>
-          </div>
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+             Details
         </div>
-      </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4" *ngIf="!update">
+                    <img   src="./assets/img/mEmp.jpeg" alt="Image" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <h4 *ngIf="!update">Name: {{ userDetails.firstName }} {{ userDetails.lastName }}</h4>
+                    <div class="form-group" *ngIf="update">
+                        <label for="fname">First Name</label>
+                        <input id="fname" name="fname" type="text" [(ngModel)]="userDetails.firstName" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group" *ngIf="update">
+                        <label for="lname">Last Name</label>
+                        <input id="lname" name="lname" type="text" [(ngModel)]="userDetails.lastName" class="form-control form-control-sm">
+                    </div>
+
+                    <h4 *ngIf="!update">Birth Date: {{ userDetails.birthDate }}</h4>
+                    <div class="form-group" *ngIf="update">
+                        <label for="birthdate">Birth Date</label>
+                        <input id="birthdate" name="birthdate" type="date" [(ngModel)]="userDetails.birthDate" class="form-control form-control-sm">
+                    </div>
+
+                    <h4 *ngIf="!update">Contact Number: {{ userDetails.contactNumber }}</h4>
+                    <div class="form-group" *ngIf="update">
+                        <label for="contactnumber">Contact Number</label>
+                        <input id="contactnumber" name="contactnumber" type="text" [(ngModel)]="userDetails.contactNumber" class="form-control form-control-sm">
+                    </div>
+
+                    <h4 *ngIf="!update">Aadhaar Id: {{ userDetails.aadharId }}</h4>
+                    <div class="form-group" *ngIf="update">
+                        <label for="aadharId">Aadhaar Id</label>
+                        <input id="aadharId" name="aadharId" type="text" [(ngModel)]="userDetails.aadharId" class="form-control form-control-sm">
+                    </div>
+
+                    <h4 *ngIf="!update">Email: {{ userDetails.email }}</h4>
+                    <div class="form-group" *ngIf="update">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="text" [(ngModel)]="userDetails.email" class="form-control form-control-sm">
+                    </div>
+                    <h4 *ngIf="!update">Gender: {{ userDetails.gender }}</h4>
+                    <div class="form-group" *ngIf="update">
+                        <label>Gender</label>
+                        <div class="form-check">
+                            <input type="radio" id="male" name="gender" value="male" class="form-check-input" [(ngModel)]="userDetails.gender">
+                            <label for="male" class="form-check-label">Male</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="female" name="gender" value="female" class="form-check-input" [(ngModel)]="userDetails.gender">
+                            <label for="female" class="form-check-label">Female</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="other" name="gender" value="other" class="form-check-input" [(ngModel)]="userDetails.gender">
+                            <label for="other" class="form-check-label">Other</label>
+                        </div>
+                    </div>
+
+                    <!-- Add other fields and buttons as needed -->
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary btn-sm" (click)="onUpdate()" *ngIf="!update">Update</button>
+                        <button type="submit" class="btn btn-success btn-sm" (click)="updateEmployee()" *ngIf="update">Update</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div> 
-
-
-  
+</div>
