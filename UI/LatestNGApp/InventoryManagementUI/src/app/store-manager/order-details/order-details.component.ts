@@ -36,8 +36,7 @@ export class OrderDetailsComponent implements OnInit {
       else
     this.getOrderDetails();
 
-  })
-  
+  }) 
   }
 
  getOrderDetails(){

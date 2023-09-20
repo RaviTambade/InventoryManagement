@@ -24,4 +24,8 @@ export class UserService {
     let url="http://localhost:5102/api/users/name/" +id
     return this.httpClient.get<any>(url)
   }
+  getUserDetails(employeeId:number):Observable<any>{
+    let url="http://localhost:5102/api/users/" +employeeId
+    return this.httpClient.get<any>(url)
+  }
 }

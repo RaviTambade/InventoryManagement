@@ -25,6 +25,9 @@
             <li class="nav-item">
               <a class="nav-link text-dark"  *ngIf="isroleStoreWorker()"  [routerLink]="['/storeworker/tasks']">Tasks</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark"  *ngIf="isroleStoreIncharge()"  [routerLink]="['/storeincharge/employees']">Employees</a>
+            </li>
           </ul>
         </div>
       </div>
