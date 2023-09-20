@@ -1,12 +1,16 @@
 
   
 <div *ngIf="taskdetails">
-    <h2>Request Details</h2>
+    <h2>Task Details</h2>
     <hr>
     <div class="card" >
       <div class="card-header bg-dark text-white">
         Task details
       </div>
+      <p class="card-text">
+        <strong>Drop:</strong> {{ department }}
+      </p>
+
       <div class="card-body">
         <div class="row">
           <div>
@@ -21,29 +25,17 @@
                       <strong>Order Id:</strong> {{ task.orderId }}
                     </p>
                     <p class="card-text">
-                      <strong>Status:</strong> {{ task.status }}
+                      <strong>Pick up:</strong> {{ task.section }}
                     </p>
-                    <p class="card-text">
-                      <strong>Section:</strong> {{ task.section }}
-                    </p>
-                    <p class="card-text">
-                        <strong>Department:</strong> {{ task.department }}
-                      </p>
 
-                    <!-- <label for="quantity" *ngIf="editQuantity && cart.id==cartId" >Edit Quantity</label>
-                    <input id="quantity" name="quantity" *ngIf="editQuantity && cart.id==cartId" type="number"  [(ngModel)]="cart.quantity" class="form-control form-control-sm"> -->
                    </div>
                 </div>
               </div>
-              <!-- <div class="card-footer">
-                  <button class="btn btn-primary" *ngIf="!editQuantity || cart.id!==cartId" [disabled]="cart.status !== 'inprogress'"  (click)="onEdit(cart.id)">Edit</button>
-                  <button class="btn btn-danger" *ngIf="!editQuantity || cart.id!==cartId " [disabled]="cart.status !== 'inprogress'" (click)="onRemove(cart.id)">Remove</button>
-                  <button class="btn btn-primary" *ngIf="editQuantity && cart.id==cartId " (click)="onEditQuantity(cart.id,cart.quantity)">Edit Quantity</button>
-                  <button class="btn btn-danger" *ngIf="editQuantity && cart.id==cartId"  (click)="onCancel()">Cancel</button>  
-            </div>       -->
           </div>
         </div>
       </div>
     </div>
   </div> 
+  <a  (click)="onPicked()" class="btn btn-primary">Picked</a>
+  <a  (click)="onDeliver()" class="btn btn-primary">Deliver</a>
   

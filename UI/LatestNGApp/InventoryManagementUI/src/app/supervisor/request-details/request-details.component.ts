@@ -85,11 +85,7 @@ export class RequestDetailsComponent {
     this._requestsvc.updateRequestedItem(this.item).subscribe((res)=>{
       console.log(res);
       window.location.reload();
-
     })
     this.editQuantity=false;
-
   }
-
-
 }

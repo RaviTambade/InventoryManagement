@@ -9,6 +9,9 @@
         <p> <b> Department :{{department}} </b> </p>
       </div>
     </div>
+    <div *ngIf="isShipper">
+      <p><b> Name :{{shipper.name}} </b> </p>
+    </div>
     <hr>
     <div class="card" *ngFor="let order of orderDetails">
       <div class="card-header bg-dark text-white">

@@ -1,4 +1,38 @@
 
+<div class="container"  style="width:90%">
+    <h2 >Tasks</h2>
+    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-2">
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+            <div class="d-flex flex-wrap align-items-center mb-2">
+                 <ul class="navbar-nav flex-grow">  
+                    <li class="nav-item">
+                        <a class="nav-link text-dark border rounded p-2 " (click)="pendingTasks()">
+                            <i class="fas fa-spinner text-warning me-2"></i> Pending Tasks
+                            <span class="badge badge-warning">{{pendingTaskcount}}</span>
+                        </a>
+                    </li>&nbsp;
+                    <li class="nav-item">
+                        <a class="nav-link text-dark border rounded p-2" (click)="completedTasks()">
+                            <i class="fas fa-check-circle text-success me-2"></i> Completed Tasks
+                            <span class="badge badge-success">{{completedTaskcount}}</span>
+                        </a>
+                    </li>    
+                </ul>
+            </div>
+            <!-- <div class="d-flex flex-wrap align-items-center">
+                <ul class="navbar-nav flex-grow">
+                    <li class="nav-item">
+                        <label for="fromDate" class="form-label">From Date:</label>
+                        <input type="date" id="fromDate" class="nav-link text-dark border rounded p-2 form-control" [(ngModel)]="fromDate" (change)="onFromDateChange()">
+                    </li>
+                    <li class="nav-item">
+                        <label for="toDate" class="form-label">To Date:</label>
+                        <input type="date" id="toDate" class="nav-link text-dark border rounded p-2 form-control"  [(ngModel)]="toDate" (change)="onToDateChange()" >
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+    </nav>
 <div *ngIf="tasks">
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -17,4 +51,5 @@
         </tbody>
     </table>
    </div> 
+   </div>
     

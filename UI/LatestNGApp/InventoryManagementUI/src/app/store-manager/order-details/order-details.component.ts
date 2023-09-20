@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDetails } from 'src/app/Models/orderDetails';
 import { OrderService } from 'src/app/Services/order.service';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-order-details',
@@ -9,14 +10,21 @@ import { OrderService } from 'src/app/Services/order.service';
 })
 export class OrderDetailsComponent implements OnInit {
 
-  orderDetails:OrderDetails |any;
+  orderDetails:OrderDetails[]=[];
   orderId:number=0;
   storeManagerId:number=1;
   newDetails:boolean=false;
   department:string='';
   orderDate=new Date()
   inprogressOrder:boolean=false;
-  constructor(private orderService:OrderService){}
+  shipper:any={
+    id:0,
+    name:""
+  };
+  isShipper:boolean=false;
+
+  constructor(private orderService:OrderService,private _usersvc:UserService){}
+
   ngOnInit(): void {
     this.orderService.selectedOrderId$.subscribe((id) => {
       console.log(id)
@@ -27,7 +35,9 @@ export class OrderDetailsComponent implements OnInit {
       }
       else
     this.getOrderDetails();
+
   })
+  
   }
 
  getOrderDetails(){
@@ -35,6 +45,7 @@ export class OrderDetailsComponent implements OnInit {
     console.log(res);
     this.orderDetails = res; 
        this.newDetails=true;
+       this.getUser();
 
     this.department=this.orderDetails[0].department;
     this.orderDate=this.orderDetails[0].orderDate;
@@ -44,9 +55,20 @@ export class OrderDetailsComponent implements OnInit {
     }
     else
     this.inprogressOrder=false;
-
   })
 }
+
+getUser() {
+  const shipperId=this.orderDetails[0].shipperId;
+  console.log(shipperId);
+  this._usersvc.getUser(shipperId).subscribe((res)=>{
+    console.log(res);
+    this.shipper=res;
+    console.log(this.shipper);
+    this.isShipper=true;
+  })
+ }
+
 
 onApproved(orderid: any, q: any) {
   const quantity = Number.parseInt(q)

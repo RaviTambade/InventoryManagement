@@ -17,6 +17,7 @@ export class OrderhistoryComponent {
   completedOrdercount: number = 0;
   pendingOrdercount: number = 0;
   request:boolean=false;
+  
 
   constructor(private _orderSvc: OrderService, private _usersvc: UserService) {
     this.orders = [];
@@ -32,7 +33,7 @@ export class OrderhistoryComponent {
     this._orderSvc.getOrders(this.storemanagerid).subscribe((res) => {
       console.log(res);
       this.data=res;
-     
+      
       this.getUser();
       this.completedCount();
       this.pendingCount();
@@ -84,6 +85,7 @@ export class OrderhistoryComponent {
     this.orders = pendingOrders;
     this._orderSvc.setSelectedOrderId(0);
   }
+  
 
   // onFromDateChange(){
   //   console.log(this.fromDate);

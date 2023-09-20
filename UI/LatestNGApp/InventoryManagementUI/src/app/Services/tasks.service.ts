@@ -11,7 +11,7 @@ export class TasksService {
   private selectedTaskIdSubject = new BehaviorSubject<any>(null);
   selectedTaskId$ = this.selectedTaskIdSubject.asObservable();
 
-  setSelectedRequestId(id: number) {
+  setSelectedTaskId(id: number) {
     this.selectedTaskIdSubject.next(id);
   }
 
@@ -25,23 +25,23 @@ export class TasksService {
     return this.http.get(url);
   }
   UpdateStatus(id:number):Observable<any>{
-    let url ="http://localhost:5112/api/shipping/updatestatus/" + id ;
+    let url ="http://localhost:5112/api/shipment/updatestatus/" + id ;
     return this.http.get(url);
   } 
   Deliver(id:number):Observable<any>{
-    let url ="http://localhost:5112/api/shipping/deliver/" + id ;
+    let url ="http://localhost:5112/api/shipment/deliver/" + id ;
     return this.http.get(url);
   } 
   getWeeklyReport(empid:number, period:any):Observable<any>{
-    let url ="http://localhost:5112/api/shipping/weeklyreport/" + empid ;
+    let url ="http://localhost:5112/api/shipment/weeklyreport/" + empid ;
     return this.http.post(url,period);
   } 
   getYearlyReport(empid:number, year:string):Observable<any>{
-    let url ="http://localhost:5112/api/shipping/yearlyreport/" + empid+"/"+year ;
+    let url ="http://localhost:5112/api/shipment/yearlyreport/" + empid+"/"+year ;
     return this.http.get(url);
   } 
   getMonthlyReport(empid:number, period:any):Observable<any>{
-    let url ="http://localhost:5112/api/shipping/monthlyreport/" + empid ;
+    let url ="http://localhost:5112/api/shipment/monthlyreport/" + empid ;
     return this.http.post(url,period);
   } 
 }
