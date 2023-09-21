@@ -50,7 +50,7 @@ public class RequestController : ControllerBase
 
     [HttpPut]
     [Route("request/item")]
-    public async Task<bool> Update(RequestDetails item)
+    public async Task<bool> Update(UpdateQuantity item)
     {
         bool status =await _reqsvs.UpdateItem(item);
         return status;

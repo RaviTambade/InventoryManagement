@@ -23,7 +23,7 @@ public class RequestService : IRequestService
 
      public async Task<RequestDetails> GetItem(int id)=>await _repo.GetItem(id);
 
-    public async Task<bool> UpdateItem(RequestDetails item) =>await _repo.UpdateItem(item);
+    public async Task<bool> UpdateItem(UpdateQuantity item) =>await _repo.UpdateItem(item);
     public async Task<bool> DeleteItem(int id) =>await _repo.DeleteItem(id);
     public async Task <List<RequestReport>> WeeklyRequests(int id,Period period ) =>await _repo.WeeklyRequests(id,period);
 

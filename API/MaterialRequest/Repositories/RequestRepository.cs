@@ -25,7 +25,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select ri.id,r.date, r.status, ri.materialid, categories.category, ri.quantity from materialrequests r  inner join materialrequestitems ri on ri.materialrequestid= r.id   inner join categories on categories.id=ri.categoryid  where r.id=@requestid";
+            string query = "	select ri.id,r.date, r.status, m.title, categories.category, ri.quantity from materialrequests r inner join materialrequestitems ri on ri.materialrequestid= r.id  inner join materials m on ri.materialid = m.id inner join categories on categories.id=ri.categoryid  where r.id=@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
             await con.OpenAsync();
@@ -34,7 +34,7 @@ public class RequestRepository : IRequestRepository
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
-                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string name = reader["title"].ToString();
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status = reader["status"].ToString();
@@ -43,7 +43,7 @@ public class RequestRepository : IRequestRepository
                 {
                     Id = id,
                     Date = date,
-                    MaterialId = materialid,
+                    Name = name,
                     Category = category,
                     Quantity = quantity,
                     Status = status
@@ -71,7 +71,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select ri.id,r.date, r.status, ri.materialid, categories.category, ri.quantity from materialrequests r  inner join materialrequestitems ri on ri.materialrequestid= r.id   inner join categories on categories.id=ri.categoryid  where ri.id=@id";
+            string query = "select ri.id,r.date, r.status, m.title, categories.category, ri.quantity from materialrequests r inner join materialrequestitems ri on ri.materialrequestid= r.id  inner join materials m on ri.materialid = m.id   inner join categories on categories.id=ri.categoryid  where ri.id=@id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", id);
             await con.OpenAsync();
@@ -79,14 +79,14 @@ public class RequestRepository : IRequestRepository
             while (await reader.ReadAsync())
             {
                 int rid = Int32.Parse(reader["id"].ToString());
-                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string name = reader["title"].ToString();
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
 
                 item = new RequestDetails()
                 {
                     Id = rid,
-                    MaterialId = materialid,
+                    Name = name,
                     Category = category,
                     Quantity = quantity,
                 };
@@ -243,7 +243,7 @@ public class RequestRepository : IRequestRepository
         return status;
     }
 
-    public async Task<bool> UpdateItem(RequestDetails item)
+    public async Task<bool> UpdateItem(UpdateQuantity item)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
