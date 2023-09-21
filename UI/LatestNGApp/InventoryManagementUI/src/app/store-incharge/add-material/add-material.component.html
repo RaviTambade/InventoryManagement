@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-4">
+        <div class="card  bg-light">
+          <div class="card-header bg-info bg-primary text-white">
+            <h5 class="mb-0">Add Material</h5>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="materialForm" (submit)="onSubmit()">
+              <div class="form-group">
+                <label for="name">Title</label>
+                <input type="text" id="name" class="form-control" formControlName="name">
+              </div>
+              <div class="form-group">
+                <label for="category">Category</label>
+                <div class="input-group">
+                  <select id="category" *ngIf="selectCategory" class="form-control" formControlName="type" >
+                    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                  </select>
+                  <button class="btn btn-primary mr-2" *ngIf="selectCategory" (click)="addNewCategory()">New Category</button>
+                  <input type="text" id="customCategory" *ngIf="addCategory" class="form-control" formControlName="type">
+                  <button class="btn btn-primary mr-2" *ngIf="addCategory" (click)="addSelectedCategory()">Existing Category</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" class="form-control" formControlName="quantity">
+              </div>
+              <div class="form-group">
+                <label for="unitPrice">Unit Price</label>
+                <input type="number" id="unitPrice" class="form-control" formControlName="unitPrice">
+              </div>
+             
+              <div class="form-group">
+                <label for="imageUrl">Image</label>
+                <input type="file" id="imageUrl" class="form-control" formControlName="imageUrl">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

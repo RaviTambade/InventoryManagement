@@ -9,6 +9,7 @@ import { Employee } from '../Models/Employee';
 })
 export class EmployeeService {
   constructor(private http:HttpClient) { }
+
   private selectedEmployeeIdSubject = new BehaviorSubject<any>(null);
   selectedEmployeeId$ = this.selectedEmployeeIdSubject.asObservable();
 
@@ -31,6 +32,18 @@ export class EmployeeService {
   getRole(id:number):Observable<Employee>{
     let url ="http://localhost:5140/api/employees/role/"+id  ;
     return this.http.get<Employee>(url);
+  }
+  deleteEmployee(id:number):Observable<Employee>{
+    let url ="http://localhost:5140/api/employees/employees/"+id  ;
+    return this.http.delete<any>(url);
+  }
+  getDepartments(): Observable<string[]> {
+    let url = "http://localhost:5140/api/employees/departments";
+    return this.http.get<string[]>(url);
+  }
+  getRoles(): Observable<string[]> {
+    let url = "http://localhost:5140/api/employees/roles";
+    return this.http.get<string[]>(url);
   }
 
 }

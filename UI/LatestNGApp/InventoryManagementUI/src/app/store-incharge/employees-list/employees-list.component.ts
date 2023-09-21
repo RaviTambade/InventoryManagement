@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EmployeeService } from '../../Services/employee.service';
 import { Employee } from 'src/app/Models/Employee';
 import { UserService } from 'src/app/Services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees-list',
@@ -16,7 +17,7 @@ export class EmployeesListComponent {
   storeWorkerCount: number = 0;
   department: string = 'Store';
   userIds: number[] = [];
-  constructor(private _employeeSvc: EmployeeService, private _userSvc: UserService) {
+  constructor(private _employeeSvc: EmployeeService, private _userSvc: UserService, private router:Router) {
 
   }
   ngOnInit(): void {
@@ -36,23 +37,30 @@ export class EmployeesListComponent {
       this.storeWorkersCount();
     })
   }
-  getUser() {
+  async getUser() {
     const userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
     this.userIds = userIds;
     console.log(this.userIds);
+  
     for (const userId of this.userIds) {
-      this._userSvc.getUser(userId).subscribe(data => {
+      try {
+        const data = await this._userSvc.getUser(userId).toPromise(); // Convert Observable to Promise
+  
         for (const responseItem of data) {
           const users = this.data.filter(u => u.userId === responseItem.id);
           for (const user of users) {
             user.name = responseItem.name;
           }
         }
-      });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
     }
-    console.log(this.employees)
-    console.log(this.data)
+  
+    console.log(this.employees);
+    console.log(this.data);
   }
+  
 
   storeManagersCount() {
     const storeManager = this.data.filter(u => u.role === "Store Manager").length;
@@ -65,11 +73,18 @@ export class EmployeesListComponent {
   storeManagers() {
     const storeManager = this.data.filter(u => u.role === "Store Manager");
     this.employees = storeManager;
+    this._employeeSvc.setSelectedEmployeeId(0);
   }
   storeWorkers() {
     const storeWorker = this.data.filter(u => u.role === "Store Worker");
     this.employees = storeWorker;
+    this._employeeSvc.setSelectedEmployeeId(0);
   }
 
+  addNewEmployee(){
+    // this.router.navigate(["storeincharge/addEmployee"])
+    this.router.navigate(["storeincharge/addMaterial"])
+
+  }
 
 }

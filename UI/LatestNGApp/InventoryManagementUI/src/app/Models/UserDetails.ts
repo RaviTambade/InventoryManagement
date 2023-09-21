@@ -6,5 +6,6 @@ export class UserDetails {
         public birthDate:Date,
         public gender:string,
         public email:string,
-        public contactNumber:string){}
+        public contactNumber:string,
+        public imageUrl:string){}
 }

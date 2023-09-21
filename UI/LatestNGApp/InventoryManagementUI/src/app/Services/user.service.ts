@@ -19,7 +19,7 @@ export class UserService {
   }
   updateUser(id :number,user: UserDetails): Observable<User> {
     let url = "http://localhost:5102/api/users/" + id ;
-    return this.httpClient.put<User>(url,user);
+    return this.httpClient.put<any>(url,user);
   }
 
   getUserRole(userId:number):Observable<string>{
@@ -33,5 +33,9 @@ export class UserService {
   getUserDetails(employeeId:number):Observable<any>{
     let url="http://localhost:5102/api/users/" +employeeId
     return this.httpClient.get<any>(url)
+  }
+  deleteUser(aadharId:string):Observable<any>{
+    let url="http://localhost:5102/api/users/aadhar/" +aadharId
+    return this.httpClient.delete<any>(url)
   }
 }

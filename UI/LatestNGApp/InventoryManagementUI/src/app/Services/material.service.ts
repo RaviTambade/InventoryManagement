@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Material } from '../Models/Material';
 
 @Injectable({
   providedIn: 'root'
@@ -37,10 +38,10 @@ export class MaterialService {
      return this.http.get(url);
    }
    // fn casing
-  //  InsertMaterial(material:Material):Observable<any>{
-  //    let url ="http://localhost:5071/api/Materials/Materials";
-  //    return this.http.post(url,material);
-  //  }
+   InsertMaterial(material:Material):Observable<any>{
+     let url ="http://localhost:5071/api/Materials/Materials";
+     return this.http.post(url,material);
+   }
  
    updateQuantity(materialId:number, quantity:number):Observable<any>{
      let url ="http://localhost:5071/api/Materials/material/stock/"+ materialId;

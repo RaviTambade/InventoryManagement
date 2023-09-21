@@ -1,4 +1,4 @@
-<div *ngIf="userDetails">
+<div *ngIf="details">
     <h2>Employee Details</h2>
     <hr>
     <div class="card">
@@ -61,12 +61,12 @@
                         </div>
                     </div>
 
-                    <!-- Add other fields and buttons as needed -->
 
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary btn-sm" (click)="onUpdate()" *ngIf="!update">Update</button>
                         <button type="submit" class="btn btn-success btn-sm" (click)="updateEmployee()" *ngIf="update">Update</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
+                        <button class="btn btn-danger btn-sm" (click)="onDelete()" *ngIf="!update">Delete</button>
+                        <button class="btn btn-danger btn-sm"(click)="onCancel()" *ngIf="update">Cancel</button>
                     </div>
                 </div>
             </div>
