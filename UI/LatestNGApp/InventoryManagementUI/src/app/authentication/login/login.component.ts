@@ -26,7 +26,7 @@ export class LoginComponent {
         this.userService.getUserByContact(this.credential.contactNumber).subscribe((response) => {
           this.userId = response.id;
           localStorage.setItem("name", response.name)
-          localStorage.setItem("userId",  this.userId.toString())
+          localStorage.setItem("userId",  this.userId.toString()) 
           console.log(this.userId);
           this.userService.getUserRole(this.userId).subscribe((response) => {
             this.role = response;
