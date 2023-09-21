@@ -82,8 +82,8 @@ export class EmployeesListComponent {
   }
 
   addNewEmployee(){
-    // this.router.navigate(["storeincharge/addEmployee"])
-    this.router.navigate(["storeincharge/addMaterial"])
+    this.router.navigate(["storeincharge/addEmployee"])
+    // this.router.navigate(["storeincharge/addMaterial"])
 
   }
 

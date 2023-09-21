@@ -25,6 +25,7 @@ export class TaskDetailsComponent implements OnInit{
   getTaskDetails(id:number){
     this.svc.getTaskDetails(id).subscribe((res)=>{
       this.taskdetails=res;
+      console.log(this.taskdetails);
       this.department=this.taskdetails[0].department;
       console.log(this.taskdetails);
     })
