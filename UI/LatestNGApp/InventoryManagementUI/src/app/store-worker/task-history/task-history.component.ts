@@ -21,7 +21,6 @@ export class TaskHistoryComponent implements OnInit{
     this.getTasks(this.empId);
   }
 
-
   getTasks(empId:number){
     this.svc.getTasks(empId).subscribe((res)=>{
       this.tasks=res;

@@ -32,8 +32,8 @@ export class LoginComponent {
             this.role = response;
             console.log(this.role);
             const role=this.role.role;
+            console.log(role);
             localStorage.setItem("role", role)
-            this.navigateByRole(role);
           })
         })
       }
@@ -41,8 +41,9 @@ export class LoginComponent {
   }
 
   navigateByRole(role: string) {
-    switch (role) {
-      case "Store Incharge":
+    console.log(role);
+    switch (role) {  
+      case "Store Incharge":  
         this.router.navigate(["storeincharge/dashboard"])
         break;
       case "Store Manager":
