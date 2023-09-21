@@ -40,15 +40,7 @@ export class NavbarComponent {
       this.isLoggedIn=true;
     }
     console.log(role);
-    // if (role === 'Supervisor') {
-    //   this.isroleSupervisor = true;
-    // } else if (role === 'Store Manager') {
-    //   this.isroleStoreManager = true;
-    // } else if (role === 'Store Worker') {
-    //   this.isroleStoreWorker = true;
-    // } else if (role === 'Store Incharge') {
-    //   this.isroleStoreIncharge = true;
-    // }    
+    
   }
 
   isroleSupervisor(): boolean {

@@ -28,7 +28,7 @@ export class MaterialsComponent implements OnInit {
       this.data = response;
       this.materials = this.data.slice(0, 10);
       console.log(response);
-      this.materials.forEach(item => {
+      this.data.forEach(item => {
         if (!this.categories.includes(item.type)) {
           this.categories.push(item.type);
         }
@@ -42,6 +42,7 @@ export class MaterialsComponent implements OnInit {
   }
 
   onSelectedCategory() {
+    this._materialsvc.setSelectedMaterialId(0);
     console.log(this.selectedCategory);
     const sortedMaterials = this.data.filter(m => m.type === this.selectedCategory)
     console.log(sortedMaterials);

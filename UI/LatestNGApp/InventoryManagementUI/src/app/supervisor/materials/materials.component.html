@@ -1,9 +1,7 @@
  <table>
       <tr>
           <td>
-              <label>Category</label>
-          </td>
-          <td>
+            <label>Category</label>
               <select  [(ngModel)]="selectedCategory" (change)="onSelectedCategory()" name="category">
               <option *ngFor="let category of categories" [value]="category">
               {{ category}}
@@ -12,36 +10,9 @@
           </td>
       </tr>
     
-
-
-
-
-
-<!-- <div class="container "  style="width:100%">
-    <h2>Categories</h2>   
-    <nav class="navbar navbar-expand-sm navbar-light bg-white">
-      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-        <div class="d-flex flex-wrap align-items-center mb-2">
-          <div class="row">
-            <div class="col-md-3 mb-2" *ngFor="let category of categories">
-              <div class="nav-item">
-                <a class="nav-link text-dark border rounded p-2" (click)="onSelectCategory(category)">{{category}}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-<hr>-->
-
-
-
-
-
- 
-      
     <div class="container" style="width: 90%">
         <div class="row">
+          <h2>Materials</h2>
           <div class="col-md-4 mb-4" *ngFor="let material of materials">
             <div class="grid-item border rounded p-3">
               <img (click)="selectedMaterialId(material.id)" src="{{material.imageUrl}}" alt="" class="img-thumbnail">
@@ -51,73 +22,3 @@
           </div>
         </div>
       </div>
-         
-
-
-
-<!-- <div class="container" style="width: 100%">
-    <h2>Categories</h2>
-    <div class="row">
-        <div class="col-md-2 mr-2">
-            <div class="custom-nav">
-                <div class="card custom-card mb-2" *ngFor="let category of categories">
-                    <div class="card-body p-2 custom-link" (click)="onSelectCategory(category)">
-                        {{ category }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 border-right"></div>
-
-        <div class="col-md-9">
-
-            <div class="row">
-                <div class="col-md-4 mb-4" *ngFor="let material of materials">
-                    <div class="grid-item border rounded p-3">
-                        <img (click)="selectedMaterialId(material.id)" src="{{ material.imageUrl }}" alt=""
-                            class="img-thumbnail">
-                        <h4 (click)="selectedMaterialId(material.id)">{{ material.name }}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>  -->
-<!-- <div class="container" style="width: 100%">
-    <h2>Categories</h2>
-    <div class="row" >
-        <div class="col-md-2 mr-1">
-            <div class="custom-nav">
-              <div class="card custom-card mb-2" *ngFor="let category of categories.slice(0, categories.length / 2)">
-                <div class="card-body p-2 custom-link" (click)="onSelectCategory(category)">
-                  {{ category }}
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-2  mr-1">
-            <div class="custom-nav">
-              <div class="card custom-card mb-2" *ngFor="let category of categories.slice(categories.length / 2)">
-                <div class="card-body p-2 custom-link" (click)="onSelectCategory(category)">
-                  {{ category }}
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        <div class="col-md-1 mr-1 border-right"></div>
-
-        <div class="col-md-7">
-            <div class="row">
-                <div class="col-md-4 mb-4" *ngFor="let material of materials">
-                    <div class="grid-item border rounded p-3">
-                        <img (click)="selectedMaterialId(material.id)" src="{{ material.imageUrl }}" alt=""
-                            class="img-thumbnail">
-                        <h4 (click)="selectedMaterialId(material.id)">{{ material.name }}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->

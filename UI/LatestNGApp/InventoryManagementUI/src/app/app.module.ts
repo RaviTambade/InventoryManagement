@@ -18,6 +18,7 @@ import { storeWorkerRoutes } from './store-worker/store-worker.module';
 import { SupervisorModule, supervisorRoutes } from './supervisor/supervisor.module';
 import { supervisorInchargeRoutes } from './supervisor-incharge/supervisor-incharge.module';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
+import { sharedRoutes } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
       {path:'storeworker',children:storeWorkerRoutes},
       {path:'supervisor',children:supervisorRoutes},
       {path:'supervisorincharge',children:supervisorInchargeRoutes},
+      {path:'shared',children:sharedRoutes},
     ])
   ],
   providers: [

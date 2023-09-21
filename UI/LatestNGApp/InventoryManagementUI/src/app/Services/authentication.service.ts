@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Credential } from '../Models/credential';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UpdatePassword } from '../Models/update-password';
 
 
 @Injectable({
@@ -26,6 +27,12 @@ export class AuthenticationService {
       return decodedToken.contactNumber;
     }
     return null;
+  }
+  updatePassword(credential: UpdatePassword): Observable<boolean> {
+    let url = "http://localhost:5077/api/authentication/update/password";
+    const token = localStorage.getItem("jwt")
+      const header = { "Authorization": "Bearer " + token }
+    return this.httpClient.put<any>(url, credential,{headers:header});
   }
 
 }
