@@ -20,7 +20,7 @@ public class ShippingRepository : IShippingRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select s.id,s.date,r.status from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where s.shipperid=@employeeId ORDER BY s.id DESC LIMIT 1";
+            string query = "select s.id,s.date,r.status from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where s.shipperid=@employeeId";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@employeeId", employeeId);
             await con.OpenAsync();

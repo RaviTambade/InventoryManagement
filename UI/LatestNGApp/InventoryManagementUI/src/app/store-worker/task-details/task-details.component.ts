@@ -19,7 +19,10 @@ export class TaskDetailsComponent implements OnInit{
     this.svc.selectedTaskId$.subscribe((id) => {
       console.log(id);
       this.taskId=id;
-      this.getTaskDetails(id);
+      if(this.taskId!==0 && this.taskId!==null){
+        this.getTaskDetails(this.taskId);
+ 
+      }
   })
   }
   getTaskDetails(id:number){
