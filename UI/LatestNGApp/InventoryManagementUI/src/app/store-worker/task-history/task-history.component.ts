@@ -10,7 +10,7 @@ import { TasksService } from 'src/app/Services/tasks.service';
 export class TaskHistoryComponent implements OnInit{
 
   tasks:Task[]=[];
-  empId:number=15;
+  empId:number=16;
   data:Task[]=[];
   pendingTaskcount:number |any;
   completedTaskcount:number |any;
@@ -18,18 +18,15 @@ export class TaskHistoryComponent implements OnInit{
   constructor(private svc:TasksService){}
 
   ngOnInit():void{
-    this.getTasks(this.empId);
-  }
-
-  getTasks(empId:number){
-    this.svc.getTasks(empId).subscribe((res)=>{
+    this.svc.getTasks(this.empId).subscribe((res)=>{
       this.tasks=res;
       this.data=res;
       console.log(res);
       this.completedTaskCount();
       this.pendingTaskCount();
-    })
-  }
+    })  }
+
+ 
 
   selectedTask(id:number){
    this.svc.setSelectedTaskId(id);

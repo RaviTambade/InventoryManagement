@@ -75,7 +75,6 @@ onApproved(orderid: any, q: any) {
   console.log(orderid)
   this.orderService.Approve(orderid, quantity).subscribe((res) => {
     console.log(res);
-    window.location.reload();
 
   })
 
