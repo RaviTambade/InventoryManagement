@@ -1,6 +1,6 @@
 
-  
 <div *ngIf="taskdetails">
+
     <h2>Task Details</h2>
     <hr>
     <div class="card" >
@@ -11,10 +11,11 @@
         <strong>Drop:</strong> {{ department }}
       </p>
 
+      <div *ngFor="let task of taskdetails">
       <div class="card-body">
         <div class="row">
           <div>
-            <div class="card" *ngFor="let task of taskdetails">
+            <div class="card" >
               <div class="card-body">
                 <div class="row">
                   <!-- Left Half: Image -->
@@ -27,7 +28,7 @@
                     <p class="card-text">
                       <strong>Pick up:</strong> {{ task.section }}
                     </p>
-
+                    
                    </div>
                 </div>
               </div>
@@ -35,7 +36,10 @@
         </div>
       </div>
     </div>
-  </div> 
-  <a  (click)="onPicked()" class="btn btn-primary">Picked</a>
-  <a  (click)="onDeliver()" class="btn btn-primary">Deliver</a>
+</div>
+<a  (click)="onPicked() " *ngIf="Status=='Ready To Dispatch'" class="btn btn-primary">Picked</a>
+<a  (click)="onDeliver()" *ngIf="Status=='Picked'" class="btn btn-primary">Deliver</a>
+</div>
+</div> 
+
   
