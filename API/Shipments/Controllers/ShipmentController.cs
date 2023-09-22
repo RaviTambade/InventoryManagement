@@ -16,19 +16,13 @@ public class ShipmentController : ControllerBase
 
     [HttpGet]
     [Route("shipments/{employeeId}")]
-    public async Task<Shipping> GetAll(int employeeId)
+    public async Task<List<Shipping>> GetAll(int employeeId)
     {
-        Shipping shipment = await _shipsvc.GetShipments(employeeId);
+        List<Shipping> shipment = await _shipsvc.GetShipments(employeeId);
         return shipment;
     }
 
-    [HttpGet]
-    [Route("shipped/{employeeId}")]
-    public async Task<List<Shipping>> GetShipped(int employeeId)
-    {
-        List<Shipping> shipment = await _shipsvc.GetShipped(employeeId);
-        return shipment;
-    }
+    
          [HttpGet]
     [Route("totaltasks/{id}")]
     public async Task<int> GetTotalTasks(int employeeId)
@@ -53,7 +47,7 @@ public class ShipmentController : ControllerBase
         return status;
     }
 
-        [HttpGet]
+    [HttpGet]
     [Route("deliver/{id}")]
     public async Task<bool> Deliver(int id)
     {

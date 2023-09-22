@@ -14,13 +14,13 @@ public class ShippingRepository : IShippingRepository
 
 
     //get cart Items of supervisors by sending supervisor's id
-    public async Task<Shipping> GetShipments(int employeeId)
+    public async Task<List<Shipping>> GetShipments(int employeeId)
     {
-        Shipping shipping = null;
+        List<Shipping> shippingDetails = new List<Shipping>();
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where s.shipperid=@employeeId and r.status=3 or r.status=4 ORDER BY s.id DESC LIMIT 1";
+            string query = "select s.id,s.date,r.status from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where s.shipperid=@employeeId ORDER BY s.id DESC LIMIT 1";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@employeeId", employeeId);
             await con.OpenAsync();
@@ -29,16 +29,16 @@ public class ShippingRepository : IShippingRepository
             {
                 int id = int.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
-                string department = reader["department"].ToString();
+                string status = reader["status"].ToString();
 
 
-                shipping = new Shipping()
+                Shipping shipping = new Shipping()
                 {
                     Id = id,
-                    Department = department,
+                    Status = status,
                     Date = date,
                 };
-
+                shippingDetails.Add(shipping);
             }
             await reader.CloseAsync();
         }
@@ -51,48 +51,7 @@ public class ShippingRepository : IShippingRepository
             await con.CloseAsync();
         }
 
-        return shipping;
-    }
-
-    public async Task<List<Shipping>> GetShipped(int employeeId)
-    {
-        List<Shipping> shippings = new();
-        MySqlConnection con = new(_connectionString);
-        try
-        {
-            string query = "select s.id,s.date,departments.department ,r.id from shipments s inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id inner join materialrequests r on s.materialrequestid=r.id where  r.status=6 and s.shipperid=@employeeId";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@employeeId", employeeId);
-            await con.OpenAsync();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (await reader.ReadAsync())
-            {
-                int id = int.Parse(reader["id"].ToString());
-                DateTime date = DateTime.Parse(reader["date"].ToString());
-                string department = reader["department"].ToString();
-
-                Shipping shipping = new()
-                {
-                    Id = id,
-                    Department = department,
-                    Date = date,
-                };
-
-                shippings.Add(shipping);
-
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-
-        return shippings;
+        return shippingDetails;
     }
 
 

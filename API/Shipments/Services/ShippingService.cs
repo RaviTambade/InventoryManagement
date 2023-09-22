@@ -10,8 +10,8 @@ public class ShippingService : IShippingService
         _repo = repo;
     }
 
-    public async Task<Shipping> GetShipments(int employeeId)=>await _repo.GetShipments(employeeId);
-    public async Task<List<Shipping>> GetShipped(int employeeId)=>await _repo.GetShipped(employeeId);
+    public async Task<List<Shipping>> GetShipments(int employeeId)=>await _repo.GetShipments(employeeId);
+    
     public async Task<int> GetTotalTasks(int employeeId)=>await _repo.GetTotalTasks(employeeId);
 
     public async Task<List<ShippingDetails>> GetShippingDetails(int taskId)=>await _repo.GetShippingDetails(taskId);
