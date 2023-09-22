@@ -47,7 +47,7 @@
 
                       <button *ngIf="!order.itemStatus" class="btn btn-success"
                         (click)="onApproved(order.id, quantity.value)">
-                        <span class="glyphicon glyphicon-ok"></span> Approve Request
+                        <span class="glyphicon glyphicon-ok">Approve </span>
                       </button>
                     </div>
                     <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>

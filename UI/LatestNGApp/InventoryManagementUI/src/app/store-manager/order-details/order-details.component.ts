@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderDetails } from 'src/app/Models/orderDetails';
 import { OrderService } from 'src/app/Services/order.service';
 import { UserService } from 'src/app/Services/user.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-order-details',
@@ -21,9 +22,10 @@ export class OrderDetailsComponent implements OnInit {
     id:0,
     name:""
   };
+  isApprove: boolean=false;
   isShipper:boolean=false;
 
-  constructor(private orderService:OrderService,private _usersvc:UserService){}
+  constructor(private cdr: ChangeDetectorRef,private orderService:OrderService,private _usersvc:UserService){}
 
   ngOnInit(): void {
     this.orderService.selectedOrderId$.subscribe((id) => {
@@ -39,6 +41,7 @@ export class OrderDetailsComponent implements OnInit {
   }) 
   }
 
+  
  getOrderDetails(){
   this.orderService.getOrderDetails(this.orderId).subscribe((res) => {
     console.log(res);
@@ -75,7 +78,8 @@ onApproved(orderid: any, q: any) {
   console.log(orderid)
   this.orderService.Approve(orderid, quantity).subscribe((res) => {
     console.log(res);
-
+    if(res==true){
+      this.cdr.detectChanges();    }
   })
 
 }
