@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Credential } from '../Models/credential';
@@ -19,7 +19,11 @@ export class AuthenticationService {
     let url = 'http://localhost:5077/api/authentication/signin';
     return this.httpClient.post<any>(url, credential);
   }
+  register(credential: Credential): Observable<boolean> {
 
+    let url = "http://localhost:5077/api/authentication/register";
+    return this.httpClient.post<any>(url, credential);
+  }
   getContactNumberFromToken(): string | null {
     const token = localStorage.getItem("JWT");
     if (token) {
@@ -30,9 +34,16 @@ export class AuthenticationService {
   }
   updatePassword(credential: UpdatePassword): Observable<boolean> {
     let url = "http://localhost:5077/api/authentication/update/password";
-    const token = localStorage.getItem("jwt")
-      const header = { "Authorization": "Bearer " + token }
-    return this.httpClient.put<any>(url, credential,{headers:header});
+    const token = localStorage.getItem("JWT")
+   const contactNumber= this.getContactNumberFromToken();
+   if(contactNumber){
+    const headers = new HttpHeaders()
+    .set('Authorization', 'Bearer ' + token)
+    .set('contactNumber', contactNumber); // Custom header for contact number
+    return this.httpClient.put<any>(url, credential,{headers});
+
+   }else
+   return this.httpClient.put<any>(url, credential);
   }
 
 }

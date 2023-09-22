@@ -18,58 +18,55 @@
 
         </div>
         <div class="col-lg-6">
-          <div class="card mb-4">
+          <div class="card mb-4 border-primary rounded">
             <div class="card-body">
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-sm-3">
-                  <p class="mb-0">Name</p>
+                  <p class="text-muted mb-4">Name</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user.firstName }} {{user.lastName}} </p>
+                  <p class="text-muted mb-1" style="font-family: 'Arial', sans-serif;">{{ user.firstName }} {{ user.lastName }}</p>
                 </div>
               </div>
-              <hr>
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-sm-3">
-                  <p class="mb-0">Email</p>
+                  <p class="text-muted mb-4">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user.email }} </p>
+                  <p class="text-muted mb-1" style="font-family: 'Arial', sans-serif;">{{ user.email }}</p>
                 </div>
               </div>
-              <hr>
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-sm-3">
-                  <p class="mb-0">Contact No</p>
+                  <p class="text-muted mb-4">Contact No</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user.contactNumber }} </p>
+                  <p class="text-muted mb-1" style="font-family: 'Arial', sans-serif;">{{ user.contactNumber }}</p>
                 </div>
               </div>
-              <hr>
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-sm-3">
-                  <p class="mb-0">Birth Date</p>
+                  <p class="text-muted mb-4">Birth Date</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user.birthDate }} </p>
+                  <p class="text-muted mb-1" style="font-family: 'Arial', sans-serif;">{{ user.birthDate }}</p>
                 </div>
               </div>
-              <hr>
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-sm-3">
-                  <p class="mb-0">Aadhar Id</p>
+                  <p class="text-muted mb-4">Aadhar Id</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user.aadharId }} </p>
+                  <p class="text-muted mb-1" style="font-family: 'Arial', sans-serif;">{{ user.aadharId }}</p>
                 </div>
               </div>
             </div>
           </div>
-
-        <button type="submit" class="btn btn-primary" (click)="changePassword()">Change Password</button>
         
+          <button type="submit" class="btn btn-primary" (click)="changePassword()">Change Password</button>
         </div>
+        
+        
       </div>
     </div>
   </section>

@@ -45,5 +45,9 @@ export class EmployeeService {
     let url = "http://localhost:5140/api/employees/roles";
     return this.http.get<string[]>(url);
   }
+  addEmployee(employee:Employee): Observable<any> {
+    let url = "http://localhost:5140/api/employees/employee";
+    return this.http.post(url, employee);
+  }
 
 }

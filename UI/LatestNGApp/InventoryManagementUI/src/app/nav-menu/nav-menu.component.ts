@@ -17,7 +17,7 @@ export class NavMenuComponent implements OnInit {
  
   }
 
-  isrole(): boolean {
+  isRole(): boolean {
     const theRole=localStorage.getItem("role");
     if(theRole){
       this.role=theRole;

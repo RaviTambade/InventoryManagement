@@ -66,6 +66,7 @@ export class ProfileComponent {
 
   }
   onPopupOk() {
+    console.log(this.credential)
     if(this.credential.newPassword!==this.confirmPassword)
     {
       alert ("wrong password")

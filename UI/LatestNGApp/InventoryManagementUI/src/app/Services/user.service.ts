@@ -12,6 +12,10 @@ export class UserService {
 
   constructor(private httpClient:HttpClient) { }
 
+  addUser(user:UserDetails):Observable<any>{
+    let url="http://localhost:5102/api/user"
+    return this.httpClient.post<any>(url,user)
+  }
   
   getUserByContact(contactNumber: string): Observable<User> {
     let url = "http://localhost:5102/api/users/username/" + contactNumber;

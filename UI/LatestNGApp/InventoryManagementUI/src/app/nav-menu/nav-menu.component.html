@@ -1,48 +1,33 @@
 <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container">
-      <a class="navbar-brand">Inventory Management App</a>
-      <button class="navbar-toggler" type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
+      <div class="d-flex align-items-center"> <!-- Use flexbox to align items -->
+        <a class="navbar-brand" href="#">Inventory Management App</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item">
-            <a class="nav-link text-dark">Home</a>
-          </li>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto"> <!-- Add ml-auto class to move items to the right -->
           <li class="nav-item">
-            <a class="nav-link text-dark">Contact us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark">About</a>
+            <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item" *ngIf="isName()">
-            <a class="nav-link text-dark" [routerLink]="['/shared/profile']" >{{name}}</a>
+            <a class="nav-link" [routerLink]="['/shared/profile']">{{ name }}</a>
           </li>
-          <li class="nav-item" *ngIf=" isrole()" >
-            <a class="nav-link text-dark">{{role}}</a>
+          <li class="nav-item" *ngIf="isRole()">
+            <a class="nav-link" >{{ role }}</a>
           </li>
-        <li class="nav-item" *ngIf="isLoggedIn()">
-          <a class="nav-link text-dark" (click)="logOut()">LogOut</a>
-        </li>
+          
+          <li class="nav-item" *ngIf="isLoggedIn()">
+            <a class="nav-link" (click)="logOut()">Log Out</a>
+          </li>
           <li class="nav-item" *ngIf="!isLoggedIn()">
-            <a class="nav-link text-dark"  [routerLink]="['/login']">Login</a>
+            <a class="nav-link" [routerLink]="['/login']">Login</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-
-

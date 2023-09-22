@@ -1,0 +1,4 @@
+/* Add space between the buttons */
+.btn-danger {
+    margin-left: 8px; /* Adjust the value to control the amount of space */
+}

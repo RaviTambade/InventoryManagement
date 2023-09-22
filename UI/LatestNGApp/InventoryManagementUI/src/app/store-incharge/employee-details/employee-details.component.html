@@ -1,74 +1,114 @@
-<div *ngIf="details">
-    <h2>Employee Details</h2>
+<h2 *ngIf="details &&!update">Employee Details</h2>
+<h2 *ngIf="update">Update Employee</h2>
+<div *ngIf="details && !update">
+
     <hr>
     <div class="card">
         <div class="card-header bg-dark text-white">
-             Details
+            Details
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4" *ngIf="!update">
-                    <img   src="./assets/img/mEmp.jpeg" alt="Image" class="img-fluid rounded-circle">
+                    <img src="./assets/img/mEmp.jpeg" alt="Image" class="img-fluid rounded-circle">
                 </div>
                 <div class="col-md-8">
                     <h4 *ngIf="!update">Name: {{ userDetails.firstName }} {{ userDetails.lastName }}</h4>
-                    <div class="form-group" *ngIf="update">
-                        <label for="fname">First Name</label>
-                        <input id="fname" name="fname" type="text" [(ngModel)]="userDetails.firstName" class="form-control form-control-sm">
-                    </div>
-                    <div class="form-group" *ngIf="update">
-                        <label for="lname">Last Name</label>
-                        <input id="lname" name="lname" type="text" [(ngModel)]="userDetails.lastName" class="form-control form-control-sm">
-                    </div>
+
+
 
                     <h4 *ngIf="!update">Birth Date: {{ userDetails.birthDate }}</h4>
-                    <div class="form-group" *ngIf="update">
-                        <label for="birthdate">Birth Date</label>
-                        <input id="birthdate" name="birthdate" type="date" [(ngModel)]="userDetails.birthDate" class="form-control form-control-sm">
-                    </div>
+
 
                     <h4 *ngIf="!update">Contact Number: {{ userDetails.contactNumber }}</h4>
-                    <div class="form-group" *ngIf="update">
-                        <label for="contactnumber">Contact Number</label>
-                        <input id="contactnumber" name="contactnumber" type="text" [(ngModel)]="userDetails.contactNumber" class="form-control form-control-sm">
-                    </div>
+
 
                     <h4 *ngIf="!update">Aadhaar Id: {{ userDetails.aadharId }}</h4>
-                    <div class="form-group" *ngIf="update">
-                        <label for="aadharId">Aadhaar Id</label>
-                        <input id="aadharId" name="aadharId" type="text" [(ngModel)]="userDetails.aadharId" class="form-control form-control-sm">
-                    </div>
+
 
                     <h4 *ngIf="!update">Email: {{ userDetails.email }}</h4>
-                    <div class="form-group" *ngIf="update">
-                        <label for="email">Email</label>
-                        <input id="email" name="email" type="text" [(ngModel)]="userDetails.email" class="form-control form-control-sm">
-                    </div>
+
                     <h4 *ngIf="!update">Gender: {{ userDetails.gender }}</h4>
-                    <div class="form-group" *ngIf="update">
-                        <label>Gender</label>
-                        <div class="form-check">
-                            <input type="radio" id="male" name="gender" value="male" class="form-check-input" [(ngModel)]="userDetails.gender">
-                            <label for="male" class="form-check-label">Male</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="female" name="gender" value="female" class="form-check-input" [(ngModel)]="userDetails.gender">
-                            <label for="female" class="form-check-label">Female</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="other" name="gender" value="other" class="form-check-input" [(ngModel)]="userDetails.gender">
-                            <label for="other" class="form-check-label">Other</label>
-                        </div>
-                    </div>
+
 
 
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary btn-sm" (click)="onUpdate()" *ngIf="!update">Update</button>
-                        <button type="submit" class="btn btn-success btn-sm" (click)="updateEmployee()" *ngIf="update">Update</button>
+                        <button type="submit" class="btn btn-primary btn-sm" (click)="onUpdate()"
+                            *ngIf="!update">Update</button>
                         <button class="btn btn-danger btn-sm" (click)="onDelete()" *ngIf="!update">Delete</button>
-                        <button class="btn btn-danger btn-sm"(click)="onCancel()" *ngIf="update">Cancel</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group" *ngIf="update">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="fname">First Name</label>
+            <input id="fname" name="fname" type="text" [(ngModel)]="userDetails.firstName"
+                class="form-control form-control-sm">
+        </div>
+        <div class="col-md-6">
+            <label for="lname">Last Name</label>
+            <input id="lname" name="lname" type="text" [(ngModel)]="userDetails.lastName"
+                class="form-control form-control-sm">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="birthdate">Birth Date</label>
+            <input id="birthdate" name="birthdate" type="date" [(ngModel)]="userDetails.birthDate"
+                class="form-control form-control-sm">
+        </div>
+        <div class="col-md-6">
+            <label for="contactnumber">Contact Number</label>
+            <input id="contactnumber" name="contactnumber" type="text" [(ngModel)]="userDetails.contactNumber"
+                class="form-control form-control-sm">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="aadharId">Aadhaar Id</label>
+            <input id="aadharId" name="aadharId" type="text" [(ngModel)]="userDetails.aadharId"
+                class="form-control form-control-sm">
+        </div>
+        <div class="col-md-6">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="text" [(ngModel)]="userDetails.email"
+                class="form-control form-control-sm">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Gender</label>
+            <div class="form-check">
+                <input type="radio" id="male" name="gender" value="male" class="form-check-input"
+                    [(ngModel)]="userDetails.gender">
+                <label for="male" class="form-check-label">Male</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="female" name="gender" value="female" class="form-check-input"
+                    [(ngModel)]="userDetails.gender">
+                <label for="female" class="form-check-label">Female</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="other" name="gender" value="other" class="form-check-input"
+                    [(ngModel)]="userDetails.gender">
+                <label for="other" class="form-check-label">Other</label>
+            </div>
+        </div>
+      
+    </div>
+    <div class="form-group" *ngIf="update">
+        <div class="row">
+            <!-- ... Other form fields ... -->
+            <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-success btn-sm mr-2" (click)="updateEmployee()">Update</button>
+<button class="btn btn-danger btn-sm" (click)="onCancel()">Cancel</button>
+
+
             </div>
         </div>
     </div>

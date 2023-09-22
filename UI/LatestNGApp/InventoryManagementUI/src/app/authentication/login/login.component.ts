@@ -34,6 +34,7 @@ export class LoginComponent {
             const role=this.role.role;
             console.log(role);
             localStorage.setItem("role", role)
+            this.navigateByRole(role);
           })
         })
       }
