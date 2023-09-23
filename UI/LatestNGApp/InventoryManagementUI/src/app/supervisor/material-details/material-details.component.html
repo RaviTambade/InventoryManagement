@@ -1,4 +1,4 @@
-<div *ngIf="material">
+<div *ngIf="details">
     <h2>Material Details</h2>
     <hr>
     <div class="card" >
@@ -23,6 +23,13 @@
                     <p class="card-text">
                       <span class="h5">Category :  {{ material.type }}</span>
                     </p>
+                    <p class="card-text">
+                      <span class="h5"  *ngIf="!isSupervisor">Quantity :  {{ material.quantity }}</span>
+                    </p>
+
+
+
+                    <div *ngIf="isSupervisor">
                     <button type="submit" *ngIf="!add" class="btn btn-primary btn-sm" (click)="addNew()">
                       <i class="fas fa-cart-plus"></i> Add 
                     </button>
@@ -30,7 +37,17 @@
                     <input id="quantity" *ngIf="add" name="quantity"  type="number"  [(ngModel)]="request.quantity"  class="form-control form-control-sm">
                       <button class="btn btn-primary btn-block" *ngIf="add" (click)="onAdd(material.name,material.type,request.quantity)">Add to Tray</button>
                     <button class="btn btn-danger btn-block" *ngIf="add" (click)="onCancel()">Cancel</button>     
-                  </div>     
+                  </div>
+                  <div *ngIf="!isSupervisor">
+                    <button type="submit"class="btn btn-primary btn-sm" *ngIf="!update" (click)="onUpdate()" > Add Material   </button>
+                    <label for="quantity" *ngIf="update" >Quantity</label>
+                    <input id="quantity"  *ngIf="update" name="quantity" [(ngModel)]="quantityValue" type="number" class="form-control form-control-sm">
+                      <button class="btn btn-primary btn-block"  *ngIf="update" (click)="onUpdateQuantity(material.id, quantityValue)">Add</button>
+                    <button class="btn btn-danger btn-block"  *ngIf="update" (click)="onCancelUpdate()" >Cancel</button>     
+                  </div>
+
+
+                 </div>     
                 </div>
               </div>
           </div>

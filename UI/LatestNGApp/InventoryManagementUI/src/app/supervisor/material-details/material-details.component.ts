@@ -10,18 +10,33 @@ import { MaterialService } from 'src/app/Services/material.service';
   styleUrls: ['./material-details.component.css']
 })
 export class MaterialDetailsComponent implements OnInit{
-  material:Material |undefined;
+  material:Material={
+    id: 0,
+    name: '',
+    type: '',
+    quantity: 0,
+    unitPrice: 0,
+    imageUrl: ''
+  };
   request = new Request(
     '',
     456, 
     '', 
     0 
-  ); 
+  );
+  details:boolean=false;
+  quantityValue: number=0; 
+  isSupervisor:boolean=false;
   add:boolean=false;
+  update:boolean=false;
   constructor(private materialSvc:MaterialService , private _initialReqSvc: InitialRequestService){
   }
 
   ngOnInit(): void {
+    const role=localStorage.getItem("role");
+    if(role=="Supervisor"){
+       this.isSupervisor=true;
+    }
     this.getMaterialId()
  
   }
@@ -30,9 +45,7 @@ export class MaterialDetailsComponent implements OnInit{
     this.materialSvc.selectedMaterialId$.subscribe((res)=>{
       console.log(res);
       const materialid=res;
-      if(materialid ==0 || materialid==null){
-        this.material=undefined;
-      }
+     
       if(materialid!=null )
       this.getMaterialDetails(res);
     })
@@ -42,6 +55,7 @@ export class MaterialDetailsComponent implements OnInit{
     this.materialSvc.getMaterial(materialid).subscribe((response)=>{
       this.material=response;
       console.log(this.material);
+      this.details=true;
     })
   }
   addNew(){
@@ -66,5 +80,22 @@ export class MaterialDetailsComponent implements OnInit{
       })
       
       this.add=false;  
+  }
+
+  onUpdate(){
+this.update=true;
+  }
+  onCancelUpdate(){
+    this.update=false;
+  }
+  onUpdateQuantity(id:number,quantity:number){
+    this.update=false;
+    console.log(id);
+    const updatedQuantity=this.material?.quantity + quantity
+    console.log(updatedQuantity);
+  this.materialSvc.updateQuantity(id,updatedQuantity).subscribe((res)=>{
+    console.log(res);
+    this.getMaterialDetails(id);
+  })
   }
 }
