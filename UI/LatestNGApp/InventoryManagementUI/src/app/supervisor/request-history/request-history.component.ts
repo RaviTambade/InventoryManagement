@@ -85,6 +85,7 @@ export class RequestHistoryComponent {
     this.inprogressCount = inprogressRequest;
   }
 
+  
   todaysRequests() {
     const today = new Date();
     const todayString = today.toISOString().split('T')[0];

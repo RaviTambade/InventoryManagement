@@ -17,7 +17,7 @@ export class OrderhistoryComponent {
   completedOrdercount: number = 0;
   pendingOrdercount: number = 0;
   request:boolean=false;
-  
+  orderCount:number=0;
 
   constructor(private _orderSvc: OrderService, private _usersvc: UserService) {
     this.orders = [];
@@ -35,10 +35,12 @@ export class OrderhistoryComponent {
       this.data=res;
       
       this.getUser();
+      this.allOrderCount()
       this.completedCount();
       this.pendingCount();
       this.pendingOrders();
       this.completedOrders();
+      
     })
   }
 
@@ -62,7 +64,12 @@ export class OrderhistoryComponent {
      console.log(this.orders)
   }
 
+  allOrderCount(){
+    const totalCount = this.data.length;
+    console.log(totalCount);
+    this.orderCount=totalCount;
 
+  }
   completedCount() {
     const completed = this.data.filter(u => u.status !== "inprogress").length;
     this.completedOrdercount = completed;
@@ -85,14 +92,14 @@ export class OrderhistoryComponent {
     this.orders = pendingOrders;
     this._orderSvc.setSelectedOrderId(0);
   }
+
+  allOrders(){
+    const allOrders =this.data;
+    console.log(allOrders);
+    this.orders=allOrders;
+  }
   
-
-
-
   selectCompletedOrder(id: number) {
     this._orderSvc.setSelectedOrderId(id);
   }
-
-
-
 }

@@ -4,7 +4,13 @@
     <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-2">
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
             <div class="d-flex flex-wrap align-items-center mb-2">
-                 <ul class="navbar-nav flex-grow">  
+                 <ul class="navbar-nav flex-grow"> 
+                    <li class="nav-item">
+                        <a class="nav-link text-dark border rounded p-2 " (click)="allOrders()">
+                             All Orders
+                            <span class="badge badge-warning">{{orderCount}}</span>
+                        </a>
+                    </li>&nbsp;
                     <li class="nav-item">
                         <a class="nav-link text-dark border rounded p-2 " (click)="pendingOrders()">
                             <i class="fas fa-spinner text-warning me-2"></i> Pending
