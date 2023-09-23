@@ -155,7 +155,7 @@ export class RequestHistoryComponent {
   }
 
   newOrder() {
-    this.router.navigate(["supervisor/store"])
+    this.router.navigate(["shared/store"])
   }
 
 }

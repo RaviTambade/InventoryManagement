@@ -21,7 +21,7 @@
             
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark"  *ngIf="isroleSupervisor()"  [routerLink]="['/supervisor/store']">Store</a>
+              <a class="nav-link text-dark"  *ngIf="isroleSupervisor()"  [routerLink]="['/shared/store']">Store</a>
             </li><li class="nav-item">
               <a class="nav-link text-dark"  *ngIf="isroleStoreManager()" [routerLink]="['/storemanager/order']">Orders</a>
             </li>
@@ -35,7 +35,7 @@
               <a class="nav-link text-dark"  *ngIf="isroleStoreIncharge()"  [routerLink]="['/shared/departments']">departments</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark"  *ngIf="isroleStoreIncharge()"  [routerLink]="['/supervisor/store']">Inventory</a>
+              <a class="nav-link text-dark"  *ngIf="isroleStoreIncharge()"  [routerLink]="['/shared/store']">Inventory</a>
             </li>
           </ul>
         </div>

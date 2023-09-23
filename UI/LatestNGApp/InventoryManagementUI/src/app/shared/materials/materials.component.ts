@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Material } from 'src/app/Models/Material';
 import { MaterialService } from 'src/app/Services/material.service';
-
 
 @Component({
   selector: 'app-materials',
   templateUrl: './materials.component.html',
   styleUrls: ['./materials.component.css']
 })
-export class MaterialsComponent implements OnInit {
+export class MaterialsComponent {
 
+  
   materials: Material[] = [];
   categories: string[] = [];
   data: Material[] = [];
@@ -47,6 +47,5 @@ export class MaterialsComponent implements OnInit {
     const sortedMaterials = this.data.filter(m => m.type === this.selectedCategory)
     console.log(sortedMaterials);
     this.materials = sortedMaterials;
-
   }
 }

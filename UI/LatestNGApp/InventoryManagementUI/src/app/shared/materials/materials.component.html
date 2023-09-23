@@ -1,0 +1,25 @@
+
+<table>
+    <tr>
+        <td>
+          <label>Category</label>
+            <select  [(ngModel)]="selectedCategory" (change)="onSelectedCategory()" name="category">
+            <option *ngFor="let category of categories" [value]="category">
+            {{ category}}
+            </option>
+            </select>
+        </td>
+    </tr>
+  
+  <div class="container" style="width: 90%">
+      <div class="row">
+        <h2>Materials</h2>
+        <div class="col-md-4 mb-4" *ngFor="let material of materials">
+          <div class="grid-item border rounded p-3">
+            <img (click)="selectedMaterialId(material.id)" src="{{material.imageUrl}}" alt="" class="img-thumbnail">
+            <h4 (click)="selectedMaterialId(material.id)" >{{material.name}}</h4>
+            
+          </div>
+        </div>
+      </div>
+    </div>
