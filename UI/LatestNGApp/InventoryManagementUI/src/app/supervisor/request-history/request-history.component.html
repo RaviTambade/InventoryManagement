@@ -6,6 +6,12 @@
             <div class="d-flex flex-wrap align-items-center mb-2">
                 <ul class="navbar-nav flex-grow">
                     <li class="nav-item">
+                        <a class="nav-link text-dark border rounded p-2" (click)="allRequests()">
+                             All Requests
+                            <span class="badge badge-primary">{{totalCount}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-dark border rounded p-2" (click)="todaysRequests()">
                             <i class="fas fa-calendar-day me-2"></i> Today's Requests
                             <span class="badge badge-primary">{{todaysCount}}</span>

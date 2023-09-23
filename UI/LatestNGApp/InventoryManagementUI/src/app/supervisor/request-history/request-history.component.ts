@@ -20,6 +20,7 @@ export class RequestHistoryComponent {
   cancelledCount: number = 0;
   deliveredCount: number = 0;
   inprogressCount: number = 0;
+  totalCount:number = 0;
   toDate: string = "";
   fromDate: string = "";
   fromDateSelected: boolean = false;
@@ -39,6 +40,7 @@ export class RequestHistoryComponent {
         console.log(this.data)
         this.getUser();
         this.requests = this.data.slice(0, 10);
+        this.allRequestCount();
         this.todaysRequestsCount();
         this.cancelledRequestsCount();
         this.deliveredRequestCount();
@@ -62,6 +64,13 @@ export class RequestHistoryComponent {
     this.requests = specificData;
     this._requestsvc.setSelectedRequestId(0);
   }
+
+  allRequestCount(){
+    const requestCount=this.data.length;
+    this.totalCount=requestCount;
+
+  }
+
   todaysRequestsCount() {
     const today = new Date();
     const todayString = today.toISOString().split('T')[0];
@@ -85,7 +94,12 @@ export class RequestHistoryComponent {
     this.inprogressCount = inprogressRequest;
   }
 
-  
+  allRequests(){
+    const totalRequests=this.data;
+    console.log(totalRequests);
+    this.requests=totalRequests;
+  }
+
   todaysRequests() {
     const today = new Date();
     const todayString = today.toISOString().split('T')[0];
@@ -104,7 +118,7 @@ export class RequestHistoryComponent {
   }
 
   inprogressRequests() {
-    const inprogressrequest = this.data.filter(u => u.status === "inprogress");
+    const inprogressrequest = this.data.filter(u => u.status !== "Delivered" && "Cancelled");
     this.requests = inprogressrequest;
     this._requestsvc.setSelectedRequestId(0);
   }
