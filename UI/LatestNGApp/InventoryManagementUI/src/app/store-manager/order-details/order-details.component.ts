@@ -15,7 +15,8 @@ export class OrderDetailsComponent implements OnInit {
   storeManagerId:number=1;
   newDetails:boolean=false;
   department:string='';
-  orderDate=new Date()
+  orderDate=new Date();
+  shipperName:string='';
   inprogressOrder:boolean=false;
   shipper:any={
     id:0,
@@ -58,11 +59,13 @@ export class OrderDetailsComponent implements OnInit {
 }
 
 getUser() {
-  const shipperId=this.orderDetails[0].shipperId;
-  console.log(shipperId);
-  this._usersvc.getUser(shipperId).subscribe((res)=>{
-    console.log(res);
-    this.shipper=res;
+  const userId=this.orderDetails[0].userId;
+  console.log(userId);
+  this._usersvc.getUser(userId).subscribe((res)=>{
+    console.log(res[0]);
+    this.shipper=res[0];
+    this.shipperName=res[0].name;
+    console.log(this.shipperName);
     console.log(this.shipper);
     this.isShipper=true;
   })

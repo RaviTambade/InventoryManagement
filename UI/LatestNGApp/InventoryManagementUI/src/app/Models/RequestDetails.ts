@@ -5,6 +5,7 @@ export class RequestDetails {
                 public name:string,
                 public status:string,
                 public userId:number,
+                public shipperId:number,
                 ){}
 }
 
