@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Material } from 'src/app/Models/Material';
 import { Request } from 'src/app/Models/Request';
 import { InitialRequestService } from 'src/app/Services/initial-request.service';
@@ -9,7 +9,8 @@ import { MaterialService } from 'src/app/Services/material.service';
   templateUrl: './material-details.component.html',
   styleUrls: ['./material-details.component.css']
 })
-export class MaterialDetailsComponent implements OnInit{
+export class MaterialDetailsComponent {
+
   material:Material={
     id: 0,
     name: '',
@@ -24,6 +25,13 @@ export class MaterialDetailsComponent implements OnInit{
     '', 
     0 
   );
+  request1:Request={
+    name: '',
+    employeeId: 0,
+    category: '',
+    quantity: 0
+    
+  }
   details:boolean=false;
   quantityValue: number=0; 
   isSupervisor:boolean=false;

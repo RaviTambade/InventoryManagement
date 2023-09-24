@@ -10,7 +10,7 @@
 </tr>
 
 <hr>
-    <div class="card"  *ngFor="let warehouse of warehouses" >
+    <div class="card" style="height: 300px;width: 750px;" *ngFor="let warehouse of warehouses" >
       <div class="card-header bg-dark text-white">
         {{warehouse.section}}
       </div>
@@ -35,7 +35,7 @@
                   </div>
                 </div>
                 <div class="btn-group">
-                    <button type="button"  (click)="selectEmployeeForSwap(warehouse)" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Swap</button>
+                    <button type="button"  (click)="selectEmployeeForSwap(warehouse)" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Swap</button>&nbsp;&nbsp;
                     <div class="dropdown-menu overflow-auto">
                       <a class="dropdown-item "  *ngFor="let warehouse of warehouses"  (click)="selectEmployeeForSwap(warehouse)" >{{ warehouse.name }}</a>
                     </div>
