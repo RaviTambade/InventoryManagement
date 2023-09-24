@@ -14,8 +14,7 @@ create table categories(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
 create table employees(id INT NOT NULL auto_increment primary KEY,
                         userid int NOT NULL UNIQUE,
-                        departmentid  int not null,
-                        constraint fk_departmentid foreign key(departmentid) references departments(id) on update cascade on delete cascade,
+                        departmentid  int not null, constraint fk_departmentid foreign key(departmentid) references departments(id) on update cascade on delete cascade,
                         roleid int not null,constraint fk_roleid foreign key(roleid) references roles(id) on update cascade on delete cascade,
                         imageurl varchar(50));
     
