@@ -23,6 +23,7 @@ namespace Transflower.Employees.Controllers
             return employees;
         }
 
+
         [HttpGet]
         [Route("employee/{id}")]
         public async Task<Employee> GetById(int id)
@@ -59,10 +60,10 @@ namespace Transflower.Employees.Controllers
 
         [HttpGet]
         [Route("roles/{role}")]
-        public async Task<IEnumerable<Employee>> GetByRole(string role)
+        public async Task<IEnumerable<int>> GetByRole(string role)
         {
-            IEnumerable<Employee> employees = await _empsrv.GetByRole(role);
-            return employees;
+            IEnumerable<int> empids = await _empsrv.GetByRole(role);
+            return empids;
         }
 
         [HttpDelete]
