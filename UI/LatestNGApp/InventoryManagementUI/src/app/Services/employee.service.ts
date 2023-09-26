@@ -25,9 +25,9 @@ export class EmployeeService {
     let url ="http://localhost:5140/api/employees/employee/" +id ;
     return this.http.get<Employee>(url);
   }
-  getEmployeesByDepartment(department:string):Observable<Employee[]>{
+  getEmployeesByDepartment(department:string):Observable<any>{
     let url ="http://localhost:5140/api/employees/department/"+ department  ;
-    return this.http.get<Employee[]>(url);
+    return this.http.get<any>(url);
   }
   getByRole(role:string):Observable<any>{
     let url ="http://localhost:5140/api/employees/roles/"+role  ;
