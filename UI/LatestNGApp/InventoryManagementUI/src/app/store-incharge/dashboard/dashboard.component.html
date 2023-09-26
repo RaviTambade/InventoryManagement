@@ -2,8 +2,8 @@
     <!-- First Row -->
     <div class="row">
         <div class="col-md-3">
-            <div class="card text-black rounded hoverable" (mouseenter)="showAdditionalData = true"
-                (mouseleave)="showAdditionalData = false">
+            <div class="card text-black rounded hoverable" (mouseenter)="showEmployeesData = true"
+                (mouseleave)="showEmployeesData = false">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
@@ -14,20 +14,21 @@
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">Total Employees</h5>
-                            <p class="card-text">123</p>
+                            <p class="card-text"  *ngIf="!showEmployeesData">123</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
-                    <div class="additional-data" *ngIf="showAdditionalData">
-                        <p>Additional Info: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="additional-data" *ngIf="showEmployeesData">
+                        <p>Store Managers: 12</p>
+                        <p>Store Wrokers: 8</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="card text-black rounded hoverable" (mouseenter)="showAdditionalData = true"
-                (mouseleave)="showAdditionalData = false">
+            <div class="card text-black rounded hoverable" (mouseenter)="showInventoryData = true"
+                (mouseleave)="showInventoryData = false">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
@@ -37,13 +38,16 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <h5 class="card-title">Total Employees</h5>
-                            <p class="card-text">123</p>
+                            <h5 class="card-title">Below The Average Materials</h5>
+                            <p class="card-text" *ngIf="!showInventoryData" >3</p>
+
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
-                    <div class="additional-data" *ngIf="showAdditionalData">
-                        <p>Additional Info: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="additional-data" *ngIf="showInventoryData">
+                        <p >Bearings : 23</p>
+                        <p >First Gear : 29</p>
+                        <p>Housing : 55</p>
                     </div>
                 </div>
             </div>

@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   showAdditionalData = false;
+  showEmployeesData = false;
+  showInventoryData = false;
+
+  
+
 }
