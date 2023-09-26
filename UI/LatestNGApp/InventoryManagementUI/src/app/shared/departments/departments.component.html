@@ -27,7 +27,7 @@
                   <div class="btn-group">
                     <button type="button"  (click)="selectEmployeeForSwap(warehouse)" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Swap</button>&nbsp;&nbsp;
                     <div class="dropdown-menu overflow-auto">
-                      <a class="dropdown-item "  *ngFor="let warehouse of warehouses;"  (click)="selectEmployeeForSwap(warehouse)" >{{ warehouse.name }}  ( {{warehouse.section}} )</a>
+                      <a class="dropdown-item "  *ngFor="let thedata of data;"  (click)="selectEmployeeForSwap(thedata)" >{{ thedata.name }}  ( {{thedata.section}} )</a>
                     </div>
                     <!-- select button -->
                     <div class="btn-group">

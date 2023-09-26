@@ -8,12 +8,16 @@ import { DepartmentsListComponent } from './departments-list/departments-list.co
 import { StoreComponent } from './store/store.component';
 import { MaterialsComponent } from './materials/materials.component';
 import { MaterialDetailsComponent } from './material-details/material-details.component';
+import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { EmployeesListComponent } from './employees-list/employees-list.component';
 
 export const sharedRoutes:Routes=[
   {path:'profile',component:ProfileComponent},
   {path:'store',component:StoreComponent},
   {path:'departmentslist',component:DepartmentsListComponent},
   {path:'departments',component:DepartmentsComponent},
+  {path:'employees',component:EmployeesComponent},
 
 
 ]
@@ -25,7 +29,10 @@ export const sharedRoutes:Routes=[
     DepartmentsListComponent,
     StoreComponent,
     MaterialsComponent,
-    MaterialDetailsComponent
+    MaterialDetailsComponent,
+    EmployeesComponent,
+    EmployeeDetailsComponent,
+    EmployeesListComponent
   ],
   imports: [
     CommonModule,

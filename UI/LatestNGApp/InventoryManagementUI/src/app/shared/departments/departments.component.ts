@@ -32,6 +32,7 @@ export class DepartmentsComponent {
     this.svc.getAllWarehouseStaff().subscribe((res) => {
       console.log(res);
       this.warehouses=res;
+      this.data=res;
       this.sections= this.warehouses.map((w) => w.section);
       this.assignedEmpIds=this.warehouses.map((w)=> w.employeeId)
       console.log(this.sections)
@@ -45,19 +46,15 @@ export class DepartmentsComponent {
  
       console.log(this.unassignedEmpids);
         this.getUser(this.storeManagersids);
-
     })
-
   }
 
-
-  getUser(ids:any) {
-    
+  getUser(ids:any) {   
     for (const userId of ids) {
       this._usrSvc.getUser(userId).subscribe(data => {
         this.storeManagers.push(data);
         for (const responseItem of data) {
-          const users = this.warehouses.filter(u => u.employeeId === responseItem.id);
+          const users = this.data.filter(u => u.employeeId === responseItem.id);
           for (const user of users) {
             user.name = responseItem.name;
           }
@@ -65,15 +62,13 @@ export class DepartmentsComponent {
         this.getUnassignedEmployees();
       });
     }
-
     console.log(this.storeManagers);
     console.log(this.data)
   }
 
   getUnassignedEmployees(){
    this.unassignedEmpids.forEach(element => {
-    const employee = this.storeManagers.find(manager => manager.id === element);
-    
+    const employee = this.storeManagers.find(manager => manager.id === element);  
     console.log(employee)
      });
 

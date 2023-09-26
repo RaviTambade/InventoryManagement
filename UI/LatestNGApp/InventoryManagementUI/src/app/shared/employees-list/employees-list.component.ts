@@ -15,10 +15,18 @@ export class EmployeesListComponent {
   employees: Employee[] = [];
   data: Employee[] = [];
   storeWorkerCount: number = 0;
-  department: string = 'Store';
+  department: string = '';
+
   userIds: number[] = [];
   constructor(private _employeeSvc: EmployeeService, private _userSvc: UserService, private router:Router) {
 
+    const role=localStorage.getItem("role");
+    if(role=="Supervisor Incharge"){
+      this.department="Supervisor";
+    }
+    if(role=="Store Incharge"){
+      this.department="Store";
+    }
   }
   ngOnInit(): void {
     this.getEmployees();
@@ -86,5 +94,4 @@ export class EmployeesListComponent {
     // this.router.navigate(["storeincharge/addMaterial"])
 
   }
-
 }
