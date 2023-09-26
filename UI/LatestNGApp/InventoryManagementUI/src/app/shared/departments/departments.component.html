@@ -1,102 +1,54 @@
-<tr>
-    <td>
-      <label>Section</label>
-        <select  [(ngModel)]="selectedSection" (change)="onSelectedSection()" name="section">
-        <option *ngFor="let section of sections" [value]="section">
-        {{ section}}
-        </option>
-        </select>
-    </td>
-</tr>
 
-<hr>
-    <div class="card" style="height: 300px;width: 750px;" *ngFor="let warehouse of warehouses" >
-      <div class="card-header bg-dark text-white">
-        {{warehouse.section}}
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div>
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <!-- Left Half: Image -->
-                  <div class="col-md-6">
-                    <img src="./assets/img/Bearing.jpeg" alt="Image" class="img-fluid">
-                  </div>
-                  <!-- Right Half: Card Title and Text -->
-                  <div class="col-md-6">
-                    <p class="card-text">
-                        <strong>Category:</strong> {{ warehouse.materialType }}
-                      </p>
-                    <p class="card-text">
-                      <strong>Assigned Employee:</strong> {{ warehouse.name }}
-                    </p>
-                  </div>
-                </div>
-                <div class="btn-group">
+ 
+
+   <div class="container">
+    <h1 class="mt-4">Inventory </h1>
+
+    <tr>
+      <td>
+        <label>Section</label>
+          <select  [(ngModel)]="selectedSection" (change)="onSelectedSection()" name="section">
+          <option *ngFor="let section of sections" [value]="section">
+          {{ section}}
+          </option>
+          </select>
+      </td>
+  </tr>
+    
+    <div class="row">
+        <!-- Section 1 -->
+          <ng-container *ngFor="let warehouse of warehouses;"  >
+            <div class="col-sm-4">
+              <div class="card mt-2" style="cursor: pointer;" >
+                <div class="card-body">
+                  <h5 class="card-title">Section :{{ warehouse.section }}</h5>
+                  <h5 class="card-text">Material :{{ warehouse.materialType }}</h5>
+                  <h5 class="card-text">Store Manager :{{ warehouse.name }}</h5>
+                  <div class="btn-group">
                     <button type="button"  (click)="selectEmployeeForSwap(warehouse)" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Swap</button>&nbsp;&nbsp;
                     <div class="dropdown-menu overflow-auto">
-                      <a class="dropdown-item "  *ngFor="let warehouse of warehouses"  (click)="selectEmployeeForSwap(warehouse)" >{{ warehouse.name }}</a>
+                      <a class="dropdown-item "  *ngFor="let warehouse of warehouses;"  (click)="selectEmployeeForSwap(warehouse)" >{{ warehouse.name }}  ( {{warehouse.section}} )</a>
                     </div>
-                    
-                  </div>
-
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Select Employee
-                    </button>
-                    <div class="dropdown-menu">
-                      <!-- Generate dropdown items dynamically based on the employee array -->
-                      <a class="dropdown-item"  *ngFor="let emp of employees" >{{ emp.name }}</a>
+                    <!-- select button -->
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Employee
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item"  *ngFor="let emp of employees" >{{ emp.name }}</a>
+                      </div>
                     </div>
                   </div>
-              </div>
-              <div class="card-footer">
-                  <!-- <button class="btn btn-primary">Swap</button> -->
-                 
-            </div>      
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> 
-<!-- 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Store Department</h2>
-    <table class="table table-bordered text-center" >
-      <thead>
-        <tr>
-          <th>Section</th>
-          <th>Material type</th>
-          <th>Assigned Employee</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let warehouse of warehouses">
-        <tr >
-          <td> {{ warehouse.section }}</td>
-          <td>{{ warehouse.materialType }}</td>
-          <td>{{ warehouse.name }}</td>
-          <td>
-             <button class="btn btn-primary btn-sm" (click)="openChangeEmployeeModal(section)">Change Employee</button> 
-            <button class="btn btn-primary btn-sm  mx-2"*ngIf="selectSwap" (click)="selectEmployeeForSwap(warehouse)">Swap</button>
-            <button class="btn btn-primary btn-sm btn-danger  mx-2" *ngIf="swap" (click)="selectEmployeeForSwap(warehouse)">Swap</button>
-            
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Employee
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item"  *ngFor="let emp of employees" (click)="replaceEmployee(warehouse, emp)">{{ emp.name }}</a>
+                </div>
               </div>
             </div>
-          </td>
+            
+          </ng-container>
+        
+        
+    
 
-        </tr>
-      </tbody>
-    </table>
-    <button class="btn btn-primary" (click)="onUpdate()" >Update</button>
-  </div>
-   -->
-
+        <!-- Repeat for Sections 4 to 8 -->
+        
+    </div>
+</div>

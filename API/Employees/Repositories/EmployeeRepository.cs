@@ -227,13 +227,13 @@ public class EmployeeRepository : IEmployeeRepository
         return employees;
     }
 
-    public async Task<IEnumerable<Employee>> GetByRole(string role)
+    public async Task<IEnumerable<int>> GetByRole(string role)
     {
-        List<Employee> employees = new();
+        List<int> ids = new();
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select   employees.userid, employees.imageurl, departments.department, roles.role from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where roles.role =@role ";
+            string query = "select   employees.userid from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where roles.role =@role ";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@role", role);
             await con.OpenAsync();
@@ -241,19 +241,7 @@ public class EmployeeRepository : IEmployeeRepository
             while (await reader.ReadAsync())
             {
                 int id = Int32.Parse(reader["userid"].ToString());
-                string? imgurl = reader["imageurl"].ToString();
-                string? department = reader["department"].ToString();
-                string? theRole = reader["role"].ToString();
-
-                Employee employee = new()
-                {
-                    UserId = id,
-                    Department = department,
-                    Role = theRole,
-                    ImageUrl = imgurl,
-                };
-
-                employees.Add(employee);
+                ids.Add(id);
             }
             await reader.CloseAsync();
         }
@@ -265,7 +253,7 @@ public class EmployeeRepository : IEmployeeRepository
         {
             await con.CloseAsync();
         }
-        return employees;
+        return ids;
     }
     public async Task<bool> Delete(int employeeId)
     {
