@@ -1,0 +1,13 @@
+.card.hoverable:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    transform: scale(1.05); /* Increase size on hover */
+    transition: transform 0.2s, box-shadow 0.2s; /* Add smooth transition */
+    background-color: #cadef3; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+
+.card.hoverable:hover .additional-data {
+    opacity: 1; /* Show additional data on hover */
+    transform: translateY(0); /* Slide down effect */
+    transition: opacity 0.2s, transform 0.2s; /* Add a smooth transition */
+}
