@@ -2,7 +2,60 @@
     <!-- First Row -->
     <div class="row">
         <div class="col-md-3">
-            <div class="card text-black rounded hoverable" (mouseenter)="showEmployeesData = true"
+            <div class="card bg-info border-black text-white rounded hoverable" (mouseenter)="showAllOrders = true"
+                (mouseleave)="showAllOrders = false">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="icon">
+                                <img src="./assets/img/theBox.png" width="100" height="100" alt="Total Employees Icon"
+                                    class="img-fluid rounded">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">All Orders</h5>
+                            <p class="card-text" *ngIf="!showAllOrders">8955</p>
+                        </div>
+                    </div>
+                    <!-- Additional data with ngIf -->
+                    <!-- Additional data with ngIf -->
+<div class="additional-data additional-info" *ngIf="showAllOrders">
+    <div class="additional-data-container">Delivered: 5677</div>
+    <div class="additional-data-container">Cancelled: 4054</div>
+    <div class="additional-data-container">Pending: 50</div>
+  </div>
+  
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-primary text-white border-black rounded hoverable"
+                (mouseenter)="showTodaysOrders = true" (mouseleave)="showTodaysOrders = false">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="icon">
+                                <img src="./assets/img/box.png" width="100" height="100" alt="Total Employees Icon"
+                                    class="img-fluid rounded">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">Todays Orders</h5>
+                            <p class="card-text" *ngIf="!showTodaysOrders">145</p>
+                        </div>
+                    </div>
+                    <!-- Additional data with ngIf -->
+                    <div class="additional-data" *ngIf="showTodaysOrders">
+                        <p>Delivered : 121</p>
+                        <p>Cancelled : 5</p>
+                        <p>Pending : 20</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info border-black text-white rounded hoverable" (mouseenter)="showEmployeesData = true"
                 (mouseleave)="showEmployeesData = false">
                 <div class="card-body">
                     <div class="row">
@@ -14,97 +67,42 @@
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">Total Employees</h5>
-                            <p class="card-text"  *ngIf="!showEmployeesData">123</p>
+                            <p class="card-text" *ngIf="!showEmployeesData">123</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
                     <div class="additional-data" *ngIf="showEmployeesData">
                         <p>Store Managers: 12</p>
-                        <p>Store Wrokers: 8</p>
+                        <p>Store Workers: 8</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="card text-black rounded hoverable" (mouseenter)="showInventoryData = true"
-                (mouseleave)="showInventoryData = false">
+            <div class="card  bg-danger border-black text-white rounded hoverable"
+                (mouseenter)="showInventoryData = true" (mouseleave)="showInventoryData = false">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="icon">
-                                <img src="./assets/img/employee.png" width="100" height="100" alt="Total Employees Icon"
+                                <img src="./assets/img/warehouse.png" width="90" height="90" alt="Total Employees Icon"
                                     class="img-fluid rounded">
                             </div>
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">Below The Average Materials</h5>
-                            <p class="card-text" *ngIf="!showInventoryData" >3</p>
-
+                            <p class="card-text" *ngIf="!showInventoryData">3</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
                     <div class="additional-data" *ngIf="showInventoryData">
-                        <p >Bearings : 23</p>
-                        <p >First Gear : 29</p>
+                        <p>Bearings : 23</p>
+                        <p>First Gear : 29</p>
                         <p>Housing : 55</p>
                     </div>
                 </div>
             </div>
-
-
-        </div>
-
-        <div class="col-md-3">
-            <div class="card text-black rounded hoverable" (mouseenter)="showAdditionalData = true"
-                (mouseleave)="showAdditionalData = false">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="icon">
-                                <img src="./assets/img/employee.png" width="100" height="100" alt="Total Employees Icon"
-                                    class="img-fluid rounded">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <h5 class="card-title">Total Employees</h5>
-                            <p class="card-text">123</p>
-                        </div>
-                    </div>
-                    <!-- Additional data with ngIf -->
-                    <div class="additional-data" *ngIf="showAdditionalData">
-                        <p>Additional Info: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-
-        <div class="col-md-3">
-            <div class="card text-black rounded hoverable" (mouseenter)="showAdditionalData = true"
-                (mouseleave)="showAdditionalData = false">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="icon">
-                                <img src="./assets/img/employee.png" width="100" height="100" alt="Total Employees Icon"
-                                    class="img-fluid rounded">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <h5 class="card-title">Total Employees</h5>
-                            <p class="card-text">123</p>
-                        </div>
-                    </div>
-                    <!-- Additional data with ngIf -->
-                    <div class="additional-data" *ngIf="showAdditionalData">
-                        <p>Additional Info: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
+</div>

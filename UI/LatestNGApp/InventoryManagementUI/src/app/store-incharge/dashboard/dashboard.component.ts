@@ -6,9 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  showAdditionalData = false;
+
   showEmployeesData = false;
   showInventoryData = false;
+  showTodaysOrders = false;
+  showAllOrders = false;
 
   
 
