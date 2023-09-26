@@ -25,7 +25,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "	select ri.id,r.date, r.status, m.title, categories.category, ri.quantity from materialrequests r inner join materialrequestitems ri on ri.materialrequestid= r.id  inner join materials m on ri.materialid = m.id inner join categories on categories.id=ri.categoryid  where r.id=@requestid";
+            string query = "select ri.id,r.date,e.shipperid, r.status, m.title, categories.category, ri.quantity from materialrequests r inner join materialrequestitems ri on ri.materialrequestid= r.id  inner join shipments e on e.materialrequestid=r.id inner join materials m on ri.materialid = m.id inner join categories on categories.id=ri.categoryid  where r.id=@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
             await con.OpenAsync();
@@ -38,6 +38,7 @@ public class RequestRepository : IRequestRepository
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status = reader["status"].ToString();
+                int shipperId = Int32.Parse(reader["shipperid"].ToString());
 
                 RequestDetails request = new RequestDetails()
                 {
@@ -46,7 +47,8 @@ public class RequestRepository : IRequestRepository
                     Name = name,
                     Category = category,
                     Quantity = quantity,
-                    Status = status
+                    Status = status,
+                    ShipperId=shipperId
                 };
 
                 requests.Add(request);
