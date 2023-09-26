@@ -33,9 +33,9 @@
         </thead>
         <tbody>
             <tr mat-row *ngFor="let employee of employees"    (click)="selectEmployee(employee.userId)"            >
-                <td class="text-center">{{ employee.name}}</td>
-                <td class="text-center">{{ employee.role }}</td>
-                <td class="text-center">{{ employee.hireDate | date:'dd/MM/yyyy' }}</td> 
+                <td  class="text-center">{{ employee.name}}</td>
+                <td  class="text-center">{{ employee.role }}</td>
+                <td  class="text-center">{{ employee.hireDate | date:'dd/MM/yyyy' }}</td> 
             </tr>
         </tbody>
     </table>

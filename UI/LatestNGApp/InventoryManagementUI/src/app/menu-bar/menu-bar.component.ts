@@ -24,4 +24,9 @@ export class MenuBarComponent {
     const role = localStorage.getItem("role")
     return role == 'Store Worker';
   }
+
+  isroleSupervisorIncharge():boolean{
+    const role = localStorage.getItem("role")
+    return role == 'Supervisor Incharge';
+  }
 }

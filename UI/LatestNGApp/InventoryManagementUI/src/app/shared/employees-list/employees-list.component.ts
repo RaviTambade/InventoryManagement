@@ -12,20 +12,25 @@ import { Router } from '@angular/router';
 export class EmployeesListComponent {
 
   storeManagerCount: number = 0;
-  employees: Employee[] = [];
-  data: Employee[] = [];
+  employees: any[] = [];
+  userId:number[]=[];
+  data: any[] = [];
   storeWorkerCount: number = 0;
   department: string = '';
+  userIds:number[] = [];
+  empName:string[]=[];
+ 
 
-  userIds: number[] = [];
   constructor(private _employeeSvc: EmployeeService, private _userSvc: UserService, private router:Router) {
 
     const role=localStorage.getItem("role");
     if(role=="Supervisor Incharge"){
       this.department="Supervisor";
+     
     }
     if(role=="Store Incharge"){
       this.department="Store";
+      
     }
   }
   ngOnInit(): void {
@@ -38,38 +43,62 @@ export class EmployeesListComponent {
   getEmployees() {
     this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res) => {
       console.log(res);
-      this.employees = res;
+      this.employees=res;
+      let userIdsString = res.join(",");
+      this._userSvc.getUser(userIdsString).subscribe((res)=>{
+        console.log(res)
+        this.employees=res;
+        console.log(this.employees)
+      })
       this.data = res;
+      console.log(this.data);
       this.getUser();
       this.storeManagersCount();
       this.storeWorkersCount();
     })
   }
-  async getUser() {
-    const userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
-    this.userIds = userIds;
-    console.log(this.userIds);
+  // async getUser() {
+  //   const userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
+  //   this.userIds = userIds;
+  //   console.log(this.userIds);
   
-    for (const userId of this.userIds) {
-      try {
-        const data = await this._userSvc.getUser(userId).toPromise(); // Convert Observable to Promise
+  //   for (const userId of this.userIds) {
+  //     try {
+  //       const data = await this._userSvc.getUser(userId).toPromise(); // Convert Observable to Promise
   
+  //       for (const responseItem of data) {
+  //         const users = this.data.filter(u => u.userId === responseItem.id);
+  //         for (const user of users) {
+  //           user.name = responseItem.name;
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //     }
+  //   }
+  
+  //   console.log(this.employees);
+  //   console.log(this.data);
+  // }
+
+  getUser() {
+    // this.userIds = this.data;
+    // map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
+    // this.userIds = userIds;
+    // console.log(this.userIds );
+    for (const userId of this.employees) {
+      console.log(userId);
+      this._userSvc.getUser(userId).subscribe(data => {
         for (const responseItem of data) {
           const users = this.data.filter(u => u.userId === responseItem.id);
           for (const user of users) {
             user.name = responseItem.name;
           }
         }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
+      });
     }
-  
-    console.log(this.employees);
-    console.log(this.data);
   }
   
-
   storeManagersCount() {
     const storeManager = this.data.filter(u => u.role === "Store Manager").length;
     this.storeManagerCount = storeManager;
