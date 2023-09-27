@@ -60,10 +60,10 @@ namespace Transflower.Employees.Controllers
 
         [HttpGet]
         [Route("roles/{role}")]
-        public async Task<IEnumerable<int>> GetByRole(string role)
+        public async Task<IEnumerable<Employee>> GetByRole(string role)
         {
-            IEnumerable<int> empids = await _empsrv.GetByRole(role);
-            return empids;
+            IEnumerable<Employee> employee = await _empsrv.GetByRole(role);
+            return employee;
         }
 
         [HttpDelete]
