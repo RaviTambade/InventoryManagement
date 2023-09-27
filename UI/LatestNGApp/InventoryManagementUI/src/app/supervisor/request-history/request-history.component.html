@@ -53,35 +53,32 @@
     </nav>
     
 
-<!-- Check if there are requests -->
-<div *ngIf="requests && requests.length > 0">
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th class="text-center">Request ID</th>
-                <th class="text-center">Date</th>
-                <th class="text-center">Supervisor</th>
-                <th class="text-center">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr mat-row *ngFor="let request of requests" (click)="selectRequest(request.id)">
-                <td class="text-center">{{ request.id }}</td>
-                <td class="text-center">{{ request.date | date:'dd/MM/yyyy' }}</td>
-                <td class="text-center">{{ request.name }}</td>
-                <td class="text-center">{{ request.status }}</td>
-                
-            </tr>
-        </tbody>
-    </table>
-    
-    
-    <div class="mt-3">
-        <button class="btn btn-primary ml-2" type="button" (click)="newOrder()">Place new Order</button>
+    <div *ngIf="requests && requests.length > 0">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" style="width: 100px;">Request ID</th>
+                    <th class="text-center" style="width: 150px;">Date</th>
+                    <th class="text-center" style="width: 200px;">Supervisor</th>
+                    <th class="text-center" style="width: 150px;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mat-row *ngFor="let request of requests" (click)="selectRequest(request.id)">
+                    <td class="text-center" style="width: 100px;">{{ request.id }}</td>
+                    <td class="text-center" style="width: 150px;">{{ request.date | date:'dd/MM/yyyy' }}</td>
+                    <td class="text-center" style="width: 200px;">{{ request.name }}</td>
+                    <td class="text-center" style="width: 150px;">{{ request.status }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="mt-3">
+            <button class="btn btn-primary ml-2" type="button" (click)="newOrder()">Place new Order</button>
+        </div>
     </div>
-</div>
+    
 
-<!-- Display "No Requests" card when there are no requests -->
 <div *ngIf="!requests || requests.length === 0" class="card mt-3">
     <div class="card-body bg-danger text-white">
         <h5 class="card-title">No Requests Found</h5>

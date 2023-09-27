@@ -51,5 +51,25 @@ export class NavMenuComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['login']);
   }
+  onHome(){
+    const role=localStorage.getItem("role");
+    switch (role) {  
+      case "Store Incharge":  
+        this.router.navigate(["storeincharge/dashboard"])
+        break;
+      case "Store Manager":
+        this.router.navigate(["storemanager/dashboard"])
+        break;
+      case "Supervisor":
+        this.router.navigate(["supervisor/dashboard"])
+        break;
+        case "Supervisor Incharge":
+        this.router.navigate(["supervisorincharge/dashboard"])
+        break;
+      case "Store Worker":
+        this.router.navigate(["storeworker/dashboard"])
+        break;
+    }
+  }
 
 }

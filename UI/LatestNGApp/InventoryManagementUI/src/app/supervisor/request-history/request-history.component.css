@@ -30,7 +30,7 @@
 
 /* Hover effect for navigation links */
 .nav-link:hover {
-    background-color: #f8f9fa; /* Light gray background on hover */
+    background-color: #a6acb1; /* Light gray background on hover */
     transition: background-color 0.2s ease-in-out;
 }
 
@@ -57,4 +57,7 @@
     background-color: #E8EAF6;
     cursor: pointer;
   }
-
+  .navbar-nav .nav-item .nav-link {
+    text-decoration: none; /* Remove underline from all nav-links */
+  }
+  

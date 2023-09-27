@@ -1,36 +1,31 @@
- <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-    <div class="container">
-      <div class="d-flex align-items-center"> 
-        <a class="navbar-brand" href="#">Inventory Management App</a>
-      </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto"> 
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item" *ngIf="isName()">
-            <a class="nav-link" [routerLink]="['/shared/profile']">{{ name }}</a>
-          </li>
-          <li class="nav-item" *ngIf="isRole()">
-            <a class="nav-link" >{{ role }}</a>
-          </li>
-          
-          <li class="nav-item" *ngIf="isLoggedIn()">
-            <a class="nav-link" (click)="logOut()">Log Out</a>
-          </li>
-          <li class="nav-item" *ngIf="!isLoggedIn()">
-            <a class="nav-link" [routerLink]="['/login']">Login</a>
-          </li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container">
+    <div class="d-flex align-items-center"> 
+      <a class="navbar-brand" href="#" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 24px;">Inventory Management App</a>
     </div>
-  </nav>
-
-</header> 
-
-
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto"> 
+        <li class="nav-item">
+          <a class="nav-link" (click)="onHome()"  style="font-family: 'Arial', sans-serif; font-size: 16px;">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="isName()">
+          <a class="nav-link" [routerLink]="['/shared/profile']" style="font-family: 'Arial', sans-serif; font-size: 16px;">{{ name }}</a>
+        </li>
+        <li class="nav-item" *ngIf="isRole()">
+          <a class="nav-link" style="font-family: 'Arial', sans-serif; font-size: 16px;">{{ role }}</a>
+        </li>
+        
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" (click)="logOut()" style="font-family: 'Arial', sans-serif; font-size: 16px;">Log Out</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn()">
+          <a class="nav-link" [routerLink]="['/login']" style="font-family: 'Arial', sans-serif; font-size: 16px;">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

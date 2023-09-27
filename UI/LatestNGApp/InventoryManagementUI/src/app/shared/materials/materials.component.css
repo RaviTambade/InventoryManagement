@@ -1,0 +1,11 @@
+/* CSS for hover effect */
+.grid-item {
+    transition: transform 0.3s, background-color 0.3s, color 0.3s; /* Add transitions for transform, background-color, and color */
+  }
+  
+  .grid-item:hover {
+    transform: scale(1.1); /* Increase the size by 10% on hover */
+    background-color: #a3a0a0; /* Change the background color on hover */
+    color: #4b1ef0; /* Change the text color on hover */
+  }
+  
