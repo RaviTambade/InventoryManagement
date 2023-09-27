@@ -19,19 +19,20 @@ export class EmployeesListComponent {
   department: string = '';
   userIds:number[] = [];
   empName:string[]=[];
+  role:string="Supervisor";
+  isRole:boolean=false;
  
-
   constructor(private _employeeSvc: EmployeeService, private _userSvc: UserService, private router:Router) {
 
-    const role=localStorage.getItem("role");
-    if(role=="Supervisor Incharge"){
-      this.department="Supervisor";
-     
-    }
-    if(role=="Store Incharge"){
-      this.department="Store";
-      
-    }
+    // const role=localStorage.getItem("role");
+    // if(role=="Supervisor Incharge"){
+    //   console.log(role);
+    //   this.department="Supervisor"; 
+    // }
+    // if(role=="Store Incharge"){
+    //   this.department="Store";
+        
+    // }
   }
   ngOnInit(): void {
     this.getEmployees();
@@ -41,21 +42,37 @@ export class EmployeesListComponent {
   }
 
   getEmployees() {
-    this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res) => {
-      console.log(res);
-      this.employees=res;
-      let userIdsString = res.join(",");
-      this._userSvc.getUser(userIdsString).subscribe((res)=>{
-        console.log(res)
+    const role=localStorage.getItem("role");
+    if(role=="Supervisor Incharge"){
+      console.log(role);
+      this.department="Supervisor"; 
+      this._employeeSvc.getByRole(this.role).subscribe((res)=>{
+        console.log(res);
         this.employees=res;
-        console.log(this.employees)
+        this.data=res;
+        this.getUser();
+      //   let userIdsString = res.join(",");
+      //   this._userSvc.getUser(userIdsString).subscribe((res)=>{
+      //   console.log(res)
+      //   this.employees=res;
+      //   console.log(this.employees)
+      // })
       })
-      this.data = res;
-      console.log(this.data);
-      this.getUser();
-      this.storeManagersCount();
-      this.storeWorkersCount();
-    })
+    }
+    if(role=="Store Incharge"){
+      this.department="Store";
+      this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res) => {
+        console.log(res);
+        this.employees=res;
+        this.data=res;
+        this.getUser();
+        console.log(this.data);
+        this.storeManagersCount();
+        this.storeWorkersCount();
+      })
+    }
+    
+    
   }
   // async getUser() {
   //   const userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
@@ -82,17 +99,21 @@ export class EmployeesListComponent {
   // }
 
   getUser() {
-    // this.userIds = this.data;
-    // map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
-    // this.userIds = userIds;
-    // console.log(this.userIds );
-    for (const userId of this.employees) {
+    const userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
+    this.userIds = userIds;
+    console.log(this.userIds );
+    for (const userId of this.userIds) {
       console.log(userId);
       this._userSvc.getUser(userId).subscribe(data => {
+        console.log(data);
         for (const responseItem of data) {
+          console.log(responseItem);
           const users = this.data.filter(u => u.userId === responseItem.id);
+          console.log(users);
           for (const user of users) {
+            console.log(user);
             user.name = responseItem.name;
+            console.log(user.name);
           }
         }
       });

@@ -188,7 +188,7 @@ public class EmployeeRepository : IEmployeeRepository
 
     public async Task<IEnumerable<Employee>> GetByDepartment(string department)
     {
-        List<Employee> employees = new();
+        List<Employee> employees = new List<Employee>();
         MySqlConnection con = new(_connectionString);
         try
         {
@@ -203,16 +203,14 @@ public class EmployeeRepository : IEmployeeRepository
                 string? imgurl = reader["imageurl"].ToString();
                 string? theDepartment = reader["department"].ToString();
                 string? role = reader["role"].ToString();
-
-                Employee employee = new()
+                Employee TheEmployee = new()
                 {
                     UserId = id,
                     Department = theDepartment,
-                    Role = role,
                     ImageUrl = imgurl,
+                    Role = role,
                 };
-
-                employees.Add(employee);
+                employees.Add(TheEmployee);
             }
             await reader.CloseAsync();
         }
@@ -226,22 +224,33 @@ public class EmployeeRepository : IEmployeeRepository
         }
         return employees;
     }
+    
 
-    public async Task<IEnumerable<int>> GetByRole(string role)
+    public async Task<IEnumerable<Employee>> GetByRole(string role)
     {
-        List<int> ids = new();
+        List<Employee> employees = new List<Employee>();
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select   employees.userid from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where roles.role =@role ";
+            string query = "select  employees.userid, employees.imageurl, departments.department, roles.role   from employees inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where  roles.role=@role ";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@role", role);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                int id = Int32.Parse(reader["userid"].ToString());
-                ids.Add(id);
+                int id = int.Parse(reader["userid"].ToString());
+                string? imgurl = reader["imageurl"].ToString();
+                string? theDepartment = reader["department"].ToString();
+                string? theRole = reader["role"].ToString();
+                Employee TheEmployee = new() 
+                {
+                    UserId = id,
+                    Department = theDepartment,
+                    ImageUrl = imgurl,
+                    Role = theRole,
+                };
+                employees.Add(TheEmployee);
             }
             await reader.CloseAsync();
         }
@@ -253,7 +262,7 @@ public class EmployeeRepository : IEmployeeRepository
         {
             await con.CloseAsync();
         }
-        return ids;
+        return employees;
     }
     public async Task<bool> Delete(int employeeId)
     {
