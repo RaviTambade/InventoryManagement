@@ -20,4 +20,32 @@
     height: 100%; /* Optional: Make the container take full height */
   }
   
+
+
+  .dashboard-card {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    display: inline-block;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card-count {
+    font-size: 36px;
+    margin-top: 10px;
+    color: #007bff; /* Change the color to your preference */
+}
+
+.card-count-main {
+    font-size: 36px;
+    margin-top: 10px;
+    color: #151616; /* Change the color to your preference */
+}
   
