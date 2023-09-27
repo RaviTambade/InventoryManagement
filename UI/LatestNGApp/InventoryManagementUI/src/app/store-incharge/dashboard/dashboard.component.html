@@ -1,3 +1,35 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="dashboard-card">
+                <div class="card-title">Total Stocks</div>
+                <div class="card-count">1234</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="dashboard-card">
+                <div class="card-title">Total Materials</div>
+                <div class="card-count">5678</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="dashboard-card">
+                <div class="card-title">Total Categories</div>
+                <div class="card-count">9</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="dashboard-card">
+                <div class="card-title">Total Employees</div>
+                <div class="card-count">74</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container mt-4">
     <!-- First Row -->
     <div class="row">
@@ -13,18 +45,18 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <h5 class="card-title">All Orders</h5>
-                            <p class="card-text" *ngIf="!showAllOrders">8955</p>
+                            <h5 class="card-title">All <br>Orders</h5>
+                            <p class="card-count-main" *ngIf="!showAllOrders">8955</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
                     <!-- Additional data with ngIf -->
-<div class="additional-data additional-info" *ngIf="showAllOrders">
-    <div class="additional-data-container">Delivered: 5677</div>
-    <div class="additional-data-container">Cancelled: 4054</div>
-    <div class="additional-data-container">Pending: 50</div>
-  </div>
-  
+                    <div class="additional-data additional-info" *ngIf="showAllOrders">
+                        <div class="additional-data-container">Delivered: 5677</div>
+                        <div class="additional-data-container">Cancelled: 4054</div>
+                        <div class="additional-data-container">Pending: 50</div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -42,7 +74,7 @@
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">Todays Orders</h5>
-                            <p class="card-text" *ngIf="!showTodaysOrders">145</p>
+                            <p class="card-count-main" *ngIf="!showTodaysOrders">145</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
@@ -67,7 +99,7 @@
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">Total Employees</h5>
-                            <p class="card-text" *ngIf="!showEmployeesData">123</p>
+                            <p class="card-count-main" *ngIf="!showEmployeesData">123</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
@@ -91,8 +123,8 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <h5 class="card-title">Below The Average Materials</h5>
-                            <p class="card-text" *ngIf="!showInventoryData">3</p>
+                            <h5 class="card-title">Materials To Reorder</h5>
+                            <p class="card-count-main" *ngIf="!showInventoryData">3</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
@@ -106,3 +138,6 @@
         </div>
     </div>
 </div>
+
+
+
