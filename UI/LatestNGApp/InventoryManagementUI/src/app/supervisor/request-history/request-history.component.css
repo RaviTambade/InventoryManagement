@@ -30,7 +30,7 @@
 
 /* Hover effect for navigation links */
 .nav-link:hover {
-    background-color: #a6acb1; /* Light gray background on hover */
+    background-color: #89b7dd; /* Light gray background on hover */
     transition: background-color 0.2s ease-in-out;
 }
 

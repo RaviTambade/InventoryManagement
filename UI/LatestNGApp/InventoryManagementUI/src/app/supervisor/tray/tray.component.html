@@ -1,5 +1,5 @@
 <div *ngIf="trays.length>0">
-    <div *ngIf="trays" class="container" style="width: 60%">
+    <div *ngIf="trays" class="container" style="width: 75%; background-color: white;">
         
         <h4 class="mt-5">My Request <button class="btn-float-right btn btn-danger btn-sm" (click)="onRemoveAll()">Remove All</button></h4>
          <br>
@@ -43,10 +43,12 @@
       </div>
       
     </div>
-    <div *ngIf="trays.length==0" class="card mt-3">
-        <div class="card-body bg-danger text-white">
+
+    
+    <div class="container" *ngIf="trays.length==0" class="card mt-2" style="width:100%">
+        <div class="card-body bg-danger text-white text-center">
             <h5 class="card-title"> No Material Found</h5>
-            <p class="card-text">There are currently no materials..</p>
+            <p class="card-text">There are currently no material in tray..</p>
         </div>
     </div>
       

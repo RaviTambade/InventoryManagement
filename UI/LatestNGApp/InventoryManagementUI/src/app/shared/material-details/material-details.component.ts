@@ -53,8 +53,11 @@ export class MaterialDetailsComponent {
     this.materialSvc.selectedMaterialId$.subscribe((res)=>{
       console.log(res);
       const materialid=res;
-     
-      if(materialid!=null )
+     if(materialid==0 || materialid==null){
+      console.log("if")
+      this.details=false;
+     }
+      else
       this.getMaterialDetails(res);
     })
   }

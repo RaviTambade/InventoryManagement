@@ -1,63 +1,60 @@
 <div *ngIf="newDetails">
   <div>
-    <h2>Details</h2>
-    <div class="container" style="width: 60%;" *ngIf="inprogressOrder">
+    <h2 *ngIf="!inprogressOrder">Order Details</h2>
+    <h2 *ngIf="inprogressOrder">Request Details</h2>
+    <div class="container" style="width: 100%; border: 1px solid #333232; padding: 20px; background-color: #e9e8e8;">
+      
       <div>
-        <p><b>Date : {{orderDate|date}} </b></p>
+          <p><strong>Date:</strong> {{ orderDate | date }}</p>
       </div>
       <div>
-        <p> <b> Department :{{department}} </b> </p>
+          <p><strong>Department:</strong> {{ department }}</p>
       </div>
-    </div>
-    <div *ngIf="isShipper">
-      <p><b> Shipper:{{shipperName}} </b> </p>
-    </div>
-    <hr>
-    <div class="card" *ngFor="let order of orderDetails">
+      <div *ngIf="isShipper">
+          <p><strong>Shipper:</strong> {{ shipperName }}</p>
+      </div>
+  </div>
+  
+    <div class="card mb-3" *ngFor="let order of orderDetails">
       <div class="card-header bg-dark text-white">
-        Details
+          Details
       </div>
       <div class="card-header bg-dark text-white" *ngIf="inprogressOrder">
-        <b style="color:Tomato;">Available Quantity : {{order.name}} :{{order.availableQuantity}} </b>
+          <b style="color: Tomato;">Available Quantity: {{order.name}}: {{order.availableQuantity}}</b>
       </div>
       <div class="card-body">
-        <div class="row">
-          <div>
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <!-- Left Half: Image -->
-                  <div class="col-md-6">
-                    <img src="{{order.imageUrl}}" alt="Image" class="img-fluid">
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="card">
+                      <div class="card-body">
+                          <img src="{{order.imageUrl}}" alt="Image" class="img-fluid">
+                      </div>
                   </div>
-                  <!-- Right Half: Card Title and Text -->
-                  <div class="col-md-6">
-                    <p class="card-text">
+              </div>
+              <div class="col-md-8">
+                  <p class="card-text">
                       <strong>Name:</strong> {{ order.name }}
-                    </p>
-                    <p class="card-text">
+                  </p>
+                  <p class="card-text">
                       <strong>Category:</strong> {{ order.category }}
-                    </p>
-                    <p class="card-text">
-                      <strong>Quantity:</strong> {{ order.quantity }}
-                    </p>
-                    <div *ngIf="inprogressOrder && !order.itemStatus">
-                      <input style="text-align:center;" name="orderQuantity" value="{{order.quantity}}"
-                        class="form-control form-control-sm" #quantity type="number">
+                  </p>
+                  
+                  <div *ngIf="inprogressOrder && !order.itemStatus">
+                    <label for="orderQuantity">Quantity</label>
+                    <input style="text-align: center;" id="orderQuantity" name="orderQuantity" value="{{order.quantity}}"
+                      class=" input-sm" #quantity type="number">
 
                       <button *ngIf="!order.itemStatus" class="btn btn-success"
-                        (click)="onApproved(order.id, quantity.value)">
-                        <span class="glyphicon glyphicon-ok">Approve </span>
+                          (click)="onApproved(order.id, quantity.value)">
+                          <span class="glyphicon glyphicon-ok">Approve</span>
                       </button>
-                    </div>
-                    <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>
                   </div>
-                </div>
+                  <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>
               </div>
-            </div>
           </div>
-        </div>
       </div>
-    </div>
+  </div>
+  
+  
   </div>
 </div>
