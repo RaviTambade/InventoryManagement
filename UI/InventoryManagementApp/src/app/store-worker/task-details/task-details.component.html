@@ -31,7 +31,8 @@
                     <div *ngFor="let task of tasks">
                         <p class="card-text" *ngIf="picked == false && deliver == false">
                             Order Id : <b>{{ task.orderId }}</b>
-                            Pick Up : <b>{{ task.section }}</b>
+                            Pick Up :  <b>{{ task.section }}</b>
+                            
                         </p>
                         <hr>
                         <p class="card-text" *ngIf="picked == true && deliver == false">

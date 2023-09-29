@@ -7,36 +7,44 @@
       <div class="card-header bg-dark text-white">
         Task details
       </div>
-      <p class="card-text">
-        <strong>Drop:</strong> {{ department }}
-      </p>
+    
 
       <div *ngFor="let task of taskdetails">
-      <div class="card-body">
-        <div class="row">
-          <div>
-            <div class="card" >
-              <div class="card-body">
-                <div class="row">
-                  <!-- Left Half: Image -->
-                  
-                  <!-- Right Half: Card Title and Text -->
-                  <div class="col-md-6">
-                    <p class="card-text">
-                      <strong>Order Id:</strong> {{ task.orderId }}
-                    </p>
-                    <p class="card-text">
-                      <strong>Pick up:</strong> {{ task.section }}
-                    </p>
-                    
-                   </div>
+        <div class="card-body">
+          <div class="row">
+            <!-- Centered Image with Overlays -->
+            <div class="col-md-6 text-center">
+              <div class="position-relative">
+                <!-- Image -->
+                <img src="./assets/img/theBox.png" alt="Delivery Box Image" class="img-fluid">
+      
+                <!-- Order ID Overlay -->
+                <div class="position-absolute top-0 start-50 translate-middle-x p-2">
+                  <span class="badge bg-primary">
+                    <strong>Order Id:</strong> {{ task.orderId }}
+                  </span>
+                </div>
+      
+                <!-- Pick up Overlay -->
+                <div class="position-absolute bottom-0 start-50 translate-middle-x p-2">
+                  <span class="badge bg-warning">
+                    <strong>Pick up:</strong> {{ task.section }}
+                  </span>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-</div>
+      
+      <!-- Delivery Address -->
+      <div class="card-footer text-right">
+        <p class="card-text">
+          <strong>Delivery Address:</strong>
+          <i class="fas fa-box"></i> {{ department }}
+        </p>
+      </div>
+      
 <a  (click)="onPicked() " *ngIf="Status=='Ready To Dispatch'" class="btn btn-primary">Picked</a>
 <a  (click)="onDeliver()" *ngIf="Status=='Picked'" class="btn btn-primary">Deliver</a>
 </div>
