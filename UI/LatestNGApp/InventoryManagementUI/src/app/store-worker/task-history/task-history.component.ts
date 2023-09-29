@@ -19,8 +19,8 @@ export class TaskHistoryComponent implements OnInit{
 
   ngOnInit():void{
     this.svc.getTasks(this.empId).subscribe((res)=>{
-      this.tasks=res;
       this.data=res;
+      this.pendingTasks();
       console.log(res);
       this.completedTaskCount();
       this.pendingTaskCount();
@@ -46,11 +46,13 @@ export class TaskHistoryComponent implements OnInit{
   } 
 
   pendingTasks(){
+    this.svc.setSelectedTaskId(0);
     const pendingTask = this.data.filter(u => u.status !== "Delivered");
     this.tasks = pendingTask;
   }
 
   completedTasks(){
+    this.svc.setSelectedTaskId(0);
     const completedOrders = this.data.filter(u => u.status === "Delivered");
     this.tasks = completedOrders;   
   }  
