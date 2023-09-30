@@ -15,12 +15,9 @@ export class DepartmentsComponent {
   selectedEmployeeForSwap: any = null; // Store the selected employee
   swap: boolean = false;
   selectSwap: boolean = true;
-  employees:any;
-  unassignedEmpids: number[] = [];
+  employees:any[]=[];
   storeManagersids: number[] = [];
-  assignedEmpIds:number[]=[];
   warehouses: warehouseStaff[] = []
-
   role:string="Store Manager"
   data: warehouseStaff[] = []
   users: any[] = [];
@@ -35,46 +32,53 @@ export class DepartmentsComponent {
       this.warehouses=res;
       this.data=res;
       this.sections= this.warehouses.map((w) => w.section);
-      this.assignedEmpIds=this.warehouses.map((w)=> w.employeeId)
       console.log(this.sections)
-      console.log(this.assignedEmpIds)
     })
     this.empSvc.getByRole(this.role).subscribe((res) => {
       this.storeManagers = res;
       this.storeManagersids= this.storeManagers.map((s)=>s.userId)
-      console.log(this.storeManagersids);
-      this.unassignedEmpids = this.storeManagersids.filter(id => !this.assignedEmpIds.includes(id));
-      console.log(this.unassignedEmpids)
- 
-      console.log(this.unassignedEmpids);
-        this.getUser(this.storeManagersids);
+      console.log(this.storeManagers);
+      console.log(this.storeManagersids); 
+         this.getUser(this.storeManagersids);
     })
   }
 
   getUser(ids:any) {   
-    for (const userId of ids) {
-      this._usrSvc.getUser(userId).subscribe(data => {
-        this.storeManagers.push(data);
+      this._usrSvc.getUser(ids).subscribe(data => {
         for (const responseItem of data) {
-          const users = this.data.filter(u => u.employeeId === responseItem.id);
+          const users = this.storeManagers.filter(u => u.userId === responseItem.id);
           for (const user of users) {
             user.name = responseItem.name;
           }
         }
-        this.getUnassignedEmployees();
+        this.mapData(this.storeManagers,this.data);
       });
-    }
+     
     console.log(this.storeManagers);
     console.log(this.data)
+    console.log(this.employees)
   }
 
-  getUnassignedEmployees(){
-   this.unassignedEmpids.forEach(element => {
-    const employee = this.storeManagers.find(manager => manager.userId === element);  
-    console.log(employee)
-     });
+  mapData(employees: Employee[], warehouseStaffs: warehouseStaff[])  {
 
-  }
+     warehouseStaffs.map((warehouseStaff) => {
+        const matchingEmployee = employees.find((employee) => employee.userId === warehouseStaff.employeeId);
+        if (matchingEmployee) {
+            warehouseStaff.name = matchingEmployee.name;
+        }
+        
+    });
+    employees.map((employee) => {
+      const unMatchingEmployee = warehouseStaffs.find((warehouse) => warehouse.employeeId !== employee.userId);
+      if (unMatchingEmployee) {
+        console.log(unMatchingEmployee)
+          this.employees.push(unMatchingEmployee)
+      }
+      
+  });
+}
+
+
 
 
   selectEmployeeForSwap(employee: any) {
@@ -106,21 +110,6 @@ export class DepartmentsComponent {
     employee2.modified = true;
   }
 
-
-  // replaceEmployee(warehouse: any, selectedEmployee: any) {
-  //   warehouse.modified=true;
-  // const originalData=  { name: warehouse.name, employeeId: warehouse.id }
-  // warehouse.name = selectedEmployee.name;
-  // warehouse.employeeId=selectedEmployee.employeeId;
-  // const employeeIndex = this.employees.indexOf(selectedEmployee);
-  
-  // if (employeeIndex !== -1) {
-  //   this.employees[employeeIndex] = originalData;
-  // }
-  //     console.log(this.warehouses)
-  //   console.log(this.employees)
-
-  // }
 
   onUpdate(){
     const modifiedData = this.warehouses.filter(item => item.modified);
