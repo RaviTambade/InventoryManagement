@@ -37,6 +37,9 @@
                       <div class="dropdown-menu">
                         <a class="dropdown-item" (click)="replaceEmployee(warehouse, emp)" *ngFor="let emp of employees" >{{ emp.name }}</a>
                       </div>
+                      <button type="button" class="btn btn-primary btn-sm dropdown-toggle" (click)="updateEmployee()">
+                        Update 
+                      </button>
                     </div>
                   </div>
                 </div>
