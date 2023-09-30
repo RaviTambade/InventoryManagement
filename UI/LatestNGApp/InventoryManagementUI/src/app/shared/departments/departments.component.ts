@@ -12,7 +12,7 @@ import { WarehouseService } from 'src/app/Services/warehouse.service';
   styleUrls: ['./departments.component.css']
 })
 export class DepartmentsComponent {
-  selectedEmployeeForSwap: any = null; // Store the selected employee
+  selectedEmployeeForSwap: any = null; 
   swap: boolean = false;
   selectSwap: boolean = true;
   employees:any[]=[];
@@ -45,6 +45,7 @@ export class DepartmentsComponent {
 
   getUser(ids:any) {   
       this._usrSvc.getUser(ids).subscribe(data => {
+        console.log(data);
         for (const responseItem of data) {
           const users = this.storeManagers.filter(u => u.userId === responseItem.id);
           for (const user of users) {
@@ -59,24 +60,22 @@ export class DepartmentsComponent {
     console.log(this.employees)
   }
 
-  mapData(employees: Employee[], warehouseStaffs: warehouseStaff[])  {
+  mapData(storeManagers: Employee[], warehouseStaffs: warehouseStaff[])  {
 
-     warehouseStaffs.map((warehouseStaff) => {
-        const matchingEmployee = employees.find((employee) => employee.userId === warehouseStaff.employeeId);
-        if (matchingEmployee) {
-            warehouseStaff.name = matchingEmployee.name;
+        for (const employee of storeManagers) {
+            const matchingWarehouseStaff = warehouseStaffs.find((warehouseStaff) => employee.userId === warehouseStaff.employeeId);
+
+            if (matchingWarehouseStaff) {
+                matchingWarehouseStaff.name = employee.name;
+            } else {
+                this.employees.push(employee);
+            }
         }
+        console.log('All Data:', this.storeManagers);
+        console.log('Matched Data:', this.warehouses);
+        console.log('Emp:', this.employees);
         
-    });
-    employees.map((employee) => {
-      const unMatchingEmployee = warehouseStaffs.find((warehouse) => warehouse.employeeId !== employee.userId);
-      if (unMatchingEmployee) {
-        console.log(unMatchingEmployee)
-          this.employees.push(unMatchingEmployee)
-      }
-      
-  });
-}
+    }
 
 
 
@@ -110,6 +109,7 @@ export class DepartmentsComponent {
     employee2.modified = true;
   }
 
+  
 
   onUpdate(){
     const modifiedData = this.warehouses.filter(item => item.modified);
