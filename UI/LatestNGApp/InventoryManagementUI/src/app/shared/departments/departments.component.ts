@@ -80,9 +80,11 @@ export class DepartmentsComponent {
 
     replaceEmployee(warehouse: any, selectedEmployee: any) {
     warehouse.modified=true; 
-    const originalData=  { name: warehouse.name, employeeId: warehouse.id }
+    console.log(warehouse)
+    console.log(selectedEmployee)
+    const originalData=  { name: warehouse.name, employeeId: warehouse.employeeId }
     warehouse.name = selectedEmployee.name;
-    warehouse.employeeId=selectedEmployee.employeeId;
+    warehouse.employeeId=selectedEmployee.userId;
     const employeeIndex = this.employees.indexOf(selectedEmployee);
     if (employeeIndex !== -1) {
       this.employees[employeeIndex] = originalData;
@@ -93,11 +95,11 @@ export class DepartmentsComponent {
 
     
     updateEmployee(){
-      const modifiedData = this.warehouses.filter(item => item.modified);
+      const modifiedData = this.data.filter(item => item.modified);
       console.log('Modified objects:', modifiedData);
-      this.svc.updateWarehouseStaff(modifiedData).subscribe((res)=>{
-        console.log(res);
-      })
+      // this.svc.updateWarehouseStaff(modifiedData).subscribe((res)=>{
+      //   console.log(res);
+      // })
     }
   
   selectEmployeeForSwap(employee: any) {
@@ -129,7 +131,7 @@ export class DepartmentsComponent {
     employee2.modified = true;
   }
 
-  
+
 
   onUpdate(){
     const modifiedData = this.warehouses.filter(item => item.modified);
