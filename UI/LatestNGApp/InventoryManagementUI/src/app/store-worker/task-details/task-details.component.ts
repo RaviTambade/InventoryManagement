@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/Models/Task';
 import { TasksService } from 'src/app/Services/tasks.service';
 
@@ -10,7 +10,8 @@ import { TasksService } from 'src/app/Services/tasks.service';
 export class TaskDetailsComponent implements OnInit{
 
   constructor(private svc :TasksService){}
-
+  
+  @Input() refresh: boolean = false;
   taskdetails:Task |any;
   department:string="";
   taskId:number=0;
@@ -42,11 +43,12 @@ export class TaskDetailsComponent implements OnInit{
     this.svc.UpdateStatus(this.taskId).subscribe((res) => {
       console.log(res);
     })
-    // window.location.reload();
+     window.location.reload();
   }
   onDeliver(){
     this.svc.Deliver(this.taskId).subscribe((res) => {
       console.log(res);
     })
+    window.location.reload();
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Employee } from 'src/app/Models/Employee';
 import { User } from 'src/app/Models/User';
 import { warehouseStaff } from 'src/app/Models/warehouseStaff';
 import { EmployeeService } from 'src/app/Services/employee.service';
@@ -25,7 +26,7 @@ export class DepartmentsComponent {
   users: any[] = [];
   sections:string[]=[];
   selectedSection:string='';
-  storeManagers:User[]=[];
+  storeManagers:Employee[]=[];
   constructor(private svc: WarehouseService, private _usrSvc: UserService,private empSvc:EmployeeService) {
   }
   ngOnInit(): void {
@@ -39,7 +40,8 @@ export class DepartmentsComponent {
       console.log(this.assignedEmpIds)
     })
     this.empSvc.getByRole(this.role).subscribe((res) => {
-      this.storeManagersids = res;
+      this.storeManagers = res;
+      this.storeManagersids= this.storeManagers.map((s)=>s.userId)
       console.log(this.storeManagersids);
       this.unassignedEmpids = this.storeManagersids.filter(id => !this.assignedEmpIds.includes(id));
       console.log(this.unassignedEmpids)
@@ -68,7 +70,7 @@ export class DepartmentsComponent {
 
   getUnassignedEmployees(){
    this.unassignedEmpids.forEach(element => {
-    const employee = this.storeManagers.find(manager => manager.id === element);  
+    const employee = this.storeManagers.find(manager => manager.userId === element);  
     console.log(employee)
      });
 
