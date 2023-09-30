@@ -18,6 +18,7 @@ export class DepartmentsComponent {
   employees:any[]=[];
   storeManagersids: number[] = [];
   warehouses: warehouseStaff[] = []
+  warehouseStaff:warehouseStaff| undefined;
   role:string="Store Manager"
   data: warehouseStaff[] = []
   users: any[] = [];
@@ -141,11 +142,11 @@ export class DepartmentsComponent {
     })
   }
 
-  onSelectedSection() {
-    console.log(this.selectedSection);
-    const section = this.data.filter(m => m.section === this.selectedSection)
+  onSelectedSection(data:string) {
+    console.log(data);
+    const section = this.data.find(m => m.section === data)
     console.log(section);
-    this.warehouses = section;
+    this.warehouseStaff = section;
   }
 }
 

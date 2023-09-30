@@ -1,7 +1,7 @@
 
  
 
-   <div class="container">
+   <!-- <div class="container">
     <h1 class="mt-4">Inventory </h1>
 
     <tr>
@@ -16,7 +16,6 @@
   </tr>
     
     <div class="row">
-        <!-- Section 1 -->
           <ng-container *ngFor="let warehouse of warehouses;"  >
             <div class="col-sm-4">
               <div class="card mt-2" style="cursor: pointer;" >
@@ -29,7 +28,6 @@
                     <div class="dropdown-menu overflow-auto">
                       <a class="dropdown-item "  *ngFor="let thedata of data;"  (click)="selectEmployeeForSwap(thedata)" >{{ thedata.name }}  ( {{thedata.section}} )</a>
                     </div>
-                    <!-- select button -->
                     <div class="btn-group">
                       <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Select Employee
@@ -49,4 +47,76 @@
             Update 
           </button>
     </div>
+</div> -->
+
+
+<!-- new edit -->
+<div class="container">
+  <div class="row">
+    <h2>Warehouse</h2>
+    <ng-container *ngFor="let warehouse of warehouses;  let i = index" >
+      <div class="col-md-1 mb-3" (click)="onSelectedSection(warehouse.section)">
+        <a class="card-link">
+          
+          <div class="card position-relative">
+            <img  src="{{ warehouse.imageUrl }}" class="card-img-top img-transparent" alt="Warehouse Image">
+            <div class="card-body position-absolute top-0 start-50 translate-middle-x p-1">
+              <span class="badge bg-danger" >
+                <strong></strong> {{ warehouse.section }}
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="clearfix visible-md-block" *ngIf="(i + 1) % 12 === 0"></div>
+    </ng-container>
+  </div>
 </div>
+
+<hr>
+
+
+
+<div class="container px-4 py-4">
+  <div *ngIf="warehouseStaff">
+    <div class="col-md-6">
+      <div class="card mt-6">
+        <div class="row g-0">
+          <div class="col-md-6">
+            <h6 class="card-subtitle mt-3 text-muted" style="font-size: 18px;">Material: {{ warehouseStaff.materialType }}</h6>
+            <hr>
+            <img src="{{ warehouseStaff.imageUrl }}" class="img-fluid" alt="Warehouse Image">
+          </div>
+          
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 24px;">{{ warehouseStaff.section }}</h5>
+              <h6 class="card-subtitle mt-3 text-muted" style="font-size: 18px;">Store Manager: {{ warehouseStaff.name }}</h6>
+              <div class="btn-group mt-3">
+                <button type="button" (click)="selectEmployeeForSwap(warehouseStaff)" class="btn btn-primary btn-sm dropdown-toggle dropup" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 16px;">Swap</button>
+                <div class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                  <a class="dropdown-item" *ngFor="let thedata of data;" (click)="selectEmployeeForSwap(thedata)" style="font-size: 16px;">{{ thedata.name }} ({{ thedata.section }})</a>
+                </div>
+                
+                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropup" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 16px;">
+                    Select Employee
+                  </button>
+                  <div class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                    <a class="dropdown-item" (click)="replaceEmployee(warehouseStaff, emp)" *ngFor="let emp of employees" style="font-size: 16px;">{{ emp.name }}</a>
+                  </div>
+              </div>
+              
+              <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                  <button class="btn btn-primary btn-sm" (click)="onUpdate()" style="font-size: 16px;">Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

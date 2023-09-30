@@ -4,5 +4,6 @@ export class warehouseStaff {
         public name:string,
         public section:string,
         public materialType:string,
+        public imageUrl:string,
         public modified:boolean=false,
 ){}}
