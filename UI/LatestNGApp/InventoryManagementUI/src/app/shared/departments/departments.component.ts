@@ -69,6 +69,7 @@ export class DepartmentsComponent {
                 matchingWarehouseStaff.name = employee.name;
             } else {
                 this.employees.push(employee);
+                
             }
         }
         console.log('All Data:', this.storeManagers);
@@ -77,9 +78,31 @@ export class DepartmentsComponent {
         
     }
 
+    replaceEmployee(warehouse: any, selectedEmployee: any) {
 
-
-
+    warehouse.modified=true;
+  
+    const originalData=  { name: warehouse.name, employeeId: warehouse.id }
+  
+    warehouse.name = selectedEmployee.name;
+  
+    warehouse.employeeId=selectedEmployee.employeeId;
+  
+    const employeeIndex = this.employees.indexOf(selectedEmployee);
+  
+  
+  
+    if (employeeIndex !== -1) {
+  
+      this.employees[employeeIndex] = originalData;
+  
+    }
+  
+        console.log(this.warehouses)
+  
+      console.log(this.employees)
+    }
+  
   selectEmployeeForSwap(employee: any) {
     employee.modified=true;
     if (this.selectedEmployeeForSwap === null) {
