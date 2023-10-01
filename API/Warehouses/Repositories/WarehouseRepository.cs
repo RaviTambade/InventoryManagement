@@ -18,7 +18,7 @@ public class WarehouseRepository : IWarehouseRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select w.id ,e.id as employeeid, w.section, c.category from warehousestaff w inner join categories c on c.id=w.categoryid inner join employees e on e.id=w.employeeid;";
+            string query = " SELECT w.id,e.id AS employeeid,  w.section,  min(m.imageurl) AS imageurl,   (c.category) AS category FROM warehousestaff w INNER JOIN  categories c ON c.id = w.categoryid INNER JOIN   materials m ON m.categoryid = w.categoryid  INNER JOIN    employees e ON e.id = w.employeeid GROUP BY   w.id,  e.id,  w.section;";
             MySqlCommand cmd = new(query, con);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -28,6 +28,7 @@ public class WarehouseRepository : IWarehouseRepository
                 int employeeId = int.Parse(reader["employeeid"].ToString());
                 string? section = reader["section"].ToString();
                 string? category = reader["category"].ToString();
+                string? imageUrl = reader["imageurl"].ToString();
 
                 WarehouseStaff warehouse = new()
                 {
@@ -35,7 +36,7 @@ public class WarehouseRepository : IWarehouseRepository
                     EmployeeId = employeeId,
                     Section = section,
                     MaterialType = category,
-
+                    ImageUrl=imageUrl
                 };
 
                 warehouses.Add(warehouse);
@@ -164,7 +165,7 @@ public class WarehouseRepository : IWarehouseRepository
             cmd.Parameters.AddWithValue("@id", warehouse.Id);
             cmd.Parameters.AddWithValue("@category", warehouse.MaterialType);
             cmd.Parameters.AddWithValue("@section", warehouse.Section);
-            cmd.Parameters.AddWithValue("@empid", warehouse.EmployeeId);
+            cmd.Parameters.AddWithValue("@empid", warehouse.EmployeeId);    
 
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
@@ -233,13 +234,11 @@ public class WarehouseRepository : IWarehouseRepository
         try
         {
             string updateQuery = "UPDATE Warehousestaff " +
-                                 "SET section = @section, categoryid = (SELECT id FROM categories WHERE category = @category), employeeid = @empid " +
+                                 "SET section = employeeid = @empid " +
                                  "WHERE id = @id";
 
             MySqlCommand cmd = new MySqlCommand(updateQuery, connection, transaction);
-            cmd.Parameters.AddWithValue("@id", warehouse.Id);
-            cmd.Parameters.AddWithValue("@category", warehouse.MaterialType);
-            cmd.Parameters.AddWithValue("@section", warehouse.Section);
+
             cmd.Parameters.AddWithValue("@empid", warehouse.EmployeeId);
 
             int rowsAffected = await cmd.ExecuteNonQueryAsync();
