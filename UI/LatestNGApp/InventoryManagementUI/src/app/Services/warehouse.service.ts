@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UpdateWarehouse } from '../Models/updateWarehouse';
 // import { warehouseStaff } from './WarehouseStaff';
 
 @Injectable({
@@ -22,8 +23,8 @@ export class WarehouseService {
     let url = "http://localhost:5131/api/warehouse/warehouse/" + id;
     return this.http.get(url);
   }
-  updateWarehouseStaff(warehouseStaff: any): Observable<any> {
-    let url = "http://localhost:5131/api/warehouse/staff" ;
+  updateWarehouseStaff(warehouseStaff: UpdateWarehouse): Observable<any> {
+    let url = "http://localhost:5131/api/warehouse/warehouse" ;
     return this.http.put(url,warehouseStaff);
   }
 }

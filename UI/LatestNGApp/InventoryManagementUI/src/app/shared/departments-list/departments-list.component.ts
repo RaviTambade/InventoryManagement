@@ -110,8 +110,8 @@ console.log(this.employees);
   onUpdate(){
     const modifiedData = this.warehouses.filter(item => item.modified);
     console.log('Modified objects:', modifiedData);
-    this.svc.updateWarehouseStaff(modifiedData).subscribe((res)=>{
-      console.log(res);
-    })
+    // this.svc.updateWarehouseStaff(modifiedData).subscribe((res)=>{
+    //   console.log(res);
+    // })
   }
 }

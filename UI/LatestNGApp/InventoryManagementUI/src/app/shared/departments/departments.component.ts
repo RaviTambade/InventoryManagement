@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Employee } from 'src/app/Models/Employee';
 import { User } from 'src/app/Models/User';
+import { UpdateWarehouse } from 'src/app/Models/updateWarehouse';
 import { warehouseStaff } from 'src/app/Models/warehouseStaff';
 import { EmployeeService } from 'src/app/Services/employee.service';
 import { UserService } from 'src/app/Services/user.service';
@@ -25,6 +26,10 @@ export class DepartmentsComponent {
   sections:string[]=[];
   selectedSection:string='';
   storeManagers:Employee[]=[];
+  updateWarehouse:any={
+    id: 0,
+    employeeId: 0,
+  }
   constructor(private svc: WarehouseService, private _usrSvc: UserService,private empSvc:EmployeeService) {
   }
   ngOnInit(): void {
@@ -98,9 +103,13 @@ export class DepartmentsComponent {
     updateEmployee(){
       const modifiedData = this.data.filter(item => item.modified);
       console.log('Modified objects:', modifiedData);
-      // this.svc.updateWarehouseStaff(modifiedData).subscribe((res)=>{
-      //   console.log(res);
-      // })
+      modifiedData.forEach(element => {
+        this.updateWarehouse.id = element.id,
+        this.updateWarehouse.employeeId = element.employeeId
+          this.svc.updateWarehouseStaff(this.updateWarehouse).subscribe((res)=>{
+            console.log(res);
+          })
+      });
     }
   
   selectEmployeeForSwap(employee: any) {
@@ -130,16 +139,6 @@ export class DepartmentsComponent {
 
     employee1.modified = true;
     employee2.modified = true;
-  }
-
-
-
-  onUpdate(){
-    const modifiedData = this.warehouses.filter(item => item.modified);
-    console.log('Modified objects:', modifiedData);
-    this.svc.updateWarehouseStaff(modifiedData).subscribe((res)=>{
-      console.log(res);
-    })
   }
 
   onSelectedSection(data:string) {
