@@ -192,7 +192,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select  employees.userid, employees.imageurl, departments.department, roles.role   from employees  inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where   departments.department=@department";
+            string query = "select  employees.userid,employees.hiredate, employees.imageurl, departments.department, roles.role   from employees  inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where   departments.department=@department";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@department", department);
             await con.OpenAsync();
@@ -203,12 +203,14 @@ public class EmployeeRepository : IEmployeeRepository
                 string? imgurl = reader["imageurl"].ToString();
                 string? theDepartment = reader["department"].ToString();
                 string? role = reader["role"].ToString();
+                DateTime hireDate =DateTime.Parse( reader["hiredate"].ToString());
                 Employee TheEmployee = new()
                 {
                     UserId = id,
                     Department = theDepartment,
                     ImageUrl = imgurl,
                     Role = role,
+                    HireDate=hireDate
                 };
                 employees.Add(TheEmployee);
             }
@@ -232,7 +234,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select  employees.userid, employees.imageurl, departments.department, roles.role   from employees inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where  roles.role=@role ";
+            string query = "select  employees.userid,employees.hiredate, employees.imageurl, departments.department, roles.role   from employees inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where  roles.role=@role ";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@role", role);
             await con.OpenAsync();
@@ -243,12 +245,15 @@ public class EmployeeRepository : IEmployeeRepository
                 string? imgurl = reader["imageurl"].ToString();
                 string? theDepartment = reader["department"].ToString();
                 string? theRole = reader["role"].ToString();
+                DateTime hireDate =DateTime.Parse( reader["hiredate"].ToString());
+
                 Employee TheEmployee = new() 
                 {
                     UserId = id,
                     Department = theDepartment,
                     ImageUrl = imgurl,
                     Role = theRole,
+                    HireDate=hireDate
                 };
                 employees.Add(TheEmployee);
             }
