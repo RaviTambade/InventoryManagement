@@ -81,8 +81,7 @@ export class DepartmentsComponent {
         console.log('All Data:', this.storeManagers);
         console.log('Matched Data:', this.warehouses);
         console.log('Emp:', this.employees);
-        
-    }
+      }
 
     replaceEmployee(warehouse: any, selectedEmployee: any) {
     warehouse.modified=true; 
