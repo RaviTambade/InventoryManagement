@@ -224,6 +224,25 @@ INSERT INTO materialrequestitems (storemanagerid, materialid, materialrequestid,
 (1, 2, 13, 1, 10),
 (1, 2, 14, 1, 10);
 
+(1, 1, 7, 1, 50),
+(2, 2, 7, 1, 51),
+(3, 3, 9, 1, 11),
+(4, 4, 9, 1, 20),
+(5, 5, 10, 1, 10),
+(6, 6, 11, 1, 10),
+(7, 7, 12, 1, 10),
+(8, 8, 13, 1, 10),
+(9, 9, 14, 1, 10),
+(2, 10, 7, 1, 50),
+(1, 11, 7, 1, 51),
+(6, 12, 9, 1, 11),
+(2, 13, 9, 1, 20),
+(3, 14, 10, 1, 10),
+(4, 15, 11, 1, 10),
+(6, 16, 12, 1, 10),
+(5, 17, 13, 1, 10),
+(7, 18, 14, 1, 10);
+
 
 -- Add more rows as needed
 INSERT INTO shipments (date, supervisorid, materialrequestid, shipperid) VALUES
