@@ -1,10 +1,10 @@
-<div class="container"  style="width:90%">
-    
-    <h2 >Employees</h2>
+<div class="container" style="width:90%">
+
+    <h2>Employees</h2>
     <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-2">
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
             <div class="d-flex flex-wrap align-items-center mb-2">
-                 <ul class="navbar-nav flex-grow">  
+                <ul class="navbar-nav flex-grow">
                     <li class="nav-item">
                         <a class="nav-link text-dark border rounded p-2 " *ngIf="!isRole" (click)="storeManagers()">
                             <i class="fas fa-user text-primary me-2"></i> Store Managers
@@ -16,36 +16,33 @@
                             <i class="fas fa-user text-primary me-2"></i>Store Workers
                             <span class="badge badge-success">{{storeWorkerCount}}</span>
                         </a>
-                    </li>    
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" *ngIf="isRole"(click)="supervisors()">
+                        <a class="nav-link text-dark border rounded p-2" *ngIf="isRole" (click)="supervisors()">
                             <i class="fas fa-user text-primary me-2"></i>Supervisors
                             <span class="badge badge-success">{{supervisorCount}}</span>
                         </a>
-                    </li> 
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
-
-<div >
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th class="text-center">Name</th>
-                <th class="text-center">Role</th>
-                <th class="text-center">Hire Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr mat-row *ngFor="let employee of employees"    (click)="selectEmployee(employee.userId)"            >
-                <td  class="text-center">{{ employee.name}}</td>
-                <td  class="text-center">{{ employee.role }}</td>
-                <td  class="text-center">{{ employee.hireDate | date:'dd/MM/yyyy' }}</td> 
-            </tr>
-        </tbody>
-    </table>
-   </div> 
-   <button type="button" class="btn btn-primary" (click)="addNewEmployee()">Add New Employee</button>
-
+    <div>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Role</th>
+                    <th class="text-center">Hire Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mat-row *ngFor="let employee of employees" (click)="selectEmployee(employee.userId)">
+                    <td class="text-center">{{ employee.name}}</td>
+                    <td class="text-center">{{ employee.role }}</td>
+                    <td class="text-center">{{ employee.hireDate | date:'dd/MM/yyyy' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="addNewEmployee()">Add New Employee</button>

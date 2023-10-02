@@ -14,27 +14,15 @@
                 </div>
                 <div class="col-md-8">
                     <h4 *ngIf="!update">Name: {{ userDetails.firstName }} {{ userDetails.lastName }}</h4>
-
-
-
                     <h4 *ngIf="!update">Birth Date: {{ userDetails.birthDate }}</h4>
-
-
                     <h4 *ngIf="!update">Contact Number: {{ userDetails.contactNumber }}</h4>
-
-
                     <h4 *ngIf="!update">Aadhaar Id: {{ userDetails.aadharId }}</h4>
-
-
                     <h4 *ngIf="!update">Email: {{ userDetails.email }}</h4>
-
                     <h4 *ngIf="!update">Gender: {{ userDetails.gender }}</h4>
-
-
-
+                    
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary btn-sm" (click)="onUpdate()"
-                            *ngIf="!update">Update Info</button>
+                        <button type="submit" class="btn btn-primary btn-sm" (click)="onUpdate()" *ngIf="!update">Update
+                            Info</button>
                         <button class="btn btn-danger btn-sm" (click)="onDelete()" *ngIf="!update">Remove</button>
                     </div>
                 </div>
@@ -99,18 +87,16 @@
                 <label for="other" class="form-check-label">Other</label>
             </div>
         </div>
-      
+
     </div>
     <div class="form-group" *ngIf="update">
         <div class="row">
-            <!-- ... Other form fields ... -->
             <div class="col-md-12 text-right">
                 <button type="submit" class="btn btn-success btn-sm mr-2" (click)="updateEmployee()">Update</button>
-<button class="btn btn-danger btn-sm" (click)="onCancel()">Cancel</button>
+                <button class="btn btn-danger btn-sm" (click)="onCancel()">Cancel</button>
 
 
             </div>
         </div>
     </div>
 </div>
-

@@ -50,42 +50,6 @@ export class TrayComponent implements OnInit {
     })
   }
 
-  // onRequest() {
-  //   console.log(this.trays)
-
-  //   for (let i = 0; i < this.data.length; i++) {
-  //     const quantity1 = parseInt(this.data[i].quantity);
-  //     const quantity2 = parseInt(this.trays[i].quantity);
- 
-      
-  //     const change=this.trays.find((element)=>element.id==this.data[i].id);
-  //     console.log(change);
-  //     if(change.quantity!==this.data[i].quantity){
-  //       console.log(change.id);
-  //     }
-  //     if (quantity1 !== quantity2) {
-  //       this.modified = true;
-        // this.modifiedId.push(this.data[i]);
-        // console.log(this.modifiedId);
-
-
-        
-
-    //     break;
-    //   }
-    // }
-
-    // if (this.modified) {
-    //   console.log("Changes detected");
-    // } else {
-    //   console.log("No changes detected");
-    // }
-    // this.orderSvc.order(this.empid).subscribe((res) => {
-    //   console.log(res);
-    //   window.location.reload();
-    // })
-  // }
-
   onOrder() {
     this.orderSvc.order(this.empid).subscribe((res) => {
       console.log(res);
