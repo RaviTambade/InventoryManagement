@@ -7,7 +7,7 @@
 	INSERT INTO categories(category) VALUES ("Main Shaft");
 	INSERT INTO categories(category) VALUES ("Counter Shaft");
 	INSERT INTO categories(category) VALUES ("Housing");
-	    INSERT INTO categories(category) VALUES  ("Clutch Components"),   ("Transmission Fluids"),  ("Axle Components"), ("Suspension Parts"),  ("Engine Block"),  ("Pistons and Rings"),  ("Crankshaft and Camshaft"), ("Electrical Components");
+	INSERT INTO categories(category) VALUES  ("Clutch Components"),   ("Transmission Fluids"),  ("Axle Components"), ("Suspension Parts"),  ("Engine Block"),  ("Pistons and Rings"),  ("Crankshaft and Camshaft"), ("Electrical Components");
 
 	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Needle Bearing',1,784,20, '/assets/img/Bearing.jpeg');
 	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Ball Bearing',1,800,30, '/assets/img/Bearing.jpeg');
@@ -192,6 +192,17 @@ INSERT INTO workerstatus(workerid)VALUES(18);
 ('2023-07-19 22:59:18', 12, 'Delivered'),
 ('2023-07-19 22:59:48', 12, 'Delivered'),
 ('2023-07-19 23:00:11', 11, 'Ready To Dispatch');
+
+  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-13 18:17:28', 11, 'Delivered');
+  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-14 22:59:18', 12, 'inprogress');
+  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-04 22:59:48', 9, 'Cancelled');
+  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-08 23:00:11', 10, 'Ready To Dispatch');
+  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-13 18:17:28', 13, 'Delivered');
+  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-14 22:59:18', 13, 'inprogress');
+   INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-13 18:17:28', 13, 'Cancelled');
+  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-14 22:59:18', 14, 'inprogress');
+   INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-13 18:17:28', 13, 'Ready To Dispatch');
+  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-14 22:59:18', 14, 'Delivered');
 
 INSERT INTO materialrequestitems (storemanagerid, materialid, materialrequestid, categoryid, quantity) VALUES
 (1, 2, 1, 1, 20),
