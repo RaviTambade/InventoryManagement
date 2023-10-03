@@ -37,15 +37,15 @@ export class EmployeesListComponent {
     const role=localStorage.getItem("role");
     if(role=="Supervisor Incharge"){
       console.log(role);
-      this.department="Supervisor"; 
       this._employeeSvc.getByRole(this.role).subscribe((res)=>{
         console.log(res);
         this.employees=res
-        this.employee=res;
+        // this.employee=res;
         this.isRole=true;
-        console.log(this.employee);
         let userIds=this.employees.map(e=>e.userId)  
         let userIdsString = userIds.join(",");
+
+
         this._userSvc.getUserName(userIdsString).subscribe((res)=>{
         console.log(res)
         this.data=res;
@@ -88,30 +88,6 @@ export class EmployeesListComponent {
       })
     }   
   }
-  // async getUser() {
-  //   const userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
-  //   this.userIds = userIds;
-  //   console.log(this.userIds);
-  
-  //   for (const userId of this.userIds) {
-  //     try {
-  //       const data = await this._userSvc.getUser(userId).toPromise(); // Convert Observable to Promise
-  
-  //       for (const responseItem of data) {
-  //         const users = this.data.filter(u => u.userId === responseItem.id);
-  //         for (const user of users) {
-  //           user.name = responseItem.name;
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     }
-  //   }
-  
-  //   console.log(this.employees);
-  //   console.log(this.data);
-  // }
-
 
   supervisorsCount() {
     const supervisors = this.employee.filter(u => u.role === "Supervisor").length;
@@ -153,7 +129,6 @@ export class EmployeesListComponent {
 
   addNewEmployee(){
     this.router.navigate(["storeincharge/addEmployee"])
-    // this.router.navigate(["storeincharge/addMaterial"])
 
   }
 }

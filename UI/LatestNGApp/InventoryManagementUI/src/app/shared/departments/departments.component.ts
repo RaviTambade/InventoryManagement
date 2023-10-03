@@ -18,11 +18,10 @@ export class DepartmentsComponent {
   selectSwap: boolean = true;
   employees:any[]=[];
   storeManagersids: number[] = [];
-  warehouses: warehouseStaff[] = []
+  warehouses: warehouseStaff[] = [];
   warehouseStaff:warehouseStaff| undefined;
   role:string="Store Manager"
-  data: warehouseStaff[] = []
-  users: any[] = [];
+  data: warehouseStaff[] = [];
   sections:string[]=[];
   selectedSection:string='';
   storeManagers:Employee[]=[];
@@ -37,7 +36,7 @@ export class DepartmentsComponent {
       console.log(res);
       this.warehouses=res;
       this.data=res;
-      this.sections= this.warehouses.map((w) => w.section);
+      this.sections= this.data.map((w) => w.section);
       console.log(this.sections)
     })
     this.empSvc.getByRole(this.role).subscribe((res) => {
