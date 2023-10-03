@@ -668,40 +668,4 @@ shipment:LOOP
     END $$
 DELIMITER ;
 	DELIMITER $$
-     
-select sd.id as orderid,s.id as taskid , materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=15;
-
-select * from shippingdetails;
-select * from shipments;
-
-select sd.id as orderid,s.id as taskid , materialrequests.status, warehousestaff.section,departments.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid inner join employees on employees.id=s.supervisorid inner join departments on employees.departmentid=departments.id where s.id=12
-
-select mri.id, m.quantity as availablequantity,q.shipperid as userid ,s.status as itemstatus, d.department,m.imageurl, c.category,m.title, mr.date,mri.quantity,mr.status from materialrequestitems mri 
-inner join materialrequests mr on mr.id=mri.materialrequestid 
-inner join shipments q on q.materialrequestid=mr.id 
-inner join employees e on e.id=mr.supervisorid
- inner join departments d on e.departmentid=d.id
- inner join materials m on m.id=mri.materialid 
- inner join categories c on c.id=mri.categoryid 
- inner join shippingdetails s on s.itemid=mri.id where mri.materialrequestid=2;
- 
- select ri.id,r.date,e.shipperid, r.status, m.title, categories.category, ri.quantity from materialrequests r inner join materialrequestitems ri on ri.materialrequestid= r.id  inner join shipments e on e.materialrequestid=r.id inner join materials m on ri.materialid = m.id inner join categories on categories.id=ri.categoryid  where r.id=3;
- 
- 
- select employees.userid from employees  inner join departments on employees.departmentid=departments.id   inner join roles on employees.roleid=roles.id where roles.role ="Store Incharge"
-
-select  employees.userid, employees.imageurl, departments.department, roles.role   from employees
-  inner join departments on employees.departmentid=departments.id 
-  inner join roles on employees.roleid=roles.id  where   departments.department="store";
-
-
-select  employees.userid, employees.imageurl, departments.department, roles.role   from employees inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where  roles.role="Supervisor";
-
-
-
-select * from shipments;
-select * from materialrequestitems;
-select * from shippingdetails;
-
-select * from materialrequests;
- select mri.id, m.quantity as availablequantity,e.userid,p.shipperid,s.status as itemstatus, d.department,m.imageurl, c.category,m.title, mr.date,mri.quantity,mr.status from materialrequestitems mri inner join materialrequests mr on mr.id=mri.materialrequestid inner join shipments p on mr.id=p.materialrequestid inner join employees e on e.id=mr.supervisorid inner join departments d on e.departmentid=d.id  inner join materials m on m.id=mri.materialid inner join categories c on c.id=mri.categoryid inner join shippingdetails s on s.itemid=mri.id where mri.materialrequestid=3;
+   
