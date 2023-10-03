@@ -670,6 +670,8 @@ DELIMITER ;
 	DELIMITER $$
    
 
+   
+
 
 
 -- Insert queries for January 2023
