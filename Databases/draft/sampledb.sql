@@ -1,112 +1,109 @@
-   
+
 -- - Insertion for material
-	INSERT INTO categories(category) VALUES ("Bearings");
-	INSERT INTO categories(category) VALUES ("1st Gear");
-	INSERT INTO categories(category) VALUES ("2nd Gear");
-	INSERT INTO categories(category) VALUES ("3rd Gear");
-	INSERT INTO categories(category) VALUES ("Reverse Gear");
-	INSERT INTO categories(category) VALUES ("Main Shaft");
-	INSERT INTO categories(category) VALUES ("Counter Shaft");
-	INSERT INTO categories(category) VALUES ("Housing");
-    INSERT INTO categories(category) VALUES("Clutch Components"),
-    ("Transmission Fluids"),
-    ("Axle Components"),
-    ("Suspension Parts"),
-    ("Engine Block"),
-    ("Pistons and Rings"),
-    ("Crankshaft and Camshaft"),
-    ("Electrical Components");
+INSERT INTO categories(category) VALUES ("Bearings");
+INSERT INTO categories(category) VALUES ("1st Gear");
+INSERT INTO categories(category) VALUES ("2nd Gear");
+INSERT INTO categories(category) VALUES ("3rd Gear");
+INSERT INTO categories(category) VALUES ("Reverse Gear");
+INSERT INTO categories(category) VALUES ("Main Shaft");
+INSERT INTO categories(category) VALUES ("Counter Shaft");
+INSERT INTO categories(category) VALUES ("Housing");
+INSERT INTO categories(category) VALUES("Clutch Components"),
+("Transmission Fluids"),
+("Axle Components"),
+("Suspension Parts"),
+("Engine Block"),
+("Pistons and Rings"),
+("Crankshaft and Camshaft"),
+("Electrical Components");
 
 
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Needle Bearing',1,784,20, '/assets/img/Bearing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Ball Bearing',1,800,30, '/assets/img/Bearing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Bush Bearing',1,4500,15, '/assets/img/Bearing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 3.4', 3,450,85, '/assets/img/2gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 3.6', 3,400,85, '/assets/img/2gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 4.2', 3,800,85, '/assets/img/2gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 8.81', 2,450,90, '/assets/img/1gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 9.23', 2,400,90, '/assets/img/1gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 7.72', 2,800,90, '/assets/img/1gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 3.4', 4,450,85, '/assets/img/3gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 3.6', 4,400,85, '/assets/img/3gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 4.2', 4,0,85, '/assets/img/3gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 3.4', 5,450,85, '/assets/img/Rgear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 3.6' , 5,400,85, '/assets/img/Rgear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 4.2', 5,800,85, '/assets/img/Rgear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Main Shaft', 6,0,200, '/assets/img/ms.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Main Shaft',6,87,250, '/assets/img/ms.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB540 Main Shaft', 6,79,400, '/assets/img/ms.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Counter Shaft', 7,80,450, '/assets/img/cs.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Counter Shaft', 7,89,200, '/assets/img/cs.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Counter Shaft', 7,0,500, '/assets/img/cs.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Housing' , 8,50,2000, '/assets/img/housing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Housing', 8,8,2500, '/assets/img/housing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Housing' , 8,0,3500, '/assets/img/housing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Needle Bearing',1,784,20, '/assets/img/Bearing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Ball Bearing',1,800,30, '/assets/img/Bearing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Bush Bearing',1,4500,15, '/assets/img/Bearing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 3.4', 3,450,85, '/assets/img/2gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 3.6', 3,400,85, '/assets/img/2gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 4.2', 3,800,85, '/assets/img/2gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 8.81', 2,450,90, '/assets/img/1gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 9.23', 2,400,90, '/assets/img/1gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 7.72', 2,800,90, '/assets/img/1gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 3.4', 4,450,85, '/assets/img/3gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 3.6', 4,400,85, '/assets/img/3gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 4.2', 4,0,85, '/assets/img/3gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 3.4', 5,450,85, '/assets/img/Rgear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 3.6' , 5,400,85, '/assets/img/Rgear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 4.2', 5,800,85, '/assets/img/Rgear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Main Shaft', 6,0,200, '/assets/img/ms.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Main Shaft',6,87,250, '/assets/img/ms.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB540 Main Shaft', 6,79,400, '/assets/img/ms.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Counter Shaft', 7,80,450, '/assets/img/cs.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Counter Shaft', 7,89,200, '/assets/img/cs.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Counter Shaft', 7,0,500, '/assets/img/cs.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Housing' , 8,50,2000, '/assets/img/housing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Housing', 8,8,2500, '/assets/img/housing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Housing' , 8,0,3500, '/assets/img/housing.jpeg');
 
-	-- Insertion for roles
-	insert INTO roles(role) VALUES("Store Incharge");
-	INSERT INTO roles(role) VALUES("Store Manager");
-	INSERT INTO roles(role) VALUES("Supervisor");
-	INSERT INTO roles(role) VALUES("Store Worker");
-    INSERT INTO roles(role) VALUES("Supervisor Incharge");
-    
-	-- Insertion for departments
-	insert INTO departments(department) VALUES("HR");
-	INSERT INTO departments(department) VALUES("Store");
-	INSERT INTO departments(department) VALUES("GB500 Line");
-	INSERT INTO departments(department) VALUES("GB400 Line");
-	INSERT INTO departments(department) VALUES("GB540 Line");
-	INSERT INTO departments(department) VALUES("worker");
-    INSERT INTO departments(department) VALUES("Engine Line");
-	INSERT INTO departments(department) VALUES("Chassis Assembly");
-	INSERT INTO departments(department) VALUES("Interior Assembly");
-    INSERT INTO departments(department) VALUES("Production");
-    
- select * from employees;
- select * from roles;
- select * from departments;
+-- Insertion for roles
+insert INTO roles(role) VALUES("Store Incharge");
+INSERT INTO roles(role) VALUES("Store Manager");
+INSERT INTO roles(role) VALUES("Supervisor");
+INSERT INTO roles(role) VALUES("Store Worker");
+INSERT INTO roles(role) VALUES("Supervisor Incharge");
 
-	-- Insertion for Employees
-    -- store manager
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(1,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(2,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(3,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(4,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(5,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(6,2, 2 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(7,2, 2 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(8,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(9,2, 2 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(10,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(11,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(12,2, 2 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(13,2, 2 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(14,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(15,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(16,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(17,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(18,2, 2 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(19,2, 2 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(20,2, 2 ,'2019-09-01 00:00:00');
-    
-    -- supervisores
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(21,3, 3 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(22,3, 3 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(23,4, 3 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(24,4, 3 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(25,5, 3 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(26,5, 3 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(27,7, 3 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(28,7, 3 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(29,8, 3 ,'2019-09-01 00:00:00');
-	INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(30,8, 3 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(31,9, 3 ,'2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(32, 9, 3, '2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(33, 10, 3, '2019-09-01 00:00:00');
-    INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(34, 10, 3, '2019-09-01 00:00:00');
-    
-    
-    -- store workers	
+-- Insertion for departments
+insert INTO departments(department) VALUES("HR");
+INSERT INTO departments(department) VALUES("Store");
+INSERT INTO departments(department) VALUES("GB500 Line");
+INSERT INTO departments(department) VALUES("GB400 Line");
+INSERT INTO departments(department) VALUES("GB540 Line");
+INSERT INTO departments(department) VALUES("worker");
+INSERT INTO departments(department) VALUES("Engine Line");
+INSERT INTO departments(department) VALUES("Chassis Assembly");
+INSERT INTO departments(department) VALUES("Interior Assembly");
+INSERT INTO departments(department) VALUES("Production");
+
+
+-- Insertion for Employees
+-- store manager
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(1,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(2,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(3,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(4,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(5,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(6,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(7,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(8,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(9,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(10,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(11,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(12,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(13,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(14,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(15,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(16,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(17,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(18,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(19,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(20,2, 2 ,'2019-09-01 00:00:00');
+
+-- supervisores
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(21,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(22,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(23,4, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(24,4, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(25,5, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(26,5, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(27,7, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(28,7, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(29,8, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(30,8, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(31,9, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(32, 9, 3, '2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(33, 10, 3, '2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(34, 10, 3, '2019-09-01 00:00:00');
+
+
+-- store workers	
 INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(35, 2, 4,'2015-08-11 00:00:00' );
 INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(36, 2, 4,'2015-08-11 00:00:00');	
 INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(37, 2, 4, '2015-08-11 00:00:00');
@@ -130,41 +127,41 @@ INSERT INTO workerstatus(workerid)VALUES(38);
 INSERT INTO workerstatus(workerid)VALUES(39);
 INSERT INTO workerstatus(workerid)VALUES(40);
 
-	-- Insertion for Sections
-	insert into Warehousestaff(section,  categoryid,employeeid)values('Section 1', 1,1);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 2', 2,2);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 3', 3,3);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 4', 4,4);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 5', 5,5);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 6', 6,6);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 7', 7,7);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 8', 8,8);
-    insert into Warehousestaff(section, categoryid,employeeid)values('Section 9', 9,9);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 10', 10,10);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 11', 11,11);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 12', 12,12);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 13', 13,13);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 14', 14,14);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 15', 15,15);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 16', 16,16);
-    
-	INSERT INTO initialrequest(employeeid) VALUES (21);
-	INSERT INTO initialrequest(employeeid) VALUES (22);
-	INSERT INTO initialrequest(employeeid) VALUES (23);
-	INSERT INTO initialrequest(employeeid) VALUES (24);
-	INSERT INTO initialrequest(employeeid) VALUES (25);
-	INSERT INTO initialrequest(employeeid) VALUES (26);
-    INSERT INTO initialrequest(employeeid) VALUES (27);
-	INSERT INTO initialrequest(employeeid) VALUES (28);
-	INSERT INTO initialrequest(employeeid) VALUES (29);
-	INSERT INTO initialrequest(employeeid) VALUES (30);
-	INSERT INTO initialrequest(employeeid) VALUES (31);
-    INSERT INTO initialrequest(employeeid) VALUES (32);
-	INSERT INTO initialrequest(employeeid) VALUES (33);
-	INSERT INTO initialrequest(employeeid) VALUES (34);
+-- Insertion for Sections
+insert into Warehousestaff(section,  categoryid,employeeid)values('Section 1', 1,1);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 2', 2,2);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 3', 3,3);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 4', 4,4);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 5', 5,5);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 6', 6,6);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 7', 7,7);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 8', 8,8);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 9', 9,9);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 10', 10,10);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 11', 11,11);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 12', 12,12);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 13', 13,13);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 14', 14,14);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 15', 15,15);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 16', 16,16);
+
+INSERT INTO initialrequest(employeeid) VALUES (21);
+INSERT INTO initialrequest(employeeid) VALUES (22);
+INSERT INTO initialrequest(employeeid) VALUES (23);
+INSERT INTO initialrequest(employeeid) VALUES (24);
+INSERT INTO initialrequest(employeeid) VALUES (25);
+INSERT INTO initialrequest(employeeid) VALUES (26);
+INSERT INTO initialrequest(employeeid) VALUES (27);
+INSERT INTO initialrequest(employeeid) VALUES (28);
+INSERT INTO initialrequest(employeeid) VALUES (29);
+INSERT INTO initialrequest(employeeid) VALUES (30);
+INSERT INTO initialrequest(employeeid) VALUES (31);
+INSERT INTO initialrequest(employeeid) VALUES (32);
+INSERT INTO initialrequest(employeeid) VALUES (33);
+INSERT INTO initialrequest(employeeid) VALUES (34);
 
 -- Insert queries for November 2022
-   INSERT INTO materialrequests (date, supervisorid, status) VALUES
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
 ('2022-11-01 12:18:05', 21, 'Delivered'),
 ('2022-11-02 20:15:07', 22, 'Delivered'),
 ('2022-11-02 20:16:15', 23, 'Delivered'),
@@ -342,10 +339,10 @@ INSERT INTO materialrequests (date, supervisorid, status) VALUES
 ('2023-01-30 22:59:18', 33, 'Delivered'),
 ('2023-01-30 22:59:48', 34, 'Delivered'),
 ('2023-01-30 23:00:11', 34, 'Delivered'),
- ('2023-01-31 23:00:11', 34, 'Delivered'), 
+('2023-01-31 23:00:11', 34, 'Delivered'), 
 
 
-   
+
 -- Insert queries for February 2023
 INSERT INTO materialrequests (date, supervisorid, status) VALUES
 ('2023-02-01 12:18:05', 21, 'Delivered'),
@@ -772,7 +769,7 @@ INSERT INTO materialrequests (date, supervisorid, status) VALUES
 ('2023-08-31 17:10:48', 22, 'Delivered');
 
 
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
 ('2023-09-01 12:18:05', 21, 'Delivered'),
 ('2023-09-02 20:15:07', 22, 'Delivered'),
 ('2023-09-02 20:16:15', 23, 'Delivered'),
@@ -848,7 +845,6 @@ INSERT INTO materialrequests (date, supervisorid, status) VALUES
 
 
 --  INSERT queries for materialrequestitems
--- 100 INSERT queries for materialrequestitems with categoryid 1
 INSERT INTO materialrequestitems (storemanagerid, materialid, materialrequestid, categoryid, quantity) VALUES
 (1, 1, 1, 1, 55),
 (2, 2, 2, 1, 60),
