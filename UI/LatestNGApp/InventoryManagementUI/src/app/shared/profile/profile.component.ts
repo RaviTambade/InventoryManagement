@@ -16,7 +16,6 @@ export class ProfileComponent {
   employee: Employee = {
     userId: 0,
     hireDate: new Date(),
-    imageUrl: '',
     department: '',
     role: '',
     name: ''

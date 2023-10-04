@@ -19,6 +19,10 @@
                     <label for="lastName">Last Name</label>
                     <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="newUser.lastName" required>
                   </div>
+                   <div class="form-group">
+                    <label for="imgUrl">Image</label>
+                    <input type="file" class="form-control" id="imgUrl" name="imgUrl" [(ngModel)]="newUser.imageUrl"   required>
+                  </div> 
                   <div class="form-group col-md-6">
                     <label for="aadharId">Aadhar ID</label>
                     <input type="text" class="form-control" id="aadharId" name="aadharId" [(ngModel)]="newUser.aadharId" required>
@@ -71,10 +75,7 @@
                     <label for="hireDate">Hire Date</label>
                     <input type="date" class="form-control" id="hireDate" name="hireDate" [(ngModel)]="newEmployee.hireDate" required>
                   </div>
-                  <div class="form-group">
-                    <label for="imgUrl">Image</label>
-                    <input type="file" class="form-control" id="imgUrl" name="imgUrl" [(ngModel)]="newEmployee.imageUrl"   required>
-                  </div>
+                 
                   <div class="form-group">
                     <label for="role">Role</label>
                     <select class="form-control" id="role" name="role" [(ngModel)]="newEmployee.role" required>
