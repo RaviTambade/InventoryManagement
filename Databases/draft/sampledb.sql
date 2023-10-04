@@ -62,9 +62,6 @@
 	INSERT INTO departments(department) VALUES("Interior Assembly");
     INSERT INTO departments(department) VALUES("Production");
     
- select * from employees;
- select * from roles;
- select * from departments;
 
 	-- Insertion for Employees
     -- store manager
