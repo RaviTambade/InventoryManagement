@@ -46,8 +46,6 @@ export class RequestHistoryComponent {
         this.deliveredRequestCount();
         this.inprogressRequestCount();
       }
-
-
     })
   }
   onFromDateChange() {
@@ -120,7 +118,8 @@ export class RequestHistoryComponent {
   inprogressRequests() {
     const inprogressrequest = this.data.filter(u => u.status !== "Delivered" && "Cancelled");
     this.requests = inprogressrequest;
-    this._requestsvc.setSelectedRequestId(0);
+    const requestId=this.requests[0].id;
+    this._requestsvc.setSelectedRequestId(requestId);
   }
 
   deliveredRequests() {
