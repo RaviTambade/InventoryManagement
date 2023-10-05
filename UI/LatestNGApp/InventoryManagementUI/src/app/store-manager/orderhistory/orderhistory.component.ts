@@ -39,7 +39,7 @@ export class OrderhistoryComponent {
       this.completedCount();
       this.pendingCount();
       this.pendingOrders();
-      this.completedOrders();
+      // this.completedOrders();
       
     })
   }
