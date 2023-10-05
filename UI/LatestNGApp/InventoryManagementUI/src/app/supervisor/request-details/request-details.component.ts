@@ -45,7 +45,7 @@ export class RequestDetailsComponent {
     this._requestsvc.selectedRequestId$.subscribe((id) => {
       console.log(id)
       const requestId = id;
-      if (requestId == 0 || requestId == null) {
+      if (requestId == 0 || requestId == undefined) {
         this.details = false;
         this.carts = [];
       }
