@@ -32,7 +32,7 @@ export class OrderDetailsComponent implements OnInit {
     this.orderService.selectedOrderId$.subscribe((id) => {
       console.log(id)
       this.orderId = id;
-      if (id == 0 || id == null) {
+      if (id == 0 || id == undefined) {
         this.orderDetails = [];
         this.newDetails = false;
       }

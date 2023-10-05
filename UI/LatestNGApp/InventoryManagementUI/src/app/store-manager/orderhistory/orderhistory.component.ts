@@ -39,9 +39,6 @@ export class OrderhistoryComponent {
       this.completedCount();
       this.pendingCount();
       this.pendingOrders();
-      // this.completedOrders();
-
-      
     })
   }
 
@@ -85,7 +82,8 @@ export class OrderhistoryComponent {
     this.request=false;
     const completedOrders = this.data.filter(u => u.status !== "inprogress");
     this.orders = completedOrders;
-    this._orderSvc.setSelectedOrderId(0);
+    const orderId = this.orders[0].id;
+    this._orderSvc.setSelectedOrderId(orderId);
   }
 
   pendingOrders() {
@@ -93,7 +91,6 @@ export class OrderhistoryComponent {
     const pendingOrders = this.data.filter(u => u.status === "inprogress");
     this.orders = pendingOrders;
     const orderId = this.orders[0].id;
-    console.log("orderId", orderId);
     this._orderSvc.setSelectedOrderId(orderId);
   }
 
@@ -101,6 +98,8 @@ export class OrderhistoryComponent {
     const allOrders =this.data;
     console.log(allOrders);
     this.orders=allOrders;
+    const orderId = this.orders[0].id;
+    this._orderSvc.setSelectedOrderId(orderId);
   }
   
   selectCompletedOrder(id: number) {

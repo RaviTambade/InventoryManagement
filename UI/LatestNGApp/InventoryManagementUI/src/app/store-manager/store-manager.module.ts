@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 import { OrderComponent } from './order/order.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
+import { FormsModule } from '@angular/forms';
 
 export const storeManagerRoutes:Routes=[
   {path:'dashboard',component:DashboardComponent},
@@ -20,7 +21,8 @@ export const storeManagerRoutes:Routes=[
     OrderhistoryComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class StoreManagerModule { }

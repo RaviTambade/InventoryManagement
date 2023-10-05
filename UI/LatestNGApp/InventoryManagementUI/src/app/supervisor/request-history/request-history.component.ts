@@ -14,7 +14,7 @@ export class RequestHistoryComponent {
   userIds: number[] = []
   requests: RequestDetails[];
   data: RequestDetails[];
-  empid: number = 21;
+  empid: number = 11;
   todaysCount: number = 0;
   cancelledCount: number = 0;
   deliveredCount: number = 0;
@@ -52,21 +52,14 @@ export class RequestHistoryComponent {
   }
 
   requestCounts(){
-    // All request count
-    const requestCount=this.data.length; 
-    const myRequestCount=this.data.filter(u => u.userId ==this.empid ).length;
-    const cancelledrequest = this.data.filter(u => u.status === "Cancelled"  && u.userId===this.empid).length;
-    const pickedCount = this.data.filter(u => u.status === "Picked"  && u.userId===this.empid).length;
-    const readyToDispatchCount = this.data.filter(u => u.status === "Ready To Dispatch" && u.userId===this.empid).length;
-    const deliveredRequest = this.data.filter(u => u.status === "Delivered"  && u.userId===this.empid).length;
-    const inprogressRequest = this.data.filter(u => u.status === "inprogress" && u.userId===this.empid).length;
-    this.totalCount=requestCount;
-    this.myRequestsCount=myRequestCount;  
-    this.cancelledCount = cancelledrequest;  
-    this.pickedCount = pickedCount; 
-    this.readyToDispatchCount = readyToDispatchCount; 
-    this.deliveredCount = deliveredRequest;
-    this.inprogressCount = inprogressRequest;
+     this.totalCount=this.data.length; 
+    this.myRequestsCount=this.data.filter(u => u.userId ==this.empid ).length;
+    this.cancelledCount = this.data.filter(u => u.status === "Cancelled"  && u.userId===this.empid).length;
+    this.pickedCount = this.data.filter(u => u.status === "Picked"  && u.userId===this.empid).length;
+    this.readyToDispatchCount = this.data.filter(u => u.status === "Ready To Dispatch" && u.userId===this.empid).length;
+    this.deliveredCount = this.data.filter(u => u.status === "Delivered"  && u.userId===this.empid).length;
+    this.inprogressCount = this.data.filter(u => u.status === "inprogress" && u.userId===this.empid).length;
+
   }
 
   onFromDateChange() {
@@ -192,5 +185,11 @@ export class RequestHistoryComponent {
   newOrder() {
     this.router.navigate(["shared/store"])
   }
+  onRemove(id:number){
+    this._requestsvc.removeItem(id).subscribe((res) => {
+      console.log(res);
+      window.location.reload();
+
+    })  }
 }
 

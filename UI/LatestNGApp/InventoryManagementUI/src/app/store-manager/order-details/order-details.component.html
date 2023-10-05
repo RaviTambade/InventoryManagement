@@ -23,38 +23,42 @@
           <b style="color: Tomato;">Available Quantity: {{order.name}}: {{order.availableQuantity}}</b>
       </div>
       <div class="card-body">
-          <div class="row">
-              <div class="col-md-4">
-                  <div class="card">
-                      <div class="card-body">
-                          <img src="{{order.imageUrl}}" alt="Image" class="img-fluid">
-                      </div>
-                  </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <img src="{{ order.imageUrl }}" alt="Image" class="img-fluid">
               </div>
-              <div class="col-md-8">
-                  <p class="card-text">
-                      <strong>Name:</strong> {{ order.name }}
-                  </p>
-                  <p class="card-text">
-                      <strong>Category:</strong> {{ order.category }}
-                  </p>
-                  
-                  <div *ngIf="inprogressOrder && !order.itemStatus">
-                    <label for="orderQuantity">Quantity</label>
-                    <input style="text-align: center;" id="orderQuantity" name="orderQuantity" value="{{order.quantity}}"
-                      class=" input-sm" #quantity type="number">
-
-                      <button *ngIf="!order.itemStatus" class="btn btn-success"
-                          (click)="onApproved(order.id, quantity.value)">
-                          <span class="glyphicon glyphicon-ok">Approve</span>
-                      </button>
-                  </div>
-                  <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>
-              </div>
+            </div>
           </div>
+          <div class="col-md-8">
+            <p class="card-text">
+              <strong>Name:</strong> {{ order.name }}
+            </p>
+            <p class="card-text">
+              <strong>Category:</strong> {{ order.category }}
+            </p>
+      
+            <div *ngIf="inprogressOrder && !order.itemStatus" class="mb-3">
+              <label for="orderQuantity" class="form-label">Quantity</label>
+              <input  style="text-align: center;" id="orderQuantity" name="orderQuantity" [(ngModel)]="order.quantity" class="form-control" type="number" >
+            </div>
+            
+            <button *ngIf="!order.itemStatus"  class="btn btn-success" (click)="onApproved(order.id, order.quantity)">
+              <span class="glyphicon glyphicon-ok"></span> Approve
+            </button>
+            
+            <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>
+          </div>
+        </div>
       </div>
+      
   </div>
   
   
   </div>
 </div>
+
+<div *ngIf="!newDetails" >
+    <img src="./assets/img/notFound.png" width="80%" height="80%">
+</div> 

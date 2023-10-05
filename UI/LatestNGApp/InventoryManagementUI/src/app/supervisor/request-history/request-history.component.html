@@ -91,6 +91,12 @@
                         <td class="text-center" style="width: 150px;">{{ request.date | date:'dd/MM/yyyy' }}</td>
                         <td class="text-center" style="width: 200px;"  *ngIf="otherSupervisor">{{ request.name }}</td>
                         <td class="text-center" style="width: 150px;">{{ request.status }}</td>
+                        <td class="text-center"  style="width: 150px;" *ngIf="request.status=='inprogress'">
+                            <button class="btn btn-secondary btn-sm" (click)="onRemove(request.id)">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                          
                     </tr>
                 </tbody>
        
