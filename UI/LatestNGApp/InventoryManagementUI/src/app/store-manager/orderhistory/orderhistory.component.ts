@@ -25,8 +25,7 @@ export class OrderhistoryComponent {
   }
 
   ngOnInit(): void {
-    this.getOrders()
-
+    this.getOrders();
   }
 
   getOrders() {
@@ -34,12 +33,12 @@ export class OrderhistoryComponent {
       console.log(res);
       this.data=res;
       
+      
       this.getUser();
       this.allOrderCount()
       this.completedCount();
       this.pendingCount();
       this.pendingOrders();
-      this.completedOrders();
       
     })
   }
@@ -86,11 +85,14 @@ export class OrderhistoryComponent {
     this.orders = completedOrders;
     this._orderSvc.setSelectedOrderId(0);
   }
+
   pendingOrders() {
     this.request=true;
     const pendingOrders = this.data.filter(u => u.status === "inprogress");
     this.orders = pendingOrders;
-    this._orderSvc.setSelectedOrderId(0);
+    const orderId = this.orders[0].id;
+    console.log("orderId", orderId);
+    this._orderSvc.setSelectedOrderId(orderId);
   }
 
   allOrders(){

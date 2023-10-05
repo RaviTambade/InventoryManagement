@@ -24,7 +24,8 @@ export class TaskHistoryComponent implements OnInit{
       console.log(res);
       this.completedTaskCount();
       this.pendingTaskCount();
-    })  }
+    })  
+  }
 
  
 

@@ -157,6 +157,5 @@ export class RequestHistoryComponent {
   newOrder() {
     this.router.navigate(["shared/store"])
   }
-
 }
 
