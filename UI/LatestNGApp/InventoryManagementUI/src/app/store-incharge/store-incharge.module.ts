@@ -4,8 +4,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
-import { PersonalDetailsComponent } from './personal-details/personal-details.component';
-import { ProfessionalDetailsComponent } from './professional-details/professional-details.component';
 import { AddMaterialComponent } from './add-material/add-material.component';
 
 export const storeInchargeRoutes:Routes=[
@@ -19,8 +17,6 @@ export const storeInchargeRoutes:Routes=[
   declarations: [
     DashboardComponent,
     AddEmployeeComponent,
-    PersonalDetailsComponent,
-    ProfessionalDetailsComponent,
     AddMaterialComponent
   ],
   imports: [

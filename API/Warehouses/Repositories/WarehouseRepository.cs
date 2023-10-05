@@ -154,17 +154,15 @@ public class WarehouseRepository : IWarehouseRepository
 
     }
 
-    public async Task<bool> Update(WarehouseStaff warehouse)
+    public async Task<bool> Update(UpdateWarehouse warehouse)
     {
         bool status = false;
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "UPDATE Warehousestaff SET section=@section, categoryid=(select id from categories where category=@category), employeeid=@empid WHERE id=@id;";
+            string query = "UPDATE Warehousestaff SET employeeid=@empid WHERE id=@id;";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@id", warehouse.Id);
-            cmd.Parameters.AddWithValue("@category", warehouse.MaterialType);
-            cmd.Parameters.AddWithValue("@section", warehouse.Section);
             cmd.Parameters.AddWithValue("@empid", warehouse.EmployeeId);    
 
             await con.OpenAsync();

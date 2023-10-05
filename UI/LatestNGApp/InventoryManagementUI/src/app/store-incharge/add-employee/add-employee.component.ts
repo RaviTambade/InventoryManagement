@@ -31,7 +31,6 @@ export class AddEmployeeComponent {
   newEmployee: Employee = {
     userId: 0,
     hireDate: new Date(),
-    imageUrl: '',
     department: 'HR',
     role: 'Manager',
     name: ''
@@ -51,13 +50,14 @@ export class AddEmployeeComponent {
   }
   onSubmit() {
     console.log(this.newUser);
+     const filename = this.newUser.imageUrl.split('\\').pop();
+     this.newUser.imageUrl = `./assets/img/${filename}`;
     this.isForm1Complete = true;
   }
   onSubmit2() {
     console.log();
     console.log(this.newEmployee);
-    const filename = this.newEmployee.imageUrl.split('\\').pop();
-    this.newEmployee.imageUrl = `./assets/img/${filename}`;
+    
     this.myCredential.contactNumber=this.newUser.contactNumber;
     console.log(this.newEmployee);
     console.log(this.myCredential);

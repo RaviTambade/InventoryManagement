@@ -43,12 +43,34 @@ insert into materials(title, categoryid, quantity, unitprice, imageurl) values (
 insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Housing', 8,8,2500, '/assets/img/housing.jpeg');
 insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Housing' , 8,0,3500, '/assets/img/housing.jpeg');
 
+
+	-- Insertion for roles
+	insert INTO roles(role) VALUES("Store Incharge");
+	INSERT INTO roles(role) VALUES("Store Manager");
+	INSERT INTO roles(role) VALUES("Supervisor");
+	INSERT INTO roles(role) VALUES("Store Worker");
+    INSERT INTO roles(role) VALUES("Supervisor Incharge");
+    
+	-- Insertion for departments
+	insert INTO departments(department) VALUES("HR");
+	INSERT INTO departments(department) VALUES("Store");
+	INSERT INTO departments(department) VALUES("GB500 Line");
+	INSERT INTO departments(department) VALUES("GB400 Line");
+	INSERT INTO departments(department) VALUES("GB540 Line");
+	INSERT INTO departments(department) VALUES("worker");
+    INSERT INTO departments(department) VALUES("Engine Line");
+	INSERT INTO departments(department) VALUES("Chassis Assembly");
+	INSERT INTO departments(department) VALUES("Interior Assembly");
+    INSERT INTO departments(department) VALUES("Production");
+    
+
 -- Insertion for roles
 insert INTO roles(role) VALUES("Store Incharge");
 INSERT INTO roles(role) VALUES("Store Manager");
 INSERT INTO roles(role) VALUES("Supervisor");
 INSERT INTO roles(role) VALUES("Store Worker");
 INSERT INTO roles(role) VALUES("Supervisor Incharge");
+
 
 -- Insertion for departments
 insert INTO departments(department) VALUES("HR");

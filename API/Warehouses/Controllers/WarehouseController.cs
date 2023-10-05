@@ -50,7 +50,7 @@ public class WarehouseController : ControllerBase
 
         [HttpPut]
         [Route("warehouse")]
-        public async Task<bool> Update([FromBody] WarehouseStaff warehouse)
+        public async Task<bool> Update([FromBody] UpdateWarehouse warehouse)
         {
             bool status = await _srv.Update(warehouse);
             return status;

@@ -17,21 +17,19 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select  employees.userid,employees.imageurl,departments.department, roles.role from employees inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id";
+            string query = "select  employees.userid,departments.department, roles.role from employees inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id";
             MySqlCommand cmd = new(query, con);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["userid"].ToString());
-                string? imgurl = reader["imageurl"].ToString();
                 string? department = reader["department"].ToString();
                 string? role = reader["role"].ToString();
                 Employee TheEmployee = new()
                 {
                     UserId = id,
                     Department = department,
-                    ImageUrl = imgurl,
                     Role = role,
                 };
                 employees.Add(TheEmployee);
@@ -90,7 +88,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select  employees.userid ,employees.imageurl,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id =@employeeId";
+            string query = "select  employees.userid,departments.department, roles.role   from employees   inner join departments on employees.departmentid=departments.id  inner join roles on employees.roleid=roles.id  where employees.id =@employeeId";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@employeeId", employeeId);
             await con.OpenAsync();
@@ -98,14 +96,12 @@ public class EmployeeRepository : IEmployeeRepository
             while (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["userid"].ToString());
-                string? imgurl = reader["imageurl"].ToString();
                 string? department = reader["department"].ToString();
                 string? role = reader["role"].ToString();
 
                 employee = new Employee
                 {
                     UserId = id,
-                    ImageUrl = imgurl,
                     Department = department,
                     Role = role,
                 };
@@ -129,12 +125,11 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "INSERT INTO employees(userid,departmentid, roleid,imageurl,hiredate)VALUES(@userId,(select id from departments where department=@departmentId),(select id from roles where role=@roleId),@imageUrl,@hireDate)";
+            string query = "INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(@userId,(select id from departments where department=@departmentId),(select id from roles where role=@roleId),@hireDate)";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@userId", employee.UserId);
             cmd.Parameters.AddWithValue("@departmentId", employee.Department);
             cmd.Parameters.AddWithValue("@roleId", employee.Role);
-            cmd.Parameters.AddWithValue("@imageUrl", employee.ImageUrl);
             cmd.Parameters.AddWithValue("@hireDate", employee.HireDate);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
@@ -161,12 +156,11 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "UPDATE employees SET  departmentid=@departmentId, roleid=@roleId, imageurl=@imageUrl,hiredate=@hireDate WHERE userid=@userId";
+            string query = "UPDATE employees SET  departmentid=@departmentId, roleid=@roleId,hiredate=@hireDate WHERE userid=@userId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@userId", employee.UserId);
             cmd.Parameters.AddWithValue("@departmentId", employee.Department);
             cmd.Parameters.AddWithValue("@roleId", employee.Role);
-            cmd.Parameters.AddWithValue("@imageUrl", employee.ImageUrl);
             cmd.Parameters.AddWithValue("@hireDate", employee.HireDate);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
@@ -192,7 +186,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select  employees.userid,employees.hiredate, employees.imageurl, departments.department, roles.role   from employees  inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where   departments.department=@department";
+            string query = "select  employees.userid,employees.hiredate, departments.department, roles.role   from employees  inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where   departments.department=@department";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@department", department);
             await con.OpenAsync();
@@ -200,7 +194,6 @@ public class EmployeeRepository : IEmployeeRepository
             while (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["userid"].ToString());
-                string? imgurl = reader["imageurl"].ToString();
                 string? theDepartment = reader["department"].ToString();
                 string? role = reader["role"].ToString();
                 DateTime hireDate =DateTime.Parse( reader["hiredate"].ToString());
@@ -208,7 +201,6 @@ public class EmployeeRepository : IEmployeeRepository
                 {
                     UserId = id,
                     Department = theDepartment,
-                    ImageUrl = imgurl,
                     Role = role,
                     HireDate=hireDate
                 };
@@ -234,7 +226,7 @@ public class EmployeeRepository : IEmployeeRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select  employees.userid,employees.hiredate, employees.imageurl, departments.department, roles.role   from employees inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where  roles.role=@role ";
+            string query = "select  employees.userid,employees.hiredate, departments.department, roles.role   from employees inner join departments on employees.departmentid=departments.id inner join roles on employees.roleid=roles.id  where  roles.role=@role ";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@role", role);
             await con.OpenAsync();
@@ -242,7 +234,6 @@ public class EmployeeRepository : IEmployeeRepository
             while (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["userid"].ToString());
-                string? imgurl = reader["imageurl"].ToString();
                 string? theDepartment = reader["department"].ToString();
                 string? theRole = reader["role"].ToString();
                 DateTime hireDate =DateTime.Parse( reader["hiredate"].ToString());
@@ -251,7 +242,6 @@ public class EmployeeRepository : IEmployeeRepository
                 {
                     UserId = id,
                     Department = theDepartment,
-                    ImageUrl = imgurl,
                     Role = theRole,
                     HireDate=hireDate
                 };
