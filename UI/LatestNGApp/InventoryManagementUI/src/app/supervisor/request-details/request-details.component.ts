@@ -45,7 +45,7 @@ export class RequestDetailsComponent {
     this._requestsvc.selectedRequestId$.subscribe((id) => {
       console.log(id)
       const requestId = id;
-      if (requestId == 0 || requestId == null) {
+      if (requestId == 0 || requestId == undefined) {
         this.details = false;
         this.carts = [];
       }
@@ -61,6 +61,7 @@ export class RequestDetailsComponent {
     console.log("req", requestId)
     this._requestsvc.getRequestDetails(requestId).subscribe((res) => {
       this.carts = res;
+      console.log(this.carts);
       this.getUser();
       console.log(this.carts);
       this.details = true;

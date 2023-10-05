@@ -1,5 +1,5 @@
 <div class="container "  style="width:90%">
-    <h2> My Requests</h2>
+    <h2>Requests</h2>
     
     <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
@@ -12,26 +12,47 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="todaysRequests()">
+                        <a class="nav-link text-dark border rounded p-2" (click)="myRequests()">
+                            <i class="fas fa-clipboard-list me-2" style="color: rgb(230, 6, 223);"></i> My Requests
+                            <span class="badge badge-primary">{{myRequestsCount}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark border rounded p-2" (click)="todaysRequests()" >
                             <i class="fas fa-calendar-day me-2"></i> Today's Requests
                             <span class="badge badge-primary">{{todaysCount}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark border rounded p-2" (click)="cancelledRequests()">
-                            <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                            <i class="fas fa-times-circle text-danger me-2"></i> 
                             <span class="badge badge-danger">{{cancelledCount}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="inprogressRequests()">
-                            <i class="fas fa-spinner text-warning me-2"></i> In Progress
+                        <a class="nav-link text-dark border rounded p-2" (click)="inprogressRequests()"  >
+                            <i class="fas fa-spinner text-warning me-2"></i>
                             <span class="badge badge-warning">{{inprogressCount}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-dark border rounded p-2" (click)="readyToDispatchRequests()">
+                            <i class="fas fa-truck"></i>  
+                            <span class="badge badge-warning">{{readyToDispatchCount}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark border rounded p-2" (click)="pickedRequests()" >
+                            <i class="fas fa-check"></i>
+                            <span class="badge badge-warning">{{pickedCount}}</span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item">
                         <a class="nav-link text-dark border rounded p-2" (click)="deliveredRequests()">
-                            <i class="fas fa-check-circle text-success me-2"></i> Delivered
+                            <i class="fas fa-check-circle text-success me-2"></i>
                             <span class="badge badge-success">{{deliveredCount}}</span>
                         </a>
                     </li>
@@ -52,25 +73,28 @@
         </div>
     </nav>
     
-
+    
     <div *ngIf="requests && requests.length > 0">
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th class="text-center" style="width: 100px;">Request ID</th>
-                    <th class="text-center" style="width: 150px;">Date</th>
-                    <th class="text-center" style="width: 200px;">Supervisor</th>
-                    <th class="text-center" style="width: 150px;">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr mat-row *ngFor="let request of requests" (click)="selectRequest(request.id)">
-                    <td class="text-center" style="width: 100px;">{{ request.id }}</td>
-                    <td class="text-center" style="width: 150px;">{{ request.date | date:'dd/MM/yyyy' }}</td>
-                    <td class="text-center" style="width: 200px;">{{ request.name }}</td>
-                    <td class="text-center" style="width: 150px;">{{ request.status }}</td>
-                </tr>
-            </tbody>
+        <table class="table table-hover"  >
+        
+                <thead class="thead-dark" >
+                    <tr>
+                        <th class="text-center" style="width: 100px;">Request ID</th>
+                        <th class="text-center" style="width: 150px;">Date</th>
+                        <th class="text-center" style="width: 200px;"*ngIf="otherSupervisor" >Supervisor</th>
+                        <th class="text-center" style="width: 150px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr mat-row *ngFor="let request of requests" (click)="selectRequest(request.id)">
+                        <td class="text-center" style="width: 100px;">{{ request.id }}</td>
+                        <td class="text-center" style="width: 150px;">{{ request.date | date:'dd/MM/yyyy' }}</td>
+                        <td class="text-center" style="width: 200px;"  *ngIf="otherSupervisor">{{ request.name }}</td>
+                        <td class="text-center" style="width: 150px;">{{ request.status }}</td>
+                    </tr>
+                </tbody>
+       
+          
         </table>
         
         <div class="mt-3">

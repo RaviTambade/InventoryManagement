@@ -11,7 +11,6 @@ import { UserService } from 'src/app/Services/user.service';
   styleUrls: ['./request-history.component.css']
 })
 export class RequestHistoryComponent {
-
   userIds: number[] = []
   requests: RequestDetails[];
   data: RequestDetails[];
@@ -20,10 +19,16 @@ export class RequestHistoryComponent {
   cancelledCount: number = 0;
   deliveredCount: number = 0;
   inprogressCount: number = 0;
+  pickedCount: number = 0;
+  readyToDispatchCount: number = 0;
   totalCount:number = 0;
+  myRequestsCount:number=0;
   toDate: string = "";
   fromDate: string = "";
   fromDateSelected: boolean = false;
+  otherSupervisor: boolean=false;
+
+
   constructor(private _requestsvc: RequestService, private _usersvc: UserService, private router: Router) {
     this.requests = [];
     this.data = [];
@@ -32,6 +37,7 @@ export class RequestHistoryComponent {
   ngOnInit(): void {
     this.getRequests();
   }
+
   getRequests() {
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
       if (res) {
@@ -39,15 +45,30 @@ export class RequestHistoryComponent {
         this.data = res;
         console.log(this.data)
         this.getUser();
-        this.requests = this.data.slice(0, 10);
-        this.allRequestCount();
-        this.todaysRequestsCount();
-        this.cancelledRequestsCount();
-        this.deliveredRequestCount();
-        this.inprogressRequestCount();
+        this.requestCounts();
+        this.inprogressRequests();
       }
     })
   }
+
+  requestCounts(){
+    // All request count
+    const requestCount=this.data.length; 
+    const myRequestCount=this.data.filter(u => u.userId ==this.empid ).length;
+    const cancelledrequest = this.data.filter(u => u.status === "Cancelled"  && u.userId===this.empid).length;
+    const pickedCount = this.data.filter(u => u.status === "Picked"  && u.userId===this.empid).length;
+    const readyToDispatchCount = this.data.filter(u => u.status === "Ready To Dispatch" && u.userId===this.empid).length;
+    const deliveredRequest = this.data.filter(u => u.status === "Delivered"  && u.userId===this.empid).length;
+    const inprogressRequest = this.data.filter(u => u.status === "inprogress" && u.userId===this.empid).length;
+    this.totalCount=requestCount;
+    this.myRequestsCount=myRequestCount;  
+    this.cancelledCount = cancelledrequest;  
+    this.pickedCount = pickedCount; 
+    this.readyToDispatchCount = readyToDispatchCount; 
+    this.deliveredCount = deliveredRequest;
+    this.inprogressCount = inprogressRequest;
+  }
+
   onFromDateChange() {
     console.log(this.fromDate);
   }
@@ -63,12 +84,6 @@ export class RequestHistoryComponent {
     this._requestsvc.setSelectedRequestId(0);
   }
 
-  allRequestCount(){
-    const requestCount=this.data.length;
-    this.totalCount=requestCount;
-
-  }
-
   todaysRequestsCount() {
     const today = new Date();
     const todayString = today.toISOString().split('T')[0];
@@ -77,28 +92,16 @@ export class RequestHistoryComponent {
       return requestDate == todayString;
     })
     this.todaysCount = todaysRequests.length;
-
   }
-  cancelledRequestsCount() {
-    const cancelledrequest = this.data.filter(u => u.status === "Cancelled").length;
-    this.cancelledCount = cancelledrequest;
-  }
-  deliveredRequestCount() {
-    const deliveredRequest = this.data.filter(u => u.status === "Delivered").length;
-    this.deliveredCount = deliveredRequest;
-  }
-  inprogressRequestCount() {
-    const inprogressRequest = this.data.filter(u => u.status === "inprogress").length;
-    this.inprogressCount = inprogressRequest;
-  }
-
+  
   allRequests(){
+    this.otherSupervisor=true;
     const totalRequests=this.data;
-    console.log(totalRequests);
     this.requests=totalRequests;
   }
 
   todaysRequests() {
+    this.otherSupervisor=false;
     const today = new Date();
     const todayString = today.toISOString().split('T')[0];
     const todaysRequests = this.data.filter(request => {
@@ -106,26 +109,59 @@ export class RequestHistoryComponent {
       return requestDate == todayString;
     })
     this.requests = todaysRequests;
+    console.log(this.requests.length>1)
+    if(this.requests.length<1){
+    this._requestsvc.setSelectedRequestId(0);
+    }
+    else{
+      const value = this.requests[0].id;
+      this._requestsvc.setSelectedRequestId(value);  
+    }
   }
 
+  myRequests(){
+    this.otherSupervisor=false;
+    const myRequests = this.data.filter(u => u.userId === this.empid);
+    this.requests = myRequests;
+    const value = this.requests[0].id
+    this._requestsvc.setSelectedRequestId(value);
+  }
   cancelledRequests() {
-    const cancelledrequest = this.data.filter(u => u.status === "Cancelled");
+    this.otherSupervisor=false;
+    const cancelledrequest = this.data.filter(u => u.status === "Cancelled"  && u.userId===this.empid);
     this.requests = cancelledrequest;
-    this._requestsvc.setSelectedRequestId(0);
-
+    const value = this.requests[0].id
+    this._requestsvc.setSelectedRequestId(value);
   }
 
   inprogressRequests() {
-    const inprogressrequest = this.data.filter(u => u.status !== "Delivered" && "Cancelled");
+    this.otherSupervisor=false;
+    const inprogressrequest = this.data.filter(u => u.status === "inprogress"  && u.userId===this.empid);
     this.requests = inprogressrequest;
-    const requestId=this.requests[0].id;
-    this._requestsvc.setSelectedRequestId(requestId);
+    const value = this.requests[0].id
+    this._requestsvc.setSelectedRequestId(value);
   }
-
+  pickedRequests() {
+    this.otherSupervisor=false;
+    const inprogressrequest = this.data.filter(u => u.status === "Picked" && u.userId===this.empid);
+    this.requests = inprogressrequest;
+    const value = this.requests[0].id
+    this._requestsvc.setSelectedRequestId(value);
+  }
+  readyToDispatchRequests() {
+    this.otherSupervisor=false;
+    const inprogressrequest = this.data.filter(u => u.status === "Ready To Dispatch"  && u.userId===this.empid);
+    this.requests = inprogressrequest;
+    const value = this.requests[0].id
+    this._requestsvc.setSelectedRequestId(value);
+  }
   deliveredRequests() {
-    const deliveredrequest = this.data.filter(u => u.status === "Delivered");
+    this.otherSupervisor=false;
+    const deliveredrequest = this.data.filter(u => u.status === "Delivered"  && u.userId===this.empid);
     this.requests = deliveredrequest;
-    this._requestsvc.setSelectedRequestId(0);
+    const value = this.requests[0].id;
+    console.log(value);
+    this._requestsvc.setSelectedRequestId(value);
   }
 
   getUser() {

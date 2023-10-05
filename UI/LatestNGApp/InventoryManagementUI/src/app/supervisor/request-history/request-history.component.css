@@ -34,6 +34,7 @@
     transition: background-color 0.2s ease-in-out;
 }
 
+
 /* Hover effect for date inputs */
 .nav-link[type="date"]:hover {
     background-color: #f8f9fa; /* Light gray background on hover */

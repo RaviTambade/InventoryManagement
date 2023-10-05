@@ -1,18 +1,14 @@
-
-   
-
-<div class="container"> <!-- Added p-0 to remove container padding -->
-    <div class="bg-light ">
-      <div class="row border">
-        <div class="col-12 col-md-8 overflow-auto" style="max-height: 400px;"  > <!-- Use col-12 to make it full width on all screens -->
-          <!-- Request History Component -->
-          <app-request-history></app-request-history>
+<div class="container-fluid p-0"> <!-- Use container-fluid for full width and p-0 to remove container padding -->
+    <div class="bg-light">
+        <div class="row border">
+            <div class="col-12 col-md-8 overflow-auto" style="max-height: 400px;">
+                <!-- Request History Component -->
+                <app-request-history></app-request-history>
+            </div>
+            <div class="col-12 col-md-4 overflow-auto" style="max-height: 400px;">
+                <!-- Details Component -->
+                <app-request-details></app-request-details>
+            </div>
         </div>
-        <div class="col-12 col-md-4 overflow-auto" style="max-height: 400px;" > <!-- Use col-12 to make it full width on all screens -->
-          <!-- Details Component -->
-          <app-request-details></app-request-details>
-        </div>
-      </div>
     </div>
-  </div>
-  
+</div>
