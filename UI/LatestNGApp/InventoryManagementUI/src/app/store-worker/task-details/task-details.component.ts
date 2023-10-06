@@ -23,13 +23,13 @@ export class TaskDetailsComponent implements OnInit{
       console.log(id);
       this.taskId=id;
       if(this.taskId!==0 && this.taskId!==null){
-        this.getTaskDetails(this.taskId);
+        this.getTaskDetails();
  
       }
   })
   }
-  getTaskDetails(id:number){
-    this.svc.getTaskDetails(id).subscribe((res)=>{
+  getTaskDetails(){
+    this.svc.getTaskDetails(this.taskId).subscribe((res)=>{
       this.taskdetails=res;
       this.Status=this.taskdetails[0].status;
       console.log(this.Status);
@@ -42,8 +42,8 @@ export class TaskDetailsComponent implements OnInit{
   onPicked(){
     this.svc.UpdateStatus(this.taskId).subscribe((res) => {
       console.log(res);
+      this.getTaskDetails();
     })
-     window.location.reload();
   }
   onDeliver(){
     this.svc.Deliver(this.taskId).subscribe((res) => {

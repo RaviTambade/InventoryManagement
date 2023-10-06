@@ -40,7 +40,6 @@ export class EmployeesListComponent {
       this._employeeSvc.getByRole(this.role).subscribe((res)=>{
         console.log(res);
         this.employees=res
-        // this.employee=res;
         this.isRole=true;
         let userIds=this.employees.map(e=>e.userId)  
         let userIdsString = userIds.join(",");
@@ -67,6 +66,8 @@ export class EmployeesListComponent {
       this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res) => {
         console.log(res);
         this.employees=res;
+        const id=this.employees[0].userId;
+        this._employeeSvc.setSelectedEmployeeId(id);
         this.employee=res;
         let userIds=this.employees.map(e=>e.userId)  
         let userIdsString = userIds.join(",");
@@ -81,36 +82,34 @@ export class EmployeesListComponent {
           employee.name=matchingName.name
         }
         })
+        
+
       })
         console.log(this.data);
-        this.storeManagersCount();
-        this.storeWorkersCount();       
+        this.getCount();
       })
     }   
   }
 
   supervisorsCount() {
-    const supervisors = this.employee.filter(u => u.role === "Supervisor").length;
-    console.log(supervisors);
-    this.supervisorCount = supervisors;
+    this.supervisorCount = this.employee.filter(u => u.role === "Supervisor").length;
   }
   
-  storeManagersCount() {
-    const storeManager = this.employee.filter(u => u.role === "Store Manager").length;
-    this.storeManagerCount = storeManager;
+  getCount() {
+    this.storeManagerCount = this.employee.filter(u => u.role === "Store Manager").length;
+    this.storeWorkerCount = this.employee.filter(u => u.role === "Store Worker").length;
+
   }
 
-  storeWorkersCount() {
-    const storeWorker = this.employee.filter(u => u.role === "Store Worker").length;
-    this.storeWorkerCount = storeWorker;
-  }
+
 
   supervisors(){
     const supervisor = this.employee.filter(u => u.role === "Supervisor");
     console.log(supervisor);
     this.employees = supervisor;
     console.log(this.employees);
-    this._employeeSvc.setSelectedEmployeeId(0);
+    const id=this.employees[0].userId;
+    this._employeeSvc.setSelectedEmployeeId(id);
   }
 
   storeManagers() {
@@ -118,13 +117,15 @@ export class EmployeesListComponent {
     console.log(storeManager);
     this.employees = storeManager;
     console.log(this.employees);
-    this._employeeSvc.setSelectedEmployeeId(0);
+    const id=this.employees[0].userId;
+    this._employeeSvc.setSelectedEmployeeId(id);
   }
   storeWorkers() {
     const storeWorker = this.employee.filter(u => u.role === "Store Worker");
     this.employees = storeWorker;
     console.log(this.employees);
-    this._employeeSvc.setSelectedEmployeeId(0);
+    const id=this.employees[0].userId;
+        this._employeeSvc.setSelectedEmployeeId(id);
   }
 
   addNewEmployee(){

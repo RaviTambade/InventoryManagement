@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/Models/User';
 import { OrderDetails } from 'src/app/Models/orderDetails';
 import { OrderService } from 'src/app/Services/order.service';
@@ -25,8 +26,9 @@ export class OrderDetailsComponent implements OnInit {
   };
   isApprove: boolean = false;
   isShipper: boolean = false;
+  @Output() reloadEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private orderService: OrderService, private _usersvc: UserService) { }
+  constructor(private orderService: OrderService, private _usersvc: UserService,private router: Router) { }
 
   ngOnInit(): void {
     this.orderService.selectedOrderId$.subscribe((id) => {
@@ -75,11 +77,14 @@ export class OrderDetailsComponent implements OnInit {
 
   onApproved(orderid: any, q: any) {
     const quantity = Number.parseInt(q)
-    console.log(quantity);
-    console.log(orderid)
     this.orderService.Approve(orderid, quantity).subscribe((res) => {
-      console.log(res);
-
+      //component reloading logic
+      const status= this.orderDetails.filter(i=>i.itemStatus==false);
+      if(status.length==1){
+        window.location.reload();
+      }
+      else
+       this.getOrderDetails();
     })
 
   }

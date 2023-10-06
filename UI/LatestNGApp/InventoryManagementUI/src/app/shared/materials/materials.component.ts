@@ -27,6 +27,9 @@ export class MaterialsComponent {
     this._materialsvc.getAllMaterials().subscribe((response) => {
       this.data = response;
       this.materials = this.data.slice(0, 10);
+      const id = this.materials[0].id;
+      this._materialsvc.setSelectedMaterialId(id);
+
       console.log(response);
       this.data.forEach(item => {
         if (!this.categories.includes(item.type)) {
@@ -37,7 +40,6 @@ export class MaterialsComponent {
     })
   }
   selectedMaterialId(id: number) {
-    console.log(id);
     this._materialsvc.setSelectedMaterialId(id);
   }
 

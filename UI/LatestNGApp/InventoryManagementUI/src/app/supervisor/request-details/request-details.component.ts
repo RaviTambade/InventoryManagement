@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { RequestService } from 'src/app/Services/request.service';
 import { UserService } from 'src/app/Services/user.service';
@@ -30,6 +30,7 @@ export class RequestDetailsComponent {
     name:""
   };
   isShipper:boolean=false;
+
   constructor(private _requestsvc: RequestService,private _usersvc:UserService ) {
     this.carts = [];
     this.item = {

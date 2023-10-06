@@ -28,7 +28,6 @@ export class RequestHistoryComponent {
   fromDateSelected: boolean = false;
   otherSupervisor: boolean=false;
 
-
   constructor(private _requestsvc: RequestService, private _usersvc: UserService, private router: Router) {
     this.requests = [];
     this.data = [];
