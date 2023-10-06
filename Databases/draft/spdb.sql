@@ -164,4 +164,36 @@ shipment:LOOP
     END $$
 DELIMITER ;
 	DELIMITER $$
+
+
+        DELIMITER $$
+CREATE PROCEDURE GetrequestsByDate
+(
+    IN supervisorId INT,
+    IN given_date DATE,
+    OUT todaysRequests INT,
+    OUT yesterdaysRequests INT,
+    OUT weekRequests INT,
+    OUT monthRequests INT
+)
+BEGIN
+    SELECT count(*) INTO todaysRequests
+    FROM materialrequests
+    WHERE DATE(date) = given_date and supervisorid=supervisorId;
+    SELECT count(*) INTO yesterdaysRequests
+    FROM materialrequests
+    WHERE DATE(date) = DATE_SUB(given_date, INTERVAL 1 DAY) and supervisorid=supervisorId;
+    SELECT count(*) INTO weekRequests
+    FROM materialrequests
+    WHERE DATE(date) BETWEEN DATE_SUB(given_date, INTERVAL (DAYOFWEEK(given_date) - 1) DAY)  -- 2023-09-08
+    AND DATE_ADD(given_date, INTERVAL (7 - DAYOFWEEK(given_date)) DAY) and supervisorid=supervisorId; -- //2023-09-14
+     SELECT count(*) INTO monthRequests
+    FROM materialrequests
+    WHERE DATE(date) BETWEEN DATE_SUB(given_date, INTERVAL DAY(given_date) - 1 DAY)
+    AND LAST_DAY(given_date) and supervisorid=supervisorId;
+END $$
+DELIMITER ;
+DELIMITER $$
+
+ 
    

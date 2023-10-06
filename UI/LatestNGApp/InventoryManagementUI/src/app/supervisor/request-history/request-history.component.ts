@@ -14,7 +14,7 @@ export class RequestHistoryComponent {
   userIds: number[] = []
   requests: RequestDetails[];
   data: RequestDetails[];
-  empid: number = 11;
+  empid: number = 21;
   todaysCount: number = 0;
   cancelledCount: number = 0;
   deliveredCount: number = 0;
@@ -36,10 +36,13 @@ export class RequestHistoryComponent {
 
   ngOnInit(): void {
     this.getRequests();
+    console.log("function called");
   }
 
   getRequests() {
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
+      console.log("function called");
+      console.log(res);
       if (res) {
         this.requests = res;
         this.data = res;
@@ -186,10 +189,10 @@ export class RequestHistoryComponent {
     this.router.navigate(["shared/store"])
   }
   onRemove(id:number){
-    this._requestsvc.removeItem(id).subscribe((res) => {
+    console.log(id);
+    this._requestsvc.deleteRequest(id).subscribe((res) => {
       console.log(res);
       window.location.reload();
-
     })  }
 }
 

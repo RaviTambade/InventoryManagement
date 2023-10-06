@@ -41,12 +41,14 @@ export class RequestService {
     let url ="http://localhost:5164/api/request/requests/" + empid ;
     return this.http.get(url);
   }
+
   getAllRequest(empid:number):Observable<any>{
     let url ="http://localhost:5082/api/requests/request/" + empid ;
     return this.http.get(url);
   }
+
   deleteRequest(reqid:number):Observable<any>{
-    let url ="http://localhost:5164/api/request/delete/request/" + reqid ;
+    let url ="http://localhost:5164/api/request/delete/request/" +reqid ;
     return this.http.delete(url);
   }
   cancelRequest(reqid:number):Observable<any>{
