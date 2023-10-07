@@ -35,12 +35,10 @@ export class RequestHistoryComponent {
 
   ngOnInit(): void {
     this.getRequests();
-    console.log("function called");
   }
 
   getRequests() {
     this._requestsvc.getAllRequests(this.empid).subscribe((res) => {
-      console.log("function called");
       console.log(res);
       if (res) {
         this.requests = res;

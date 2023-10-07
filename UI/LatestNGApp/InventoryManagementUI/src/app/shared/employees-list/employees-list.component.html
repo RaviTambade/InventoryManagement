@@ -6,19 +6,19 @@
             <div class="d-flex flex-wrap align-items-center mb-2">
                 <ul class="navbar-nav flex-grow">
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2 " *ngIf="!isRole" (click)="storeManagers()">
+                        <a class="nav-link text-dark border rounded p-2 " *ngIf="isRole" (click)="storeManagers()">
                             <i class="fas fa-user text-primary me-2"></i> Store Managers
                             <span class="badge badge-warning">{{storeManagerCount}}</span>
                         </a>
                     </li>&nbsp;
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" *ngIf="!isRole" (click)="storeWorkers()">
+                        <a class="nav-link text-dark border rounded p-2" *ngIf="isRole" (click)="storeWorkers()">
                             <i class="fas fa-user text-primary me-2"></i>Store Workers
                             <span class="badge badge-success">{{storeWorkerCount}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" *ngIf="isRole" (click)="supervisors()">
+                        <a class="nav-link text-dark border rounded p-2" *ngIf="!isRole" (click)="supervisors()">
                             <i class="fas fa-user text-primary me-2"></i>Supervisors
                             <span class="badge badge-success">{{supervisorCount}}</span>
                         </a>

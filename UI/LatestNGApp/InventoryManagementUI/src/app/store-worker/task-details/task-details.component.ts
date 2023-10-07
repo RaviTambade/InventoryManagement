@@ -43,9 +43,11 @@ export class TaskDetailsComponent implements OnInit{
     this.svc.UpdateStatus(this.taskId).subscribe((res) => {
       console.log(res);
       if(res==true){
-      for(let i=1; i<this.taskdetails.length; i++){
-        this.taskdetails.status="Picked"
+        // this.getTaskDetails();
+      for(const details of this.taskdetails){
+        details.status="Picked"
       }
+      
       }
     })
   }

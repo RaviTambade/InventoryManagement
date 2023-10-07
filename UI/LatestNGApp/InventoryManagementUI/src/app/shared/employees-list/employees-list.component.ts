@@ -3,6 +3,7 @@ import { EmployeeService } from '../../Services/employee.service';
 import { Employee } from 'src/app/Models/Employee';
 import { UserService } from 'src/app/Services/user.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/Models/User';
 
 @Component({
   selector: 'app-employees-list',
@@ -19,92 +20,101 @@ export class EmployeesListComponent {
   department: string = '';
   userIds:number[] = [];
   employee:any[]=[];
-  role:string="Supervisor";
+  user:User[]=[];
+  role:string=" ";
   isRole:boolean=false;
   supervisorCount:number=0;
  
-  constructor(private _employeeSvc: EmployeeService, private _userSvc: UserService, private router:Router) {
+constructor(private _employeeSvc: EmployeeService, private _userSvc: UserService, private router:Router) {
+    const role=localStorage.getItem("role");
+    if(role=="Supervisor Incharge"){
+      this.department="Production";
+    }
+    else{
+      this.department="Store";
+    }
   }
 
   ngOnInit(): void {
     this.getEmployees();
   }
+
   selectEmployee(id: number) {
     this._employeeSvc.setSelectedEmployeeId(id);
   }
 
   getEmployees() {
-    const role=localStorage.getItem("role");
-    if(role=="Supervisor Incharge"){
-      console.log(role);
-      this._employeeSvc.getByRole(this.role).subscribe((res)=>{
+    if(this.department){
+      this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res)=>{
         console.log(res);
-        this.employees=res
+        this.employees=res;
+        this.data=res;
         this.isRole=true;
         let userIds=this.employees.map(e=>e.userId)  
         let userIdsString = userIds.join(",");
 
-
         this._userSvc.getUserName(userIdsString).subscribe((res)=>{
         console.log(res)
-        this.data=res;
-        console.log(this.employees)
-        this.employees.forEach((employee)=>{
-        let matchingName=this.data.find((element)=>element.id==employee.userId)
+        this.user=res;
+        console.log(this.data);
+        this.data.forEach((employee)=>{
+        let matchingName=this.user.find((element)=>element.id==employee.userId)
         console.log(matchingName);
         if(matchingName != undefined){
           employee.name=matchingName.name
         }
         })
       })
+      this.getCount();
       this.supervisorsCount();
+      this.storeManagers()
       })
-    }
+  }
 
-    if(role=="Store Incharge"){
-      this.department="Store";
-      this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res) => {
-        console.log(res);
-        this.employees=res;
-        const id=this.employees[0].userId;
-        this._employeeSvc.setSelectedEmployeeId(id);
-        this.employee=res;
-        let userIds=this.employees.map(e=>e.userId)  
-        let userIdsString = userIds.join(",");
-        this._userSvc.getUserName(userIdsString).subscribe((res)=>{
-        console.log(res)
-        this.data=res;
-        console.log(this.employees)
-        this.employees.forEach((employee)=>{
-        let matchingName=this.data.find((element)=>element.id==employee.userId)
-        console.log(matchingName);
-        if(matchingName != undefined){
-          employee.name=matchingName.name
-        }
-        })
+    // if(role=="Store Incharge"){
+    //   this.department="Store";
+    //   this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res) => {
+    //     console.log(res);
+    //     this.employees=res;
+    //     const id=this.employees[0].userId;
+    //     this._employeeSvc.setSelectedEmployeeId(id);
+    //     this.employee=res;
+    //     let userIds=this.employees.map(e=>e.userId)  
+    //     let userIdsString = userIds.join(",");
+    //     this._userSvc.getUserName(userIdsString).subscribe((res)=>{
+    //     console.log(res)
+    //     this.data=res;
+    //     console.log(this.employees)
+    //     this.employees.forEach((employee)=>{
+    //     let matchingName=this.data.find((element)=>element.id==employee.userId)
+    //     console.log(matchingName);
+    //     if(matchingName != undefined){
+    //       employee.name=matchingName.name
+    //     }
+    //     })
         
 
-      })
-        console.log(this.data);
-        this.getCount();
-      })
-    }   
+    //   })
+    //     console.log(this.data);
+    //     this.getCount();
+    //   })
+    // }   
   }
 
   supervisorsCount() {
-    this.supervisorCount = this.employee.filter(u => u.role === "Supervisor").length;
+    this.supervisorCount = this.data.filter(u => u.role === "Supervisor").length;
   }
   
   getCount() {
-    this.storeManagerCount = this.employee.filter(u => u.role === "Store Manager").length;
-    this.storeWorkerCount = this.employee.filter(u => u.role === "Store Worker").length;
-
+    this.storeManagerCount = this.data.filter(u => u.role === "Store Manager").length;
+    this.storeWorkerCount = this.data.filter(u => u.role === "Store Worker").length;
+    
   }
 
 
 
   supervisors(){
-    const supervisor = this.employee.filter(u => u.role === "Supervisor");
+    const supervisor = this.data.filter(u => u.role === "Supervisor");
     console.log(supervisor);
     this.employees = supervisor;
     console.log(this.employees);
@@ -113,7 +123,7 @@ export class EmployeesListComponent {
   }
 
   storeManagers() {
-    const storeManager = this.employee.filter(u => u.role === "Store Manager");
+    const storeManager = this.data.filter(u => u.role === "Store Manager");
     console.log(storeManager);
     this.employees = storeManager;
     console.log(this.employees);
@@ -121,11 +131,11 @@ export class EmployeesListComponent {
     this._employeeSvc.setSelectedEmployeeId(id);
   }
   storeWorkers() {
-    const storeWorker = this.employee.filter(u => u.role === "Store Worker");
+    const storeWorker = this.data.filter(u => u.role === "Store Worker");
     this.employees = storeWorker;
     console.log(this.employees);
     const id=this.employees[0].userId;
-        this._employeeSvc.setSelectedEmployeeId(id);
+    this._employeeSvc.setSelectedEmployeeId(id);
   }
 
   addNewEmployee(){
