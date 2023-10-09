@@ -26,7 +26,6 @@ export class OrderDetailsComponent implements OnInit {
   };
   isApprove: boolean = false;
   isShipper: boolean = false;
-  @Output() reloadEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private orderService: OrderService, private _usersvc: UserService, private router: Router) { }
 
