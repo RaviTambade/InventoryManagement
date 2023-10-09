@@ -24,25 +24,25 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="cancelledRequests()">
+                        <a class="nav-link text-dark border rounded p-2" (click)="filterRequests('Cancelled')">
                             <i class="fas fa-times-circle text-danger me-2"></i> 
                             <span class="badge badge-danger">{{cancelledCount}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="inprogressRequests()"  >
+                        <a class="nav-link text-dark border rounded p-2" (click)="filterRequests('inprogress')"  >
                             <i class="fas fa-spinner text-warning me-2"></i>
                             <span class="badge badge-warning">{{inprogressCount}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="readyToDispatchRequests()">
+                        <a class="nav-link text-dark border rounded p-2" (click)="filterRequests('Ready To Dispatch')">
                             <i class="fas fa-truck"></i>  
                             <span class="badge badge-warning">{{readyToDispatchCount}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="pickedRequests()" >
+                        <a class="nav-link text-dark border rounded p-2" (click)="filterRequests('Picked')" >
                             <i class="fas fa-check"></i>
                             <span class="badge badge-warning">{{pickedCount}}</span>
                         </a>
@@ -51,7 +51,7 @@
                     
                     
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="deliveredRequests()">
+                        <a class="nav-link text-dark border rounded p-2" (click)="filterRequests('Delivered')">
                             <i class="fas fa-check-circle text-success me-2"></i>
                             <span class="badge badge-success">{{deliveredCount}}</span>
                         </a>

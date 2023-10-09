@@ -14,7 +14,6 @@ export class OrderDetailsComponent implements OnInit {
 
   orderDetails: OrderDetails[] = [];
   orderId: number = 0;
-  storeManagerId: number = 1;
   newDetails: boolean = false;
   department: string = '';
   orderDate = new Date();
@@ -27,7 +26,7 @@ export class OrderDetailsComponent implements OnInit {
   isApprove: boolean = false;
   isShipper: boolean = false;
 
-  constructor(private orderService: OrderService, private _usersvc: UserService, private router: Router) { }
+  constructor(private orderService: OrderService, private _usersvc: UserService) { }
 
   ngOnInit(): void {
     this.orderService.selectedOrderId$.subscribe((id) => {
@@ -49,15 +48,7 @@ export class OrderDetailsComponent implements OnInit {
       this.orderDetails = res;
       this.newDetails = true;
       this.getUser();
-
-      this.department = this.orderDetails[0].department;
-      this.orderDate = this.orderDetails[0].orderDate;
-
-      if (this.orderDetails[0].status == 'inprogress') {
-        this.inprogressOrder = true;
-      }
-      else
-        this.inprogressOrder = false;
+      this.getCommonValues(); 
     })
   }
 
@@ -66,10 +57,7 @@ export class OrderDetailsComponent implements OnInit {
     console.log(userId);
     this._usersvc.getUser(userId).subscribe((res) => {
       console.log(res[0]);
-      this.shipper = res[0];
       this.shipperName = res[0].name;
-      console.log(this.shipperName);
-      console.log(this.shipper);
       this.isShipper = true;
     })
   }
@@ -90,4 +78,14 @@ export class OrderDetailsComponent implements OnInit {
 
   }
 
+  getCommonValues(){
+    this.department = this.orderDetails[0].department;
+    this.orderDate = this.orderDetails[0].orderDate;
+
+    if (this.orderDetails[0].status == 'inprogress') {
+      this.inprogressOrder = true;
+    }
+    else
+      this.inprogressOrder = false;
+  }
 }

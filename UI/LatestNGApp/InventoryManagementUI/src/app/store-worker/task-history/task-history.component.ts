@@ -10,7 +10,7 @@ import { TasksService } from 'src/app/Services/tasks.service';
 export class TaskHistoryComponent implements OnInit{
 
   tasks:Task[]=[];
-  empId:number=37;
+  employeeId:number=0;
   data:Task[]=[];
   pendingTaskcount:number |any;
   completedTaskcount:number |any;
@@ -18,11 +18,17 @@ export class TaskHistoryComponent implements OnInit{
   constructor(private svc:TasksService){}
 
   ngOnInit():void{
-    this.getTasks() ;
+    this.getTasks();
+    this.getEmployeeId();
   }
-
+  getEmployeeId(){
+    const id=localStorage.getItem("userId");
+    if(id){
+     this.employeeId=Number.parseInt(id);
+    }
+  }
  getTasks(){
-  this.svc.getTasks(this.empId).subscribe((res)=>{
+  this.svc.getTasks(this.employeeId).subscribe((res)=>{
     this.data=res;
     this.getTasksCount();
     this.pendingTasks();
@@ -34,25 +40,20 @@ export class TaskHistoryComponent implements OnInit{
   this.pendingTaskcount  = this.data.filter(u => u.status !== "Delivered").length;
   this.completedTaskcount = this.data.filter(u => u.status === "Delivered").length;
  }
-  selectedTask(id:number){
-   this.svc.setSelectedTaskId(id);
-   console.log(id);
-
-  }
-
-
 
   pendingTasks(){
-    this.svc.setSelectedTaskId(0);
-    const pendingTask = this.data.filter(u => u.status !== "Delivered");
-    this.tasks = pendingTask;
+    this.tasks = this.data.filter(u => u.status !== "Delivered");
     const id=this.tasks[0].id;
     this.svc.setSelectedTaskId(id);
   }
 
   completedTasks(){
-    this.svc.setSelectedTaskId(0);
-    const completedOrders = this.data.filter(u => u.status === "Delivered");
-    this.tasks = completedOrders;   
-  }  
+    this.tasks = this.data.filter(u => u.status === "Delivered");
+    const id=this.tasks[0].id;
+    this.svc.setSelectedTaskId(id); 
+  } 
+  
+  selectedTask(id:number){
+    this.svc.setSelectedTaskId(id);
+   }
 }

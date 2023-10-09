@@ -22,7 +22,7 @@ export class OrderhistoryComponent {
   constructor(private _orderSvc: OrderService, private _usersvc: UserService) {
     this.orders = [];
     this.data = [];
-    this.getEmployeeId()
+    this.getEmployeeId();
     
   }
 

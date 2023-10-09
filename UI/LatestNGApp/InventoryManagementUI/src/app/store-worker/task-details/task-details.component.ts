@@ -11,7 +11,6 @@ export class TaskDetailsComponent implements OnInit{
 
   constructor(private svc :TasksService){}
   
-  @Input() refresh: boolean = false;
   taskdetails:Task |any;
   department:string="";
   taskId:number=0;
@@ -20,11 +19,9 @@ export class TaskDetailsComponent implements OnInit{
   
   ngOnInit(): void {
     this.svc.selectedTaskId$.subscribe((id) => {
-      console.log(id);
       this.taskId=id;
-      if(this.taskId!==0 && this.taskId!==null){
+      if(this.taskId!==0 && this.taskId!==undefined){
         this.getTaskDetails();
- 
       }
   })
   }
@@ -32,10 +29,7 @@ export class TaskDetailsComponent implements OnInit{
     this.svc.getTaskDetails(this.taskId).subscribe((res)=>{
       this.taskdetails=res;
       this.Status=this.taskdetails[0].status;
-      console.log(this.Status);
-      console.log(this.taskdetails);
       this.department=this.taskdetails[0].department;
-      console.log(this.taskdetails);
     })
 
   }
