@@ -166,6 +166,7 @@ DELIMITER ;
 	DELIMITER $$
 
 
+--  get count of requests of particular supervisorid (todays,yesterdays,week,month)
         DELIMITER $$
 CREATE PROCEDURE GetrequestsByDate
 (
@@ -194,6 +195,41 @@ BEGIN
 END $$
 DELIMITER ;
 DELIMITER $$
+
+
+
+--  get count of tasks of particular shipperid (todays,yesterdays,week,month)
+ DELIMITER $$
+CREATE PROCEDURE GetTasksByDate
+(
+    IN shipperId INT,
+    IN given_date DATE,
+    OUT todaysTasks INT,
+    OUT yesterdaysTasks INT,
+    OUT weekTasks INT,
+    OUT monthTasks INT
+)
+BEGIN
+    SELECT count(*) INTO todaysTasks
+    FROM shipments
+    WHERE DATE(date) = given_date and shipperid=shipperId;
+    SELECT count(*) INTO yesterdaysTasks
+    FROM shipments
+    WHERE DATE(date) = DATE_SUB(given_date, INTERVAL 1 DAY) and shipperid=shipperId;
+    SELECT count(*) INTO weekTasks
+    FROM shipments
+    WHERE DATE(date) BETWEEN DATE_SUB(given_date, INTERVAL (DAYOFWEEK(given_date) - 1) DAY)  
+    AND DATE_ADD(given_date, INTERVAL (7 - DAYOFWEEK(given_date)) DAY) and shipperid=shipperId; 
+     SELECT count(*) INTO monthTasks
+    FROM shipments
+    WHERE DATE(date) BETWEEN DATE_SUB(given_date, INTERVAL DAY(given_date) - 1 DAY)
+    AND LAST_DAY(given_date) and shipperid=shipperId;
+    END $$
+	DELIMITER ;
+	DELIMITER $$
+    
+    
+   
 
  
    
