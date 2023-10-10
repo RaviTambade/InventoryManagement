@@ -40,18 +40,10 @@ public class ShipmentController : ControllerBase
     }
 
     [HttpGet]
-    [Route("updatestatus/{id}")]
-    public async Task<bool> UpdateStatus(int id)
+    [Route("updatestatus/{id}/{orderStatus}")]
+    public async Task<bool> UpdateStatus(int id,string orderStatus)
     {
-        bool status = await _shipsvc.UpdateStatus(id);
-        return status;
-    }
-
-    [HttpGet]
-    [Route("deliver/{id}")]
-    public async Task<bool> Deliver(int id)
-    {
-        bool status = await _shipsvc.ShipmentDeliver(id);
+        bool status = await _shipsvc.UpdateStatus(id,orderStatus);
         return status;
     }
 }

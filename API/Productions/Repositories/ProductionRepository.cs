@@ -23,11 +23,13 @@ public class ProductionRepository : IProductionRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
+                int id = int.Parse(reader["id"].ToString());
                 string? department = reader["department"].ToString();
                 int firstSupervisor = int.Parse(reader["firstsupervisor"].ToString());
                 int secondSupervisor = int.Parse(reader["secondsupervisor"].ToString());
                 ProductionStaff productionStaff = new()
                 {
+                    Id = id,
                     Department = department,
                     FirstSupervisor = firstSupervisor,
                     SecondSupervisor = secondSupervisor,

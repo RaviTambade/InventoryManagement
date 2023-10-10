@@ -15,11 +15,13 @@ export class TaskHistoryComponent implements OnInit{
   pendingTaskcount:number |any;
   completedTaskcount:number |any;
 
-  constructor(private svc:TasksService){}
+  constructor(private svc:TasksService){
+    this.getEmployeeId();
+  }
 
   ngOnInit():void{
     this.getTasks();
-    this.getEmployeeId();
+    
   }
   getEmployeeId(){
     const id=localStorage.getItem("userId");
@@ -30,6 +32,7 @@ export class TaskHistoryComponent implements OnInit{
  getTasks(){
   this.svc.getTasks(this.employeeId).subscribe((res)=>{
     this.data=res;
+    console.log(res);
     this.getTasksCount();
     this.pendingTasks();
 

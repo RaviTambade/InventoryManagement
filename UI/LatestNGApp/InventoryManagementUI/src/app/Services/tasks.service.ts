@@ -24,14 +24,11 @@ export class TasksService {
     let url ="http://localhost:5112/api/shipment/shippingdetails/" + id ;
     return this.http.get(url);
   }
-  UpdateStatus(id:number):Observable<any>{
-    let url ="http://localhost:5112/api/shipment/updatestatus/" + id ;
+  UpdateStatus(id:number,orderStatus:string):Observable<any>{
+    let url ="http://localhost:5112/api/shipment/updatestatus/" + id+ "/"+ orderStatus ;
     return this.http.get(url);
   } 
-  Deliver(id:number):Observable<any>{
-    let url ="http://localhost:5112/api/shipment/deliver/" + id ;
-    return this.http.get(url);
-  } 
+  
   getWeeklyReport(empid:number, period:any):Observable<any>{
     let url ="http://localhost:5112/api/shipment/weeklyreport/" + empid ;
     return this.http.post(url,period);

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Task } from 'src/app/Models/Task';
+import { TaskDetails } from 'src/app/Models/TaskDetails';
 import { TasksService } from 'src/app/Services/tasks.service';
 
 @Component({
@@ -11,11 +11,12 @@ export class TaskDetailsComponent implements OnInit{
 
   constructor(private svc :TasksService){}
   
-  taskdetails:Task |any;
+  taskdetails:TaskDetails |any;
   department:string="";
   taskId:number=0;
   changeStatus:boolean=true;
   Status:string="";
+  orderStatus:string="Picked";
   
   ngOnInit(): void {
     this.svc.selectedTaskId$.subscribe((id) => {
@@ -28,13 +29,16 @@ export class TaskDetailsComponent implements OnInit{
   getTaskDetails(){
     this.svc.getTaskDetails(this.taskId).subscribe((res)=>{
       this.taskdetails=res;
+      console.log(res);
       this.Status=this.taskdetails[0].status;
       this.department=this.taskdetails[0].department;
     })
 
   }
   onPicked(){
-    this.svc.UpdateStatus(this.taskId).subscribe((res) => {
+    // this.updateStatus.id =this.taskId;
+    const orderStatus="Picked";
+    this.svc.UpdateStatus(this.taskId,orderStatus).subscribe((res) => {
       console.log(res);
       if(res==true){
         // this.getTaskDetails();
@@ -46,7 +50,8 @@ export class TaskDetailsComponent implements OnInit{
     })
   }
   onDeliver(){
-    this.svc.Deliver(this.taskId).subscribe((res) => {
+    const orderStatus="Delivered"; 
+    this.svc.UpdateStatus(this.taskId,orderStatus).subscribe((res) => {
       console.log(res);
     })
     window.location.reload();
