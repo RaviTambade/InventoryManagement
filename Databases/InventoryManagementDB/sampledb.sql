@@ -281,3 +281,7 @@ INSERT INTO shippingdetails (storemanagerid, materialid, categoryid, shipmentid,
 (1, 1, 9, 12, 16, 1, 66),
 (1, 3, 9, 13, 17, 1, 66),
 (1, 2, 10, 14, 18, 1, 10);
+
+
+
+

@@ -52,7 +52,6 @@ CREATE TABLE initialrequestitems(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         initialrequestid INT NOT NULL,
                         CONSTRAINT fk_initialrequest FOREIGN KEY (initialrequestid) REFERENCES initialrequest(id)ON UPDATE CASCADE ON DELETE CASCADE,
                         materialid INT NOT NULL,CONSTRAINT fk_material_id4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                        categoryid INT NOT NULL, constraint fk_categoryid2 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
                         quantity INT NOT NULL ); 
 
 
@@ -61,30 +60,26 @@ CREATE TABLE materialrequests(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                               date DATETIME DEFAULT CURRENT_TIMESTAMP,
 							  supervisorid INT NOT NULL,
                               CONSTRAINT fk_supervisor_id5 FOREIGN KEY (supervisorid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                        status ENUM('inprogress' ,'Ready To Dispatch', 'Picked','Delivered', 'Cancelled') NOT NULL);
+                             status ENUM('inprogress' ,'Ready To Dispatch', 'Picked','Delivered', 'Cancelled') NOT NULL);
 
 
                     
 CREATE TABLE materialrequestitems(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            storemanagerid INT NOT NULL,CONSTRAINT fk_employee_id FOREIGN KEY (storemanagerid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+                            categoryid int not null,constraint fk_category_id2 foreign key(categoryid) references categories(id) on update cascade on delete cascade,
                             materialid INT NOT NULL,CONSTRAINT fk_materialid FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
                             materialrequestid INT NOT NULL,CONSTRAINT fk_materialrequestid FOREIGN KEY (materialrequestid) REFERENCES materialrequests(id) ON UPDATE CASCADE ON DELETE CASCADE ,
-                            categoryid INT NOT NULL, constraint fk_categoryid FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
                             quantity INT NOT NULL);
                 
 
                             
 CREATE TABLE shipments(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         date DATETIME DEFAULT CURRENT_TIMESTAMP,
-                        supervisorid INT NOT NULL,CONSTRAINT fk_employee_id6 FOREIGN KEY (supervisorid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
                         materialrequestid INT NOT NULL,CONSTRAINT fk_materialrequest_id FOREIGN KEY (materialrequestid) REFERENCES materialrequests(id) ON UPDATE CASCADE ON DELETE CASCADE, 
                         shipperid INT NOT NULL, CONSTRAINT fk_shipperid FOREIGN KEY (shipperid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE);
 
 
 CREATE TABLE shippingdetails(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             storemanagerid INT NOT NULL,CONSTRAINT fk_employee_id7 FOREIGN KEY (storemanagerid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                            materialid INT NOT NULL,CONSTRAINT fk_materialid_4 FOREIGN KEY (materialid) REFERENCES materials(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                            categoryid INT NOT NULL, constraint fk_categoryid_5 FOREIGN KEY(categoryid) REFERENCES categories(id) on UPDATE cascade on delete cascade,
                             shipmentid INT NOT NULL, constraint fk_shipmentid FOREIGN KEY(shipmentid) REFERENCES shipments(id) on UPDATE cascade on delete cascade,
                             itemid INT NOT NULL, constraint fk_itemid FOREIGN KEY(itemid) REFERENCES materialrequestitems(id) on UPDATE cascade on delete cascade,
                            status boolean DEFAULT false,
