@@ -540,3 +540,42 @@ SELECT @TotalRequestCount AS TotalRequestCount,
        @HighestRequestInADay AS HighestRequestInADay;
 
 
+
+
+   DELIMITER $$
+CREATE PROCEDURE GetRequests
+(
+    OUT totalRequests INT,
+    OUT todaysRequests INT,
+    OUT cancelledRequests INT,
+    OUT pendingRequests INT,
+    OUT deliveredRequests INT
+    
+)
+BEGIN
+    -- total requests count
+    SELECT count(*) INTO totalRequests
+    FROM materialrequests;
+    -- todays requests count
+    SELECT count(*) INTO todaysRequests
+    FROM materialrequests
+    where DATE(date)='2023-10-10';
+    -- total cancelled requests
+    SELECT count(*) INTO cancelledRequests
+    FROM materialrequests
+    WHERE status="Cancelled";
+    -- total pending requests
+	SELECT count(*) INTO pendingRequests
+    FROM materialrequests
+    WHERE status = "inprogress";
+    -- total delivered requests
+    SELECT count(*) INTO deliveredRequests
+    FROM materialrequests
+    WHERE status = "Delivered";
+    
+    END $$
+	DELIMITER ;
+	DELIMITER $$
+    
+   
+ 
