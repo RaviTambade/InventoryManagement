@@ -444,3 +444,102 @@ shipment:LOOP
 DELIMITER ;
 	DELIMITER $$
    
+
+
+
+   --BI
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE GetMaterialRequestStatsBySupervisor(
+    IN supervisor_id INT,
+    OUT TotalRequestCount INT,
+    OUT FrequentlyRequestedMaterial VARCHAR(255),
+    OUT HighestRequestInADay INT
+)
+BEGIN
+    -- Total request count
+    SELECT COUNT(*) INTO TotalRequestCount
+    FROM materialrequests
+    WHERE supervisorid = supervisor_id;
+
+    -- Frequently requested material
+    SELECT
+        m.title INTO FrequentlyRequestedMaterial
+    FROM (
+        SELECT materialid, COUNT(materialid) AS MaterialCount
+        FROM materialrequests AS mr
+        JOIN materialrequestitems AS mri ON mr.id = mri.materialrequestid
+        WHERE mr.supervisorid = supervisor_id
+        GROUP BY materialid
+        ORDER BY MaterialCount DESC
+        LIMIT 1
+    ) AS Subquery
+    JOIN materials AS m ON Subquery.materialid = m.id;
+
+    -- Highest request raised in a day
+    SELECT MAX(RequestsInADay) INTO HighestRequestInADay
+    FROM (
+        SELECT DATE(date) AS RequestDate, COUNT(*) AS RequestsInADay
+        FROM materialrequests
+        WHERE supervisorid = supervisor_id
+        GROUP BY RequestDate
+    ) AS RequestStats;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetMaterialRequestStatsBySupervisor(
+    IN supervisor_id INT,
+    OUT TotalRequestCount INT,
+    OUT TopFrequentlyRequestedMaterials TEXT,
+    OUT HighestRequestInADay INT
+)
+BEGIN
+    -- Total request count
+    SELECT COUNT(*) INTO TotalRequestCount
+    FROM materialrequests
+    WHERE supervisorid = supervisor_id;
+
+    -- Top 3 frequently requested materials
+    SELECT
+        GROUP_CONCAT(m.title ORDER BY MaterialCount DESC SEPARATOR ', ') INTO TopFrequentlyRequestedMaterials
+    FROM (
+        SELECT materialid, COUNT(materialid) AS MaterialCount
+        FROM materialrequests AS mr
+        JOIN materialrequestitems AS mri ON mr.id = mri.materialrequestid
+        WHERE mr.supervisorid = supervisor_id
+        GROUP BY materialid
+        ORDER BY MaterialCount DESC
+        LIMIT 3
+    ) AS Subquery
+    JOIN materials AS m ON Subquery.materialid = m.id;
+
+    -- Highest request raised in a day
+    SELECT MAX(RequestsInADay) INTO HighestRequestInADay
+    FROM (
+        SELECT DATE(date) AS RequestDate, COUNT(*) 
+        AS RequestsInADay  FROM materialrequests WHERE supervisorid = supervisor_id 
+        GROUP BY RequestDate) AS RequestStats;
+END$$
+
+DELIMITER ;
+
+
+CALL GetMaterialRequestStatsBySupervisor(
+    11,
+    @TotalRequestCount,
+    @FrequentlyRequestedMaterial,
+    @HighestRequestInADay
+);
+
+-- Retrieve the values from the OUT parameters
+SELECT @TotalRequestCount AS TotalRequestCount,
+       @FrequentlyRequestedMaterial AS FrequentlyRequestedMaterial,
+       @HighestRequestInADay AS HighestRequestInADay;
+
+
