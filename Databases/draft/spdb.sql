@@ -578,4 +578,27 @@ BEGIN
 	DELIMITER $$
     
    
- 
+ DELIMITER $$
+CREATE PROCEDURE GetSupervisors
+(
+    OUT totalSupervisors INT,
+    OUT topSupervisors varchar(10)
+)
+BEGIN
+    --  total supervisors
+    select count(*) INTO totalSupervisors
+    from employees inner join roles on employees.roleid=roles.id where role="supervisor";
+    -- top 3 supervisorid
+    SELECT
+        GROUP_CONCAT(subquery.supervisorid ) INTO topSupervisors
+    FROM (
+     SELECT supervisorid,COUNT(supervisorid)
+        FROM materialrequests
+        GROUP BY supervisorid
+        ORDER BY COUNT(supervisorid) DESC
+        LIMIT 3
+   )
+   AS Subquery;
+    END $$
+	DELIMITER ;
+	DELIMITER $$

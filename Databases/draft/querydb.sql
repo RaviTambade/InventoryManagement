@@ -15,4 +15,8 @@ select @todaysOrders,@yesterdaysOrders,@weekOrders,@monthOrders;
  call GetRequests(@totalRequests,@todaysRequests,@cancelledRequests,@pendingRequests,@deliveredRequests);
 
 select @totalRequests,@todaysRequests,@cancelledRequests,@pendingRequests,@deliveredRequests;
-   
+    
+call GetSupervisors(@totalSupervisors,@topSupervisors);
+
+select @totalSupervisors,@topSupervisors;
+ 
