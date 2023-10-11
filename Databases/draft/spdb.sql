@@ -268,8 +268,7 @@ DELIMITER $$
 
    
 -------------- updated
-
-
+                           
  DELIMITER !!
 CREATE TRIGGER newshipment
 after INSERT
@@ -317,6 +316,7 @@ BEGIN
     end !!
 	DELIMITER ;
     
+    drop trigger updatestatus;
     
       DELIMITER !!
 CREATE TRIGGER updatestatus
@@ -333,8 +333,7 @@ SELECT COUNT(*) into totalcount FROM shippingdetails s where s.shipmentid=new.sh
 UPDATE materials
 SET quantity = quantity - new.quantity
 WHERE id = (SELECT m.materialid
-             FROM materialrequestitems m
-             INNER JOIN someothertable t ON m.id = t.itemid); 
+             FROM materialrequestitems m where m.id=new.itemId); 
 set val=0;
 OPEN shipping_cursor ;
 begin
@@ -360,9 +359,7 @@ shipment:LOOP
     DELIMITER ;
     
 
-
-
-
+drop procedure createorder;
 
         DELIMITER $$
 CREATE PROCEDURE CreateOrder(in cartId int)
@@ -375,7 +372,7 @@ DECLARE quantity INT;
 DECLARE status BOOLEAN;
 DECLARE superviosrid INT;
 DECLARE noMoreRow1 INT default 0;
-DECLARE initialrequestitems_cursor CURSOR  FOR SELECT ct.materialid, ct.categoryid, ct.quantity FROM initialrequestitems ct WHERE ct.initialrequestid=cartId;
+DECLARE initialrequestitems_cursor CURSOR  FOR SELECT ct.materialid, ct.quantity FROM initialrequestitems ct WHERE ct.initialrequestid=cartId;
 insert into materialrequests(supervisorid,status)values((select ir.employeeid from initialrequest ir where ir.id=cartId),1);
 set reqid= LAST_INSERT_ID();
    OPEN initialrequestitems_cursor ;
@@ -383,12 +380,12 @@ set reqid= LAST_INSERT_ID();
     DECLARE exit_flag INT DEFAULT 0;
      DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
     initialrequestitems:loop
-    	FETCH initialrequestitems_cursor INTO materialId,categoryId,quantity;
+    	FETCH initialrequestitems_cursor INTO materialId,quantity;
     IF exit_flag=1 THEN 
 		LEAVE initialrequestitems;
     END IF;
-	INSERT INTO materialrequestitems(storemanagerid,materialrequestid,materialid,categoryid,quantity)
-    VALUES((select w.employeeid from warehousestaff w  where w.categoryid=categoryId),reqid,materialId,categoryId,quantity); 
+	INSERT INTO materialrequestitems(materialrequestid,materialid,categoryid,quantity)
+    VALUES(reqid,materialId,(select m.categoryid from materials m where m.id=materialId),quantity); 
 
 END LOOP initialrequestitems;
 end;
