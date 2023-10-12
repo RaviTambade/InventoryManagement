@@ -2,9 +2,10 @@ export class TaskDetails{
 
     constructor(
 
-        public id:number,
-        public date:Date,
-        public status:string,
-        public department:string
+        public department: string,
+        public orderId: number,
+        public section: string,
+        public status: string,
+        public taskId: number
     ){}
 }

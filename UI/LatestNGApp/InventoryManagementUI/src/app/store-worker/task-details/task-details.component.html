@@ -1,7 +1,7 @@
 <div *ngIf="taskdetails">
   <h2>Task Details</h2>
 
-  <div *ngIf="Status === 'Delivered'" class="delivered-message">
+  <div *ngIf="status === 'Delivered'" class="delivered-message">
     <h1 style="color: green; font-weight: bold; text-align: center;">Delivered</h1>
   </div>
 
@@ -36,8 +36,8 @@
     </div>
 
     <div class="text-right mt-2">
-      <a (click)="onPicked()" *ngIf="Status == 'Ready To Dispatch'" class="btn btn-primary">Picked</a>
-      <a (click)="onDeliver()" *ngIf="Status == 'Picked'" class="btn btn-primary">Deliver</a>
+      <a (click)="onPicked()" *ngIf="status == 'Ready To Dispatch'" class="btn btn-primary">Picked</a>
+      <a (click)="onDeliver()" *ngIf="status == 'Picked'" class="btn btn-primary">Deliver</a>
     </div>
   </div>
 </div>

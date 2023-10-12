@@ -38,7 +38,6 @@ export class ProfileComponent {
     contactNumber: '',
     imageUrl: ''
   }
-  imgurl: string = './assets/img/fEmp.jpeg'
 
   constructor(private usrsvc: UserService, private empsvc: EmployeeService,private authSvc : AuthenticationService) { }
 
