@@ -4,10 +4,10 @@ using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using System.Collections;
 using System.Data;
-using MaterialRequest.Models;
-using MaterialRequest.Repositories.Interfaces;
+using Transflower.InventoryManagement.Orders.Models;
+using Transflower.InventoryManagement.Orders.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-namespace MaterialRequest.Repositories;
+namespace Transflower.InventoryManagement.Orders.Repositories;
 public class OrderRepository : IOrderRepository
 {
 

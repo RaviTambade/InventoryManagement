@@ -1,4 +1,4 @@
-namespace MaterialRequest.Models;
+namespace Transflower.InventoryManagement.Orders.Models;
 public class Order
 {
     public int Id { get; set; }

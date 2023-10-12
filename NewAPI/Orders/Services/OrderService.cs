@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Threading.Tasks;
-using MaterialRequest.Models;
-using MaterialRequest.Repositories.Interfaces;
-using MaterialRequest.Services.Interfaces;
-namespace MaterialRequest.Services;
+using Transflower.InventoryManagement.Orders.Models;
+using Transflower.InventoryManagement.Orders.Repositories.Interfaces;
+using Transflower.InventoryManagement.Orders.Services.Interfaces;
+namespace Transflower.InventoryManagement.Orders.Services;
 public class OrderService : IOrderService
 {
     private readonly IOrderRepository _repo;

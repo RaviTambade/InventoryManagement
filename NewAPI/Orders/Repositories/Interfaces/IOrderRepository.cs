@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Net.Http.Headers;
-using MaterialRequest.Models;
-namespace MaterialRequest.Repositories.Interfaces;
+using Transflower.InventoryManagement.Orders.Models;
+namespace Transflower.InventoryManagement.Orders.Repositories.Interfaces;
 public interface IOrderRepository
 {
     Task<IEnumerable<Request>> GetOrders(int empid);

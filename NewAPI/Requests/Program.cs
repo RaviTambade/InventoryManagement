@@ -1,7 +1,7 @@
-using Transflower.InventoryManagement.Orders.Repositories.Interfaces;
-using Transflower.InventoryManagement.Orders.Repositories;
-using Transflower.InventoryManagement.Orders.Services.Interfaces;
-using Transflower.InventoryManagement.Orders.Services;
+using Transflower.InventoryManagement.Requests.Repositories.Interfaces;
+using Transflower.InventoryManagement.Requests.Repositories;
+using Transflower.InventoryManagement.Requests.Services.Interfaces;
+using Transflower.InventoryManagement.Requests.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -34,9 +34,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors(MyAllowSpecificOrigins);
-
 app.UseAuthorization();
 
 app.MapControllers();
