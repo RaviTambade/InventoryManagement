@@ -231,7 +231,7 @@ BEGIN
     
    
 --  get count of orders of particular storemanagerid (todays,yesterdays,week,month)
- DELIMITER $$
+DELIMITER $$
 CREATE PROCEDURE GetOrdersByDate
 (
     IN storeManagerId INT,
@@ -243,28 +243,30 @@ CREATE PROCEDURE GetOrdersByDate
 )
 BEGIN
     SELECT count(*) INTO todaysOrders
-    FROM materialrequestitems 
+    FROM  materialrequestitems 
+    inner join shippingdetails on shippingdetails.itemid = materialrequestitems.id
     inner join materialrequests on materialrequests.id =materialrequestitems.materialrequestid
-    WHERE DATE(date) = given_date and materialrequestitems.storemanagerid=storeManagerId;
+    WHERE DATE(date) = given_date and shippingdetails.storemanagerid=storeManagerId;
     SELECT count(*) INTO yesterdaysOrders
     FROM materialrequestitems
+    inner join shippingdetails on shippingdetails.itemid = materialrequestitems.id
     inner join materialrequests on materialrequests.id =materialrequestitems.materialrequestid
-    WHERE DATE(date) = DATE_SUB(given_date, INTERVAL 1 DAY) and materialrequestitems.storemanagerid=storeManagerId;
+    WHERE DATE(date) = DATE_SUB(given_date, INTERVAL 1 DAY) and shippingdetails.storemanagerid=storeManagerId;
     SELECT count(*) INTO weekOrders
     FROM materialrequestitems
+    inner join shippingdetails on shippingdetails.itemid = materialrequestitems.id
     inner join materialrequests on materialrequests.id =materialrequestitems.materialrequestid
     WHERE DATE(date) BETWEEN DATE_SUB(given_date, INTERVAL (DAYOFWEEK(given_date) - 1) DAY)  
-    AND DATE_ADD(given_date, INTERVAL (7 - DAYOFWEEK(given_date)) DAY) and materialrequestitems.storemanagerid=storeManagerId; 
-    SELECT count(*) INTO monthOrders
+    AND DATE_ADD(given_date, INTERVAL (7 - DAYOFWEEK(given_date)) DAY) and shippingdetails.storemanagerid=storeManagerId; 
+     SELECT count(*) INTO monthOrders
     FROM materialrequestitems
+    inner join shippingdetails on shippingdetails.itemid = materialrequestitems.id
     inner join materialrequests on materialrequests.id =materialrequestitems.materialrequestid
     WHERE DATE(date) BETWEEN DATE_SUB(given_date, INTERVAL DAY(given_date) - 1 DAY)
-    AND LAST_DAY(given_date) and materialrequestitems.storemanagerid=storeManagerId;
+    AND LAST_DAY(given_date) and shippingdetails.storemanagerid=storeManagerId;
 END $$
 DELIMITER ;
-DELIMITER $$
-    
-    
+	DELIMITER $$
 
    
 -------------- updated
