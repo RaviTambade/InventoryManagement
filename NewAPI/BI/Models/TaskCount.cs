@@ -2,8 +2,8 @@ namespace Transflower.InventoryManagement.BIService.Models;
 
 public class TaskCount
 {
-    public int TodaysRequests { get; set; }
-    public int YesterdaysRequests { get; set; }
-    public int WeekRequests { get; set; }
-    public int MonthRequests { get; set; }
+    public int TodaysTasks { get; set; }
+    public int YesterdaysTasks { get; set; }
+    public int WeekTasks { get; set; }
+    public int MonthTasks { get; set; }
 }

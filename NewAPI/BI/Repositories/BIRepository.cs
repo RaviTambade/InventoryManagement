@@ -91,4 +91,41 @@ public class BIRepository : IBIRepository
         }
         return orders;
     }
+
+    public async Task<TaskCount> GetTaskCount(DateTime date, int storeWorkerId)
+    {
+        TaskCount tasks = new TaskCount();
+        MySqlConnection connection = new MySqlConnection(_connectionString);
+        try
+        {
+            MySqlCommand cmd = new MySqlCommand("GetTasksByDate", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@given_date", date);
+            cmd.Parameters.AddWithValue("@storeWorkerId", storeWorkerId);
+            cmd.Parameters.AddWithValue("@todaysTasks", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@yesterdaysTasks", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@weekTasks", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@monthTasks", MySqlDbType.Int32);
+
+            cmd.Parameters["@todaysTasks"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@yesterdaysTasks"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@weekTasks"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@monthTasks"].Direction = ParameterDirection.Output;
+            await connection.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            tasks.TodaysTasks = (int)cmd.Parameters["@todaysTasks"].Value;
+            tasks.YesterdaysTasks = (int)cmd.Parameters["@yesterdaysTasks"].Value;
+            tasks.WeekTasks = (int)cmd.Parameters["@weekTasks"].Value;
+            tasks.MonthTasks = (int)cmd.Parameters["@monthTasks"].Value;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+        return tasks;
+    }
 }

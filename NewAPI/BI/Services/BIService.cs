@@ -24,4 +24,9 @@ public class BIServices : IBIService
     {
         return await _repository.GetOrderCount(date, storeManagerId);
     }
+
+    public async Task<TaskCount> GetTaskCount(DateTime date, int storeWorkerId)
+    {
+        return await _repository.GetTaskCount(date, storeWorkerId);
+    }
 }

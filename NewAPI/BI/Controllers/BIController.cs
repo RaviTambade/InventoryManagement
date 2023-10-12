@@ -27,7 +27,10 @@ namespace Transflower.InventoryManagement.BIService.Controllers
             return await _service.GetOrderCount(date, storeManagerId);
         }
 
-      
-
+        [HttpGet("taskcount/{date}/{storeWorkerId}")]
+        public async Task<TaskCount> GetTaskCount(DateTime date, int storeWorkerId)
+        {
+            return await _service.GetTaskCount(date, storeWorkerId);
+        }
     }
 }
