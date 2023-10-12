@@ -8,4 +8,5 @@ public interface IBIRepository
     Task<OrderCount> GetOrderCount(DateTime date, int storeManagerId);
     Task<TaskCount> GetTaskCount(DateTime date, int storeWorkerId);
 
+
 }
