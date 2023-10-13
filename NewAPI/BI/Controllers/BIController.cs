@@ -32,5 +32,29 @@ namespace Transflower.InventoryManagement.BIService.Controllers
         {
             return await _service.GetTaskCount(date, storeWorkerId);
         }
+
+        [HttpGet("requests")]
+        public async Task<Request> GetRequestByStatus()
+        {
+            return await _service.GetRequestByStatus();
+        }
+
+        [HttpGet("supervisors")]
+        public async Task<Supervisor> GetSupervisors()
+        {
+            return await _service.GetSupervisors();
+        }
+
+        [HttpGet("materials")]
+        public async Task<Material> GetMaterials()
+        {
+            return await _service.GetMaterials();
+        }
+
+        [HttpGet("supervisorRequest/{supervisorId}")]
+        public async Task<SupervisorRequest> GetMaterialRequestBySupervisor(int supervisorId)
+        {
+            return await _service.GetMaterialRequestBySupervisor(supervisorId);
+        }
     }
 }
