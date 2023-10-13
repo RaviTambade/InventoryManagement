@@ -128,4 +128,156 @@ public class BIRepository : IBIRepository
         }
         return tasks;
     }
+
+    public async Task<Request> GetRequestByStatus()
+    {
+        Request requests = new Request();
+        MySqlConnection connection = new MySqlConnection(_connectionString);
+        try
+        {
+            MySqlCommand cmd = new MySqlCommand("GetRequests", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@todaysRequests", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@totalRequests", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@cancelledRequests", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@pendingRequests", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@deliveredRequests", MySqlDbType.Int32);
+
+            cmd.Parameters["@todaysRequests"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@totalRequests"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@cancelledRequests"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@pendingRequests"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@deliveredRequests"].Direction = ParameterDirection.Output;
+            await connection.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            requests.TodaysRequests = (int)cmd.Parameters["@todaysRequests"].Value;
+            requests.TotalRequests = (int)cmd.Parameters["@totalRequests"].Value;
+            requests.TotalCancelled = (int)cmd.Parameters["@cancelledRequests"].Value;
+            requests.TotalPending = (int)cmd.Parameters["@pendingRequests"].Value;
+            requests.TotalDelivered = (int)cmd.Parameters["@deliveredRequests"].Value;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+        return requests;
+    }
+
+     public async Task<Material> GetMaterials()
+    {
+        Material materials = new Material();
+        MySqlConnection connection = new MySqlConnection(_connectionString);
+        try
+        {
+            MySqlCommand cmd = new MySqlCommand("GetTotalsAndCounts", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Total Stocks", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@Total Categories", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@Total Materials", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@Materials to Reorder", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@Out of Stock Materials", MySqlDbType.Int32);
+
+            cmd.Parameters["@Total Stocks"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@Total Categories"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@Total Materials"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@Materials to Reorder"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@Out of Stock Materials"].Direction = ParameterDirection.Output;
+            await connection.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            materials.TotalStocks = (int)cmd.Parameters["@Total Stocks"].Value;
+            materials.TotalCategories = (int)cmd.Parameters["@Total Categories"].Value;
+            materials.TotalMaterials = (int)cmd.Parameters["@Total Materials"].Value;
+            materials.MaterialsToReorder = (int)cmd.Parameters["@Materials to Reorder"].Value;
+            materials.OutOFStockMaterials = (int)cmd.Parameters["@Out of Stock Materials"].Value;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+        return materials;
+    }
+
+    public async Task<Supervisor> GetSupervisors()
+    {
+        Supervisor supervisor = null;
+        MySqlConnection connection = new MySqlConnection(_connectionString);
+        try
+        {
+            MySqlCommand cmd = new MySqlCommand("GetSupervisors", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@totalSupervisors", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@topSupervisors", MySqlDbType.VarChar);     
+            cmd.Parameters["@totalSupervisors"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@topSupervisors"].Direction = ParameterDirection.Output;    
+            await connection.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int totalSupervisors = int.Parse(reader["totalSupervisors"].ToString());
+                string? topSupervisors = reader["topSupervisors"].ToString();
+                
+                supervisor = new Supervisor()
+                {
+                    TotalSupervisors=totalSupervisors,
+                    TopSupervisors=topSupervisors
+                };
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+        return supervisor;
+    }
+
+    public async Task<SupervisorRequest> GetMaterialRequestBySupervisor(int supervisorId)
+    {
+        SupervisorRequest requests = new SupervisorRequest();
+        MySqlConnection connection = new MySqlConnection(_connectionString);
+        try
+        {
+            MySqlCommand cmd = new MySqlCommand("GetMaterialRequestStatsBySupervisor", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@supervisor_id", supervisorId);
+            cmd.Parameters.AddWithValue("@TotalRequestCount", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@FrequentlyRequestedMaterial", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@HighestRequestInADay", MySqlDbType.Int32);
+            
+            cmd.Parameters["@TotalRequestCount"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@FrequentlyRequestedMaterial"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@HighestRequestInADay"].Direction = ParameterDirection.Output;
+            await connection.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            requests.TotalRequestCount = (int)cmd.Parameters["@TotalRequestCount"].Value;
+            requests.FrequentlyRequestedMaterial = (int)cmd.Parameters["@FrequentlyRequestedMaterial"].Value;
+            requests.HighestRequestInADay = (int)cmd.Parameters["@HighestRequestInADay"].Value;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+        return requests;
+    }
+
+    
+
+
+
+    
 }
