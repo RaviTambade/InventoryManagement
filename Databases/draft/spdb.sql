@@ -604,3 +604,81 @@ BEGIN
     END $$
 	DELIMITER ;
 	DELIMITER $$
+
+
+
+
+-- all order details for store incharge 
+DELIMITER //
+
+CREATE PROCEDURE GetOrdersCounts()
+BEGIN
+    DECLARE allOrders INT;
+    DECLARE todaysOrders INT;
+    DECLARE pendingOrders INT;
+    DECLARE completedOrders INT;
+    DECLARE cancelledOrders INT;
+
+    -- Count for all orders
+    SELECT COUNT(*) INTO allOrders FROM materialrequests;
+    SELECT COUNT(*) INTO todaysOrders FROM materialrequests WHERE DATE(date) = CURDATE();
+    SELECT COUNT(*) INTO pendingOrders FROM materialrequests WHERE status = 'inprogress';
+    SELECT COUNT(*) INTO completedOrders FROM materialrequests WHERE status NOT IN ('inprogress', 'cancelled');
+    SELECT COUNT(*) INTO cancelledOrders FROM materialrequests WHERE status = 'cancelled';
+
+    -- Return the results
+    SELECT allOrders AS 'All Orders',
+           todaysOrders AS 'Today\'s Orders',
+           pendingOrders AS 'Pending Orders',
+           completedOrders AS 'completed Orders',
+           cancelledOrders AS 'Cancelled Orders';
+
+END //
+
+DELIMITER ;
+
+
+CALL GetOrdersCounts();
+
+
+
+
+
+-- warehouse details for store incharge
+DELIMITER //
+CREATE PROCEDURE GetTotalsAndCounts()
+BEGIN
+    DECLARE totalStocks INT;
+    DECLARE totalCategories INT;
+    DECLARE totalMaterials INT;
+    DECLARE materialsToReorder INT;
+    DECLARE outOfStockMaterials INT;
+
+    -- Total Stocks
+    SELECT SUM(quantity) INTO totalStocks FROM materials;
+
+    -- Total Categories
+    SELECT COUNT(*) INTO totalCategories FROM categories;
+
+    -- Total Materials
+    SELECT COUNT(*) INTO totalMaterials FROM materials;
+
+    -- Materials to Reorder (quantity under 500)
+    SELECT COUNT(*) INTO materialsToReorder FROM materials WHERE quantity < 500;
+
+    -- Out of Stock Materials (quantity is 0)
+    SELECT COUNT(*) INTO outOfStockMaterials FROM materials WHERE quantity = 0;
+
+    -- Return the results
+    SELECT totalStocks AS 'Total Stocks',
+           totalCategories AS 'Total Categories',
+           totalMaterials AS 'Total Materials',
+           materialsToReorder AS 'Materials to Reorder',
+           outOfStockMaterials AS 'Out of Stock Materials';
+
+END //
+DELIMITER ;
+
+-- Call the stored procedure
+CALL GetTotalsAndCounts();
+
