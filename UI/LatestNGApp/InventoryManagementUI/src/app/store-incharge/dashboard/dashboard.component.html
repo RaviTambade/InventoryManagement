@@ -1,22 +1,22 @@
 
-<div class="container">
+<div class="container" *ngIf="count">
     <div class="row">
         <div class="col-md-3">
             <div class="dashboard-card">
                 <div class="card-title">Total Stocks</div>
-                <div class="card-count">1234</div>
+                <div class="card-count">{{count.totalStocks}}</div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="dashboard-card">
                 <div class="card-title">Total Materials</div>
-                <div class="card-count">5678</div>
+                <div class="card-count">{{count.totalMaterials}}</div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="dashboard-card">
                 <div class="card-title">Total Categories</div>
-                <div class="card-count">9</div>
+                <div class="card-count">{{count.totalCategories}}</div>
             </div>
         </div>
         <div class="col-md-3">
@@ -30,7 +30,7 @@
 
 
 
-<div class="container mt-4">
+<div class="container mt-4" *ngIf="order">
     <!-- First Row -->
     <div class="row">
         <div class="col-md-3">
@@ -46,15 +46,15 @@
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">All <br>Orders</h5>
-                            <p class="card-count-main" *ngIf="!showAllOrders">8955</p>
+                            <p class="card-count-main" *ngIf="!showAllOrders">{{order.totalOrders}}</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
                     <!-- Additional data with ngIf -->
                     <div class="additional-data additional-info" *ngIf="showAllOrders">
-                        <div class="additional-data-container">Delivered: 5677</div>
-                        <div class="additional-data-container">Cancelled: 4054</div>
-                        <div class="additional-data-container">Pending: 50</div>
+                        <div class="additional-data-container">Delivered: {{order.completedOrders}}</div>
+                        <div class="additional-data-container">Cancelled: {{order.cancelledOrders}}</div>
+                        <div class="additional-data-container">Pending: {{order.pendingOrders}}</div>
                     </div>
 
                 </div>
@@ -74,14 +74,14 @@
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">Todays Orders</h5>
-                            <p class="card-count-main" *ngIf="!showTodaysOrders">145</p>
+                            <p class="card-count-main" *ngIf="!showTodaysOrders">{{order.todaysOrders}}</p>
                         </div>
                     </div>
                     <!-- Additional data with ngIf -->
                     <div class="additional-data" *ngIf="showTodaysOrders">
-                        <p>Delivered : 121</p>
-                        <p>Cancelled : 5</p>
-                        <p>Pending : 20</p>
+                        <p>Delivered : 4667</p>
+                        <p>Cancelled : 2367</p>
+                        <p>Pending : 6776</p>
                     </div>
                 </div>
             </div>
