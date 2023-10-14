@@ -67,38 +67,14 @@ export class EmployeesListComponent {
           })
         })
         this.getCount();
-        this.storeManagers()
+        if(this.department = "Production" ){
+          this.supervisors();
+        }else
+        this.storeManagers();
       })
     }
 
-    // if(role=="Store Incharge"){
-    //   this.department="Store";
-    //   this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res) => {
-    //     console.log(res);
-    //     this.employees=res;
-    //     const id=this.employees[0].userId;
-    //     this._employeeSvc.setSelectedEmployeeId(id);
-    //     this.employee=res;
-    //     let userIds=this.employees.map(e=>e.userId)  
-    //     let userIdsString = userIds.join(",");
-    //     this._userSvc.getUserName(userIdsString).subscribe((res)=>{
-    //     console.log(res)
-    //     this.data=res;
-    //     console.log(this.employees)
-    //     this.employees.forEach((employee)=>{
-    //     let matchingName=this.data.find((element)=>element.id==employee.userId)
-    //     console.log(matchingName);
-    //     if(matchingName != undefined){
-    //       employee.name=matchingName.name
-    //     }
-    //     })
 
-
-    //   })
-    //     console.log(this.data);
-    //     this.getCount();
-    //   })
-    // }   
   }
 
   getCount() {

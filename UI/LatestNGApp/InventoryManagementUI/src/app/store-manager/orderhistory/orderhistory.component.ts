@@ -38,7 +38,7 @@ export class OrderhistoryComponent {
   }
  
   getOrders() {
-    this._orderSvc.getOrders(1).subscribe((res) => {
+    this._orderSvc.getOrders(this.employeeId).subscribe((res) => {
       console.log(res);
       this.data=res;
       this.getUser();

@@ -53,8 +53,8 @@
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Select Employee
                 </button>
-                <div class="dropdown-menu" style="max-height: 200px;">
-                  <a class="dropdown-item" (click)="replaceEmployee(warehouseStaff, emp)" *ngFor="let emp of employees">{{ emp.name }}</a>
+                <div class="dropdown-menu" style="max-height: 200px; overflow-y: auto;" >
+                  <a class="dropdown-item" (click)="replaceEmployee(warehouseStaff, emp)" *ngFor="let emp of employees">{{ emp }}</a>
                 </div>
               </div>
               

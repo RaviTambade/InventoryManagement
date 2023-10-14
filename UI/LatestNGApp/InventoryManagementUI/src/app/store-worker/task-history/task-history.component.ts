@@ -30,7 +30,7 @@ export class TaskHistoryComponent implements OnInit{
     }
   }
  getTasks(){
-  this.svc.getTasks(38).subscribe((res)=>{
+  this.svc.getTasks(this.employeeId).subscribe((res)=>{
     this.data=res;
     console.log(res);
     this.getTasksCount();

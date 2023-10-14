@@ -73,7 +73,7 @@ export class DepartmentsComponent {
             if (matchingWarehouseStaff) {
                 matchingWarehouseStaff.name = employee.name;
             } else {
-                this.employees.push(employee);
+                this.employees.push(employee.name);
                 
             }
         }

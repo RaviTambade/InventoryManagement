@@ -45,7 +45,7 @@ export class RequestHistoryComponent {
     }
   }
   getRequests() {
-    this._requestsvc.getAllRequests(21).subscribe((res) => {
+    this._requestsvc.getAllRequests(this.employeeId).subscribe((res) => {
       console.log(res);
       if (res) {
         this.data = res;
