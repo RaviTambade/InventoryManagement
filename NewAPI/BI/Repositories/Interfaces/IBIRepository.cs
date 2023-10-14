@@ -11,4 +11,5 @@ public interface IBIRepository
     Task<Supervisor> GetSupervisors();
     Task<Material> GetMaterials();
     Task<SupervisorRequest> GetMaterialRequestBySupervisor(int supervisorId);
+    Task<OrderStatus> GetAllOrdersCountByStatus();
 }

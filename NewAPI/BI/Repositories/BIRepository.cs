@@ -244,7 +244,7 @@ public class BIRepository : IBIRepository
 
     public async Task<SupervisorRequest> GetMaterialRequestBySupervisor(int supervisorId)
     {
-        SupervisorRequest requests = new SupervisorRequest();
+        SupervisorRequest supervisorRequest = new SupervisorRequest();
         MySqlConnection connection = new MySqlConnection(_connectionString);
         try
         {
@@ -252,17 +252,28 @@ public class BIRepository : IBIRepository
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@supervisor_id", supervisorId);
             cmd.Parameters.AddWithValue("@TotalRequestCount", MySqlDbType.Int32);
-            cmd.Parameters.AddWithValue("@FrequentlyRequestedMaterial", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@TopFrequentlyRequestedMaterials", MySqlDbType.VarChar);
             cmd.Parameters.AddWithValue("@HighestRequestInADay", MySqlDbType.Int32);
             
             cmd.Parameters["@TotalRequestCount"].Direction = ParameterDirection.Output;
-            cmd.Parameters["@FrequentlyRequestedMaterial"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@TopFrequentlyRequestedMaterials"].Direction = ParameterDirection.Output;
             cmd.Parameters["@HighestRequestInADay"].Direction = ParameterDirection.Output;
             await connection.OpenAsync();
-            int rowsAffected = await cmd.ExecuteNonQueryAsync();
-            requests.TotalRequestCount = (int)cmd.Parameters["@TotalRequestCount"].Value;
-            requests.FrequentlyRequestedMaterial = (int)cmd.Parameters["@FrequentlyRequestedMaterial"].Value;
-            requests.HighestRequestInADay = (int)cmd.Parameters["@HighestRequestInADay"].Value;
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int totalRequestCount = int.Parse(reader["TotalRequestCount"].ToString());
+                int highestRequestInADay = int.Parse(reader["HighestRequestInADay"].ToString());
+                string? topMaterials= reader["TopFrequentlyRequestedMaterials"].ToString();
+                
+                supervisorRequest = new SupervisorRequest()
+                {
+                    TotalRequestCount=totalRequestCount,
+                    HighestRequestInADay=highestRequestInADay,
+                    FrequentlyRequestedMaterial=topMaterials
+
+                };
+            }
         }
         catch (Exception)
         {
@@ -272,12 +283,44 @@ public class BIRepository : IBIRepository
         {
             await connection.CloseAsync();
         }
-        return requests;
+        return supervisorRequest;
     }
 
-    
+    public async Task<OrderStatus> GetAllOrdersCountByStatus()
+    {
+        OrderStatus orders = new OrderStatus();
+        MySqlConnection connection = new MySqlConnection(_connectionString);
+        try
+        {
+            MySqlCommand cmd = new MySqlCommand("GetOrdersCounts", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@allOrders", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@todaysOrders", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@cancelledOrders", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@pendingOrders", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@completedOrders", MySqlDbType.Int32);
 
-
-
-    
+            cmd.Parameters["@allOrders"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@todaysOrders"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@cancelledOrders"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@pendingOrders"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@completedOrders"].Direction = ParameterDirection.Output;
+            await connection.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            orders.TotalOrders = (int)cmd.Parameters["@allOrders"].Value;
+            orders.TodaysOrders = (int)cmd.Parameters["@todaysOrders"].Value;
+            orders.CancelledOrders = (int)cmd.Parameters["@cancelledOrders"].Value;
+            orders.PendingOrders = (int)cmd.Parameters["@pendingOrders"].Value;
+            orders.CompletedOrders = (int)cmd.Parameters["@completedOrders"].Value;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+        return orders;
+    } 
 }

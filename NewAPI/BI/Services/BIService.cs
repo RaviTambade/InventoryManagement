@@ -47,4 +47,9 @@ public class BIServices : IBIService
     {
         return await _repository.GetMaterialRequestBySupervisor(supervisorId);
     }
+
+    public async Task<OrderStatus> GetAllOrdersCountByStatus()
+    {
+        return await _repository.GetAllOrdersCountByStatus();
+    }
 }

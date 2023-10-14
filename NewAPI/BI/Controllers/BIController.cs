@@ -56,5 +56,11 @@ namespace Transflower.InventoryManagement.BIService.Controllers
         {
             return await _service.GetMaterialRequestBySupervisor(supervisorId);
         }
+
+        [HttpGet("allorderStatus")]
+        public async Task<OrderStatus> GetAllOrdersCountByStatus()
+        {
+            return await _service.GetAllOrdersCountByStatus();
+        }
     }
 }
