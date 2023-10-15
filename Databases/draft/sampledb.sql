@@ -167,12 +167,13 @@ insert into Warehousestaff(section, categoryid,employeeid)values('Section 14', 1
 insert into Warehousestaff(section, categoryid,employeeid)values('Section 15', 15,15);
 insert into Warehousestaff(section, categoryid,employeeid)values('Section 16', 16,16);
 
-INSERT INTO assemblystaff(department,supervisorid1,supervisorid2) VALUES("GB500 Line",21,22);
-	INSERT INTO assemblystaff(department,supervisorid1,supervisorid2) VALUES("GB400 Line",23,24);
-	INSERT INTO assemblystaff(department,supervisorid1,supervisorid2) VALUES("GB540 Line",25,26);
-	INSERT INTO assemblystaff(department,supervisorid1,supervisorid2) VALUES("Chassis Assembly",27,28);
-    INSERT INTO assemblystaff(department,supervisorid1,supervisorid2) VALUES("Engine Line",29,30);
-	INSERT INTO assemblystaff(department,supervisorid1,supervisorid2) VALUES("Interior Assembly",31,32);
+        INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("GB500 Line",21,22);
+	INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("GB400 Line",23,24);
+	INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("GB540 Line",25,26);
+	INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("Chassis Assembly",27,28);
+        INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("Engine Line",29,30);
+	INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("Interior Assembly",31,32);
+
     
 INSERT INTO initialrequest(employeeid) VALUES (21);
 INSERT INTO initialrequest(employeeid) VALUES (22);
