@@ -9,7 +9,6 @@ namespace Transflower.InventoryManagement.Requests.Controllers;
 [Route("/api/[controller]")]
 public class RequestController : ControllerBase
 {
-
     private readonly IRequestService _reqsvs;
     public RequestController(IRequestService reqsvs)
     {

@@ -20,7 +20,7 @@ public class ShippingRepository : IShippingRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select s.date ,r.status,r.id from shipments s inner join productionstaff p on p.firstsupervisor= s.supervisorid or p.secondsupervisor = s.supervisorid  inner join materialrequests r on s.materialrequestid=r.id where s.shipperid=@employeeId and r.status<> 1 ORDER BY s.id";
+            string query = "select s.date ,r.status,r.id from shipments s inner join materialrequests r on s.materialrequestid=r.id inner join productionstaff p on p.firstsupervisor= r.supervisorid or p.secondsupervisor = r.supervisorid where s.shipperid=@employeeId and r.status<> 1 and r.status<> 5 ORDER BY s.id";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@employeeId", employeeId);
             await con.OpenAsync();
@@ -61,7 +61,7 @@ public class ShippingRepository : IShippingRepository
         MySqlConnection con = new(_connectionString);
         try
         {
-            string query = "select sd.id as orderid,s.id as taskid , materialrequests.status, warehousestaff.section,a.department from shipments s inner join shippingdetails sd on s.id=sd.shipmentid inner join materialrequests on materialrequests.id=s.id inner join warehousestaff on warehousestaff.categoryid=sd.categoryid   inner join productionstaff a on  a.firstsupervisor= s.supervisorid or a.secondsupervisor = s.supervisorid where s.id=@taskId";
+           string query ="select sd.id as orderid,s.id as taskid , p.status, warehousestaff.section,a.department from shipments s  inner join shippingdetails sd on s.id=sd.shipmentid  inner join materialrequests p on p.id=s.id  inner join warehousestaff on warehousestaff.employeeId=sd.storemanagerid   inner join productionstaff a on  a.firstsupervisor= p.supervisorid or a.secondsupervisor = p.supervisorid where s.id=@taskId";
             MySqlCommand cmd = new(query, con);
             cmd.Parameters.AddWithValue("@taskId", taskId);
             await con.OpenAsync();

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InitialRequestService } from 'src/app/Services/initial-request.service';
 import { OrderService } from 'src/app/Services/order.service';
+import { RequestService } from 'src/app/Services/request.service';
 
 @Component({
   selector: 'app-tray',
@@ -20,7 +21,7 @@ export class TrayComponent implements OnInit {
   modifiedId:number[]=[];
   
 
-  constructor(private requestSvc: InitialRequestService, private orderSvc: OrderService, private svc: InitialRequestService) {
+  constructor(private initialRequest: InitialRequestService, private requestSvc: RequestService, private svc: InitialRequestService) {
 
     this.updatedTray = {
       id: 0,
@@ -34,7 +35,7 @@ export class TrayComponent implements OnInit {
 
 
   getTray() {
-    this.requestSvc.getTray(this.empid).subscribe((res) => {
+    this.initialRequest.getTray(this.empid).subscribe((res) => {
       console.log(res);
       this.data=res;
       this.trays = JSON.parse(JSON.stringify(res));
@@ -43,22 +44,22 @@ export class TrayComponent implements OnInit {
   }
 
   onRemove(id: number) {
-    this.requestSvc.remove(id).subscribe((res) => {
+    this.initialRequest.remove(id).subscribe((res) => {
       if (res) {
         window.location.reload();
       }
     })
   }
 
-  onOrder() {
-    this.orderSvc.order(this.empid).subscribe((res) => {
+  onRequest() {
+    this.requestSvc.request(this.empid).subscribe((res) => {
       console.log(res);
       window.location.reload();
     })
   }
 
   onRemoveAll() {
-    this.requestSvc.removeAll(this.empid).subscribe((res) => {
+    this.initialRequest.removeAll(this.empid).subscribe((res) => {
       console.log(res);
       window.location.reload();
     })
