@@ -29,11 +29,10 @@ CREATE TABLE materials(id INT NOT NULL AUTO_INCREMENT primary KEY,
                         unitprice INT NOT NULL,
                         imageurl varchar (50));
 
-
-create table assemblystaff(id INT NOT NULL AUTO_INCREMENT primary KEY,
+create table productionstaff(id INT NOT NULL AUTO_INCREMENT primary KEY,
                          department varchar (50), 
-                         supervisorid1 int ,constraint fk_employeeid4 foreign key(supervisorid1) references employees(id) on update cascade on delete cascade,
-                        supervisorid2 int ,constraint fk_employeeid1 foreign key(supervisorid2) references employees(id) on update cascade on delete cascade);
+                         firstsupervisor int ,constraint fk_employeeid4 foreign key(firstsupervisor) references employees(id) on update cascade on delete cascade,
+                        secondsupervisor int ,constraint fk_employeeid1 foreign key(secondsupervisor) references employees(id) on update cascade on delete cascade);
 
 
 create table Warehousestaff(id INT NOT NULL AUTO_INCREMENT primary KEY,
