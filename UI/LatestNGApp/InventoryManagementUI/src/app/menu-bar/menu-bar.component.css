@@ -5,6 +5,5 @@
 
 .navbar-nav .nav-item .nav-link:hover {
   color: blue; /* Change the text color to blue on hover */
-  /* You can also add other styles like background-color, border, etc. here */
   text-decoration: none; /* Remove underline on hover */
 }
