@@ -1,73 +1,60 @@
-- Insertion for material
-	INSERT INTO categories(category) VALUES ("Bearings");
-	INSERT INTO categories(category) VALUES ("1st Gear");
-	INSERT INTO categories(category) VALUES ("2nd Gear");
-	INSERT INTO categories(category) VALUES ("3rd Gear");
-	INSERT INTO categories(category) VALUES ("Reverse Gear");
-	INSERT INTO categories(category) VALUES ("Main Shaft");
-	INSERT INTO categories(category) VALUES ("Counter Shaft");
-	INSERT INTO categories(category) VALUES ("Housing");
-	INSERT INTO categories(category) VALUES  ("Clutch Components"),   ("Transmission Fluids"),  ("Axle Components"), ("Suspension Parts"),  ("Engine Block"),  ("Pistons and Rings"),  ("Crankshaft and Camshaft"), ("Electrical Components");
+INSERT INTO categories(category) VALUES ("Bearings");
+INSERT INTO categories(category) VALUES ("1st Gear");
+INSERT INTO categories(category) VALUES ("2nd Gear");
+INSERT INTO categories(category) VALUES ("3rd Gear");
+INSERT INTO categories(category) VALUES ("Reverse Gear");
+INSERT INTO categories(category) VALUES ("Main Shaft");
+INSERT INTO categories(category) VALUES ("Counter Shaft");
+INSERT INTO categories(category) VALUES ("Housing");
+INSERT INTO categories(category) VALUES  ("Clutch Components"),   ("Transmission Fluids"),  ("Axle Components"), ("Suspension Parts"),  ("Engine Block"),  ("Pistons and Rings");
 
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Needle Bearing',1,784,20, '/assets/img/Bearing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Ball Bearing',1,800,30, '/assets/img/Bearing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Bush Bearing',1,4500,15, '/assets/img/Bearing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 3.4', 3,450,85, '/assets/img/2gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 3.6', 3,400,85, '/assets/img/2gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 4.2', 3,800,85, '/assets/img/2gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 8.81', 2,450,90, '/assets/img/1gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 9.23', 2,400,90, '/assets/img/1gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 7.72', 2,800,90, '/assets/img/1gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 3.4', 4,450,85, '/assets/img/3gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 3.6', 4,400,85, '/assets/img/3gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 4.2', 4,0,85, '/assets/img/3gear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 3.4', 5,450,85, '/assets/img/Rgear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 3.6' , 5,400,85, '/assets/img/Rgear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 4.2', 5,800,85, '/assets/img/Rgear.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Main Shaft', 6,0,200, '/assets/img/ms.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Main Shaft',6,87,250, '/assets/img/ms.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB540 Main Shaft', 6,79,400, '/assets/img/ms.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Counter Shaft', 7,80,450, '/assets/img/cs.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Counter Shaft', 7,89,200, '/assets/img/cs.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Counter Shaft', 7,0,500, '/assets/img/cs.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Housing' , 8,50,2000, '/assets/img/housing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Housing', 8,8,2500, '/assets/img/housing.jpeg');
-	insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Housing' , 8,0,3500, '/assets/img/housing.jpeg');
-
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Needle Bearing',1,784,20, '/assets/img/Bearing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Ball Bearing',1,800,30, '/assets/img/Bearing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Bush Bearing',1,4500,15, '/assets/img/Bearing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 3.4', 3,450,85, '/assets/img/2gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 3.6', 3,400,85, '/assets/img/2gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('2nd Gear of ratio 4.2', 3,800,85, '/assets/img/2gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 8.81', 2,450,90, '/assets/img/1gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 9.23', 2,400,90, '/assets/img/1gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('1st Gear of ratio 7.72', 2,800,90, '/assets/img/1gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 3.4', 4,450,85, '/assets/img/3gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 3.6', 4,400,85, '/assets/img/3gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('3rd Gear of ratio 4.2', 4,0,85, '/assets/img/3gear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 3.4', 5,450,85, '/assets/img/Rgear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 3.6' , 5,400,85, '/assets/img/Rgear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Reverse Gear of ratio 4.2', 5,800,85, '/assets/img/Rgear.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Main Shaft', 6,0,200, '/assets/img/ms.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Main Shaft',6,87,250, '/assets/img/ms.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB540 Main Shaft', 6,79,400, '/assets/img/ms.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Counter Shaft', 7,80,450, '/assets/img/cs.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Counter Shaft', 7,89,200, '/assets/img/cs.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Counter Shaft', 7,0,500, '/assets/img/cs.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB500 Housing' , 8,50,2000, '/assets/img/housing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('GB400 Housing', 8,8,2500, '/assets/img/housing.jpeg');
+insert into materials(title, categoryid, quantity, unitprice, imageurl) values ('Gb540 Housing' , 8,0,3500, '/assets/img/housing.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl) VALUES ('Clutch Plate', 9, 500, 35, '/assets/img/ClutchPlate.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl) VALUES ('Pressure Plate', 9, 300, 45, '/assets/img/PressurePlate.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl) VALUES ('Release Bearing', 9, 400, 25, '/assets/img/ReleaseBearing.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Flywheel', 9, 150, 70, '/assets/img/Flywheel.jpeg');
-
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl) VALUES ('Automatic Transmission Fluid', 10, 1000, 15, '/assets/img/AutomaticTransmissionFluid.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl) VALUES ('Manual Transmission Oil', 10, 800, 20, '/assets/img/ManualTransmissionOil.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl) VALUES ('CVT Fluid', 10, 500, 25, '/assets/img/CVTFuild.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl) VALUES ('Dual-Clutch Transmission Fluid', 10, 600, 30, '/assets/img/DCTFluid.jpeg');
-
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Axle Shaft', 11, 300, 50, '/assets/img/AxleShaft.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('CV Joint', 11, 400, 30, '/assets/img/CVJoint.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Differential', 11, 150, 80, '/assets/img/Differential.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl) VALUES ('Wheel Hub Assembly', 11, 200, 40, '/assets/img/WheelHubAssembly.jpeg');
-
-
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Coil Spring', 12, 800, 25, '/assets/img/CoilSpring.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Shock Absorber', 12, 600, 40, '/assets/img/ShockAbsorber.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Control Arm', 12, 400, 30, '/assets/img/ControlArm.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Sway Bar Link', 12, 500, 20, '/assets/img/SwayBarLink.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Strut Assembly', 12, 700, 50, '/assets/img/StrutAssembly.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Suspension Bushing', 12, 300, 15, '/assets/img/SuspensionBushing.jpeg');
-
-
--- Inserting different types of engine block components
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Cylinder Block', 13, 100, 150, '/assets/img/CylinderBlock.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Crankcase', 13, 80, 120, '/assets/img/Crankcase.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Engine Block Gasket', 13, 150, 10, '/assets/img/EngineBlockGasket.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Cylinder Head', 13, 120, 180, '/assets/img/CylinderHead.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Engine Mount', 13, 200, 30, '/assets/img/EngineMount.jpeg');
-
--- You can continue adding more engine block component entries here
-
--- Inserting different types of pistons and rings components
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Piston Set', 14, 300, 50, '/assets/img/PistonSet.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Piston Rings Set', 14, 350, 40, '/assets/img/PistonRingsSet.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Connecting Rod', 14, 200, 30, '/assets/img/ConnectingRod.jpeg');
@@ -75,213 +62,1514 @@ INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Ring Compressor', 14, 150, 10, '/assets/img/RingCompressor.jpeg');
 INSERT INTO materials(title, categoryid, quantity, unitprice, imageurl)VALUES ('Piston Crown', 14, 180, 20, '/assets/img/PistonCrown.jpeg');
 
-	-- Insertion for roles
-		insert INTO roles(role) VALUES("Incharge");
-	INSERT INTO roles(role) VALUES("Store Manager");
-	INSERT INTO roles(role) VALUES("Supervisor");
-	INSERT INTO roles(role) VALUES("Store Worker");
-	insert INTO roles(role) VALUES("Store Incharge");
-	insert INTO roles(role) VALUES("Supervisor Incharge");
+-- Insertion for roles
+insert INTO roles(role) VALUES("Store Incharge");
+INSERT INTO roles(role) VALUES("Store Manager");
+INSERT INTO roles(role) VALUES("Supervisor");
+INSERT INTO roles(role) VALUES("Store Worker");
+insert INTO roles(role) VALUES("Supervisor Incharge");
 
-	-- Insertion for departments
-	insert INTO departments(department) VALUES("HR");
-	INSERT INTO departments(department) VALUES("Store");
-	INSERT INTO departments(department) VALUES("GB500 Line");
-	INSERT INTO departments(department) VALUES("GB400 Line");
-	INSERT INTO departments(department) VALUES("GB540 Line");
-	INSERT INTO departments(department) VALUES("Engine Line");
-	INSERT INTO departments(department) VALUES("Chassis Assembly");
-	INSERT INTO departments(department) VALUES("Interior Assembly");
-    
- 
+-- Insertion for departments
+insert INTO departments(department) VALUES("HR");
+INSERT INTO departments(department) VALUES("Store");
+INSERT INTO departments(department) VALUES("Production");
 
-	-- Insertion for Employees
-    -- store employee
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(1,2, 2 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(2,2, 2 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(3,2, 2 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(4,2, 2 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(5,2, 2 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(6,2, 2 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(7,2, 2 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(8,2, 2 ,'/assets/img/mEmp.jpeg');
-    
-    -- supervisores
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(9,3, 3 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(10,3, 3 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(11,4, 3 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(12,4, 3 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(13,5, 3 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(14,5, 3 ,'/assets/img/mEmp.jpeg');
-    
-    -- store workers
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(15,6, 4 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(16,6, 4 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(17,6, 4 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees(userid,departmentid, roleid,imageurl)VALUES(18,6, 4 ,'/assets/img/mEmp.jpeg');
-	INSERT INTO employees (userid, departmentid, roleid, imageurl, date_added)
-VALUES
-(19, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(20, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(21, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(22, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(23, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(24, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(25, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(26, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(30, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(31, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(32, 2, 2, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(33, 2, 6, '/assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(34, 2, 5, '/assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(35, 2, 4, '/assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(36, 2, 4, '/assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(37, 2, 4, './assets/img/mEmp.jpeg', '2015-08-11 00:00:00'),
-(38, 2, 4, './assets/img/mEmp.jpeg', '2023-08-10 00:00:00'),
-(39, 2, 4, './assets/img/mEmp.jpeg', '2015-10-10 00:00:00'),
-(40, 2, 4, './assets/img/mEmp.jpeg', '2018-05-08 00:00:00');
+-- insertion for employees
+-- store manager
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(1,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(2,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(3,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(4,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(5,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(6,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(7,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(8,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(9,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(10,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(11,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(12,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(13,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(14,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(15,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(16,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(17,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(18,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(19,2, 2 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(20,2, 2 ,'2019-09-01 00:00:00');
+
+-- supervisores
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(21,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(22,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(23,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(24,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(25,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(26,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(27,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(28,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(29,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(30,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(31,3, 3 ,'2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(32,3, 3, '2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(33,3, 3, '2019-09-01 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(34,3, 3, '2019-09-01 00:00:00');
 
 
+-- store workers	
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(35, 2, 4,'2015-08-11 00:00:00' );
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(36, 2, 4,'2015-08-11 00:00:00');	
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(37, 2, 4, '2015-08-11 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(38, 2, 4,'2015-08-11 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(39, 2, 4,'2015-08-11 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(40, 2, 4, '2015-08-11 00:00:00');
 
-INSERT INTO workerstatus(workerid)VALUES(15);
-INSERT INTO workerstatus(workerid)VALUES(16);
-INSERT INTO workerstatus(workerid)VALUES(17);
-INSERT INTO workerstatus(workerid)VALUES(18);
+-- store Incharge
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(41, 1, 1, '2015-08-11 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(42, 1, 1, '2015-08-11 00:00:00');
 
-	-- Insertion for Sections
-	-- Insertion for Sections
-	insert into Warehousestaff(section,  categoryid,employeeid)values('Section 1', 1,1);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 2', 2,2);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 3', 3,3);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 4', 4,4);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 5', 5,5);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 6', 6,6);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 7', 7,7);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 8', 8,8);
-
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 9', 9,19);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 10', 10,20);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 11', 11,21);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 12', 12,22);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 13', 13,23);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 14', 14,24);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 15', 15,25);
-	insert into Warehousestaff(section, categoryid,employeeid)values('Section 16', 16,26);
-
-	INSERT INTO initialrequest(employeeid) VALUES (9);
-	INSERT INTO initialrequest(employeeid) VALUES (10);
-	INSERT INTO initialrequest(employeeid) VALUES (11);
-	INSERT INTO initialrequest(employeeid) VALUES (12);
-	INSERT INTO initialrequest(employeeid) VALUES (13);
-	INSERT INTO initialrequest(employeeid) VALUES (14);
-   
-   
-
-    INSERT INTO materialrequests (date, supervisorid, status) VALUES
-('2023-07-12 12:18:05', 11, 'Delivered'),
-('2023-07-12 20:15:07', 12, 'Delivered'),
-('2023-07-12 20:16:15', 11, 'Delivered'),
-('2023-07-12 22:15:33', 11, 'Cancelled'),
-('2023-07-12 23:26:33', 11, 'Delivered'),
-('2023-07-12 23:26:56', 11, 'Cancelled'),
-('2023-07-12 23:56:35', 11, 'Ready To Dispatch'),
-('2023-07-13 09:27:08', 11, 'Ready To Dispatch'),
-('2023-07-13 20:27:38', 11, 'Delivered'),
-('2023-07-14 22:29:23', 11, 'Delivered'),
-('2023-07-18 18:17:28', 12, 'Delivered'),
-('2023-07-19 22:59:18', 12, 'Delivered'),
-('2023-07-19 22:59:48', 12, 'Delivered'),
-('2023-07-19 23:00:11', 11, 'Ready To Dispatch');
-
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-13 18:17:28', 11, 'Delivered');
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-14 22:59:18', 12, 'inprogress');
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-04 22:59:48', 9, 'Cancelled');
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-08 23:00:11', 10, 'Ready To Dispatch');
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-13 18:17:28', 13, 'Delivered');
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-14 22:59:18', 13, 'inprogress');
-   INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-13 18:17:28', 13, 'Cancelled');
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-14 22:59:18', 14, 'inprogress');
-   INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-13 18:17:28', 13, 'Ready To Dispatch');
-  INSERT INTO materialrequests (date, supervisorid, status) VALUES('2023-07-14 22:59:18', 14, 'Delivered');
-
-INSERT INTO materialrequestitems (storemanagerid, materialid, materialrequestid, categoryid, quantity) VALUES
-(1, 2, 1, 1, 20),
-(1, 2, 2, 1, 40),
-(3, 5, 3, 3, 20),
-(3, 5, 3, 3, 30),
-(1, 1, 3, 1, 40),
-(1, 1, 4, 1, 50),
-(1, 2, 4, 1, 10),
-(1, 1, 5, 1, 77),
-(1, 3, 5, 1, 30),
-(1, 1, 7, 1, 50),
-(1, 2, 7, 1, 51),
-(1, 1, 9, 1, 11),
-(1, 3, 9, 1, 20),
-(1, 2, 10, 1, 10),
-(1, 2, 11, 1, 10),
-(1, 2, 12, 1, 10),
-(1, 2, 13, 1, 10),
-(1, 2, 14, 1, 10);
-
-(1, 1, 7, 1, 50),
-(2, 2, 7, 1, 51),
-(3, 3, 9, 1, 11),
-(4, 4, 9, 1, 20),
-(5, 5, 10, 1, 10),
-(6, 6, 11, 1, 10),
-(7, 7, 12, 1, 10),
-(8, 8, 13, 1, 10),
-(9, 9, 14, 1, 10),
-(2, 10, 7, 1, 50),
-(1, 11, 7, 1, 51),
-(6, 12, 9, 1, 11),
-(2, 13, 9, 1, 20),
-(3, 14, 10, 1, 10),
-(4, 15, 11, 1, 10),
-(6, 16, 12, 1, 10),
-(5, 17, 13, 1, 10),
-(7, 18, 14, 1, 10);
+-- supervisor incharge
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(43, 1, 5, '2015-08-11 00:00:00');
+INSERT INTO employees(userid,departmentid, roleid,hiredate)VALUES(44, 1, 5, '2015-08-11 00:00:00');
 
 
--- Add more rows as needed
-INSERT INTO shipments (date, supervisorid, materialrequestid, shipperid) VALUES
-('2023-07-12 19:56:10', 11, 1, 16),
-('2023-07-20 00:48:27', 12, 2, 17),
-('2023-07-19 23:00:39', 11, 3, 18),
-('2023-07-20 00:48:56', 11, 4, 15),
-('2023-07-12 22:49:29', 11, 5, 17),
-('2023-07-12 23:27:57', 11, 6, 15),
-('2023-07-20 01:24:56', 11, 7, 16),
-('2023-09-07 11:53:52', 11, 8, 17),
-('2023-09-07 11:53:47', 11, 9, 18),
-('2023-07-13 20:31:22', 11, 10, 15),
-('2023-07-14 22:29:34', 12, 11, 16),
-('2023-07-18 18:18:36', 12, 12, 17),
-('2023-07-19 23:01:29', 12, 13, 18),
-('2023-09-07 11:53:40', 11, 14, 15);
 
--- Add more rows as needed
-INSERT INTO shippingdetails (storemanagerid, materialid, categoryid, shipmentid, itemid, status, quantity) VALUES
-(1, 1, 1, 1, 1, 1, 20),
-(1, 2, 1, 2, 2, 1, 20),
-(3, 3, 3, 3, 3, 1, 20),
-(3, 3, 3, 3, 4, 1, 20),
-(1, 1, 3, 3, 5, 1, 40),
-(1, 1, 4, 4, 6, 1, 50),
-(1, 2, 4, 4, 7, 1, 10),
-(1, 1, 5, 5, 8, 1, 77),
-(1, 3, 5, 5, 9, 1, 18),
-(1, 1, 7, 7, 10, 1, 66),
-(1, 2, 7, 7, 11, 1, 66),
-(1, 1, 9, 9, 12, 1, 66),
-(1, 3, 9, 9, 13, 1, 66),
-(1, 2, 10, 10, 14, 1, 10),
-(1, 2, 7, 11, 15, 1, 66),
-(1, 1, 9, 12, 16, 1, 66),
-(1, 3, 9, 13, 17, 1, 66),
-(1, 2, 10, 14, 18, 1, 10);
+INSERT INTO workerstatus(workerid)VALUES(35);
+INSERT INTO workerstatus(workerid)VALUES(36);
+INSERT INTO workerstatus(workerid)VALUES(37);
+INSERT INTO workerstatus(workerid)VALUES(38);
+INSERT INTO workerstatus(workerid)VALUES(39);
+INSERT INTO workerstatus(workerid)VALUES(40);
 
+
+-- Insertion for warehousestaff
+insert into Warehousestaff(section,  categoryid,employeeid)values('Section 1', 1,1);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 2', 2,2);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 3', 3,3);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 4', 4,4);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 5', 5,5);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 6', 6,6);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 7', 7,7);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 8', 8,8);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 9', 9,9);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 10', 10,10);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 11', 11,11);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 12', 12,12);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 13', 13,13);
+insert into Warehousestaff(section, categoryid,employeeid)values('Section 14', 14,14);
+
+INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("GB500 Line",21,22);
+INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("GB400 Line",23,24);
+INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("GB540 Line",25,26);
+INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("Chassis Assembly",27,28);
+INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("Engine Line",29,30);
+INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("Interior Assembly",31,32);
+
+
+INSERT INTO initialrequest(employeeid) VALUES (21);
+INSERT INTO initialrequest(employeeid) VALUES (22);
+INSERT INTO initialrequest(employeeid) VALUES (23);
+INSERT INTO initialrequest(employeeid) VALUES (24);
+INSERT INTO initialrequest(employeeid) VALUES (25);
+INSERT INTO initialrequest(employeeid) VALUES (26);
+INSERT INTO initialrequest(employeeid) VALUES (27);
+INSERT INTO initialrequest(employeeid) VALUES (28);
+INSERT INTO initialrequest(employeeid) VALUES (29);
+INSERT INTO initialrequest(employeeid) VALUES (30);
+INSERT INTO initialrequest(employeeid) VALUES (31);
+INSERT INTO initialrequest(employeeid) VALUES (32);
+INSERT INTO initialrequest(employeeid) VALUES (33);
+INSERT INTO initialrequest(employeeid) VALUES (34);
+
+
+
+-- Insert queries for November 2022
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2022-11-01 12:18:05', 21, 'Delivered'),
+('2022-11-02 20:15:07', 22, 'Delivered'),
+('2022-11-02 20:16:15', 23, 'Delivered'),
+('2022-11-03 20:15:07', 22, 'Delivered'),
+('2022-11-03 20:16:15', 27, 'Delivered'),
+('2022-11-04 22:15:33', 21, 'Delivered'),
+('2022-11-05 23:26:33', 21, 'Delivered'),
+('2022-11-07 23:26:56', 25, 'Delivered'),
+('2022-11-08 20:27:38', 29, 'Delivered'),
+('2022-11-08 22:29:23', 26, 'Delivered'),
+('2022-11-09 18:17:28', 22, 'Delivered'),
+('2022-11-10 22:59:48', 23, 'Delivered'),
+('2022-11-10 23:00:11', 26, 'Delivered'),
+('2022-11-11 12:18:05', 30, 'Delivered'),
+('2022-11-11 23:26:56', 21, 'Delivered'),
+('2022-11-11 23:56:35', 21, 'Delivered'),
+('2022-11-12 20:15:07', 22, 'Delivered'),
+('2022-11-12 20:16:15', 23, 'Delivered'),
+('2022-11-12 22:15:33', 21, 'Cancelled'),
+('2022-11-12 23:26:33', 21, 'Delivered'),
+('2022-11-14 09:27:08', 21, 'Delivered'),
+('2022-11-14 20:27:38', 22, 'Delivered'),
+('2022-11-15 18:17:28', 22, 'Delivered'),
+('2022-11-15 22:59:18', 22, 'Delivered'),
+('2022-11-15 22:59:48', 23, 'Delivered'),
+('2022-11-17 18:17:28', 22, 'Delivered'),
+('2022-11-17 22:59:18', 22, 'Delivered'),
+('2022-11-17 22:59:48', 23, 'Delivered'),
+('2022-11-18 18:17:28', 22, 'Delivered'),
+('2022-11-18 18:17:28', 21, 'Delivered'),
+('2022-11-18 18:17:28', 21, 'Delivered'),
+('2022-11-19 22:59:18', 21, 'Delivered'),
+('2022-11-19 22:59:48', 23, 'Delivered'),
+('2022-11-19 23:00:11', 23, 'Delivered'),
+('2022-11-21 18:17:28', 21, 'Delivered'),
+('2022-11-21 18:17:28', 26, 'Delivered'),
+('2022-11-22 18:17:28', 30, 'Delivered'),
+('2022-11-22 22:59:18', 21, 'Delivered'),
+('2022-11-24 23:00:11', 23, 'Delivered'),
+('2022-11-24 22:59:18', 21, 'Delivered'),
+('2022-11-25 22:59:48', 23, 'Delivered'),
+('2022-11-25 23:00:11', 23, 'Delivered'),
+('2022-11-25 22:59:48', 23, 'Delivered'),
+('2022-11-26 23:00:11', 23, 'Delivered'),
+('2022-11-26 22:59:18', 22, 'Delivered'),
+('2022-11-26 22:59:48', 21, 'Delivered'),
+('2022-11-28 22:59:18', 22, 'Delivered'),
+('2022-11-29 22:59:48', 21, 'Delivered'),
+('2022-11-29 23:00:11', 21, 'Delivered'),
+('2022-11-30 22:59:48', 21, 'Delivered'),
+('2022-11-30 23:00:11', 21, 'Delivered');
+
+-- Insert queries for December 2022
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2022-12-01 12:18:05', 21, 'Delivered'),
+('2022-12-01 15:30:45', 22, 'Delivered'),
+('2022-12-02 08:45:22', 22, 'Delivered'),
+('2022-12-02 14:20:10', 21, 'Delivered'),
+('2022-12-03 09:55:33', 22, 'Delivered'),
+('2022-12-03 17:10:48', 22, 'Delivered'),
+('2022-12-03 13:25:15', 21, 'Delivered'),
+('2022-12-05 18:40:30', 22, 'Delivered'),
+('2022-12-05 10:58:42', 22, 'Delivered'),
+('2022-12-05 16:15:55', 21, 'Delivered'),
+('2022-12-06 11:30:20', 22, 'Delivered'),
+('2022-12-06 19:42:37', 21, 'Delivered'),
+('2022-12-06 14:05:55', 21, 'Delivered'),
+('2022-12-07 20:30:10', 21, 'Delivered'),
+('2022-12-08 09:18:05', 23, 'Delivered'),
+('2022-12-08 15:30:45', 21, 'Delivered'),
+('2022-12-09 08:45:22', 22, 'Delivered'),
+('2022-12-09 14:20:10', 22, 'Delivered'),
+('2022-12-10 09:55:33', 21, 'Delivered'),
+('2022-12-10 17:10:48', 22, 'Delivered'),
+('2022-12-10 13:25:15', 21, 'Delivered'),
+('2022-12-10 18:40:30', 21, 'Delivered'),
+('2022-12-12 10:58:42', 22, 'Delivered'),
+('2022-12-12 16:15:55', 21, 'Delivered'),
+('2022-12-13 11:30:20', 21, 'Delivered'),
+('2022-12-13 19:42:37', 22, 'Delivered'),
+('2022-12-14 14:05:55', 22, 'Delivered'),
+('2022-12-14 20:30:10', 21, 'Delivered'),
+('2022-12-15 09:18:05', 22, 'Delivered'),
+('2022-12-15 15:30:45', 22, 'Delivered'),
+('2022-12-16 08:45:22', 21, 'Delivered'),
+('2022-12-16 14:20:10', 22, 'Delivered'),
+('2022-12-17 09:55:33', 23, 'Delivered'),
+('2022-12-17 17:10:48', 21, 'Delivered'),
+('2022-12-17 13:25:15', 22, 'Delivered'),
+('2022-12-19 18:40:30', 23, 'Delivered'),
+('2022-12-19 10:58:42', 21, 'Delivered'),
+('2022-12-19 16:15:55', 22, 'Delivered'),
+('2022-12-19 11:30:20', 22, 'Delivered'),
+('2022-12-19 19:42:37', 21, 'Delivered'),
+('2022-12-21 14:05:55', 22, 'Delivered'),
+('2022-12-21 20:30:10', 23, 'Delivered'),
+('2022-12-22 09:18:05', 21, 'Delivered'),
+('2022-12-22 15:30:45', 22, 'Delivered'),
+('2022-12-23 08:45:22', 23, 'Delivered'),
+('2022-12-23 14:20:10', 21, 'Delivered'),
+('2022-12-24 09:55:33', 22, 'Delivered'),
+('2022-12-24 17:10:48', 23, 'Delivered'),
+('2022-12-26 13:25:15', 21, 'Delivered'),
+('2022-12-26 18:40:30', 22, 'Delivered'),
+('2022-12-26 10:58:42', 21, 'Delivered'),
+('2022-12-26 16:15:55', 21, 'Delivered'),
+('2022-12-27 11:30:20', 22, 'Delivered'),
+('2022-12-27 19:42:37', 21, 'Delivered'),
+('2022-12-28 14:05:55', 21, 'Delivered'),
+('2022-12-28 20:30:10', 22, 'Delivered'),
+('2022-12-29 09:18:05', 21, 'Delivered'),
+('2022-12-29 15:30:45', 21, 'Delivered'),
+('2022-12-30 08:45:22', 22, 'Delivered'),
+('2022-12-30 14:20:10', 21, 'Delivered'),
+('2022-12-31 09:55:33', 21, 'Delivered'),
+('2022-12-31 17:10:48', 22, 'Delivered');
+
+-- Insert queries for January 2023
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-01-02 20:15:07', 22, 'Delivered'),
+('2023-01-02 20:16:15', 23, 'Delivered'),
+('2023-01-04 22:15:33', 21, 'Cancelled'),
+('2023-01-05 23:26:33', 21, 'Delivered'),
+('2023-01-06 23:26:56', 21, 'Cancelled'),
+('2023-01-07 23:56:35', 21, 'Delivered'),
+('2023-01-07 09:27:08', 21, 'Delivered'),
+('2023-01-09 22:59:18', 22, 'Delivered'),
+('2023-01-09 22:59:48', 23, 'Delivered'),
+('2023-01-09 23:00:11', 23, 'Delivered'),
+('2023-01-11 12:18:05', 21, 'Delivered'),
+('2023-01-11 23:26:56', 21, 'Delivered'),
+('2023-01-11 23:56:35', 21, 'Delivered'),
+('2023-01-12 20:15:07', 22, 'Delivered'),
+('2023-01-12 20:16:15', 23, 'Delivered'),
+('2023-01-12 22:15:33', 21, 'Cancelled'),
+('2023-01-12 23:26:33', 21, 'Delivered'),
+('2023-01-13 09:27:08', 21, 'Delivered'),
+('2023-01-13 20:27:38', 22, 'Delivered'),
+('2023-01-14 22:29:23', 22, 'Delivered'),
+('2023-01-14 22:29:23', 23, 'Delivered'),
+('2023-01-14 22:29:23', 23, 'Delivered'),
+('2023-01-14 22:29:23', 22, 'Delivered'),
+('2023-01-16 18:17:28', 22, 'Delivered'),
+('2023-01-16 22:59:18', 22, 'Delivered'),
+('2023-01-16 22:59:48', 23, 'Delivered'),
+('2023-01-17 18:17:28', 22, 'Delivered'),
+('2023-01-17 22:59:18', 22, 'Delivered'),
+('2023-01-17 22:59:48', 23, 'Delivered'),
+('2023-01-18 18:17:28', 22, 'Delivered'),
+('2023-01-18 18:17:28', 21, 'Delivered'),
+('2023-01-18 18:17:28', 21, 'Delivered'),
+('2023-01-19 22:59:18', 21, 'Delivered'),
+('2023-01-19 22:59:48', 23, 'Delivered'),
+('2023-01-19 23:00:11', 23, 'Delivered'),
+('2023-01-20 22:59:18', 22, 'Delivered'),
+('2023-01-20 22:59:48', 23, 'Delivered'),
+('2023-01-20 23:00:11', 23, 'Delivered'),
+('2023-01-21 22:59:18', 22, 'Delivered'),
+('2023-01-21 22:59:48', 23, 'Delivered'),
+('2023-01-23 22:59:48', 23, 'Delivered'),
+('2023-01-23 23:00:11', 23, 'Delivered'),
+('2023-01-23 22:59:18', 21, 'Delivered'),
+('2023-01-25 22:59:48', 23, 'Delivered'),
+('2023-01-25 23:00:11', 23, 'Delivered'),
+('2023-01-25 22:59:48', 23, 'Delivered'),
+('2023-01-26 23:00:11', 23, 'Delivered'),
+('2023-01-26 22:59:18', 22, 'Delivered'),
+('2023-01-26 22:59:48', 21, 'Delivered'),
+('2023-01-27 23:00:11', 21, 'Delivered'),
+('2023-01-27 23:00:11', 21, 'Delivered'),
+('2023-01-27 22:59:18', 29, 'Delivered'),
+('2023-01-28 22:59:48', 30, 'Delivered'),
+('2023-01-28 23:00:11', 31, 'Delivered'),
+('2023-01-28 23:00:11', 32, 'Delivered'),
+('2023-01-30 22:59:18', 33, 'Delivered'),
+('2023-01-30 22:59:48', 34, 'Delivered'),
+('2023-01-30 23:00:11', 34, 'Delivered'),
+('2023-01-31 23:00:11', 34, 'Delivered'); 
+
+
+
+-- Insert queries for February 2023
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-02-01 12:18:05', 21, 'Delivered'),
+('2023-02-01 15:30:45', 22, 'Delivered'),
+('2023-02-01 08:45:22', 21, 'Delivered'),
+('2023-02-02 14:20:10', 21, 'Delivered'),
+('2023-02-03 09:55:33', 21, 'Delivered'),
+('2023-02-03 17:10:48', 22, 'Delivered'),
+('2023-02-04 13:25:15', 22, 'Delivered'),
+('2023-02-04 18:40:30', 21, 'Delivered'),
+('2023-02-04 10:58:42', 21, 'Delivered'),
+('2023-02-06 16:15:55', 21, 'Delivered'),
+('2023-02-06 11:30:20', 21, 'Delivered'),
+('2023-02-06 19:42:37', 21, 'Delivered'),
+('2023-02-06 14:05:55', 21, 'Delivered'),
+('2023-02-07 20:30:10', 22, 'Delivered'),
+('2023-02-08 09:18:05', 21, 'Delivered'),
+('2023-02-08 15:30:45', 21, 'Delivered'),
+('2023-02-09 08:45:22', 22, 'Delivered'),
+('2023-02-09 14:20:10', 23, 'Delivered'),
+('2023-02-09 09:55:33', 21, 'Delivered'),
+('2023-02-10 17:10:48', 22, 'Delivered'),
+('2023-02-11 13:25:15', 21, 'Delivered'),
+('2023-02-11 18:40:30', 21, 'Delivered'),
+('2023-02-11 10:58:42', 22, 'Delivered'),
+('2023-02-13 16:15:55', 21, 'Delivered'),
+('2023-02-13 11:30:20', 21, 'Delivered'),
+('2023-02-13 19:42:37', 22, 'Delivered'),
+('2023-02-14 14:05:55', 21, 'Delivered'),
+('2023-02-14 20:30:10', 21, 'Delivered'),
+('2023-02-15 09:18:05', 22, 'Delivered'),
+('2023-02-16 15:30:45', 23, 'Delivered'),
+('2023-02-16 08:45:22', 21, 'Delivered'),
+('2023-02-16 14:20:10', 22, 'Delivered'),
+('2023-02-17 09:55:33', 23, 'Delivered'),
+('2023-02-17 17:10:48', 21, 'Delivered'),
+('2023-02-17 13:25:15', 22, 'Delivered'),
+('2023-02-18 18:40:30', 23, 'Delivered'),
+('2023-02-18 10:58:42', 21, 'Delivered'),
+('2023-02-18 16:15:55', 22, 'Delivered'),
+('2023-02-20 11:30:20', 23, 'Delivered'),
+('2023-02-20 19:42:37', 21, 'Delivered'),
+('2023-02-21 14:05:55', 22, 'Delivered'),
+('2023-02-21 20:30:10', 23, 'Delivered'),
+('2023-02-22 09:18:05', 21, 'Delivered'),
+('2023-02-22 15:30:45', 22, 'Delivered'),
+('2023-02-23 08:45:22', 23, 'Delivered'),
+('2023-02-23 14:20:10', 21, 'Delivered'),
+('2023-02-24 09:55:33', 22, 'Delivered'),
+('2023-02-24 17:10:48', 23, 'Delivered'),
+('2023-02-25 13:25:15', 21, 'Delivered'),
+('2023-02-25 18:40:30', 22, 'Delivered'),
+('2023-02-25 10:58:42', 21, 'Delivered'),
+('2023-02-27 16:15:55', 21, 'Delivered'),
+('2023-02-27 11:30:20', 21, 'Delivered'),
+('2023-02-27 19:42:37', 21, 'Delivered'),
+('2023-02-28 14:05:55', 21, 'Delivered'),
+('2023-02-28 20:30:10', 22, 'Delivered');
+
+
+-- Insert queries for March 2023
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-03-01 12:18:05', 21, 'Delivered'),
+('2023-03-01 15:30:45', 22, 'Delivered'),
+('2023-03-02 08:45:22', 22, 'Delivered'),
+('2023-03-02 14:20:10', 21, 'Delivered'),
+('2023-03-03 09:55:33', 22, 'Delivered'),
+('2023-03-03 17:10:48', 21, 'Delivered'),
+('2023-03-04 13:25:15', 21, 'Delivered'),
+('2023-03-04 18:40:30', 22, 'Delivered'),
+('2023-03-04 10:58:42', 21, 'Delivered'),
+('2023-03-04 16:15:55', 21, 'Delivered'),
+('2023-03-06 11:30:20', 22, 'Delivered'),
+('2023-03-06 19:42:37', 21, 'Delivered'),
+('2023-03-07 14:05:55', 21, 'Delivered'),
+('2023-03-07 20:30:10', 21, 'Delivered'),
+('2023-03-08 09:18:05', 22, 'Delivered'),
+('2023-03-08 15:30:45', 21, 'Delivered'),
+('2023-03-09 08:45:22', 22, 'Delivered'),
+('2023-03-09 14:20:10', 21, 'Delivered'),
+('2023-03-10 09:55:33', 21, 'Delivered'),
+('2023-03-10 17:10:48', 22, 'Delivered'),
+('2023-03-11 13:25:15', 22, 'Delivered'),
+('2023-03-11 18:40:30', 21, 'Delivered'),
+('2023-03-11 10:58:42', 22, 'Delivered'),
+('2023-03-11 16:15:55', 22, 'Delivered'),
+('2023-03-13 11:30:20', 21, 'Delivered'),
+('2023-03-13 19:42:37', 22, 'Delivered'),
+('2023-03-14 14:05:55', 23, 'Delivered'),
+('2023-03-14 20:30:10', 21, 'Delivered'),
+('2023-03-15 09:18:05', 22, 'Delivered'),
+('2023-03-15 15:30:45', 23, 'Delivered'),
+('2023-03-16 08:45:22', 21, 'Delivered'),
+('2023-03-16 14:20:10', 22, 'Delivered'),
+('2023-03-17 09:55:33', 21, 'Delivered'),
+('2023-03-17 17:10:48', 21, 'Delivered'),
+('2023-03-18 13:25:15', 22, 'Delivered'),
+('2023-03-18 18:40:30', 23, 'Delivered'),
+('2023-03-20 10:58:42', 21, 'Delivered'),
+('2023-03-20 16:15:55', 22, 'Delivered'),
+('2023-03-20 11:30:20', 21, 'Delivered'),
+('2023-03-20 19:42:37', 21, 'Delivered'),
+('2023-03-21 14:05:55', 22, 'Delivered'),
+('2023-03-21 20:30:10', 21, 'Delivered'),
+('2023-03-22 09:18:05', 21, 'Delivered'),
+('2023-03-22 15:30:45', 22, 'Delivered'),
+('2023-03-23 08:45:22', 22, 'Delivered'),
+('2023-03-23 14:20:10', 21, 'Delivered'),
+('2023-03-24 09:55:33', 22, 'Delivered'),
+('2023-03-24 17:10:48', 22, 'Delivered'),
+('2023-03-25 13:25:15', 21, 'Delivered'),
+('2023-03-25 18:40:30', 22, 'Delivered'),
+('2023-03-27 10:58:42', 22, 'Delivered'),
+('2023-03-27 16:15:55', 21, 'Delivered'),
+('2023-03-27 11:30:20', 22, 'Delivered'),
+('2023-03-27 19:42:37', 21, 'Delivered'),
+('2023-03-28 14:05:55', 21, 'Delivered'),
+('2023-03-28 20:30:10', 22, 'Delivered'),
+('2023-03-29 09:18:05', 22, 'Delivered'),
+('2023-03-29 15:30:45', 21, 'Delivered'),
+('2023-03-30 08:45:22', 22, 'Delivered'),
+('2023-03-30 14:20:10', 23, 'Delivered'),
+('2023-03-31 09:55:33', 21, 'Delivered'),
+('2023-03-31 17:10:48', 22, 'Delivered');
+
+-- Insert queries for April 2023
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-04-01 23:26:33', 21, 'Delivered'),
+('2023-04-03 20:16:15', 23, 'Delivered'),
+('2023-04-03 20:16:15', 23, 'Delivered'),
+('2023-04-04 22:15:33', 21, 'Cancelled'),
+('2023-04-05 22:15:33', 21, 'Cancelled'),
+('2023-04-06 23:26:56', 21, 'Cancelled'),
+('2023-04-07 23:56:35', 21, 'Delivered'),
+('2023-04-07 09:27:08', 21, 'Delivered'),
+('2023-04-08 09:27:08', 21, 'Delivered'),
+('2023-04-08 09:27:08', 21, 'Delivered'),
+('2023-04-10 23:00:11', 23, 'Delivered'),
+('2023-04-10 23:00:11', 23, 'Delivered'),
+('2023-04-11 12:18:05', 21, 'Delivered'),
+('2023-04-11 23:26:56', 21, 'Delivered'),
+('2023-04-11 23:56:35', 21, 'Delivered'),
+('2023-04-12 23:26:56', 21, 'Delivered'),
+('2023-04-12 23:56:35', 21, 'Delivered'),
+('2023-04-13 09:27:08', 21, 'Delivered'),
+('2023-04-13 20:27:38', 22, 'Delivered'),
+('2023-04-14 22:29:23', 22, 'Delivered'),
+('2023-04-14 22:29:23', 23, 'Delivered'),
+('2023-04-14 22:29:23', 23, 'Delivered'),
+('2023-04-14 22:29:23', 22, 'Delivered'),
+('2023-04-15 22:29:23', 23, 'Delivered'),
+('2023-04-15 22:29:23', 23, 'Delivered'),
+('2023-04-15 22:29:23', 22, 'Delivered'),
+('2023-04-17 18:17:28', 22, 'Delivered'),
+('2023-04-17 22:59:18', 22, 'Delivered'),
+('2023-04-17 22:59:48', 23, 'Delivered'),
+('2023-04-18 18:17:28', 22, 'Delivered'),
+('2023-04-18 18:17:28', 21, 'Delivered'),
+('2023-04-18 18:17:28', 21, 'Delivered'),
+('2023-04-20 22:59:18', 22, 'Delivered'),
+('2023-04-20 22:59:48', 23, 'Delivered'),
+('2023-04-20 23:00:11', 23, 'Delivered'),
+('2023-04-21 22:59:18', 22, 'Delivered'),
+('2023-04-21 22:59:48', 23, 'Delivered'),
+('2023-04-25 22:59:48', 23, 'Delivered'),
+('2023-04-25 23:00:11', 23, 'Delivered'),
+('2023-04-25 22:59:48', 23, 'Delivered'),
+('2023-04-27 23:00:11', 21, 'Delivered'),
+('2023-04-27 23:00:11', 21, 'Delivered'),
+('2023-04-27 22:59:18', 29, 'Delivered'),
+('2023-04-28 22:59:48', 30, 'Delivered'),
+('2023-04-28 23:00:11', 31, 'Delivered'),
+('2023-04-28 23:00:11', 32, 'Delivered');
+
+
+-- Insert queries for May 2023
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-05-01 12:18:05', 21, 'Delivered'),
+('2023-05-02 20:15:07', 22, 'Delivered'),
+('2023-05-02 20:16:15', 23, 'Delivered'),
+('2023-05-03 20:15:07', 22, 'Delivered'),
+('2023-05-03 20:16:15', 23, 'Delivered'),
+('2023-05-04 22:15:33', 21, 'Delivered'),
+('2023-05-05 23:26:33', 21, 'Delivered'),
+('2023-05-06 23:26:56', 21, 'Cancelled'),
+('2023-05-06 23:26:56', 21, 'Delivered'),
+('2023-05-08 20:27:38', 22, 'Delivered'),
+('2023-05-08 22:29:23', 22, 'Delivered'),
+('2023-05-08 18:17:28', 22, 'Delivered'),
+('2023-05-09 22:59:18', 22, 'Delivered'),
+('2023-05-09 22:59:48', 23, 'Delivered'),
+('2023-05-09 23:00:11', 23, 'Delivered'),
+('2023-05-10 22:59:48', 23, 'Delivered'),
+('2023-05-10 23:00:11', 23, 'Delivered'),
+('2023-05-11 12:18:05', 21, 'Delivered'),
+('2023-05-11 23:26:56', 21, 'Delivered'),
+('2023-05-11 23:56:35', 21, 'Delivered'),
+('2023-05-12 20:15:07', 22, 'Delivered'),
+('2023-05-12 20:16:15', 23, 'Delivered'),
+('2023-05-12 22:15:33', 21, 'Cancelled'),
+('2023-05-12 23:26:33', 21, 'Delivered'),
+('2023-05-13 09:27:08', 21, 'Delivered'),
+('2023-05-13 20:27:38', 22, 'Delivered'),
+('2023-05-15 18:17:28', 22, 'Delivered'),
+('2023-05-15 22:59:18', 22, 'Delivered'),
+('2023-05-15 22:59:48', 23, 'Delivered'),
+('2023-05-16 18:17:28', 22, 'Delivered'),
+('2023-05-16 22:59:18', 22, 'Delivered'),
+('2023-05-16 22:59:48', 23, 'Delivered'),
+('2023-05-17 18:17:28', 22, 'Delivered'),
+('2023-05-17 22:59:18', 22, 'Delivered'),
+('2023-05-17 22:59:48', 23, 'Delivered'),
+('2023-05-18 18:17:28', 22, 'Delivered'),
+('2023-05-18 18:17:28', 21, 'Delivered'),
+('2023-05-18 18:17:28', 21, 'Delivered'),
+('2023-05-19 22:59:18', 21, 'Delivered'),
+('2023-05-19 22:59:48', 23, 'Delivered'),
+('2023-05-19 23:00:11', 23, 'Delivered'),
+('2023-05-20 22:59:18', 22, 'Delivered'),
+('2023-05-20 22:59:48', 25, 'Delivered'),
+('2023-05-20 23:00:11', 23, 'Delivered'),
+('2023-05-22 18:17:28', 21, 'Delivered'),
+('2023-05-22 18:17:28', 26, 'Delivered'),
+('2023-05-22 18:17:28', 30, 'Delivered'),
+('2023-05-22 22:59:18', 21, 'Delivered'),
+('2023-05-23 22:59:48', 23, 'Delivered'),
+('2023-05-23 23:00:11', 23, 'Delivered'),
+('2023-05-23 22:59:18', 21, 'Delivered'),
+('2023-05-24 23:00:11', 23, 'Delivered'),
+('2023-05-24 22:59:18', 21, 'Delivered'),
+('2023-05-25 22:59:48', 23, 'Delivered'),
+('2023-05-25 23:00:11', 23, 'Delivered'),
+('2023-05-25 22:59:48', 23, 'Delivered'),
+('2023-05-26 23:00:11', 23, 'Delivered'),
+('2023-05-26 22:59:18', 22, 'Delivered'),
+('2023-05-26 22:59:48', 21, 'Delivered'),
+('2023-05-27 23:00:11', 21, 'Delivered'),
+('2023-05-27 23:00:11', 21, 'Delivered'),
+('2023-05-27 22:59:18', 22, 'Delivered'),
+('2023-05-29 22:59:18', 22, 'Delivered'),
+('2023-05-29 22:59:48', 21, 'Delivered'),
+('2023-05-29 23:00:11', 21, 'Delivered'),
+('2023-05-30 22:59:18', 22, 'Delivered'),
+('2023-05-30 22:59:48', 23, 'Delivered'),
+('2023-05-30 23:00:11', 23, 'Delivered');
+
+
+-- Insert queries for June 2023
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-06-01 12:18:05', 21, 'Delivered'),
+('2023-06-01 15:30:45', 21, 'Delivered'),
+('2023-06-02 08:45:22', 21, 'Delivered'),
+('2023-06-02 14:20:10', 21, 'Delivered'),
+('2023-06-03 09:55:33', 22, 'Delivered'),
+('2023-06-03 17:10:48', 22, 'Delivered'),
+('2023-06-03 13:25:15', 22, 'Delivered'),
+('2023-06-05 18:40:30', 22, 'Delivered'),
+('2023-06-05 10:58:42', 22, 'Delivered'),
+('2023-06-05 16:15:55', 21, 'Delivered'),
+('2023-06-06 11:30:20', 22, 'Delivered'),
+('2023-06-06 19:42:37', 21, 'Delivered'),
+('2023-06-07 14:05:55', 21, 'Delivered'),
+('2023-06-07 20:30:10', 22, 'Delivered'),
+('2023-06-08 09:18:05', 22, 'Delivered'),
+('2023-06-08 15:30:45', 21, 'Delivered'),
+('2023-06-09 08:45:22', 22, 'Delivered'),
+('2023-06-09 14:20:10', 23, 'Delivered'),
+('2023-06-10 09:55:33', 21, 'Delivered'),
+('2023-06-10 17:10:48', 21, 'Delivered'),
+('2023-06-10 13:25:15', 23, 'Delivered'),
+('2023-06-10 18:40:30', 21, 'Delivered'),
+('2023-06-12 10:58:42', 22, 'Delivered'),
+('2023-06-12 16:15:55', 22, 'Delivered'),
+('2023-06-13 11:30:20', 21, 'Delivered'),
+('2023-06-13 19:42:37', 22, 'Delivered'),
+('2023-06-14 14:05:55', 21, 'Delivered'),
+('2023-06-14 20:30:10', 21, 'Delivered'),
+('2023-06-15 09:18:05', 22, 'Delivered'),
+('2023-06-15 15:30:45', 22, 'Delivered'),
+('2023-06-17 09:55:33', 22, 'Delivered'),
+('2023-06-17 17:10:48', 21, 'Delivered'),
+('2023-06-17 13:25:15', 22, 'Delivered'),
+('2023-06-19 18:40:30', 21, 'Delivered'),
+('2023-06-19 10:58:42', 21, 'Delivered'),
+('2023-06-19 16:15:55', 22, 'Delivered'),
+('2023-06-20 11:30:20', 22, 'Delivered'),
+('2023-06-20 19:42:37', 21, 'Delivered'),
+('2023-06-21 14:05:55', 22, 'Delivered'),
+('2023-06-21 20:30:10', 22, 'Delivered'),
+('2023-06-22 09:18:05', 22, 'Delivered'),
+('2023-06-22 15:30:45', 22, 'Delivered'),
+('2023-06-23 08:45:22', 22, 'Delivered'),
+('2023-06-23 14:20:10', 21, 'Delivered'),
+('2023-06-24 09:55:33', 22, 'Delivered'),
+('2023-06-24 17:10:48', 21, 'Delivered'),
+('2023-06-26 13:25:15', 21, 'Delivered'),
+('2023-06-26 18:40:30', 22, 'Delivered'),
+('2023-06-26 10:58:42', 21, 'Delivered'),
+('2023-06-26 16:15:55', 21, 'Delivered'),
+('2023-06-27 11:30:20', 22, 'Delivered'),
+('2023-06-27 19:42:37', 22, 'Delivered'),
+('2023-06-28 14:05:55', 21, 'Delivered'),
+('2023-06-28 20:30:10', 22, 'Delivered'),
+('2023-06-29 09:18:05', 23, 'Delivered'),
+('2023-06-29 15:30:45', 21, 'Delivered'),
+('2023-06-30 08:45:22', 22, 'Delivered'),
+('2023-06-30 14:20:10', 23, 'Delivered');
+
+-- Insert queries for July 2023
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-07-01 12:18:05', 21, 'Delivered'),
+('2023-07-03 20:15:07', 22, 'Delivered'),
+('2023-07-03 20:16:15', 23, 'Delivered'),
+('2023-07-04 22:15:33', 21, 'Delivered'),
+('2023-07-05 23:26:33', 21, 'Delivered'),
+('2023-07-06 23:26:56', 21, 'Cancelled'),
+('2023-07-06 23:26:56', 21, 'Delivered'),
+('2023-07-07 23:26:56', 25, 'Delivered'),
+('2023-07-08 20:27:38', 22, 'Delivered'),
+('2023-07-08 22:29:23', 26, 'Delivered'),
+('2023-07-08 18:17:28', 22, 'Delivered'),
+('2023-07-10 22:59:48', 23, 'Delivered'),
+('2023-07-10 23:00:11', 26, 'Delivered'),
+('2023-07-11 12:18:05', 21, 'Delivered'),
+('2023-07-11 23:26:56', 21, 'Delivered'),
+('2023-07-11 23:56:35', 21, 'Delivered'),
+('2023-07-12 20:15:07', 22, 'Delivered'),
+('2023-07-12 20:16:15', 23, 'Delivered'),
+('2023-07-12 22:15:33', 21, 'Cancelled'),
+('2023-07-12 23:26:33', 21, 'Delivered'),
+('2023-07-13 09:27:08', 21, 'Delivered'),
+('2023-07-13 20:27:38', 22, 'Delivered'),
+('2023-07-14 09:27:08', 21, 'Delivered'),
+('2023-07-14 20:27:38', 22, 'Delivered'),
+('2023-07-15 18:17:28', 22, 'Delivered'),
+('2023-07-15 22:59:18', 22, 'Delivered'),
+('2023-07-15 22:59:48', 23, 'Delivered'),
+('2023-07-17 18:17:28', 22, 'Delivered'),
+('2023-07-17 22:59:18', 22, 'Delivered'),
+('2023-07-17 22:59:48', 23, 'Delivered'),
+('2023-07-18 18:17:28', 22, 'Delivered'),
+('2023-07-18 18:17:28', 21, 'Delivered'),
+('2023-07-18 18:17:28', 21, 'Delivered'),
+('2023-07-19 22:59:18', 21, 'Delivered'),
+('2023-07-19 22:59:48', 23, 'Delivered'),
+('2023-07-19 23:00:11', 23, 'Delivered'),
+('2023-07-20 22:59:18', 22, 'Delivered'),
+('2023-07-20 22:59:48', 25, 'Delivered'),
+('2023-07-20 23:00:11', 23, 'Delivered'),
+('2023-07-21 18:17:28', 21, 'Delivered'),
+('2023-07-21 18:17:28', 26, 'Delivered'),
+('2023-07-22 18:17:28', 30, 'Delivered'),
+('2023-07-22 22:59:18', 21, 'Delivered'),
+('2023-07-24 23:00:11', 23, 'Delivered'),
+('2023-07-24 22:59:18', 21, 'Delivered'),
+('2023-07-25 22:59:48', 23, 'Delivered'),
+('2023-07-25 23:00:11', 23, 'Delivered'),
+('2023-07-25 22:59:48', 23, 'Delivered'),
+('2023-07-26 23:00:11', 23, 'Delivered'),
+('2023-07-26 22:59:18', 22, 'Delivered'),
+('2023-07-26 22:59:48', 21, 'Delivered'),
+('2023-07-27 23:00:11', 21, 'Delivered'),
+('2023-07-27 23:00:11', 21, 'Delivered'),
+('2023-07-27 22:59:18', 22, 'Delivered'),
+('2023-07-29 22:59:18', 22, 'Delivered'),
+('2023-07-29 22:59:48', 21, 'Delivered'),
+('2023-07-29 23:00:11', 21, 'Delivered'),
+('2023-07-29 22:59:48', 21, 'Delivered'),
+('2023-07-29 23:00:11', 21, 'Delivered');
+
+
+-- Insert queries for August 2023
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-08-01 12:18:05', 21, 'Delivered'),
+('2023-08-01 15:30:45', 22, 'Delivered'),
+('2023-08-02 14:20:10', 21, 'Delivered'),
+('2023-08-03 09:55:33', 21, 'Delivered'),
+('2023-08-03 17:10:48', 22, 'Delivered'),
+('2023-08-04 13:25:15', 21, 'Delivered'),
+('2023-08-04 18:40:30', 22, 'Delivered'),
+('2023-08-05 16:15:55', 21, 'Delivered'),
+('2023-08-07 14:05:55', 21, 'Delivered'),
+('2023-08-07 20:30:10', 22, 'Delivered'),
+('2023-08-08 09:18:05', 22, 'Delivered'),
+('2023-08-08 15:30:45', 21, 'Delivered'),
+('2023-08-09 08:45:22', 22, 'Delivered'),
+('2023-08-09 14:20:10', 22, 'Delivered'),
+('2023-08-10 09:55:33', 22, 'Delivered'),
+('2023-08-10 17:10:48', 22, 'Delivered'),
+('2023-08-11 18:40:30', 21, 'Delivered'),
+('2023-08-12 10:58:42', 22, 'Delivered'),
+('2023-08-12 16:15:55', 21, 'Delivered'),
+('2023-08-14 14:05:55', 23, 'Delivered'),
+('2023-08-14 20:30:10', 21, 'Delivered'),
+('2023-08-15 09:18:05', 22, 'Delivered'),
+('2023-08-15 15:30:45', 21, 'Delivered'),
+('2023-08-16 08:45:22', 21, 'Delivered'),
+('2023-08-16 14:20:10', 22, 'Delivered'),
+('2023-08-17 17:10:48', 21, 'Delivered'),
+('2023-08-18 13:25:15', 22, 'Delivered'),
+('2023-08-18 18:40:30', 23, 'Delivered'),
+('2023-08-19 10:58:42', 21, 'Delivered'),
+('2023-08-19 16:15:55', 22, 'Delivered'),
+('2023-08-20 19:42:37', 21, 'Delivered'),
+('2023-08-21 14:05:55', 22, 'Delivered'),
+('2023-08-21 20:30:10', 21, 'Delivered'),
+('2023-08-22 09:18:05', 21, 'Delivered'),
+('2023-08-22 15:30:45', 22, 'Delivered'),
+('2023-08-23 08:45:22', 22, 'Delivered'),
+('2023-08-23 14:20:10', 21, 'Delivered'),
+('2023-08-24 09:55:33', 22, 'Delivered'),
+('2023-08-24 17:10:48', 21, 'Delivered'),
+('2023-08-25 13:25:15', 21, 'Delivered'),
+('2023-08-25 18:40:30', 22, 'Delivered'),
+('2023-08-26 16:15:55', 21, 'Delivered'),
+('2023-08-27 11:30:20', 22, 'Delivered'),
+('2023-08-27 19:42:37', 23, 'Delivered'),
+('2023-08-28 14:05:55', 21, 'Delivered'),
+('2023-08-28 20:30:10', 22, 'Delivered'),
+('2023-08-29 09:18:05', 23, 'Delivered'),
+('2023-08-29 15:30:45', 21, 'Delivered'),
+('2023-08-30 08:45:22', 22, 'Delivered'),
+('2023-08-30 14:20:10', 23, 'Delivered'),
+('2023-08-31 17:10:48', 22, 'Delivered');
+
+INSERT INTO materialrequests (date, supervisorid, status) VALUES
+('2023-09-01 12:18:05', 21, 'Delivered'),
+('2023-09-02 20:15:07', 22, 'Delivered'),
+('2023-09-02 20:16:15', 23, 'Delivered'),
+('2023-09-04 22:15:33', 21, 'Cancelled'),
+('2023-09-05 23:26:33', 21, 'Delivered'),
+('2023-09-06 23:26:56', 21, 'Cancelled'),
+('2023-09-07 23:56:35', 21, 'Delivered'),
+('2023-09-07 09:27:08', 21, 'Delivered'),
+('2023-09-08 20:27:38', 22, 'Delivered'),
+('2023-09-08 22:29:23', 22, 'Delivered'),
+('2023-09-08 18:17:28', 22, 'Delivered'),
+('2023-09-09 22:59:18', 22, 'Delivered'),
+('2023-09-09 22:59:48', 23, 'Delivered'),
+('2023-09-09 23:00:11', 23, 'Delivered'),
+('2023-09-11 12:18:05', 21, 'Delivered'),
+('2023-09-11 23:26:56', 21, 'Delivered'),
+('2023-09-11 23:56:35', 21, 'Delivered'),
+('2023-09-12 20:15:07', 22, 'Delivered'),
+('2023-09-12 20:16:15', 23, 'Delivered'),
+('2023-09-12 22:15:33', 21, 'Cancelled'),
+('2023-09-12 23:26:33', 21, 'Delivered'),
+('2023-09-13 09:27:08', 21, 'Delivered'),
+('2023-09-13 20:27:38', 22, 'Delivered'),
+('2023-09-14 22:29:23', 22, 'Delivered'),
+('2023-09-14 22:29:23', 23, 'Delivered'),
+('2023-09-14 22:29:23', 23, 'Delivered'),
+('2023-09-14 22:29:23', 22, 'Delivered'),
+('2023-09-15 18:17:28', 22, 'Delivered'),
+('2023-09-15 22:59:18', 22, 'Delivered'),
+('2023-09-15 22:59:48', 23, 'Delivered'),
+('2023-09-16 18:17:28', 22, 'Delivered'),
+('2023-09-16 22:59:18', 22, 'Delivered'),
+('2023-09-16 22:59:48', 23, 'Delivered'),
+('2023-09-17 18:17:28', 22, 'Delivered'),
+('2023-09-17 22:59:18', 22, 'Delivered'),
+('2023-09-17 22:59:48', 23, 'Delivered'),
+('2023-09-18 18:17:28', 22, 'Delivered'),
+('2023-09-18 18:17:28', 21, 'Delivered'),
+('2023-09-18 18:17:28', 21, 'Delivered'),
+('2023-09-19 22:59:18', 21, 'Delivered'),
+('2023-09-19 22:59:48', 23, 'Delivered'),
+('2023-09-19 23:00:11', 23, 'Delivered'),
+('2023-09-20 22:59:18', 22, 'Delivered'),
+('2023-09-20 22:59:48', 23, 'Delivered'),
+('2023-09-20 23:00:11', 23, 'Delivered'),
+('2023-09-21 22:59:18', 22, 'Delivered'),
+('2023-09-21 22:59:48', 23, 'Delivered'),
+('2023-09-22 18:17:28', 21, 'Delivered'),
+('2023-09-22 18:17:28', 21, 'Delivered'),
+('2023-09-22 18:17:28', 22, 'Delivered'),
+('2023-09-22 22:59:18', 21, 'Delivered'),
+('2023-09-23 22:59:48', 23, 'Delivered'),
+('2023-09-23 23:00:11', 23, 'Delivered'),
+('2023-09-23 22:59:18', 21, 'Delivered'),
+('2023-09-25 22:59:48', 23, 'Delivered'),
+('2023-09-25 23:00:11', 23, 'Delivered'),
+('2023-09-25 22:59:48', 23, 'Delivered'),
+('2023-09-26 23:00:11', 23, 'Delivered'),
+('2023-09-26 22:59:18', 22, 'Delivered'),
+('2023-09-26 22:59:48', 21, 'Delivered'),
+('2023-09-27 23:00:11', 21, 'Delivered'),
+('2023-09-27 23:00:11', 21, 'Delivered'),
+('2023-09-27 22:59:18', 22, 'Delivered'),
+('2023-09-28 22:59:48', 21, 'Delivered'),
+('2023-09-28 23:00:11', 21, 'Delivered'),
+('2023-09-28 23:00:11', 21, 'Delivered'),
+('2023-09-29 22:59:18', 22, 'Delivered'),
+('2023-09-29 22:59:48', 21, 'Delivered'),
+('2023-09-29 23:00:11', 21, 'Delivered'),
+('2023-09-30 22:59:18', 22, 'Delivered'),
+('2023-09-30 22:59:48', 23, 'Delivered'),
+('2023-09-30 23:00:11', 23, 'Delivered');
+
+
+INSERT INTO materialrequestitems (materialid, materialrequestid, categoryid, quantity) VALUES
+(1, 1, 1, 55),
+(2, 2, 1, 60),
+(3, 3, 1, 65),
+(4, 4, 2, 70),
+(5, 5, 2, 75),
+(1, 6, 1, 80),
+(2, 7, 1, 85),
+(3, 8, 1, 90),
+(4, 9, 2, 95),
+(5, 10, 2, 100),
+(1, 11, 1, 55),
+(2, 12, 1, 60),
+(3, 13, 1, 65),
+(7, 14, 3, 70),
+(8, 15, 3, 75),
+(1, 16, 1, 80),
+(2, 17, 1, 85),
+(3, 18, 1, 90),
+(10, 19, 4, 95),
+(10, 20, 4, 100),
+(11, 21, 4, 55),
+(2, 22, 1, 60),
+(3, 23, 1, 65),
+(1, 24, 1, 70),
+(1, 25, 1, 75),
+(1, 26, 1, 80),
+(2, 27, 1, 85),
+(3, 28, 1, 90),
+(4, 29, 2, 95),
+(1, 30, 1, 100),
+(1, 31, 1, 55),
+(2, 32, 1, 60),
+(3, 33, 1, 65),
+(1, 34, 1, 70),
+(1, 35, 1, 75),
+(1, 36, 1, 80),
+(2, 37, 1, 85),
+(1, 38, 1, 90),
+(1, 39, 1, 95),
+(1, 40, 1, 100),
+(1, 41, 1, 55),
+(2, 42, 1, 60),
+(3, 43, 1, 65),
+(3, 44, 1, 70),
+(3, 45, 1, 75),
+(1, 46, 1, 80),
+(2, 47, 1, 85),
+(3, 48, 1, 90),
+(2, 49, 1, 95),
+(2, 50, 1, 100),
+(1, 51, 1, 55),
+(2, 52, 1, 60),
+(3, 53, 1, 65),
+(4, 54, 2, 70),
+(5, 55, 2, 75),
+(1, 56, 1, 80),
+(2, 57, 1, 85),
+(3, 58, 1, 90),
+(4, 59, 2, 95),
+(5, 60, 2, 100),
+(1, 61, 1, 55),
+(2, 62, 1, 60),
+(3, 63, 1, 65),
+(4, 64, 2, 70),
+(5, 65, 2, 75),
+(1, 66, 1, 80),
+(2, 67, 1, 85),
+(3, 68, 1, 90),
+(4, 69, 2, 95),
+(5, 70, 2, 100),
+(2, 71, 1, 55),
+(3, 72, 1, 60),
+(1, 73, 1, 65),
+(2, 74, 2, 70),
+(5, 75, 2, 75),
+(1, 76, 1, 80),
+(2, 77, 1, 85),
+(3, 78, 1, 90),
+(2, 79, 1, 95),
+(2, 80, 1, 100),
+(1, 81, 1, 55),
+(2, 82, 1, 60),
+(3, 83, 1, 65),
+(1, 84, 1, 70),
+(1, 85, 1, 75),
+(1, 86, 1, 80),
+(2, 87, 1, 85),
+(3, 88, 1, 90),
+(1, 89, 1, 95),
+(2, 90, 1, 100),
+(1, 91, 1, 55),
+(2, 92, 1, 60),
+(3, 93, 1, 65),
+(1, 94, 1, 70),
+(1, 95, 1, 75),
+(1, 96, 1, 80),
+(2, 97, 1, 85),
+(3, 98, 1, 90),
+(4, 99, 2, 95),
+(5, 100, 2, 100);
+
+INSERT INTO materialrequestitems (materialid, materialrequestid, categoryid, quantity) VALUES
+(2, 101, 1, 60),
+(3, 102, 1, 65),
+(1, 103, 1, 70),
+(2, 104, 1, 75),
+(3, 105, 1, 80),
+(1, 106, 1, 85),
+(2, 107, 1, 90),
+(3, 108, 1, 95),
+(1, 109, 1, 100),
+(2, 110, 1, 55),
+(3, 111, 1, 60),
+(1, 112, 1, 65),
+(2, 113, 1, 70),
+(3, 114, 1, 75),
+(1, 115, 1, 80),
+(2, 116, 1, 85),
+(3, 117, 1, 90),
+(1, 118, 1, 95),
+(2, 119, 1, 100),
+(3, 120, 1, 55),
+(1, 121, 1, 60),
+(2, 122, 1, 65),
+(3, 123, 1, 70),
+(1, 124, 1, 75),
+(2, 125, 1, 80),
+(3, 126, 1, 85),
+(1, 127, 1, 90),
+(2, 128, 1, 95),
+(3, 129, 1, 100),
+(1, 130, 1, 55),
+(2, 131, 1, 60),
+(3, 132, 1, 65),
+(1, 133, 1, 70),
+(2, 134, 1, 75),
+(3, 135, 1, 80),
+(1, 136, 1, 85),
+(2, 137, 1, 90),
+(3, 138, 1, 95),
+(1, 139, 1, 100),
+(2, 140, 1, 55),
+(3, 141, 1, 60),
+(1, 142, 1, 65),
+(2, 143, 1, 70),
+(3, 144, 1, 75),
+(1, 145, 1, 80),
+(2, 146, 1, 85),
+(3, 147, 1, 90),
+(1, 148, 1, 95),
+(2, 149, 1, 100),
+(3, 150, 1, 55),
+(1, 151, 1, 60),
+(2, 152, 1, 65),
+(3, 153, 1, 70),
+(1, 154, 1, 75),
+(2, 155, 1, 80),
+(3, 156, 1, 85),
+(1, 157, 1, 90),
+(2, 158, 1, 95),
+(3, 159, 1, 100),
+(1, 160, 1, 55),
+(2, 161, 1, 60),
+(3, 162, 1, 65),
+(1, 163, 1, 70),
+(2, 164, 1, 75),
+(3, 165, 1, 80),
+(1, 166, 1, 85),
+(2, 167, 1, 90),
+(3, 168, 1, 95),
+(1, 169, 1, 100),
+(2, 170, 1, 55),
+(3, 171, 1, 60),
+(1, 172, 1, 65),
+(2, 173, 1, 70),
+(3, 174, 1, 75),
+(1, 175, 1, 80),
+(2, 176, 1, 85),
+(3, 177, 1, 90),
+(1, 178, 1, 95),
+(2, 179, 1, 100),
+(3, 180, 1, 55),
+(1, 181, 1, 60),
+(2, 182, 1, 65),
+(3, 183, 1, 70),
+(1, 184, 1, 75),
+(2, 185, 1, 80),
+(3, 186, 1, 85),
+(1, 187, 1, 90),
+(2, 188, 1, 95),
+(3, 189, 1, 100),
+(1, 190, 1, 55),
+(2, 191, 1, 60),
+(3, 192, 1, 65),
+(1, 193, 1, 70),
+(2, 194, 1, 75),
+(3, 195, 1, 80),
+(1, 196, 1, 85),
+(2, 197, 1, 90),
+(3, 198, 1, 95),
+(1, 199, 1, 100),
+(2, 200, 1, 55);
+
+INSERT INTO materialrequestitems (materialid, materialrequestid, categoryid, quantity) VALUES
+(2, 201, 2, 60),
+(2, 202, 2, 65),
+(2, 203, 2, 70),
+(2, 204, 2, 75),
+(2, 205, 2, 80),
+(2, 206, 2, 85),
+(2, 207, 2, 90),
+(2, 208, 2, 95),
+(2, 209, 2, 100),
+(2, 210, 2, 55),
+(2, 211, 2, 60),
+(2, 212, 2, 65),
+(2, 213, 2, 70),
+(2, 214, 2, 75),
+(2, 215, 2, 80),
+(2, 216, 2, 85),
+(2, 217, 2, 90),
+(2, 218, 2, 95),
+(2, 219, 2, 100),
+(2, 220, 2, 55),
+(2, 221, 2, 60),
+(2, 222, 2, 65),
+(2, 223, 2, 70),
+(2, 224, 2, 75),
+(2, 225, 2, 80),
+(2, 226, 2, 85),
+(2, 227, 2, 90),
+(2, 228, 2, 95),
+(2, 229, 2, 100),
+(2, 230, 2, 55),
+(2, 231, 2, 60),
+(2, 232, 2, 65),
+(2, 233, 2, 70),
+(2, 234, 2, 75),
+(2, 235, 2, 80),
+(2, 236, 2, 85),
+(2, 237, 2, 90),
+(2, 238, 2, 95),
+(2, 239, 2, 100),
+(2, 240, 2, 55),
+(2, 241, 2, 60),
+(2, 242, 2, 65),
+(2, 243, 2, 70),
+(2, 244, 2, 75),
+(2, 245, 2, 80),
+(2, 246, 2, 85),
+(2, 247, 2, 90),
+(2, 248, 2, 95),
+(2, 249, 2, 100),
+(2, 250, 2, 55),
+(2, 251, 2, 60),
+(2, 252, 2, 65),
+(2, 253, 2, 70),
+(2, 254, 2, 75),
+(2, 255, 2, 80),
+(2, 256, 2, 85),
+(2, 257, 2, 90),
+(2, 258, 2, 95),
+(2, 259, 2, 100),
+(2, 260, 2, 55),
+(2, 261, 2, 60),
+(2, 262, 2, 65),
+(2, 263, 2, 70),
+(2, 264, 2, 75),
+(2, 265, 2, 80),
+(2, 266, 2, 85),
+(2, 267, 2, 90),
+(2, 268, 2, 95),
+(2, 269, 2, 100),
+(2, 270, 2, 55),
+(2, 271, 2, 60),
+(2, 272, 2, 65),
+(2, 273, 2, 70),
+(2, 274, 2, 75),
+(2, 275, 2, 80),
+(2, 276, 2, 85),
+(2, 277, 2, 90),
+(2, 278, 2, 95),
+(2, 279, 2, 100),
+(2, 280, 2, 55),
+(2, 281, 2, 60),
+(2, 282, 2, 65),
+(2, 283, 2, 70),
+(2, 284, 2, 75),
+(2, 285, 2, 80),
+(2, 286, 2, 85),
+(2, 287, 2, 90),
+(2, 288, 2, 95),
+(2, 289, 2, 100),
+(2, 290, 2, 55),
+(2, 291, 2, 60),
+(2, 292, 2, 65),
+(2, 293, 2, 70),
+(2, 294, 2, 75),
+(2, 295, 2, 80),
+(2, 296, 2, 85),
+(2, 297, 2, 90),
+(2, 298, 2, 95),
+(2, 299, 2, 100),
+(2, 300, 2, 55),
+(2, 301, 2, 60),
+(2, 302, 2, 65),
+(2, 303, 2, 70),
+(2, 304, 2, 75),
+(2, 305, 2, 80),
+(2, 306, 2, 85),
+(2, 307, 2, 90),
+(2, 308, 2, 95),
+(2, 309, 2, 100),
+(2, 310, 2, 55),
+(2, 311, 2, 60),
+(2, 312, 2, 65),
+(2, 313, 2, 70),
+(2, 314, 2, 75),
+(2, 315, 2, 80),
+(2, 316, 2, 85),
+(2, 317, 2, 90),
+(2, 318, 2, 95),
+(2, 319, 2, 100),
+(2, 320, 2, 55),
+(2, 321, 2, 60),
+(2, 322, 2, 65),
+(2, 323, 2, 70),
+(2, 324, 2, 75),
+(2, 325, 2, 80),
+(2, 326, 2, 85),
+(2, 327, 2, 90),
+(2, 328, 2, 95),
+(2, 329, 2, 100),
+(2, 330, 2, 55),
+(2, 331, 2, 60),
+(2, 332, 2, 65),
+(2, 333, 2, 70),
+(2, 334, 2, 75),
+(2, 335, 2, 80),
+(2, 336, 2, 85),
+(2, 337, 2, 90),
+(2, 338, 2, 95),
+(2, 339, 2, 100),
+(2, 340, 2, 55),
+(2, 341, 2, 60),
+(2, 342, 2, 65),
+(2, 343, 2, 70),
+(2, 344, 2, 75),
+(2, 345, 2, 80),
+(2, 346, 2, 85),
+(2, 347, 2, 90),
+(2, 348, 2, 95),
+(2, 349, 2, 100),
+(2, 350, 2, 55);
+
+
+
+INSERT INTO materialrequestitems (materialid, materialrequestid, categoryid, quantity) VALUES
+(2, 351, 2, 60),
+(2, 352, 2, 65),
+(2, 353, 2, 70),
+(2, 354, 2, 75),
+(2, 355, 2, 80),
+(2, 356, 2, 85),
+(2, 357, 2, 90),
+(2, 358, 2, 95),
+(2, 359, 2, 100),
+(2, 360, 2, 55),
+(2, 361, 2, 60),
+(2, 362, 2, 65),
+(2, 363, 2, 70),
+(2, 364, 2, 75),
+(2, 365, 2, 80),
+(2, 366, 2, 85),
+(2, 367, 2, 90),
+(2, 368, 2, 95),
+(2, 369, 2, 100),
+(2, 370, 2, 55),
+(2, 371, 2, 60),
+(2, 372, 2, 65),
+(2, 373, 2, 70),
+(2, 374, 2, 75),
+(2, 375, 2, 80),
+(2, 376, 2, 85),
+(2, 377, 2, 90),
+(2, 378, 2, 95),
+(2, 379, 2, 100),
+(2, 380, 2, 55),
+(2, 381, 2, 60),
+(2, 382, 2, 65),
+(2, 383, 2, 70),
+(2, 384, 2, 75),
+(2, 385, 2, 80),
+(2, 386, 2, 85),
+(2, 387, 2, 90),
+(2, 388, 2, 95),
+(2, 389, 2, 100),
+(2, 390, 2, 55),
+(2, 391, 2, 60),
+(2, 392, 2, 65),
+(2, 393, 2, 70),
+(2, 394, 2, 75),
+(2, 395, 2, 80),
+(2, 396, 2, 85),
+(2, 397, 2, 90),
+(2, 398, 2, 95),
+(2, 399, 2, 100),
+(2, 400, 2, 55),
+(1, 401, 1, 55),
+(1, 402, 1, 60),
+(1, 403, 1, 65),
+(1, 404, 1, 70),
+(1, 405, 1, 75),
+(1, 406, 1, 80),
+(1, 407, 1, 85),
+(1, 408, 1, 90),
+(1, 409, 1, 95),
+(1, 410, 1, 100),
+(1, 411, 1, 55),
+(1, 412, 1, 60),
+(1, 413, 1, 65),
+(1, 414, 1, 70),
+(1, 415, 1, 75),
+(1, 416, 1, 80),
+(1, 417, 1, 85),
+(1, 418, 1, 90),
+(1, 419, 1, 95),
+(1, 420, 1, 100),
+(1, 421, 1, 55),
+(1, 422, 1, 60),
+(1, 423, 1, 65),
+(1, 424, 1, 70),
+(1, 425, 1, 75),
+(1, 426, 1, 80),
+(1, 427, 1, 85),
+(1, 428, 1, 90),
+(1, 429, 1, 95),
+(1, 430, 1, 100),
+(1, 431, 1, 55),
+(1, 432, 1, 60),
+(1, 433, 1, 65),
+(1, 434, 1, 70),
+(1, 435, 1, 75),
+(1, 436, 1, 80),
+(1, 437, 1, 85),
+(1, 438, 1, 90),
+(1, 439, 1, 95),
+(1, 440, 1, 100),
+(1, 441, 1, 55),
+(1, 442, 1, 60),
+(1, 443, 1, 65),
+(1, 444, 1, 70),
+(1, 445, 1, 75),
+(1, 446, 1, 80),
+(1, 447, 1, 85),
+(1, 448, 1, 90),
+(1, 449, 1, 95),
+(1, 450, 1, 100);
+
+INSERT INTO materialrequestitems (materialid, materialrequestid, categoryid, quantity) VALUES
+(1, 451, 1, 55),
+(1, 452, 1, 60),
+(1, 453, 1, 65),
+(1, 454, 1, 70),
+(1, 455, 1, 75),
+(1, 456, 1, 80),
+(1, 457, 1, 85),
+(1, 458, 1, 90),
+(1, 459, 1, 95),
+(1, 460, 1, 100),
+(1, 461, 1, 55),
+(1, 462, 1, 60),
+(1, 463, 1, 65),
+(1, 464, 1, 70),
+(1, 465, 1, 75),
+(1, 466, 1, 80),
+(1, 467, 1, 85),
+(1, 468, 1, 90),
+(1, 469, 1, 95),
+(1, 470, 1, 100),
+(1, 471, 1, 55),
+(1, 472, 1, 60),
+(1, 473, 1, 65),
+(1, 474, 1, 70),
+(1, 475, 1, 75),
+(1, 476, 1, 80),
+(1, 477, 1, 85),
+(1, 478, 1, 90),
+(1, 479, 1, 95),
+(1, 480, 1, 100),
+(1, 481, 1, 55),
+(1, 482, 1, 60),
+(1, 483, 1, 65),
+(1, 484, 1, 70),
+(1, 485, 1, 75),
+(1, 486, 1, 80),
+(1, 487, 1, 85),
+(1, 488, 1, 90),
+(1, 489, 1, 95),
+(1, 490, 1, 100),
+(1, 491, 1, 55),
+(1, 492, 1, 60),
+(1, 493, 1, 65),
+(1, 494, 1, 70),
+(1, 495, 1, 75),
+(1, 496, 1, 80),
+(1, 497, 1, 85),
+(1, 498, 1, 90),
+(1, 499, 1, 95),
+(1, 500, 1, 100),
+(1, 501, 1, 55),
+(1, 502, 1, 60),
+(1, 503, 1, 65),
+(1, 504, 1, 70),
+(1, 505, 1, 75),
+(1, 506, 1, 80),
+(1, 507, 1, 85),
+(1, 508, 1, 90),
+(1, 509, 1, 95),
+(1, 510, 1, 100),
+(1, 511, 1, 55),
+(1, 512, 1, 60),
+(1, 513, 1, 65),
+(1, 514, 1, 70),
+(1, 515, 1, 75),
+(1, 516, 1, 80),
+(1, 517, 1, 85),
+(1, 518, 1, 90),
+(1, 519, 1, 95),
+(1, 520, 1, 100),
+(1, 521, 1, 55),
+(1, 522, 1, 60),
+(1, 523, 1, 65),
+(1, 524, 1, 70),
+(1, 525, 1, 75),
+(1, 526, 1, 80),
+(1, 527, 1, 85),
+(1, 528, 1, 90),
+(1, 529, 1, 95),
+(1, 530, 1, 100),
+(1, 531, 1, 55),
+(1, 532, 1, 60),
+(1, 533, 1, 65),
+(1, 534, 1, 70),
+(1, 535, 1, 75),
+(1, 536, 1, 80),
+(1, 537, 1, 85),
+(1, 538, 1, 90),
+(1, 539, 1, 95),
+(1, 540, 1, 100),
+(1, 541, 1, 55),
+(1, 542, 1, 60),
+(1, 543, 1, 65),
+(1, 544, 1, 70),
+(1, 545, 1, 75),
+(1, 546, 1, 80),
+(1, 547, 1, 85),
+(1, 548, 1, 90),
+(1, 549, 1, 95),
+(1, 550, 1, 100),
+(1, 551, 1, 55),
+(1, 552, 1, 60),
+(1, 553, 1, 65),
+(1, 554, 1, 70),
+(1, 555, 1, 75),
+(1, 556, 1, 80),
+(1, 557, 1, 85),
+(1, 558, 1, 90),
+(1, 559, 1, 95),
+(1, 560, 1, 100),
+(1, 561, 1, 55),
+(1, 562, 1, 60),
+(1, 563, 1, 65),
+(1, 564, 1, 70),
+(1, 565, 1, 75),
+(1, 566, 1, 80),
+(1, 567, 1, 85),
+(1, 568, 1, 90),
+(1, 569, 1, 95),
+(1, 570, 1, 100),
+(1, 571, 1, 55),
+(1, 572, 1, 60),
+(1, 573, 1, 65),
+(1, 574, 1, 70),
+(1, 575, 1, 75),
+(1, 576, 1, 80),
+(1, 577, 1, 85),
+(1, 578, 1, 90),
+(1, 579, 1, 95),
+(1, 580, 1, 100),
+(1, 581, 1, 55),
+(1, 582, 1, 60),
+(1, 583, 1, 65),
+(1, 584, 1, 70),
+(1, 585, 1, 75),
+(1, 586, 1, 80),
+(1, 587, 1, 85),
+(1, 588, 1, 90),
+(1, 589, 1, 95),
+(1, 590, 1, 100),
+(1, 591, 1, 55),
+(1, 592, 1, 60),
+(1, 593, 1, 65),
+(1, 594, 1, 70),
+(1, 595, 1, 75),
+(1, 596, 1, 80),
+(1, 597, 1, 85),
+(1, 598, 1, 90),
+(1, 599, 1, 95),
+(1, 600, 1, 100),
+(1, 601, 1, 55),
+(1, 601, 1, 60),
+(1, 601, 1, 65),
+(1, 602, 1, 70),
+(1, 602, 1, 75),
+(1, 602, 1, 80),
+(1, 603, 1, 85),
+(1, 603, 1, 90),
+(1, 604, 1, 95),
+(1, 604, 1, 100),
+(1, 605, 1, 55),
+(1, 605, 1, 60),
+(1, 606, 1, 65),
+(1, 606, 1, 70),
+(1, 607, 1, 75),
+(1, 607, 1, 80),
+(1, 608, 1, 85),
+(1, 608, 1, 90),
+(1, 609, 1, 95),
+(1, 609, 1, 100),
+(1, 610, 1, 55),
+(1, 611, 1, 60),
+(1, 612, 1, 65),
+(1, 612, 1, 70),
+(1, 613, 1, 75),
+(1, 613, 1, 80),
+(1, 614, 1, 85),
+(1, 614, 1, 90),
+(1, 615, 1, 95),
+(1, 616, 1, 100),
+(1, 617, 1, 55),
+(1, 617, 1, 60),
+(1, 618, 1, 65),
+(1, 618, 1, 70),
+(1, 619, 1, 75),
+(1, 619, 1, 80),
+(1, 620, 1, 85),
+(1, 620, 1, 90),
+(1, 621, 1, 95),
+(1, 621, 1, 100),
+(1, 622, 1, 55),
+(1, 622, 1, 60),
+(1, 623, 1, 65),
+(1, 624, 1, 70),
+(1, 624, 1, 75),
+(1, 625, 1, 80),
+(1, 625, 1, 85),
+(1, 626, 1, 90),
+(1, 626, 1, 95),
+(1, 627, 1, 100),
+(1, 627, 1, 55),
+(1, 628, 1, 60),
+(1, 628, 1, 65),
+(1, 629, 1, 70),
+(1, 629, 1, 75),
+(1, 630, 1, 80),
+(1, 630, 1, 85),
+(1, 631, 1, 90),
+(1, 631, 1, 95),
+(1, 632, 1, 100),
+(1, 632, 1, 55),
+(1, 633, 1, 60),
+(1, 633, 1, 65),
+(1, 634, 1, 70),
+(1, 634, 1, 75),
+(1, 635, 1, 80),
+(1, 635, 1, 85),
+(1, 636, 1, 90),
+(1, 636, 1, 95),
+(1, 637, 1, 100),
+(1, 637, 1, 55),
+(1, 637, 1, 60),
+(1, 638, 1, 65),
+(1, 638, 1, 70),
+(1, 639, 1, 75),
+(1, 639, 1, 80),
+(1, 640, 1, 85),
+(1, 640, 1, 90),
+(1, 641, 1, 95),
+(1, 641, 1, 100),
+(1, 641, 1, 55),
+(1, 641, 1, 60),
+(1, 642, 1, 65),
+(1, 642, 1, 70),
+(1, 642, 1, 75),
+(1, 642, 1, 80),
+(1, 643, 1, 85),
+(1, 643, 1, 90),
+(1, 643, 1, 95),
+(1, 643, 1, 100),
+(1, 644, 1, 55),
+(1, 644, 1, 60),
+(1, 644, 1, 65),
+(1, 644, 1, 70),
+(1, 644, 1, 75);
 
 
 
