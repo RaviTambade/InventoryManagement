@@ -12,8 +12,8 @@
             <tbody>
                 <tr mat-row *ngFor="let department of departments">
                     <td class="text-center" style="width: 100px;">{{ department.department }}</td>
-                    <!-- <td class="text-center" style="width: 150px;">{{ department.name}}</td>
-                    <td class="text-center" style="width: 200px;" >{{ department.name }}</td>               -->
+                    <td class="text-center" style="width: 150px;">{{ department.firstSupervisorName}}</td>
+                    <td class="text-center" style="width: 200px;" >{{ department.secondSupervisorName }}</td>              
                 </tr>
             </tbody>   
     </table>
