@@ -155,9 +155,6 @@ insert into Warehousestaff(section, categoryid,employeeid)values('Section 11', 1
 insert into Warehousestaff(section, categoryid,employeeid)values('Section 12', 12,12);
 insert into Warehousestaff(section, categoryid,employeeid)values('Section 13', 13,13);
 insert into Warehousestaff(section, categoryid,employeeid)values('Section 14', 14,14);
-insert into Warehousestaff(section, categoryid,employeeid)values('Section 15', 15,15);
-insert into Warehousestaff(section, categoryid,employeeid)values('Section 16', 16,16);
-
 
 INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("GB500 Line",21,22);
 INSERT INTO productionstaff(department,firstsupervisor,secondsupervisor) VALUES("GB400 Line",23,24);
