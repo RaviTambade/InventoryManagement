@@ -67,9 +67,12 @@ export class EmployeesListComponent {
           })
         })
         this.getCount();
-        if(this.department = "Production" ){
-          this.supervisors();
-        }else
+        // if(this.department = "Production" ){
+        //   console.log("supervisor")
+        //   this.supervisors();
+        // }else
+        // console.log("store m")
+
         this.storeManagers();
       })
     }

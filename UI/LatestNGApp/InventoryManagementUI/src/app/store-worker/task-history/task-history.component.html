@@ -39,5 +39,15 @@
         </tbody>
     </table>
    </div> 
+
+
+   <div *ngIf=" tasks.length === 0" class="card mt-3">
+    <div class="card-body bg-danger text-white">
+        <h5 class="card-title">No Tasks Found</h5>
+        <p class="card-text">There are currently no Task available..</p>
+    </div>
+</div> 
+
+
    </div>
     
