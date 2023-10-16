@@ -46,7 +46,6 @@ BEGIN
     end !!
 	DELIMITER ;
     
-    drop trigger updatestatus;
     
       DELIMITER !!
 CREATE TRIGGER updatestatus
@@ -89,7 +88,7 @@ shipment:LOOP
     DELIMITER ;
     
 
-drop procedure createorder;
+
 
         DELIMITER $$
 CREATE PROCEDURE CreateOrder(in cartId int)
@@ -172,11 +171,7 @@ DELIMITER ;
 	DELIMITER $$
    
 
-
-
    --BI
-
-
 
 DELIMITER $$
 
