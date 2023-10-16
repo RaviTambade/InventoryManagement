@@ -11,6 +11,7 @@ namespace Requests.Controllers;
 public class RequestController : ControllerBase
 {
 
+
     private readonly IRequestService _reqsvs;
     public RequestController(IRequestService reqsvs)
     {
@@ -20,7 +21,7 @@ public class RequestController : ControllerBase
         //get request history of department 
     [HttpGet]
     [Route("requests/{empid}")]
-    public async Task<List<Request>> GetAll(int empid)
+    public async Task<List<Request>> GetAllRequests(int empid)
     {
         List<Request> requests =await _reqsvs.GetAllRequests(empid);
         return requests;
@@ -28,7 +29,7 @@ public class RequestController : ControllerBase
 
     [HttpGet]
     [Route("requests/store/{storemanagerid}")]
-    public async Task<List<Request>> GetById(int storemanagerid)
+    public async Task<List<Request>> GetRequests(int storemanagerid)
     {
         List<Request> requests =await _reqsvs.GetRequests(storemanagerid);
         return requests;
@@ -51,7 +52,7 @@ public class RequestController : ControllerBase
 
     [HttpPut]
     [Route("request/item")]
-    public async Task<bool> Update(RequestDetails item)
+    public async Task<bool> Update(UpdateQuantity item)
     {
         bool status =await _reqsvs.UpdateItem(item);
         return status;
@@ -94,10 +95,26 @@ public class RequestController : ControllerBase
         return status;
     }
     [HttpPost]
-    [Route("weeklyorders/{id}")]
+    [Route("weeklyrequests/{id}")]
     public async Task<List<RequestReport>> WeeklyRequests(int id, Period period)
     {
         List<RequestReport> requests =await _reqsvs.WeeklyRequests(id,period);
+        return requests;
+    }
+
+    [HttpPost]
+    [Route("monthlyrequests/{id}")]
+    public async Task<List<RequestReport>> MonthlyRequests(int id, Period period)
+    {
+        List<RequestReport> requests =await _reqsvs.MonthlyRequests(id,period);
+        return requests;
+    }
+
+    [HttpGet]
+    [Route("yearlyrequests/{id}/{year}")]
+    public async Task<List<RequestReport>> YearlyRequests(int id, string year)
+    {
+        List<RequestReport> requests =await _reqsvs.YearlyRequests(id,year);
         return requests;
     }
 }
