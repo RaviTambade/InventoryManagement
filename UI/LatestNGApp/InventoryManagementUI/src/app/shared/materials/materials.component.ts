@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Material } from 'src/app/Models/Material';
 import { MaterialService } from 'src/app/Services/material.service';
 
@@ -16,7 +17,7 @@ export class MaterialsComponent {
   data: Material[] = [];
   selectedCategory: string = "";
 
-  constructor(private _materialsvc: MaterialService) {
+  constructor(private _materialsvc: MaterialService,private router:Router) {
   }
 
   ngOnInit(): void {
@@ -49,5 +50,8 @@ export class MaterialsComponent {
     const sortedMaterials = this.data.filter(m => m.type === this.selectedCategory)
     console.log(sortedMaterials);
     this.materials = sortedMaterials;
+  }
+  addNewMaterial(){
+    this.router.navigate(["storeincharge/addMaterial"])
   }
 }

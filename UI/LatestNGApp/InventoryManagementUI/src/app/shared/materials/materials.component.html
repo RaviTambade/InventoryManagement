@@ -1,17 +1,14 @@
 
-<table>
+<div>
   <h2>Materials</h2>
-    <tr>
-        <td>
           <label>Category</label>
             <select  [(ngModel)]="selectedCategory" (change)="onSelectedCategory()" name="category">
             <option *ngFor="let category of categories" [value]="category">
             {{ category}}
             </option>
             </select>
-        </td>
+</div>
 
-    </tr>
 
     <hr>
   
@@ -24,6 +21,9 @@
             <h4 (click)="selectedMaterialId(material.id)">{{material.name}}</h4>
           </div>
         </div>
+
+    
       </div>
     </div>
-    
+    <button type="submit" class="btn btn-primary btn-sm" (click)="addNewMaterial()" > Add New Material   </button>
+

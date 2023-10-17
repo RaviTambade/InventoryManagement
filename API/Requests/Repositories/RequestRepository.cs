@@ -11,7 +11,7 @@ using Transflower.Requests.Models;
 namespace Requests.Repositories;
 public class RequestRepository : IRequestRepository
 {
-    private IConfiguration _configuration;
+   private IConfiguration _configuration;
     private string _conString;
     public RequestRepository(IConfiguration configuration)
     {
@@ -26,7 +26,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select ri.id,r.date, r.status, ri.materialid, categories.category, ri.quantity from materialrequests r  inner join materialrequestitems ri on ri.materialrequestid= r.id   inner join categories on categories.id=ri.categoryid  where r.id=@requestid";
+            string query = "select ri.id,r.date,e.shipperid, r.status, m.title, categories.category, ri.quantity from materialrequests r inner join materialrequestitems ri on ri.materialrequestid= r.id  inner join shipments e on e.materialrequestid=r.id inner join materials m on ri.materialid = m.id inner join categories on categories.id=ri.categoryid  where r.id=@requestid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@requestid", requestid);
             await con.OpenAsync();
@@ -35,19 +35,21 @@ public class RequestRepository : IRequestRepository
             {
                 int id = Int32.Parse(reader["id"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
-                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string name = reader["title"].ToString();
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
                 string status = reader["status"].ToString();
+                int shipperId = Int32.Parse(reader["shipperid"].ToString());
 
                 RequestDetails request = new RequestDetails()
                 {
                     Id = id,
                     Date = date,
-                    MaterialId = materialid,
+                    Name = name,
                     Category = category,
                     Quantity = quantity,
-                    Status = status
+                    Status = status,
+                    ShipperId=shipperId
                 };
 
                 requests.Add(request);
@@ -72,7 +74,7 @@ public class RequestRepository : IRequestRepository
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "select ri.id,r.date, r.status, ri.materialid, categories.category, ri.quantity from materialrequests r  inner join materialrequestitems ri on ri.materialrequestid= r.id   inner join categories on categories.id=ri.categoryid  where ri.id=@id";
+            string query = "select ri.id,r.date, r.status, m.title, categories.category, ri.quantity from materialrequests r inner join materialrequestitems ri on ri.materialrequestid= r.id  inner join materials m on ri.materialid = m.id   inner join categories on categories.id=ri.categoryid  where ri.id=@id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", id);
             await con.OpenAsync();
@@ -80,14 +82,14 @@ public class RequestRepository : IRequestRepository
             while (await reader.ReadAsync())
             {
                 int rid = Int32.Parse(reader["id"].ToString());
-                int materialid = Int32.Parse(reader["materialid"].ToString());
+                string name = reader["title"].ToString();
                 string category = reader["category"].ToString();
                 int quantity = Int32.Parse(reader["quantity"].ToString());
 
                 item = new RequestDetails()
                 {
                     Id = rid,
-                    MaterialId = materialid,
+                    Name = name,
                     Category = category,
                     Quantity = quantity,
                 };
@@ -244,7 +246,7 @@ public class RequestRepository : IRequestRepository
         return status;
     }
 
-    public async Task<bool> UpdateItem(RequestDetails item)
+    public async Task<bool> UpdateItem(UpdateQuantity item)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -340,13 +342,13 @@ public class RequestRepository : IRequestRepository
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
             {
-                int reqs = Int32.Parse(reader["requests"].ToString());
-                string day = reader["day"].ToString();
+                int therequest = Int32.Parse(reader["requests"].ToString());
+                string theperiod = reader["day"].ToString();
 
                 RequestReport request = new RequestReport()
                 {
-                    Day=day,
-                    Requests=reqs
+                    Period=theperiod,
+                    Requests=therequest
                 };
 
                 requests.Add(request);
@@ -362,6 +364,85 @@ public class RequestRepository : IRequestRepository
         {
             await con.CloseAsync();
         }
+        return requests;
+    }
+
+    public async Task<List<RequestReport>> MonthlyRequests(int empid,Period period)
+    {
+       List<RequestReport> requests = new List<RequestReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT week_number, COUNT(*) AS requests_count FROM ( SELECT CONCAT('week-', WEEK(date, 2) - WEEK(DATE_SUB(date, INTERVAL DAYOFMONTH(date) - 1 DAY), 2) + 1) AS week_number, date  FROM  materialrequests  WHERE date >= @FromDate AND date <= @ToDate AND supervisorid = @empid) AS subquery GROUP BY  week_number;";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@FromDate", period.FromDate);
+            cmd.Parameters.AddWithValue("@ToDate", period.ToDate);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int therequest = Int32.Parse(reader["requests_count"].ToString());
+                string theperiod = reader["week_number"].ToString();
+
+                RequestReport request = new RequestReport()
+                {
+                    Period=theperiod,
+                    Requests=therequest
+                };
+                requests.Add(request);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+
+        return requests;
+    }
+ 
+     public async Task<List<RequestReport>> YearlyRequests(int empid,string year)
+    {
+       List<RequestReport> requests = new List<RequestReport>();
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "SELECT monthname(date) AS month, COUNT(*) AS requests FROM materialrequests WHERE YEAR(date) = @year AND materialrequests.supervisorid = @empid and materialrequests.status<>7 GROUP BY  monthname(date)";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@empid", empid);
+            cmd.Parameters.AddWithValue("@year", year);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int therequest = Int32.Parse(reader["requests"].ToString());
+                string theperiod = reader["month"].ToString();
+
+                RequestReport request = new RequestReport()
+                {
+                    Period=theperiod,
+                    Requests=therequest
+                };
+                requests.Add(request);
+
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+
         return requests;
     }
  

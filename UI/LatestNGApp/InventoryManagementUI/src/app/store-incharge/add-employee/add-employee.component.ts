@@ -13,7 +13,6 @@ import { UserService } from 'src/app/Services/user.service';
 })
 export class AddEmployeeComponent {
 
-  isForm1Complete: boolean = false;
   newUser: UserDetails = {
     id: 0,
     aadharId: '',
@@ -25,55 +24,53 @@ export class AddEmployeeComponent {
     contactNumber: '',
     imageUrl: ''
   };
-  departments: string[] = [];
   roles: string[] = [];
   myCredential = new Credential('', 'password');
   newEmployee: Employee = {
     userId: 0,
     hireDate: new Date(),
-    department: 'HR',
-    role: 'Manager',
+    department: '',
+    role: '',
     name: ''
   };
 
   userId:number=0;
-  constructor(private usrsvc:UserService,private empsvc:EmployeeService, private authsvc:AuthenticationService) { }
+  constructor(private usrsvc:UserService,private empsvc:EmployeeService, private authsvc:AuthenticationService) {
+   }
 
   ngOnInit() {
-    this.empsvc.getDepartments().subscribe((res)=>{
-      this.departments=res;
-    })
+    this.getRoles();
+  }
+  getRoles(){
+    const role=localStorage.getItem("role");
+    if(role=='Store Incharge'){
+      this.roles=['Store Manager','Store Worker', 'Store Incharge']
+    }
+    else{
+      this.roles=['Supervisor', 'Supervisor Incharge']
+    }
 
-    this.empsvc.getRoles().subscribe((res)=>{
-      this.roles=res;
-    })
   }
+
   onSubmit() {
-    console.log(this.newUser);
-     const filename = this.newUser.imageUrl.split('\\').pop();
-     this.newUser.imageUrl = `./assets/img/${filename}`;
-    this.isForm1Complete = true;
-  }
-  onSubmit2() {
-    console.log();
+    const filename = this.newUser.imageUrl.split('\\').pop();
+    this.newUser.imageUrl = `./assets/img/${filename}`;
     console.log(this.newEmployee);
-    
     this.myCredential.contactNumber=this.newUser.contactNumber;
     console.log(this.newEmployee);
     console.log(this.myCredential);
+    console.log(this.newUser);
     
-    this.usrsvc.addUser(this.newUser).subscribe((res)=>{
-      this.userId=res;
-      console.log(res);
-      if(this.userId!=0){
-          this.addEmployee(this.userId)
-      }
-    })
+    // this.usrsvc.addUser(this.newUser).subscribe((res)=>{
+    //   this.userId=res;
+    //   console.log(res);
+    //   if(this.userId!=0){
+    //       this.addEmployee(this.userId)
+    //   }
+    // })
   }
 
-  onBack(){
-    this.isForm1Complete=false;
-  }
+
   addEmployee(userId:number){
     this.newEmployee.userId=userId; 
     console.log(this.newEmployee);

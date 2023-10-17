@@ -1,27 +1,3 @@
-<!-- <p>departments works!</p>
-
-<div class="container">
-    <div class="row">
-      <h2>Warehouse</h2>
-      <ng-container *ngFor="let department of departments;  let i = index" >
-        <div class="col-md-1 mb-3" (click)="onSelectedDepartment(department.id)">
-          <a class="card-link">
-            
-            <div class="card position-relative">
-              <div class="card-body position-absolute top-0 start-50 translate-middle-x p-1">
-                <span class="badge bg-danger" >
-                  <strong></strong> {{ department.department }}
-                </span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="clearfix visible-md-block" *ngIf="(i + 1) % 12 === 0"></div>
-      </ng-container>
-    </div>
-  </div>
-  
-  <hr> -->
   
   <div *ngIf="departments">
     <table class="table table-hover"  >
@@ -44,48 +20,5 @@
 </div>
   
   
-  <!-- <div class="container px-4 py-4  my-4">
-    <div *ngIf="department">
-      <div class="col-md-6">
-        <div class="card mt-6">
-          <div class="row g-0"> 
-            
-            <div class="col-md-6">
-              <div class="card-body">
-                <h5 class="card-title" style="font-size: 24px;">{{ department.department }}</h5>
-                <h6 class="card-subtitle mt-3 text-muted" style="font-size: 18px;">Supervisor: {{ department.firstSupervisorName  }}</h6>
-   -->
-                <!-- <div class="btn-group mt-3">
-                  <button type="button" (click)="selectEmployeeForSwap(warehouseStaff)" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Swap
-                  </button>
-                  <div class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
-                    <a class="dropdown-item" *ngFor="let thedata of data;" (click)="selectEmployeeForSwap(thedata)">{{ thedata.name }} ({{ thedata.section }})</a>
-                  </div>
-                </div> -->
-                
-                <!-- <div class="btn-group mt-3">
-                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select Employee
-                  </button>
-                  <div class="dropdown-menu" style="max-height: 200px;">
-                    <a class="dropdown-item" (click)="replaceEmployee(warehouseStaff, emp)" *ngFor="let emp of employees">{{ emp.name }}</a>
-                  </div>
-                </div> -->
-                
-                <!-- <div class="row mt-3">
-                  <div class="col-md-12 text-center">
-                    <button class="btn btn-primary btn-sm" (click)="updateEmployee()">Update</button>
-                  </div>
-                </div> -->
-                
-              <!-- </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-   -->
   
   
