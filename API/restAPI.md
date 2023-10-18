@@ -42,7 +42,7 @@
   - <b>URL</b> : /api/employees/departments/{deptid}
  
   - <b>Method</b>: GET
-  - <b>Description</b>: Get the Employees of given department
+  - <b>Description</b>: Get list of  employees of a department
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Not required
   - <b>Response</b> = 
@@ -61,7 +61,7 @@
   - <b>URL</b> : /api/employees/roles/{role}
   -  <b>URL</b> :/api/employees/roles/{role}
   - <b>Method</b>: GET
-  - <b>Description</b>: Get the Employees of given role
+  - <b>Description</b>: Get list of Employees of given role
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Not required
   - <b>Response</b> = 
@@ -77,7 +77,7 @@
     ```
 
   - <b>URL</b> : /api/employees/role/{id}
-  - <b>URL</b> : /api/employees/role/{empid}
+  - <b>URL</b> : /api/roles/employees/{empid}
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employee role of given Id
   - <b>Body</b>: Not requried
@@ -113,7 +113,7 @@
     ``` 
 
   - <b>URL</b> : /api/employees/departments
-  - <b>URL</b> : /api/employees/departments
+  - <b>URL</b> : /api/departments/
   - <b>Method</b>: GET
   - <b>Description</b>: Get All Departments
   - <b>Body</b>: Not requried
@@ -135,9 +135,9 @@
     ``` 
 
   - <b>URL</b> : /api/employees/roles
-  - <b>URL</b> : /api/employees/roles
+  - <b>URL</b> : /api/roles/inventory
   - <b>Method</b>: GET
-  - <b>Description</b>: Get All roles
+  - <b>Description</b>: Get All roles of inventory management
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Not required
   - <b>Response</b> = 
@@ -199,7 +199,7 @@
  ### InitialRequests API
 
   - <b>URL</b>: /api/InitialRequest/items/{empid}
-  - <b>URL</b>: /api/InitialRequest/{empid}
+  - <b>URL</b>: /api/tray/employees/{empid}
   - <b>Method</b>: GET
   - <b>Description</b>: Get Tray of given employee Id
   - <b>Body</b>: Not requried
@@ -220,7 +220,7 @@
     ``` 
  
   - <b>URL</b> : /api/InitialRequest/item/{id}
-  - <b>URL</b> : /api/InitialRequest/item/{id}
+  - <b>URL</b> : /api/tray/items/{id}
   - <b>Method</b>: DELETE
   - <b>Description</b>: Remove Item in tray of given Id
   - <b>Body</b>: Not requried
@@ -233,7 +233,7 @@
     ``` 
 
   - <b>URL</b> : /api/InitialRequest/items/{empid} 
-  - <b>URL</b> : /api/InitialRequest/{empid} 
+  - <b>URL</b> : /api/tray/employees/{empid} 
   - <b>Method</b>: DELETE
   - <b>Description</b>:delete tray of given employeeId
   - <b>Body</b>: Not requried
@@ -246,7 +246,7 @@
     ``` 
 
   - <b>URL</b> : /api/InitialRequest/ChangeStatus
-  - <b>URL</b> : /api/InitialRequests/Status
+  - <b>URL</b> : /api/tray/{trayid}/Status/{status}
   - <b>Method</b>: PUT
   - <b>Description</b>: Update status of given Id
   - <b>Body</b>: 
@@ -263,7 +263,7 @@
     ``` 
 
    - <b>URL</b> : /api/InitialRequest/item
-   - <b>URL</b> : /api/InitialRequest
+   - <b>URL</b> : /api/tray/items
   - <b>Method</b>: POST
   - <b>Description</b>: Add new Items in Tray
   - <b>Body</b>: 
@@ -289,7 +289,7 @@
 ### Warehouse API
 
   - <b>URL</b> : /api/warehouses/warehouse
-  - <b>URL</b> : /api/warehouse
+  - <b>URL</b> : /api/warehouse/sections
   - <b>Method</b>: GET
   - <b>Description</b>: Get all section from the warehouse
   - <b>Body</b>: Not requried
@@ -309,7 +309,7 @@
     ```
 
   - <b>URL</b> : /api/warehouse/warehouses
-  - <b>URL</b> : /api/warehouse
+  - <b>URL</b> : /api/warehouse/section
   - <b>Method</b>: Post
   - <b>Description</b>: Insert new section in warehouse.
   - <b>Body</b>: 
@@ -331,7 +331,7 @@
 ```
 
   - <b>URL</b> : /api/warehouse/warehouses
-  - <b>URL</b> : /api/warehouse
+  - <b>URL</b> : /api/warehouse/staff
   - <b>Method</b>: Put
   - <b>Description</b>: update warehouse staff
   - <b>Body</b>: 
@@ -351,7 +351,7 @@
 
 
   - <b>URL</b> : /api/warehouse/warehouses
-  - <b>URL</b> : /api/warehouse
+  - <b>URL</b> : /api/warehouse/section
   - <b>Method</b>: Delete
   - <b>Description</b>: remove section from the warehouse
   - <b>Body</b>: Not requried
@@ -368,7 +368,7 @@
 
 
   - <b>URL</b> : /api/shipments/shipments/{employeeId}
-  - <b>URL</b> : /api/shipments/{employeeId}
+  - <b>URL</b> : /api/shipments/employees/{employeeId}
   - <b>Method</b>: Get
   - <b>Description</b>: get shipment list of shipper
   - <b>Body</b>: Not requried
@@ -385,6 +385,7 @@
 
 
   - <b>URL</b> : /api/shipments/taskdetails/{taskId}
+  - /api/shipments/tasks/{taskId}
   - <b>Method</b>: Get
   - <b>Description</b>: get task details of given task id
   - <b>Body</b>: Not requried
@@ -402,6 +403,7 @@
 
 
   - <b>URL</b> : /api/shipments/updatestatus/{id}/{taskStatus}
+  - /api/shipments/tasks/{id}/status/{taskStatus}
   - <b>Method</b>: Put
   - <b>Description</b>: update task status to picked/delivered
   - <b>Body</b>: Not requried
