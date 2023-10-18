@@ -341,6 +341,21 @@ http://localhost:5262/api/InitialRequest/item
 Description    : update tray
 
 Type     : Put
+ 
+
+ 
+<h4>WareHouse   </h4>
+
+```console
+
+    http://localhost:5131/api/warehouse/warehouses
+
+```
+Method         : Get
+
+Description    : Return Total Sections in warehouse
+
+Parameter      :  noun
 
 Body           : None
 
@@ -367,6 +382,105 @@ Description    : Delete Items in tray of given id
 Type     : Delete
 
 Body           : None
+   {
+    "id": 0,
+    "employeeId": 0,
+    "section": "string",
+    "materialType": "string",
+    "imageUrl": "string"
+  }
+
+
+```
+Token required : Yes
+
+<hr>
+
+           
+```console
+
+    http://localhost:5131/api/warehouse/warehouse
+
+```
+Method         : Post
+
+Description    : Insert new section in warehouse
+
+Parameter      :  Noun
+
+Body           : 
+
+```console
+
+
+{
+    "id": 0,
+  "employeeId": 0,
+  "section": "string",
+  "materialType": "string",
+  "imageUrl": "string"
+}
+
+```
+
+Response        :
+
+```console
+
+   True
+
+
+```
+Token required : Yes
+
+<hr>
+
+```console
+
+http://localhost:5131/api/warehouse/warehouse
+
+```
+Method         : Put
+
+Description    : Update warehouse staff
+
+Parameter      : EmployeeId
+
+Body           :
+
+```console
+
+{
+  "id": 0,
+  "employeeId": 0
+}
+
+```
+Response        :
+
+```console
+
+true
+
+```
+Token required : Yes
+
+<hr>
+
+
+```console
+
+http://localhost:5131/api/warehouse/{id}
+
+```
+Method         : Delete
+
+Description    : Remove section from the warehouse
+
+Parameter      : Id
+
+Body           : Noun
+
 
 Response        :
 
@@ -393,6 +507,29 @@ Type     : Delete
 
 Body           : None
 
+```
+Token required : Yes
+
+<hr>
+
+
+
+<h2>Shipments</h2>
+
+```console
+
+http://localhost:5112/api/shipment/shipments/{employeeId}
+
+```
+Method         : Get
+
+Description    : Get shipments details
+
+Parameter      : EmployeeId
+
+Body           : Noun
+
+
 Response        :
 
 ```console
@@ -416,6 +553,32 @@ Description    : Add new material in Tray
 Type     : Post
 
 Body           : None
+{
+    "id": 0,
+    "date": "2023-10-17T10:41:05.140Z",
+    "status": "string"
+  }
+
+```
+Token required : Yes
+
+<hr>
+
+
+
+```console
+
+http://localhost:5112/api/shipment/shippingdetails/{taskId}
+
+```
+Method         : Get
+
+Description    : Get shipping details
+
+Parameter      : EmployeeId
+
+Body           : Noun
+
 
 Response        :
 
@@ -441,6 +604,34 @@ Description    : update status in material requests
 Type     : Put
 
 Body           : None
+{
+    "orderId": 1,
+    "taskId": 1,
+    "section": "Section 1",
+    "department": "GB500 Line",
+    "status": "Delivered"
+  }
+
+```
+Token required : Yes
+
+<hr>
+
+
+
+```console
+
+http://localhost:5112/api/shipment/updatestatus/{Id}/{orderStatus}
+
+```
+Method         : Put
+
+Description    : Update order status
+
+Parameter      : Id, status
+
+Body           : Noun
+
 
 Response        :
 
@@ -452,3 +643,77 @@ Token required : No
 <hr>
 
  
+{
+    true
+  }
+
+```
+Token required : Yes
+
+<hr>
+
+
+
+
+```console
+
+http://localhost:5231/api/request/requests/{employeeId}
+
+```
+Method         : Get
+
+Description    : Get requests list
+
+Parameter      : 1
+
+Body           : Noun
+
+
+Response        :
+
+```console
+
+{
+    "id": 0,
+    "date": "2023-10-17T10:57:12.779Z",
+    "status": "string",
+    "userId": 0
+}
+
+```
+Token required : Yes
+
+<hr>
+
+
+
+
+```console
+
+http://localhost:5231/api/request/requests/{employeeId}
+
+```
+Method         : Get
+
+Description    : Get requests list
+
+Parameter      : 1
+
+Body           : Noun
+
+
+Response        :
+
+```console
+
+{
+    "id": 0,
+    "date": "2023-10-17T10:57:12.779Z",
+    "status": "string",
+    "userId": 0
+}
+
+```
+Token required : Yes
+
+<hr>
