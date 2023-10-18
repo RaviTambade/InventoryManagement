@@ -147,7 +147,7 @@ public class InitialRequestRepository : IInitialRequestRepository
         try
         {
 
-            string query = "  insert into InitialRequestItems(initialrequestid,materialid,quantity )values((select id from initialrequest where employeeid=@empid), (select id from materials where title=@name),@quantity)";
+            string query = "insert into InitialRequestItems(initialrequestid,materialid,quantity )values((select id from initialrequest where employeeid=@empid), (select id from materials where title=@name),@quantity)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@empid", item.EmployeeId);
             cmd.Parameters.AddWithValue("@name", item.Name);
@@ -256,5 +256,4 @@ public class InitialRequestRepository : IInitialRequestRepository
         }
         return status;
     }
-
 }
