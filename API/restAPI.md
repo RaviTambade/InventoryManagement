@@ -1,7 +1,5 @@
 ## REST API EndPoints
 ### Employee API
-
- 
   - <b>URL</b> : /api/employees/employees
   - <b>URL</b> : /api/employees 
   - <b>Method</b>: GET
