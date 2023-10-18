@@ -3,8 +3,7 @@
 
  
   - <b>URL</b> : /api/employees/employees
-  - <b>URL</b> : /api/employees/
-  - 
+  - <b>URL</b> : /api/employees 
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Total Employees 
   - <b>Body</b>: Not requried
@@ -17,7 +16,7 @@
         "department": "string",
         "role": "string",
         "hireDate": "2023-10-17T09:35:03.460Z"
-     }
+      }
     ]
     ```
 
@@ -41,7 +40,7 @@
 
   - <b>URL</b> : /api/employees/department/{department}
   - <b>URL</b> : /api/employees/departments/{deptid}
-  -  - /api/employees/departments/{name}
+ 
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employees of given department
   - <b>Body</b>: Not requried
@@ -60,7 +59,7 @@
 
 
   - <b>URL</b> : /api/employees/roles/{role}
-  -  /api/employees/roles/{roleid}
+  -  <b>URL</b> :/api/employees/roles/{role}
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employees of given role
   - <b>Body</b>: Not requried
@@ -78,6 +77,7 @@
     ```
 
   - <b>URL</b> : /api/employees/role/{id}
+  - <b>URL</b> : /api/employees/role/{empid}
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employee role of given Id
   - <b>Body</b>: Not requried
@@ -100,6 +100,7 @@
     ```
 
   - <b>URL</b> : /api/employees/employees/{id}
+  - <b>URL</b> : /api/employees/{id}
   - <b>Method</b>: DELETE
   - <b>Description</b>: Delete Employee of given id
   - <b>Body</b>: Not requried
@@ -111,6 +112,7 @@
     ]
     ``` 
 
+  - <b>URL</b> : /api/employees/departments
   - <b>URL</b> : /api/employees/departments
   - <b>Method</b>: GET
   - <b>Description</b>: Get All Departments
@@ -132,6 +134,7 @@
     ]
     ``` 
 
+  - <b>URL</b> : /api/employees/roles
   - <b>URL</b> : /api/employees/roles
   - <b>Method</b>: GET
   - <b>Description</b>: Get All roles
@@ -155,21 +158,35 @@
 
     
   - <b>URL</b> : /api/employees/employee
+  - <b>URL</b> : /api/employees
   - <b>Method</b>: POST
   - <b>Description</b>: Add new employee in list
-  - <b>Body</b>: Not requried
+  - <b>Body</b>:
+      {
+        "userId": 0,
+        "department": "string",
+        "role": "string",
+        "hireDate": "2023-10-17T09:46:08.327Z"
+      }
   - <b>JWTToken Header</b>: Not required
   - <b>Response</b> = 
     ```console
     [
-      true/false
+     
     ]
     ``` 
 
   - <b>URL</b> : /api/employees/employee
+  - <b>URL</b> : /api/employees
   - <b>Method</b>: PUT
   - <b>Description</b>: Update Existing Employee in list
-  - <b>Body</b>: Not requried
+  - <b>Body</b>:
+      {
+        "userId": 0,
+        "department": "string",
+        "role": "string",
+        "hireDate": "2023-10-17T09:46:08.327Z"
+      }
   - <b>JWTToken Header</b>: Not required
   - <b>Response</b> = 
     ```console
@@ -181,7 +198,8 @@
 
  ### InitialRequests API
 
-  - <b>URL</b> : /api/InitialRequest/items/{empid}
+  - <b>URL</b>: /api/InitialRequest/items/{empid}
+  - <b>URL</b>: /api/InitialRequest/{empid}
   - <b>Method</b>: GET
   - <b>Description</b>: Get Tray of given employee Id
   - <b>Body</b>: Not requried
@@ -202,6 +220,7 @@
     ``` 
  
   - <b>URL</b> : /api/InitialRequest/item/{id}
+  - <b>URL</b> : /api/InitialRequest/item/{id}
   - <b>Method</b>: DELETE
   - <b>Description</b>: Remove Item in tray of given Id
   - <b>Body</b>: Not requried
@@ -214,6 +233,7 @@
     ``` 
 
   - <b>URL</b> : /api/InitialRequest/items/{empid} 
+  - <b>URL</b> : /api/InitialRequest/{empid} 
   - <b>Method</b>: DELETE
   - <b>Description</b>:delete tray of given employeeId
   - <b>Body</b>: Not requried
@@ -226,9 +246,14 @@
     ``` 
 
   - <b>URL</b> : /api/InitialRequest/ChangeStatus
+  - <b>URL</b> : /api/InitialRequests/Status
   - <b>Method</b>: PUT
   - <b>Description</b>: Update status of given Id
-  - <b>Body</b>: Not requried
+  - <b>Body</b>: 
+    {
+      "id":0,
+      "statusId":0
+    }
   - <b>JWTToken Header</b>: Not required
   - <b>Response</b> = 
     ```console
@@ -238,9 +263,15 @@
     ``` 
 
    - <b>URL</b> : /api/InitialRequest/item
+   - <b>URL</b> : /api/InitialRequest
   - <b>Method</b>: POST
   - <b>Description</b>: Add new Items in Tray
-  - <b>Body</b>: Not requried
+  - <b>Body</b>: 
+    {
+      "initialRequestId":0,
+      "materialId":0,
+      "quantity":0
+    }
   - <b>JWTToken Header</b>: Not required
   - <b>Response</b> = 
     ```console
