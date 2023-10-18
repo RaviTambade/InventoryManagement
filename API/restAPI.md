@@ -1,6 +1,9 @@
 ## REST API EndPoints
 ### Employee API
  
+ ## REST API EndPoints
+### Employee API
+ 
   - <b>URL</b> : /api/employees/employees
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Total Employees 
@@ -153,7 +156,7 @@
 
   - <b>URL</b> : /api/employees/employee
   - <b>Method</b>: PUT
-  - <b>Description</b>: Update Existing Employee
+  - <b>Description</b>: Update Existing Employee in list
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Not required
   - <b>Response</b> = 
@@ -162,6 +165,7 @@
       true/false
     ]
     ``` 
+
 
  <h4>Initial Requests </h4>
  <hr>
@@ -192,9 +196,6 @@ Response        :
 ```
 Token required : No
 
-<hr>
-
-<hr>
 
  
  ```console
@@ -233,9 +234,7 @@ true
 Token required : No
 
 <hr>
-<hr>
 
- 
  ```console
 
 http://localhost:5262/api/InitialRequest/item/{id}
@@ -259,6 +258,82 @@ Body           : None
 ```
 Token required : Yes
 
+<hr>
+
+<hr>
+
+ 
+ ```console
+
+http://localhost:5262/api/InitialRequest/items/{empid}
+
+```
+
+Description    : delete tray of given employeeId
+
+Type     : Delete
+
+Body           : None
+
+```
+Token required : Yes
+
+<hr>
+
+
+<hr>
+
+ 
+ ```console
+
+http://localhost:5262/api/InitialRequest/item
+```
+
+Description    : Add new material in Tray
+
+Type     : Post
+
+Body           : None
+{
+    "id": 0,
+    "date": "2023-10-17T10:41:05.140Z",
+    "status": "string"
+  }
+
+```
+Token required : Yes
+
+
+<hr>
+
+ 
+ ```console
+
+http://localhost:5262/api/InitialRequest/ChangeStatus
+
+```
+
+Description    : update status in material requests
+
+Type     : Put
+
+Body           : None
+{
+    "orderId": 1,
+    "taskId": 1,
+    "section": "Section 1",
+    "department": "GB500 Line",
+    "status": "Delivered"
+  }
+
+```
+Token required : Yes
+
+<hr>
+
+
+<h2>Warehouse</h2>
+ 
 <hr>
 
            
@@ -357,25 +432,6 @@ Token required : No
 
 <hr>
 
-<hr>
-
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/items/{empid}
-
-```
-
-Description    : delete tray of given employeeId
-
-Type     : Delete
-
-Body           : None
-
-```
-Token required : Yes
-
-<hr>
 
 
 
@@ -407,28 +463,6 @@ Token required : No
 
 <hr>
 
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/item
-```
-
-Description    : Add new material in Tray
-
-Type     : Post
-
-Body           : None
-{
-    "id": 0,
-    "date": "2023-10-17T10:41:05.140Z",
-    "status": "string"
-  }
-
-```
-Token required : Yes
-
-<hr>
-
 
 
 ```console
@@ -452,33 +486,6 @@ Response        :
 true
 ```
 Token required : No
-
-<hr>
-
-<hr>
-
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/ChangeStatus
-
-```
-
-Description    : update status in material requests
-
-Type     : Put
-
-Body           : None
-{
-    "orderId": 1,
-    "taskId": 1,
-    "section": "Section 1",
-    "department": "GB500 Line",
-    "status": "Delivered"
-  }
-
-```
-Token required : Yes
 
 <hr>
 
@@ -519,6 +526,7 @@ Token required : Yes
 
 
 
+Requests
 
 ```console
 
