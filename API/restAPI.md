@@ -290,11 +290,11 @@
    ```
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
-    ```console
+   ```console
    {
       true/false
     }
-    ```
+   ```
  
   - <b>URL</b> : /api/warehouse
   - <b>Method</b>: Put
@@ -308,11 +308,11 @@
 ```
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
-    ```console
+   ```console
    {
       true/false
     }
-    ```
+   ```
 
 
   - <b>URL</b> : /api/warehouse
@@ -321,11 +321,11 @@
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
-    ```console
+   ```console
    {
       true/false
     }
-    ```
+   ```
 
 
 ### Shipments API
@@ -337,13 +337,13 @@
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
-    ```console
+```console
   {
     "id": 0,
     "date": "2023-10-17T10:41:05.140Z",
     "status": "string"
   }
-    ```
+ ```
 
 
 
@@ -353,7 +353,7 @@
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
-    ```console
+```console
   {
     "orderId": 1,
     "taskId": 1,
@@ -361,7 +361,7 @@
     "department": "GB500 Line",
     "status": "Delivered"
   }
-    ```
+```
 
 
   - <b>URL</b> : /api/shipments/updatestatus/{id}/{taskStatus}
@@ -370,11 +370,11 @@
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
-    ```console
+```console
   {
     True/false
   }
-    ```
+```
 
 
 
@@ -387,12 +387,12 @@
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
-    ```console
+```console
   {
     "id": 0,
     "date": "2023-10-17T10:57:12.779Z",
     "status": "string",
     "userId": 0
   }
-  
-    ```
+
+```
