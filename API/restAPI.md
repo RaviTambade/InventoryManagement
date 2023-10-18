@@ -1,8 +1,6 @@
 ## REST API EndPoints
 ### Employee API
- 
- ## REST API EndPoints
-### Employee API
+
  
   - <b>URL</b> : /api/employees/employees
   - <b>Method</b>: GET
@@ -167,73 +165,79 @@
     ``` 
 
 
- <h4>Initial Requests </h4>
- <hr>
+ ### InitialRequests API
+
+  - <b>URL</b> : /api/InitialRequest/items/{empid}
+  - <b>Method</b>: GET
+  - <b>Description</b>: Get Tray of given employee Id
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Not required
+  - <b>Response</b> = 
+    ```console
+    [
+     {
+      "id": 0,
+      "requestId": 0,
+      "name": "string",
+      "category": "string",
+      "imageUrl": "string",
+      "quantity": 0,
+      "employeeId": 0
+      }
+    ]
+    ``` 
+ 
+  - <b>URL</b> : /api/InitialRequest/item/{id}
+  - <b>Method</b>: DELETE
+  - <b>Description</b>: Remove Item in tray of given Id
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Not required
+  - <b>Response</b> = 
+    ```console
+    [
+     true/false
+    ]
+    ``` 
+
+  - <b>URL</b> : /api/InitialRequest/items/{empid} 
+  - <b>Method</b>: DELETE
+  - <b>Description</b>:delete tray of given employeeId
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Not required
+  - <b>Response</b> = 
+    ```console
+    [
+     true/false
+    ]
+    ``` 
+
+  - <b>URL</b> : /api/InitialRequest/ChangeStatus
+  - <b>Method</b>: PUT
+  - <b>Description</b>: Update status of given Id
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Not required
+  - <b>Response</b> = 
+    ```console
+    [
+     true/false
+    ]
+    ``` 
+
+   - <b>URL</b> : /api/InitialRequest/item
+  - <b>Method</b>: POST
+  - <b>Description</b>: Add new Items in Tray
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Not required
+  - <b>Response</b> = 
+    ```console
+    [
+     true/false
+    ]
+    ``` 
+ 
 
  
- ```console
-http://localhost:5262/api/InitialRequest/items/{empid}
 
-```
-
-Description    : Tray of given employee Id
-
-Body           : None
-
-Response        :
-
-```console
-
-{
-    "id": 0,
-    "requestId": 0,
-    "name": "string",
-    "category": "string",
-    "imageUrl": "string",
-    "quantity": 0,
-    "employeeId": 0
-  }
-```
-Token required : No
-
-
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/item
-
-```
-
-Description    : update tray
-
-Type     : Put
- 
-
- 
-<h4>WareHouse   </h4>
-
-```console
-
-    http://localhost:5131/api/warehouse/warehouses
-
-```
-Method         : Get
-
-Description    : Return Total Sections in warehouse
-
-Parameter      :  noun
-
-Body           : None
-
-Response        :
-
-```console
-
-true
-```
-Token required : No
-
-<hr>
 
  ```console
 
@@ -294,11 +298,7 @@ Description    : Add new material in Tray
 Type     : Post
 
 Body           : None
-{
-    "id": 0,
-    "date": "2023-10-17T10:41:05.140Z",
-    "status": "string"
-  }
+
 
 ```
 Token required : Yes
