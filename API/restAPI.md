@@ -285,8 +285,10 @@
 
 
 
+
 ### Warehouse API
 
+  - <b>URL</b> : /api/warehouses/warehouse
   - <b>URL</b> : /api/warehouse
   - <b>Method</b>: GET
   - <b>Description</b>: Get all section from the warehouse
@@ -306,6 +308,7 @@
     ]
     ```
 
+  - <b>URL</b> : /api/warehouse/warehouses
   - <b>URL</b> : /api/warehouse
   - <b>Method</b>: Post
   - <b>Description</b>: Insert new section in warehouse.
@@ -325,8 +328,9 @@
    {
       true/false
     }
-   ```
- 
+```
+
+  - <b>URL</b> : /api/warehouse/warehouses
   - <b>URL</b> : /api/warehouse
   - <b>Method</b>: Put
   - <b>Description</b>: update warehouse staff
@@ -346,6 +350,7 @@
    ```
 
 
+  - <b>URL</b> : /api/warehouse/warehouses
   - <b>URL</b> : /api/warehouse
   - <b>Method</b>: Delete
   - <b>Description</b>: remove section from the warehouse
@@ -362,6 +367,7 @@
 ### Shipments API
 
 
+  - <b>URL</b> : /api/shipments/shipments/{employeeId}
   - <b>URL</b> : /api/shipments/{employeeId}
   - <b>Method</b>: Get
   - <b>Description</b>: get shipment list of shipper
@@ -397,7 +403,7 @@
 
   - <b>URL</b> : /api/shipments/updatestatus/{id}/{taskStatus}
   - <b>Method</b>: Put
-  - <b>Description</b>: get task status to picked/delivered
+  - <b>Description</b>: update task status to picked/delivered
   - <b>Body</b>: Not requried
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
@@ -412,6 +418,7 @@
 
 ### Request API
 
+  - <b>URL</b> : /api/request/requests/{employeeId}
   - <b>URL</b> : /api/request/{employeeId}
   - <b>Method</b>: Get
   - <b>Description</b>: Get requests list of supervisor
@@ -425,5 +432,91 @@
     "status": "string",
     "userId": 0
   }
-
+  
 ```
+
+
+  - <b>URL</b> : /api/request/request/requestdetails/{requestId}
+  - <b>URL</b> : /api/request/requestdetails/{requestId}
+  - <b>Method</b>: Get
+  - <b>Description</b>: get request details
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+ ```console
+  [
+  {
+    "id": 55,
+    "date": "2022-12-02T14:20:10",
+    "status": "Delivered",
+    "name": "2nd Gear of ratio 3.6",
+    "category": "1st Gear",
+    "quantity": 75,
+    "shipperId": 35
+  }
+]
+  
+ ```
+
+  - <b>URL</b> : /api/request/delete/request/{requestId}
+  - <b>URL</b> : /api/request/{requestId}
+  - <b>Method</b>: Delete
+  - <b>Description</b>: delete request
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+```console
+  [
+  True
+]
+  
+ ```
+
+  - <b>URL</b> : /api/request/item/{Id}
+  - <b>URL</b> : /api/request/item{itemId}
+  - <b>Method</b>: Delete
+  - <b>Description</b>: delete items 
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+```console
+  [
+  True
+]
+  
+```    
+
+  - <b>URL</b> : /api/request/yearlyrequests/{Id}/{year}
+  - <b>URL</b> : /api/request/yearlyrequestreport/{Id}/{year}
+  - <b>Method</b>: Get
+  - <b>Description</b>: Get Yearly requests 
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+```console
+[
+  {
+    "period": "January",
+    "requests": 18
+  },
+  {
+    "period": "February",
+    "requests": 31
+  },
+  {
+    "period": "March",
+    "requests": 30
+  },
+  {
+    "period": "April",
+    "requests": 18
+  },
+  {
+    "period": "May",
+    "requests": 23
+  }
+]
+  
+```    
+    
+
