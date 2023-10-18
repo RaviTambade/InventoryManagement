@@ -239,99 +239,6 @@
  
 
 
- ```console
-
-http://localhost:5262/api/InitialRequest/item/{id}
-
-```
-
-Description    : Delete Items in tray of given id
-
-Type     : Delete
-
-Body           : None
-   {
-    "id": 0,
-    "employeeId": 0,
-    "section": "string",
-    "materialType": "string",
-    "imageUrl": "string"
-  }
-
-
-```
-Token required : Yes
-
-<hr>
-
-<hr>
-
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/items/{empid}
-
-```
-
-Description    : delete tray of given employeeId
-
-Type     : Delete
-
-Body           : None
-
-```
-Token required : Yes
-
-<hr>
-
-
-<hr>
-
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/item
-```
-
-Description    : Add new material in Tray
-
-Type     : Post
-
-Body           : None
-
-
-```
-Token required : Yes
-
-
-<hr>
-
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/ChangeStatus
-
-```
-
-Description    : update status in material requests
-
-Type     : Put
-
-Body           : None
-{
-    "orderId": 1,
-    "taskId": 1,
-    "section": "Section 1",
-    "department": "GB500 Line",
-    "status": "Delivered"
-  }
-
-```
-Token required : Yes
-
-<hr>
-
-
 
 ### Warehouse API
 
@@ -473,6 +380,5 @@ Token required : Yes
     "status": "string",
     "userId": 0
   }
+  
     ```
-
-
