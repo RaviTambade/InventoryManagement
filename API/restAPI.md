@@ -407,6 +407,59 @@
   }
 ```
 
+### Production API
+ - <b>URL</b> : /api/production/productionstaffs
+  - <b>Method</b>: GET
+  - <b>Description</b>: get all productionstaff
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+```console
+  {
+    "id":0,
+    "department":"string",
+    "firstSupervisor":0,
+    "secondSupervisor":0
+  }
+```
+
+
+### Material API
+
+  - <b>URL</b> : api/Materials/materials/{materialId}
+  - <b>Method</b>: Put
+  - <b>Description</b>: get material details of given Id
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+```console
+  [
+      {
+        "id": 3,
+        "name": "Bush Bearing",
+        "type": "Bearings",
+        "quantity": 4496,
+        "unitPrice": 15,
+        "imageUrl": "/assets/img/Bearing.jpeg"
+      }
+  ]
+```
+
+ - <b>URL</b> : /api/materials/categories
+  - <b>Method</b>: GET
+  - <b>Description</b>: get all productionstaff
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+```console
+  {
+    "id":0,
+    "department":"string",
+    "firstSupervisor":0,
+    "secondSupervisor":0
+  }
+```
+
 
 
 
