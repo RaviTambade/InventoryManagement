@@ -3,6 +3,8 @@
 
  
   - <b>URL</b> : /api/employees/employees
+  - /api/employees/
+  - 
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Total Employees 
   - <b>Body</b>: Not requried
@@ -20,6 +22,7 @@
     ```
 
   - <b>URL</b> : /api/employees/employee/{id}
+  - /api/employees/{id}
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employee of given Id
   - <b>Body</b>: Not requried
@@ -37,6 +40,8 @@
     ```
 
   - <b>URL</b> : /api/employees/department/{department}
+  - /api/employees/departments/{deptid}
+  -  - /api/employees/departments/{name}
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employees of given department
   - <b>Body</b>: Not requried
@@ -55,6 +60,7 @@
 
 
   - <b>URL</b> : /api/employees/roles/{role}
+  -  /api/employees/roles/{roleid}
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employees of given role
   - <b>Body</b>: Not requried
@@ -80,6 +86,14 @@
     ```console
     [
       {  
+        "role": "Store Manager", 
+      }
+    ]
+
+
+      [
+      {
+         roleid:23,
         "role": "Store Manager", 
       }
     ]
