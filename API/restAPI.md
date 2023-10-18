@@ -193,7 +193,7 @@ http://localhost:5140/api/employees/departments
 
 ```
 
-Description    : Return Total departments
+Description    : Return all departments
 
 Body           : None
 
@@ -225,7 +225,7 @@ http://localhost:5140/api/employees/roles
 
 ```
 
-Description    : Return Total roles
+Description    : Return all roles
 
 Parameter      : EmployeeId
 
@@ -368,9 +368,7 @@ true
 Token required : No
 
 <hr>
-<hr>
 
- 
  ```console
 
 http://localhost:5262/api/InitialRequest/item/{id}
@@ -394,6 +392,82 @@ Body           : None
 ```
 Token required : Yes
 
+<hr>
+
+<hr>
+
+ 
+ ```console
+
+http://localhost:5262/api/InitialRequest/items/{empid}
+
+```
+
+Description    : delete tray of given employeeId
+
+Type     : Delete
+
+Body           : None
+
+```
+Token required : Yes
+
+<hr>
+
+
+<hr>
+
+ 
+ ```console
+
+http://localhost:5262/api/InitialRequest/item
+```
+
+Description    : Add new material in Tray
+
+Type     : Post
+
+Body           : None
+{
+    "id": 0,
+    "date": "2023-10-17T10:41:05.140Z",
+    "status": "string"
+  }
+
+```
+Token required : Yes
+
+
+<hr>
+
+ 
+ ```console
+
+http://localhost:5262/api/InitialRequest/ChangeStatus
+
+```
+
+Description    : update status in material requests
+
+Type     : Put
+
+Body           : None
+{
+    "orderId": 1,
+    "taskId": 1,
+    "section": "Section 1",
+    "department": "GB500 Line",
+    "status": "Delivered"
+  }
+
+```
+Token required : Yes
+
+<hr>
+
+
+<h2>Warehouse</h2>
+ 
 <hr>
 
            
@@ -492,25 +566,6 @@ Token required : No
 
 <hr>
 
-<hr>
-
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/items/{empid}
-
-```
-
-Description    : delete tray of given employeeId
-
-Type     : Delete
-
-Body           : None
-
-```
-Token required : Yes
-
-<hr>
 
 
 
@@ -542,28 +597,6 @@ Token required : No
 
 <hr>
 
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/item
-```
-
-Description    : Add new material in Tray
-
-Type     : Post
-
-Body           : None
-{
-    "id": 0,
-    "date": "2023-10-17T10:41:05.140Z",
-    "status": "string"
-  }
-
-```
-Token required : Yes
-
-<hr>
-
 
 
 ```console
@@ -587,33 +620,6 @@ Response        :
 true
 ```
 Token required : No
-
-<hr>
-
-<hr>
-
- 
- ```console
-
-http://localhost:5262/api/InitialRequest/ChangeStatus
-
-```
-
-Description    : update status in material requests
-
-Type     : Put
-
-Body           : None
-{
-    "orderId": 1,
-    "taskId": 1,
-    "section": "Section 1",
-    "department": "GB500 Line",
-    "status": "Delivered"
-  }
-
-```
-Token required : Yes
 
 <hr>
 
@@ -654,6 +660,7 @@ Token required : Yes
 
 
 
+Requests
 
 ```console
 
