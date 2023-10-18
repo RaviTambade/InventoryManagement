@@ -332,259 +332,151 @@ Token required : Yes
 <hr>
 
 
-<h2>Warehouse</h2>
- 
-<hr>
 
-           
-```console
+### Warehouse API
 
-    http://localhost:5131/api/warehouse/warehouse
-
-```
-Method         : Post
-
-Description    : Insert new section in warehouse
-
-Parameter      :  Noun
-
-Body           : 
-
-```console
-
-
-{
+  - <b>URL</b> : /api/warehouse
+  - <b>Method</b>: GET
+  - <b>Description</b>: Get all section from the warehouse
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+    ```console
+    [
+      {
     "id": 0,
-  "employeeId": 0,
-  "section": "string",
-  "materialType": "string",
-  "imageUrl": "string"
-}
+    "employeeId": 0,
+    "section": "string",
+    "materialType": "string",
+    "imageUrl": "string"
+     }
 
-```
+    ]
+    ```
 
-Response        :
-
-```console
-
-   True
-
-
-```
-Token required : Yes
-
-<hr>
-
-```console
-
-http://localhost:5131/api/warehouse/warehouse
-
-```
-Method         : Put
-
-Description    : Update warehouse staff
-
-Parameter      : EmployeeId
-
-Body           :
-
-```console
-
+  - <b>URL</b> : /api/warehouse
+  - <b>Method</b>: Post
+  - <b>Description</b>: Insert new section in warehouse.
+  - <b>Body</b>: 
+   ```console
+   {
+      "id": 0,
+      "employeeId": 0,
+      "section": "string",
+      "materialType": "string",
+      "imageUrl": "string"
+    }
+    ```
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+    ```console
+   {
+      true/false
+    }
+    ```
+ 
+  - <b>URL</b> : /api/warehouse
+  - <b>Method</b>: Put
+  - <b>Description</b>: update warehouse staff
+  - <b>Body</b>: 
+ ```console
 {
   "id": 0,
   "employeeId": 0
 }
-
 ```
-Response        :
-
-```console
-
-true
-
-```
-Token required : Yes
-
-<hr>
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+    ```console
+   {
+      true/false
+    }
+    ```
 
 
-```console
-
-http://localhost:5131/api/warehouse/{id}
-
-```
-Method         : Delete
-
-Description    : Remove section from the warehouse
-
-Parameter      : Id
-
-Body           : Noun
-
-
-Response        :
-
-```console
-
-true
-```
-Token required : No
-
-<hr>
+  - <b>URL</b> : /api/warehouse
+  - <b>Method</b>: Delete
+  - <b>Description</b>: remove section from the warehouse
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+    ```console
+   {
+      true/false
+    }
+    ```
 
 
+### Shipments API
 
 
-<h2>Shipments</h2>
-
-```console
-
-http://localhost:5112/api/shipment/shipments/{employeeId}
-
-```
-Method         : Get
-
-Description    : Get shipments details
-
-Parameter      : EmployeeId
-
-Body           : Noun
-
-
-Response        :
-
-```console
-
-true
-```
-Token required : No
-
-<hr>
-
-<hr>
-
-
-
-```console
-
-http://localhost:5112/api/shipment/shippingdetails/{taskId}
-
-```
-Method         : Get
-
-Description    : Get shipping details
-
-Parameter      : EmployeeId
-
-Body           : Noun
-
-
-Response        :
-
-```console
-
-true
-```
-Token required : No
-
-<hr>
-
-
-
-```console
-
-http://localhost:5112/api/shipment/updatestatus/{Id}/{orderStatus}
-
-```
-Method         : Put
-
-Description    : Update order status
-
-Parameter      : Id, status
-
-Body           : Noun
-
-
-Response        :
-
-```console
-
-true
-```
-Token required : No
-<hr>
-
- 
-{
-    true
+  - <b>URL</b> : /api/shipments/{employeeId}
+  - <b>Method</b>: Get
+  - <b>Description</b>: get shipment list of shipper
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+    ```console
+  {
+    "id": 0,
+    "date": "2023-10-17T10:41:05.140Z",
+    "status": "string"
   }
-
-```
-Token required : Yes
-
-<hr>
+    ```
 
 
 
-Requests
+  - <b>URL</b> : /api/shipments/taskdetails/{taskId}
+  - <b>Method</b>: Get
+  - <b>Description</b>: get task details of given task id
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+    ```console
+  {
+    "orderId": 1,
+    "taskId": 1,
+    "section": "Section 1",
+    "department": "GB500 Line",
+    "status": "Delivered"
+  }
+    ```
 
-```console
 
-http://localhost:5231/api/request/requests/{employeeId}
+  - <b>URL</b> : /api/shipments/updatestatus/{id}/{taskStatus}
+  - <b>Method</b>: Put
+  - <b>Description</b>: get task status to picked/delivered
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+    ```console
+  {
+    True/false
+  }
+    ```
 
-```
-Method         : Get
-
-Description    : Get requests list
-
-Parameter      : 1
-
-Body           : Noun
 
 
-Response        :
 
-```console
+### Request API
 
-{
+  - <b>URL</b> : /api/request/{employeeId}
+  - <b>Method</b>: Get
+  - <b>Description</b>: Get requests list of supervisor
+  - <b>Body</b>: Not requried
+  - <b>JWTToken Header</b>: Required
+  - <b>Response</b> = 
+    ```console
+  {
     "id": 0,
     "date": "2023-10-17T10:57:12.779Z",
     "status": "string",
     "userId": 0
-}
-
-```
-Token required : Yes
-
-<hr>
+  }
+    ```
 
 
 
-
-```console
-
-http://localhost:5231/api/request/requests/{employeeId}
-
-```
-Method         : Get
-
-Description    : Get requests list
-
-Parameter      : 1
-
-Body           : Noun
-
-
-Response        :
-
-```console
-
-{
-    "id": 0,
-    "date": "2023-10-17T10:57:12.779Z",
-    "status": "string",
-    "userId": 0
-}
 
 ```
 Token required : Yes
