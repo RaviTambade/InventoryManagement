@@ -3,7 +3,7 @@
 
  
   - <b>URL</b> : /api/employees/employees
-  - /api/employees/
+  - <b>URL</b> : /api/employees/
   - 
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Total Employees 
@@ -22,7 +22,7 @@
     ```
 
   - <b>URL</b> : /api/employees/employee/{id}
-  - /api/employees/{id}
+  - <b>URL</b> : /api/employees/{id}
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employee of given Id
   - <b>Body</b>: Not requried
@@ -40,7 +40,7 @@
     ```
 
   - <b>URL</b> : /api/employees/department/{department}
-  - /api/employees/departments/{deptid}
+  - <b>URL</b> : /api/employees/departments/{deptid}
   -  - /api/employees/departments/{name}
   - <b>Method</b>: GET
   - <b>Description</b>: Get the Employees of given department
@@ -287,7 +287,7 @@
       "materialType": "string",
       "imageUrl": "string"
     }
-    ```
+   ```
   - <b>JWTToken Header</b>: Required
   - <b>Response</b> = 
     ```console
