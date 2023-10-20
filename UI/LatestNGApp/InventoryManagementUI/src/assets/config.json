@@ -1,0 +1,13 @@
+
+{
+    "connections": [
+      {
+        "name": "employeeConnection",
+        "connectionString": "http://localhost:5140/api/employees"
+      },
+      {
+        "name": "Connection2",
+        "connectionString": "your_connection_string_for_connection_2"
+      }
+    ]
+  }
