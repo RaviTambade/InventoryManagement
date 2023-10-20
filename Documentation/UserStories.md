@@ -1,14 +1,12 @@
+As a supervisor, I want to search specific materials from the inventory so that I can order quickly.
 
-
- As a supervisor, I want to search specific materials from the inventory so that I can order quickly.
-
- As a  supervisor, I want to sort materials by categories so that I can easily find and order materials.
+As a  supervisor, I want to sort materials by categories so that I can easily find and order materials.
 
 As a registered user, I want to be able to save items to my wishlist so that I can keep track of materials that I am interested in and request multiple materials at one time.
 
- As a supervisor, I want to edit or remove materials from the cart so that I can efficiently manage and refine the selection of materials.
+As a supervisor, I want to edit or remove materials from the cart so that I can efficiently manage and refine the selection of materials.
 
- As a supervisor, I want to cancel an order that I have placed, so that I can cancel order if i ordered incorrectly.
+As a supervisor, I want to cancel an order that I have placed, so that I can cancel order if i ordered incorrectly.
 
 As a supervisor, I want to see status of my order (processing, shipped, delivered) so that I can track my orders.
 
