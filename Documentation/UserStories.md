@@ -74,7 +74,7 @@ As a Store Incharge, I want to be able to reset my password in case I forget it.
 
 As a Supervisor Incharge, I want to view an overview of employee information and departments so that I can efficiently manage teams and make informed decisions regarding staffing and resource allocation.
 
-As a Supervisors Incharge, I want to view order reports graphs so that i can make data-driven decisions and analyze trends.
+As a Supervisors Incharge, I want to view request reports graphs so that i can make data-driven decisions and analyze trends.
 
 As a Supervisors Incharge, I want to add new supervior to the system so that i can seamlessly expand our team, assign roles and responsibilities.
 
@@ -82,13 +82,13 @@ As a Supervisors Incharge, I want to update  information of supervisors  so that
 
 As a Supervisors Incharge, I want to switch the departments of employees when they move to different teams so that I can maintain efficient workflow across teams.
 
-As a Supervisors Incharge, I want  order reports of each supervisor,  so that I can assess individual and team performance, track trends in order management.
+As a Supervisors Incharge, I want request reports of each supervisor,  so that I can assess individual and team performance, track trends in order management.
 
-As a Supervisors Incharge, I want to view a graph showing the total number of orders placed by each supervisor so that I can assess their productivity levels, 
+As a Supervisors Incharge, I want to view a graph showing the total number of requests placed by each supervisor so that I can assess their productivity levels, 
 
-As a Supervisors Incharge, I want to view graphical representations of weekly, monthly, and yearly so that i can analise order trends.
+As a Supervisors Incharge, I want to view graphical representations of weekly, monthly, and yearly so that i can analise request trends.
 
-As a Supervisors Incharge, I want to see a graph that displays the number of cancelled orders for each supervisor so that I can identify potential issues in order processing.
+As a Supervisors Incharge, I want to see a graph that displays the number of cancelled requests for each supervisor so that I can identify potential issues in order processing.
 
 As a  Supervisors Incharge, I want to be able to reset my password in case I forget it.
 
