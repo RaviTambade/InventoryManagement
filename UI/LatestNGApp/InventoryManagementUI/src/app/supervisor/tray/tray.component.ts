@@ -10,7 +10,7 @@ import { RequestService } from 'src/app/Services/request.service';
 })
 export class TrayComponent implements OnInit {
 
-  empid: number = 21;
+  empid: number = 0;
   trays: any[] = [];
   updatedTray: any;
   data: any[] = [];
@@ -27,12 +27,19 @@ export class TrayComponent implements OnInit {
       id: 0,
       quantity: 0
     }
+    this.getEmployeeId();
   }
 
   ngOnInit(): void {
     this.getTray();
   }
 
+  getEmployeeId(){
+    const id=localStorage.getItem("userId");
+    if(id){
+     this.empid=Number.parseInt(id);
+    }
+  }
 
   getTray() {
     this.initialRequest.getTray(this.empid).subscribe((res) => {

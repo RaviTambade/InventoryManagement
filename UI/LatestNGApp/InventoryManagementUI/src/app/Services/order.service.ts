@@ -16,41 +16,41 @@ export class OrderService {
     this.selectedOrderIdSubject.next(id);
   }
   getOrders(empid:number):Observable<any>{
-    let url =" http://localhost:5119/api/order/orders/" +empid ;
+    let url =" http://localhost:5108/api/order/orders/" +empid ;
     return this.http.get(url);
   }
 
   getCompletedOrders(empid:number):Observable<any>{
-    let url ="http://localhost:5119/api/order/completed/orders/" +empid ;
+    let url ="http://localhost:5108/api/order/completed/orders/" +empid ;
     return this.http.get(url);
   }
   // fn name
   Approve(orderid:number,quantity:number):Observable<any>{
-    let url ="http://localhost:5119/api/order/approve/" +orderid+"/"+quantity ;
+    let url ="http://localhost:5108/api/order/approve/" +orderid+"/"+quantity ;
     return this.http.get(url);
   }
   
   getOrderDetails(requestid:number):Observable<any>{
-    let url ="http://localhost:5119/api/order/orders/details/" +requestid   ;
+    let url ="http://localhost:5108/api/order/orders/details/" +requestid   ;
     return this.http.get(url);
   }
 
   orderHistory(empid:number):Observable<any>{
-    let url ="http://localhost:5119/api/orders/details/" +empid ;
+    let url ="http://localhost:5108/api/orders/details/" +empid ;
     return this.http.get(url);
   }
   orderDetails(orderid:number):Observable<any>{
-    let url ="http://localhost:5119/api/orders/detail/" +orderid ;
+    let url ="http://localhost:5108/api/orders/detail/" +orderid ;
     return this.http.get(url);
   }
   
 // url name casing  
   getOrdersHistory(id:number):Observable<any>{
-    let url ="http://localhost:5119/api/Orders/history/" + id ;
+    let url ="http://localhost:5108/api/Orders/history/" + id ;
     return this.http.get(url);
   }
   getRequestHistory(request:any):Observable<any>{
-    let url ="http://localhost:5119/api/Orders/requestdetails"  ;
+    let url ="http://localhost:5108/api/Orders/requestdetails"  ;
     return this.http.post(url,request);
   }
   

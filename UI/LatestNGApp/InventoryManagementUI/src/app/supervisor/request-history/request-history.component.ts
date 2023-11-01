@@ -52,6 +52,7 @@ export class RequestHistoryComponent {
         console.log(this.data)
         this.getUser();
         this.getRequestCounts();
+        this.todaysRequestsCount();
         this.filterRequests('inprogress');
       }
     })
@@ -64,11 +65,11 @@ export class RequestHistoryComponent {
     this.readyToDispatchCount = this.getRequestCountByStatus("Ready To Dispatch");
     this.deliveredCount = this.getRequestCountByStatus("Delivered");
     this.inprogressCount = this.getRequestCountByStatus("inprogress");
-     this.myRequestsCount=this.data.filter(u => u.userId ==21 ).length;
+     this.myRequestsCount=this.data.filter(u => u.userId ==this.employeeId ).length;
 }
 
 getRequestCountByStatus(status: string): number {
-  return this.data.filter(u => u.status === status && u.userId === 21).length;
+  return this.data.filter(u => u.status === status && u.userId === this.employeeId).length;
 }
 
   onFromDateChange() {
@@ -129,7 +130,7 @@ getRequestCountByStatus(status: string): number {
 
   filterRequests(status:string){
     this.otherSupervisor=false;
-    this.requests = this.data.filter(u => u.status === status  && u.userId===21);
+    this.requests = this.data.filter(u => u.status === status  && u.userId===this.employeeId);
     const value = this.requests[0].id
     this._requestsvc.setSelectedRequestId(value);
   }

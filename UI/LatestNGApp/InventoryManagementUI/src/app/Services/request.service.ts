@@ -19,60 +19,60 @@ export class RequestService {
  
   getRequestDetails(requestid:number):Observable<any>
   {
-    let url ="http://localhost:5120/api/request/requestdetails/"+ requestid;
+    let url ="http://localhost:5231/api/request/requestdetails/"+ requestid;
     return this.http.get(url)
   }
   getRequestId(empid:number):Observable<any>
   {
-    let url ="http://localhost:5120/api/requests/requestid/"+ empid;
+    let url ="http://localhost:5231/api/requests/requestid/"+ empid;
     return this.http.get(url)
   }
   //url request/request should be only single request/
   getItemFromRequest(id:number){
-    let url ="http://localhost:5120/api/request/request/item/" + id ;
+    let url ="http://localhost:5231/api/request/request/item/" + id ;
     return this.http.get(url);
   }
   updateRequestedItem(item:any):Observable<any>{
-    let url ="http://localhost:5120/api/request/request/item";
+    let url ="http://localhost:5231/api/request/request/item";
     return this.http.put(url,item);
   }
   
   getAllRequests(empid:number):Observable<any>{
-    let url ="http://localhost:5120/api/request/requests/" + empid ;
+    let url ="http://localhost:5231/api/request/requests/" + empid ;
     return this.http.get(url);
   }
 
   getAllRequest(empid:number):Observable<any>{
-    let url ="http://localhost:5120/api/requests/request/" + empid ;
+    let url ="http://localhost:5231/api/requests/request/" + empid ;
     return this.http.get(url);
   }
 
   request(empid:number):Observable<any>{
-    let url ="http://localhost:5120/api/request/request/" +empid ;
+    let url ="http://localhost:5231/api/request/request/" +empid ;
     return this.http.get(url);
   }
   deleteRequest(reqid:number):Observable<any>{
-    let url ="http://localhost:5120/api/request/delete/request/" +reqid ;
+    let url ="http://localhost:5231/api/request/delete/request/" +reqid ;
     return this.http.delete(url);
   }
   cancelRequest(reqid:number):Observable<any>{
-    let url ="http://localhost:5120/api/request/cancel/" + reqid ;
+    let url ="http://localhost:5231/api/request/cancel/" + reqid ;
     return this.http.delete(url);
   }
   removeItem(id:number):Observable<any>{
-    let url ="http://localhost:5120/api/request/item/" + id ;
+    let url ="http://localhost:5231/api/request/item/" + id ;
     return this.http.delete(url);
   }
   GetWeeklyReport(empid:number,period:any):Observable<any>{
-    let url ="http://localhost:5120/api/request/weeklyrequests/" + empid ;
+    let url ="http://localhost:5231/api/request/weeklyrequests/" + empid ;
     return this.http.post(url,period);
   }
   GetMonthlyReport(empid:number,period:any):Observable<any>{
-    let url ="http://localhost:5120/api/request/monthlyrequests/" + empid ;
+    let url ="http://localhost:5231/api/request/monthlyrequests/" + empid ;
     return this.http.post(url,period);
   }
   GetYearlyReport(empid:number,year:string):Observable<any>{
-    let url ="http://localhost:5120/api/request/yearlyrequests/" + empid+"/"+year ;
+    let url ="http://localhost:5231/api/request/yearlyrequests/" + empid+"/"+year ;
     return this.http.get(url);
   }
  

@@ -23,7 +23,6 @@ export class OrderhistoryComponent {
     this.orders = [];
     this.data = [];
     this.getEmployeeId();
-    
   }
 
   ngOnInit(): void {
@@ -32,6 +31,7 @@ export class OrderhistoryComponent {
 
   getEmployeeId(){
     const id=localStorage.getItem("userId");
+    console.log(id);
     if(id){
      this.employeeId=Number.parseInt(id);
     }
@@ -59,8 +59,7 @@ export class OrderhistoryComponent {
             user.name = responseItem.name;
           }
         }
-      });
-    
+      });  
   }
 
   allOrderCount(){
