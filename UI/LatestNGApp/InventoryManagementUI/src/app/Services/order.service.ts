@@ -16,22 +16,22 @@ export class OrderService {
     this.selectedOrderIdSubject.next(id);
   }
   getOrders(empid:number):Observable<any>{
-    let url =" http://localhost:5108/api/order/orders/" +empid ;
+    let url =" http://localhost:5108/api/orders/orders/" +empid ;
     return this.http.get(url);
   }
 
   getCompletedOrders(empid:number):Observable<any>{
-    let url ="http://localhost:5108/api/order/completed/orders/" +empid ;
+    let url ="http://localhost:5108/api/orders/completed/orders/" +empid ;
     return this.http.get(url);
   }
   // fn name
   Approve(orderid:number,quantity:number):Observable<any>{
-    let url ="http://localhost:5108/api/order/approve/" +orderid+"/"+quantity ;
+    let url ="http://localhost:5108/api/orders/approve/" +orderid+"/"+quantity ;
     return this.http.get(url);
   }
   
   getOrderDetails(requestid:number):Observable<any>{
-    let url ="http://localhost:5108/api/order/orders/details/" +requestid   ;
+    let url ="http://localhost:5108/api/orders/orders/details/" +requestid   ;
     return this.http.get(url);
   }
 

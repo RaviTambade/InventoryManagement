@@ -13,6 +13,7 @@ export class OrderhistoryComponent {
   orders: Order[] = [];
   data: Order[] = [];
   userIds: any[] = [];
+
   completedOrdercount: number = 0;
   pendingOrdercount: number = 0;
   request:boolean=false;
@@ -22,86 +23,60 @@ export class OrderhistoryComponent {
   constructor(private _orderSvc: OrderService, private _usersvc: UserService) {
     this.orders = [];
     this.data = [];
-    this.getEmployeeId();
-  }
 
-  ngOnInit(): void {
-    this.getOrders();
-  }
-
-  getEmployeeId(){
+    //get existing empolyee id from local storage
     const id=localStorage.getItem("userId");
     console.log(id);
     if(id){
      this.employeeId=Number.parseInt(id);
     }
   }
- 
-  getOrders() {
+
+  ngOnInit(): void {
     this._orderSvc.getOrders(this.employeeId).subscribe((res) => {
-      console.log(res);
-      this.data=res;
-      this.getUser();
-      //this.allOrderCount(); 
-      this.orderCount = this.data.length;
-     // this.completedCount();
-     this.completedOrdercount = this.data.filter(u => u.status !== "inprogress").length;
+                              this.data=res;
+                              //get user
+                              this.userIds = this.data.map(item => item.userId)
+                                                      .filter((value, index, self) => self.indexOf(value) === index);
+                                                                            let userIdsString = this.userIds.join(","); 
+                                                                              this._usersvc.getUserName(userIdsString).subscribe(data => {
+                                                                                                                        for (const responseItem of data) {
+                                                                                                                          const users = this.data.filter(u => u.userId === responseItem.id);
+                                                                                                                          for (const user of users) {
+                                                                                                                            user.name = responseItem.name;
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      }); 
 
-     //this.pendingCount();
-     this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length;
-
-      //this.pendingOrders();
-      this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length;
-      
-
-    })
+                              this.orderCount = this.data.length;
+                              this.completedOrdercount = this.data.filter(u => u.status !== "inprogress").length;
+                              this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length;
+                              this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length; 
+                            })
   }
 
-  getUser() {
-    this.userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index);
-    let userIdsString = this.userIds.join(","); 
-      this._usersvc.getUserName(userIdsString).subscribe(data => {
-        for (const responseItem of data) {
-          const users = this.data.filter(u => u.userId === responseItem.id);
-          for (const user of users) {
-            user.name = responseItem.name;
-          }
-        }
-      });  
-  }
 
-  allOrderCount(){
-    this.orderCount = this.data.length;
-  }
-  completedCount() {
-    this.completedOrdercount = this.data.filter(u => u.status !== "inprogress").length;
-  }
-
-  pendingCount() {
-    this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length;
-  }
-
-  completedOrders() {
+  onCompletedOrders() {
     this.request=false;
     this.orders = this.data.filter(u => u.status !== "inprogress");
     const orderId = this.orders[0].id;
     this._orderSvc.setSelectedOrderId(orderId); 
   }
 
-  pendingOrders() {
+  onPendingOrders() {
     this.request=true;
     this.orders  = this.data.filter(u => u.status === "inprogress");
     const orderId = this.orders[0].id;
     this._orderSvc.setSelectedOrderId(orderId);
   }
 
-  allOrders(){
+  onReceiveAllOrders(){
     this.orders =this.data;
     const orderId = this.orders[0].id;
     this._orderSvc.setSelectedOrderId(orderId);
   }
-  
-  selectCompletedOrder(id: number) {
+    
+  onSelectCompletedOrder(id: number) {
     this._orderSvc.setSelectedOrderId(id);
   }
 }
