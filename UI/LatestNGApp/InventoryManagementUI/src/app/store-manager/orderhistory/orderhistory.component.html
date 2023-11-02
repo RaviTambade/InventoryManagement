@@ -6,19 +6,19 @@
             <div class="d-flex flex-wrap align-items-center mb-2">
                  <ul class="navbar-nav flex-grow"> 
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2 " (click)="allOrders()">
+                        <a class="nav-link text-dark border rounded p-2 " (click)="onReceiveallOrders()">
                             <i class="fas fa-clipboard-list me-2" style="color: rgb(230, 6, 223);"></i> All Orders
                             <span class="badge badge-warning">{{orderCount}}</span>
                         </a>
                     </li>&nbsp;
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2 " (click)="pendingOrders()">
+                        <a class="nav-link text-dark border rounded p-2 " (click)="onPendingOrders()">
                             <i class="fas fa-spinner text-warning me-2"></i> Pending
                             <span class="badge badge-warning">{{pendingOrdercount}}</span>
                         </a>
                     </li>&nbsp;
                     <li class="nav-item">
-                        <a class="nav-link text-dark border rounded p-2" (click)="completedOrders()">
+                        <a class="nav-link text-dark border rounded p-2" (click)="onCompletedOrders()">
                             <i class="fas fa-check-circle text-success me-2"></i> Completed
                             <span class="badge badge-success">{{completedOrdercount}}</span>
                         </a>
