@@ -42,10 +42,18 @@ export class OrderhistoryComponent {
       console.log(res);
       this.data=res;
       this.getUser();
-      this.allOrderCount(); 
-      this.completedCount();
-      this.pendingCount();
-      this.pendingOrders();
+      //this.allOrderCount(); 
+      this.orderCount = this.data.length;
+     // this.completedCount();
+     this.completedOrdercount = this.data.filter(u => u.status !== "inprogress").length;
+
+     //this.pendingCount();
+     this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length;
+
+      //this.pendingOrders();
+      this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length;
+      
+
     })
   }
 
