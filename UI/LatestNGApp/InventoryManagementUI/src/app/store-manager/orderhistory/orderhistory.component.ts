@@ -23,20 +23,18 @@ export class OrderhistoryComponent {
   constructor(private _orderSvc: OrderService, private _usersvc: UserService) {
     this.orders = [];
     this.data = [];
-    //this.getEmployeeId();
 
     //get existing empolyee id from local storage
     const id=localStorage.getItem("userId");
     if(id){
      this.employeeId=Number.parseInt(id);
     }
-
   }
 
   ngOnInit(): void {
     this._orderSvc.getOrders(this.employeeId).subscribe((res) => {
                               this.data=res;
-                              this.getUser();
+                              //this.getUser();
                               //get user
                               this.userIds = this.data.map(item => item.userId)
                                                       .filter((value, index, self) => self.indexOf(value) === index);
