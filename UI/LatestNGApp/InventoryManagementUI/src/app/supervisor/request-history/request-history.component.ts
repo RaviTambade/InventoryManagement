@@ -41,7 +41,7 @@ export class RequestHistoryComponent {
   ngOnInit(): void {
     this.getRequests();
   }
-  git 
+
   getRequests() {
     this._requestsvc.getAllRequests(this.employeeId).subscribe((res) => {
       if (res) {
