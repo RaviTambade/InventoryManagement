@@ -33,24 +33,19 @@ export class DepartmentsComponent {
   }
   ngOnInit(): void {
     this.svc.getAllWarehouseStaff().subscribe((res) => {
-      console.log(res);
       this.warehouses=res;
       this.data=res;
       this.sections= this.data.map((w) => w.section);
-      console.log(this.sections)
     })
     this.empSvc.getByRole(this.role).subscribe((res) => {
       this.storeManagers = res;
-      this.storeManagersids= this.storeManagers.map((s)=>s.userId)
-      console.log(this.storeManagers);
-      console.log(this.storeManagersids); 
+      this.storeManagersids= this.storeManagers.map((s)=>s.userId) 
          this.getUser(this.storeManagersids);
     })
   }
 
   getUser(ids:any) {   
       this._usrSvc.getUser(ids).subscribe(data => {
-        console.log(data);
         for (const responseItem of data) {
           const users = this.storeManagers.filter(u => u.userId === responseItem.id);
           for (const user of users) {
@@ -59,10 +54,6 @@ export class DepartmentsComponent {
         }
         this.mapData(this.storeManagers,this.data);
       });
-     
-    console.log(this.storeManagers);
-    console.log(this.data)
-    console.log(this.employees)
   }
 
   mapData(storeManagers: Employee[], warehouseStaffs: warehouseStaff[])  {
@@ -77,15 +68,10 @@ export class DepartmentsComponent {
                 
             }
         }
-        console.log('All Data:', this.storeManagers);
-        console.log('Matched Data:', this.warehouses);
-        console.log('Emp:', this.employees);
       }
 
     replaceEmployee(warehouse: any, selectedEmployee: any) {
     warehouse.modified=true; 
-    console.log(warehouse)
-    console.log(selectedEmployee)
     const originalData=  { name: warehouse.name, employeeId: warehouse.employeeId }
     warehouse.name = selectedEmployee.name;
     warehouse.employeeId=selectedEmployee.userId;
@@ -93,19 +79,15 @@ export class DepartmentsComponent {
     if (employeeIndex !== -1) {
       this.employees[employeeIndex] = originalData;
     }
-        console.log(this.warehouses)
-      console.log(this.employees)
     }
 
     
     updateEmployee(){
       const modifiedData = this.data.filter(item => item.modified);
-      console.log('Modified objects:', modifiedData);
       modifiedData.forEach(element => {
         this.updateWarehouse.id = element.id,
         this.updateWarehouse.employeeId = element.employeeId
           this.svc.updateWarehouseStaff(this.updateWarehouse).subscribe((res)=>{
-            console.log(res);
           })
       });
     }

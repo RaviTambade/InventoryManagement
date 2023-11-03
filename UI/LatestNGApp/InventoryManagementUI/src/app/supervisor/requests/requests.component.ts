@@ -10,6 +10,5 @@ export class RequestsComponent {
 
   onRequestSelected(requestId: number) {
     this.selectedRequestId = requestId;
-    console.log(this.selectedRequestId)
   }
 }

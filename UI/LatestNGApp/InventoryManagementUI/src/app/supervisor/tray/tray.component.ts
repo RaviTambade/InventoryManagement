@@ -43,7 +43,6 @@ export class TrayComponent implements OnInit {
 
   getTray() {
     this.initialRequest.getTray(this.empid).subscribe((res) => {
-      console.log(res);
       this.data=res;
       this.trays = JSON.parse(JSON.stringify(res));
       this.data = JSON.parse(JSON.stringify(res));
@@ -60,20 +59,17 @@ export class TrayComponent implements OnInit {
 
   onRequest() {
     this.requestSvc.request(this.empid).subscribe((res) => {
-      console.log(res);
       window.location.reload();
     })
   }
 
   onRemoveAll() {
     this.initialRequest.removeAll(this.empid).subscribe((res) => {
-      console.log(res);
       window.location.reload();
     })
   }
 
   onEdit(cartid: number) {
-    console.log("edit");
     this.trayId = cartid;
     this.onEditClick = true;
   }
@@ -82,9 +78,7 @@ export class TrayComponent implements OnInit {
     this.onEditClick = false;
     this.updatedTray.id = trayId;
     this.updatedTray.quantity = quantity;
-    console.log(this.updatedTray);
     this.svc.updateQuantity(this.updatedTray).subscribe((res)=>{
-      console.log(res);
     })
   }
 

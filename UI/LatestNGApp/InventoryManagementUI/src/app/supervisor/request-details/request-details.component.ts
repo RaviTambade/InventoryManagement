@@ -44,7 +44,6 @@ export class RequestDetailsComponent {
 
   getRequestId() {
     this._requestsvc.selectedRequestId$.subscribe((id) => {
-      console.log(id)
       const requestId = id;
       if (requestId == 0 || requestId == undefined) {
         this.details = false;
@@ -59,39 +58,30 @@ export class RequestDetailsComponent {
 
   getDetails(requestId: number) {
     this.editQuantity=false;
-    console.log("req", requestId)
     this._requestsvc.getRequestDetails(requestId).subscribe((res) => {
       this.carts = res;
-      console.log(this.carts);
       this.getUser();
-      console.log(this.carts);
       this.details = true;
     })
   }
 
   getUser() {
     const shipperId=this.carts[0].shipperId;
-    console.log(shipperId);
     this._usersvc.getUser(shipperId).subscribe((res)=>{
-      console.log(res[0]);
       this.shipper=res[0];
       this.shipperName=res[0].name;
-      console.log(this.shipperName);
-      console.log(this.shipper);
       this.isShipper=true;
     })
    }
 
   onRemove(id: number) {
     this._requestsvc.removeItem(id).subscribe((res) => {
-      console.log(res);
       window.location.reload();
 
     })
   }
 
   onEdit(id: any) {
-    console.log(id);
     this.cartId = id;
     this.editQuantity = true;
   }
@@ -100,13 +90,9 @@ export class RequestDetailsComponent {
   }
 
   onEditQuantity(id: any, quantity: any) {
-    console.log(id)
-    console.log(quantity);
     this.item.id = id;
     this.item.quantity = quantity;
-    console.log(this.item);
     this._requestsvc.updateRequestedItem(this.item).subscribe((res)=>{
-      console.log(res);
       window.location.reload();
     })
     this.editQuantity=false;

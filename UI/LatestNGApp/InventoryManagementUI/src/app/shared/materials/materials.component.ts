@@ -37,7 +37,6 @@ export class MaterialsComponent {
           this.categories.push(item.type);
         }
       });
-      console.log(this.categories);
     })
   }
   selectedMaterialId(id: number) {
@@ -46,9 +45,7 @@ export class MaterialsComponent {
 
   onSelectedCategory() {
     this._materialsvc.setSelectedMaterialId(0);
-    console.log(this.selectedCategory);
     const sortedMaterials = this.data.filter(m => m.type === this.selectedCategory)
-    console.log(sortedMaterials);
     this.materials = sortedMaterials;
   }
   addNewMaterial(){

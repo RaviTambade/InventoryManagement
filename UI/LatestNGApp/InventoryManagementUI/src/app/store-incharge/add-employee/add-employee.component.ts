@@ -55,12 +55,7 @@ export class AddEmployeeComponent {
   onSubmit() {
     const filename = this.newUser.imageUrl.split('\\').pop();
     this.newUser.imageUrl = `./assets/img/${filename}`;
-    console.log(this.newEmployee);
     this.myCredential.contactNumber=this.newUser.contactNumber;
-    console.log(this.newEmployee);
-    console.log(this.myCredential);
-    console.log(this.newUser);
-    
     // this.usrsvc.addUser(this.newUser).subscribe((res)=>{
     //   this.userId=res;
     //   console.log(res);
@@ -73,7 +68,6 @@ export class AddEmployeeComponent {
 
   addEmployee(userId:number){
     this.newEmployee.userId=userId; 
-    console.log(this.newEmployee);
     this.empsvc.addEmployee(this.newEmployee).subscribe((res)=>{
       console.log(res);
       if(res==true){
@@ -85,8 +79,6 @@ export class AddEmployeeComponent {
   addCredentials(credential:Credential)
   {
     this.authsvc.register(credential).subscribe((res)=>{
-      console.log(res);
-      console.log("new Employee Added!!!")
     })
   }
 

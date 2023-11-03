@@ -31,25 +31,21 @@ export class RequestHistoryComponent {
   constructor(private _requestsvc: RequestService, private _usersvc: UserService, private router: Router) {
     this.requests = [];
     this.data = [];
-    this.getEmployeeId();
-  }
-
-  ngOnInit(): void {
-    this.getRequests();
-  }
-  
-  getEmployeeId(){
+    // get userId from localStorage
     const id=localStorage.getItem("userId");
     if(id){
      this.employeeId=Number.parseInt(id);
     }
   }
+
+  ngOnInit(): void {
+    this.getRequests();
+  }
+  git 
   getRequests() {
     this._requestsvc.getAllRequests(this.employeeId).subscribe((res) => {
-      console.log(res);
       if (res) {
         this.data = res;
-        console.log(this.data)
         this.getUser();
         this.getRequestCounts();
         this.todaysRequestsCount();
@@ -73,16 +69,11 @@ getRequestCountByStatus(status: string): number {
 }
 
   onFromDateChange() {
-    console.log(this.fromDate);
   }
   onToDateChange() {
-    console.log(this.toDate);
-    console.log(this.fromDate);
-
     let specificData = this.data.filter(
       m => new Date(m.date) >= new Date(this.fromDate) && new Date(m.date) <= new Date(this.toDate)
     );
-    console.log(specificData)
     this.requests = specificData;
     this._requestsvc.setSelectedRequestId(0);
   }
@@ -164,9 +155,7 @@ getRequestCountByStatus(status: string): number {
     this.router.navigate(["shared/store"])
   }
   onRemove(id:number){
-    console.log(id);
     this._requestsvc.deleteRequest(id).subscribe((res) => {
-      console.log(res);
       window.location.reload();
     })  }
 }

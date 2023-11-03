@@ -26,7 +26,6 @@ export class OrderhistoryComponent {
 
     //get existing empolyee id from local storage
     const id=localStorage.getItem("userId");
-    console.log(id);
     if(id){
      this.employeeId=Number.parseInt(id);
     }
@@ -52,10 +51,10 @@ export class OrderhistoryComponent {
                               this.completedOrdercount = this.data.filter(u => u.status !== "inprogress").length;
                               this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length;
                               this.pendingOrdercount = this.data.filter(u => u.status === "inprogress").length; 
+                              this.onPendingOrders();
                             })
   }
-
-
+  
   onCompletedOrders() {
     this.request=false;
     this.orders = this.data.filter(u => u.status !== "inprogress");

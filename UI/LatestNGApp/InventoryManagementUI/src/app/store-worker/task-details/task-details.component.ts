@@ -28,7 +28,6 @@ export class TaskDetailsComponent implements OnInit{
   getTaskDetails(){
     this.svc.getTaskDetails(this.taskId).subscribe((res)=>{
       this.taskdetails=res;
-      console.log(res);
       this.status=this.taskdetails[0].status;
       this.department=this.taskdetails[0].department;
     })
@@ -37,7 +36,6 @@ export class TaskDetailsComponent implements OnInit{
   onPicked(){
     const orderStatus="Picked";
     this.svc.UpdateStatus(this.taskId,orderStatus).subscribe((res) => {
-      console.log(res);
       if(res==true){
         this.status=orderStatus;
       }
@@ -46,7 +44,6 @@ export class TaskDetailsComponent implements OnInit{
   onDeliver(){
     const orderStatus="Delivered"; 
     this.svc.UpdateStatus(this.taskId,orderStatus).subscribe((res) => {
-      console.log(res);
     })
     window.location.reload();
   }

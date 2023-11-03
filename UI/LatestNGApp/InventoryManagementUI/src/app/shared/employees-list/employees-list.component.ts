@@ -47,7 +47,6 @@ export class EmployeesListComponent {
   getEmployees() {
     if (this.department) {
       this._employeeSvc.getEmployeesByDepartment(this.department).subscribe((res) => {
-        console.log(res);
         this.employees = res;
         this.data = res;
 
@@ -55,12 +54,9 @@ export class EmployeesListComponent {
         let userIdsString = userIds.join(",");
 
         this._userSvc.getUserName(userIdsString).subscribe((res) => {
-          console.log(res)
           this.user = res;
-          console.log(this.data);
           this.data.forEach((employee) => {
             let matchingName = this.user.find((element) => element.id == employee.userId)
-            console.log(matchingName);
             if (matchingName != undefined) {
               employee.name = matchingName.name
             }
@@ -90,27 +86,20 @@ export class EmployeesListComponent {
 
   supervisors() {
     const supervisor = this.data.filter(u => u.role === "Supervisor");
-    console.log(supervisor);
     this.employees = supervisor;
-    console.log(this.employees);
     const id = this.employees[0].userId;
     this._employeeSvc.setSelectedEmployeeId(id);
   }
 
   storeManagers() {
-
     const storeManager = this.data.filter(u => u.role === "Store Manager");
-    console.log(storeManager);
     this.employees = storeManager;
-    console.log(this.employees);
     const id = this.employees[0].userId;
     this._employeeSvc.setSelectedEmployeeId(id);
   }
   storeWorkers() {
-
     const storeWorker = this.data.filter(u => u.role === "Store Worker");
     this.employees = storeWorker;
-    console.log(this.employees);
     const id = this.employees[0].userId;
     this._employeeSvc.setSelectedEmployeeId(id);
   }

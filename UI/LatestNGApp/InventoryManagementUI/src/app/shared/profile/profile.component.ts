@@ -45,12 +45,10 @@ export class ProfileComponent {
     const userId = localStorage.getItem("userId");
     if (userId != null) {
       this.usrsvc.getUserDetails(parseInt(userId)).subscribe((res) => {
-        console.log(res);
         this.user = res;
       })
 
       this.empsvc.getEmployee(parseInt(userId)).subscribe((res) => {
-        console.log(res);
         this.employee = res;
       })
     }
@@ -64,7 +62,6 @@ export class ProfileComponent {
 
   }
   onPopupOk() {
-    console.log(this.credential)
     if(this.credential.newPassword!==this.confirmPassword)
     {
       alert ("wrong password")
@@ -74,7 +71,6 @@ export class ProfileComponent {
       if (this.credential.newPassword === this.confirmPassword) {
   
         this.authSvc.updatePassword(this.credential).subscribe((response) => {
-          console.log(response);
           if (response) {
             alert("Password changed")
           }

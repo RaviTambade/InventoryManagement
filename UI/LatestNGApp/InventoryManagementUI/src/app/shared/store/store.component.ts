@@ -55,12 +55,10 @@ export class StoreComponent {
     this._materialsvc.getAllMaterials().subscribe((response) => {
       this.materials = response;
       this.data=response;
-      console.log(response);
       
 
     })
     this._materialsvc.getCategories().subscribe((res) => {
-      console.log(res);
       this.categories = res;
     })
   }
@@ -77,7 +75,6 @@ export class StoreComponent {
 
     }
     this.materials = this.data.filter( x => this.checked.includes(x.type));
-    console.log(this.materials)
   }
 
 

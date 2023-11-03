@@ -28,7 +28,6 @@ export class AddMaterialComponent {
     // Fetch categories from your category service
     this.svc.getCategories().subscribe((data: any) => {
       this.categories = data;
-      console.log(this.categories)
     });
   }
 
@@ -36,10 +35,8 @@ export class AddMaterialComponent {
   onSubmit() {
     if (this.materialForm.valid) {
       const filename = this.materialForm.value.imageUrl.split('\\').pop();
-      console.log(filename);
       this.materialForm.value.imageUrl = `./assets/img/${filename}`;
       const formData = this.materialForm.value;
-      console.log(formData)
       // this.svc.InsertMaterial(formData).subscribe((res)=>{
       //   console.log(res)
       // })

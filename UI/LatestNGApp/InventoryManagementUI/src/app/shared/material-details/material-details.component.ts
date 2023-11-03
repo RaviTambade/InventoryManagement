@@ -51,10 +51,8 @@ export class MaterialDetailsComponent {
 
   getMaterialId(){
     this.materialSvc.selectedMaterialId$.subscribe((res)=>{
-      console.log(res);
       const materialid=res;
      if(materialid==0 || materialid==null){
-      console.log("if")
       this.details=false;
      }
       else
@@ -65,7 +63,6 @@ export class MaterialDetailsComponent {
   getMaterialDetails(materialid:any){
     this.materialSvc.getMaterial(materialid).subscribe((response)=>{
       this.material=response;
-      console.log(this.material);
       this.details=true;
     })
   }
@@ -82,12 +79,10 @@ export class MaterialDetailsComponent {
       this.request.name = name;
       this.request.category = category,
       this.request.quantity = quantity
-      console.log(this.request)
       this._initialReqSvc.add(this.request).subscribe((res) => {
-        console.log(res);
-        if (res) {
-          alert("added to cart!");
-        }
+        // if (res) {
+        //   alert("added to cart!");
+        // }
       })
       
       this.add=false;  
@@ -101,11 +96,8 @@ this.update=true;
   }
   onUpdateQuantity(id:number,quantity:number){
     this.update=false;
-    console.log(id);
     const updatedQuantity=this.material?.quantity + quantity
-    console.log(updatedQuantity);
   this.materialSvc.updateQuantity(id,updatedQuantity).subscribe((res)=>{
-    console.log(res);
     this.getMaterialDetails(id);
   })
   }

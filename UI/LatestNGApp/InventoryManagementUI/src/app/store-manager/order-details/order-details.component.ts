@@ -30,7 +30,6 @@ export class OrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.selectedOrderId$.subscribe((id) => {
-      console.log(id)
       this.orderId = id;
       if (id == 0 || id == undefined) {
         this.orderDetails = [];
@@ -44,7 +43,6 @@ export class OrderDetailsComponent implements OnInit {
 
   getOrderDetails() {
     this.orderService.getOrderDetails(this.orderId).subscribe((res) => {
-      console.log(res);
       this.orderDetails = res;
       this.newDetails = true;
       this.getUser();
@@ -54,9 +52,7 @@ export class OrderDetailsComponent implements OnInit {
 
   getUser() {
     const userId = this.orderDetails[0].userId;
-    console.log(userId);
     this._usersvc.getUser(userId).subscribe((res) => {
-      console.log(res[0]);
       this.shipperName = res[0].name;
       this.isShipper = true;
     })

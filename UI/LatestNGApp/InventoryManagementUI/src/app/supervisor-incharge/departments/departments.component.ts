@@ -28,7 +28,6 @@ export class DepartmentsComponent implements OnInit{
     this.svc.getAll().subscribe((res)=>{
       this.departments =res;
       this.data=res;
-      console.log(res);
       // for(const department of this.departments){
       //   this.supervisorIds.push(department.firstSupervisor);
       //   this.supervisorIds.push(department.secondSupervisor);
@@ -36,10 +35,7 @@ export class DepartmentsComponent implements OnInit{
       // console.log(this.departments);
       this.empSvc.getByRole(this.role).subscribe((res) => {
         this.supervisors = res;
-        console.log(this.supervisors);
         this.supervisorIds= this.supervisors.map((s)=>s.userId)
-        console.log(this.supervisors);
-        console.log(this.supervisorIds); 
            this.getUser();
       })
     })
@@ -47,26 +43,16 @@ export class DepartmentsComponent implements OnInit{
 
   getUser(){
     let userIdsString = this.supervisorIds.join(",");
-    console.log(userIdsString);
     this._userService.getUserName(userIdsString).subscribe((res) => {
-      console.log(res)
       this.user = res;
-      console.log(this.user);
       this.supervisors.forEach((department) => {
         let matchingName = this.user.find((element) => element.id == department.userId);
-        console.log(matchingName);
         if (matchingName  != undefined) {
           department.name = matchingName.name;
-        }
-        console.log(this.supervisors);
-        
-         
+        } 
       })
       this.mapData(this.supervisors,this.data);  
     }) 
-    console.log(this.departments);
-    // console.log(this.data);
-    // console.log(this.employees);
     
   }
 
@@ -87,8 +73,7 @@ export class DepartmentsComponent implements OnInit{
           this.emp.push(employee.name);    
         }
       }
-      console.log(this.employees);
-      console.log(this.emp);
+      
     }
 
   // dataBinding(){
