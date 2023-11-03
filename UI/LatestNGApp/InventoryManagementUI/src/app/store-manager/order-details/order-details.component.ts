@@ -36,27 +36,27 @@ export class OrderDetailsComponent implements OnInit {
         this.newDetails = false;
       }
       else
-        this.getOrderDetails();
-
+      this.orderService.getOrderDetails(this.orderId).subscribe((res) => {
+        this.orderDetails = res;
+        this.newDetails = true;
+        // this.getUser();
+        const userId = this.orderDetails[0].userId;
+        this._usersvc.getUser(userId).subscribe((res) => {
+        this.shipperName = res[0].name;
+        this.isShipper = true;
+        })
+        // this.getCommonValues(); 
+        this.department = this.orderDetails[0].department;
+        this.orderDate = this.orderDetails[0].orderDate;
+        if (this.orderDetails[0].status == 'inprogress') {
+          this.inprogressOrder = true;
+        }
+        else
+        this.inprogressOrder = false;
+      })
     })
   }
 
-  getOrderDetails() {
-    this.orderService.getOrderDetails(this.orderId).subscribe((res) => {
-      this.orderDetails = res;
-      this.newDetails = true;
-      this.getUser();
-      this.getCommonValues(); 
-    })
-  }
-
-  getUser() {
-    const userId = this.orderDetails[0].userId;
-    this._usersvc.getUser(userId).subscribe((res) => {
-      this.shipperName = res[0].name;
-      this.isShipper = true;
-    })
-  }
 
   onApproved(orderid: any, q: any) {
     const quantity = Number.parseInt(q)
@@ -71,17 +71,5 @@ export class OrderDetailsComponent implements OnInit {
         window.location.reload();
       }
     })
-
-  }
-
-  getCommonValues(){
-    this.department = this.orderDetails[0].department;
-    this.orderDate = this.orderDetails[0].orderDate;
-
-    if (this.orderDetails[0].status == 'inprogress') {
-      this.inprogressOrder = true;
-    }
-    else
-      this.inprogressOrder = false;
   }
 }

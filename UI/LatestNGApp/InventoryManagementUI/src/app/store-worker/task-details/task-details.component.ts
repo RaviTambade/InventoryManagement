@@ -21,18 +21,15 @@ export class TaskDetailsComponent implements OnInit{
     this.svc.selectedTaskId$.subscribe((id) => {
       this.taskId=id;
       if(this.taskId!==0 && this.taskId!==undefined && this.taskId!==null){
-        this.getTaskDetails();
+          this.svc.getTaskDetails(this.taskId).subscribe((res)=>{
+          this.taskdetails=res;
+          this.status=this.taskdetails[0].status;
+          this.department=this.taskdetails[0].department;
+        })
       }
   })
   }
-  getTaskDetails(){
-    this.svc.getTaskDetails(this.taskId).subscribe((res)=>{
-      this.taskdetails=res;
-      this.status=this.taskdetails[0].status;
-      this.department=this.taskdetails[0].department;
-    })
 
-  }
   onPicked(){
     const orderStatus="Picked";
     this.svc.UpdateStatus(this.taskId,orderStatus).subscribe((res) => {

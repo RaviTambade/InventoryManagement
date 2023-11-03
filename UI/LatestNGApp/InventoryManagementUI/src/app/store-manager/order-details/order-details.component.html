@@ -39,16 +39,18 @@
               <strong>Category:</strong> {{ order.category }}
             </p>
       
-            <div *ngIf="inprogressOrder && !order.itemStatus" class="mb-3">
+            <div *ngIf= "inprogressOrder && !order.itemStatus" class="mb-3">
               <label for="orderQuantity" class="form-label">Quantity</label>
               <input  style="text-align: center;" id="orderQuantity" name="orderQuantity" [(ngModel)]="order.quantity" class="form-control" type="number" >
             </div>
-            
-            <button *ngIf="inprogressOrder && !order.itemStatus"  class="btn btn-success" (click)="onApproved(order.id, order.quantity)">
+            <div  *ngIf="inprogressOrder && !order.itemStatus">
+            <button  class="btn btn-success" (click)="onApproved(order.id, order.quantity)">
               <span class="glyphicon glyphicon-ok"></span> Approve 
             </button>
-            
-            <span *ngIf="order.itemStatus" class="glyphicon glyphicon-ok text-success"></span>
+            </div>
+            <div *ngIf="!inprogressOrder && order.itemStatus">
+            <span  class="glyphicon glyphicon-ok text-success"></span>
+          </div>
           </div>
         </div>
       </div>

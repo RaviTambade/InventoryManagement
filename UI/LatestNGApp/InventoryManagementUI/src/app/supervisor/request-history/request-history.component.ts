@@ -39,30 +39,43 @@ export class RequestHistoryComponent {
   }
 
   ngOnInit(): void {
-    this.getRequests();
-  }
-
-  getRequests() {
     this._requestsvc.getAllRequests(this.employeeId).subscribe((res) => {
       if (res) {
         this.data = res;
-        this.getUser();
-        this.getRequestCounts();
-        this.todaysRequestsCount();
-        this.filterRequests('inprogress');
+        //this.getUser();
+        this.userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
+        let userIdsString = this.userIds.join(","); 
+                          this._usersvc.getUserName(userIdsString).subscribe(data => {
+                                                                          for (const responseItem of data) {
+                                                                            const users = this.data.filter(u => u.userId === responseItem.id);
+                                                                            for (const user of users) {
+                                                                              user.name = responseItem.name;
+                                                                            }
+                                                                          }
+        });
+        //this.getRequestCounts();
+        this.totalCount = this.data.length;
+        this.cancelledCount = this.getRequestCountByStatus("Cancelled");
+        this.pickedCount = this.getRequestCountByStatus("Picked");
+        this.readyToDispatchCount = this.getRequestCountByStatus("Ready To Dispatch");
+        this.deliveredCount = this.getRequestCountByStatus("Delivered");
+        this.inprogressCount = this.getRequestCountByStatus("inprogress");
+        this.myRequestsCount=this.data.filter(u => u.userId ==this.employeeId ).length;
+
+        // todaysRequests;
+        const today = new Date();
+        const todayString = today.toISOString().split('T')[0];
+        const todaysRequests = this.data.filter(request => {
+        const requestDate = request.date.toString().split('T')[0];
+        return requestDate == todayString;
+        })
+        this.todaysCount = todaysRequests.length;
+
+        //filter requests
+        this.onFilterRequests('inprogress');
       }
     })
   }
-  
-  getRequestCounts() {
-    this.totalCount = this.data.length;
-    this.cancelledCount = this.getRequestCountByStatus("Cancelled");
-    this.pickedCount = this.getRequestCountByStatus("Picked");
-    this.readyToDispatchCount = this.getRequestCountByStatus("Ready To Dispatch");
-    this.deliveredCount = this.getRequestCountByStatus("Delivered");
-    this.inprogressCount = this.getRequestCountByStatus("inprogress");
-     this.myRequestsCount=this.data.filter(u => u.userId ==this.employeeId ).length;
-}
 
 getRequestCountByStatus(status: string): number {
   return this.data.filter(u => u.status === status && u.userId === this.employeeId).length;
@@ -78,22 +91,14 @@ getRequestCountByStatus(status: string): number {
     this._requestsvc.setSelectedRequestId(0);
   }
 
-  todaysRequestsCount() {
-    const today = new Date();
-    const todayString = today.toISOString().split('T')[0];
-    const todaysRequests = this.data.filter(request => {
-      const requestDate = request.date.toString().split('T')[0];
-      return requestDate == todayString;
-    })
-    this.todaysCount = todaysRequests.length;
-  }
+ 
   
-  allRequests(){
+  onReceiveAllRequests(){
     this.otherSupervisor=true;
     this.requests=this.data;
   }
 
-  todaysRequests() {
+  onAllTodaysRequests() {
     this.otherSupervisor=false;
     const today = new Date();
     const todayString = today.toISOString().split('T')[0];
@@ -112,36 +117,21 @@ getRequestCountByStatus(status: string): number {
     }
   }
 
-  myRequests(){
+  onFilterMyRequests(){
     this.otherSupervisor=false;
     this.requests = this.data.filter(u => u.userId === this.employeeId);
     const value = this.requests[0].id
     this._requestsvc.setSelectedRequestId(value);
   }
 
-  filterRequests(status:string){
+  onFilterRequests(status:string){
     this.otherSupervisor=false;
     this.requests = this.data.filter(u => u.status === status  && u.userId===this.employeeId);
     const value = this.requests[0].id
     this._requestsvc.setSelectedRequestId(value);
   }
 
-
-  getUser() {
-    this.userIds = this.data.map(item => item.userId).filter((value, index, self) => self.indexOf(value) === index); // Filter duplicates
-    let userIdsString = this.userIds.join(","); 
-      this._usersvc.getUserName(userIdsString).subscribe(data => {
-        for (const responseItem of data) {
-          const users = this.data.filter(u => u.userId === responseItem.id);
-          for (const user of users) {
-            user.name = responseItem.name;
-          }
-        }
-      });
-    
-  }
-
-  selectRequest(id: number) {
+  onSelectRequest(id: number) {
     this._requestsvc.setSelectedRequestId(id);
   }
 
@@ -151,7 +141,7 @@ getRequestCountByStatus(status: string): number {
     })
   }
 
-  newOrder() {
+  onNewOrder() {
     this.router.navigate(["shared/store"])
   }
   onRemove(id:number){

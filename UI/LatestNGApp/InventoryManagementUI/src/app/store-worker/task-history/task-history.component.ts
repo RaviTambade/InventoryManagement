@@ -16,46 +16,35 @@ export class TaskHistoryComponent implements OnInit{
   completedTaskcount:number |any;
 
   constructor(private svc:TasksService){
-    this.getEmployeeId();
-  }
-
-  ngOnInit():void{
-    this.getTasks();
-    
-  }
-  getEmployeeId(){
     const id=localStorage.getItem("userId");
     if(id){
      this.employeeId=Number.parseInt(id);
     }
   }
- getTasks(){
-  this.svc.getTasks(this.employeeId).subscribe((res)=>{
-    this.data=res;
-    this.getTasksCount();
-    this.pendingTasks();
 
-  }) 
- }
+  ngOnInit():void{
+    this.svc.getTasks(this.employeeId).subscribe((res)=>{
+      this.data=res;
+      //this.getTasksCount();
+      this.pendingTaskcount  = this.data.filter(u => u.status !== "Delivered").length;
+      this.completedTaskcount = this.data.filter(u => u.status === "Delivered").length;
+      this.onPendingTasks();
+    }) 
+  }
 
- getTasksCount(){
-  this.pendingTaskcount  = this.data.filter(u => u.status !== "Delivered").length;
-  this.completedTaskcount = this.data.filter(u => u.status === "Delivered").length;
- }
-
-  pendingTasks(){
+  onPendingTasks(){
     this.tasks = this.data.filter(u => u.status !== "Delivered");
     const id=this.tasks[0].id;
     this.svc.setSelectedTaskId(id);
   }
 
-  completedTasks(){
+  onCompletedTasks(){
     this.tasks = this.data.filter(u => u.status === "Delivered");
     const id=this.tasks[0].id;
     this.svc.setSelectedTaskId(id); 
   } 
   
-  selectedTask(id:number){
+  onSelectedTask(id:number){
     this.svc.setSelectedTaskId(id);
    }
 }

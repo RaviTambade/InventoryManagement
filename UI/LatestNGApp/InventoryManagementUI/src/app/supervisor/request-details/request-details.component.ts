@@ -39,40 +39,28 @@ export class RequestDetailsComponent {
     };
   }
   ngOnInit(): void {
-    const id = this.getRequestId();
-  }
-
-  getRequestId() {
     this._requestsvc.selectedRequestId$.subscribe((id) => {
       const requestId = id;
       if (requestId == 0 || requestId == undefined) {
         this.details = false;
         this.carts = [];
       }
-      else
-        this.getDetails(id);
-
+      else{
+      this.editQuantity=false;
+      this._requestsvc.getRequestDetails(requestId).subscribe((res) => {
+        this.carts = res;
+        // this.getUser();
+        const shipperId=this.carts[0].shipperId;
+        this._usersvc.getUser(shipperId).subscribe((res)=>{
+        this.shipper=res[0];
+        this.shipperName=res[0].name;
+        this.isShipper=true;
+        })
+        this.details = true;
+      })
+     }
     });
-
   }
-
-  getDetails(requestId: number) {
-    this.editQuantity=false;
-    this._requestsvc.getRequestDetails(requestId).subscribe((res) => {
-      this.carts = res;
-      this.getUser();
-      this.details = true;
-    })
-  }
-
-  getUser() {
-    const shipperId=this.carts[0].shipperId;
-    this._usersvc.getUser(shipperId).subscribe((res)=>{
-      this.shipper=res[0];
-      this.shipperName=res[0].name;
-      this.isShipper=true;
-    })
-   }
 
   onRemove(id: number) {
     this._requestsvc.removeItem(id).subscribe((res) => {
