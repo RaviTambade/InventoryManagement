@@ -38,30 +38,25 @@ This system is designed for manufacturing companies and is accessible only to au
 The existing manual system involves paperwork and has various disadvantages, such as time-consuming searches, manual information updates, and communication challenges.
 
 ## Proposed System
-
 The proposed system aims to address the limitations of the existing system by offering a user-friendly, portable, maintainable, and secure solution.
 
 ### Advantages
 
 **For Incharge**
-
 - Authority and security.
 - Full system overview.
 
 **For Store Managers**
-
 - Time-saving material checks.
 - Elimination of paperwork.
 - Efficient monitoring.
 
 **For Supervisors**
-
 - Easy material ordering.
 - Automated record-keeping.
 - Monitoring capabilities.
 
 **For Store Workers**
-
 - Time-saving order tracking.
 - Efficient record-keeping.
 - Access to supervisor contacts.
@@ -72,8 +67,7 @@ The proposed system aims to address the limitations of the existing system by of
 - Personal information view for all employees.
 - Specific functions for each role.
 
-## Non-Functional Requirements
-
+## System Behaviour
 - Security measures.
 - 24/7 availability.
 - Maintainability with commercial database software.
@@ -85,11 +79,7 @@ The proposed system aims to address the limitations of the existing system by of
 - Safety against malicious attacks.
 
 ## Software Tools
-
 - Database Server: Microsoft SQL Server-2012
 - Client: Microsoft Internet Explorer or any web browser
 - Development Tools: Microsoft Visual Studio 2019
 - Programming Language: C#.Net
-
-
- 
