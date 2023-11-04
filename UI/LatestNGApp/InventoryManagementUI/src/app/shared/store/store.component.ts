@@ -17,7 +17,6 @@ export class StoreComponent {
   form: FormGroup;
   checked :any [];
 
-
   constructor(private fb: FormBuilder, private _materialsvc: MaterialService, private router: Router) {
     this.data = [];
     this.checked=[];
@@ -35,7 +34,6 @@ export class StoreComponent {
       "quantity": 0,
       "type": '',
       "unitPrice": 0
-
     }];
     this.form = this.fb.group({
       category: this.fb.array([], [Validators.required])
@@ -55,8 +53,6 @@ export class StoreComponent {
     this._materialsvc.getAllMaterials().subscribe((response) => {
       this.materials = response;
       this.data=response;
-      
-
     })
     this._materialsvc.getCategories().subscribe((res) => {
       this.categories = res;
@@ -72,11 +68,9 @@ export class StoreComponent {
       let index = categoryFormArray.controls.findIndex(x => x.value == res)
       categoryFormArray.removeAt(index);
       this.checked = categoryFormArray.value;
-
     }
     this.materials = this.data.filter( x => this.checked.includes(x.type));
   }
-
 
   add(id: number) {
     this.router.navigate(['/supervisor/request', id]);

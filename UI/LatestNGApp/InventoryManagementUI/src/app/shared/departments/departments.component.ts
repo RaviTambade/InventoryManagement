@@ -31,6 +31,7 @@ export class DepartmentsComponent {
   }
   constructor(private svc: WarehouseService, private _usrSvc: UserService,private empSvc:EmployeeService) {
   }
+
   ngOnInit(): void {
     this.svc.getAllWarehouseStaff().subscribe((res) => {
       this.warehouses=res;
@@ -39,38 +40,31 @@ export class DepartmentsComponent {
     })
     this.empSvc.getByRole(this.role).subscribe((res) => {
       this.storeManagers = res;
-      this.storeManagersids= this.storeManagers.map((s)=>s.userId) 
-         this.getUser(this.storeManagersids);
-    })
-  }
-
-  getUser(ids:any) {   
-      this._usrSvc.getUser(ids).subscribe(data => {
+      this.storeManagersids= this.storeManagers.map((s)=>s.userId)
+      let userIdsString = this.storeManagersids.join(","); 
+        //  this.getUser(this.storeManagersids);
+        this._usrSvc.getUserName(userIdsString).subscribe(data => {
         for (const responseItem of data) {
           const users = this.storeManagers.filter(u => u.userId === responseItem.id);
           for (const user of users) {
             user.name = responseItem.name;
           }
         }
-        this.mapData(this.storeManagers,this.data);
+        // this.mapData(this.storeManagers,this.data);
+        for (const employee of this.storeManagers) {
+          const matchingWarehouseStaff = this.data.find((warehouseStaff) => employee.userId === warehouseStaff.employeeId);
+
+          if (matchingWarehouseStaff) {
+              matchingWarehouseStaff.name = employee.name;
+          } else {
+              this.employees.push(employee.name);
+          }
+        }
       });
+    })
   }
 
-  mapData(storeManagers: Employee[], warehouseStaffs: warehouseStaff[])  {
-
-        for (const employee of storeManagers) {
-            const matchingWarehouseStaff = warehouseStaffs.find((warehouseStaff) => employee.userId === warehouseStaff.employeeId);
-
-            if (matchingWarehouseStaff) {
-                matchingWarehouseStaff.name = employee.name;
-            } else {
-                this.employees.push(employee.name);
-                
-            }
-        }
-      }
-
-    replaceEmployee(warehouse: any, selectedEmployee: any) {
+    onReplaceEmployee(warehouse: any, selectedEmployee: any) {
     warehouse.modified=true; 
     const originalData=  { name: warehouse.name, employeeId: warehouse.employeeId }
     warehouse.name = selectedEmployee.name;
@@ -82,7 +76,7 @@ export class DepartmentsComponent {
     }
 
     
-    updateEmployee(){
+    onUpdateEmployee(){
       const modifiedData = this.data.filter(item => item.modified);
       modifiedData.forEach(element => {
         this.updateWarehouse.id = element.id,
@@ -92,7 +86,7 @@ export class DepartmentsComponent {
       });
     }
   
-  selectEmployeeForSwap(employee: any) {
+  onSelectedEmployeeForSwap(employee: any) {
     employee.modified=true;
     if (this.selectedEmployeeForSwap === null) {
       this.selectedEmployeeForSwap = employee;

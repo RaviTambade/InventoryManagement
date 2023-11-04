@@ -39,9 +39,7 @@ export class AddEmployeeComponent {
    }
 
   ngOnInit() {
-    this.getRoles();
-  }
-  getRoles(){
+    // this.getRoles();
     const role=localStorage.getItem("role");
     if(role=='Store Incharge'){
       this.roles=['Store Manager','Store Worker', 'Store Incharge']
@@ -49,27 +47,24 @@ export class AddEmployeeComponent {
     else{
       this.roles=['Supervisor', 'Supervisor Incharge']
     }
-
   }
 
   onSubmit() {
     const filename = this.newUser.imageUrl.split('\\').pop();
     this.newUser.imageUrl = `./assets/img/${filename}`;
     this.myCredential.contactNumber=this.newUser.contactNumber;
-    // this.usrsvc.addUser(this.newUser).subscribe((res)=>{
-    //   this.userId=res;
-    //   console.log(res);
-    //   if(this.userId!=0){
-    //       this.addEmployee(this.userId)
-    //   }
-    // })
+    this.usrsvc.addUser(this.newUser).subscribe((res)=>{
+      this.userId=res;
+      console.log(res);
+      if(this.userId!=0){
+          this.addEmployee(this.userId)
+      }
+    })
   }
-
 
   addEmployee(userId:number){
     this.newEmployee.userId=userId; 
     this.empsvc.addEmployee(this.newEmployee).subscribe((res)=>{
-      console.log(res);
       if(res==true){
        this.addCredentials(this.myCredential);
       }
@@ -81,5 +76,4 @@ export class AddEmployeeComponent {
     this.authsvc.register(credential).subscribe((res)=>{
     })
   }
-
 }

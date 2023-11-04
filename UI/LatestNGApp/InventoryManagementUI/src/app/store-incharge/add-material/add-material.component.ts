@@ -37,9 +37,9 @@ export class AddMaterialComponent {
       const filename = this.materialForm.value.imageUrl.split('\\').pop();
       this.materialForm.value.imageUrl = `./assets/img/${filename}`;
       const formData = this.materialForm.value;
-      // this.svc.InsertMaterial(formData).subscribe((res)=>{
-      //   console.log(res)
-      // })
+      this.svc.InsertMaterial(formData).subscribe((res)=>{
+        console.log(res)
+      })
     }
   }
   addNewCategory(){

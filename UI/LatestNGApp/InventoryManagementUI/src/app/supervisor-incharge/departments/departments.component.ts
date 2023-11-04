@@ -13,6 +13,7 @@ import { UserService } from 'src/app/Services/user.service';
 })
 export class DepartmentsComponent implements OnInit{
 
+  selectedEmployeeForSwap: any = null; 
   departments:Department[]=[];
   userIds:any[]=[];
   user:User[]=[];
@@ -28,13 +29,15 @@ export class DepartmentsComponent implements OnInit{
     this.svc.getAll().subscribe((res)=>{
       this.departments =res;
       this.data=res;
+      console.log(this.data);
       // for(const department of this.departments){
-      //   this.supervisorIds.push(department.firstSupervisor);
-      //   this.supervisorIds.push(department.secondSupervisor);
+      //   this.emp.push(department.firstSupervisorName);
+      //   this.emp.push(department.secondSupervisorName);
       // }
       // console.log(this.departments);
       this.empSvc.getByRole(this.role).subscribe((res) => {
         this.supervisors = res;
+        console.log(this.supervisors)
         this.supervisorIds= this.supervisors.map((s)=>s.userId)
            this.getUser();
       })
@@ -52,8 +55,7 @@ export class DepartmentsComponent implements OnInit{
         } 
       })
       this.mapData(this.supervisors,this.data);  
-    }) 
-    
+    })   
   }
 
   mapData(supervisors: Employee[], data: Department[])  {
@@ -63,18 +65,46 @@ export class DepartmentsComponent implements OnInit{
         if (matchingName1!=undefined) {
           matchingName1.firstSupervisorName = employee.name;
         } 
-        else {
-            this.employees.push(employee.name);    
-        }
-        if (matchingName2!=undefined) {
+        else if(matchingName2!=undefined) {
           matchingName2.secondSupervisorName = employee.name;
         } 
         else {
-          this.emp.push(employee.name);    
+          this.employees.push(employee.name);    
         }
       }
-      
+      console.log(this.employees);
     }
+
+
+    onSelectedEmployeeForSwap(employee: any) {
+      employee.modified=true;
+      if (this.selectedEmployeeForSwap === null) {
+        this.selectedEmployeeForSwap = employee;
+        // this.swap = true;
+        // this.selectSwap = false;
+        console.log(this.selectedEmployeeForSwap);
+      } else {
+        this.swapEmployees(this.selectedEmployeeForSwap, employee);
+        this.selectedEmployeeForSwap = null;
+        // this.swap = false;
+        // this.selectSwap = true;
+      }
+    }
+
+    swapEmployees(employee1: any, employee2: any) {
+
+      const tempName = employee1.name;
+      employee1.name = employee2.name;
+      employee2.name = tempName;
+  
+      const tempEmployeeId = employee1.employeeId;
+      employee1.employeeId = employee2.employeeId;
+      employee2.employeeId = tempEmployeeId;
+  
+      employee1.modified = true;
+      employee2.modified = true;
+    }
+
 
   // dataBinding(){
   //   this.supervisors.forEach((i)=>{

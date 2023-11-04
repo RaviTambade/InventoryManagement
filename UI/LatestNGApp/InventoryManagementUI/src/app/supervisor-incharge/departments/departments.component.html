@@ -6,14 +6,33 @@
                 <tr>
                     <th class="text-center" style="width: 100px;">Department</th>
                     <th class="text-center" style="width: 150px;">FirstSupervisor</th>
+                    <!-- <th class="text-center" style="width: 150px;">First Supervisor</th> -->
                     <th class="text-center" style="width: 150px;">SecondSupervisor</th>
+                    <!-- <th class="text-center" style="width: 150px;">second supervisor</th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr mat-row *ngFor="let department of departments">
                     <td class="text-center" style="width: 100px;">{{ department.department }}</td>
                     <td class="text-center" style="width: 150px;">{{ department.firstSupervisorName}}</td>
-                    <td class="text-center" style="width: 200px;" >{{ department.secondSupervisorName }}</td>              
+                    <!-- <div class="btn-group mt-3">
+                        <button type="button" (click)="onSelectedEmployeeForSwap(departments)" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Swap
+                        </button>
+                        <div class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                          <a class="dropdown-item" *ngFor="let employee of departments" (click)="onSelectedEmployeeForSwap(employee)">{{employee.firstSupervisorName}}</a>
+                        </div>
+                      </div> -->
+                    
+                    <td class="text-center" style="width: 200px;" >{{ department.secondSupervisorName }}</td>
+                    <!-- <div class="btn-group mt-3">
+                        <button type="button" (click)="onSelectedEmployeeForSwap(departments)" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Swap
+                        </button>
+                        <div class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                          <a class="dropdown-item" *ngFor="let employee of departments" (click)="onSelectedEmployeeForSwap(employee)">{{employee.secondSupervisorName}}</a>
+                        </div>
+                      </div>               -->
                 </tr>
             </tbody>   
     </table>
