@@ -1671,7 +1671,6 @@ INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,co
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","889635678500","rohini","bangar","1963-04-07","female","rohinibangar@gmail.com","9880543200");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","821034878560","riddhi","argade","1963-04-07","female","riddhiargade@gmail.com","9867901280");
 
-
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","817745785007","sarika","karande","1963-04-07","female","sarikakarande@gmail.com","9850290927");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","873412892746","aaditya","pokharkar","1963-04-07","female","aadityapokharkar@gmail.com","9850250936");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","762345342385","om","ajab","1963-04-07","female","omajab@gmail.com","8801501234");

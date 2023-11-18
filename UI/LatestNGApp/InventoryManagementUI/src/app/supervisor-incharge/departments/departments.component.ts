@@ -23,13 +23,16 @@ export class DepartmentsComponent implements OnInit{
   emp:string[]=[];
   supervisors:Employee[]=[];
   supervisorIds:any[]=[];
+  selectedDepartment:string[]=[];
 
   constructor(private svc:ProductionService,private _userService:UserService,private empSvc:EmployeeService){}
   ngOnInit(): void {
     this.svc.getAll().subscribe((res)=>{
       this.departments =res;
       this.data=res;
+      this.selectedDepartment=this.data.map((u)=>u.department);
       console.log(this.data);
+      console.log(this.selectedDepartment);
       // for(const department of this.departments){
       //   this.emp.push(department.firstSupervisorName);
       //   this.emp.push(department.secondSupervisorName);
@@ -126,5 +129,12 @@ export class DepartmentsComponent implements OnInit{
   //   console.log(this.departments);
   //   console.log(this.employees);
   // }
+
+  onSelectedDepartment(department:string){
+   console.log(department);
+   const section = this.data.find(m => m.department === department)
+    console.log(section);
+    // this.departments = section;
+  }
 }
   

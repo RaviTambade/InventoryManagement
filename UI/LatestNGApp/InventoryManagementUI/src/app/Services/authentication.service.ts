@@ -16,12 +16,11 @@ export class AuthenticationService {
     ) { }
     
   validate(credential: Credential): Observable<any> {
-    let url = 'http://localhost:5077/api/authentication/signin';
+    let url = 'http://localhost:5142/api/auth/signin';
     return this.httpClient.post<any>(url, credential);
   }
   register(credential: Credential): Observable<boolean> {
-
-    let url = "http://localhost:5077/api/authentication/register";
+    let url = "http://localhost:5142/api/auth/register";
     return this.httpClient.post<any>(url, credential);
   }
   getContactNumberFromToken(): string | null {
@@ -33,7 +32,7 @@ export class AuthenticationService {
     return null;
   }
   updatePassword(credential: UpdatePassword): Observable<boolean> {
-    let url = "http://localhost:5077/api/authentication/update/password";
+    let url = "http://localhost:5142/api/auth/update/password";
     const token = localStorage.getItem("JWT")
    const contactNumber= this.getContactNumberFromToken();
    if(contactNumber){
@@ -46,4 +45,14 @@ export class AuthenticationService {
    return this.httpClient.put<any>(url, credential);
   }
 
+
+  // getClaimFromToken(claim: TokenClaims) {
+  //   let token = localStorage.getItem("JWT");
+  //   if (token) {
+  //     const decodedToken = this.jwtHelper.decodeToken(token);
+  //     console.log(decodedToken[claim]);
+  //     return decodedToken[claim];
+  //   }
+  //   return null;
+  // }
 }

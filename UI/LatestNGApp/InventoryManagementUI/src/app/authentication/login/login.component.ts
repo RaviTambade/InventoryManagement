@@ -29,9 +29,10 @@ export class LoginComponent {
           localStorage.setItem("userId",  this.userId.toString()) 
           console.log(this.userId);
           this.userService.getUserRole(this.userId).subscribe((response) => {
-            this.role = response;
+            console.log(response);
+            this.role = response[0].name;
             console.log(this.role);
-            const role=this.role.role;
+            const role=this.role;
             console.log(role);
             localStorage.setItem("role", role)
             this.navigateByRole(role);
