@@ -6,8 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { AuthenticationModule } from './authentication/authentication.module';
@@ -19,14 +17,13 @@ import { SupervisorModule, supervisorRoutes } from './supervisor/supervisor.modu
 import { supervisorInchargeRoutes } from './supervisor-incharge/supervisor-incharge.module';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { sharedRoutes } from './shared/shared.module';
+import { LoginRoutingComponent } from './authentication/login-routing/login-routing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     MenuBarComponent
   ],
   imports: [
@@ -38,8 +35,8 @@ import { sharedRoutes } from './shared/shared.module';
 
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'login', component: LoginComponent },
+      // { path: 'login', component: LoginComponent },
+      { path: 'login', component: LoginRoutingComponent },
       { path: 'dashboard', component: DashboardComponent},
       {path:'storeincharge',children:storeInchargeRoutes},
       {path:'storemanager',children:storeManagerRoutes},

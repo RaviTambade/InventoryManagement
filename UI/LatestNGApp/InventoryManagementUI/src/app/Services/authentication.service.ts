@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Credential } from '../Models/credential';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UpdatePassword } from '../Models/update-password';
+import { TokenClaims } from '../Models/Enums/tokenclaims';
 
 
 @Injectable({
@@ -46,13 +47,30 @@ export class AuthenticationService {
   }
 
 
-  // getClaimFromToken(claim: TokenClaims) {
-  //   let token = localStorage.getItem("JWT");
-  //   if (token) {
-  //     const decodedToken = this.jwtHelper.decodeToken(token);
-  //     console.log(decodedToken[claim]);
-  //     return decodedToken[claim];
-  //   }
-  //   return null;
-  // }
+  getClaimFromToken(claim: TokenClaims) {
+    let token = localStorage.getItem("JWT");
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      console.log(decodedToken[claim]);
+      return decodedToken[claim];
+    }
+    return null;
+  }
+
+
+  getRolesFromToken():string[]{
+    let token = localStorage.getItem("JWT");
+    if(token){
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      const roles = decodedToken.roles;
+      console.log(roles);
+      if (Array.isArray(roles)) {
+        return roles;
+      } else if (typeof roles === 'string') {
+        return [roles];
+      }
+    }
+    return [];
+  }
 }
+
