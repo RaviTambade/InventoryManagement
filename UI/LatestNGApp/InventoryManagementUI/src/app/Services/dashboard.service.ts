@@ -20,17 +20,17 @@ export class DashboardService {
   }
 
   getRequestByStatus():Observable<any>{
-    let url ="http://localhost:5161/api/bi/requests"  ;
+    let url ="http://localhost:5161/api/bi/requests";
     return this.http.get<any>(url);
   }
   
   getSupervisors():Observable<any>{
-    let url ="http://localhost:5161/api/bi/supervisors" ;
+    let url ="http://localhost:5161/api/bi/supervisors";
     return this.http.get<any>(url);
   }
 
   getTotalAndCounts():Observable<any>{
-    let url ="http://localhost:5161/api/bi/materials" ;
+    let url ="http://localhost:5161/api/bi/materials";
     return this.http.get<any>(url);
   }
 
